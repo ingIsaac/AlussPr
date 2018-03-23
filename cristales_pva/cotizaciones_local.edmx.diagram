@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51e1e444dd1d4e08aba86e5f0f2104c2" Name="Diagram1">
+        <EntityTypeShape EntityType="cotizaciones.materiales_modulos" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="cotizaciones.corte" Width="1.5" PointX="4.25" PointY="6.75" />
+        <EntityTypeShape EntityType="cotizaciones.cotizacione" Width="1.5" PointX="7.75" PointY="4.625" />
+        <EntityTypeShape EntityType="cotizaciones.cristales_cotizados" Width="1.5" PointX="2.5" PointY="0.75" />
+        <EntityTypeShape EntityType="cotizaciones.herrajes_cotizados" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="cotizaciones.otros_cotizaciones" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cotizaciones.aluminio_cotizado" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="cotizaciones.datos_reporte" Width="1.5" PointX="4.25" PointY="0.75" />
+        <EntityTypeShape EntityType="cotizaciones.articulos_reporte" Width="1.5" PointX="6" PointY="4.25" />
+        <EntityTypeShape EntityType="cotizaciones.modulos_cotizaciones" Width="1.5" PointX="9.5" PointY="0.75" />
+        <EntityTypeShape EntityType="cotizaciones.copybox" Width="1.5" PointX="2.5" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

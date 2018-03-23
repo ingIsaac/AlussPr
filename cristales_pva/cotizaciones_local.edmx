@@ -1,0 +1,744 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cotizaciones.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aluminio_cotizado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="folio" Type="int" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="lista" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="largo_total" Type="float" />
+          <Property Name="acabado" Type="varchar(max)" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="descuento" Type="float" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proveedor" Type="nchar" MaxLength="10" />
+          <Property Name="descripcion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="articulos_reporte">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="concepto" Type="varchar(max)" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="largo" Type="float" />
+          <Property Name="alto" Type="float" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="pic" Type="image" />
+          <Property Name="desc_p" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="copybox">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="folio" Type="int" />
+          <Property Name="modulo_id" Type="int" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="mano_obra" Type="float" />
+          <Property Name="dimensiones" Type="varchar(max)" />
+          <Property Name="acabado_perfil" Type="varchar(max)" />
+          <Property Name="claves_cristales" Type="varchar(max)" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="diseño" Type="varchar(max)" />
+          <Property Name="clave" Type="varchar(max)" />
+          <Property Name="total" Type="float" />
+          <Property Name="largo" Type="int" />
+          <Property Name="alto" Type="int" />
+          <Property Name="flete" Type="float" />
+          <Property Name="utilidad" Type="float" />
+          <Property Name="desperdicio" Type="float" />
+          <Property Name="claves_otros" Type="varchar(max)" />
+          <Property Name="claves_herrajes" Type="varchar(max)" />
+          <Property Name="pic" Type="image" />
+          <Property Name="claves_perfiles" Type="varchar(max)" />
+          <Property Name="merge_id" Type="int" />
+          <Property Name="concept_id" Type="int" />
+          <Property Name="ubicacion" Type="varchar(max)" />
+          <Property Name="sub_folio" Type="int" />
+          <Property Name="dir" Type="int" />
+          <Property Name="news" Type="varchar(max)" />
+          <Property Name="new_desing" Type="varchar(max)" />
+          <Property Name="orden" Type="int" />
+        </EntityType>
+        <EntityType Name="cortes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clave" Type="varchar(max)" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="modulo_id" Type="int" />
+          <Property Name="partida" Type="varchar(max)" />
+          <Property Name="longitud_corte" Type="float" />
+          <Property Name="tramo_perfil" Type="float" />
+          <Property Name="acabado" Type="varchar(max)" />
+          <Property Name="cantidad" Type="float" />
+        </EntityType>
+        <EntityType Name="cotizaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="folio" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" />
+          <Property Name="fecha" Type="varchar" MaxLength="50" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cristales_cotizados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="folio" Type="int" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="lista" Type="varchar(max)" />
+          <Property Name="largo" Type="float" />
+          <Property Name="alto" Type="float" />
+          <Property Name="canteado" Type="varchar(max)" />
+          <Property Name="biselado" Type="varchar(max)" />
+          <Property Name="desconchado" Type="varchar(max)" />
+          <Property Name="pecho_paloma" Type="varchar(max)" />
+          <Property Name="perforado_media_pulgada" Type="varchar(max)" />
+          <Property Name="perforado_una_pulgada" Type="varchar(max)" />
+          <Property Name="perforado_dos_pulgadas" Type="varchar(max)" />
+          <Property Name="grabado" Type="varchar(max)" />
+          <Property Name="esmerilado" Type="varchar(max)" />
+          <Property Name="tipo_venta" Type="varchar(max)" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="descuento" Type="float" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="filo_muerto" Type="float" />
+          <Property Name="descripcion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="datos_reporte">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cliente" Type="varchar(max)" />
+          <Property Name="Nombre_Proyecto" Type="varchar" MaxLength="50" />
+          <Property Name="Folio" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha" Type="varchar" MaxLength="50" />
+          <Property Name="Domicilio" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Subtotal" Type="float" />
+          <Property Name="IVA" Type="float" />
+          <Property Name="Total" Type="float" />
+          <Property Name="Forma_de_Pago" Type="varchar(max)" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="herrajes_cotizados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="folio" Type="int" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="caracteristicas" Type="varchar(max)" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="descuento" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="descripcion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="materiales_modulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="concepto" Type="int" />
+          <Property Name="clave" Type="varchar(max)" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="metros_lineales" Type="float" />
+          <Property Name="metros_cuadrados" Type="float" />
+          <Property Name="acabado" Type="varchar(max)" />
+          <Property Name="largo_perfil" Type="float" />
+        </EntityType>
+        <EntityType Name="modulos_cotizaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="folio" Type="int" />
+          <Property Name="modulo_id" Type="int" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="mano_obra" Type="float" />
+          <Property Name="dimensiones" Type="varchar(max)" />
+          <Property Name="acabado_perfil" Type="varchar(max)" />
+          <Property Name="claves_cristales" Type="varchar(max)" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="diseño" Type="varchar(max)" />
+          <Property Name="clave" Type="varchar(max)" />
+          <Property Name="total" Type="float" />
+          <Property Name="largo" Type="int" />
+          <Property Name="alto" Type="int" />
+          <Property Name="flete" Type="float" />
+          <Property Name="utilidad" Type="float" />
+          <Property Name="desperdicio" Type="float" />
+          <Property Name="claves_otros" Type="varchar(max)" />
+          <Property Name="claves_herrajes" Type="varchar(max)" />
+          <Property Name="ubicacion" Type="varchar(max)" />
+          <Property Name="pic" Type="image" />
+          <Property Name="claves_perfiles" Type="varchar(max)" />
+          <Property Name="merge_id" Type="int" />
+          <Property Name="concept_id" Type="int" />
+          <Property Name="sub_folio" Type="int" />
+          <Property Name="dir" Type="int" />
+          <Property Name="news" Type="varchar(max)" />
+          <Property Name="new_desing" Type="varchar(max)" />
+          <Property Name="orden" Type="int" />
+        </EntityType>
+        <EntityType Name="otros_cotizaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="folio" Type="int" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="caracteristicas" Type="varchar(max)" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="descuento" Type="float" />
+          <Property Name="total" Type="float" />
+          <Property Name="largo" Type="float" />
+          <Property Name="alto" Type="float" />
+          <Property Name="descripcion" Type="varchar(max)" />
+        </EntityType>
+        <EntityContainer Name="cotizacionesStoreContainer">
+          <EntitySet Name="aluminio_cotizado" EntityType="Self.aluminio_cotizado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="articulos_reporte" EntityType="Self.articulos_reporte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="copybox" EntityType="Self.copybox" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cortes" EntityType="Self.cortes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cotizaciones" EntityType="Self.cotizaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cristales_cotizados" EntityType="Self.cristales_cotizados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="datos_reporte" EntityType="Self.datos_reporte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="herrajes_cotizados" EntityType="Self.herrajes_cotizados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materiales_modulos" EntityType="Self.materiales_modulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="modulos_cotizaciones" EntityType="Self.modulos_cotizaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="otros_cotizaciones" EntityType="Self.otros_cotizaciones" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cotizaciones" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cotizaciones_local" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="materiales_modulos" EntityType="cotizaciones.materiales_modulos" />
+          <EntitySet Name="cortes" EntityType="cotizaciones.corte" />
+          <EntitySet Name="cotizaciones" EntityType="cotizaciones.cotizacione" />
+          <EntitySet Name="cristales_cotizados" EntityType="cotizaciones.cristales_cotizados" />
+          <EntitySet Name="herrajes_cotizados" EntityType="cotizaciones.herrajes_cotizados" />
+          <EntitySet Name="otros_cotizaciones" EntityType="cotizaciones.otros_cotizaciones" />
+          <EntitySet Name="aluminio_cotizado" EntityType="cotizaciones.aluminio_cotizado" />
+          <EntitySet Name="datos_reporte" EntityType="cotizaciones.datos_reporte" />
+          <EntitySet Name="articulos_reporte" EntityType="cotizaciones.articulos_reporte" />
+          <EntitySet Name="modulos_cotizaciones" EntityType="cotizaciones.modulos_cotizaciones" />
+          <EntitySet Name="copyboxes" EntityType="cotizaciones.copybox" />
+        </EntityContainer>
+        <EntityType Name="materiales_modulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="concepto" Type="Int32" />
+          <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="metros_lineales" Type="Double" />
+          <Property Name="metros_cuadrados" Type="Double" />
+          <Property Name="acabado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="largo_perfil" Type="Double" />
+        </EntityType>
+        <EntityType Name="corte">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="modulo_id" Type="Int32" />
+          <Property Name="partida" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="longitud_corte" Type="Double" />
+          <Property Name="tramo_perfil" Type="Double" />
+          <Property Name="acabado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+        </EntityType>
+        <EntityType Name="cotizacione">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="folio" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="cristales_cotizados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="folio" Type="Int32" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lista" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="largo" Type="Double" />
+          <Property Name="alto" Type="Double" />
+          <Property Name="canteado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="biselado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="desconchado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pecho_paloma" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="perforado_media_pulgada" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="perforado_una_pulgada" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="perforado_dos_pulgadas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="grabado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="esmerilado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_venta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="descuento" Type="Double" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="filo_muerto" Type="Double" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="herrajes_cotizados">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="folio" Type="Int32" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="caracteristicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="descuento" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="otros_cotizaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="folio" Type="Int32" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="caracteristicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="descuento" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="largo" Type="Double" />
+          <Property Name="alto" Type="Double" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="aluminio_cotizado">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="folio" Type="Int32" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lista" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="largo_total" Type="Double" />
+          <Property Name="acabado" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="descuento" Type="Double" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proveedor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="datos_reporte">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cliente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Proyecto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Folio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Domicilio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Subtotal" Type="Double" />
+          <Property Name="IVA" Type="Double" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="Forma_de_Pago" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="articulos_reporte">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="concepto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="largo" Type="Double" />
+          <Property Name="alto" Type="Double" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="desc_p" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="modulos_cotizaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="folio" Type="Int32" />
+          <Property Name="modulo_id" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mano_obra" Type="Double" />
+          <Property Name="dimensiones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="acabado_perfil" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="claves_cristales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="diseño" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="Double" />
+          <Property Name="largo" Type="Int32" />
+          <Property Name="alto" Type="Int32" />
+          <Property Name="flete" Type="Double" />
+          <Property Name="utilidad" Type="Double" />
+          <Property Name="desperdicio" Type="Double" />
+          <Property Name="claves_otros" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="claves_herrajes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ubicacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="claves_perfiles" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="merge_id" Type="Int32" />
+          <Property Name="concept_id" Type="Int32" />
+          <Property Name="sub_folio" Type="Int32" />
+          <Property Name="dir" Type="Int32" />
+          <Property Name="news" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="new_desing" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="orden" Type="Int32" />
+        </EntityType>
+        <EntityType Name="copybox">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="folio" Type="Int32" />
+          <Property Name="modulo_id" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="mano_obra" Type="Double" />
+          <Property Name="dimensiones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="acabado_perfil" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="claves_cristales" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="diseño" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="total" Type="Double" />
+          <Property Name="largo" Type="Int32" />
+          <Property Name="alto" Type="Int32" />
+          <Property Name="flete" Type="Double" />
+          <Property Name="utilidad" Type="Double" />
+          <Property Name="desperdicio" Type="Double" />
+          <Property Name="claves_otros" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="claves_herrajes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="claves_perfiles" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="merge_id" Type="Int32" />
+          <Property Name="concept_id" Type="Int32" />
+          <Property Name="ubicacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sub_folio" Type="Int32" />
+          <Property Name="dir" Type="Int32" />
+          <Property Name="news" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="new_desing" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="orden" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cotizacionesStoreContainer" CdmEntityContainer="cotizaciones_local">
+          <EntitySetMapping Name="materiales_modulos">
+            <EntityTypeMapping TypeName="cotizaciones.materiales_modulos">
+              <MappingFragment StoreEntitySet="materiales_modulos">
+                <ScalarProperty Name="largo_perfil" ColumnName="largo_perfil" />
+                <ScalarProperty Name="acabado" ColumnName="acabado" />
+                <ScalarProperty Name="metros_cuadrados" ColumnName="metros_cuadrados" />
+                <ScalarProperty Name="metros_lineales" ColumnName="metros_lineales" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="concepto" ColumnName="concepto" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cortes">
+            <EntityTypeMapping TypeName="cotizaciones.corte">
+              <MappingFragment StoreEntitySet="cortes">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="acabado" ColumnName="acabado" />
+                <ScalarProperty Name="tramo_perfil" ColumnName="tramo_perfil" />
+                <ScalarProperty Name="longitud_corte" ColumnName="longitud_corte" />
+                <ScalarProperty Name="partida" ColumnName="partida" />
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cotizaciones">
+            <EntityTypeMapping TypeName="cotizaciones.cotizacione">
+              <MappingFragment StoreEntitySet="cotizaciones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cristales_cotizados">
+            <EntityTypeMapping TypeName="cotizaciones.cristales_cotizados">
+              <MappingFragment StoreEntitySet="cristales_cotizados">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="filo_muerto" ColumnName="filo_muerto" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="tipo_venta" ColumnName="tipo_venta" />
+                <ScalarProperty Name="esmerilado" ColumnName="esmerilado" />
+                <ScalarProperty Name="grabado" ColumnName="grabado" />
+                <ScalarProperty Name="perforado_dos_pulgadas" ColumnName="perforado_dos_pulgadas" />
+                <ScalarProperty Name="perforado_una_pulgada" ColumnName="perforado_una_pulgada" />
+                <ScalarProperty Name="perforado_media_pulgada" ColumnName="perforado_media_pulgada" />
+                <ScalarProperty Name="pecho_paloma" ColumnName="pecho_paloma" />
+                <ScalarProperty Name="desconchado" ColumnName="desconchado" />
+                <ScalarProperty Name="biselado" ColumnName="biselado" />
+                <ScalarProperty Name="canteado" ColumnName="canteado" />
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="lista" ColumnName="lista" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="herrajes_cotizados">
+            <EntityTypeMapping TypeName="cotizaciones.herrajes_cotizados">
+              <MappingFragment StoreEntitySet="herrajes_cotizados">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="caracteristicas" ColumnName="caracteristicas" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="otros_cotizaciones">
+            <EntityTypeMapping TypeName="cotizaciones.otros_cotizaciones">
+              <MappingFragment StoreEntitySet="otros_cotizaciones">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="caracteristicas" ColumnName="caracteristicas" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aluminio_cotizado">
+            <EntityTypeMapping TypeName="cotizaciones.aluminio_cotizado">
+              <MappingFragment StoreEntitySet="aluminio_cotizado">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="acabado" ColumnName="acabado" />
+                <ScalarProperty Name="largo_total" ColumnName="largo_total" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="lista" ColumnName="lista" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="datos_reporte">
+            <EntityTypeMapping TypeName="cotizaciones.datos_reporte">
+              <MappingFragment StoreEntitySet="datos_reporte">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Forma_de_Pago" ColumnName="Forma_de_Pago" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Nombre_Proyecto" ColumnName="Nombre_Proyecto" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articulos_reporte">
+            <EntityTypeMapping TypeName="cotizaciones.articulos_reporte">
+              <MappingFragment StoreEntitySet="articulos_reporte">
+                <ScalarProperty Name="desc_p" ColumnName="desc_p" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="concepto" ColumnName="concepto" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modulos_cotizaciones">
+            <EntityTypeMapping TypeName="cotizaciones.modulos_cotizaciones">
+              <MappingFragment StoreEntitySet="modulos_cotizaciones">
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="new_desing" ColumnName="new_desing" />
+                <ScalarProperty Name="news" ColumnName="news" />
+                <ScalarProperty Name="dir" ColumnName="dir" />
+                <ScalarProperty Name="sub_folio" ColumnName="sub_folio" />
+                <ScalarProperty Name="concept_id" ColumnName="concept_id" />
+                <ScalarProperty Name="merge_id" ColumnName="merge_id" />
+                <ScalarProperty Name="claves_perfiles" ColumnName="claves_perfiles" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="claves_herrajes" ColumnName="claves_herrajes" />
+                <ScalarProperty Name="claves_otros" ColumnName="claves_otros" />
+                <ScalarProperty Name="desperdicio" ColumnName="desperdicio" />
+                <ScalarProperty Name="utilidad" ColumnName="utilidad" />
+                <ScalarProperty Name="flete" ColumnName="flete" />
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="diseño" ColumnName="diseño" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="claves_cristales" ColumnName="claves_cristales" />
+                <ScalarProperty Name="acabado_perfil" ColumnName="acabado_perfil" />
+                <ScalarProperty Name="dimensiones" ColumnName="dimensiones" />
+                <ScalarProperty Name="mano_obra" ColumnName="mano_obra" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="copyboxes">
+            <EntityTypeMapping TypeName="cotizaciones.copybox">
+              <MappingFragment StoreEntitySet="copybox">
+                <ScalarProperty Name="orden" ColumnName="orden" />
+                <ScalarProperty Name="new_desing" ColumnName="new_desing" />
+                <ScalarProperty Name="news" ColumnName="news" />
+                <ScalarProperty Name="dir" ColumnName="dir" />
+                <ScalarProperty Name="sub_folio" ColumnName="sub_folio" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="concept_id" ColumnName="concept_id" />
+                <ScalarProperty Name="merge_id" ColumnName="merge_id" />
+                <ScalarProperty Name="claves_perfiles" ColumnName="claves_perfiles" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="claves_herrajes" ColumnName="claves_herrajes" />
+                <ScalarProperty Name="claves_otros" ColumnName="claves_otros" />
+                <ScalarProperty Name="desperdicio" ColumnName="desperdicio" />
+                <ScalarProperty Name="utilidad" ColumnName="utilidad" />
+                <ScalarProperty Name="flete" ColumnName="flete" />
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="diseño" ColumnName="diseño" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="claves_cristales" ColumnName="claves_cristales" />
+                <ScalarProperty Name="acabado_perfil" ColumnName="acabado_perfil" />
+                <ScalarProperty Name="dimensiones" ColumnName="dimensiones" />
+                <ScalarProperty Name="mano_obra" ColumnName="mano_obra" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

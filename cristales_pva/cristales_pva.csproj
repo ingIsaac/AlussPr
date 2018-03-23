@@ -1,0 +1,932 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A88CB2C2-4C95-4C49-9C10-BFA927018C96}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>cristales_pva</RootNamespace>
+    <AssemblyName>AlussPr</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationVersion>1.0.3.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>raw.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="acabado.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="acabados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acabados.Designer.cs">
+      <DependentUpon>acabados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="admin_panel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin_panel.Designer.cs">
+      <DependentUpon>admin_panel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="admin_propiedades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin_propiedades.Designer.cs">
+      <DependentUpon>admin_propiedades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="aluminio_cotizado.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="articulos_cotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="articulos_cotizacion.Designer.cs">
+      <DependentUpon>articulos_cotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="articulos_reporte.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="buscar_cotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="buscar_cotizacion.Designer.cs">
+      <DependentUpon>buscar_cotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cambiar_imagen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cambiar_imagen.Designer.cs">
+      <DependentUpon>cambiar_imagen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="categoria.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="change_colors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="change_colors.Designer.cs">
+      <DependentUpon>change_colors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="clientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="clientes.Designer.cs">
+      <DependentUpon>clientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cm_opciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cm_opciones.Designer.cs">
+      <DependentUpon>cm_opciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="colores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="colores.Designer.cs">
+      <DependentUpon>colores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="colores_aluminio.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="config_conexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="config_conexion.Designer.cs">
+      <DependentUpon>config_conexion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="config_items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="config_items.Designer.cs">
+      <DependentUpon>config_items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="config_modulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="config_modulo.Designer.cs">
+      <DependentUpon>config_modulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="confirm_password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="confirm_password.Designer.cs">
+      <DependentUpon>confirm_password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="constants.cs" />
+    <Compile Include="copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="copy.Designer.cs">
+      <DependentUpon>copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="copybox.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="corte.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cortes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cortes.Designer.cs">
+      <DependentUpon>cortes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cotizacione.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cotizaciones.cs" />
+    <Compile Include="cotizaciones_local.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cotizaciones_local.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cotizaciones_local.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cotizaciones_local.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cotizaciones_local.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="crear_modulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="crear_modulo.Designer.cs">
+      <DependentUpon>crear_modulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cristales_cotizados.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="datagridviewNE.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="datagridviewNE.Designer.cs">
+      <DependentUpon>datagridviewNE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="datos_reporte.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="delete_password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="delete_password.Designer.cs">
+      <DependentUpon>delete_password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="descipcion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="descipcion.Designer.cs">
+      <DependentUpon>descipcion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="desglose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="desglose.Designer.cs">
+      <DependentUpon>desglose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="desglose_materiales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="desglose_materiales.Designer.cs">
+      <DependentUpon>desglose_materiales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="diseño.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="diseño.Designer.cs">
+      <DependentUpon>diseño.cs</DependentUpon>
+    </Compile>
+    <Compile Include="diseño_p.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="diseño_p.Designer.cs">
+      <DependentUpon>diseño_p.cs</DependentUpon>
+    </Compile>
+    <Compile Include="edit_expresss.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="edit_expresss.Designer.cs">
+      <DependentUpon>edit_expresss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="enviar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="enviar.Designer.cs">
+      <DependentUpon>enviar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="esquema.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="filas_borradas.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="guardar_cotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="guardar_cotizacion.Designer.cs">
+      <DependentUpon>guardar_cotizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="herraje.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="herrajes_cotizados.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="historial_registros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="historial_registros.Designer.cs">
+      <DependentUpon>historial_registros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="info.Designer.cs">
+      <DependentUpon>info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="lineas_modulos.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listas.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>listas.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>listas.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="lista_costo_corte_e_instalado.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lista_precios_hojas.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lista_precio_corte_e_instalado.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="loading_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loading_form.Designer.cs">
+      <DependentUpon>loading_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="load_report.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="load_report.Designer.cs">
+      <DependentUpon>load_report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mail.Designer.cs">
+      <DependentUpon>mail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="materiales_modulos.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="merge_items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="merge_items.Designer.cs">
+      <DependentUpon>merge_items.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modulo.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modulos_articulos.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modulos_cotizaciones.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modulo_data.cs">
+      <DependentUpon>modulo_data.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="modulo_data.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modulo_data.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="modulo_data_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modulo_data_form.Designer.cs">
+      <DependentUpon>modulo_data_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modulo_precios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modulo_precios.Designer.cs">
+      <DependentUpon>modulo_precios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="new_articulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="new_articulo.Designer.cs">
+      <DependentUpon>new_articulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="otro.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="otros_cotizaciones.cs">
+      <DependentUpon>cotizaciones_local.tt</DependentUpon>
+    </Compile>
+    <Compile Include="perfile.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="propiedade.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="propiedades_local.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="proveedore.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="registro_presupuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="registro_presupuesto.Designer.cs">
+      <DependentUpon>registro_presupuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="reportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="reportes.Designer.cs">
+      <DependentUpon>reportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="reportes_dataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>reportes_dataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="selectCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="selectCliente.Designer.cs">
+      <DependentUpon>selectCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="setDir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="setDir.Designer.cs">
+      <DependentUpon>setDir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sqlDateBaseManager.cs" />
+    <Compile Include="update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="update.Designer.cs">
+      <DependentUpon>update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="userLocal.cs">
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userLocal_model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>userLocal_model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userLocal_model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>userLocal_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="userLocal_model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>userLocal_model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="user_items.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="user_items.Designer.cs">
+      <DependentUpon>user_items.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="acabados.resx">
+      <DependentUpon>acabados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="admin_panel.resx">
+      <DependentUpon>admin_panel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="admin_propiedades.resx">
+      <DependentUpon>admin_propiedades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="articulos_cotizacion.resx">
+      <DependentUpon>articulos_cotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="buscar_cotizacion.resx">
+      <DependentUpon>buscar_cotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cambiar_imagen.resx">
+      <DependentUpon>cambiar_imagen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="change_colors.resx">
+      <DependentUpon>change_colors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="clientes.resx">
+      <DependentUpon>clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cm_opciones.resx">
+      <DependentUpon>cm_opciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="colores.resx">
+      <DependentUpon>colores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="config_conexion.resx">
+      <DependentUpon>config_conexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="config_items.resx">
+      <DependentUpon>config_items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="config_modulo.resx">
+      <DependentUpon>config_modulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="confirm_password.resx">
+      <DependentUpon>confirm_password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="copy.resx">
+      <DependentUpon>copy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cortes.resx">
+      <DependentUpon>cortes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crear_modulo.resx">
+      <DependentUpon>crear_modulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="delete_password.resx">
+      <DependentUpon>delete_password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="descipcion.resx">
+      <DependentUpon>descipcion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="desglose.rdlc" />
+    <EmbeddedResource Include="desglose.resx">
+      <DependentUpon>desglose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="desglose_materiales.resx">
+      <DependentUpon>desglose_materiales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="diseño.resx">
+      <DependentUpon>diseño.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="diseño_p.resx">
+      <DependentUpon>diseño_p.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="edit_expresss.resx">
+      <DependentUpon>edit_expresss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="enviar.resx">
+      <DependentUpon>enviar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="guardar_cotizacion.resx">
+      <DependentUpon>guardar_cotizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="historial_registros.resx">
+      <DependentUpon>historial_registros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="info.resx">
+      <DependentUpon>info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loading_form.resx">
+      <DependentUpon>loading_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="load_report.resx">
+      <DependentUpon>load_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mail.resx">
+      <DependentUpon>mail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="merge_items.resx">
+      <DependentUpon>merge_items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modulo_data.rdlc" />
+    <EmbeddedResource Include="modulo_data_form.resx">
+      <DependentUpon>modulo_data_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modulo_precios.rdlc" />
+    <EmbeddedResource Include="modulo_precios.resx">
+      <DependentUpon>modulo_precios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="new_articulo.resx">
+      <DependentUpon>new_articulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="registro_presupuesto.resx">
+      <DependentUpon>registro_presupuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reporte2_c.rdlc" />
+    <EmbeddedResource Include="reporte_c.rdlc" />
+    <EmbeddedResource Include="reporte2.rdlc" />
+    <EmbeddedResource Include="reporte.rdlc" />
+    <EmbeddedResource Include="reportes.resx">
+      <DependentUpon>reportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="selectCliente.resx">
+      <DependentUpon>selectCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="setDir.resx">
+      <DependentUpon>setDir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="update.resx">
+      <DependentUpon>update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="user_items.resx">
+      <DependentUpon>user_items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="listas.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>listas.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="cotizaciones_local.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>cotizaciones_local.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="app.manifest" />
+    <None Include="cotizaciones_local.edmx.diagram">
+      <DependentUpon>cotizaciones_local.edmx</DependentUpon>
+    </None>
+    <None Include="listas.edmx.diagram">
+      <DependentUpon>listas.edmx</DependentUpon>
+    </None>
+    <None Include="modulo_data.xsc">
+      <DependentUpon>modulo_data.xsd</DependentUpon>
+    </None>
+    <None Include="modulo_data.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>modulo_data.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="modulo_data.xss">
+      <DependentUpon>modulo_data.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\sqlDateBaseManager.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EntityDeploy Include="userLocal_model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>userLocal_model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="reportes_dataSet.xsc">
+      <DependentUpon>reportes_dataSet.xsd</DependentUpon>
+    </None>
+    <None Include="reportes_dataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>reportes_dataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="reportes_dataSet.xss">
+      <DependentUpon>reportes_dataSet.xsd</DependentUpon>
+    </None>
+    <None Include="userLocal_model.edmx.diagram">
+      <DependentUpon>userLocal_model.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database-icon_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database-icon_cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="admin_panel_uz1_icon.ico" />
+    <Content Include="cotizaciones_local.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>cotizaciones_local.edmx</DependentUpon>
+      <LastGenOutput>cotizaciones_local.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="cotizaciones_local.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>cotizaciones_local.edmx</DependentUpon>
+      <LastGenOutput>cotizaciones_local.cs</LastGenOutput>
+    </Content>
+    <Content Include="listas.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>listas.edmx</DependentUpon>
+      <LastGenOutput>listas.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="listas.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>listas.edmx</DependentUpon>
+      <LastGenOutput>listas.cs</LastGenOutput>
+    </Content>
+    <Content Include="localDateBase.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="localDateBase_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>localDateBase.mdf</DependentUpon>
+    </Content>
+    <Content Include="raw.ico" />
+    <Content Include="raw_MW4_icon.ico" />
+    <None Include="Resources\print.png" />
+    <None Include="Resources\documents.png" />
+    <None Include="Resources\Misc-Upload-Database-icon.png" />
+    <None Include="Resources\db_update.png" />
+    <None Include="Resources\Misc-Download-Database-icon.png" />
+    <None Include="Resources\admin_panel.png" />
+    <None Include="Resources\raw.png" />
+    <None Include="Resources\red_light.png" />
+    <None Include="Resources\green_light.png" />
+    <None Include="Resources\Excel-icon.png" />
+    <None Include="Resources\reflectasol_plata.png" />
+    <None Include="Resources\satin_glass.png" />
+    <None Include="Resources\tintex.png" />
+    <None Include="Resources\antirreflejante.png" />
+    <None Include="Resources\c_azul.png" />
+    <None Include="Resources\c_bronce.png" />
+    <None Include="Resources\cilindrado_claro.png" />
+    <None Include="Resources\cilindrado_color.png" />
+    <None Include="Resources\claro.png" />
+    <None Include="Resources\espejo.png" />
+    <None Include="Resources\filtrasol.png" />
+    <None Include="Resources\reflectasol_bronce.png" />
+    <None Include="Resources\ultraclear.png" />
+    <None Include="Resources\cancel_button.png" />
+    <None Include="Resources\save_icon.png" />
+    <None Include="Resources\search_icon.png" />
+    <None Include="Resources\Drill-icon.png" />
+    <None Include="Resources\cuprum_logo.gif" />
+    <None Include="Resources\herralum_logo.png" />
+    <None Include="Resources\herrajes_europeos_logo.jpg" />
+    <None Include="Resources\No_Image_Available.png" />
+    <None Include="Resources\constructor_logo.png" />
+    <None Include="Resources\nuevo_logo.png" />
+    <None Include="Resources\open-file-icon.png" />
+    <None Include="Resources\arrow-up-icon.png" />
+    <None Include="Resources\arrow-down-icon.png" />
+    <None Include="Resources\Counterclockwise-arrow-icon.png" />
+    <None Include="Resources\User-icon.png" />
+    <None Include="Resources\Status-user-online-icon.png" />
+    <None Include="Resources\Sales-report-icon.png" />
+    <None Include="Resources\Arrow-turn-right-icon.png" />
+    <None Include="Resources\client-account-template-icon.png" />
+    <None Include="Resources\Actions-edit-undo-icon.png" />
+    <None Include="Resources\refresh-icon.png" />
+    <None Include="Resources\Actions-window-close-icon.png" />
+    <None Include="Resources\Actions-application-exit-icon.png" />
+    <None Include="Resources\ver_icon_herrajes.png" />
+    <None Include="Resources\Button-Add-icon.png" />
+    <None Include="Resources\Information-icon.png" />
+    <None Include="Resources\metal_textura.jpg" />
+    <None Include="Resources\loading_gif.gif" />
+    <None Include="Resources\copy-icon.png" />
+    <None Include="Resources\Percent-icon.png" />
+    <None Include="Resources\add-icon 16bits.png" />
+    <None Include="Resources\add-icon %2832bits%29.png" />
+    <None Include="Resources\Imagen-no-disponible-282x300.png" />
+    <None Include="Resources\Imagen-no-disponible.png" />
+    <None Include="Resources\Apps-system-software-update-icon.png" />
+    <None Include="Resources\pdf_icon.png" />
+    <None Include="Resources\user-add-icon.png" />
+    <None Include="Resources\search-icon%2816px%29.png" />
+    <None Include="Resources\Gear-icon.png" />
+    <None Include="Resources\loading_green.gif" />
+    <None Include="Resources\progress_bar.gif" />
+    <None Include="Resources\loading_gears.gif" />
+    <None Include="Resources\app_logo.png" />
+    <None Include="Resources\await.gif" />
+    <None Include="Resources\module_load.gif" />
+    <None Include="Resources\no_color.jpg" />
+    <None Include="Resources\Letters-icon.png" />
+    <None Include="Resources\add-item-icon.png" />
+    <None Include="Resources\Food-List-Ingredients-icon.png" />
+    <None Include="Resources\diseño_p.png" />
+    <None Include="Resources\esquema_default.png" />
+    <None Include="Resources\new_concepto.jpg" />
+    <None Include="Resources\Forward-icon.png" />
+    <None Include="Resources\tile-empty.jpg" />
+    <None Include="Resources\Lock-Lock-icon.png" />
+    <None Include="Resources\Actions-arrow-up-icon.png" />
+    <None Include="Resources\Actions-edit-delete-shred-icon.png" />
+    <None Include="Resources\Trash-can-icon.png" />
+    <None Include="Resources\Actions-edit-delete-icon.png" />
+    <None Include="Resources\document-construction-icon.png" />
+    <None Include="Resources\concepto_extra.png" />
+    <None Include="Resources\concepto_extra.jpg" />
+    <None Include="Resources\Actions-arrow-right-icon.png" />
+    <None Include="Resources\Actions-arrow-left-icon.png" />
+    <None Include="Resources\data-find-icon.png" />
+    <None Include="Resources\label-icon.png" />
+    <None Include="Resources\perfil_icon.png" />
+    <None Include="Resources\tool-box-preferences-icon.png" />
+    <None Include="Resources\a-z.png" />
+    <None Include="Resources\z-a.png" />
+    <None Include="Resources\Actions-go-next-icon.png" />
+    <None Include="Resources\lg.dual-gear-loading-icon.gif" />
+    <None Include="Resources\pdf_24.png" />
+    <None Include="Resources\look_24.png" />
+    <None Include="Resources\printer_24.png" />
+    <None Include="Resources\save_24.png" />
+    <None Include="Resources\email-send-icon.png" />
+    <None Include="Resources\mail-arrow-up-icon.png" />
+    <None Include="Resources\logo_title.png" />
+    <None Include="Resources\suivant-bleu-icon.png" />
+    <None Include="Resources\upload-bleu-icon.png" />
+    <None Include="Resources\color_alumn.png" />
+    <None Include="Resources\Paint-icon.png" />
+    <None Include="Resources\Actions-arrow-left-double-icon.png" />
+    <None Include="Resources\Actions-arrow-right-double-icon.png" />
+    <None Include="Resources\Wizard-icon.png" />
+    <None Include="Resources\box-icon.png" />
+    <None Include="Resources\box-in-icon.png" />
+    <None Include="Resources\Wizard-icon-big.png" />
+    <None Include="Resources\dir_1.jpg" />
+    <None Include="Resources\dir_2.jpg" />
+    <None Include="Resources\Rulers-icon.png" />
+    <None Include="Resources\Block-icon.png" />
+    <None Include="Resources\blank.jpg" />
+    <None Include="Resources\Very-Basic-Alarm-Clock-icon.png" />
+    <None Include="Resources\small_packet.png" />
+    <None Include="Resources\big_packet.png" />
+    <Content Include="userLocal_model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>userLocal_model.edmx</DependentUpon>
+      <LastGenOutput>userLocal_model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="userLocal_model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>userLocal_model.edmx</DependentUpon>
+      <LastGenOutput>userLocal_model.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\system_config_services.png" />
+    <None Include="Resources\Aqua-Config-icon.png" />
+    <None Include="Resources\server-database-icon.png" />
+    <None Include="Resources\Computer-icon.png" />
+    <None Include="Resources\Computer-icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

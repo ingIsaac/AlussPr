@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="userLocal_model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="categoria" Type="varchar(max)" />
+          <Property Name="grupo" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="filas_borradas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="int" />
+          <Property Name="folio" Type="int" />
+          <Property Name="articulo_id" Type="int" />
+        </EntityType>
+        <EntityType Name="lineas_modulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="linea_modulo" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="usuario" Type="varchar(max)" />
+          <Property Name="contraseña" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="modulos_articulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="componente" Type="varchar(max)" />
+          <Property Name="id_articulo" Type="int" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="ubicacion" Type="varchar" MaxLength="50" />
+          <Property Name="seccion" Type="int" />
+        </EntityType>
+        <EntityType Name="propiedades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="iva" Type="float" />
+        </EntityType>
+        <EntityType Name="propiedades_local">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="folio_abierto" Type="int" />
+          <Property Name="nombre_cliente_abierto" Type="varchar(max)" />
+          <Property Name="p_cristales" Type="float" />
+          <Property Name="p_aluminio" Type="float" />
+          <Property Name="p_herrajes" Type="float" />
+          <Property Name="p_otros" Type="float" />
+          <Property Name="proyecto_abierto" Type="varchar(max)" />
+          <Property Name="desc_cotizacion" Type="float" />
+          <Property Name="utilidad_cotizacion" Type="float" />
+        </EntityType>
+        <EntityType Name="proveedores">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="grupo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="userLocal">
+          <Key>
+            <PropertyRef Name="user" />
+          </Key>
+          <Property Name="user" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="remember" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="userLocal_modelStoreContainer">
+          <EntitySet Name="categorias" EntityType="Self.categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="filas_borradas" EntityType="Self.filas_borradas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lineas_modulos" EntityType="Self.lineas_modulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="modulos_articulos" EntityType="Self.modulos_articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="propiedades" EntityType="Self.propiedades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="propiedades_local" EntityType="Self.propiedades_local" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proveedores" EntityType="Self.proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userLocal" EntityType="Self.userLocal" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="userLocal_model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="userLocal">
+          <Key>
+            <PropertyRef Name="user" />
+          </Key>
+          <Property Name="user" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="remember" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="localDateBaseEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="userLocals" EntityType="Self.userLocal" />
+          <EntitySet Name="filas_borradas" EntityType="userLocal_model.filas_borradas" />
+          <EntitySet Name="categorias" EntityType="userLocal_model.categoria" />
+          <EntitySet Name="proveedores" EntityType="userLocal_model.proveedore" />
+          <EntitySet Name="lineas_modulos" EntityType="userLocal_model.lineas_modulos" />
+          <EntitySet Name="modulos_articulos" EntityType="userLocal_model.modulos_articulos" />
+          <EntitySet Name="logins" EntityType="userLocal_model.login" />
+          <EntitySet Name="propiedades" EntityType="userLocal_model.propiedade" />
+          <EntitySet Name="propiedades_local" EntityType="userLocal_model.propiedades_local" />
+          </EntityContainer>
+        <EntityType Name="filas_borradas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="folio" Type="Int32" />
+          <Property Name="articulo_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="categoria1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="grupo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="proveedore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lineas_modulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="linea_modulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="modulos_articulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="componente" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_articulo" Type="Int32" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="ubicacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="seccion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="contraseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="propiedade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="iva" Type="Double" />
+        </EntityType>
+        <EntityType Name="propiedades_local">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="folio_abierto" Type="Int32" />
+          <Property Name="nombre_cliente_abierto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="p_cristales" Type="Double" />
+          <Property Name="p_aluminio" Type="Double" />
+          <Property Name="p_herrajes" Type="Double" />
+          <Property Name="p_otros" Type="Double" />
+          <Property Name="proyecto_abierto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="desc_cotizacion" Type="Double" />
+          <Property Name="utilidad_cotizacion" Type="Double" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="userLocal_modelStoreContainer" CdmEntityContainer="localDateBaseEntities3">
+          <EntitySetMapping Name="userLocals">
+            <EntityTypeMapping TypeName="userLocal_model.userLocal">
+              <MappingFragment StoreEntitySet="userLocal">
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="remember" ColumnName="remember" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="filas_borradas">
+            <EntityTypeMapping TypeName="userLocal_model.filas_borradas">
+              <MappingFragment StoreEntitySet="filas_borradas">
+                <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+                <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categorias">
+            <EntityTypeMapping TypeName="userLocal_model.categoria">
+              <MappingFragment StoreEntitySet="categorias">
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="categoria1" ColumnName="categoria" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedores">
+            <EntityTypeMapping TypeName="userLocal_model.proveedore">
+              <MappingFragment StoreEntitySet="proveedores">
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lineas_modulos">
+            <EntityTypeMapping TypeName="userLocal_model.lineas_modulos">
+              <MappingFragment StoreEntitySet="lineas_modulos">
+                <ScalarProperty Name="linea_modulo" ColumnName="linea_modulo" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modulos_articulos">
+            <EntityTypeMapping TypeName="userLocal_model.modulos_articulos">
+              <MappingFragment StoreEntitySet="modulos_articulos">
+                <ScalarProperty Name="seccion" ColumnName="seccion" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id_articulo" ColumnName="id_articulo" />
+                <ScalarProperty Name="componente" ColumnName="componente" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logins">
+            <EntityTypeMapping TypeName="userLocal_model.login">
+              <MappingFragment StoreEntitySet="login">
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="propiedades">
+            <EntityTypeMapping TypeName="userLocal_model.propiedade">
+              <MappingFragment StoreEntitySet="propiedades">
+                <ScalarProperty Name="iva" ColumnName="iva" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="propiedades_local">
+            <EntityTypeMapping TypeName="userLocal_model.propiedades_local">
+              <MappingFragment StoreEntitySet="propiedades_local">
+                <ScalarProperty Name="utilidad_cotizacion" ColumnName="utilidad_cotizacion" />
+                <ScalarProperty Name="desc_cotizacion" ColumnName="desc_cotizacion" />
+                <ScalarProperty Name="proyecto_abierto" ColumnName="proyecto_abierto" />
+                <ScalarProperty Name="p_otros" ColumnName="p_otros" />
+                <ScalarProperty Name="p_herrajes" ColumnName="p_herrajes" />
+                <ScalarProperty Name="p_aluminio" ColumnName="p_aluminio" />
+                <ScalarProperty Name="p_cristales" ColumnName="p_cristales" />
+                <ScalarProperty Name="nombre_cliente_abierto" ColumnName="nombre_cliente_abierto" />
+                <ScalarProperty Name="folio_abierto" ColumnName="folio_abierto" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

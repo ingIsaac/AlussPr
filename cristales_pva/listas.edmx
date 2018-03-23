@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="listas_model_pva.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="acabados">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="acabado" Type="varchar(max)" />
+          <Property Name="neto_recto" Type="float" />
+          <Property Name="neto_curvo" Type="float" />
+        </EntityType>
+        <EntityType Name="colores_aluminio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+          <Property Name="proveedor" Type="varchar" MaxLength="50" />
+          <Property Name="precio" Type="float" />
+          <Property Name="costo_extra_ml" Type="float" />
+        </EntityType>
+        <EntityType Name="esquemas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar(max)" />
+          <Property Name="filas" Type="int" />
+          <Property Name="columnas" Type="int" />
+          <Property Name="diseño" Type="varchar" MaxLength="50" />
+          <Property Name="esquemas" Type="varchar(max)" />
+          <Property Name="marco" Type="bit" />
+          <Property Name="grupo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="herrajes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="caracteristicas" Type="varchar(max)" />
+          <Property Name="color" Type="varchar(max)" />
+          <Property Name="precio" Type="float" />
+        </EntityType>
+        <EntityType Name="lista_costo_corte_e_instalado">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="costo_corte_m2" Type="float" />
+          <Property Name="costo_instalado" Type="float" />
+          <Property Name="proveedor" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="lista_precio_corte_e_instalado">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="precio_venta_corte_m2" Type="float" />
+          <Property Name="precio_venta_instalado" Type="float" />
+          <Property Name="proveedor" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="lista_precios_hojas">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="largo" Type="float" />
+          <Property Name="alto" Type="float" />
+          <Property Name="precio_hoja" Type="float" />
+          <Property Name="proveedor" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="modulos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="clave_vidrio" Type="varchar(max)" />
+          <Property Name="id_aluminio" Type="varchar(max)" />
+          <Property Name="id_herraje" Type="varchar(max)" />
+          <Property Name="id_otros" Type="varchar(max)" />
+          <Property Name="secciones" Type="int" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" />
+          <Property Name="id_diseño" Type="int" />
+          <Property Name="cs" Type="bit" />
+          <Property Name="parametros" Type="varchar" MaxLength="50" />
+          <Property Name="reglas" Type="varchar(max)" />
+          <Property Name="privado" Type="bit" />
+        </EntityType>
+        <EntityType Name="otros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="caracteristicas" Type="varchar(max)" />
+          <Property Name="color" Type="varchar(max)" />
+          <Property Name="precio" Type="float" />
+          <Property Name="largo" Type="float" />
+          <Property Name="alto" Type="float" />
+        </EntityType>
+        <EntityType Name="perfiles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" />
+          <Property Name="articulo" Type="varchar(max)" />
+          <Property Name="linea" Type="varchar(max)" />
+          <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="largo" Type="float" />
+          <Property Name="ancho_perfil" Type="float" />
+          <Property Name="perimetro_dm2_ml" Type="float" />
+          <Property Name="crudo" Type="float" />
+          <Property Name="blanco" Type="float" />
+          <Property Name="hueso" Type="float" />
+          <Property Name="champagne" Type="float" />
+          <Property Name="gris" Type="float" />
+          <Property Name="negro" Type="float" />
+          <Property Name="brillante" Type="float" />
+          <Property Name="natural_1" Type="float" />
+          <Property Name="madera" Type="float" />
+          <Property Name="kg_peso_lineal" Type="float" />
+          <Property Name="fecha" Type="varchar" MaxLength="50" />
+          <Property Name="chocolate" Type="float" />
+          <Property Name="acero_inox" Type="float" />
+          <Property Name="bronce" Type="float" />
+        </EntityType>
+        <EntityContainer Name="listas_model_pvaStoreContainer">
+          <EntitySet Name="acabados" EntityType="Self.acabados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="colores_aluminio" EntityType="Self.colores_aluminio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="esquemas" EntityType="Self.esquemas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="herrajes" EntityType="Self.herrajes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_costo_corte_e_instalado" EntityType="Self.lista_costo_corte_e_instalado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_precio_corte_e_instalado" EntityType="Self.lista_precio_corte_e_instalado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lista_precios_hojas" EntityType="Self.lista_precios_hojas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="modulos" EntityType="Self.modulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="otros" EntityType="Self.otros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfiles" EntityType="Self.perfiles" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="listas_model_pva" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="lista_costo_corte_e_instalado">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="costo_corte_m2" Type="Double" />
+          <Property Name="costo_instalado" Type="Double" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lista_precio_corte_e_instalado">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="precio_venta_corte_m2" Type="Double" />
+          <Property Name="precio_venta_instalado" Type="Double" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lista_precios_hojas">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="largo" Type="Double" />
+          <Property Name="alto" Type="Double" />
+          <Property Name="precio_hoja" Type="Double" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="listas_entities_pva" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="lista_costo_corte_e_instalado" EntityType="Self.lista_costo_corte_e_instalado" />
+          <EntitySet Name="lista_precio_corte_e_instalado" EntityType="Self.lista_precio_corte_e_instalado" />
+          <EntitySet Name="lista_precios_hojas" EntityType="Self.lista_precios_hojas" />
+          <EntitySet Name="acabados" EntityType="listas_model_pva.acabado" />
+          <EntitySet Name="otros" EntityType="listas_model_pva.otro" />
+          <EntitySet Name="esquemas" EntityType="listas_model_pva.esquema" />
+          <EntitySet Name="herrajes" EntityType="listas_model_pva.herraje" />
+          <EntitySet Name="colores_aluminio" EntityType="listas_model_pva.colores_aluminio" />
+          <EntitySet Name="modulos" EntityType="listas_model_pva.modulo" />
+          <EntitySet Name="perfiles" EntityType="listas_model_pva.perfile" />
+        </EntityContainer>
+        <EntityType Name="acabado">
+          <Key>
+            <PropertyRef Name="clave" />
+          </Key>
+          <Property Name="clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="acabado1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="neto_recto" Type="Double" />
+          <Property Name="neto_curvo" Type="Double" />
+        </EntityType>
+        <EntityType Name="otro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="caracteristicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="largo" Type="Double" />
+          <Property Name="alto" Type="Double" />
+        </EntityType>
+        <EntityType Name="esquema">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="filas" Type="Int32" />
+          <Property Name="columnas" Type="Int32" />
+          <Property Name="diseño" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="esquemas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="marco" Type="Boolean" />
+          <Property Name="grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="herraje">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="caracteristicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Double" />
+        </EntityType>
+        <EntityType Name="colores_aluminio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="costo_extra_ml" Type="Double" />
+        </EntityType>
+        <EntityType Name="modulo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="clave_vidrio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_aluminio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_herraje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_otros" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="secciones" Type="Int32" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_diseño" Type="Int32" />
+          <Property Name="cs" Type="Boolean" />
+          <Property Name="parametros" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reglas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="privado" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="perfile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="linea" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="largo" Type="Double" />
+          <Property Name="ancho_perfil" Type="Double" />
+          <Property Name="perimetro_dm2_ml" Type="Double" />
+          <Property Name="crudo" Type="Double" />
+          <Property Name="blanco" Type="Double" />
+          <Property Name="hueso" Type="Double" />
+          <Property Name="champagne" Type="Double" />
+          <Property Name="gris" Type="Double" />
+          <Property Name="negro" Type="Double" />
+          <Property Name="brillante" Type="Double" />
+          <Property Name="natural_1" Type="Double" />
+          <Property Name="madera" Type="Double" />
+          <Property Name="kg_peso_lineal" Type="Double" />
+          <Property Name="fecha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="chocolate" Type="Double" />
+          <Property Name="acero_inox" Type="Double" />
+          <Property Name="bronce" Type="Double" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="listas_model_pvaStoreContainer" CdmEntityContainer="listas_entities_pva">
+          <EntitySetMapping Name="lista_costo_corte_e_instalado">
+            <EntityTypeMapping TypeName="listas_model_pva.lista_costo_corte_e_instalado">
+              <MappingFragment StoreEntitySet="lista_costo_corte_e_instalado">
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="costo_corte_m2" ColumnName="costo_corte_m2" />
+                <ScalarProperty Name="costo_instalado" ColumnName="costo_instalado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_precio_corte_e_instalado">
+            <EntityTypeMapping TypeName="listas_model_pva.lista_precio_corte_e_instalado">
+              <MappingFragment StoreEntitySet="lista_precio_corte_e_instalado">
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="precio_venta_corte_m2" ColumnName="precio_venta_corte_m2" />
+                <ScalarProperty Name="precio_venta_instalado" ColumnName="precio_venta_instalado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lista_precios_hojas">
+            <EntityTypeMapping TypeName="listas_model_pva.lista_precios_hojas">
+              <MappingFragment StoreEntitySet="lista_precios_hojas">
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="precio_hoja" ColumnName="precio_hoja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="acabados">
+            <EntityTypeMapping TypeName="listas_model_pva.acabado">
+              <MappingFragment StoreEntitySet="acabados">
+                <ScalarProperty Name="neto_curvo" ColumnName="neto_curvo" />
+                <ScalarProperty Name="neto_recto" ColumnName="neto_recto" />
+                <ScalarProperty Name="acabado1" ColumnName="acabado" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="otros">
+            <EntityTypeMapping TypeName="listas_model_pva.otro">
+              <MappingFragment StoreEntitySet="otros">
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="caracteristicas" ColumnName="caracteristicas" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="esquemas">
+            <EntityTypeMapping TypeName="listas_model_pva.esquema">
+              <MappingFragment StoreEntitySet="esquemas">
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="marco" ColumnName="marco" />
+                <ScalarProperty Name="esquemas" ColumnName="esquemas" />
+                <ScalarProperty Name="diseño" ColumnName="diseño" />
+                <ScalarProperty Name="columnas" ColumnName="columnas" />
+                <ScalarProperty Name="filas" ColumnName="filas" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="herrajes">
+            <EntityTypeMapping TypeName="listas_model_pva.herraje">
+              <MappingFragment StoreEntitySet="herrajes">
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="caracteristicas" ColumnName="caracteristicas" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="colores_aluminio">
+            <EntityTypeMapping TypeName="listas_model_pva.colores_aluminio">
+              <MappingFragment StoreEntitySet="colores_aluminio">
+                <ScalarProperty Name="costo_extra_ml" ColumnName="costo_extra_ml" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modulos">
+            <EntityTypeMapping TypeName="listas_model_pva.modulo">
+              <MappingFragment StoreEntitySet="modulos">
+                <ScalarProperty Name="privado" ColumnName="privado" />
+                <ScalarProperty Name="reglas" ColumnName="reglas" />
+                <ScalarProperty Name="parametros" ColumnName="parametros" />
+                <ScalarProperty Name="cs" ColumnName="cs" />
+                <ScalarProperty Name="id_diseño" ColumnName="id_diseño" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="secciones" ColumnName="secciones" />
+                <ScalarProperty Name="id_otros" ColumnName="id_otros" />
+                <ScalarProperty Name="id_herraje" ColumnName="id_herraje" />
+                <ScalarProperty Name="id_aluminio" ColumnName="id_aluminio" />
+                <ScalarProperty Name="clave_vidrio" ColumnName="clave_vidrio" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="perfiles">
+            <EntityTypeMapping TypeName="listas_model_pva.perfile">
+              <MappingFragment StoreEntitySet="perfiles">
+                <ScalarProperty Name="bronce" ColumnName="bronce" />
+                <ScalarProperty Name="acero_inox" ColumnName="acero_inox" />
+                <ScalarProperty Name="chocolate" ColumnName="chocolate" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="kg_peso_lineal" ColumnName="kg_peso_lineal" />
+                <ScalarProperty Name="madera" ColumnName="madera" />
+                <ScalarProperty Name="natural_1" ColumnName="natural_1" />
+                <ScalarProperty Name="brillante" ColumnName="brillante" />
+                <ScalarProperty Name="negro" ColumnName="negro" />
+                <ScalarProperty Name="gris" ColumnName="gris" />
+                <ScalarProperty Name="champagne" ColumnName="champagne" />
+                <ScalarProperty Name="hueso" ColumnName="hueso" />
+                <ScalarProperty Name="blanco" ColumnName="blanco" />
+                <ScalarProperty Name="crudo" ColumnName="crudo" />
+                <ScalarProperty Name="perimetro_dm2_ml" ColumnName="perimetro_dm2_ml" />
+                <ScalarProperty Name="ancho_perfil" ColumnName="ancho_perfil" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="linea" ColumnName="linea" />
+                <ScalarProperty Name="articulo" ColumnName="articulo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
