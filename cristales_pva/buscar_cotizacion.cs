@@ -13,8 +13,8 @@ namespace cristales_pva
     {
         private string org_search = string.Empty;
         int c = 0;
-        int div = 50;
-        int paginas = 0;
+        int div = 25;
+        int paginas = 1;
         bool LastPage = true;
         bool load = false;
 
@@ -148,8 +148,8 @@ namespace cristales_pva
                 if (textBox1.Text == "")
                 {
                     c = sql.countCotizaciones(org_search, false, "", false);
-                    paginas = c / div;
-                    label4.Text = "Páginas: " + (paginas + 1);
+                    paginas = (int)Math.Ceiling((float)c / div);
+                    label4.Text = "Páginas: " + (paginas);
                     label2.Text = "Total de registros en (" + constants.user + "): " + c;
                     if (lastPage == false)
                     {
@@ -173,8 +173,8 @@ namespace cristales_pva
                 else
                 {
                     c = sql.countCotizaciones(org_search, false, textBox1.Text, true);
-                    paginas = c / div;
-                    label4.Text = "Páginas: " + (paginas + 1);
+                    paginas = (int)Math.Ceiling((float)c / div);
+                    label4.Text = "Páginas: " + (paginas);
                     label2.Text = "Total de registros en (" + constants.user + "): " + c;
                     if (lastPage == false)
                     {
@@ -201,8 +201,8 @@ namespace cristales_pva
                 if (textBox1.Text == "")
                 {
                     c = sql.countCotizaciones(org_search, true, "", false);
-                    paginas = c / div;
-                    label4.Text = "Páginas: " + (paginas + 1);
+                    paginas = (int)Math.Ceiling((float)c / div);
+                    label4.Text = "Páginas: " + (paginas);
                     label2.Text = "Total de registros: " + c;
                     if (lastPage == false)
                     {
@@ -226,8 +226,8 @@ namespace cristales_pva
                 else
                 {
                     c = sql.countCotizaciones(org_search, true, textBox1.Text, true);
-                    paginas = c / div;
-                    label4.Text = "Páginas: " + (paginas + 1);
+                    paginas = (int)Math.Ceiling((float)c / div);
+                    label4.Text = "Páginas: " + (paginas);
                     label2.Text = "Total de registros: " + c;
                     if (lastPage == false)
                     {
@@ -261,8 +261,8 @@ namespace cristales_pva
             if (checkBox1.Checked == false)
             {
                 c = sql.countCotizacionesFecha(date, org_search);
-                paginas = c / div;
-                label4.Text = "Páginas: " + (paginas + 1);
+                paginas = (int)Math.Ceiling((float)c / div);
+                label4.Text = "Páginas: " + (paginas);
                 label2.Text = "Total de registros en (" + constants.user + "): " + c;
                 if (lastPage == false)
                 {
@@ -286,8 +286,8 @@ namespace cristales_pva
             else
             {
                 c = sql.countCotizacionesFecha(date, org_search, true);
-                paginas = c / div;
-                label4.Text = "Páginas: " + (paginas + 1);
+                paginas = (int)Math.Ceiling((float)c / div);
+                label4.Text = "Páginas: " + (paginas);
                 label2.Text = "Total de registros: " + c;
                 if (lastPage == false)
                 {
@@ -347,7 +347,7 @@ namespace cristales_pva
         {
             if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false && backgroundWorker4.IsBusy == false)
             {
-                DialogResult r = MessageBox.Show("¿Estás seguro de eliminar de forma permanente esta cotización?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show(this, "¿Estás seguro de eliminar de forma permanente esta cotización?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                 if (r == DialogResult.Yes)
                 {
@@ -374,7 +374,7 @@ namespace cristales_pva
             {
                 if (constants.cotizacion_proceso == true)
                 {
-                    DialogResult r = MessageBox.Show("Existe una cotización en progreso. ¿Desea guardarla?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    DialogResult r = MessageBox.Show(this, "Existe una cotización en progreso. ¿Desea guardarla?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
                     if(r == DialogResult.Yes)
                     {
@@ -468,6 +468,7 @@ namespace cristales_pva
             sql.deleteCotizacion("otros_cotizaciones", constants.folio_eliminacion);
             sql.deleteCotizacion("modulos_cotizaciones", constants.folio_eliminacion);
             sql.deleteRegistroPresupuestos(constants.folio_eliminacion);
+            sql.deleteProduccionTable(constants.folio_eliminacion);
             ((Form1)Application.OpenForms["Form1"]).ifDeleted();
             iniciarBusqueda(true);
         }       
@@ -504,6 +505,18 @@ namespace cristales_pva
             if (constants.cotizacion_error != true)
             {
                 label3.Text = "Abriendo Cotización...";
+                if (constants.ac_cotizacion == true && constants.p_ac == true)
+                {
+                    DialogResult r = MessageBox.Show(this, "¿Deseas actualizar los precios de está cotización?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (r == DialogResult.Yes)
+                    {
+                        constants.reload_precios = true;
+                    }
+                    else if(r == DialogResult.No)
+                    {
+                        constants.reload_precios = false;
+                    }
+                }
                 backgroundWorker4.RunWorkerAsync();
             }
             else
@@ -511,7 +524,7 @@ namespace cristales_pva
                 pictureBox1.Visible = false;
                 label3.Visible = false;
                 datagridviewNE1.Enabled = true;
-                MessageBox.Show("[Error] no se pudo abrir esta cotización, intenta de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error] no se pudo abrir esta cotización, intenta de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -567,7 +580,7 @@ namespace cristales_pva
         private void backgroundWorker4_DoWork(object sender, DoWorkEventArgs e)
         {
             constants.deleteFilasBorradasFromLocalDB();
-            if (constants.ac_cotizacion == true)
+            if (constants.ac_cotizacion == true && constants.reload_precios == true)
             {
                 constants.errors_Open.Clear();
                 for (int i = 1; i < 5; i++)
@@ -578,7 +591,8 @@ namespace cristales_pva
             constants.reloadCotizaciones();
             ((Form1)Application.OpenForms["Form1"]).setFolioLabel();
             ((Form1)Application.OpenForms["Form1"]).seleccionarPastaña();
-            ((Form1)Application.OpenForms["Form1"]).resetSubfolio();           
+            ((Form1)Application.OpenForms["Form1"]).resetSubfolio();
+            ((Form1)Application.OpenForms["Form1"]).refreshNewArticulo();
         }
 
         private void BackgroundWorker4_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -631,7 +645,7 @@ namespace cristales_pva
             {
                 label3.Text = "Buscando...";
                 LastPage = false;
-                textBox2.Text = "0";
+                textBox2.Text = paginas > 0 ? "1" : "0";
                 pictureBox1.Visible = true;
                 label3.Visible = true;
                 datagridviewNE1.Enabled = false;
@@ -662,7 +676,7 @@ namespace cristales_pva
         private void button5_Click(object sender, EventArgs e)
         {
             int page = constants.stringToInt(textBox2.Text);
-            if (page > 0)
+            if (page > 1)
             {
                 if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false && backgroundWorker4.IsBusy == false)
                 {
@@ -801,6 +815,6 @@ namespace cristales_pva
                 datagridviewNE1.Enabled = false;
                 backgroundWorker1.RunWorkerAsync(getMesInt(comboBox2.Text) + "/" + comboBox3.Text);
             }
-        }
+        }    
     }
 }

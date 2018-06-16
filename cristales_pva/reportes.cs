@@ -26,10 +26,11 @@ namespace cristales_pva
         float total = 0;
         float descuento = 0;
         float desc_cant = 0;
+        float utilidad = 0;
         bool sort_a_z = true;
         bool load = false;
 
-        public reportes(string cliente, string proyecto, string folio, float subtotal, float iva, float total, float descuento, float desc_cant)
+        public reportes(string cliente, string proyecto, string folio, float subtotal, float iva, float total, float descuento, float desc_cant, float utilidad)
         {
             InitializeComponent();
             textBox4.Leave += TextBox4_Leave;
@@ -41,6 +42,7 @@ namespace cristales_pva
             this.total = total;
             this.descuento = descuento;
             this.desc_cant = desc_cant;
+            this.utilidad = utilidad;
             checkBox2.Checked = constants.op1;
             checkBox1.Checked = constants.op2;
             checkBox3.Checked = constants.op3;
@@ -49,9 +51,11 @@ namespace cristales_pva
             checkBox6.Checked = constants.op6;
             checkBox7.Checked = constants.op7;
             checkBox8.Checked = constants.op8;
+            checkBox9.Checked = constants.op9;
+            checkBox10.Checked = constants.op10;
             load = true;
             label6.Text = "Sub-Folio: " + constants.sub_folio;
-
+            
             //load reporte
             sqlDateBaseManager sql = new sqlDateBaseManager();
             if (cliente != "")
@@ -90,15 +94,26 @@ namespace cristales_pva
 
         private void setData(string cliente, string proyecto, string domicilio, string telefono, string email)
         {
-            textBox1.Text = cliente;
-            textBox2.Text = proyecto;
-            textBox3.Text = domicilio;
-            textBox4.Text = telefono;
-            textBox5.Text = email;
+            textBox1.Text = cliente != "" ? cliente : textBox1.Text;
+            textBox2.Text = proyecto != "" ? proyecto : textBox2.Text;
+            textBox3.Text = domicilio != "" ? domicilio : textBox3.Text;
+            textBox4.Text = telefono != "" ? telefono : textBox4.Text;
+            textBox5.Text = email != "" ? email : textBox5.Text;
         }
 
         public void loadReporte(string cliente, string proyecto, string folio, float subtotal, float iva, float total, bool pic=true)
         {
+            float _utilidad = 0;
+            //Incluir utilidad 
+            if (checkBox9.Checked)
+            {
+                _utilidad = this.utilidad > 0 ? (this.utilidad / 100) + 1 : 1;
+            }
+            else
+            {
+                _utilidad = 1;
+            }
+
             //ocultar desglose
             if (checkBox5.Checked)
             {
@@ -145,21 +160,28 @@ namespace cristales_pva
             }
             reportViewer1.LocalReport.DisplayName = textBox1.Text + " - " + constants.sub_folio;
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
-            reportViewer1.LocalReport.EnableExternalImages = true;          
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", "file:///" + Application.StartupPath + "\\pics\\reportes\\" + constants.header_reporte + ".jpg"));
+            reportViewer1.LocalReport.EnableExternalImages = true;
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
             if (checkBox6.Checked)
             {
-                reportViewer1.LocalReport.SetParameters(new ReportParameter("marca", "file:///" + Application.StartupPath + "\\pics\\reportes\\fondos\\" + constants.header_reporte + ".bmp"));
+                reportViewer1.LocalReport.SetParameters(new ReportParameter("marca", constants.getExternalImage("marca")));
             }
             else
             {
                 reportViewer1.LocalReport.SetParameters(new ReportParameter("marca", " "));
             }
             if (descuento > 0 && checkBox4.Checked)
-            {                
-                reportViewer1.LocalReport.SetParameters(new ReportParameter("descuento", "Precio Especial: \n(-" + descuento + "%)"));
+            {
+                if (checkBox10.Checked)
+                {
+                    reportViewer1.LocalReport.SetParameters(new ReportParameter("descuento", "Precio Especial: \n(-" + descuento + "%)"));
+                }
+                else
+                {
+                    reportViewer1.LocalReport.SetParameters(new ReportParameter("descuento", "Precio Especial: "));
+                }
                 reportViewer1.LocalReport.SetParameters(new ReportParameter("desc_cant", "$ " + total.ToString("n")));
-                subtotal = this.subtotal + desc_cant;
+                subtotal = this.subtotal + (desc_cant * _utilidad);
                 iva = subtotal * (constants.iva - 1);
                 total = subtotal + iva;
             }
@@ -424,9 +446,9 @@ namespace cristales_pva
                         largo = Math.Round((float)c.largo / 1000, 2),
                         alto = Math.Round((float)c.alto / 1000, 2),
                         cantidad = c.cantidad,
-                        total = c.total,
+                        total = c.total * _utilidad,
                         pic = p,
-                        desc_p = checkBox8.Checked == true ? "(-" + descuento + "%)\n$" + (Math.Round((float)c.total - ((float)c.total * (descuento / 100)), 2)).ToString("n") : ""
+                        desc_p = checkBox8.Checked == true ? "(-" + descuento + "%)\n$" + (Math.Round(((float)c.total * _utilidad) - (((float)c.total * _utilidad) * (descuento / 100)), 2)).ToString("n") : ""
                     };
                     cotizaciones.articulos_reporte.Add(q_5);
                     cris_list.Clear();
@@ -472,7 +494,7 @@ namespace cristales_pva
                         descripcion = desc,
                         largo = Math.Round((float)c.largo_total / 1000, 2),
                         cantidad = c.cantidad,
-                        total = c.total,
+                        total = c.total * _utilidad,
                         pic = null
                     };
                     cotizaciones.articulos_reporte.Add(q_1);
@@ -734,7 +756,7 @@ namespace cristales_pva
                         largo = Math.Round((float)c.largo / 1000, 2),
                         alto = Math.Round((float)c.alto / 1000, 2),
                         cantidad = c.cantidad,
-                        total = c.total,
+                        total = c.total * _utilidad,
                         pic = null                               
                     };
                     cotizaciones.articulos_reporte.Add(q_2);
@@ -769,7 +791,7 @@ namespace cristales_pva
                         concepto = c.articulo,
                         descripcion = desc,
                         cantidad = c.cantidad,
-                        total = c.total,
+                        total = c.total * _utilidad,
                         pic = null
                     };
                     cotizaciones.articulos_reporte.Add(q_3);
@@ -829,7 +851,7 @@ namespace cristales_pva
                         largo = l == true ? Math.Round((float)c.largo / 1000, 2) : 0,
                         alto = a == true ? Math.Round((float)c.alto / 1000, 2) : 0,
                         cantidad = c.cantidad,
-                        total = c.total,
+                        total = c.total * _utilidad,
                         pic = null
                     };
                     cotizaciones.articulos_reporte.Add(q_4);
@@ -917,8 +939,24 @@ namespace cristales_pva
         //actualizar datos
         private void button1_Click(object sender, EventArgs e)
         {
+            string[] r = ((Form1)Application.OpenForms["form1"]).getDesglose();
+            this.cliente = constants.nombre_cotizacion;
+            this.folio = constants.folio_abierto.ToString();
+            this.proyecto = constants.nombre_proyecto;
+            this.subtotal = constants.stringToFloat(r[0]);
+            this.iva = constants.stringToFloat(r[1]);
+            this.total = constants.stringToFloat(r[2]);
+            this.descuento = constants.desc_cotizacion;
+            this.desc_cant = constants.desc_cant;
+            this.utilidad = constants.utilidad_cotizacion;
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            if (cliente != "")
+            {
+                setData(cliente, proyecto, sql.getSingleSQLValue("clientes", "domicilio", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "telefono", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "correo_electronico", "nombre", cliente, 0));
+            }
             loadReporte(cliente, proyecto, folio, subtotal, iva, total);
         }
+        //
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -1037,6 +1075,47 @@ namespace cristales_pva
             }
         }
 
+        private void checkBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            if (load == true)
+            {
+                loadReporte(cliente, proyecto, folio, subtotal, iva, total);
+                if (checkBox9.Checked == true)
+                {
+                    setNewOption("OP9", "true");
+                    constants.op9 = true;
+                }
+                else
+                {
+                    setNewOption("OP9", "false");
+                    constants.op9 = false;
+                }
+            }
+        }
+
+        private void checkBox10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (load == true)
+            {
+                loadReporte(cliente, proyecto, folio, subtotal, iva, total);
+                if (checkBox10.Checked == true)
+                {
+                    setNewOption("OP10", "true");
+                    constants.op10 = true;
+                }
+                else
+                {
+                    setNewOption("OP10", "false");
+                    constants.op10 = false;
+                }
+            }
+        }
+
+        public void reload()
+        {
+            loadReporte(cliente, proyecto, folio, subtotal, iva, total);
+        }
+
         private void setNewOption(string opcion, string v)
         {
             try
@@ -1056,6 +1135,12 @@ namespace cristales_pva
                 constants.errorLog(err.ToString());
                 MessageBox.Show("[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        //Forma de pago
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new forma_pago().ShowDialog();
         }
     }
 }

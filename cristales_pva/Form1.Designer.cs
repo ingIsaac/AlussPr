@@ -249,6 +249,7 @@
             this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.panelDeAdministradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.opcionesDelProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optimizarBaseDeDatosLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -264,6 +265,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.enviarCotizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.artículosDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.producciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ordenDeProducciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -306,7 +309,6 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.label100 = new System.Windows.Forms.Label();
-            this.opcionesDelProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -2623,7 +2625,8 @@
             this.reportesToolStripMenuItem,
             this.desgloseToolStripMenuItem,
             this.presupuestosToolStripMenuItem,
-            this.artículosDeUsuarioToolStripMenuItem});
+            this.artículosDeUsuarioToolStripMenuItem,
+            this.producciónToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1019, 28);
@@ -2662,6 +2665,13 @@
             this.panelDeAdministradorToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.panelDeAdministradorToolStripMenuItem.Text = "Panel de administrador";
             this.panelDeAdministradorToolStripMenuItem.Click += new System.EventHandler(this.panelDeAdministradorToolStripMenuItem_Click);
+            // 
+            // opcionesDelProgramaToolStripMenuItem
+            // 
+            this.opcionesDelProgramaToolStripMenuItem.Name = "opcionesDelProgramaToolStripMenuItem";
+            this.opcionesDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.opcionesDelProgramaToolStripMenuItem.Text = "Opciones del programa";
+            this.opcionesDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.opcionesDelProgramaToolStripMenuItem_Click);
             // 
             // optimizarBaseDeDatosLocalToolStripMenuItem
             // 
@@ -2778,6 +2788,22 @@
             this.artículosDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
             this.artículosDeUsuarioToolStripMenuItem.Text = "Paquetes y Servicios";
             this.artículosDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.artículosDeUsuarioToolStripMenuItem_Click);
+            // 
+            // producciónToolStripMenuItem
+            // 
+            this.producciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ordenDeProducciónToolStripMenuItem});
+            this.producciónToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.production_icon;
+            this.producciónToolStripMenuItem.Name = "producciónToolStripMenuItem";
+            this.producciónToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            this.producciónToolStripMenuItem.Text = "Producción";
+            // 
+            // ordenDeProducciónToolStripMenuItem
+            // 
+            this.ordenDeProducciónToolStripMenuItem.Name = "ordenDeProducciónToolStripMenuItem";
+            this.ordenDeProducciónToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.ordenDeProducciónToolStripMenuItem.Text = "Generar orden de producción";
+            this.ordenDeProducciónToolStripMenuItem.Click += new System.EventHandler(this.ordenDeProducciónToolStripMenuItem_Click);
             // 
             // backgroundWorker1
             // 
@@ -3275,13 +3301,6 @@
             this.label100.Size = new System.Drawing.Size(0, 13);
             this.label100.TabIndex = 31;
             // 
-            // opcionesDelProgramaToolStripMenuItem
-            // 
-            this.opcionesDelProgramaToolStripMenuItem.Name = "opcionesDelProgramaToolStripMenuItem";
-            this.opcionesDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.opcionesDelProgramaToolStripMenuItem.Text = "Opciones del programa";
-            this.opcionesDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.opcionesDelProgramaToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3631,6 +3650,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem opcionesDelProgramaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem producciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ordenDeProducciónToolStripMenuItem;
     }
 }
 

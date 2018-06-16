@@ -22,8 +22,10 @@ namespace cristales_pva
             datagridviewNE1.CellLeave += DatagridviewNE1_CellLeave;
             datagridviewNE1.CellEndEdit += DatagridviewNE1_CellEndEdit;
             datagridviewNE1.EditingControlShowing += DatagridviewNE1_EditingControlShowing;
+            datagridviewNE1.DataBindingComplete += DatagridviewNE1_DataBindingComplete;
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
+            backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             this.FormClosed += Articulos_cotizacion_FormClosed;
             textBox1.KeyDown += TextBox1_KeyDown;           
             if (Application.OpenForms["edit_express"] != null)
@@ -34,6 +36,38 @@ namespace cristales_pva
             if (constants.tipo_cotizacion == 0)
             {
                 MessageBox.Show("No se ha seleccionado un tipo de artículo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void DatagridviewNE1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            try
+            {
+                string[] y = null;
+                foreach (string x in constants.save_onEdit)
+                {
+                    if (datagridviewNE1.Rows.Count > 0)
+                    {
+                        foreach (DataGridViewRow v in datagridviewNE1.Rows)
+                        {
+                            y = x.Split('-');
+                            if (y.Length == 2)
+                            {
+                                if (constants.stringToInt(y[1]) == constants.tipo_cotizacion)
+                                {
+                                    if ((int)v.Cells[0].Value == constants.stringToInt(y[0]))
+                                    {
+                                        v.Cells[0].Style.BackColor = Color.LightGreen;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //do nohitng
             }
         }
 
@@ -88,52 +122,78 @@ namespace cristales_pva
 
         public void loadALL()
         {
-            switch (constants.tipo_cotizacion)
+            try
             {
-                case 1:
-                    this.Text = "Cristales Cotizados";
-                    constants.loadCotizacionesLocales("cristales", datagridviewNE1);
-                    button7.Visible = false;
-                    break;
-                case 2:
-                    this.Text = "Aluminio Cotizados";
-                    constants.loadCotizacionesLocales("aluminio", datagridviewNE1);
-                    button7.Visible = false;
-                    break;
-                case 3:
-                    this.Text = "Herrajes Cotizados";
-                    constants.loadCotizacionesLocales("herrajes", datagridviewNE1);
-                    button7.Visible = false;
-                    break;
-                case 4:
-                    this.Text = "Otros Materiales Cotizados";
-                    constants.loadCotizacionesLocales("otros", datagridviewNE1);
-                    button7.Visible = false;
-                    break;
-                case 5:
-                    this.Text = "Módulos Cotizados";
-                    constants.loadCotizacionesLocales("modulos", datagridviewNE1, true);
-                    checkErrorsModulos();
-                    button7.Visible = true;
-                    break;
-                default: break;
-            }           
-            label2.Text = "Se encontrarón: (" + datagridviewNE1.RowCount + ") partidas.";
-            selectRow();
-            string[] r = ((Form1)Application.OpenForms["form1"]).getTotalAndDescount();
-            label3.Text = "$ " + r[0] + " (-" + r[1] + "%)";
-            label5.Text = "Sub-Folio: " + constants.sub_folio;
-            label6.Text = constants.sub_folio.ToString();
-            foreach (int x in constants.save_onEdit)
-            {
-                foreach (DataGridViewRow v in datagridviewNE1.Rows)
+                datagridviewNE1.DataSource = null;
+                datagridviewNE1.Rows.Clear();
+                datagridviewNE1.Columns.Clear();
+                switch (constants.tipo_cotizacion)
                 {
-                    if ((int)v.Cells[0].Value == x)
-                    {
-                        v.Cells[0].Style.BackColor = Color.LightGreen;
-                    }
+                    case 1:
+                        this.Text = "Cristales Cotizados";
+                        constants.loadCotizacionesLocales("cristales", datagridviewNE1);
+                        button7.Visible = false;
+                        button8.Visible = false;
+                        break;
+                    case 2:
+                        this.Text = "Aluminio Cotizados";
+                        constants.loadCotizacionesLocales("aluminio", datagridviewNE1);
+                        button7.Visible = false;
+                        button8.Visible = false;
+                        break;
+                    case 3:
+                        this.Text = "Herrajes Cotizados";
+                        constants.loadCotizacionesLocales("herrajes", datagridviewNE1);
+                        button7.Visible = false;
+                        button8.Visible = false;
+                        break;
+                    case 4:
+                        this.Text = "Otros Materiales Cotizados";
+                        constants.loadCotizacionesLocales("otros", datagridviewNE1);
+                        button7.Visible = false;
+                        button8.Visible = false;
+                        break;
+                    case 5:
+                        this.Text = "Módulos Cotizados";
+                        constants.loadCotizacionesLocales("modulos", datagridviewNE1, true);
+                        checkErrorsModulos();
+                        button7.Visible = true;
+                        button8.Visible = true;
+                        break;
+                    default: break;
                 }
+                label2.Text = "Se encontrarón: (" + datagridviewNE1.RowCount + ") partidas.";
+                selectRow();
+                string[] r = ((Form1)Application.OpenForms["form1"]).getTotalAndDescount();
+                label3.Text = "$ " + r[0] + " (-" + r[1] + "%)";
+                label5.Text = "Sub-Folio: " + constants.sub_folio;
+                label6.Text = constants.sub_folio.ToString();   
+                if(constants.tipo_cotizacion == 5)
+                {
+                    string[] y = null;
+                    foreach (string x in constants.save_onEdit)
+                    {
+                        if (datagridviewNE1.Rows.Count > 0)
+                        {
+                            foreach (DataGridViewRow v in datagridviewNE1.Rows)
+                            {
+                                y = x.Split('-');
+                                if (y.Length == 2)
+                                {
+                                    if (constants.stringToInt(y[1]) == constants.tipo_cotizacion)
+                                    {
+                                        if ((int)v.Cells[0].Value == constants.stringToInt(y[0]))
+                                        {
+                                            v.Cells[0].Style.BackColor = Color.LightGreen;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }           
             }
+            catch (Exception) { }        
         }
 
         //Set ONLY articulos to uppercase
@@ -576,7 +636,14 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
-                new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).ShowDialog();
+                if (Application.OpenForms["merge_items"] == null)
+                {
+                    new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
+                }
+                else
+                {
+                    Application.OpenForms["merge_items"].Select();
+                }
             }
         }
 
@@ -682,8 +749,8 @@ namespace cristales_pva
         {
             resetRowSelect();
             constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
-            loadALL();
             ((Form1)Application.OpenForms["Form1"]).reloadAll();
+            loadALL();
         }
 
         //cargar al cerrar
@@ -920,7 +987,7 @@ namespace cristales_pva
 
         private void acabadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            change_colors colors = new change_colors((int)datagridviewNE1.CurrentRow.Cells[0].Value, datagridviewNE1.CurrentRow.Cells[6].Value.ToString(), (byte[])datagridviewNE1.CurrentRow.Cells[2].Value);
+            change_colors colors = new change_colors((int)datagridviewNE1.CurrentRow.Cells[0].Value, datagridviewNE1.CurrentRow.Cells[6].Value.ToString(), datagridviewNE1.CurrentRow.Cells[13].Value.ToString(), datagridviewNE1.CurrentRow.Cells[14].Value.ToString());
             if (Application.OpenForms["change_colors"] == null)
             {
                 colors.ShowDialog();
@@ -952,6 +1019,39 @@ namespace cristales_pva
                     }
                 }
             }
+        }
+
+        //Analiticas
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if(Application.OpenForms["analiticas"] == null)
+            {
+               if(backgroundWorker3.IsBusy == false)
+                {
+                    pictureBox1.Visible = true;
+                    backgroundWorker3.RunWorkerAsync();
+                }
+            }
+            else
+            {
+                if(Application.OpenForms["analiticas"].WindowState == FormWindowState.Minimized)
+                {
+                    Application.OpenForms["analiticas"].WindowState = FormWindowState.Normal;
+                }
+                Application.OpenForms["analiticas"].Select();
+            }
+        }
+
+        private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
+        {
+            System.Threading.Thread.Sleep(2000);
+        }
+
+        private void BackgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            string[] r = ((Form1)Application.OpenForms["form1"]).getDesglose();
+            new analiticas(constants.nombre_cotizacion, constants.nombre_proyecto, constants.folio_abierto.ToString(), constants.stringToFloat(r[0]), constants.stringToFloat(r[1]), constants.stringToFloat(r[2]), constants.desc_cotizacion, constants.desc_cant, constants.utilidad_cotizacion).Show();
+            pictureBox1.Visible = false;
         }
         //
     }

@@ -1849,6 +1849,40 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox43">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!costo_add.Value</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox43</rd:DefaultName>
+        <Top>16.37648cm</Top>
+        <Left>6.68995cm</Left>
+        <Height>0.6cm</Height>
+        <Width>6.5956cm</Width>
+        <ZIndex>38</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
     <Height>7.24246in</Height>
     <Style />
@@ -1882,7 +1916,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.97896cm</Height>
+      <Height>0.68792cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1903,7 +1937,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox16</rd:DefaultName>
-          <Top>0.17639cm</Top>
+          <Top>0cm</Top>
           <Left>0.2347cm</Left>
           <Height>0.6cm</Height>
           <Width>1.32701cm</Width>
@@ -1934,7 +1968,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox17</rd:DefaultName>
-          <Top>0.17639cm</Top>
+          <Top>0cm</Top>
           <Left>1.7381cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
@@ -1970,7 +2004,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox18</rd:DefaultName>
-          <Top>0.20285cm</Top>
+          <Top>0cm</Top>
           <Left>16.59724cm</Left>
           <Height>0.57354cm</Height>
           <Width>3.74354cm</Width>
@@ -2155,6 +2189,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="subtot">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="costo_add">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>

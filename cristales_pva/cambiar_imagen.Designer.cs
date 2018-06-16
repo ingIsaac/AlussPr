@@ -44,6 +44,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +87,7 @@
             "puerta",
             "templados",
             "otros"});
-            this.comboBox1.Location = new System.Drawing.Point(605, 380);
+            this.comboBox1.Location = new System.Drawing.Point(605, 407);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 6;
@@ -94,7 +96,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(523, 383);
+            this.label2.Location = new System.Drawing.Point(523, 410);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 7;
@@ -118,7 +120,7 @@
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(605, 407);
+            this.comboBox2.Location = new System.Drawing.Point(605, 434);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 10;
@@ -127,7 +129,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(546, 410);
+            this.label4.Location = new System.Drawing.Point(546, 437);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 11;
@@ -148,7 +150,7 @@
             // button5
             // 
             this.button5.Image = global::cristales_pva.Properties.Resources.Block_icon;
-            this.button5.Location = new System.Drawing.Point(12, 260);
+            this.button5.Location = new System.Drawing.Point(12, 287);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(182, 31);
             this.button5.TabIndex = 13;
@@ -161,7 +163,7 @@
             // button4
             // 
             this.button4.Image = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
-            this.button4.Location = new System.Drawing.Point(200, 297);
+            this.button4.Location = new System.Drawing.Point(200, 324);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(24, 23);
             this.button4.TabIndex = 12;
@@ -171,7 +173,7 @@
             // button3
             // 
             this.button3.Image = global::cristales_pva.Properties.Resources.document_construction_icon;
-            this.button3.Location = new System.Drawing.Point(307, 380);
+            this.button3.Location = new System.Drawing.Point(307, 407);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(210, 48);
             this.button3.TabIndex = 9;
@@ -184,7 +186,7 @@
             // button2
             // 
             this.button2.Image = global::cristales_pva.Properties.Resources.save_icon;
-            this.button2.Location = new System.Drawing.Point(200, 380);
+            this.button2.Location = new System.Drawing.Point(200, 407);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(54, 48);
             this.button2.TabIndex = 4;
@@ -194,7 +196,7 @@
             // button1
             // 
             this.button1.Image = global::cristales_pva.Properties.Resources.search_icon;
-            this.button1.Location = new System.Drawing.Point(200, 326);
+            this.button1.Location = new System.Drawing.Point(200, 353);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(54, 48);
             this.button1.TabIndex = 3;
@@ -207,18 +209,37 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
             this.pictureBox1.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 297);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 324);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(182, 131);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(307, 384);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Buscar:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(356, 381);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(370, 20);
+            this.textBox1.TabIndex = 15;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // cambiar_imagen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(738, 440);
+            this.ClientSize = new System.Drawing.Size(738, 467);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label4);
@@ -266,5 +287,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -18,6 +18,7 @@ namespace cristales_pva
             this.Text = name + " - " + linea;
             ReportDataSource rd = new ReportDataSource("modulo_data", md.Tables[0]);
             ReportDataSource rd_2 = new ReportDataSource("img_modulo", md.Tables[2]);
+            reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.DataSources.Add(rd);
             reportViewer1.LocalReport.DataSources.Add(rd_2);
             reportViewer1.LocalReport.SetParameters(new ReportParameter("module_clave", "Clave: " + clave));
@@ -25,7 +26,7 @@ namespace cristales_pva
             reportViewer1.LocalReport.SetParameters(new ReportParameter("module_linea", "Linea: " + linea));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("dimensiones", dimensiones));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("autor", "Autor: " + autor));
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("header", "file:///" + Application.StartupPath + "\\pics\\reportes\\" + constants.header_reporte + ".jpg"));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("header", constants.getExternalImage("header")));
             reportViewer1.LocalReport.Refresh();
             reportViewer1.RefreshReport();
         }

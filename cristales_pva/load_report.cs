@@ -41,7 +41,7 @@ namespace cristales_pva
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            new reportes(constants.nombre_cotizacion, constants.nombre_proyecto, constants.folio_abierto.ToString(), sub_total, iva, total, constants.desc_cotizacion, constants.desc_cant).Show();
+            new reportes(constants.nombre_cotizacion, constants.nombre_proyecto, constants.folio_abierto.ToString(), sub_total, iva, total, constants.desc_cotizacion, constants.desc_cant, constants.utilidad_cotizacion).Show();
             Close();
         }
 

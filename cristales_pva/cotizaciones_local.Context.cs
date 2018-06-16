@@ -33,8 +33,9 @@ namespace cristales_pva
         public virtual DbSet<otros_cotizaciones> otros_cotizaciones { get; set; }
         public virtual DbSet<aluminio_cotizado> aluminio_cotizado { get; set; }
         public virtual DbSet<datos_reporte> datos_reporte { get; set; }
-        public virtual DbSet<articulos_reporte> articulos_reporte { get; set; }
         public virtual DbSet<modulos_cotizaciones> modulos_cotizaciones { get; set; }
         public virtual DbSet<copybox> copyboxes { get; set; }
+        public virtual DbSet<articulos_reporte> articulos_reporte { get; set; }
+        public virtual DbSet<produccion_t> produccion_t { get; set; }
     }
 }

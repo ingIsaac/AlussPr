@@ -394,13 +394,11 @@ namespace cristales_pva
         //proceso de update ---------------------------------------------------------------------------------------------------------------------------
         private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            toolStripStatusLabel1.Text = "Listo!";
             toolStripProgressBar1.Value = 100;
-            MessageBox.Show("La lista se ha actualizado!", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);           
             toolStripProgressBar1.Visible = false;
             toolStripProgressBar1.Value = 0;
-            toolStripStatusLabel1.Text = "";
             toolStripStatusLabel2.Text = "";
+            toolStripStatusLabel1.Text = "Listo!";
             ((Control)tabPage1).Enabled = true;
         }
 

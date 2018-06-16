@@ -14,10 +14,11 @@ namespace cristales_pva
         cotizaciones_local cotizaciones;
         int merged_id = -1;
         int id;
+        Image img = null;
 
         public edit_expresss()
         {
-            InitializeComponent();
+            InitializeComponent();        
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
             datagridviewNE1.MouseMove += DatagridviewNE1_MouseMove;
             datagridviewNE1.MouseDown += DatagridviewNE1_MouseDown;
@@ -48,7 +49,7 @@ namespace cristales_pva
         private void añadirConcepto(int id)
         {
             cotizaciones_local cotizaciones = new cotizaciones_local();
-
+                     
             var modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == merged_id select x).Count();
 
             if (modulos < 5)
@@ -57,10 +58,10 @@ namespace cristales_pva
                 {
                     borrarImagenPredeterminada(merged_id);
                 }
-                setDir dir = new setDir(id, merged_id, constants.byteToImage((Byte[])datagridviewNE1.CurrentRow.Cells[1].Value), getMedidas(id, "largo"), getMedidas(id, "alto"));
+                setDir dir = new setDir(id, merged_id, img, getMedidas(id, "largo"), getMedidas(id, "alto"));
                 dir.ShowDialog();
                 if (dir.close == true)
-                {                 
+                {
                     cargarMergedItems(merged_id);
                     cargarModulosCotizados();
                 }
@@ -68,7 +69,7 @@ namespace cristales_pva
             else
             {
                 MessageBox.Show("[Error] este concepto ya tiene demaciados artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }              
         }
 
         private float getMedidas(int id, string dimension)
@@ -104,26 +105,27 @@ namespace cristales_pva
             if ((int)datagridviewNE1.CurrentRow.Cells[3].Value > 0)
             {
                 id = (int)datagridviewNE1.CurrentRow.Cells[0].Value;
-            }   
+                img = constants.byteToImage((Byte[])datagridviewNE1.CurrentRow.Cells[1].Value);
+            }
         }       
 
         private void DatagridviewNE1_MouseMove(object sender, MouseEventArgs e)
         {           
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
             {
-                DragDropEffects dropEffect = datagridviewNE1.DoDragDrop(id, DragDropEffects.Move);
-            }           
+                DragDropEffects dropEffect = datagridviewNE1.DoDragDrop(id, DragDropEffects.Move);               
+            }                       
         }
 
         private void DatagridviewNE2_DragOver(object sender, DragEventArgs e)
         {
             if (id > 0)
-            {
+            {            
                 e.Effect = DragDropEffects.Move;
             }
             else
             {
-                e.Effect = DragDropEffects.None;
+                e.Effect = DragDropEffects.Move;
             }
         }
 
@@ -201,10 +203,21 @@ namespace cristales_pva
             }
         }
 
-        public void reloadALL()
+        public void reloadALL(int id = -1)
         {
             cargarModulosCotizados();
             datagridviewNE2.Rows.Clear();
+            if(id > 0)
+            {
+                foreach(DataGridViewRow x in datagridviewNE1.Rows)
+                {
+                    if ((int)x.Cells[0].Value == id)
+                    {
+                        datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
+                        x.Selected = true;
+                    }
+                }
+            }
         }
 
         //cargar articulos cotizados
@@ -229,6 +242,7 @@ namespace cristales_pva
             datagridviewNE1.Columns[2].DefaultCellStyle.BackColor = Color.LightGreen;
             datagridviewNE1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             datagridviewNE1.Columns[2].DefaultCellStyle.Font = new Font("Arial", 12f, FontStyle.Bold);
+            datagridviewNE1.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             cotizaciones = new cotizaciones_local();
             var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.modulo_id != -2 && x.sub_folio == constants.sub_folio select x);
             float sum = 0;
@@ -399,7 +413,7 @@ namespace cristales_pva
                 new cambiar_imagen((int)datagridviewNE1.CurrentRow.Cells[0].Value).ShowDialog();
                 ((Form1)Application.OpenForms["form1"]).refreshNewArticulo(5);
             }
-        }      
+        }
         //---------------------------------------------------->
     }
 }

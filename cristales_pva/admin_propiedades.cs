@@ -89,7 +89,25 @@ namespace cristales_pva
             else
             {
                 checkBox7.Checked = false;
-            }           
+            }
+            //modalidad liva
+            if (constants.m_liva == true)
+            {
+                checkBox8.Checked = true;
+            }
+            else
+            {
+                checkBox8.Checked = false;
+            }
+            //preguntar si se desea actualizar
+            if (constants.p_ac == true)
+            {
+                checkBox9.Checked = true;
+            }
+            else
+            {
+                checkBox9.Checked = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -135,6 +153,8 @@ namespace cristales_pva
                                 x.SetElementValue("MA", getMostrarAcabado());
                                 x.SetElementValue("ACC", getAC_Cotizacion());
                                 x.SetElementValue("PAI", getPAI());
+                                x.SetElementValue("MLIVA", getMLIVA());
+                                x.SetElementValue("PAC", getPAC());
                             }
                             opciones_xml.Save(constants.opciones_xml);
                         }
@@ -151,13 +171,20 @@ namespace cristales_pva
                                 sqlDateBaseManager sql = new sqlDateBaseManager();
                                 localDateBaseEntities3 p = new localDateBaseEntities3();
                                 float iva = (float.Parse(textBox4.Text) / 100) + 1;
-                                if (constants.iva_desglosado == true)
+                                if (iva > 0)
                                 {
-                                    constants.iva = iva;
+                                    if (constants.iva_desglosado == true)
+                                    {
+                                        constants.iva = iva;
+                                    }
+                                    sql.updatePropiedades(iva);
+                                    constants.setPropiedadesModel(iva);
+                                    ((Form1)Application.OpenForms["form1"]).reloadIVA();
                                 }
-                                sql.updatePropiedades(iva);
-                                constants.setPropiedadesModel(iva);
-                                ((Form1)Application.OpenForms["form1"]).reloadIVA();
+                                else
+                                {
+                                    MessageBox.Show("[Error]: dato de IVA no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             catch (Exception err)
                             {
@@ -167,6 +194,7 @@ namespace cristales_pva
                         }
                         // ---------------------------------------------------------------------------------------------------
                         MessageBox.Show("Se necesita reiniciar el programa para ver algunos cambios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
                     }
                     else
                     {
@@ -293,6 +321,37 @@ namespace cristales_pva
             {
                 constants.permitir_ajuste_iva = false;
                 ((Form1)Application.OpenForms["form1"]).permitirAjusteIVA(false);
+                return "false";
+            }
+        }
+
+        private string getMLIVA()
+        {
+            if (checkBox8.Checked == true)
+            {
+                constants.m_liva = true;
+                ((Form1)Application.OpenForms["form1"]).setModoLIVA();
+                return "true";
+            }
+            else
+            {
+                constants.m_liva = false;
+                ((Form1)Application.OpenForms["form1"]).setModoLIVA();
+                return "false";
+            }
+        }
+
+        private string getPAC()
+        {
+            if (checkBox9.Checked == true)
+            {
+                constants.p_ac = true;
+                return "true";
+            }
+            else
+            {
+                constants.p_ac = false;
+                constants.reload_precios = true;
                 return "false";
             }
         }

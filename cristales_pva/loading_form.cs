@@ -665,6 +665,7 @@ namespace cristales_pva
                     constants.logged = true;
                     checkUpdates();
                     constants.downloadPropiedadesModel();
+                    constants.loadPropiedadesModel();
                     if (constants.optimizar_inicio == true)
                     {
                         insertTablesToLocalDB();
@@ -673,6 +674,7 @@ namespace cristales_pva
                 else
                 {
                     constants.downloadPropiedadesModel();
+                    constants.loadPropiedadesModel();
                     insertTablesToLocalDB();                    
                 }
             }
@@ -707,6 +709,11 @@ namespace cristales_pva
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             ((Form1)Application.OpenForms["Form1"]).reloadPrecios();
+            ((Form1)Application.OpenForms["Form1"]).seleccionarPastaña();
+            if (constants.tipo_cotizacion > 0)
+            {
+                ((Form1)Application.OpenForms["Form1"]).refreshNewArticulo();
+            }
         }
 
         private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

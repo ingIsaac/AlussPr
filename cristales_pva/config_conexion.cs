@@ -90,11 +90,11 @@ namespace cristales_pva
                                             propiedades_xml.Save(constants.propiedades_xml);
                                             sql.insertNewPCActivation(mac, textBox2.Text, Environment.MachineName);
                                             constants.mac_address = mac;
-                                            MessageBox.Show("El equipo ha sido activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            MessageBox.Show(this, "El equipo ha sido activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         }
                                         catch (Exception err)
                                         {
-                                            MessageBox.Show("[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            MessageBox.Show(this, "[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                             constants.errorLog(err.ToString());
                                         }
                                     }
@@ -105,27 +105,27 @@ namespace cristales_pva
                                 }
                                 else
                                 {
-                                    MessageBox.Show("[Error] este equipo ya se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, "[Error] este equipo ya se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("[Error] clave de activación se encuentra en uso.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, "[Error] clave de activación se encuentra en uso.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("[Error] clave de activación no valida.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(this, "[Error] clave de activación no valida.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("[Error] solo puede tener acceso el administrador.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "[Error] solo puede tener acceso el administrador.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("[Error] Acceso no autorizado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] Acceso no autorizado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

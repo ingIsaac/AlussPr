@@ -20,6 +20,7 @@ namespace cristales_pva
         List<string> claves_herrajes = new List<string>();
         List<string> claves_perfiles = new List<string>();
         List<string> new_items = new List<string>();
+        List<string> new_costos = new List<string>();
         string[] reglas;
 
         TableLayoutPanel panel;
@@ -325,7 +326,7 @@ namespace cristales_pva
         }
 
         public void resetSession(int module_id, int id_cotizacion)
-        {
+        {           
             tableLayoutPanel1.Visible = false;
             resetTextBox();
             dataGridView1.Rows.Clear();
@@ -355,6 +356,7 @@ namespace cristales_pva
             claves_herrajes.Clear();
             claves_perfiles.Clear();
             new_items.Clear();
+            new_costos.Clear();
             marco_width = 0;
             marco_height = 0;
             c = 1;
@@ -384,6 +386,11 @@ namespace cristales_pva
             if (Application.OpenForms["edit_expresss"] != null)
             {
                 Application.OpenForms["edit_expresss"].Close();
+            }
+            //------------------------------------------------------------------------>
+            if (Application.OpenForms["new_articulo"] != null)
+            {
+                Application.OpenForms["new_articulo"].Close();
             }
         }
 
@@ -416,7 +423,7 @@ namespace cristales_pva
 
         //Crear pic modulo
         private Bitmap createModuloPic()
-        {
+        {           
             if (panel.Width > (tableLayoutPanel1.Width - 10))
             {
                 panel.Width = tableLayoutPanel1.Width - 10;
@@ -429,14 +436,14 @@ namespace cristales_pva
             {
                 clearBackground();
             }
-
+            
             if (checkBox16.Checked)
             {
                 //Si es esquema resulta muy pequeño y evitar distorción
                 if (panel.Width < 120 || panel.Height < 105)
                 {
-                    panel.Width = 120 + marco_width;
-                    panel.Height = 105 + marco_height;
+                    panel.Width = 120 + getMarcoWidth();
+                    panel.Height = 105 + getMarcoHeight();
                     foreach (Control x in panel.Controls)
                     {
                         x.Width = 120 / columns;
@@ -445,7 +452,7 @@ namespace cristales_pva
                 }
                 //
             }
-
+                    
             Bitmap bm = new Bitmap(panel.Width, panel.Height);
             panel.DrawToBitmap(bm, new Rectangle(0, 0, panel.Width, panel.Height));
             Bitmap gm_2 = new Bitmap(bm, 120, 105);            
@@ -742,6 +749,22 @@ namespace cristales_pva
                             }
                             buffer = buffer + x.ToString();
                         }
+                        string[] t = null;
+                        foreach(string x in new_items)
+                        {
+                            t = x.Split(',');
+                            if(t.Length > 0)
+                            {
+                                if(t[0] == "5")
+                                {
+                                    if (t.Length == 4)
+                                    {
+                                        new_costos.Add(x);
+                                    }
+                                }
+                            }
+                        }
+                        displayNewCosto();
                     }
                     //    
 
@@ -900,7 +923,10 @@ namespace cristales_pva
                     foreach (string x in new_items)
                     {
                         string[] n = x.Split(',');
-                        setNewItem(constants.stringToInt(n[0]), n[1], n[2], n[3], n[4], n[5]);
+                        if (n[0] != "5")
+                        {
+                            setNewItem(constants.stringToInt(n[0]), n[1], n[2], n[3], n[4], n[5]);
+                        }
                     }
 
                     //check acabados selectivo
@@ -959,8 +985,8 @@ namespace cristales_pva
                     {
                         if (seccion_e == 0)
                         {
-                            panel.Width = (width / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_width;
-                            panel.Height = (height / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_height;
+                            panel.Width = (width / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoWidth();
+                            panel.Height = (height / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoHeight();
                             label20.Text = height + " mm";
                             label21.Text = width + " mm";
                             largo_total = width;
@@ -1018,8 +1044,8 @@ namespace cristales_pva
                         {
                             panel.Controls[seccion_e - 1].Width = width / (hScrollBar1.Maximum - hScrollBar1.Value);
                             panel.Controls[seccion_e - 1].Height = height / (hScrollBar1.Maximum - hScrollBar1.Value);
-                            panel.Width = ((width * panel.ColumnCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_width;
-                            panel.Height = ((height * panel.RowCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_height;
+                            panel.Width = ((width * panel.ColumnCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoWidth();
+                            panel.Height = ((height * panel.RowCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoHeight();
                             if (constants.stringToFloat(textBox1.Text) > 0 && constants.stringToFloat(textBox2.Text) > 0)
                             {
                                 label20.Text = constants.stringToFloat(textBox2.Text) + " mm";
@@ -1081,7 +1107,7 @@ namespace cristales_pva
                 drawDimesions(tableLayoutPanel1);
                 autoEscalar();
                 mts = mts + (float)(Math.Round((float)largo_total / 1000, 2) * Math.Round((float)alto_total / 1000, 2));
-                label40.Text = "Dimensiones: " + Math.Round(mts, 2).ToString("0.00") + " m2";
+                label40.Text = "Superficie: " + Math.Round(mts, 2).ToString("0.00") + " m2";
             }
         }        
 
@@ -1155,18 +1181,20 @@ namespace cristales_pva
         {
             listas_entities_pva listas = new listas_entities_pva();
             string clave = string.Empty;
+            float cant = 0;
             float r = 0;          
             foreach (DataGridViewRow x in dataGridView4.Rows)
             {
                 if (constants.stringToFloat(x.Cells[4].Value.ToString()) > 0)
                 {
                     clave = x.Cells[2].Value.ToString();
+                    cant = constants.stringToFloat(x.Cells[4].Value.ToString());
                     var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
                     if (otros != null)
                     {
                         if (otros.linea == "motores")
                         {
-                            r = constants.stringToFloat(otros.caracteristicas.ToString());
+                            r = constants.stringToFloat(otros.caracteristicas.ToString()) * cant;
                         }
                     }
                 }
@@ -1446,7 +1474,9 @@ namespace cristales_pva
 
         private void getSeccionesReady(int seccion)
         {
-            bool ready = true;            
+            bool ready = true;
+            if (checkBox11.Checked)
+            {
                 foreach (DataGridViewRow x in dataGridView1.Rows)
                 {
                     if (constants.stringToFloat(x.Cells[4].Value.ToString()) > 0)
@@ -1458,7 +1488,10 @@ namespace cristales_pva
                         }
                     }
                 }
+            }
 
+            if (checkBox12.Checked)
+            {
                 foreach (DataGridViewRow x in dataGridView2.Rows)
                 {
                     if (constants.stringToFloat(x.Cells[3].Value.ToString()) > 0)
@@ -1470,7 +1503,10 @@ namespace cristales_pva
                         }
                     }
                 }
+            }
 
+            if (checkBox13.Checked)
+            {
                 foreach (DataGridViewRow x in dataGridView3.Rows)
                 {
                     if (constants.stringToFloat(x.Cells[4].Value.ToString()) > 0)
@@ -1482,15 +1518,19 @@ namespace cristales_pva
                         }
                     }
                 }
+            }
 
-            foreach (DataGridViewRow x in dataGridView4.Rows)
+            if (checkBox14.Checked)
             {
-                if (constants.stringToFloat(x.Cells[4].Value.ToString()) > 0)
+                foreach (DataGridViewRow x in dataGridView4.Rows)
                 {
-                    if (constants.stringToInt(x.Cells[6].Value.ToString()) == seccion && x.Cells[2].Value.ToString() == "")
+                    if (constants.stringToFloat(x.Cells[4].Value.ToString()) > 0)
                     {
-                        ready = false;
-                        break;
+                        if (constants.stringToInt(x.Cells[6].Value.ToString()) == seccion && x.Cells[2].Value.ToString() == "")
+                        {
+                            ready = false;
+                            break;
+                        }
                     }
                 }
             }
@@ -2361,18 +2401,20 @@ namespace cristales_pva
             //---> Desglose
             total = (tot_aluminio + (tot_aluminio * desperdicio));
             textBox9.Text = "$" + total.ToString("0.00");
-            total = total + tot_herraje + tot_otros + tot_vidrio;
+            total = total + tot_herraje + tot_otros + tot_vidrio + getTotalNewCostos(new_costos);
             textBox10.Text = "$" + tot_herraje.ToString("0.00");
             textBox11.Text = "$" + tot_vidrio.ToString("0.00");
-            textBox12.Text = "$" + tot_otros.ToString("0.00");
+            textBox12.Text = "$" + tot_otros.ToString("0.00") + " + $" + getTotalNewCostos(new_costos);
             total = total + (total * flete);
             total = total + (total * mano_obra);
             total = total + (total * utilidad);
             label42.Text = "Peso: " + Math.Round(peso_aluminio, 2) + " KG.";
             if (((dataGridView1.RowCount == 0 || arePerfiles() == false) && (comboBox1.Text == "" || comboBox3.Text == "")) || (dataGridView1.RowCount > 0 && (comboBox1.Text != "" || comboBox3.Text != "")))
             {
-                textBox13.Text = Math.Round(total * cantidad, 2).ToString("0.00");
-                label12.Text = Math.Round((total * cantidad) * constants.iva, 2).ToString("n");
+                float _tot = getTotalNewCostosTotal(new_costos);
+                textBox13.Text = Math.Round((total * cantidad) + _tot, 2).ToString("0.00");
+                label12.Text = Math.Round(((total * cantidad) + _tot) * constants.iva, 2).ToString("n");
+                label44.Text = _tot > 0 ? "+ ($" + _tot + ")" : string.Empty;
             }
             else
             {
@@ -2389,6 +2431,42 @@ namespace cristales_pva
             }
             acomodarDesglose();
             //
+        }        
+
+        private float getTotalNewCostos(List<string> new_costos)
+        {
+            float r = 0;
+            string[] t = null;
+            foreach(string x in new_costos)
+            {
+                t = x.Split(',');
+                if(t.Length == 4)
+                {
+                    if (t[3] != "Total")
+                    {
+                        r = constants.stringToFloat(t[2]) + r;
+                    }
+                }
+            }
+            return r;
+        }
+
+        private float getTotalNewCostosTotal(List<string> new_costos)
+        {
+            float r = 0;
+            string[] t = null;
+            foreach (string x in new_costos)
+            {
+                t = x.Split(',');
+                if (t.Length == 4)
+                {
+                    if (t[3] == "Total")
+                    {
+                        r = constants.stringToFloat(t[2]) + r;
+                    }
+                }
+            }
+            return r;
         }
 
         //SACS
@@ -3016,6 +3094,10 @@ namespace cristales_pva
                     r = r + "4," + x.Cells[2].Value.ToString() + "," + x.Cells[4].Value.ToString() + "," + x.Cells[5].Value.ToString() + "," + x.Cells[6].Value.ToString() + "," + ";";
                 }
             }
+            foreach(string x in new_costos)
+            {
+                r = r + x + ";";
+            }
             return r;
         }
 
@@ -3279,7 +3361,8 @@ namespace cristales_pva
                                                         {
                                                             constants.updateModuloPersonalizado((int)ud.merge_id);
                                                         }
-                                                        constants.errors_Open.RemoveAll(x => x == id_cotizacion);                                                     
+                                                        constants.errors_Open.RemoveAll(x => x == id_cotizacion);
+                                                        constants.errors_Open.RemoveAll(x => x == ud.merge_id);
                                                     }
                                                 }
                                                 catch (Exception err)
@@ -3416,7 +3499,7 @@ namespace cristales_pva
                                         }
                                         if (Application.OpenForms["edit_expresss"] != null)
                                         {
-                                            ((edit_expresss)Application.OpenForms["edit_expresss"]).reloadALL();
+                                            ((edit_expresss)Application.OpenForms["edit_expresss"]).reloadALL(id_cotizacion);
                                             Application.OpenForms["edit_expresss"].Select();
                                             Application.OpenForms["edit_expresss"].WindowState = FormWindowState.Normal;
                                         }
@@ -3955,7 +4038,7 @@ namespace cristales_pva
                     md.Tables[1].Rows.Add(row);
                 }
                 createModuloPic(md);
-                new modulo_precios(md, label6.Text, label7.Text, label8.Text, label37.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox3.Text, textBox7.Text, label12.Text, "Largo: " + label21.Text + " - " + "Alto: " + label20.Text, textBox9.Text, textBox10.Text, textBox12.Text, textBox11.Text, textBox13.Text).ShowDialog();
+                new modulo_precios(md, label6.Text, label7.Text, label8.Text, label37.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox3.Text, textBox7.Text, label12.Text, "Largo: " + label21.Text + " - " + "Alto: " + label20.Text, textBox9.Text, textBox10.Text, textBox12.Text, textBox11.Text, textBox13.Text, label44.Text).ShowDialog();
                 md.Dispose();
             }       
         }
@@ -4167,8 +4250,8 @@ namespace cristales_pva
                         }
                         else
                         {
-                            panel.Width = (width / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_width;
-                            panel.Height = (height / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_height;
+                            panel.Width = (width / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoWidth();
+                            panel.Height = (height / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoHeight();
                             if (cs == false)
                             {
                                 for (int i = 0; i < panel.Controls.Count; i++)
@@ -4193,13 +4276,23 @@ namespace cristales_pva
                         {
                             panel.Controls[seccion_e - 1].Width = width / (hScrollBar1.Maximum - hScrollBar1.Value);
                             panel.Controls[seccion_e - 1].Height = height / (hScrollBar1.Maximum - hScrollBar1.Value);
-                            panel.Width = ((width * panel.ColumnCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_width;
-                            panel.Height = ((height * panel.RowCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + marco_height;
+                            panel.Width = ((width * panel.ColumnCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoWidth();
+                            panel.Height = ((height * panel.RowCount) / (hScrollBar1.Maximum - hScrollBar1.Value)) + getMarcoHeight();
                         }
                     }
                 }
             }
             label19.Text = "x -" + (hScrollBar1.Maximum - hScrollBar1.Value);
+        }
+
+        private int getMarcoWidth()
+        {
+            return marco_width;
+        }
+
+        private int getMarcoHeight()
+        {
+            return marco_height;
         }
 
         //borrar panel image background
@@ -4398,7 +4491,18 @@ namespace cristales_pva
         //add new item
         private void button8_Click(object sender, EventArgs e)
         {
-            new new_articulo().ShowDialog();
+            if (Application.OpenForms["new_articulo"] == null)
+            {
+                new new_articulo(new_costos).Show();
+            }
+            else
+            {
+                if (Application.OpenForms["new_articulo"].WindowState == FormWindowState.Minimized)
+                {
+                    Application.OpenForms["new_articulo"].WindowState = FormWindowState.Normal;
+                }
+                Application.OpenForms["new_articulo"].Select();
+            }
         }
 
         //Obtener las instrucciones
@@ -5745,18 +5849,40 @@ namespace cristales_pva
                     {
                         clave = x.Cells[2].Value.ToString();
                         var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+                        float peso_motor = 0;
 
                         if (otros != null)
                         {
                             if (otros.linea == "motores")
                             {
-                                if (peso_aluminio < constants.stringToFloat(otros.caracteristicas.ToString()))
+                                peso_motor = constants.stringToFloat(otros.caracteristicas.ToString());
+                                if (peso_motor >= 100)
                                 {
-                                    x.Cells[4].Value = "1";
-                                    getInstruction(x.Cells[2].Value.ToString(), 1);
-                                    error = false;
-                                    break;
+                                    if (peso_aluminio < peso_motor)
+                                    {
+                                        x.Cells[4].Value = "1";
+                                        getInstruction(x.Cells[2].Value.ToString(), 1);
+                                        error = false;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        x.Cells[4].Value = Math.Ceiling(peso_aluminio / peso_motor);
+                                        getInstruction(x.Cells[2].Value.ToString(), 1);
+                                        error = false;
+                                        break;
+                                    }
                                 }
+                                else
+                                {
+                                    if (peso_aluminio < peso_motor)
+                                    {
+                                        x.Cells[4].Value = "1";
+                                        getInstruction(x.Cells[2].Value.ToString(), 1);
+                                        error = false;
+                                        break;
+                                    }
+                                }                               
                             }
                         }
                     }
@@ -5775,5 +5901,24 @@ namespace cristales_pva
             }      
         }
         ////---------------------------------------------------------------------------------------------------------->
+
+        public void setNewCosto(List<string> new_costos)
+        {
+            this.new_costos = new_costos;
+            displayNewCosto();
+            calcularCostoModulo();
+        }
+
+        private void displayNewCosto()
+        {
+            if (new_costos.Count > 0)
+            {
+                label43.Text = "*Nota: este artículo incluye costos adicionales.";
+            }
+            else
+            {
+                label43.Text = string.Empty;
+            }
+        }
     }
 }

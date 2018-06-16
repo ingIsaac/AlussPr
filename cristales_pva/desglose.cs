@@ -21,7 +21,7 @@ namespace cristales_pva
         {
             // TODO: This line of code loads data into the 'reportes_dataSet.materiales_modulos' table. You can move, or remove it, as needed.
             this.materiales_modulosTableAdapter.Fill(this.reportes_dataSet.materiales_modulos);
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("header", "file:///" + Application.StartupPath + "\\pics\\reportes\\" + constants.header_reporte + ".jpg"));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("header", constants.getExternalImage("header")));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("cliente", constants.nombre_cotizacion == "" ? "n/a" : constants.nombre_cotizacion));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("proyecto", constants.nombre_proyecto == "" ? "n/a" : constants.nombre_proyecto));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("folio", constants.folio_abierto.ToString()));

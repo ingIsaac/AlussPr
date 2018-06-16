@@ -647,6 +647,7 @@ namespace cristales_pva
             disableTabPage();
             checkBox5.Checked = constants.iva_desglosado;
             checkBox5.Enabled = constants.permitir_ajuste_iva;
+            setModoLIVA();
         }
 
         public void permitirAjusteIVA(bool r)
@@ -711,8 +712,7 @@ namespace cristales_pva
         {
             countCotizacionesArticulo();
             loadCountArticulos();
-            seleccionarPastaña();
-            calcularTotalesCotizacion();
+            calcularTotalesCotizacion();         
             refreshNewArticulo();
             constants.checkErrorsOnLoad();
             constants.cotizacion_guardada = false;
@@ -727,7 +727,7 @@ namespace cristales_pva
 
         public void reloadPreciosCotizaciones()
         {
-            if (constants.ac_cotizacion == true)
+            if (constants.ac_cotizacion == true && constants.reload_precios == true)
             {
                 constants.errors_Open.Clear();
                 for (int i = 1; i < 5; i++)
@@ -1688,6 +1688,7 @@ namespace cristales_pva
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {          
             constants.downloadPropiedadesModel();
+            constants.loadPropiedadesModel();
             updateTablesToLocalDB();
             reloadPrecios();
             reloadIVA();
@@ -3563,7 +3564,7 @@ namespace cristales_pva
                             opened_module = id_tem;
                             if (modulos.linea == "CANCEL BAÑO")
                             {
-                                constants.setImage("series", "CM", "png", pictureBox10);
+                                constants.setImage("series", "CB", "png", pictureBox10);
                             }
                             else
                             {
@@ -4085,6 +4086,10 @@ namespace cristales_pva
             toolStripStatusLabel3.Text = toolStripStatusLabel3.Text.ToUpper();
             toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;
             checkBox5.Checked = constants.iva_desglosado;
+            if (checkBox5.Checked)
+            {
+                setModoLIVA();
+            }
         }
         //
 
@@ -4447,12 +4452,14 @@ namespace cristales_pva
         //Arbol de articulos de contadores
         private void TreeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            constants.id_articulo_cotizacion = -1;
+            setEditImage(false, false);
             switch (e.Node.Index)
             {
                 case 0:
                     resetDatagridCotizaciones();
                     constants.loadCotizacionesLocales("cristales", datagridviewNE1);
-                    constants.tipo_cotizacion = 1;
+                    constants.tipo_cotizacion = 1;                  
                     break;
                 case 1:
                     resetDatagridCotizaciones();
@@ -4476,7 +4483,7 @@ namespace cristales_pva
                     break;
                 default:
                     break;
-            }
+            }          
         }
         //        
 
@@ -4960,10 +4967,13 @@ namespace cristales_pva
             {
                 datagridviewNE2.ClearSelection();
                 constants.id_articulo_cotizacion = id;
-                if(constants.save_onEdit.Contains(id) == false)
+                if (constants.tipo_cotizacion > 0)
                 {
-                    constants.save_onEdit.Add(id);
-                }                           
+                    if (constants.save_onEdit.Contains(id + "-" + constants.tipo_cotizacion) == false)
+                    {
+                        constants.save_onEdit.Add(id + "-" + constants.tipo_cotizacion);
+                    }
+                }                          
                 setArticuloToEdit(constants.tipo_cotizacion, constants.id_articulo_cotizacion);
             }
             catch (Exception err)
@@ -5024,6 +5034,11 @@ namespace cristales_pva
             button12.Visible = visible;       
             if (color == false)
             {
+                label9.Text = refreshClave(label9.Text);
+                label60.Text = refreshClave(label60.Text);
+                label29.Text = refreshClave(label29.Text);
+                label76.Text = refreshClave(label76.Text);
+                // ---------------------------------------->
                 tabPage1.Refresh();
                 tabPage2.Refresh();
                 tabPage3.Refresh();
@@ -5032,13 +5047,9 @@ namespace cristales_pva
             }
             else
             {
-                label9.Text = refreshClave(label9.Text);
                 tabPage1.Refresh();
-                label60.Text = refreshClave(label60.Text);
                 tabPage2.Refresh();
-                label29.Text = refreshClave(label29.Text);
                 tabPage3.Refresh();
-                label76.Text = refreshClave(label76.Text);
                 tabPage4.Refresh();
                 tabPage5.Refresh();               
             }
@@ -5333,7 +5344,14 @@ namespace cristales_pva
                     }
                     else
                     {
-                        new merge_items(true, false, id).ShowDialog();
+                        if (Application.OpenForms["merge_items"] == null)
+                        {
+                            new merge_items(true, false, id).Show();
+                        }
+                        else
+                        {
+                            Application.OpenForms["merge_items"].Select();
+                        }
                     }
                 }
             }
@@ -5400,18 +5418,23 @@ namespace cristales_pva
             {
                 case 1:
                     constants.loadCotizacionesLocales("cristales", datagridviewNE1);
+                    treeView1.SelectedNode = treeView1.Nodes[0].Nodes[0];
                     break;
                 case 2:
                     constants.loadCotizacionesLocales("aluminio", datagridviewNE1);
+                    treeView1.SelectedNode = treeView1.Nodes[0].Nodes[1];
                     break;
                 case 3:
                     constants.loadCotizacionesLocales("herrajes", datagridviewNE1);
+                    treeView1.SelectedNode = treeView1.Nodes[0].Nodes[2];
                     break;
                 case 4:
                     constants.loadCotizacionesLocales("otros", datagridviewNE1);
+                    treeView1.SelectedNode = treeView1.Nodes[0].Nodes[3];
                     break;
                 case 5:
                     constants.loadCotizacionesLocales("modulos", datagridviewNE1);
+                    treeView1.SelectedNode = treeView1.Nodes[0].Nodes[4];
                     break;
                 default: break;
             }
@@ -5654,50 +5677,63 @@ namespace cristales_pva
         public void setArticuloPersonalizacion(int id, int perso_id, int dir, bool remove=false)
         {           
             cotizaciones_local cotizaciones = new cotizaciones_local();
-            Image img = null;
-
-            var concepto = (from x in cotizaciones.modulos_cotizaciones where x.id == perso_id select x).SingleOrDefault();
-
-            var modulo = (from x in cotizaciones.modulos_cotizaciones where x.id == id select x).SingleOrDefault();
-
-            if (modulo != null)
+            try
             {
-                if (remove == false)
-                {                   
-                    if (concepto != null)
-                    {
-                        if (concepto.dir != 3)
-                        {
-                            img = constants.MergeTwoImages(constants.byteToImage(concepto.pic), constants.byteToImage(modulo.pic));
-                        }
-                        modulo.dir = dir;
-                        modulo.merge_id = perso_id;
-                        modulo.orden = 0;
-                        concepto.pic = img != null ? constants.imageToByte(img) : concepto.dir == 3 ? concepto.pic : modulo.pic;
-                        concepto.concept_id = perso_id;
-                        concepto.modulo_id = -1;
-                        concepto.articulo = concepto.articulo.Length > 0 ? concepto.articulo + " + " + modulo.articulo : modulo.articulo;
-                        concepto.total = Math.Round((((float)concepto.total/(float)concepto.cantidad) + (float)modulo.total) * (float)concepto.cantidad, 2);
-                        concepto.linea = concepto.linea.Length <= 0 ? modulo.linea : constants.getLineasInConcept(concepto.linea, modulo.linea) == false ? concepto.linea + "/" + modulo.linea : concepto.linea;
-                        concepto.ubicacion = modulo.ubicacion.Length <= 0 ? concepto.ubicacion : concepto.ubicacion.Length <= 0 ? modulo.ubicacion : constants.getUbicacionInConcept(concepto.ubicacion, modulo.ubicacion) == true ? concepto.ubicacion : modulo.ubicacion.Length > 0 ? concepto.ubicacion + "/" + modulo.ubicacion : concepto.ubicacion;
-                        concepto.acabado_perfil = concepto.acabado_perfil == "" ? modulo.acabado_perfil : concepto.acabado_perfil;
-                        concepto.diseño = concepto.diseño.Length > 0 ? concepto.diseño + "/" + modulo.diseño : modulo.diseño;                      
-                        concepto.claves_cristales = concepto.claves_cristales + modulo.claves_cristales;
-                    }                  
-                    cotizaciones.SaveChanges();
-                    countCotizacionesArticulo();
-                    loadCountArticulos();
-                    constants.updateModuloPersonalizado((int)concepto.concept_id);
-                }
-                else
+                Image img = null;
+                var concepto = (from x in cotizaciones.modulos_cotizaciones where x.id == perso_id select x).SingleOrDefault();
+                var modulo = (from x in cotizaciones.modulos_cotizaciones where x.id == id select x).SingleOrDefault();
+
+                if (modulo != null)
                 {
-                    modulo.merge_id = -1;
-                    cotizaciones.SaveChanges();
-                    constants.updateModuloPersonalizado((int)concepto.concept_id);
-                    countCotizacionesArticulo();
-                    loadCountArticulos();
+                    if (remove == false)
+                    {
+                        if (concepto != null)
+                        {
+                            if (concepto.dir != 3)
+                            {
+                                img = constants.MergeTwoImages(constants.byteToImage(concepto.pic), constants.byteToImage(modulo.pic));                      
+                            }
+                            modulo.dir = dir;
+                            modulo.merge_id = perso_id;
+                            concepto.pic = img != null ? constants.imageToByte(img) : concepto.dir == 3 ? concepto.pic : modulo.pic;
+                            concepto.concept_id = perso_id;
+                            concepto.modulo_id = -1;
+                            concepto.articulo = concepto.articulo.Length > 0 ? concepto.articulo + " + " + modulo.articulo : modulo.articulo;
+                            concepto.total = Math.Round((((float)concepto.total / (float)concepto.cantidad) + (float)modulo.total) * (float)concepto.cantidad, 2);
+                            concepto.linea = concepto.linea.Length <= 0 ? modulo.linea : constants.getLineasInConcept(concepto.linea, modulo.linea) == false ? concepto.linea + "/" + modulo.linea : concepto.linea;
+                            concepto.ubicacion = modulo.ubicacion.Length <= 0 ? concepto.ubicacion : concepto.ubicacion.Length <= 0 ? modulo.ubicacion : constants.getUbicacionInConcept(concepto.ubicacion, modulo.ubicacion) == true ? concepto.ubicacion : modulo.ubicacion.Length > 0 ? concepto.ubicacion + "/" + modulo.ubicacion : concepto.ubicacion;
+                            concepto.acabado_perfil = concepto.acabado_perfil == "" ? modulo.acabado_perfil : concepto.acabado_perfil;
+                            concepto.diseño = concepto.diseño.Length > 0 ? concepto.diseño + "/" + modulo.diseño : modulo.diseño;
+                            concepto.claves_cristales = concepto.claves_cristales + modulo.claves_cristales;
+                        }
+                        cotizaciones.SaveChanges();
+                        countCotizacionesArticulo();
+                        loadCountArticulos();
+                        constants.updateModuloPersonalizado((int)concepto.concept_id);
+                    }
+                    else
+                    {
+                        concepto.dir = 0;
+                        modulo.merge_id = -1;
+                        cotizaciones.SaveChanges();
+                        constants.updateModuloPersonalizado((int)concepto.concept_id);
+                        countCotizacionesArticulo();
+                        loadCountArticulos();
+                    }
+                    constants.loadCotizacionesLocales("modulos", datagridviewNE1);
                 }
-                constants.loadCotizacionesLocales("modulos", datagridviewNE1);
+            }
+            catch (Exception)
+            {
+                cotizaciones = null;
+                cotizaciones = new cotizaciones_local();
+                var concepto = (from x in cotizaciones.modulos_cotizaciones where x.id == perso_id select x).SingleOrDefault();
+                if (concepto != null)
+                {
+                    concepto.pic = constants.imageToByte(Properties.Resources.new_concepto);
+                }
+                cotizaciones.SaveChanges();
+                MessageBox.Show("[Error] se detecto un problema durante la integración del nuevo concepto.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -5706,7 +5742,14 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
-                new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).ShowDialog();
+                if (Application.OpenForms["merge_items"] == null)
+                {
+                    new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
+                }
+                else
+                {
+                    Application.OpenForms["merge_items"].Select();
+                }
             }
         }
 
@@ -6565,6 +6608,7 @@ namespace cristales_pva
                 constants.cotizacion_guardada = false;
                 constants.setClienteToPropiedades();
                 constants.deleteFilasBorradasFromLocalDB();
+                setModoLIVA();
                 resetCountArticulos();
                 resetDatagridCotizaciones();
                 calcularTotalesCotizacion();
@@ -6626,6 +6670,26 @@ namespace cristales_pva
             admin_propiedades p = new admin_propiedades();
             p.ShowDialog();
         }
+
+        //Produccion
+        private void ordenDeProducciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                if (constants.folio_abierto > 0)
+                {
+                    new produccion().ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("[Error] la cotización debe de estar ligada a un folio para continuar.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         //
 
         //enable IVA
@@ -6670,8 +6734,28 @@ namespace cristales_pva
         {
             string[] r = new string[2];
             r[0] = label20.Text;
-            r[1] = textBox4.Text;
+            r[1] = constants.stringToFloat(textBox4.Text).ToString();
             return r;
+        }
+
+        public void setModoLIVA()
+        {
+            if (constants.m_liva)
+            {
+                if (constants.stringToFloat(textBox28.Text) <= 0)
+                {
+                    textBox28.Text = "16";
+                }
+                checkBox5.Checked = false;
+                //---------------------------->
+                textBox28.Enabled = false;
+            }
+            else
+            {
+                textBox28.Text = "0";
+                checkBox5.Checked = true;
+                textBox28.Enabled = true;
+            }
         }
     }
 }

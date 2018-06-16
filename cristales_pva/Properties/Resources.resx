@@ -424,4 +424,25 @@
   <data name="small_packet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\small_packet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="chart_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chart_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="column" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\column.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="row" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\row.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="production_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\production_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="font_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\font_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gear_icon_min" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gear_icon_min.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

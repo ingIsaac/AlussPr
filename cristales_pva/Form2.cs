@@ -376,6 +376,8 @@ namespace cristales_pva
                 var ivd = (from x in opciones_xml.Descendants("Opciones") select x.Element("IVD")).SingleOrDefault();
                 var pai = (from x in opciones_xml.Descendants("Opciones") select x.Element("PAI")).SingleOrDefault();
                 var spac = (from x in opciones_xml.Descendants("Opciones") select x.Element("SPAC")).SingleOrDefault();
+                var m_liva = (from x in opciones_xml.Descendants("Opciones") select x.Element("MLIVA")).SingleOrDefault();
+                var pac = (from x in opciones_xml.Descendants("Opciones") select x.Element("PAC")).SingleOrDefault();
 
                 var op1 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP1")).SingleOrDefault();
                 var op2 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP2")).SingleOrDefault();
@@ -385,6 +387,8 @@ namespace cristales_pva
                 var op6 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP6")).SingleOrDefault();
                 var op7 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP7")).SingleOrDefault();
                 var op8 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP8")).SingleOrDefault();
+                var op9 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP9")).SingleOrDefault();
+                var op10 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP10")).SingleOrDefault();
 
                 if (mv != null)
                 {
@@ -494,6 +498,30 @@ namespace cristales_pva
                     }
                 }
 
+                if (m_liva != null)
+                {
+                    if (m_liva.Value == "true")
+                    {
+                        constants.m_liva = true;
+                    }
+                    else
+                    {
+                        constants.m_liva = false;
+                    }
+                }
+
+                if (pac != null)
+                {
+                    if (pac.Value == "true")
+                    {
+                        constants.p_ac = true;
+                    }
+                    else
+                    {
+                        constants.p_ac = false;
+                    }
+                }
+
                 if (op1 != null)
                 {
                     if (op1.Value == "true")
@@ -587,6 +615,30 @@ namespace cristales_pva
                     else
                     {
                         constants.op8 = false;
+                    }
+                }
+
+                if (op9 != null)
+                {
+                    if (op9.Value == "true")
+                    {
+                        constants.op9 = true;
+                    }
+                    else
+                    {
+                        constants.op9 = false;
+                    }
+                }
+
+                if (op10 != null)
+                {
+                    if (op10.Value == "true")
+                    {
+                        constants.op10 = true;
+                    }
+                    else
+                    {
+                        constants.op10 = false;
                     }
                 }
             }
@@ -683,7 +735,7 @@ namespace cristales_pva
 
                 if (user_ac != null)
                 {
-                    constants.user_ac = user_ac.Value;
+                    constants.user_ac = user_ac.Value.ToUpper();
                 }
 
                 if (password_ac != null)

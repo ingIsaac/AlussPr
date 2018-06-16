@@ -14,6 +14,7 @@ namespace cristales_pva
         bool get_merged;
         bool personalizacion;
         int perso_id;
+        bool reload = false;
 
         public merge_items(bool get_merged = false, bool personalizacion = false, int perso_id = -1)
         {
@@ -21,8 +22,10 @@ namespace cristales_pva
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
             datagridviewNE1.CellLeave += DatagridviewNE1_CellLeave;
+            datagridviewNE1.DataBindingComplete += DatagridviewNE1_DataBindingComplete;
             contextMenuStrip1.Items[2].Visible = false;
             contextMenuStrip1.Items[3].Visible = false;
+            this.FormClosed += Merge_items_FormClosed;
             this.get_merged = get_merged;
             this.personalizacion = personalizacion;
             this.perso_id = perso_id;
@@ -38,6 +41,48 @@ namespace cristales_pva
             }
         }
 
+        public void reloadMergedItems()
+        {
+            if (get_merged == true)
+            {
+                constants.getMargedItems(datagridviewNE1, perso_id);
+                this.Text = "Artículos de esté concepto...";
+            }
+        }
+
+        private void Merge_items_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (reload == true)
+            {
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                }
+            }
+        }
+
+        private void DatagridviewNE1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            checkErrorsModulos();
+        }
+
+        public void checkErrorsModulos()
+        {
+            if (datagridviewNE1.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                {
+                    foreach (int v in constants.errors_Open)
+                    {
+                        if (v == constants.stringToInt(x.Cells[0].Value.ToString()))
+                        {
+                            x.Cells[0].Style.BackColor = Color.Red;
+                        }
+                    }
+                }
+            }
+        }
+
         private void DatagridviewNE1_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
             if (datagridviewNE1.Rows.Count > 0)
@@ -46,7 +91,10 @@ namespace cristales_pva
                 {
                     if(x.OwningColumn.HasDefaultCellStyle == false)
                     {
-                        x.Style.BackColor = Color.White;
+                        if (x.ColumnIndex != 0)
+                        {
+                            x.Style.BackColor = Color.White;
+                        }                    
                     }
                 }
             }
@@ -60,7 +108,10 @@ namespace cristales_pva
                 {
                     if (x.OwningColumn.HasDefaultCellStyle == false)
                     {
-                        x.Style.BackColor = Color.LightGray;
+                        if (x.ColumnIndex != 0)
+                        {
+                            x.Style.BackColor = Color.LightGray;
+                        }                  
                     }
                 }
             }
@@ -169,17 +220,6 @@ namespace cristales_pva
             cotizaciones.SaveChanges();
         }
 
-        private void setImagenPredeterminada(int perso_id)
-        {
-            cotizaciones_local cotizaciones = new cotizaciones_local();
-            var concepto = (from x in cotizaciones.modulos_cotizaciones where x.id == perso_id select x).SingleOrDefault();
-            if (concepto != null)
-            {
-                concepto.pic = constants.imageToByte(Properties.Resources.new_concepto);
-            }
-            cotizaciones.SaveChanges();
-        }
-
         //Remover de concepto
         private void removerDeConceptoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -259,32 +299,58 @@ namespace cristales_pva
             cotizacion.SaveChanges();
             constants.updateModuloPersonalizado(perso_id);
             constants.getMargedItems(datagridviewNE1, perso_id);
-        }
-
-        //al lado
-        private void alLadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (datagridviewNE1.RowCount > 0)
-            {
-                setNewDir((int)datagridviewNE1.CurrentRow.Cells[0].Value, 2);
-            }
-        }
-
-        //sobre o por debajo
-        private void sobrePorDebajoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (datagridviewNE1.RowCount > 0)
-            {
-                setNewDir((int)datagridviewNE1.CurrentRow.Cells[0].Value, 1);
-            }
-        }
+        }     
 
         //indefinido
         private void indefinidoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (datagridviewNE1.RowCount > 0)
             {
-                setNewDir((int)datagridviewNE1.CurrentRow.Cells[0].Value, 0);
+                try
+                {
+                    int id = (int)datagridviewNE1.CurrentRow.Cells[0].Value;
+                    new setDir(id, perso_id, constants.byteToImage((byte[])datagridviewNE1.CurrentRow.Cells[1].Value), getMedidas(id, "largo"), getMedidas(id, "alto"), false, true).ShowDialog();
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    constants.errorLog(err.ToString());
+                }
+            }
+        }
+
+        //manual
+        private void asignaciónManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (datagridviewNE1.RowCount > 0)
+            {
+                new asignar_dir().ShowDialog();
+            }
+        }
+
+        public void asignacionManual(int dir)
+        {
+            reload = true;
+            setNewDir((int)datagridviewNE1.CurrentRow.Cells[0].Value, dir);
+        }
+
+        private void eliminarConfiguraciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Deseas eliminar toda la configuración de integración?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                cotizaciones_local cotizacion = new cotizaciones_local();
+
+                var modulos = from x in cotizacion.modulos_cotizaciones where x.merge_id == perso_id select x;
+
+                if(modulos != null)
+                {
+                    foreach (var x in modulos)
+                    {
+                        x.dir = 0;
+                    }
+                    cotizacion.SaveChanges();
+                    reloadMergedItems();
+                }
             }
         }
     }

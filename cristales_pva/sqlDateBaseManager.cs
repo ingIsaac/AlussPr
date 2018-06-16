@@ -3841,7 +3841,6 @@ namespace cristales_pva
             }
         }
 
-
         public void deleteRegistroPresupuestos(int folio, bool msg=false)
         {
             connection = new SqlConnection();
@@ -3856,7 +3855,7 @@ namespace cristales_pva
                 cmd.ExecuteNonQuery();
                 if(msg == true)
                 {
-                    MessageBox.Show("Se ha eliminado el registro de está cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Se ha eliminado el registro de está cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception e)
@@ -4068,6 +4067,185 @@ namespace cristales_pva
             }
             return result;
         }
+
+        public DataTable selectProduccionTable(int folio)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                SqlDataAdapter adapter = null;
+                adapter = new SqlDataAdapter("SELECT * FROM produccion WHERE folio = '" + folio + "'", getConnectionString());                           
+                SqlCommandBuilder cb = new SqlCommandBuilder(adapter);
+                adapter.Fill(data);               
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+            return data;
+        }
+
+        public void updateProduccionTable(int id, string parameters, string observaciones, int m_id)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "UPDATE produccion SET parameters=@PARAM, observaciones=@OBS, m_id=@MID WHERE id='" + id + "'";
+            cmd.Parameters.AddWithValue("@PARAM", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@PARAM"].Value = parameters;
+            cmd.Parameters.AddWithValue("@OBS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@OBS"].Value = observaciones;
+            cmd.Parameters.AddWithValue("@MID", System.Data.SqlDbType.Int);
+            cmd.Parameters["@MID"].Value = m_id;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void insertProduccionTable(int m_id, string parameters, string observaciones, int folio)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT INTO produccion (parameters, observaciones, m_id, folio) VALUES (@PARAM, @OBS, @MID, @FOLIO)";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@PARAM", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@PARAM"].Value = parameters;
+            cmd.Parameters.AddWithValue("@OBS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@OBS"].Value = observaciones;
+            cmd.Parameters.AddWithValue("@MID", System.Data.SqlDbType.Int);
+            cmd.Parameters["@MID"].Value = m_id;
+            cmd.Parameters.AddWithValue("@FOLIO", System.Data.SqlDbType.Int);
+            cmd.Parameters["@FOLIO"].Value = folio;         
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void deleteProduccionTable(int folio, bool msg = false, Form form=null)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "DELETE FROM produccion WHERE folio='" + folio + "'";
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                if (msg == true)
+                {
+                    if (form != null)
+                    {
+                        MessageBox.Show(form, "Se ha eliminado la orden ligada al folio: " + folio + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Se ha eliminado la orden ligada al folio: " + folio + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public Boolean getProduccionID(int id)
+        {
+            Boolean b = false;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT id FROM produccion WHERE id='" + id + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    b = true;
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return b;
+        }
+
+        public Boolean getFolioProduccion(int folio)
+        {
+            Boolean b = false;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT TOP 1 folio FROM produccion WHERE folio='" + folio + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    b = true;
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return b;
+        }
+
         ~sqlDateBaseManager()
         {
 

@@ -323,6 +323,26 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap chart_icon {
+            get {
+                object obj = ResourceManager.GetObject("chart_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap check {
+            get {
+                object obj = ResourceManager.GetObject("check", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap client_account_template_icon {
             get {
                 object obj = ResourceManager.GetObject("client_account_template_icon", resourceCulture);
@@ -336,6 +356,16 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap color_alumn {
             get {
                 object obj = ResourceManager.GetObject("color_alumn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap column {
+            get {
+                object obj = ResourceManager.GetObject("column", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -523,6 +553,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap font_icon {
+            get {
+                object obj = ResourceManager.GetObject("font_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Food_List_Ingredients_icon {
             get {
                 object obj = ResourceManager.GetObject("Food_List_Ingredients_icon", resourceCulture);
@@ -546,6 +586,16 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap Gear_icon {
             get {
                 object obj = ResourceManager.GetObject("Gear_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gear_icon_min {
+            get {
+                object obj = ResourceManager.GetObject("gear_icon_min", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -843,6 +893,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap production_icon {
+            get {
+                object obj = ResourceManager.GetObject("production_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap progress_bar {
             get {
                 object obj = ResourceManager.GetObject("progress_bar", resourceCulture);
@@ -876,6 +936,16 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap refresh_icon {
             get {
                 object obj = ResourceManager.GetObject("refresh_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap row {
+            get {
+                object obj = ResourceManager.GetObject("row", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -48,6 +48,9 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
+            this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -56,11 +59,10 @@
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
+            this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -130,7 +132,7 @@
             // 
             this.acabadosToolStripMenuItem.Name = "acabadosToolStripMenuItem";
             this.acabadosToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.acabadosToolStripMenuItem.Text = "Cambiar Acabados";
+            this.acabadosToolStripMenuItem.Text = "Wizard";
             this.acabadosToolStripMenuItem.Click += new System.EventHandler(this.acabadosToolStripMenuItem_Click);
             // 
             // label1
@@ -221,15 +223,60 @@
             this.label5.TabIndex = 16;
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(708, 576);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 23);
+            this.label6.TabIndex = 18;
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // datagridviewNE1
+            // 
+            this.datagridviewNE1.AllowDrop = true;
+            this.datagridviewNE1.AllowUserToAddRows = false;
+            this.datagridviewNE1.AllowUserToDeleteRows = false;
+            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
+            this.datagridviewNE1.Location = new System.Drawing.Point(0, 47);
+            this.datagridviewNE1.Name = "datagridviewNE1";
+            this.datagridviewNE1.Size = new System.Drawing.Size(1059, 517);
+            this.datagridviewNE1.TabIndex = 0;
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.Image = global::cristales_pva.Properties.Resources.chart_icon;
+            this.button8.Location = new System.Drawing.Point(346, 6);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(96, 35);
+            this.button8.TabIndex = 19;
+            this.button8.Text = "Analíticas";
+            this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Visible = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.Image = global::cristales_pva.Properties.Resources.Wizard_icon;
-            this.button7.Location = new System.Drawing.Point(263, 6);
+            this.button7.Location = new System.Drawing.Point(448, 6);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(127, 35);
+            this.button7.Size = new System.Drawing.Size(96, 35);
             this.button7.TabIndex = 17;
-            this.button7.Text = "Acabados";
+            this.button7.Text = "Wizard";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button7.UseVisualStyleBackColor = true;
@@ -240,9 +287,9 @@
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Image = global::cristales_pva.Properties.Resources.save_24;
-            this.button6.Location = new System.Drawing.Point(395, 6);
+            this.button6.Location = new System.Drawing.Point(550, 6);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(127, 35);
+            this.button6.Size = new System.Drawing.Size(96, 35);
             this.button6.TabIndex = 13;
             this.button6.Text = "Guardar";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -254,9 +301,9 @@
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Image = global::cristales_pva.Properties.Resources.look_24;
-            this.button5.Location = new System.Drawing.Point(528, 6);
+            this.button5.Location = new System.Drawing.Point(652, 6);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(127, 35);
+            this.button5.Size = new System.Drawing.Size(96, 35);
             this.button5.TabIndex = 12;
             this.button5.Text = "Abrir";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -268,9 +315,9 @@
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Image = global::cristales_pva.Properties.Resources.pdf_24;
-            this.button4.Location = new System.Drawing.Point(661, 6);
+            this.button4.Location = new System.Drawing.Point(754, 6);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(127, 35);
+            this.button4.Size = new System.Drawing.Size(96, 35);
             this.button4.TabIndex = 11;
             this.button4.Text = "Exportar";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -282,9 +329,9 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Image = global::cristales_pva.Properties.Resources.printer_24;
-            this.button3.Location = new System.Drawing.Point(794, 6);
+            this.button3.Location = new System.Drawing.Point(856, 6);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(127, 35);
+            this.button3.Size = new System.Drawing.Size(96, 35);
             this.button3.TabIndex = 10;
             this.button3.Text = "Imprimir";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -296,9 +343,9 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(927, 6);
+            this.button2.Location = new System.Drawing.Point(958, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(127, 35);
+            this.button2.Size = new System.Drawing.Size(96, 35);
             this.button2.TabIndex = 8;
             this.button2.Text = "Incluir otros...";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -313,7 +360,7 @@
             this.pictureBox1.Image = global::cristales_pva.Properties.Resources.progress_bar;
             this.pictureBox1.Location = new System.Drawing.Point(102, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(155, 29);
+            this.pictureBox1.Size = new System.Drawing.Size(238, 29);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -330,40 +377,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label6
+            // backgroundWorker3
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(708, 576);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 23);
-            this.label6.TabIndex = 18;
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // datagridviewNE1
-            // 
-            this.datagridviewNE1.AllowUserToAddRows = false;
-            this.datagridviewNE1.AllowUserToDeleteRows = false;
-            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
-            this.datagridviewNE1.Location = new System.Drawing.Point(0, 47);
-            this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.Size = new System.Drawing.Size(1059, 517);
-            this.datagridviewNE1.TabIndex = 0;
+            this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
             // 
             // articulos_cotizacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 608);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label5);
@@ -385,8 +408,8 @@
             this.Name = "articulos_cotizacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -422,5 +445,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.ToolStripMenuItem acabadosToolStripMenuItem;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button8;
+        private System.ComponentModel.BackgroundWorker backgroundWorker3;
     }
 }

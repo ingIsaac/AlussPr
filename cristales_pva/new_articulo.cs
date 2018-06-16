@@ -11,11 +11,14 @@ namespace cristales_pva
 {
     public partial class new_articulo : Form
     {
-        public new_articulo()
+        List<string> lista;
+
+        public new_articulo(List<string> lista)
         {
             InitializeComponent();
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
             datagridviewNE1.CellLeave += DatagridviewNE1_CellLeave;
+            this.lista = lista;
         }
 
         private void DatagridviewNE1_CellLeave(object sender, DataGridViewCellEventArgs e)
@@ -698,6 +701,12 @@ namespace cristales_pva
                     }
                 }
             }
+        }
+
+        //boton nuevos costos
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new new_costos(lista).ShowDialog();
         }
     }
 }

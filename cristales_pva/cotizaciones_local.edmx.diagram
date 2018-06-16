@@ -13,9 +13,10 @@
         <EntityTypeShape EntityType="cotizaciones.otros_cotizaciones" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="cotizaciones.aluminio_cotizado" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="cotizaciones.datos_reporte" Width="1.5" PointX="4.25" PointY="0.75" />
-        <EntityTypeShape EntityType="cotizaciones.articulos_reporte" Width="1.5" PointX="6" PointY="4.25" />
         <EntityTypeShape EntityType="cotizaciones.modulos_cotizaciones" Width="1.5" PointX="9.5" PointY="0.75" />
         <EntityTypeShape EntityType="cotizaciones.copybox" Width="1.5" PointX="2.5" PointY="6.75" />
+        <EntityTypeShape EntityType="cotizaciones.articulos_reporte" Width="1.5" PointX="6" PointY="4.25" />
+        <EntityTypeShape EntityType="cotizaciones.produccion_t" Width="1.5" PointX="6" PointY="8" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

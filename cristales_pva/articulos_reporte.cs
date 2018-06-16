@@ -23,5 +23,9 @@ namespace cristales_pva
         public Nullable<double> total { get; set; }
         public byte[] pic { get; set; }
         public string desc_p { get; set; }
+        public string desp { get; set; }
+        public string mano_obra { get; set; }
+        public string flete { get; set; }
+        public string utilidad { get; set; }
     }
 }

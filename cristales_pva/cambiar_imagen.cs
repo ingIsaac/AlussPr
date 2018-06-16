@@ -18,6 +18,7 @@ namespace cristales_pva
         string acabado = string.Empty;
         int desing = 0;
         bool enable = false;
+        sqlDateBaseManager search = new sqlDateBaseManager();
 
         public cambiar_imagen(int id)
         {
@@ -363,6 +364,11 @@ namespace cristales_pva
                 }
                 this.Close();
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+           search.dropTableOnGridViewWithFilter(datagridviewNE1, "esquemas", "nombre", textBox1.Text);
         }
     }
 }

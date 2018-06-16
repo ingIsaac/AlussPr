@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using System.Xml;
 using System.Data;
 using System.Net.Mail;
+using Microsoft.Reporting.WinForms;
 
 namespace cristales_pva
 {
@@ -70,9 +71,14 @@ namespace cristales_pva
         public static bool op6 = false;
         public static bool op7 = false;
         public static bool op8 = false;
+        public static bool op9 = false;
+        public static bool op10 = false;
+        public static bool m_liva = false;
         public static bool ingreso_ac = false;
         public static string user_ac = string.Empty;
         public static string password_ac = string.Empty;
+        public static bool reload_precios = true;
+        public static bool p_ac = false;
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;
@@ -89,7 +95,7 @@ namespace cristales_pva
         public static bool permitir_cp = false;
         public static int sub_folio = 1;
         public static List<int> errors_Open = new List<int>();
-        public static List<int> save_onEdit = new List<int>();
+        public static List<string> save_onEdit = new List<string>();
         public static bool update_later = false;
 
         public static void getSoftwareVersion()
@@ -140,9 +146,8 @@ namespace cristales_pva
                 //
                 externalip = new WebClient().DownloadString(c);
             }
-            catch (Exception err)
+            catch (Exception)
             {
-                errorLog(err.ToString());
                 externalip = "0.0.0.0";
             }
             return externalip;
@@ -1015,7 +1020,6 @@ namespace cristales_pva
                             datagrid.Columns.Add("Total", "Total");
 
                             var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio orderby x.orden select x);
-
                             DataGridViewColumn descripcion = datagrid.Columns[9];
                             DataGridViewColumn orden = datagrid.Columns[1];
                             descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
@@ -1035,7 +1039,7 @@ namespace cristales_pva
                                 {
                                     c.pic = constants.imageToByte(Properties.Resources.new_concepto);
                                 }
-                                datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, c.total);
+                                datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, c.total);                               
                             }
                             if (datagrid.RowCount > 0)
                             {
@@ -1096,8 +1100,8 @@ namespace cristales_pva
                             {
                                 c.pic = constants.imageToByte(Properties.Resources.new_concepto);
                             }
-                            datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, c.total);
-                        }
+                            datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, c.total);                            
+                        }                       
                         if (datagrid.RowCount > 0)
                         {
                             datagrid.FirstDisplayedScrollingRowIndex = datagrid.RowCount - 1;
@@ -1218,20 +1222,36 @@ namespace cristales_pva
             }
         }
 
-        public static void setConceptEditZone(DataGridView datagrid)
+        public static void setConceptEditZone(DataGridView datagrid, bool editable=false)
         {
             if (datagrid.RowCount > 0)
             {
+                cotizaciones_local cotizaciones = new cotizaciones_local();
+                int p = 0;
                 foreach (DataGridViewRow x in datagrid.Rows)
                 {
                     if (x.Cells[5].Value.ToString() == "-1")
                     {
                         foreach (DataGridViewCell v in x.Cells)
                         {
-                            if (v.ColumnIndex == 1 || v.ColumnIndex == 9 || v.ColumnIndex == 10 || v.ColumnIndex == 13 || v.ColumnIndex == 14 || v.ColumnIndex == 15)
+                            if (v.ColumnIndex == 1 || v.ColumnIndex == 9 || v.ColumnIndex == 10 || v.ColumnIndex == 15)
                             {
                                 v.ReadOnly = false;
                                 v.Style.BackColor = Color.LightBlue;
+                            }
+                            else if (v.ColumnIndex == 13 || v.ColumnIndex == 14)
+                            {                              
+                                p = (int)x.Cells[0].Value;
+                                var k = (from n in cotizaciones.modulos_cotizaciones where n.merge_id == p select n).Where(n => n.dir == 0).FirstOrDefault(); 
+                                if(k != null)
+                                {
+                                    v.ReadOnly = false;
+                                    v.Style.BackColor = Color.LightBlue;
+                                }
+                                else
+                                {
+                                    v.ReadOnly = true;
+                                }
                             }
                             else
                             {
@@ -1388,7 +1408,7 @@ namespace cristales_pva
                                Modulo_Id = o.modulo_id,
                                Artículo = o.articulo,
                                Linea = o.linea,
-                               Configuración = o.dir == 1 ? "Sobre / Por Debajo" : o.dir == 2 ? "Al Lado" : "Indefinido",
+                               Configuración = o.dir == 0 ? "Indefinido" : o.dir >= 110 ? o.dir.ToString()[0] + "," + o.dir.ToString()[1] + "," + o.dir.ToString()[2] : o.dir.ToString(),
                                Diseño = o.diseño,
                                Descripción = o.descripcion,
                                Ubicación = o.ubicacion,
@@ -1477,7 +1497,7 @@ namespace cristales_pva
                     {
                         if (concepto.dir != 3)
                         {
-                            img = MergeTwoImages(byteToImage(concepto.pic), byteToImage(v.pic));
+                            img = MergeTwoImages(byteToImage(concepto.pic), byteToImage(v.pic));                          
                         }
                         concepto.modulo_id = -1;
                         concepto.pic = img != null ? imageToByte(img) : concepto.dir == 3 ? concepto.pic : v.pic;
@@ -1501,7 +1521,7 @@ namespace cristales_pva
                     concepto.alto = 0;
                     cotizaciones.SaveChanges();
 
-                    modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id && x.dir > 0 orderby x.largo ascending select x).ThenBy(x => x.dir);
+                    modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id && x.dir > 0 && x.dir < 100 orderby x.largo ascending select x).ThenBy(x => x.dir);
 
                     if (modulos != null)
                     {                     
@@ -1514,7 +1534,7 @@ namespace cristales_pva
 
                     dir_p = -1;
 
-                    modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id && x.dir > 0 orderby x.alto ascending select x).ThenBy(x => x.dir);
+                    modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id && x.dir > 0 && x.dir < 100 orderby x.alto ascending select x).ThenBy(x => x.dir);
 
                     if (modulos != null)
                     {
@@ -1524,8 +1544,148 @@ namespace cristales_pva
                             dir_p = (int)v.dir;
                         }
                     }
+                    //----------------------------------------------------------------------------------------------------------->
+
+
+                    //Nuevo Algoritmo ------------------------------------------------------------------------------------------->
+                    modulos = null;
+                    modulos = (from x in cotizaciones.modulos_cotizaciones where (x.merge_id == concepto.concept_id && x.dir >= 110) orderby x.dir ascending select x);
+
+                    if(modulos != null)
+                    {
+                        try {
+                            List<string> buffer;
+                            List<string> g = new List<string>();
+                            List<List<string>> rows = new List<List<string>>();
+                            List<List<string>> columns = new List<List<string>>();
+                            string[] k = null;
+
+                            foreach (var x in modulos)
+                            {
+                                if (x.dir >= 110)
+                                {
+                                    g.Add(x.dir.ToString()[0] + "," + x.dir.ToString()[1] + "," + x.dir.ToString()[2]);
+                                }
+                            }
+
+                            if (g.Count > 0)
+                            {
+                                for (int i = 1; i < 8; i++)
+                                {
+                                    buffer = new List<string>();
+                                    foreach (string v in g)
+                                    {
+                                        k = v.Split(',');
+                                        if (k.Length >= 2)
+                                        {
+                                            if (k[0] == i.ToString())
+                                            {
+                                                buffer.Add(v);
+                                            }
+                                        }
+                                    }
+                                    if (buffer.Count > 0)
+                                    {
+                                        rows.Add(buffer);
+                                    }
+                                }
+
+                                k = null;
+
+                                for (int i = 1; i < 8; i++)
+                                {
+                                    buffer = new List<string>();
+                                    foreach (string v in g)
+                                    {
+                                        k = v.Split(',');
+                                        if (k.Length >= 2)
+                                        {
+                                            if (k[1] == i.ToString())
+                                            {
+                                                buffer.Add(v);
+                                            }
+                                        }
+                                    }
+                                    if (buffer.Count > 0)
+                                    {
+                                        columns.Add(buffer);
+                                    }
+                                }
+
+                                string[] u = null;
+                                int w = -1;
+
+                                foreach (string p in rows.OrderByDescending(n => n.Count).FirstOrDefault())
+                                {
+                                    u = p.Split(',');
+                                    if (u.Length >= 2)
+                                    {
+                                        w = stringToInt((u[0] + u[1] + u[2]));
+                                        var z = (from v in cotizaciones.modulos_cotizaciones where v.merge_id == concepto.concept_id && v.dir == w select v).FirstOrDefault();
+                                        if (z != null)
+                                        {
+                                            if (z.cantidad > 1)
+                                            {
+                                                if (u[2] == "0")
+                                                {
+                                                    concepto.largo = concepto.largo + (z.largo * z.cantidad);
+                                                }
+                                                else
+                                                {
+                                                    concepto.largo = concepto.largo + z.largo;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                concepto.largo = concepto.largo + z.largo;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                foreach (string p in columns.OrderByDescending(n => n.Count).FirstOrDefault())
+                                {
+                                    u = p.Split(',');
+                                    if (u.Length >= 2)
+                                    {
+                                        w = stringToInt((u[0] + u[1] + u[2]));
+                                        var z = (from v in cotizaciones.modulos_cotizaciones where v.merge_id == concepto.concept_id && v.dir == w select v).FirstOrDefault();
+                                        if (z != null)
+                                        {
+                                            if (z.cantidad > 1)
+                                            {
+                                                if (u[2] == "1")
+                                                {
+                                                    concepto.alto = concepto.alto + (z.alto * z.cantidad);
+                                                }
+                                                else
+                                                {
+                                                    concepto.alto = concepto.alto + z.alto;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                concepto.alto = concepto.alto + z.alto;
+                                            }
+                                        }
+                                    }
+                                }                            
+
+                                //clear
+                                buffer = null;
+                                rows = null;
+                                columns = null;
+                                g = null;
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            errorLog(err.ToString());
+                        }
+                    }
+                    //----------------------------------------------------------------------------------------------------------->
                 }
-                //----------------------------------------------------------------------------------------------------------->
             }
             cotizaciones.SaveChanges();
         }
@@ -2274,7 +2434,11 @@ namespace cristales_pva
 
                 if (propiedades != null)
                 {
-                    propiedades.iva = stringToFloat(sql.getSingleSQLValue("propiedades", "iva", "id", "1", 0));
+                    float iva = stringToFloat(sql.getSingleSQLValue("propiedades", "iva", "id", "1", 0));
+                    if (iva > 0)
+                    {
+                        propiedades.iva = iva;
+                    }
                 }
                 p.SaveChanges();
             }
@@ -2306,7 +2470,7 @@ namespace cristales_pva
 
         public static float getPropiedadesModel()
         {
-            float r = 0;
+            float r = 1.16f;
             localDateBaseEntities3 p = new localDateBaseEntities3();
             try
             {
@@ -2314,7 +2478,10 @@ namespace cristales_pva
 
                 if (propiedades != null)
                 {
-                    r = (float)propiedades.iva;
+                    if ((float)propiedades.iva > 0)
+                    {
+                        r = (float)propiedades.iva;
+                    }
                 }
             }
             catch (Exception err)
@@ -2333,7 +2500,10 @@ namespace cristales_pva
 
                 if (propiedades != null)
                 {
-                    iva = (float)propiedades.iva;
+                    if ((float)propiedades.iva > 0)
+                    {
+                        iva = (float)propiedades.iva;
+                    }
                 }
             }
             catch (Exception err)
@@ -3488,6 +3658,7 @@ namespace cristales_pva
         public static float reloadCalcularCostoModulo(int modulo_id, float mano_obra, int cantidad, string dimensiones, string claves_cristales, float flete, float desperdicio, float utilidad, string claves_otros, string claves_herrajes, string claves_perfiles, string new_items, string acabado, int id)
         {
             listas_entities_pva listas = new listas_entities_pva();
+            cotizaciones_local cotizacion;
             List<string> n_items = new List<string>();
             bool error = false;    
             float costo = 0;
@@ -3496,6 +3667,7 @@ namespace cristales_pva
             bool cs = false;
             string buffer = string.Empty;
             float get = 0;
+            float _total = 0;
 
             if (new_items.Length > 0)
             {
@@ -3728,6 +3900,21 @@ namespace cristales_pva
                                 error = true;
                             }
                         }
+                        //
+                        else if (p[0] == "5")
+                        {
+                            if (p.Length == 4)
+                            {
+                                if (p[3] != "Total")
+                                {
+                                    costo = costo + stringToFloat(p[2]);
+                                }
+                                else
+                                {
+                                    _total = _total + stringToFloat(p[2]);
+                                }
+                            }
+                        }
                     }
                 }
                 //------------------------->
@@ -3736,6 +3923,18 @@ namespace cristales_pva
                     if (errors_Open.Contains(id) == false)
                     {
                         errors_Open.Add(id);
+                        cotizacion = new cotizaciones_local();
+                        var w = (from x in cotizacion.modulos_cotizaciones where x.id == id select x).SingleOrDefault();
+                        if(w != null)
+                        {
+                            if(w.merge_id > 0)
+                            {
+                                if (errors_Open.Contains((int)w.merge_id) == false)
+                                {
+                                    errors_Open.Add((int)w.merge_id);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -3744,7 +3943,7 @@ namespace cristales_pva
             costo = costo + (costo * mano_obra);
             costo = costo + (costo * utilidad);            
             //
-            return ((costo) * cantidad);
+            return ((costo) * cantidad) + _total;
         }
 
         public static void checkErrorsOnLoad()
@@ -4652,6 +4851,40 @@ namespace cristales_pva
             {
                 //do nothing
             }
+        }
+
+        public static string getExternalImage(string type)
+        {
+            string path = string.Empty;
+
+            if (type == "header")
+            {
+                if (File.Exists(Application.StartupPath + "\\pics\\reportes\\" + header_reporte + ".jpg"))
+                {
+                    Uri uri = new Uri(Application.StartupPath + "\\pics\\reportes\\" + header_reporte + ".jpg");
+                    path = uri.AbsoluteUri;
+                }
+                else
+                {
+                    string web = "http://" + server + "/" + header_reporte + ".jpg";
+                    path = web;                    
+                }
+            }
+            else if(type == "marca")
+            {
+                if (File.Exists(Application.StartupPath + "\\pics\\reportes\\fondos\\" + header_reporte + ".bmp"))
+                {
+                    Uri uri = new Uri(Application.StartupPath + "\\pics\\reportes\\fondos\\" + header_reporte + ".bmp");
+                    path = uri.AbsoluteUri;
+                }
+                else
+                {
+                    string web = "http://" + server + "/" + header_reporte + ".bmp";
+                    path = web;
+                }
+            }
+
+            return path;
         }
     }
 }

@@ -36,6 +36,10 @@
           <Property Name="total" Type="float" />
           <Property Name="pic" Type="image" />
           <Property Name="desc_p" Type="varchar(max)" />
+          <Property Name="desp" Type="varchar" MaxLength="50" />
+          <Property Name="mano_obra" Type="varchar" MaxLength="50" />
+          <Property Name="flete" Type="varchar" MaxLength="50" />
+          <Property Name="utilidad" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="copybox">
           <Key>
@@ -227,6 +231,24 @@
           <Property Name="alto" Type="float" />
           <Property Name="descripcion" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="produccion_t">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="pic" Type="image" />
+          <Property Name="ubicacion" Type="varchar(max)" />
+          <Property Name="medidas" Type="varchar" MaxLength="50" />
+          <Property Name="observaciones" Type="varchar(max)" />
+          <Property Name="vista" Type="varchar" MaxLength="50" />
+          <Property Name="apertura" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="aluminio" Type="varchar(max)" />
+          <Property Name="cristal" Type="varchar(max)" />
+          <Property Name="herrajes" Type="varchar(max)" />
+          <Property Name="otros" Type="varchar(max)" />
+          <Property Name="cantidad" Type="int" />
+        </EntityType>
         <EntityContainer Name="cotizacionesStoreContainer">
           <EntitySet Name="aluminio_cotizado" EntityType="Self.aluminio_cotizado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="articulos_reporte" EntityType="Self.articulos_reporte" Schema="dbo" store:Type="Tables" />
@@ -239,6 +261,7 @@
           <EntitySet Name="materiales_modulos" EntityType="Self.materiales_modulos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="modulos_cotizaciones" EntityType="Self.modulos_cotizaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="otros_cotizaciones" EntityType="Self.otros_cotizaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="produccion_t" EntityType="Self.produccion_t" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -253,9 +276,10 @@
           <EntitySet Name="otros_cotizaciones" EntityType="cotizaciones.otros_cotizaciones" />
           <EntitySet Name="aluminio_cotizado" EntityType="cotizaciones.aluminio_cotizado" />
           <EntitySet Name="datos_reporte" EntityType="cotizaciones.datos_reporte" />
-          <EntitySet Name="articulos_reporte" EntityType="cotizaciones.articulos_reporte" />
           <EntitySet Name="modulos_cotizaciones" EntityType="cotizaciones.modulos_cotizaciones" />
           <EntitySet Name="copyboxes" EntityType="cotizaciones.copybox" />
+          <EntitySet Name="articulos_reporte" EntityType="cotizaciones.articulos_reporte" />
+          <EntitySet Name="produccion_t" EntityType="cotizaciones.produccion_t" />
         </EntityContainer>
         <EntityType Name="materiales_modulos">
           <Key>
@@ -393,20 +417,6 @@
           <Property Name="Forma_de_Pago" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="articulos_reporte">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="concepto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="largo" Type="Double" />
-          <Property Name="alto" Type="Double" />
-          <Property Name="cantidad" Type="Double" />
-          <Property Name="total" Type="Double" />
-          <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="desc_p" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="modulos_cotizaciones">
           <Key>
             <PropertyRef Name="id" />
@@ -478,6 +488,42 @@
           <Property Name="news" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="new_desing" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="orden" Type="Int32" />
+        </EntityType>
+        <EntityType Name="articulos_reporte">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="concepto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="largo" Type="Double" />
+          <Property Name="alto" Type="Double" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="total" Type="Double" />
+          <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="desc_p" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="desp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mano_obra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="flete" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="utilidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="produccion_t">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="pic" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ubicacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="medidas" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="vista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apertura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="aluminio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cristal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="herrajes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="otros" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -629,21 +675,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="articulos_reporte">
-            <EntityTypeMapping TypeName="cotizaciones.articulos_reporte">
-              <MappingFragment StoreEntitySet="articulos_reporte">
-                <ScalarProperty Name="desc_p" ColumnName="desc_p" />
-                <ScalarProperty Name="pic" ColumnName="pic" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="alto" ColumnName="alto" />
-                <ScalarProperty Name="largo" ColumnName="largo" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="concepto" ColumnName="concepto" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="modulos_cotizaciones">
             <EntityTypeMapping TypeName="cotizaciones.modulos_cotizaciones">
               <MappingFragment StoreEntitySet="modulos_cotizaciones">
@@ -714,6 +745,44 @@
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
                 <ScalarProperty Name="folio" ColumnName="folio" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articulos_reporte">
+            <EntityTypeMapping TypeName="cotizaciones.articulos_reporte">
+              <MappingFragment StoreEntitySet="articulos_reporte">
+                <ScalarProperty Name="utilidad" ColumnName="utilidad" />
+                <ScalarProperty Name="flete" ColumnName="flete" />
+                <ScalarProperty Name="mano_obra" ColumnName="mano_obra" />
+                <ScalarProperty Name="desp" ColumnName="desp" />
+                <ScalarProperty Name="desc_p" ColumnName="desc_p" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="alto" ColumnName="alto" />
+                <ScalarProperty Name="largo" ColumnName="largo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="concepto" ColumnName="concepto" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="produccion_t">
+            <EntityTypeMapping TypeName="cotizaciones.produccion_t">
+              <MappingFragment StoreEntitySet="produccion_t">
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="otros" ColumnName="otros" />
+                <ScalarProperty Name="herrajes" ColumnName="herrajes" />
+                <ScalarProperty Name="cristal" ColumnName="cristal" />
+                <ScalarProperty Name="aluminio" ColumnName="aluminio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="apertura" ColumnName="apertura" />
+                <ScalarProperty Name="vista" ColumnName="vista" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="medidas" ColumnName="medidas" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

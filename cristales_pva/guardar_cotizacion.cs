@@ -104,7 +104,7 @@ namespace cristales_pva
             {
                 if (constants.cotizacion_error == false)
                 {
-                    MessageBox.Show("Se ha guardado está cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Se ha guardado está cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     constants.save_onEdit.Clear();
                     pictureBox1.Visible = true;
                     backgroundWorker2.RunWorkerAsync();
@@ -162,7 +162,7 @@ namespace cristales_pva
             label7.Text = "Abriendo cotización...";
             constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion);
             constants.deleteFilasBorradasFromLocalDB();
-            if (constants.ac_cotizacion == true)
+            if (constants.ac_cotizacion == true && constants.reload_precios == true)
             {
                 constants.errors_Open.Clear();
                 for (int i = 1; i < 5; i++)
