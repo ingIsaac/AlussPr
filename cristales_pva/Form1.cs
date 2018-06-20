@@ -5514,6 +5514,30 @@ namespace cristales_pva
             {
                 constants.tipo_cotizacion = 5;
             }
+            //si se presenta igualdad
+            if (constants.tipo_cotizacion <= 0)
+            {
+                if (constants.count_modulos > 0)
+                {
+                    constants.tipo_cotizacion = 5;
+                }
+                else if (constants.count_cristales > 0)
+                {
+                    constants.tipo_cotizacion = 1;
+                }
+                else if(constants.count_aluminio > 0)
+                {
+                    constants.tipo_cotizacion = 2;
+                }
+                else if (constants.count_herrajes > 0)
+                {
+                    constants.tipo_cotizacion = 3;
+                }
+                else if (constants.count_otros > 0)
+                {
+                    constants.tipo_cotizacion = 4;
+                }                
+            }
         }
         //
 
