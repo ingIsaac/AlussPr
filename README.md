@@ -17,4 +17,4 @@ Instalación de Paquetería (Dependencias).
 
 <h3>Copyright:</h3>
 
-Isaac Solís Ramiréz - <span style="font-weight: bold;">2018</span>
+Isaac Solís Ramírez - <span style="font-weight: bold;">2018</span>
