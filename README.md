@@ -1,4 +1,4 @@
-<h1 style="color: red;">Introducción...</h1>
+<h1 style="color: red;">Introducción.</h1>
 
 Software empleado para la gestión y coordinación de presupuestos para empresas en el giro de cancelería de vidrio y aluminio.
 
@@ -10,6 +10,10 @@ Instalación de Paquetería (Dependencias).
 <li>SQLLocalDB</li>
 <li>SQLSysclrtypes 2014</li>
 </ol>
+
+<h3>Manual de Usuario:</h3>
+
+<a href="https://drive.google.com/open?id=1GM6mjO4F1dG5zEFFjk1VFD0oWnWDPW9i">Manual de usuario.pdf</a>
 
 <h3>Copyright:</h3>
 
