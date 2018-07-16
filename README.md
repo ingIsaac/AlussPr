@@ -1,6 +1,6 @@
 <h1 style="color: red;">Introducción.</h1>
 
-Software empleado para la gestión y coordinación de presupuestos para empresas en el giro de cancelería de vidrio y aluminio.
+Software empleado para la gestión o coordinación de presupuestos y producción para empresas en el giro de cancelería de vidrio y aluminio.
 
 Instalación de Paquetería (Dependencias).
 
