@@ -1,8 +1,8 @@
 <h1 style="color: red;">Introducción...</h1>
 
-Software empleado para la gestion y coordinación de presupuestos  para empresas en le giro de canceleria de vidrio y aluminio.
+Software empleado para la gestión y coordinación de presupuestos para empresas en el giro de cancelería de vidrio y aluminio.
 
-Instalacion de Paquetería de dependencias.
+Instalación de Paquetería (Dependencias).
 
 <ol type="1">
 <li>.NET Framework 4.5 </li>
