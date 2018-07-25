@@ -328,14 +328,14 @@ namespace cristales_pva
                             int diseño_id = (int)modulo.id_diseño;
                             LeerDiseño(diseño_id);
                         }
-                    }
-                    if (data.new_desing != "" && data.new_desing != null)
+                    }                 
+                }
+                if (data.new_desing != "" && data.new_desing != null)
+                {
+                    if (constants.stringToInt(data.new_desing) > 0)
                     {
-                        if (constants.stringToInt(data.new_desing) > 0)
-                        {
-                            desing = constants.stringToInt(data.new_desing);
-                            LeerDiseño(desing);
-                        }
+                        desing = constants.stringToInt(data.new_desing);
+                        LeerDiseño(desing);
                     }
                 }
             }
