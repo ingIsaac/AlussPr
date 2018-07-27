@@ -2641,30 +2641,22 @@ namespace cristales_pva
         private void textBox26_TextChanged(object sender, EventArgs e)
         {
             if (constants.isDesc(textBox26.Text) == true)
-            {
-                if (float.Parse(textBox26.Text) >= 0)
+            {              
+                if (comboBox1.SelectedIndex == 2)
                 {
-                    if (comboBox1.SelectedIndex == 2)
-                    {
-                        calculoGeneralCristales("_hoja");
-                    }
-                    else {
-                        if (checkBox1.Checked == true)
-                        {
-                            calculoGeneralCristales("_m2");
-                        }
-                        else
-                        {
-                            calculoGeneralCristales("_instalado");
-                        }
-                    }
+                    calculoGeneralCristales("_hoja");
                 }
                 else
                 {
-                    textBox26.Text = "";
-                    label17.Text = p.ToString("0.00");
-                    label41.Text = p.ToString("0.00");
-                }
+                    if (checkBox1.Checked == true)
+                    {
+                        calculoGeneralCristales("_m2");
+                    }
+                    else
+                    {
+                        calculoGeneralCristales("_instalado");
+                    }
+                }              
             }
             else
             {
