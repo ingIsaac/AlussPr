@@ -199,7 +199,17 @@ namespace cristales_pva
         }
 
         public static Boolean isInteger(string num)
+        {          
+            int r;
+            return int.TryParse(num, out r);
+        }
+
+        public static Boolean isDesc(string num)
         {
+            if (num == "-")
+            {
+                return true;
+            }
             int r;
             return int.TryParse(num, out r);
         }

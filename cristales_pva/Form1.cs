@@ -2640,7 +2640,7 @@ namespace cristales_pva
         //Descuento cristales
         private void textBox26_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isInteger(textBox26.Text) == true)
+            if (constants.isDesc(textBox26.Text) == true)
             {
                 if (float.Parse(textBox26.Text) >= 0)
                 {
@@ -3747,7 +3747,7 @@ namespace cristales_pva
         //descuento
         private void textBox27_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isInteger(textBox27.Text) == true)
+            if (constants.isDesc(textBox27.Text) == true)
             {
                 calculoAluminio();
             }
@@ -3911,7 +3911,7 @@ namespace cristales_pva
         //descuento herrajes
         private void textBox29_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isInteger(textBox29.Text) == true)
+            if (constants.isDesc(textBox29.Text) == true)
             {
                 calculoHerrajes();
             }
@@ -3938,7 +3938,7 @@ namespace cristales_pva
         //descuento otros
         private void textBox31_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isInteger(textBox31.Text) == true)
+            if (constants.isDesc(textBox31.Text) == true)
             {
                 calculoOtros();
             }
