@@ -6657,7 +6657,7 @@ namespace cristales_pva
         {
             if (constants.local == false)
             {
-                if (constants.user_access >= 2)
+                if (constants.user_access >= 5)
                 {
                     if (Application.OpenForms["user_items"] == null)
                     {
@@ -6671,7 +6671,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (2) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else

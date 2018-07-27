@@ -315,6 +315,11 @@ namespace cristales_pva
                         sql.insertListaOtros(constants.setUserItemClave(), textBox2.Text, "", comboBox2.Text, comboBox2.Text == "servicios" ? richTextBox1.Text : getArticulos(), textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), constants.stringToFloat(textBox7.Text), constants.stringToFloat(textBox8.Text));
                         MessageBox.Show("Se ha creado el " + comboBox2.Text.Remove(comboBox2.Text.Length-1) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         loadAll();
+                        clear();
+                        if (MessageBox.Show("¿Deseas sincronizar la base de datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            new loading_form().ShowDialog();
+                        }
                     }
                     else
                     {
@@ -323,6 +328,11 @@ namespace cristales_pva
                             sql.updateListaOtros(this.id, textBox2.Text, "", comboBox2.Text, comboBox2.Text == "servicios" ? richTextBox1.Text : getArticulos(), textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), constants.stringToFloat(textBox7.Text), constants.stringToFloat(textBox8.Text));
                             MessageBox.Show("Se ha actualizado el " + comboBox2.Text.Remove(comboBox2.Text.Length - 1) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             loadAll();
+                            clear();
+                            if (MessageBox.Show("¿Deseas sincronizar la base de datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                new loading_form().ShowDialog();
+                            }
                         }
                     }
                 }
@@ -595,6 +605,11 @@ namespace cristales_pva
 
         private void button4_Click(object sender, EventArgs e)
         {
+            clear();
+        }
+
+        private void clear()
+        {
             textBox3.Text = "00000000000";
             textBox2.Clear();
             textBox6.Clear();
@@ -641,6 +656,12 @@ namespace cristales_pva
                 datagridviewNE1.DataSource = null;
                 datagridviewNE1.DataSource = new sqlDateBaseManager().createDataTableFromSQLTableWithFilter("otros", "clave", "USER");
             }
+        }
+
+        //sincronizar
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new loading_form().ShowDialog();
         }
     }
 }
