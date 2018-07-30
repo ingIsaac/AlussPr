@@ -4035,6 +4035,68 @@ namespace cristales_pva
             return result;
         }
 
+        public DateTime getvigenciaTienda(string tienda)
+        {
+            DateTime result = new DateTime();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT vigencia FROM tiendas WHERE nombre_tienda='" + tienda + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    result = Convert.ToDateTime(r.GetValue(0));
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+                MessageBox.Show("[Error] no se ha podido verificar la licencia de esté programa, intente de nuevo.\n\nDe continuar el problema póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
+
+        public string getvigenciaType(string tienda)
+        {
+            string result = string.Empty;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT tipo_licencia FROM tiendas WHERE nombre_tienda='" + tienda + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    result = r.GetValue(0).ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
         public bool getIvaDesglosado(int folio)
         {
             bool result = true;

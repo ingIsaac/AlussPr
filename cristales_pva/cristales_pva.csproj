@@ -560,6 +560,12 @@
     <Compile Include="user_items.Designer.cs">
       <DependentUpon>user_items.cs</DependentUpon>
     </Compile>
+    <Compile Include="vigencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vigencia.Designer.cs">
+      <DependentUpon>vigencia.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="acabados.resx">
       <DependentUpon>acabados.cs</DependentUpon>
     </EmbeddedResource>
@@ -722,6 +728,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="user_items.resx">
       <DependentUpon>user_items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="vigencia.resx">
+      <DependentUpon>vigencia.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="listas.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

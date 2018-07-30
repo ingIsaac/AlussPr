@@ -37,6 +37,11 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.propiedadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.borrarHistorialDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónDeConexiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.códigoDeVigenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -45,10 +50,6 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.propiedadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.borrarHistorialDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.configuraciónDeConexiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.errorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -127,6 +128,48 @@
             this.menuStrip1.Size = new System.Drawing.Size(288, 38);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // propiedadesToolStripMenuItem
+            // 
+            this.propiedadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.borrarHistorialDeUsuariosToolStripMenuItem,
+            this.configuraciónDeConexiónToolStripMenuItem,
+            this.códigoDeVigenciaToolStripMenuItem,
+            this.errorLogToolStripMenuItem});
+            this.propiedadesToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.system_config_services;
+            this.propiedadesToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.propiedadesToolStripMenuItem.Name = "propiedadesToolStripMenuItem";
+            this.propiedadesToolStripMenuItem.Size = new System.Drawing.Size(42, 34);
+            this.propiedadesToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.propiedadesToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            // 
+            // borrarHistorialDeUsuariosToolStripMenuItem
+            // 
+            this.borrarHistorialDeUsuariosToolStripMenuItem.Name = "borrarHistorialDeUsuariosToolStripMenuItem";
+            this.borrarHistorialDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.borrarHistorialDeUsuariosToolStripMenuItem.Text = "Borrar historial de usuarios";
+            this.borrarHistorialDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.borrarHistorialDeUsuariosToolStripMenuItem_Click);
+            // 
+            // configuraciónDeConexiónToolStripMenuItem
+            // 
+            this.configuraciónDeConexiónToolStripMenuItem.Name = "configuraciónDeConexiónToolStripMenuItem";
+            this.configuraciónDeConexiónToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.configuraciónDeConexiónToolStripMenuItem.Text = "Configuración de conexión";
+            this.configuraciónDeConexiónToolStripMenuItem.Click += new System.EventHandler(this.configuraciónDeConexiónToolStripMenuItem_Click);
+            // 
+            // códigoDeVigenciaToolStripMenuItem
+            // 
+            this.códigoDeVigenciaToolStripMenuItem.Name = "códigoDeVigenciaToolStripMenuItem";
+            this.códigoDeVigenciaToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.códigoDeVigenciaToolStripMenuItem.Text = "Licencia";
+            this.códigoDeVigenciaToolStripMenuItem.Click += new System.EventHandler(this.códigoDeVigenciaToolStripMenuItem_Click);
+            // 
+            // errorLogToolStripMenuItem
+            // 
+            this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
+            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.errorLogToolStripMenuItem.Text = "Error log";
+            this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -211,40 +254,6 @@
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
             // 
-            // propiedadesToolStripMenuItem
-            // 
-            this.propiedadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.borrarHistorialDeUsuariosToolStripMenuItem,
-            this.configuraciónDeConexiónToolStripMenuItem,
-            this.errorLogToolStripMenuItem});
-            this.propiedadesToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.system_config_services;
-            this.propiedadesToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.propiedadesToolStripMenuItem.Name = "propiedadesToolStripMenuItem";
-            this.propiedadesToolStripMenuItem.Size = new System.Drawing.Size(42, 34);
-            this.propiedadesToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.propiedadesToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            // 
-            // borrarHistorialDeUsuariosToolStripMenuItem
-            // 
-            this.borrarHistorialDeUsuariosToolStripMenuItem.Name = "borrarHistorialDeUsuariosToolStripMenuItem";
-            this.borrarHistorialDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.borrarHistorialDeUsuariosToolStripMenuItem.Text = "Borrar historial de usuarios";
-            this.borrarHistorialDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.borrarHistorialDeUsuariosToolStripMenuItem_Click);
-            // 
-            // configuraciónDeConexiónToolStripMenuItem
-            // 
-            this.configuraciónDeConexiónToolStripMenuItem.Name = "configuraciónDeConexiónToolStripMenuItem";
-            this.configuraciónDeConexiónToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.configuraciónDeConexiónToolStripMenuItem.Text = "Configuración de conexión";
-            this.configuraciónDeConexiónToolStripMenuItem.Click += new System.EventHandler(this.configuraciónDeConexiónToolStripMenuItem_Click);
-            // 
-            // errorLogToolStripMenuItem
-            // 
-            this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
-            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.errorLogToolStripMenuItem.Text = "Error log";
-            this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::cristales_pva.Properties.Resources.app_logo;
@@ -319,5 +328,6 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.ToolStripMenuItem códigoDeVigenciaToolStripMenuItem;
     }
 }

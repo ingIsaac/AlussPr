@@ -164,44 +164,52 @@ namespace cristales_pva
                         {
                             if (sql.getTienda(constants.org_name) == true)
                             {
-                                constants.connected = true;
-                                pictureBox2.Image = Properties.Resources.database_icon_check;
-                                constants.user_id = sql.getUserId(constants.user);
-                                label3.Text = "Actualizando Historial...";
-                                constants.crearHistorialLogin(constants.user, Environment.MachineName, constants.getPublicIP(), DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
-                                users = new localDateBaseEntities3();
-                                var d = (from x in users.userLocals where x.user == comboBox1.Text select x).SingleOrDefault();
-
-                                if (d == null)
+                                if (constants.getVigencia(sql.getvigenciaTienda(constants.org_name)))
                                 {
-                                    try
+                                    constants.connected = true;
+                                    pictureBox2.Image = Properties.Resources.database_icon_check;
+                                    constants.user_id = sql.getUserId(constants.user);
+                                    label3.Text = "Actualizando Historial...";
+                                    constants.crearHistorialLogin(constants.user, Environment.MachineName, constants.getPublicIP(), DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+                                    users = new localDateBaseEntities3();
+                                    var d = (from x in users.userLocals where x.user == comboBox1.Text select x).SingleOrDefault();
+
+                                    if (d == null)
                                     {
-                                        userLocal lu = new userLocal()
+                                        try
                                         {
-                                            user = comboBox1.Text,
-                                            password = textBox2.Text,
-                                            remember = isRemembered()
-                                        };
-                                        users.userLocals.Add(lu);
-                                        users.SaveChanges();
+                                            userLocal lu = new userLocal()
+                                            {
+                                                user = comboBox1.Text,
+                                                password = textBox2.Text,
+                                                remember = isRemembered()
+                                            };
+                                            users.userLocals.Add(lu);
+                                            users.SaveChanges();
+                                        }
+                                        catch (Exception err)
+                                        {
+                                            MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            constants.errorLog(err.ToString());
+                                        }
+                                        finally
+                                        {
+                                            users.Dispose();
+                                        }
                                     }
-                                    catch (Exception err)
+                                    else
                                     {
-                                        MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        constants.errorLog(err.ToString());
-                                    }
-                                    finally
-                                    {
-                                        users.Dispose();
+                                        if (d.remember == false && isRemembered() == true)
+                                        {
+                                            d.remember = true;
+                                            users.SaveChanges();
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    if (d.remember == false && isRemembered() == true)
-                                    {
-                                        d.remember = true;
-                                        users.SaveChanges();
-                                    }
+                                    MessageBox.Show("El periodo de la licencia a expirado, póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    constants.connected = false;
                                 }
                             }
                             else
@@ -378,6 +386,7 @@ namespace cristales_pva
                 var spac = (from x in opciones_xml.Descendants("Opciones") select x.Element("SPAC")).SingleOrDefault();
                 var m_liva = (from x in opciones_xml.Descendants("Opciones") select x.Element("MLIVA")).SingleOrDefault();
                 var pac = (from x in opciones_xml.Descendants("Opciones") select x.Element("PAC")).SingleOrDefault();
+                var lim_sm = (from x in opciones_xml.Descendants("Opciones") select x.Element("LIM_SM")).SingleOrDefault();
 
                 var op1 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP1")).SingleOrDefault();
                 var op2 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP2")).SingleOrDefault();
@@ -520,6 +529,11 @@ namespace cristales_pva
                     {
                         constants.p_ac = false;
                     }
+                }
+
+                if (lim_sm != null)
+                {
+                    constants.lim_sm = constants.stringToFloat(lim_sm.Value.ToString());
                 }
 
                 if (op1 != null)
@@ -871,6 +885,11 @@ namespace cristales_pva
                 constants.errorLog(err.ToString());
                 MessageBox.Show("[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void códigoDeVigenciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new vigencia().ShowDialog(this);
         }
     }
 }

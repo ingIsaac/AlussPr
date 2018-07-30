@@ -79,6 +79,7 @@ namespace cristales_pva
         public static string password_ac = string.Empty;
         public static bool reload_precios = true;
         public static bool p_ac = false;
+        public static float lim_sm = 15;
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;
@@ -4895,6 +4896,16 @@ namespace cristales_pva
             }
 
             return path;
+        }
+
+        public static bool getVigencia(DateTime date)
+        {
+            return DateTime.Now <= date ? true : false;
+        }
+
+        public static bool getAlertVigencia(DateTime date)
+        {
+            return DateTime.Now.AddDays(5) >= date ? true : false;
         }
     }
 }

@@ -104,6 +104,8 @@
             this.contextMenuStrip6 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removerToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
             this.checkBox18 = new System.Windows.Forms.CheckBox();
             this.checkBox17 = new System.Windows.Forms.CheckBox();
             this.checkBox14 = new System.Windows.Forms.CheckBox();
@@ -844,6 +846,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.textBox14);
+            this.tabPage4.Controls.Add(this.label45);
             this.tabPage4.Controls.Add(this.checkBox18);
             this.tabPage4.Controls.Add(this.checkBox17);
             this.tabPage4.Controls.Add(this.checkBox14);
@@ -857,6 +861,26 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Otros Materiales";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox14.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox14.Location = new System.Drawing.Point(390, 196);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(82, 20);
+            this.textBox14.TabIndex = 7;
+            this.textBox14.TextChanged += new System.EventHandler(this.textBox14_TextChanged);
+            // 
+            // label45
+            // 
+            this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(233, 199);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(151, 13);
+            this.label45.TabIndex = 6;
+            this.label45.Text = "Limite Peso/Sist. Manual (KG):";
             // 
             // checkBox18
             // 
@@ -2410,5 +2434,7 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.Label label45;
     }
 }

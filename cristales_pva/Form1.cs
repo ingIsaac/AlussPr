@@ -648,6 +648,10 @@ namespace cristales_pva
             checkBox5.Checked = constants.iva_desglosado;
             checkBox5.Enabled = constants.permitir_ajuste_iva;
             setModoLIVA();
+            if(constants.getAlertVigencia(new sqlDateBaseManager().getvigenciaTienda(constants.org_name)))
+            {
+                MessageBox.Show("La fecha de expiración esta próxima, pónganse en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         public void permitirAjusteIVA(bool r)

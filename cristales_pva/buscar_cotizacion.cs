@@ -36,8 +36,17 @@ namespace cristales_pva
             monthCalendar1.DateSelected += MonthCalendar1_DateSelected;
             textBox1.KeyPress += TextBox1_KeyPress;
             this.FormClosing += Buscar_cotizacion_FormClosing;
+            setYears();
             comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
             comboBox3.Text = DateTime.Now.Year.ToString();
+        }
+
+        private void setYears()
+        {
+            for(int i = 2017; i <= DateTime.Today.Year; i++)
+            {
+                comboBox3.Items.Add(i);
+            }
         }
 
         private void Buscar_cotizacion_FormClosing(object sender, FormClosingEventArgs e)
@@ -90,10 +99,12 @@ namespace cristales_pva
             if(constants.user_access == 6)
             {
                 checkBox1.Visible = true;
+                checkBox1.Checked = true;
             }
             else
             {
                 checkBox1.Visible = false;
+                checkBox1.Checked = false;
             }
             sqlDateBaseManager sql = new sqlDateBaseManager();
             List<string> tiendas = sql.getTiendas();
@@ -328,7 +339,13 @@ namespace cristales_pva
 
         //BOTON BUSCAR -------------------------------->
         private void button1_Click(object sender, EventArgs e)
-        {         
+        {
+            buscarCotizacion();     
+        }
+        //
+
+        private void buscarCotizacion()
+        {
             if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false && backgroundWorker4.IsBusy == false)
             {
                 label3.Text = "Buscando...";
@@ -338,9 +355,8 @@ namespace cristales_pva
                 label3.Visible = true;
                 datagridviewNE1.Enabled = false;
                 backgroundWorker1.RunWorkerAsync();
-            }              
+            }
         }
-        //
 
         //ELIMINAR COTIZACION ------------------------->
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -574,6 +590,8 @@ namespace cristales_pva
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             org_search = comboBox1.Text;
+            label5.Text = org_search;
+            buscarCotizacion();
         }
 
         //abriendo cotizacion
@@ -815,6 +833,6 @@ namespace cristales_pva
                 datagridviewNE1.Enabled = false;
                 backgroundWorker1.RunWorkerAsync(getMesInt(comboBox2.Text) + "/" + comboBox3.Text);
             }
-        }    
+        }
     }
 }

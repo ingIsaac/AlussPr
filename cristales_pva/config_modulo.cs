@@ -125,6 +125,47 @@ namespace cristales_pva
                 checkBox3.Checked = false;
                 checkBox5.Checked = false;
             }
+            textBox14.KeyDown += TextBox14_KeyDown;
+            textBox14.Leave += TextBox14_Leave;    
+            textBox14.Text = constants.lim_sm.ToString();
+        }
+
+        private void setLimitSM(float lim)
+        {
+            constants.lim_sm = lim;
+            try
+            {
+                XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+
+                var spac = from x in opciones_xml.Descendants("Opciones") select x;
+
+                foreach (XElement x in spac)
+                {
+                    x.SetElementValue("LIM_SM", lim.ToString());
+                }
+                opciones_xml.Save(constants.opciones_xml);
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+                MessageBox.Show("[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void TextBox14_Leave(object sender, EventArgs e)
+        {
+            setLimitSM(constants.stringToFloat(textBox14.Text));
+            checkWeight();
+        }
+
+        //lim sistemas manual
+        private void TextBox14_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                setLimitSM(constants.stringToFloat(textBox14.Text));
+                checkWeight();
+            }
         }
 
         private bool checkIsAvailableManual()
@@ -147,7 +188,6 @@ namespace cristales_pva
                     }                   
                 }
             }
-
             return r;
         }
 
@@ -1115,7 +1155,7 @@ namespace cristales_pva
         {
             if (checkBox17.Checked)
             {
-                if(peso_aluminio > 15)
+                if(peso_aluminio > constants.lim_sm)
                 {
                     MessageBox.Show("[Error] El peso de la cortina no es el indicado para un sistema de elevación manual.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     label42.ForeColor = Color.Red;
@@ -1123,6 +1163,37 @@ namespace cristales_pva
                 else
                 {
                     label42.ForeColor = Color.Green;
+                }
+
+                string clave = string.Empty;
+                listas_entities_pva listas = new listas_entities_pva();
+
+                foreach (DataGridViewRow x in dataGridView4.Rows)
+                {
+                    clave = x.Cells[2].Value.ToString();
+                    var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+
+                    if (otros != null)
+                    {
+                        if (otros.linea == "carrete" || otros.linea == "motores")
+                        {
+                            x.Cells[4].Value = "0";
+                        }
+                    }
+                }
+
+                foreach (DataGridViewRow x in dataGridView4.Rows)
+                {
+                    clave = x.Cells[2].Value.ToString();
+                    var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+
+                    if (otros != null)
+                    {
+                        if (otros.linea == "carrete")
+                        {
+                            x.Cells[4].Value = "1";
+                        }
+                    }
                 }
             }
             else if(checkBox18.Checked)
@@ -1150,7 +1221,7 @@ namespace cristales_pva
                 }
                 else if(checkBox17.Checked)
                 {
-                    if(peso_aluminio > 15)
+                    if(peso_aluminio > constants.lim_sm)
                     {
                         label42.ForeColor = Color.Red;
                         return false;
@@ -5754,9 +5825,14 @@ namespace cristales_pva
         //Cortinas
         private void checkBox17_CheckedChanged(object sender, EventArgs e)
         {
+            setSistManual();
+        }
+
+        private void setSistManual()
+        {
             if (checkBox17.Checked)
             {
-                if (peso_aluminio <= 15)
+                if (peso_aluminio <= constants.lim_sm)
                 {
                     checkBox18.Checked = false;
                     string clave = string.Empty;
@@ -5772,7 +5848,7 @@ namespace cristales_pva
                             if (otros.linea == "carrete" || otros.linea == "motores")
                             {
                                 x.Cells[4].Value = "0";
-                            }                         
+                            }
                         }
                     }
 
@@ -5786,7 +5862,7 @@ namespace cristales_pva
                             if (otros.linea == "carrete")
                             {
                                 x.Cells[4].Value = "1";
-                            }                        
+                            }
                         }
                     }
                     calcularCostoModulo();
@@ -5799,9 +5875,9 @@ namespace cristales_pva
                 }
             }
             else
-            {                
+            {
                 calcularCostoModulo();
-            }          
+            }
         }
 
         private void checkBox18_CheckedChanged(object sender, EventArgs e)
@@ -5815,6 +5891,14 @@ namespace cristales_pva
             else
             {
                 calcularCostoModulo();
+            }         
+        }
+
+        private void textBox14_TextChanged(object sender, EventArgs e)
+        {
+            if (!constants.isFloat(textBox14.Text))
+            {
+                textBox14.Clear();
             }         
         }
 

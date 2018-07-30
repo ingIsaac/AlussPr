@@ -37,7 +37,6 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -59,10 +58,12 @@
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -105,9 +106,9 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 22);
+            this.groupBox1.Location = new System.Drawing.Point(12, 49);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1019, 555);
+            this.groupBox1.Size = new System.Drawing.Size(1019, 562);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
@@ -115,7 +116,7 @@
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button8.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
-            this.button8.Location = new System.Drawing.Point(333, 523);
+            this.button8.Location = new System.Drawing.Point(333, 530);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(33, 23);
             this.button8.TabIndex = 20;
@@ -127,17 +128,7 @@
             this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "2017",
-            "2018",
-            "2019",
-            "2020",
-            "2021",
-            "2022",
-            "2023",
-            "2024",
-            "2025"});
-            this.comboBox3.Location = new System.Drawing.Point(239, 524);
+            this.comboBox3.Location = new System.Drawing.Point(239, 531);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(88, 21);
             this.comboBox3.TabIndex = 19;
@@ -161,7 +152,7 @@
             "Octubre",
             "Noviembre",
             "Diciembre"});
-            this.comboBox2.Location = new System.Drawing.Point(145, 524);
+            this.comboBox2.Location = new System.Drawing.Point(145, 531);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(88, 21);
             this.comboBox2.TabIndex = 18;
@@ -170,34 +161,16 @@
             // monthCalendar1
             // 
             this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.monthCalendar1.Location = new System.Drawing.Point(6, 353);
+            this.monthCalendar1.Location = new System.Drawing.Point(6, 360);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 4;
             this.monthCalendar1.Visible = false;
-            // 
-            // datagridviewNE1
-            // 
-            this.datagridviewNE1.AllowUserToAddRows = false;
-            this.datagridviewNE1.AllowUserToDeleteRows = false;
-            this.datagridviewNE1.AllowUserToResizeColumns = false;
-            this.datagridviewNE1.AllowUserToResizeRows = false;
-            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE1.Location = new System.Drawing.Point(9, 55);
-            this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.ReadOnly = true;
-            this.datagridviewNE1.Size = new System.Drawing.Size(1003, 460);
-            this.datagridviewNE1.TabIndex = 17;
             // 
             // button7
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.Image = global::cristales_pva.Properties.Resources.Actions_arrow_left_double_icon;
-            this.button7.Location = new System.Drawing.Point(470, 524);
+            this.button7.Location = new System.Drawing.Point(470, 531);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(26, 23);
             this.button7.TabIndex = 16;
@@ -208,7 +181,7 @@
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Image = global::cristales_pva.Properties.Resources.Actions_arrow_right_double_icon;
-            this.button6.Location = new System.Drawing.Point(600, 524);
+            this.button6.Location = new System.Drawing.Point(600, 531);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(26, 23);
             this.button6.TabIndex = 15;
@@ -230,7 +203,7 @@
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Image = global::cristales_pva.Properties.Resources.Actions_arrow_left_icon;
-            this.button5.Location = new System.Drawing.Point(499, 524);
+            this.button5.Location = new System.Drawing.Point(499, 531);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(26, 23);
             this.button5.TabIndex = 14;
@@ -251,7 +224,7 @@
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Image = global::cristales_pva.Properties.Resources.Actions_arrow_right_icon;
-            this.button4.Location = new System.Drawing.Point(571, 524);
+            this.button4.Location = new System.Drawing.Point(571, 531);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(26, 23);
             this.button4.TabIndex = 13;
@@ -262,7 +235,7 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(531, 526);
+            this.textBox2.Location = new System.Drawing.Point(531, 533);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(34, 20);
             this.textBox2.TabIndex = 12;
@@ -273,7 +246,7 @@
             this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(632, 525);
+            this.comboBox1.Location = new System.Drawing.Point(632, 532);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(290, 21);
             this.comboBox1.TabIndex = 9;
@@ -293,7 +266,7 @@
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(372, 527);
+            this.checkBox1.Location = new System.Drawing.Point(372, 534);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(92, 17);
             this.checkBox1.TabIndex = 7;
@@ -303,7 +276,7 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button2.Location = new System.Drawing.Point(9, 521);
+            this.button2.Location = new System.Drawing.Point(9, 528);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 28);
             this.button2.TabIndex = 6;
@@ -314,7 +287,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(928, 521);
+            this.button1.Location = new System.Drawing.Point(928, 528);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 28);
             this.button1.TabIndex = 3;
@@ -326,7 +299,7 @@
             // 
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(12, 4);
+            this.label2.Location = new System.Drawing.Point(12, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(913, 20);
             this.label2.TabIndex = 4;
@@ -373,17 +346,45 @@
             // label4
             // 
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label4.Location = new System.Drawing.Point(931, 4);
+            this.label4.Location = new System.Drawing.Point(931, 30);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 20);
             this.label4.TabIndex = 4;
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 5);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(1019, 20);
+            this.label5.TabIndex = 5;
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // datagridviewNE1
+            // 
+            this.datagridviewNE1.AllowUserToAddRows = false;
+            this.datagridviewNE1.AllowUserToDeleteRows = false;
+            this.datagridviewNE1.AllowUserToResizeColumns = false;
+            this.datagridviewNE1.AllowUserToResizeRows = false;
+            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.Location = new System.Drawing.Point(9, 55);
+            this.datagridviewNE1.Name = "datagridviewNE1";
+            this.datagridviewNE1.ReadOnly = true;
+            this.datagridviewNE1.Size = new System.Drawing.Size(1003, 467);
+            this.datagridviewNE1.TabIndex = 17;
+            // 
             // buscar_cotizacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 587);
+            this.ClientSize = new System.Drawing.Size(1043, 621);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
@@ -396,9 +397,9 @@
             this.Load += new System.EventHandler(this.buscar_cotizacion_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -434,5 +435,6 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label5;
     }
 }
