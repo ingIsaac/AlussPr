@@ -19,8 +19,10 @@ namespace cristales_pva
 
         private void loadVigencia()
         {
-            DateTime date = new sqlDateBaseManager().getvigenciaTienda(constants.org_name);
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            DateTime date = sql.getvigenciaTienda(constants.org_name);
             textBox1.Text = date.ToShortDateString();
+            textBox2.Text = sql.getvigenciaType(constants.org_name);
             if(constants.getVigencia(date))
             {
                 label2.Text = "Activa";
