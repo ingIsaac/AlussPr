@@ -19,7 +19,7 @@ namespace cristales_pva
         string acabado = string.Empty;
 
         public diseño_p(int id)
-        {
+        {            
             InitializeComponent();
             treeView1.NodeMouseClick += TreeView1_NodeMouseClick;
             treeView1.AfterSelect += TreeView1_AfterSelect;
@@ -359,11 +359,9 @@ namespace cristales_pva
             }
             comboBox1.Text = tableLayoutPanel1.ColumnCount.ToString();
             comboBox6.Items.Clear();
-            int c = 0;
-            foreach (ColumnStyle x in tableLayoutPanel1.ColumnStyles)
+            for (int i = 0; i < tableLayoutPanel1.ColumnStyles.Count-1; i++)
             {
-                comboBox6.Items.Add(c);
-                c++;
+                comboBox6.Items.Add(i);
             }
             comboBox5.Text = "0";
             comboBox6.Text = "0";
@@ -383,12 +381,10 @@ namespace cristales_pva
             }
             comboBox2.Text = tableLayoutPanel1.RowCount.ToString();
             comboBox5.Items.Clear();
-            int c = 0;
-            foreach (RowStyle x in tableLayoutPanel1.RowStyles)
+            for(int i = 0; i < tableLayoutPanel1.RowStyles.Count-1; i++)
             {
-                comboBox5.Items.Add(c);
-                c++;
-            }
+                comboBox5.Items.Add(i);
+            }           
             comboBox5.Text = "0";
             comboBox6.Text = "0";
         }

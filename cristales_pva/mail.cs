@@ -24,8 +24,7 @@ namespace cristales_pva
         {
             InitializeComponent();
             comboBox1.Text = to;
-            textBox1.Text = constants.email;
-            textBox2.Text = constants.email_pw;
+            getEmailCredentials();
             listView1.ItemSelectionChanged += ListView1_ItemSelectionChanged;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
@@ -33,6 +32,24 @@ namespace cristales_pva
             comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
             listBox1.SelectedIndexChanged += ListBox1_SelectedIndexChanged;
             loadContactos();           
+        }
+
+        private void getEmailCredentials()
+        {
+            XDocument doc = XDocument.Load(constants.propiedades_xml);
+
+            var email = (from x in doc.Descendants("Propiedades") select x.Element("EMAIL")).SingleOrDefault();
+            var pw = (from x in doc.Descendants("Propiedades") select x.Element("PW")).SingleOrDefault();
+
+            if(email != null)
+            {
+                textBox1.Text = email.Value;
+            }
+
+            if(pw != null)
+            {
+                textBox2.Text = pw.Value;
+            }
         }
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -316,6 +333,29 @@ namespace cristales_pva
                 borrarTodos();
                 loadContactos();
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
+
+                var propiedades = from x in propiedades_xml.Descendants("Propiedades") select x;
+
+                foreach (XElement x in propiedades)
+                {
+                    x.SetElementValue("EMAIL", textBox1.Text);
+                    x.SetElementValue("PW", textBox2.Text);
+                }
+                propiedades_xml.Save(constants.propiedades_xml);
+                MessageBox.Show("Se ha guardado la configuración de el correo electrónico.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+                MessageBox.Show("[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }        
         }
     }
 }

@@ -61,8 +61,6 @@ namespace cristales_pva
         public static bool iva_desglosado = true;
         public static bool permitir_ajuste_iva = true;
         public static bool siempre_permitir_ac = true;
-        public static string email = string.Empty;
-        public static string email_pw = string.Empty;
         public static bool op1 = false;
         public static bool op2 = false;
         public static bool op3 = false;

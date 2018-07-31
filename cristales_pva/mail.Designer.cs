@@ -55,13 +55,14 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.quitarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -90,24 +91,23 @@
             // 
             // textBox1
             // 
-            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(88, 23);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(352, 20);
+            this.textBox1.Size = new System.Drawing.Size(289, 20);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
             // 
-            this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(88, 48);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(352, 20);
+            this.textBox2.Size = new System.Drawing.Size(289, 20);
             this.textBox2.TabIndex = 3;
             this.textBox2.UseSystemPasswordChar = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label2);
@@ -307,6 +307,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Contactos";
             // 
+            // button5
+            // 
+            this.button5.Image = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
+            this.button5.Location = new System.Drawing.Point(6, 458);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(32, 29);
+            this.button5.TabIndex = 17;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -361,15 +371,15 @@
             this.quitarToolStripMenuItem1.Text = "Quitar";
             this.quitarToolStripMenuItem1.Click += new System.EventHandler(this.quitarToolStripMenuItem1_Click);
             // 
-            // button5
+            // button6
             // 
-            this.button5.Image = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
-            this.button5.Location = new System.Drawing.Point(6, 458);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(32, 29);
-            this.button5.TabIndex = 17;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button6.Image = global::cristales_pva.Properties.Resources.save_24;
+            this.button6.Location = new System.Drawing.Point(383, 22);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(57, 47);
+            this.button6.TabIndex = 4;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // mail
             // 
@@ -433,5 +443,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem quitarToolStripMenuItem1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }

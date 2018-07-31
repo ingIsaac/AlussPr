@@ -677,8 +677,6 @@ namespace cristales_pva
                 var mbd = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("MBD")).SingleOrDefault();
                 var updater_enable = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("UDE")).SingleOrDefault();
                 var updater_form_close = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("UC")).SingleOrDefault();
-                var email = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("EMAIL")).SingleOrDefault();
-                var email_password = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("PW")).SingleOrDefault();
                 var ingreso_ac = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("INGRESO_AC")).SingleOrDefault();
                 var user_ac = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("USER_AC")).SingleOrDefault();
                 var password_ac = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("PASSWORD_AC")).SingleOrDefault();
@@ -730,17 +728,7 @@ namespace cristales_pva
                     {
                         constants.updater_form_close = false;
                     }
-                }
-
-                if (email != null)
-                {
-                    constants.email = email.Value;
-                }
-
-                if (email_password != null)
-                {
-                    constants.email_pw = email_password.Value;
-                }
+                }            
 
                 if(ingreso_ac != null)
                 {
