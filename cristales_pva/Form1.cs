@@ -652,6 +652,10 @@ namespace cristales_pva
             {
                 MessageBox.Show("La fecha de expiración esta próxima, pónganse en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            if(constants.licencia == "DEMO")
+            {
+                Text = Text + " | VERSIÓN DE PRUEBA"; 
+            }
         }
 
         public void permitirAjusteIVA(bool r)

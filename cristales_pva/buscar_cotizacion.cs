@@ -106,16 +106,27 @@ namespace cristales_pva
                 checkBox1.Visible = false;
                 checkBox1.Checked = false;
             }
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            List<string> tiendas = sql.getTiendas();
-            if (tiendas.Count > 0)
+            if (constants.licencia != "DEMO")
             {
-                comboBox1.Items.Clear();
-                foreach (string x in tiendas)
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                List<string> tiendas = sql.getTiendas();
+                if (tiendas.Count > 0)
                 {
-                    comboBox1.Items.Add(x);
+                    comboBox1.Items.Clear();
+                    foreach (string x in tiendas)
+                    {
+                        comboBox1.Items.Add(x);
+                    }
+                    comboBox1.Text = constants.org_name;
                 }
-                comboBox1.Text = constants.org_name;
+            }
+            else
+            {
+                if (constants.org_name != string.Empty)
+                {
+                    comboBox1.Items.Add(constants.org_name);
+                    comboBox1.Text = constants.org_name;
+                }
             }
             org_search = constants.org_name;
             pictureBox1.Visible = false;

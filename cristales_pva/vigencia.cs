@@ -22,7 +22,7 @@ namespace cristales_pva
             sqlDateBaseManager sql = new sqlDateBaseManager();
             DateTime date = sql.getvigenciaTienda(constants.org_name);
             textBox1.Text = date.ToShortDateString();
-            textBox2.Text = sql.getvigenciaType(constants.org_name);
+            textBox2.Text = sql.getvigenciaType(constants.org_name).ToUpper();
             if(constants.getVigencia(date))
             {
                 label2.Text = "Activa";

@@ -36,6 +36,7 @@ namespace cristales_pva
         public static string ps_dl = "45uT2Q23l";
 
         //Properties...
+        public static string licencia = string.Empty;
         public static float iva = 1.16f;
         public static int updater_interval = 1;
         public static bool updater_enable = true;
