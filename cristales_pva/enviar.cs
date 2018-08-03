@@ -14,12 +14,41 @@ namespace cristales_pva
         public enviar()
         {
             InitializeComponent();
-            cargarTiendas();
+            backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+            this.Shown += Enviar_Shown;
+        }
+
+        private void Enviar_Shown(object sender, EventArgs e)
+        {
+            if (!backgroundWorker1.IsBusy)
+            {
+                comboBox1.Enabled = false;
+                comboBox2.Enabled = false;
+                label3.Text = "Cargando...";
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            label3.Text = string.Empty;
+            comboBox1.Enabled = true;
+            comboBox2.Enabled = true;
         }
 
         private void cargarTiendas()
         {
             sqlDateBaseManager sql = new sqlDateBaseManager();
+            List<string> usuarios = sql.getUsersList();
+            if (usuarios.Count > 0)
+            {
+                comboBox2.Items.Clear();
+                foreach (string x in usuarios)
+                {
+                    comboBox2.Items.Add(x);
+                }
+            }
+            //
             List<string> tiendas = sql.getTiendas();
             if (tiendas.Count > 0)
             {
@@ -40,11 +69,11 @@ namespace cristales_pva
                 if (comboBox1.Text != "")
                 {
                     sqlDateBaseManager sql = new sqlDateBaseManager();
-                    if (sql.getUserId(textBox1.Text) > 0)
+                    if (sql.getUserId(comboBox2.Text) > 0)
                     {
                         if (sql.isFolioExist(constants.folio_abierto) == true)
                         {
-                            sql.updateCotizacionUsuario(constants.folio_abierto, textBox1.Text, comboBox1.Text);
+                            sql.updateCotizacionUsuario(constants.folio_abierto, comboBox2.Text, comboBox1.Text);
                             ((Form1)Application.OpenForms["form1"]).borrarCotizacion();
                             Close();
                         }
@@ -67,6 +96,11 @@ namespace cristales_pva
             {
                 Close();
             }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            cargarTiendas();                
         }
     }
 }

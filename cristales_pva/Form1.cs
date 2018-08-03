@@ -648,7 +648,7 @@ namespace cristales_pva
             checkBox5.Checked = constants.iva_desglosado;
             checkBox5.Enabled = constants.permitir_ajuste_iva;
             setModoLIVA();
-            if(constants.getAlertVigencia(new sqlDateBaseManager().getvigenciaTienda(constants.org_name)))
+            if (constants.getAlertVigencia(new sqlDateBaseManager().getvigenciaTienda(constants.org_name)))
             {
                 MessageBox.Show("La fecha de expiración esta próxima, pónganse en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -6363,7 +6363,12 @@ namespace cristales_pva
             {
                 if (Application.OpenForms["historial_registros"] == null)
                 {
-                    new historial_registros().Show();
+                    historial_registros historial = new historial_registros();
+                    historial.Show();
+                    if (constants.maximizar_ventanas == true)
+                    {
+                        historial.WindowState = FormWindowState.Maximized;
+                    }
                 }
                 else
                 {
@@ -6669,7 +6674,12 @@ namespace cristales_pva
                 {
                     if (Application.OpenForms["user_items"] == null)
                     {
-                        new user_items().Show();
+                        user_items user_items = new user_items();
+                        user_items.Show();
+                        if (constants.maximizar_ventanas == true)
+                        {
+                            user_items.WindowState = FormWindowState.Maximized;
+                        }
                     }
                     else
                     {

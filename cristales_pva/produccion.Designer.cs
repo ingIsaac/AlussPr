@@ -105,7 +105,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1126, 553);
+            this.tabControl1.Size = new System.Drawing.Size(954, 553);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -114,7 +114,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1118, 527);
+            this.tabPage1.Size = new System.Drawing.Size(946, 527);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Configuración";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@
             this.datagridviewNE1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datagridviewNE1.Location = new System.Drawing.Point(3, 3);
             this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.Size = new System.Drawing.Size(1112, 521);
+            this.datagridviewNE1.Size = new System.Drawing.Size(940, 521);
             this.datagridviewNE1.TabIndex = 0;
             // 
             // Column1
@@ -263,7 +263,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1118, 527);
+            this.tabPage2.Size = new System.Drawing.Size(946, 527);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Reporte de Impresión";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -281,14 +281,14 @@
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.produccion.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(3, 3);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(1112, 521);
+            this.reportViewer1.Size = new System.Drawing.Size(940, 521);
             this.reportViewer1.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = global::cristales_pva.Properties.Resources.printer_24;
-            this.button1.Location = new System.Drawing.Point(1016, 571);
+            this.button1.Location = new System.Drawing.Point(844, 571);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 33);
             this.button1.TabIndex = 0;
@@ -302,7 +302,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = global::cristales_pva.Properties.Resources.save_24;
-            this.button2.Location = new System.Drawing.Point(892, 571);
+            this.button2.Location = new System.Drawing.Point(720, 571);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(118, 33);
             this.button2.TabIndex = 1;
@@ -316,7 +316,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Image = global::cristales_pva.Properties.Resources.Actions_application_exit_icon;
-            this.button3.Location = new System.Drawing.Point(768, 571);
+            this.button3.Location = new System.Drawing.Point(596, 571);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(118, 33);
             this.button3.TabIndex = 2;
@@ -332,7 +332,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(56, 571);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(667, 33);
+            this.progressBar1.Size = new System.Drawing.Size(495, 33);
             this.progressBar1.TabIndex = 3;
             this.progressBar1.Visible = false;
             // 
@@ -340,7 +340,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::cristales_pva.Properties.Resources.loading_green;
-            this.pictureBox1.Location = new System.Drawing.Point(729, 571);
+            this.pictureBox1.Location = new System.Drawing.Point(557, 571);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(33, 33);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -379,7 +379,7 @@
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(987, 11);
+            this.checkBox1.Location = new System.Drawing.Point(815, 11);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(146, 17);
             this.checkBox1.TabIndex = 1;
@@ -391,7 +391,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1150, 610);
+            this.ClientSize = new System.Drawing.Size(978, 610);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.progressBar1);
@@ -404,7 +404,6 @@
             this.Name = "produccion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Orden de Producción";
-            this.Load += new System.EventHandler(this.produccion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.datos_reporteBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportes_dataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.produccion_tBindingSource)).EndInit();

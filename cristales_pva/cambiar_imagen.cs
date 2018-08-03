@@ -370,5 +370,10 @@ namespace cristales_pva
         {
            search.dropTableOnGridViewWithFilter(datagridviewNE1, "esquemas", "nombre", textBox1.Text);
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            new colores().ShowDialog(this);
+        }
     }
 }

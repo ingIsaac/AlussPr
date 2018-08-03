@@ -7,35 +7,130 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.Reporting.WinForms;
 
 namespace cristales_pva
 {
     public partial class historial_registros : Form
     {
         sqlDateBaseManager sql = new sqlDateBaseManager();
-        string file_name = string.Empty;
+        System.Timers.Timer timer = new System.Timers.Timer(constants.monitor_interval * 60 * 1000);
+        Rectangle rec;
+        int recorrido = 0;
 
         public historial_registros()
         {
             InitializeComponent();
-            datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
             textBox1.KeyPress += TextBox1_KeyPress;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
-            this.Text = this.Text + " - " + constants.org_name;
-            comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
-            comboBox3.Text = DateTime.Now.Year.ToString();
-            loadPresupuestos();
+            reportViewer1.LocalReport.EnableExternalImages = true;
+            reportViewer1.ZoomMode = ZoomMode.PageWidth;
+            reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;            
+            Load += Historial_registros_Load;
+            contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
+            datagridviewNE1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            this.Shown += Historial_registros_Shown;
+            setYears();
+        }
+
+        private void Historial_registros_Shown(object sender, EventArgs e)
+        {           
+            List<string> tiendas = new sqlDateBaseManager().getTiendas();
+            if(tiendas.Count > 0)
+            {
+                comboBox4.Items.Clear();
+                foreach(string x in tiendas)
+                {
+                    comboBox4.Items.Add(x);
+                }
+            }
+            comboBox4.Text = constants.org_name;
+            setTimer();
+            loadPresupuestos(string.Empty, false);
+        }
+
+        private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
+        {
+            reportViewer1.LocalReport.ReleaseSandboxAppDomain();
+            reportViewer1.LocalReport.Dispose();
+        }
+
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if(datagridviewNE1.RowCount <= 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void setYears()
+        {
+            for (int i = 2017; i <= DateTime.Today.Year; i++)
+            {
+                comboBox3.Items.Add(i);
+            }
+        }
+
+        private void setTimer()
+        {
+            timer.Elapsed += Timer_Elapsed;
+            timer.AutoReset = true;
+            timer.Enabled = true;
+            timer.Start();
+        }
+
+        private void stopTimer()
+        {
+            timer.Stop();
+        }
+
+        private void startTimer()
+        {
+            timer.Start();
+        }
+
+        private void Historial_registros_Load(object sender, EventArgs e)
+        {            
+            rec = this.Bounds;
+            //----------------------------------------------------------------------------------------------->
+            // TODO: This line of code loads data into the 'reportes_dataSet.datos_reporte' table. You can move, or remove it, as needed.
+            this.datos_reporteTableAdapter.Fill(this.reportes_dataSet.datos_reporte);
+            this.reportViewer1.RefreshReport();
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
+            ReportPageSettings ps = reportViewer1.LocalReport.GetDefaultPageSettings();
+            this.reportViewer1.ParentForm.Width = ps.PaperSize.Width;
+            this.reportViewer1.RefreshReport();
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (checkBox3.Checked)
+            {
+                if((recorrido + 1) < comboBox4.Items.Count)
+                {
+                    recorrido++;
+                }
+                else
+                {
+                    recorrido = 0;
+                }
+                loadPresupuestos(textBox1.Text, checkBox2.Checked, comboBox4.Items[recorrido].ToString());
+            }
+            else
+            {
+                loadPresupuestos(textBox1.Text, checkBox2.Checked);
+            }
         }
 
         private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pictureBox1.Visible = false;
+            tabControl1.SelectedTab = tabPage2;
         }
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.Enabled = true;
             pictureBox1.Visible = false;
         }
 
@@ -47,31 +142,39 @@ namespace cristales_pva
             }
         }
 
-        private void DatagridviewNE1_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void loadPresupuestos(string filter="", bool fecha=true, string tienda="")
         {
-            if(backgroundWorker2.IsBusy == false)
+            if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false)
             {
                 pictureBox1.Visible = true;
-                file_name = datagridviewNE1.CurrentRow.Cells[1].Value.ToString();
-                backgroundWorker2.RunWorkerAsync();
-            }
-        }
-
-        private void loadPresupuestos(string filter="")
-        {
-            if (backgroundWorker1.IsBusy == false)
-            {
-                string[] s = new string[] {getMesInt(comboBox2.Text) + "/" + comboBox3.Text, filter};
-                richTextBox1.Clear();
-                pictureBox1.Visible = true;
-                this.Enabled = false;
+                string _fecha = string.Empty;
+                if (fecha)
+                {
+                    if (checkBox1.Checked)
+                    {
+                        if(getMesName(DateTime.Now.Month.ToString()) != comboBox2.Text)
+                        {
+                            comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
+                        }
+                        if(DateTime.Now.Year.ToString() != comboBox3.Text)
+                        {
+                            comboBox3.Text = DateTime.Now.Year.ToString();
+                        }
+                    }
+                    _fecha = getMesInt(comboBox2.Text) + "/" + comboBox3.Text;
+                }
+                if(tienda == "")
+                {
+                    tienda = comboBox4.Text;
+                }
+                label6.Text = tienda;
+                string[] s = new string[] {_fecha, filter, tienda};
                 backgroundWorker1.RunWorkerAsync(s);              
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = "";
             loadPresupuestos();
         }
 
@@ -82,7 +185,7 @@ namespace cristales_pva
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadPresupuestos(comboBox1.Text);
+            loadPresupuestos(comboBox1.Text);           
         }
 
         private void setcolors()
@@ -108,11 +211,19 @@ namespace cristales_pva
                 }
 
                 //Etapas
-                if (etapa == "Cotización Aceptada" || etapa == "Requisito de Material")
+                if (etapa == "Cotización Aceptada")
                 {
                     x.Cells[4].Style.BackColor = Color.LightBlue;
                 }
-                else if (etapa == "Fabricación" || etapa == "Instalación")
+                else if (etapa == "Requisición de Material")
+                {
+                    x.Cells[4].Style.BackColor = Color.LightYellow;
+                }
+                else if (etapa == "Fabricación")
+                {
+                    x.Cells[4].Style.BackColor = Color.Orange;
+                }
+                else if (etapa == "Instalación")
                 {
                     x.Cells[4].Style.BackColor = Color.LightPink;
                 }
@@ -127,37 +238,65 @@ namespace cristales_pva
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             string[] s = e.Argument as string[];
-            sql.dropPresupuestosOnGridView(datagridviewNE1, s[0], s[1]);
+            sql.dropPresupuestosOnGridView(datagridviewNE1, constants.stringToInt(textBox2.Text) < 10 ? 10 : constants.stringToInt(textBox2.Text), s[2], s[0], s[1]);
             setcolors();
+            if(s[0] != "")
+            {
+                label7.Text = "Total del Periodo: (" + datagridviewNE1.Rows.Count + ") Presupuestos.";
+            }
+            else
+            {
+                label7.Text = string.Empty;
+            }
         }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            richTextBox1.Text = sql.selectRegistroPresupuestos((int)datagridviewNE1.CurrentRow.Cells[0].Value, "informe");
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (file_name != "")
+            if (reportViewer1.InvokeRequired == true)
             {
-                try {
-                    string path = string.Empty;
-                    saveFileDialog1.Filter = "txt files (*.doc)|*.doc|All files (*.*)|*.*";
-                    saveFileDialog1.FileName = file_name;
-                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                    {
-                        using (Stream s = File.Open(saveFileDialog1.FileName, FileMode.CreateNew))
-                        using (StreamWriter sw = new StreamWriter(s))
-                        {
-                            sw.Write(richTextBox1.Text);
-                        }
-                    }
-                }
-                catch (Exception err)
+                reportViewer1.Invoke((MethodInvoker)delegate
                 {
-                    constants.errorLog(err.ToString());
-                }
-            }
+                    try
+                    {
+                        cotizaciones_local cotizaciones = new cotizaciones_local();
+                        cotizaciones.Database.ExecuteSqlCommand("TRUNCATE TABLE datos_reporte");
+                        cotizaciones.Database.ExecuteSqlCommand("DBCC CHECKIDENT (datos_reporte, RESEED, 1)");
+                        string[] p = e.Argument as string[];
+                        if (p.Length == 7)
+                        {
+                            string informe = sql.selectRegistroPresupuestos(constants.stringToInt(p[0]), "informe");
+                            reportViewer1.LocalReport.SetParameters(new ReportParameter("informe", informe));
+                            reportViewer1.LocalReport.SetParameters(new ReportParameter("responsable", p[3]));
+                            reportViewer1.LocalReport.SetParameters(new ReportParameter("etapa", p[4]));
+                            reportViewer1.LocalReport.SetParameters(new ReportParameter("fecha_inicio", p[5]));
+                            reportViewer1.LocalReport.SetParameters(new ReportParameter("fecha_entrega", p[6]));
+
+                            var reporte = new datos_reporte()
+                            {
+                                Cliente = p[1],
+                                Nombre_Proyecto = p[2],
+                                Fecha = DateTime.Today.ToString("dd/MM/yyyy"),
+                                Folio = p[0],
+                                Subtotal = 0,
+                                IVA = 0,
+                                Total = 0
+                            };
+                            cotizaciones.datos_reporte.Add(reporte);
+                            cotizaciones.SaveChanges();
+                        }
+
+                        var datos = (from x in cotizaciones.datos_reporte select x);
+                        datos_reporteBindingSource.DataSource = datos.ToList();
+                        this.datos_reporteTableAdapter.Fill(this.reportes_dataSet.datos_reporte);
+                        this.reportViewer1.LocalReport.Refresh();
+                        this.reportViewer1.RefreshReport();
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.ToString());
+                    }
+                });
+            }         
         }
 
         private string getMesInt(string mes)
@@ -226,14 +365,84 @@ namespace cristales_pva
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        //Ver informe
+        private void verInformeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            loadPresupuestos();
+            if (backgroundWorker2.IsBusy == false && backgroundWorker1.IsBusy == false)
+            {
+                pictureBox1.Visible = true;
+                string[] param = new string[] { datagridviewNE1.CurrentRow.Cells[0].Value.ToString(), datagridviewNE1.CurrentRow.Cells[1].Value.ToString(), datagridviewNE1.CurrentRow.Cells[2].Value.ToString(), datagridviewNE1.CurrentRow.Cells[3].Value.ToString(), datagridviewNE1.CurrentRow.Cells[4].Value.ToString(), datagridviewNE1.CurrentRow.Cells[5].Value.ToString(), datagridviewNE1.CurrentRow.Cells[6].Value.ToString() };
+                backgroundWorker2.RunWorkerAsync(param);
+            }
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void GoFullscreen(bool fullscreen)
         {
-            loadPresupuestos();
+            if (fullscreen)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.Bounds = Screen.PrimaryScreen.Bounds;
+                button4.Text = "Pantalla Normal";
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.Bounds = rec;
+                button4.Text = "Pantalla Completa";
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if(FormBorderStyle == FormBorderStyle.None)
+            {
+                GoFullscreen(false);
+            }
+            else
+            {
+                GoFullscreen(true);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            loadPresupuestos(string.Empty, false);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                startTimer();
+            }
+            else
+            {
+                stopTimer();
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (!constants.isInteger(textBox2.Text))
+            {
+                textBox2.Text = "";
+            }
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadPresupuestos(string.Empty, false);
+            label6.Text = comboBox4.Text;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox3.Checked)
+            {
+                recorrido = comboBox4.SelectedIndex;
+            }
         }
     }
 }

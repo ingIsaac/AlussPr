@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace cristales_pva
 {
@@ -27,16 +28,19 @@ namespace cristales_pva
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
             backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             this.FormClosed += Articulos_cotizacion_FormClosed;
-            textBox1.KeyDown += TextBox1_KeyDown;           
+            textBox1.KeyDown += TextBox1_KeyDown;
+            loadFontSize();
             if (Application.OpenForms["edit_express"] != null)
             {
                 Application.OpenForms["edit_express"].Close();
             }          
-            loadALL();
-            if (constants.tipo_cotizacion == 0)
+            loadALL();           
+            string m = constants.nombre_cotizacion;
+            if(constants.nombre_proyecto != string.Empty)
             {
-                MessageBox.Show("No se ha seleccionado un tipo de artículo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                m = m + " - " + constants.nombre_proyecto;
             }
+            label7.Text = m;
         }
 
         private void DatagridviewNE1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -1053,6 +1057,90 @@ namespace cristales_pva
             new analiticas(constants.nombre_cotizacion, constants.nombre_proyecto, constants.folio_abierto.ToString(), constants.stringToFloat(r[0]), constants.stringToFloat(r[1]), constants.stringToFloat(r[2]), constants.desc_cotizacion, constants.desc_cant, constants.utilidad_cotizacion).Show();
             pictureBox1.Visible = false;
         }
-        //
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                datagridviewNE1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            else
+            {
+                datagridviewNE1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            }
+        }
+
+        private void articulos_cotizacion_Load(object sender, EventArgs e)
+        {
+            if (constants.tipo_cotizacion == 0)
+            {
+                MessageBox.Show("No se ha seleccionado un tipo de artículo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox2.SelectedIndex)
+            {
+                case 0:
+                    constants.tipo_cotizacion = 1;
+                    loadALL();
+                    break;
+                case 1:
+                    constants.tipo_cotizacion = 2;
+                    loadALL();
+                    break;
+                case 2:
+                    constants.tipo_cotizacion = 3;
+                    loadALL();
+                    break;
+                case 3:
+                    constants.tipo_cotizacion = 4;
+                    loadALL();
+                    break;
+                case 4:
+                    constants.tipo_cotizacion = 5;
+                    loadALL();
+                    break;
+                default:
+                    break;
+            }
+            comboBox2.SelectedIndex = -1;
+        }
+
+        //Font Size
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            float font_size = constants.stringToFloat(comboBox3.Text);
+            datagridviewNE1.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", font_size, GraphicsUnit.Pixel);
+            datagridviewNE1.Refresh();
+
+            if (constants.fsconfig != font_size)
+            {
+                try
+                {
+                    XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+
+                    var mv = from x in opciones_xml.Descendants("Opciones") select x;
+
+                    foreach (XElement x in mv)
+                    {
+                        x.SetElementValue("FSCONFIG", comboBox3.Text);
+                    }
+                    opciones_xml.Save(constants.opciones_xml);
+                    constants.fsconfig = font_size;
+                }
+                catch (Exception err)
+                {
+                    constants.errorLog(err.ToString());
+                    MessageBox.Show("[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void loadFontSize()
+        {
+            comboBox3.Text = constants.fsconfig.ToString();
+        }
     }
 }

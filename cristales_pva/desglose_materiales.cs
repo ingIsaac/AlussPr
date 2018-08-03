@@ -25,6 +25,7 @@ namespace cristales_pva
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             this.Text = this.Text + " - Sub-Folio: " + constants.sub_folio;
+            label2.Text = "Los conceptos personalizados 'C/E' no están incluidos en el desglose.";
         }
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)

@@ -79,6 +79,8 @@ namespace cristales_pva
         public static bool reload_precios = true;
         public static bool p_ac = false;
         public static float lim_sm = 15;
+        public static int monitor_interval = 1;
+        public static float fsconfig = 11;
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;
@@ -4898,12 +4900,12 @@ namespace cristales_pva
         }
 
         public static bool getVigencia(DateTime date)
-        {
+        {          
             return DateTime.Now <= date ? true : false;
         }
 
         public static bool getAlertVigencia(DateTime date)
-        {
+        {          
             return DateTime.Now.AddDays(5) >= date ? true : false;
         }
     }

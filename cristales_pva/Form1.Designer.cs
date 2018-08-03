@@ -3150,10 +3150,8 @@
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.treeView1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView1.ForeColor = System.Drawing.Color.DarkBlue;
-            this.treeView1.HideSelection = false;
+            this.treeView1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.treeView1.Indent = 10;
             this.treeView1.ItemHeight = 20;
             this.treeView1.Location = new System.Drawing.Point(4, 18);

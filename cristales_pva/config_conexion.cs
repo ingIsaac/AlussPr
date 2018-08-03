@@ -134,5 +134,19 @@ namespace cristales_pva
         {
             pictureBox1.Visible = false;
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                textBox1.Enabled = true;
+                textBox5.Enabled = true;
+            }
+            else
+            {
+                textBox1.Enabled = false;
+                textBox5.Enabled = false;
+            }
+        }
     }
 }

@@ -575,6 +575,7 @@
     <EmbeddedResource Include="admin_propiedades.resx">
       <DependentUpon>admin_propiedades.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="informe.rdlc" />
     <EmbeddedResource Include="new_costos.resx">
       <DependentUpon>new_costos.cs</DependentUpon>
     </EmbeddedResource>
@@ -969,6 +970,8 @@
     <None Include="Resources\production_icon.png" />
     <None Include="Resources\font_icon.png" />
     <None Include="Resources\gear_icon_min.png" />
+    <None Include="Resources\import_icon.png" />
+    <None Include="Resources\save_16.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

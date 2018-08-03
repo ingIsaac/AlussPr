@@ -32,12 +32,7 @@ namespace cristales_pva
             label6.Text = constants.nombre_cotizacion;
             label7.Text = constants.nombre_proyecto;
             label8.Text = constants.autor_cotizacion != "" ? constants.autor_cotizacion : sql.getSingleSQLValue("cotizaciones", "usuario", "folio", constants.folio_abierto.ToString(), 0);
-            string fecha_inicio = constants.fecha_cotizacion != "" ? constants.fecha_cotizacion : sql.getSingleSQLValue("cotizaciones", "fecha", "folio", constants.folio_abierto.ToString(), 0);
-            string[] s = fecha_inicio.Split('-');
-            if (s.Length >= 0)
-            {
-                label14.Text = s[0];
-            }            
+            label14.Text = DateTime.Now.ToString("dd/MM/yyyy");                      
             string etapa = sql.selectRegistroPresupuestos(constants.folio_abierto, "etapa");
             string informe = sql.selectRegistroPresupuestos(constants.folio_abierto, "informe");
             string fecha_entrega = sql.selectRegistroPresupuestos(constants.folio_abierto, "fecha_entrega");
@@ -67,7 +62,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    sql.updateRegistroPresupuestos(comboBox1.Text == "" ? textBox1.Text : comboBox1.Text, richTextBox2.Text != "" ? richTextBox1.Text + richTextBox2.Text + line : richTextBox1.Text + richTextBox2.Text, label14.Text, label15.Text, constants.folio_abierto);
+                    sql.updateRegistroPresupuestos(comboBox1.Text == "" ? textBox1.Text : comboBox1.Text, richTextBox2.Text != "" ? richTextBox1.Text + richTextBox2.Text + line : richTextBox1.Text + richTextBox2.Text, label15.Text, constants.folio_abierto);
                     richTextBox1.Text = richTextBox2.Text != "" ? richTextBox1.Text + richTextBox2.Text + line : richTextBox1.Text + richTextBox2.Text;
                     MessageBox.Show("Se ha actualizado esta cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

@@ -128,7 +128,7 @@ namespace cristales_pva
             textBox14.KeyDown += TextBox14_KeyDown;
             textBox14.Leave += TextBox14_Leave;    
             textBox14.Text = constants.lim_sm.ToString();
-        }
+        }      
 
         private void setLimitSM(float lim)
         {

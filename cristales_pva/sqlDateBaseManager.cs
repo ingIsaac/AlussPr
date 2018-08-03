@@ -281,6 +281,39 @@ namespace cristales_pva
             return result;
         }
 
+        public List<string> getUsersList()
+        {
+            List<string> result = new List<string>();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT usuario FROM usuarios";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while(r.Read())
+                {
+                    if (!r.IsDBNull(0))
+                    {
+                        result.Add(r.GetValue(0).ToString());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
         public int getDiseñoID(string nombre)
         {
             int result = 0;
@@ -3809,20 +3842,18 @@ namespace cristales_pva
             }
         }
 
-        public void updateRegistroPresupuestos(string etapa, string informe, string fecha_inicio, string fecha_entrega, int folio)
+        public void updateRegistroPresupuestos(string etapa, string informe, string fecha_entrega, int folio)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE registro_presupuestos SET etapa=@ETAPA, informe=@INFORME, fecha_inicio=@FI, fecha_entrega=@FE WHERE folio='" + folio + "'";
+            cmd.CommandText = "UPDATE registro_presupuestos SET etapa=@ETAPA, informe=@INFORME, fecha_entrega=@FE WHERE folio='" + folio + "'";
             cmd.Parameters.AddWithValue("@ETAPA", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@ETAPA"].Value = etapa;
             cmd.Parameters.AddWithValue("@INFORME", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@INFORME"].Value = informe;
-            cmd.Parameters.AddWithValue("@FI", System.Data.SqlDbType.VarChar);
-            cmd.Parameters["@FI"].Value = fecha_inicio;
             cmd.Parameters.AddWithValue("@FE", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@FE"].Value = fecha_entrega;            
             try
@@ -3902,7 +3933,7 @@ namespace cristales_pva
             return result;
         }
 
-        public void dropPresupuestosOnGridView(DataGridView dataview, string fecha, string search="")
+        public void dropPresupuestosOnGridView(DataGridView dataview, int limit, string tienda, string fecha="", string search="")
         {
             DataTable data = new DataTable();
             try
@@ -3911,11 +3942,18 @@ namespace cristales_pva
 
                 if (search == "")
                 {
-                    query = "SELECT registro_presupuestos.folio, cotizaciones.cliente, cotizaciones.nombre_proyecto, cotizaciones.usuario, registro_presupuestos.etapa, registro_presupuestos.fecha_inicio, registro_presupuestos.fecha_entrega FROM registro_presupuestos INNER JOIN cotizaciones ON registro_presupuestos.folio = cotizaciones.folio WHERE registro_presupuestos.org = '" + constants.org_name + "' AND registro_presupuestos.fecha_inicio LIKE '%" + fecha + "%' ORDER BY folio DESC";
+                    if (fecha == "")
+                    {
+                        query = "SELECT TOP " + limit + " registro_presupuestos.folio, cotizaciones.cliente, cotizaciones.nombre_proyecto, cotizaciones.usuario, registro_presupuestos.etapa, registro_presupuestos.fecha_inicio, registro_presupuestos.fecha_entrega FROM registro_presupuestos INNER JOIN cotizaciones ON registro_presupuestos.folio = cotizaciones.folio WHERE registro_presupuestos.org = '" + tienda + "' ORDER BY folio DESC";
+                    }
+                    else
+                    {
+                        query = "SELECT TOP " + limit + " registro_presupuestos.folio, cotizaciones.cliente, cotizaciones.nombre_proyecto, cotizaciones.usuario, registro_presupuestos.etapa, registro_presupuestos.fecha_inicio, registro_presupuestos.fecha_entrega FROM registro_presupuestos INNER JOIN cotizaciones ON registro_presupuestos.folio = cotizaciones.folio WHERE registro_presupuestos.org = '" + tienda + "' AND (registro_presupuestos.fecha_inicio LIKE '%" + fecha + "%' OR registro_presupuestos.fecha_entrega LIKE '%" + fecha + "%') ORDER BY folio DESC";
+                    }
                 }
                 else
                 {
-                    query = "SELECT registro_presupuestos.folio, cotizaciones.cliente, cotizaciones.nombre_proyecto, cotizaciones.usuario, registro_presupuestos.etapa, registro_presupuestos.fecha_inicio, registro_presupuestos.fecha_entrega FROM registro_presupuestos INNER JOIN cotizaciones ON registro_presupuestos.folio = cotizaciones.folio WHERE registro_presupuestos.org = '" + constants.org_name + "' AND registro_presupuestos.fecha_inicio LIKE '%" + fecha + "%' AND (registro_presupuestos.folio = '" + constants.stringToInt(search) + "' OR cotizaciones.cliente LIKE '%" + search + "' OR cotizaciones.nombre_proyecto LIKE '%" + search + "' OR registro_presupuestos.etapa = '" + search + "') ORDER BY folio DESC";
+                    query = "SELECT TOP " + limit + " registro_presupuestos.folio, cotizaciones.cliente, cotizaciones.nombre_proyecto, cotizaciones.usuario, registro_presupuestos.etapa, registro_presupuestos.fecha_inicio, registro_presupuestos.fecha_entrega FROM registro_presupuestos INNER JOIN cotizaciones ON registro_presupuestos.folio = cotizaciones.folio WHERE registro_presupuestos.org = '" + tienda + "' AND (registro_presupuestos.fecha_inicio LIKE '%" + fecha + "%' OR registro_presupuestos.fecha_entrega LIKE '%" + fecha + "%') AND (registro_presupuestos.folio LIKE '%" + constants.stringToInt(search) + "' OR cotizaciones.cliente LIKE '" + search + "%' OR cotizaciones.nombre_proyecto LIKE '" + search + "%' OR registro_presupuestos.etapa = '" + search + "') ORDER BY folio DESC";
                 }
 
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
@@ -4035,7 +4073,7 @@ namespace cristales_pva
             return result;
         }
 
-        public DateTime getvigenciaTienda(string tienda)
+        public DateTime getvigenciaTienda(string tienda, Form form=null)
         {
             DateTime result = new DateTime();
             connection = new SqlConnection();
@@ -4057,6 +4095,10 @@ namespace cristales_pva
             {
                 constants.errorLog(e.ToString());
                 MessageBox.Show("[Error] no se ha podido verificar la licencia de esté programa, intente de nuevo.\n\nDe continuar el problema póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if(form != null)
+                {
+                    form.Close();
+                }
             }
             finally
             {

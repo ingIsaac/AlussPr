@@ -396,6 +396,7 @@ namespace cristales_pva
                 var m_liva = (from x in opciones_xml.Descendants("Opciones") select x.Element("MLIVA")).SingleOrDefault();
                 var pac = (from x in opciones_xml.Descendants("Opciones") select x.Element("PAC")).SingleOrDefault();
                 var lim_sm = (from x in opciones_xml.Descendants("Opciones") select x.Element("LIM_SM")).SingleOrDefault();
+                var fsconfig = (from x in opciones_xml.Descendants("Opciones") select x.Element("FSCONFIG")).SingleOrDefault();
 
                 var op1 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP1")).SingleOrDefault();
                 var op2 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP2")).SingleOrDefault();
@@ -543,6 +544,11 @@ namespace cristales_pva
                 if (lim_sm != null)
                 {
                     constants.lim_sm = constants.stringToFloat(lim_sm.Value.ToString());
+                }
+
+                if (fsconfig != null)
+                {
+                    constants.fsconfig = constants.stringToFloat(fsconfig.Value.ToString());
                 }
 
                 if (op1 != null)

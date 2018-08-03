@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AlussPr")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("MztTik")]
+[assembly: AssemblyCompany("SistemaTik")]
 [assembly: AssemblyProduct("AlussPr")]
-[assembly: AssemblyCopyright("Isaac Solís Ramírez -- AlussPr 2018-2019")]
+[assembly: AssemblyCopyright("Isaac Solís Ramírez | AlussPr 2018-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("9.4.4.3")]
+[assembly: AssemblyFileVersion("9.4.4.4")]

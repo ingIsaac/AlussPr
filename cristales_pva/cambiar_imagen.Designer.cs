@@ -38,14 +38,14 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.datagridviewNE1 = new cristales_pva.datagridviewNE();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +63,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(281, 195);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(281, 226);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label1
@@ -147,6 +147,23 @@
             this.datagridviewNE1.Size = new System.Drawing.Size(419, 338);
             this.datagridviewNE1.TabIndex = 2;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(307, 384);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Buscar:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(356, 381);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(370, 20);
+            this.textBox1.TabIndex = 15;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // button5
             // 
             this.button5.Image = global::cristales_pva.Properties.Resources.Block_icon;
@@ -163,10 +180,12 @@
             // button4
             // 
             this.button4.Image = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
-            this.button4.Location = new System.Drawing.Point(200, 324);
+            this.button4.Location = new System.Drawing.Point(200, 287);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(24, 23);
+            this.button4.Size = new System.Drawing.Size(93, 31);
             this.button4.TabIndex = 12;
+            this.button4.Text = "Cancelar";
+            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -186,20 +205,25 @@
             // button2
             // 
             this.button2.Image = global::cristales_pva.Properties.Resources.save_icon;
-            this.button2.Location = new System.Drawing.Point(200, 407);
+            this.button2.Location = new System.Drawing.Point(200, 393);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(54, 48);
+            this.button2.Size = new System.Drawing.Size(93, 62);
             this.button2.TabIndex = 4;
+            this.button2.Text = "Guardar";
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
-            this.button1.Image = global::cristales_pva.Properties.Resources.search_icon;
-            this.button1.Location = new System.Drawing.Point(200, 353);
+            this.button1.Image = global::cristales_pva.Properties.Resources.import_icon;
+            this.button1.Location = new System.Drawing.Point(200, 324);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(54, 48);
+            this.button1.Size = new System.Drawing.Size(93, 62);
             this.button1.TabIndex = 3;
+            this.button1.Text = "Importar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -215,23 +239,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(307, 384);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Buscar:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(356, 381);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(370, 20);
-            this.textBox1.TabIndex = 15;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // cambiar_imagen
             // 

@@ -30,9 +30,10 @@ namespace cristales_pva
             backgroundWorker2.ProgressChanged += BackgroundWorker2_ProgressChanged;
             this.folio = constants.folio_abierto;
             this.Text = this.Text + " - Sub-Folio: " + constants.sub_folio;
+            this.Shown += Produccion_Shown;
         }
 
-        private void produccion_Load(object sender, EventArgs e)
+        private void Produccion_Shown(object sender, EventArgs e)
         {
             if (!backgroundWorker2.IsBusy && !backgroundWorker1.IsBusy)
             {
@@ -474,12 +475,12 @@ namespace cristales_pva
                 checkRows();
             }
         }
-
+     
         private byte[] setDimensionsImage(byte[] pic, string largo, string alto)
         {
             byte[] r = pic;
             Image img = constants.byteToImage(r);
-            Bitmap bm = new Bitmap(img.Width + 80, img.Height + 20);
+            Bitmap bm = new Bitmap(img.Width + 80, img.Height + 20);           
             using (Graphics gp = Graphics.FromImage(bm))
             {
                 gp.Clear(Color.White);
