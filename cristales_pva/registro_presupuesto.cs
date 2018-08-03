@@ -42,7 +42,7 @@ namespace cristales_pva
                 textBox1.Text = etapa;
             }
             richTextBox1.Text = informe;
-            label15.Text = fecha_entrega;                
+            label15.Text = fecha_entrega;          
         }
 
         //actualizar

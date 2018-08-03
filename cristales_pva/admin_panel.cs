@@ -1463,7 +1463,7 @@ namespace cristales_pva
                         }
                         else
                         {
-                            MessageBox.Show("[Error] no se puede ejecutar este proceso mientras se estan ingresando nuevo artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("[Error] no se puede ejecutar este proceso mientras se están ingresando nuevo artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -2499,7 +2499,7 @@ namespace cristales_pva
                             }
                             else
                             {
-                                MessageBox.Show("[Error] no se puede ejecutar este proceso mientras se estan ingresando nuevo artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("[Error] no se puede ejecutar este proceso mientras se están ingresando nuevo artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
@@ -2544,7 +2544,7 @@ namespace cristales_pva
                             }
                             else
                             {
-                                MessageBox.Show("[Error] no se puede ejecutar este proceso mientras se estan ingresando nuevo artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("[Error] no se puede ejecutar este proceso mientras se están ingresando nuevo artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
