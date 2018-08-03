@@ -15,6 +15,14 @@ namespace cristales_pva
         public desglose()
         {
             InitializeComponent();
+            reportViewer1.ZoomMode = ZoomMode.PageWidth;
+            reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
+        }
+
+        private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
+        {
+            reportViewer1.LocalReport.ReleaseSandboxAppDomain();
+            reportViewer1.LocalReport.Dispose();
         }
 
         private void desglose_Load(object sender, EventArgs e)
@@ -25,6 +33,8 @@ namespace cristales_pva
             reportViewer1.LocalReport.SetParameters(new ReportParameter("cliente", constants.nombre_cotizacion == "" ? "n/a" : constants.nombre_cotizacion));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("proyecto", constants.nombre_proyecto == "" ? "n/a" : constants.nombre_proyecto));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("folio", constants.folio_abierto.ToString()));
+            ReportPageSettings ps = reportViewer1.LocalReport.GetDefaultPageSettings();
+            this.reportViewer1.ParentForm.Width = ps.PaperSize.Width;
             this.reportViewer1.RefreshReport();
         }
     }
