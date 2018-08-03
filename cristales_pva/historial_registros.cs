@@ -24,14 +24,23 @@ namespace cristales_pva
             textBox1.KeyPress += TextBox1_KeyPress;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
+            datagridviewNE1.Click += DatagridviewNE1_Click;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;            
             Load += Historial_registros_Load;
-            contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             datagridviewNE1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             this.Shown += Historial_registros_Shown;
             setYears();
+        }
+
+        private void DatagridviewNE1_Click(object sender, EventArgs e)
+        {
+            if(datagridviewNE1.Rows.Count > 0)
+            {
+                string[] param = new string[] { datagridviewNE1.CurrentRow.Cells[0].Value.ToString(), datagridviewNE1.CurrentRow.Cells[1].Value.ToString(), datagridviewNE1.CurrentRow.Cells[2].Value.ToString(), datagridviewNE1.CurrentRow.Cells[3].Value.ToString(), datagridviewNE1.CurrentRow.Cells[4].Value.ToString(), datagridviewNE1.CurrentRow.Cells[5].Value.ToString(), datagridviewNE1.CurrentRow.Cells[6].Value.ToString() };
+                new informe(param).ShowDialog(this);
+            }
         }
 
         private void Historial_registros_Shown(object sender, EventArgs e)
@@ -54,14 +63,6 @@ namespace cristales_pva
         {
             reportViewer1.LocalReport.ReleaseSandboxAppDomain();
             reportViewer1.LocalReport.Dispose();
-        }
-
-        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
-        {
-            if(datagridviewNE1.RowCount <= 0)
-            {
-                e.Cancel = true;
-            }
         }
 
         private void setYears()
@@ -365,13 +366,11 @@ namespace cristales_pva
             }
         }
 
-        //Ver informe
-        private void verInformeToolStripMenuItem_Click(object sender, EventArgs e)
+        public void getInformeToPrint(string[] param)
         {
             if (backgroundWorker2.IsBusy == false && backgroundWorker1.IsBusy == false)
             {
                 pictureBox1.Visible = true;
-                string[] param = new string[] { datagridviewNE1.CurrentRow.Cells[0].Value.ToString(), datagridviewNE1.CurrentRow.Cells[1].Value.ToString(), datagridviewNE1.CurrentRow.Cells[2].Value.ToString(), datagridviewNE1.CurrentRow.Cells[3].Value.ToString(), datagridviewNE1.CurrentRow.Cells[4].Value.ToString(), datagridviewNE1.CurrentRow.Cells[5].Value.ToString(), datagridviewNE1.CurrentRow.Cells[6].Value.ToString() };
                 backgroundWorker2.RunWorkerAsync(param);
             }
         }

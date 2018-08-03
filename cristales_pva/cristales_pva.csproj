@@ -373,6 +373,12 @@
     <Compile Include="info.Designer.cs">
       <DependentUpon>info.cs</DependentUpon>
     </Compile>
+    <Compile Include="informe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="informe.Designer.cs">
+      <DependentUpon>informe.cs</DependentUpon>
+    </Compile>
     <Compile Include="lineas_modulos.cs">
       <DependentUpon>userLocal_model.tt</DependentUpon>
     </Compile>
@@ -576,6 +582,9 @@
       <DependentUpon>admin_propiedades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="informe.rdlc" />
+    <EmbeddedResource Include="informe.resx">
+      <DependentUpon>informe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="new_costos.resx">
       <DependentUpon>new_costos.cs</DependentUpon>
     </EmbeddedResource>
