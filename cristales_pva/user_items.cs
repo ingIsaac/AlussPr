@@ -12,6 +12,7 @@ namespace cristales_pva
     public partial class user_items : Form
     {
         int id = 0;
+        string _clave = string.Empty;
 
         public user_items()
         {
@@ -20,6 +21,14 @@ namespace cristales_pva
             textBox1.KeyDown += TextBox1_KeyDown;
             datagridviewNE2.CellEndEdit += DatagridviewNE2_CellEndEdit;
             this.FormClosed += User_items_FormClosed;
+            backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+            backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
+            backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
+        }        
+
+        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            pictureBox1.Visible = false;
         }
 
         private void User_items_FormClosed(object sender, FormClosedEventArgs e)
@@ -35,20 +44,17 @@ namespace cristales_pva
             if(e.KeyData == Keys.Enter)
             {
                 listas_entities_pva listas = new listas_entities_pva();
-                var otros = from x in listas.otros
-                            where x.clave.StartsWith("USER") && (x.articulo.StartsWith(textBox1.Text) || x.clave.StartsWith(textBox1.Text))
-                            orderby x.articulo ascending
+                var paquetes = from x in listas.paquetes                            
+                            orderby x.comp_articulo ascending
                             select new
                             {
                                 Id = x.id,
-                                Clave = x.clave,
-                                Artículo = x.articulo,
-                                Linea = x.linea,
-                                Color = x.color,
-                                Precio = "$" + x.precio
+                                Clave = x.comp_clave,
+                                Artículo = x.comp_articulo,
+                                Categoría = x.comp_type
                             };
                 datagridviewNE1.DataSource = null;
-                datagridviewNE1.DataSource = otros.ToList();
+                datagridviewNE1.DataSource = paquetes.ToList();
             }
         }
 
@@ -62,8 +68,9 @@ namespace cristales_pva
 
         private void loadAll()
         {
-            if(backgroundWorker1.IsBusy == false)
+            if(!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy)
             {
+                pictureBox1.Visible = true;
                 backgroundWorker1.RunWorkerAsync();
             }           
         }
@@ -294,7 +301,6 @@ namespace cristales_pva
         private void user_items_Load(object sender, EventArgs e)
         {
             loadAll();
-            comboBox2.Text = "paquetes";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -302,48 +308,30 @@ namespace cristales_pva
             loadAll();
         }
 
+        private string getListaFromCategoria(string categoria)
+        {
+            if (categoria == "Cristal")
+            {
+                return "costo_corte_precio";
+            }
+            else if (categoria == "Herraje")
+            {
+                return "herrajes";
+            }
+            else if (categoria == "Otros Materiales")
+            {
+                return "otros";
+            }
+            return string.Empty;
+        }
+
         //Guardar
         private void button1_Click(object sender, EventArgs e)
         {
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            if(textBox2.Text != "")
+            if(!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy)
             {
-                if(comboBox2.Text != "")
-                {
-                    if(sql.findSQLValue("clave", "clave", "otros", textBox3.Text) == false)
-                    {
-                        sql.insertListaOtros(constants.setUserItemClave(), textBox2.Text, "", comboBox2.Text, comboBox2.Text == "servicios" ? richTextBox1.Text : getArticulos(), textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), constants.stringToFloat(textBox7.Text), constants.stringToFloat(textBox8.Text));
-                        MessageBox.Show("Se ha creado el " + comboBox2.Text.Remove(comboBox2.Text.Length-1) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        loadAll();
-                        clear();
-                        if (MessageBox.Show("¿Deseas sincronizar la base de datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            new loading_form().ShowDialog();
-                        }
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("¿Deseas actualizar estos datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            sql.updateListaOtros(this.id, textBox2.Text, "", comboBox2.Text, comboBox2.Text == "servicios" ? richTextBox1.Text : getArticulos(), textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), constants.stringToFloat(textBox7.Text), constants.stringToFloat(textBox8.Text));
-                            MessageBox.Show("Se ha actualizado el " + comboBox2.Text.Remove(comboBox2.Text.Length - 1) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            loadAll();
-                            clear();
-                            if (MessageBox.Show("¿Deseas sincronizar la base de datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-                                new loading_form().ShowDialog();
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("[Error] se necesita seleccionar una linea.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("[Error] se necesita escribir el nombre del " + comboBox2.Text.Remove(comboBox2.Text.Length - 1) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                pictureBox1.Visible = true;
+                backgroundWorker2.RunWorkerAsync();
             }
         }
 
@@ -393,50 +381,88 @@ namespace cristales_pva
         {
             listas_entities_pva listas = new listas_entities_pva();
             datagridviewNE2.Rows.Clear();
+            comboBox3.Enabled = false;
             this.id = id;
-            var otros = (from x in listas.otros where x.id == id select x).SingleOrDefault();
-            if(otros != null)
+            string type = string.Empty;
+            var paquetes = (from x in listas.paquetes where x.id == id select x).SingleOrDefault();
+
+            if(paquetes != null)
             {
-                textBox3.Text = otros.clave;
-                textBox2.Text = otros.articulo;
-                comboBox2.Text = otros.linea;
-                textBox6.Text = otros.color;
-                textBox7.Text = otros.largo.ToString();
-                textBox8.Text = otros.alto.ToString();
-                textBox9.Text = otros.precio.ToString();
-                richTextBox1.Text = otros.linea == "servicios" ? otros.caracteristicas : "";
-                if(otros.linea == "paquetes")
+                _clave = paquetes.comp_clave;
+                type = paquetes.comp_type;
+                comboBox3.Text = paquetes.comp_type;
+
+                string[] v = paquetes.comp_items.Split(',');
+                string[] k = null;
+                string clave = string.Empty;
+                foreach (string x in v)
                 {
-                    string[] v = otros.caracteristicas.Split(',');
-                    string[] k = null;
-                    string clave = string.Empty;
-                    foreach(string x in v)
+                    k = x.Split(':');
+                    if (k.Length == 3)
                     {
-                        k = x.Split(':');
-                        if (k.Length == 3)
+                        clave = k[1];
+                        dynamic p = null;
+                        if (k[0] == "1")
                         {
-                            clave = k[1];
-                            dynamic p = null;
-                            if (k[0] == "1")
-                            {
-                                p = (from y in listas.lista_costo_corte_e_instalado where y.clave == clave select y.articulo).SingleOrDefault();
-                            }
-                            else if (k[0] == "2")
-                            {
-                                p = (from y in listas.herrajes where y.clave == clave select y.articulo).SingleOrDefault();
-                            }
-                            else if (k[0] == "3")
-                            {
-                                p = (from y in listas.otros where y.clave == clave select y.articulo).SingleOrDefault();
-                            }
-                            if (p != null)
-                            {
-                                datagridviewNE2.Rows.Add(getComponente(k[0]), clave, p, k[2]);
-                            }
+                            p = (from y in listas.lista_costo_corte_e_instalado where y.clave == clave select y.articulo).SingleOrDefault();
+                        }
+                        else if (k[0] == "2")
+                        {
+                            p = (from y in listas.herrajes where y.clave == clave select y.articulo).SingleOrDefault();
+                        }
+                        else if (k[0] == "3")
+                        {
+                            p = (from y in listas.otros where y.clave == clave select y.articulo).SingleOrDefault();
+                        }
+                        if (p != null)
+                        {
+                            datagridviewNE2.Rows.Add(getComponente(k[0]), clave, p, k[2]);
                         }
                     }
                 }
             }
+
+            if(type == "Cristal")
+            {
+                var cristal = (from x in listas.lista_costo_corte_e_instalado where x.clave == _clave select x).SingleOrDefault();
+                if (cristal != null)
+                {
+                    textBox3.Text = cristal.clave;
+                    textBox2.Text = cristal.articulo;
+                    textBox9.Text = cristal.costo_corte_m2.ToString();
+                    comboBox4.Text = cristal.proveedor;
+                }
+            }
+            else if(type == "Herraje")
+            {
+                var herrajes = (from x in listas.herrajes where x.clave == _clave select x).SingleOrDefault();
+                if (herrajes != null)
+                {
+                    textBox3.Text = herrajes.clave;
+                    textBox2.Text = herrajes.articulo;
+                    comboBox2.Text = herrajes.linea;
+                    textBox6.Text = herrajes.color;
+                    textBox9.Text = herrajes.precio.ToString();
+                    richTextBox1.Text = herrajes.caracteristicas;
+                    comboBox4.Text = herrajes.proveedor;
+                }
+            }
+            else if(type == "Otros Materiales")
+            {
+                var otros = (from x in listas.otros where x.clave == _clave select x).SingleOrDefault();
+                if (otros != null)
+                {
+                    textBox3.Text = otros.clave;
+                    textBox2.Text = otros.articulo;
+                    comboBox2.Text = otros.linea;
+                    textBox6.Text = otros.color;
+                    textBox7.Text = otros.largo.ToString();
+                    textBox8.Text = otros.alto.ToString();
+                    textBox9.Text = otros.precio.ToString();
+                    richTextBox1.Text = otros.caracteristicas;
+                    comboBox4.Text = otros.proveedor;
+                }
+            }                                   
         }
 
         private string getComponente(string i)
@@ -483,15 +509,18 @@ namespace cristales_pva
         {
             if(comboBox2.Text == "paquetes")
             {
+                if(comboBox3.Text != "Herraje")
+                {
+                    textBox7.Enabled = true;
+                    textBox8.Enabled = true;
+                }
                 richTextBox1.Clear();
                 richTextBox1.Enabled = false;
                 label3.Text = "Artículo:";
                 textBox9.Enabled = false;
-                textBox6.Enabled = true;
-                textBox7.Enabled = true;
-                textBox8.Enabled = true;
+                textBox6.Enabled = true;                
             }
-            else
+            else if(comboBox2.Text == "servicios")
             {
                 label3.Text = "Servicio:";
                 datagridviewNE2.Rows.Clear();
@@ -504,12 +533,12 @@ namespace cristales_pva
                 textBox7.Clear();
                 textBox8.Clear();
                 textBox9.Clear();
-            }
+            }            
         }
 
         private void calcular()
         {
-            if (comboBox2.Text == "paquetes")
+            if (comboBox2.Text == "paquetes" || comboBox3.Text == "Cristal")
             {
                 string clave = string.Empty;
                 float c = 0;
@@ -562,14 +591,21 @@ namespace cristales_pva
         {
             if (datagridviewNE3.Rows.Count > 0)
             {
-                if (comboBox2.Text == "paquetes")
+                if (comboBox3.Text != "")
                 {
-                    datagridviewNE2.Rows.Add(getComponenteFromList(), comboBox1.SelectedIndex == 0 ? datagridviewNE3.CurrentRow.Cells[0].Value.ToString() : datagridviewNE3.CurrentRow.Cells[1].Value.ToString(), comboBox1.SelectedIndex == 0 ? datagridviewNE3.CurrentRow.Cells[1].Value.ToString() : datagridviewNE3.CurrentRow.Cells[2].Value.ToString(), "1");
-                    calcular();
+                    if (comboBox2.Text == "paquetes" || comboBox3.Text == "Cristal")
+                    {
+                        datagridviewNE2.Rows.Add(getComponenteFromList(), comboBox1.SelectedIndex == 0 ? datagridviewNE3.CurrentRow.Cells[0].Value.ToString() : datagridviewNE3.CurrentRow.Cells[1].Value.ToString(), comboBox1.SelectedIndex == 0 ? datagridviewNE3.CurrentRow.Cells[1].Value.ToString() : datagridviewNE3.CurrentRow.Cells[2].Value.ToString(), "1");
+                        calcular();
+                    }
+                    else
+                    {
+                        MessageBox.Show("[Error] para empaquetar artículos seleccioné la opción 'paquetes'.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("[Error] para empaquetar artículos seleccioné la opción 'paquetes'.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("[Error] necesitas seleccionar una categoría.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -587,20 +623,17 @@ namespace cristales_pva
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             listas_entities_pva listas = new listas_entities_pva();
-            var otros = from x in listas.otros
-                        where x.clave.StartsWith("USER") && (x.articulo.StartsWith(textBox1.Text) || x.clave.StartsWith(textBox1.Text))
-                        orderby x.articulo ascending
-                        select new
-                        {
-                            Id = x.id,
-                            Clave = x.clave,
-                            Artículo = x.articulo,
-                            Linea = x.linea,
-                            Color = x.color,
-                            Precio = "$" + x.precio
-                        };
+            var paquetes = from x in listas.paquetes
+                           orderby x.comp_articulo ascending
+                           select new
+                           {
+                               Id = x.id,
+                               Clave = x.comp_clave,
+                               Artículo = x.comp_articulo,
+                               Categoría = x.comp_type
+                           };
             datagridviewNE1.DataSource = null;
-            datagridviewNE1.DataSource = otros.ToList();
+            datagridviewNE1.DataSource = paquetes.ToList();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -620,24 +653,145 @@ namespace cristales_pva
             textBox9.Clear();
             richTextBox1.Clear();
             button4.Visible = false;
+            comboBox4.SelectedIndex = -1;
+            comboBox3.SelectedIndex = -1;
+            comboBox2.SelectedIndex = -1;
+            comboBox3.Enabled = true;
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(constants.user_access >= 5)
+            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy)
             {
-                if(datagridviewNE1.Rows.Count > 0)
+                if (constants.user_access >= 5)
                 {
-                    sqlDateBaseManager sql = new sqlDateBaseManager();
-                    string id = datagridviewNE1.CurrentRow.Cells[0].Value.ToString();
-                    sql.deleteSQLValue("otros", "id", id);
-                    MessageBox.Show("El artículo ha sido eliminado con exito.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    loadAll();
+                    if (datagridviewNE1.Rows.Count > 0)
+                    {
+                        pictureBox1.Visible = true;
+                        backgroundWorker3.RunWorkerAsync();                       
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        //sincronizar
+        private void button5_Click(object sender, EventArgs e)
+        {
+            new loading_form().ShowDialog();
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBox3.Text == "Cristal")
+            {
+                comboBox2.SelectedIndex = -1;
+                comboBox2.Enabled = false;
+                //--------------------------------------->
+                textBox6.Clear();
+                textBox6.Enabled = false;
+                textBox7.Clear();
+                textBox7.Enabled = false;
+                textBox8.Clear();
+                textBox8.Enabled = false;
+                //--------------------------------------->
+                richTextBox1.Clear();
+                richTextBox1.Enabled = false;
+                setproveedores();
+            }
+            else if(comboBox3.Text == "Herraje")
+            {
+                comboBox2.SelectedIndex = -1;
+                comboBox2.Enabled = true;
+                //--------------------------------------->
+                textBox6.Clear();
+                textBox6.Enabled = true;
+                textBox7.Clear();
+                textBox7.Enabled = false;
+                textBox8.Clear();
+                textBox8.Enabled = false;
+                //--------------------------------------->
+                richTextBox1.Clear();
+                richTextBox1.Enabled = true;
+                setproveedores();
+            }
+            else if (comboBox3.Text == "Otros Materiales")
+            {
+                comboBox2.SelectedIndex = -1;
+                comboBox2.Enabled = true;
+                //--------------------------------------->
+                textBox6.Clear();
+                textBox6.Enabled = true;
+                textBox7.Clear();
+                textBox7.Enabled = true;
+                textBox8.Clear();
+                textBox8.Enabled = true;
+                //--------------------------------------->
+                richTextBox1.Clear();
+                richTextBox1.Enabled = true;
+                setproveedores();
             }
             else
             {
-                MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                comboBox2.SelectedIndex = -1;
+                comboBox2.Enabled = true;
+                //--------------------------------------->
+                textBox6.Clear();
+                textBox6.Enabled = true;
+                textBox7.Clear();
+                textBox7.Enabled = true;
+                textBox8.Clear();
+                textBox8.Enabled = true;
+                //--------------------------------------->
+                richTextBox1.Clear();
+                richTextBox1.Enabled = true;
+                comboBox4.Items.Clear();
+            }
+        }
+
+        private void setproveedores()
+        {
+            localDateBaseEntities3 listas = new localDateBaseEntities3();
+
+            string comp = comboBox3.Text;
+            if(comp == "Cristal")
+            {
+                var p = from x in listas.proveedores where x.grupo == "vidrio" select x;
+                if(p != null)
+                {
+                    comboBox4.Items.Clear();
+                    foreach(var x in p)
+                    {
+                        comboBox4.Items.Add(x.proveedor);
+                    }
+                }
+            }
+            else if(comp == "Herraje")
+            {
+                var p = from x in listas.proveedores where x.grupo == "herraje" select x;
+                if (p != null)
+                {
+                    comboBox4.Items.Clear();
+                    foreach (var x in p)
+                    {
+                        comboBox4.Items.Add(x.proveedor);
+                    }
+                }
+            }
+            else if (comp == "Otros Materiales")
+            {
+                var p = from x in listas.proveedores where x.grupo == "otros" select x;
+                if (p != null)
+                {
+                    comboBox4.Items.Clear();
+                    foreach (var x in p)
+                    {
+                        comboBox4.Items.Add(x.proveedor);
+                    }
+                }
             }
         }
 
@@ -648,20 +802,160 @@ namespace cristales_pva
                 datagridviewNE1.Invoke((MethodInvoker)delegate
                 {
                     datagridviewNE1.DataSource = null;
-                    datagridviewNE1.DataSource = new sqlDateBaseManager().createDataTableFromSQLTableWithFilter("otros", "clave", "USER");
+                    datagridviewNE1.DataSource = new sqlDateBaseManager().createDataTableFromSQLTable("paquetes");
                 });
             }
             else
             {
                 datagridviewNE1.DataSource = null;
-                datagridviewNE1.DataSource = new sqlDateBaseManager().createDataTableFromSQLTableWithFilter("otros", "clave", "USER");
+                datagridviewNE1.DataSource = new sqlDateBaseManager().createDataTableFromSQLTable("paquetes");
             }
         }
 
-        //sincronizar
-        private void button5_Click(object sender, EventArgs e)
+        //Cargar
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            new loading_form().ShowDialog();
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            string categoria = comboBox3.Text;
+
+            if (textBox2.Text != "")
+            {             
+                if (comboBox2.Text != "" || categoria == "Cristal")
+                {
+                    if (comboBox3.Text != "")
+                    {
+                        if (sql.findSQLValue("clave", "clave", "otros", textBox3.Text) == false)
+                        {
+                            if (sql.findSQLValue("articulo", "articulo", getListaFromCategoria(categoria), textBox2.Text) == false)
+                            {
+                                string clave = constants.setUserItemClave("paquetes");
+                                sql.insertNewPaquete(clave, getArticulos(), categoria, textBox2.Text);
+                                if (categoria == "Cristal")
+                                {
+                                    sql.insertListaCosto(clave, textBox2.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), 0, 0, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), 0, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), comboBox4.Text, "MXN");
+                                }
+                                else if (categoria == "Herraje")
+                                {
+                                    sql.insertListaHerrajes(clave, textBox2.Text, comboBox4.Text, comboBox2.Text, "", textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), "MXN");
+                                }
+                                else if (categoria == "Otros Materiales")
+                                {
+                                    sql.insertListaOtros(clave, textBox2.Text, comboBox4.Text, comboBox2.Text, richTextBox1.Text, textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), constants.stringToFloat(textBox7.Text), constants.stringToFloat(textBox8.Text), "MXN");
+                                }
+                                if (categoria != "Cristal")
+                                {
+                                    MessageBox.Show("Se ha creado el " + comboBox2.Text.Remove(comboBox2.Text.Length - 1) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Se ha creado el paquete.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                e.Result = true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("[Error] el nombre del paquete o servicio ya existe.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            if (MessageBox.Show("¿Deseas actualizar estos datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+
+                                sql.updatePaquete(this.id, _clave, getArticulos(), textBox2.Text);
+                                if (categoria == "Cristal")
+                                {
+                                    sql.updateListaCosto(_clave, textBox2.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), 0, 0, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), 0, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), comboBox4.Text, "MXN");
+                                }
+                                else if (categoria == "Herraje")
+                                {
+                                    sql.updateListaHerrajes(sql.getIDFromClave(_clave, "herrajes"), textBox2.Text, comboBox4.Text, comboBox2.Text, "", textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), "MXN");
+                                }
+                                else if (categoria == "Otros Materiales")
+                                {
+                                    sql.updateListaOtros(sql.getIDFromClave(_clave, "otros"), textBox2.Text, comboBox4.Text, comboBox2.Text, richTextBox1.Text, textBox6.Text, (float)Math.Round(constants.stringToFloat(textBox9.Text), 2), DateTime.Today.ToString("dd/MM/yyyy"), constants.stringToFloat(textBox7.Text), constants.stringToFloat(textBox8.Text), "MXN");
+                                }
+                                if (categoria != "Cristal")
+                                {
+                                    MessageBox.Show("Se ha actualizado el " + comboBox2.Text.Remove(comboBox2.Text.Length - 1) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Se ha actualizado el paquete.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                e.Result = true;                                  
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("[Error] se necesita seleccionar una categoría.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("[Error] se necesita seleccionar una linea.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }               
+            }
+            else
+            {
+                MessageBox.Show("[Error] se necesita escribir el nombre del paquete o servicio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Eliminar
+        private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
+        {
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            int id = (int)datagridviewNE1.CurrentRow.Cells[0].Value;
+            string clave = datagridviewNE1.CurrentRow.Cells[1].Value.ToString();
+            string categoria = datagridviewNE1.CurrentRow.Cells[3].Value.ToString();
+            sql.deletePaquete(id);
+            if (categoria == "Cristal")
+            {
+                sql.deleteSQLValue("costo_corte_precio", "clave", clave);
+                e.Result = true;
+            }
+            else if (categoria == "Herraje")
+            {
+                sql.deleteSQLValue("herrajes", "id", sql.getIDFromClave(clave, "herrajes").ToString());
+                e.Result = true;
+            }
+            else if (categoria == "Otros Materiales")
+            {
+                sql.deleteSQLValue("otros", "id", sql.getIDFromClave(clave, "otros").ToString());
+                e.Result = true;
+            }
+        }
+
+        private void BackgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Result != null)
+            {
+                if ((bool)e.Result)
+                {
+                    MessageBox.Show("El artículo ha sido eliminado con exito.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    loadAll();
+                }
+            }
+            pictureBox1.Visible = false;
+        }
+
+        private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if(e.Result != null)
+            {
+                if ((bool)e.Result)
+                {
+                    loadAll();
+                    clear();
+                    if (MessageBox.Show("¿Deseas sincronizar la base de datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        new loading_form().ShowDialog();
+                    }
+                }
+            }
+            pictureBox1.Visible = false;
         }
     }
 }

@@ -50,6 +50,7 @@
           <Property Name="caracteristicas" Type="varchar(max)" />
           <Property Name="color" Type="varchar(max)" />
           <Property Name="precio" Type="float" />
+          <Property Name="moneda" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="lista_costo_corte_e_instalado">
           <Key>
@@ -60,6 +61,7 @@
           <Property Name="costo_corte_m2" Type="float" />
           <Property Name="costo_instalado" Type="float" />
           <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="moneda" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="lista_precio_corte_e_instalado">
           <Key>
@@ -70,6 +72,7 @@
           <Property Name="precio_venta_corte_m2" Type="float" />
           <Property Name="precio_venta_instalado" Type="float" />
           <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="moneda" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="lista_precios_hojas">
           <Key>
@@ -81,6 +84,7 @@
           <Property Name="alto" Type="float" />
           <Property Name="precio_hoja" Type="float" />
           <Property Name="proveedor" Type="varchar(max)" />
+          <Property Name="moneda" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityType Name="modulos">
           <Key>
@@ -117,6 +121,17 @@
           <Property Name="precio" Type="float" />
           <Property Name="largo" Type="float" />
           <Property Name="alto" Type="float" />
+          <Property Name="moneda" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="paquetes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="comp_clave" Type="varchar" MaxLength="50" />
+          <Property Name="comp_items" Type="varchar(max)" />
+          <Property Name="comp_type" Type="varchar" MaxLength="50" />
+          <Property Name="comp_articulo" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="perfiles">
           <Key>
@@ -144,6 +159,7 @@
           <Property Name="chocolate" Type="float" />
           <Property Name="acero_inox" Type="float" />
           <Property Name="bronce" Type="float" />
+          <Property Name="moneda" Type="varchar" MaxLength="3" />
         </EntityType>
         <EntityContainer Name="listas_model_pvaStoreContainer">
           <EntitySet Name="acabados" EntityType="Self.acabados" Schema="dbo" store:Type="Tables" />
@@ -155,6 +171,7 @@
           <EntitySet Name="lista_precios_hojas" EntityType="Self.lista_precios_hojas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="modulos" EntityType="Self.modulos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="otros" EntityType="Self.otros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paquetes" EntityType="Self.paquetes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="perfiles" EntityType="Self.perfiles" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -170,6 +187,7 @@
           <Property Name="costo_corte_m2" Type="Double" />
           <Property Name="costo_instalado" Type="Double" />
           <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="lista_precio_corte_e_instalado">
           <Key>
@@ -180,6 +198,7 @@
           <Property Name="precio_venta_corte_m2" Type="Double" />
           <Property Name="precio_venta_instalado" Type="Double" />
           <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="lista_precios_hojas">
           <Key>
@@ -191,6 +210,7 @@
           <Property Name="alto" Type="Double" />
           <Property Name="precio_hoja" Type="Double" />
           <Property Name="proveedor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="listas_entities_pva" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="lista_costo_corte_e_instalado" EntityType="Self.lista_costo_corte_e_instalado" />
@@ -203,6 +223,7 @@
           <EntitySet Name="colores_aluminio" EntityType="listas_model_pva.colores_aluminio" />
           <EntitySet Name="modulos" EntityType="listas_model_pva.modulo" />
           <EntitySet Name="perfiles" EntityType="listas_model_pva.perfile" />
+          <EntitySet Name="paquetes" EntityType="listas_model_pva.paquete" />
         </EntityContainer>
         <EntityType Name="acabado">
           <Key>
@@ -227,6 +248,7 @@
           <Property Name="precio" Type="Double" />
           <Property Name="largo" Type="Double" />
           <Property Name="alto" Type="Double" />
+          <Property Name="moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="esquema">
           <Key>
@@ -253,6 +275,7 @@
           <Property Name="caracteristicas" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="color" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="precio" Type="Double" />
+          <Property Name="moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="colores_aluminio">
           <Key>
@@ -312,6 +335,17 @@
           <Property Name="chocolate" Type="Double" />
           <Property Name="acero_inox" Type="Double" />
           <Property Name="bronce" Type="Double" />
+          <Property Name="moneda" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="paquete">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="comp_clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="comp_items" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="comp_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="comp_articulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -322,6 +356,7 @@
           <EntitySetMapping Name="lista_costo_corte_e_instalado">
             <EntityTypeMapping TypeName="listas_model_pva.lista_costo_corte_e_instalado">
               <MappingFragment StoreEntitySet="lista_costo_corte_e_instalado">
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
                 <ScalarProperty Name="proveedor" ColumnName="proveedor" />
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="articulo" ColumnName="articulo" />
@@ -333,6 +368,7 @@
           <EntitySetMapping Name="lista_precio_corte_e_instalado">
             <EntityTypeMapping TypeName="listas_model_pva.lista_precio_corte_e_instalado">
               <MappingFragment StoreEntitySet="lista_precio_corte_e_instalado">
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
                 <ScalarProperty Name="proveedor" ColumnName="proveedor" />
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="articulo" ColumnName="articulo" />
@@ -344,6 +380,7 @@
           <EntitySetMapping Name="lista_precios_hojas">
             <EntityTypeMapping TypeName="listas_model_pva.lista_precios_hojas">
               <MappingFragment StoreEntitySet="lista_precios_hojas">
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
                 <ScalarProperty Name="proveedor" ColumnName="proveedor" />
                 <ScalarProperty Name="clave" ColumnName="clave" />
                 <ScalarProperty Name="articulo" ColumnName="articulo" />
@@ -366,6 +403,7 @@
           <EntitySetMapping Name="otros">
             <EntityTypeMapping TypeName="listas_model_pva.otro">
               <MappingFragment StoreEntitySet="otros">
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
                 <ScalarProperty Name="alto" ColumnName="alto" />
                 <ScalarProperty Name="largo" ColumnName="largo" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
@@ -396,6 +434,7 @@
           <EntitySetMapping Name="herrajes">
             <EntityTypeMapping TypeName="listas_model_pva.herraje">
               <MappingFragment StoreEntitySet="herrajes">
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="color" ColumnName="color" />
                 <ScalarProperty Name="caracteristicas" ColumnName="caracteristicas" />
@@ -444,6 +483,7 @@
           <EntitySetMapping Name="perfiles">
             <EntityTypeMapping TypeName="listas_model_pva.perfile">
               <MappingFragment StoreEntitySet="perfiles">
+                <ScalarProperty Name="moneda" ColumnName="moneda" />
                 <ScalarProperty Name="bronce" ColumnName="bronce" />
                 <ScalarProperty Name="acero_inox" ColumnName="acero_inox" />
                 <ScalarProperty Name="chocolate" ColumnName="chocolate" />
@@ -465,6 +505,17 @@
                 <ScalarProperty Name="linea" ColumnName="linea" />
                 <ScalarProperty Name="articulo" ColumnName="articulo" />
                 <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paquetes">
+            <EntityTypeMapping TypeName="listas_model_pva.paquete">
+              <MappingFragment StoreEntitySet="paquetes">
+                <ScalarProperty Name="comp_articulo" ColumnName="comp_articulo" />
+                <ScalarProperty Name="comp_type" ColumnName="comp_type" />
+                <ScalarProperty Name="comp_items" ColumnName="comp_items" />
+                <ScalarProperty Name="comp_clave" ColumnName="comp_clave" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

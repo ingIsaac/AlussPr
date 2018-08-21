@@ -12,13 +12,12 @@ namespace cristales_pva
     using System;
     using System.Collections.Generic;
     
-    public partial class lista_costo_corte_e_instalado
+    public partial class paquete
     {
-        public string clave { get; set; }
-        public string articulo { get; set; }
-        public Nullable<double> costo_corte_m2 { get; set; }
-        public Nullable<double> costo_instalado { get; set; }
-        public string proveedor { get; set; }
-        public string moneda { get; set; }
+        public int id { get; set; }
+        public string comp_clave { get; set; }
+        public string comp_items { get; set; }
+        public string comp_type { get; set; }
+        public string comp_articulo { get; set; }
     }
 }

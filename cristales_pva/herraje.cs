@@ -22,5 +22,6 @@ namespace cristales_pva
         public string caracteristicas { get; set; }
         public string color { get; set; }
         public Nullable<double> precio { get; set; }
+        public string moneda { get; set; }
     }
 }

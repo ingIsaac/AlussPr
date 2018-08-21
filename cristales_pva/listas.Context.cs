@@ -35,5 +35,6 @@ namespace cristales_pva
         public virtual DbSet<colores_aluminio> colores_aluminio { get; set; }
         public virtual DbSet<modulo> modulos { get; set; }
         public virtual DbSet<perfile> perfiles { get; set; }
+        public virtual DbSet<paquete> paquetes { get; set; }
     }
 }

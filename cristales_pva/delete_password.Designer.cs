@@ -37,7 +37,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 22);
+            this.label1.Location = new System.Drawing.Point(22, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(25, 39);
+            this.textBox1.Location = new System.Drawing.Point(25, 44);
             this.textBox1.Name = "textBox1";
             this.textBox1.PasswordChar = '*';
             this.textBox1.Size = new System.Drawing.Size(208, 20);
@@ -54,11 +54,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(92, 66);
+            this.button1.Image = global::cristales_pva.Properties.Resources.check;
+            this.button1.Location = new System.Drawing.Point(25, 70);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(208, 31);
             this.button1.TabIndex = 2;
             this.button1.Text = "Confirmar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -76,7 +79,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(258, 115);
+            this.ClientSize = new System.Drawing.Size(257, 122);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);

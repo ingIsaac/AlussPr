@@ -45,7 +45,6 @@ namespace cristales_pva
             backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             this.SizeChanged += Form1_SizeChanged;
             this.FormClosing += Form1_FormClosing;
-            statusStrip1.Paint += StatusStrip1_Paint;
 
             //grid 1-------
             datagridviewNE2.CellClick += datagridviewNE2_CellClick;
@@ -271,18 +270,6 @@ namespace cristales_pva
                     default: break;
                 }
                 listas.Dispose();
-            }
-        }
-
-        private void StatusStrip1_Paint(object sender, PaintEventArgs e)
-        {
-            try
-            {
-                base.OnPaint(e);
-            }
-            catch (Exception)
-            {
-                this.Invalidate();
             }
         }
 
@@ -614,12 +601,16 @@ namespace cristales_pva
             label39.Text = "v." + constants.version;
             //
             tabControl1.SelectedTab = tabPage15;
+            checkBox5.Checked = constants.iva_desglosado;
+            checkBox5.Enabled = constants.permitir_ajuste_iva;
+            setModoLIVA();
             constants.setFolioStart();           
             if (constants.folio_abierto > 0)
             {
                 label22.Text = constants.folio_abierto.ToString();
                 textBox4.Text = constants.desc_cotizacion.ToString();
                 textBox28.Text = constants.utilidad_cotizacion.ToString();
+                checkBox5.Checked = constants.iva_desglosado;
                 toolStripStatusLabel3.Text = "     [Cliente: " + constants.nombre_cotizacion + "]   [Proyecto: " + constants.nombre_proyecto + "]";
                 toolStripStatusLabel3.Text = toolStripStatusLabel3.Text.ToUpper();
                 toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;
@@ -644,10 +635,7 @@ namespace cristales_pva
             treeView1.Nodes[0].Expand();
             constants.loadPropiedadesModel();
             reloadIVA();          
-            disableTabPage();
-            checkBox5.Checked = constants.iva_desglosado;
-            checkBox5.Enabled = constants.permitir_ajuste_iva;
-            setModoLIVA();
+            disableTabPage();           
             if (constants.getAlertVigencia(new sqlDateBaseManager().getvigenciaTienda(constants.org_name)))
             {
                 MessageBox.Show("La fecha de expiración esta próxima, pónganse en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -675,6 +663,7 @@ namespace cristales_pva
                 label22.Text = constants.folio_abierto.ToString();
                 textBox4.Text = constants.desc_cotizacion.ToString();
                 textBox28.Text = constants.utilidad_cotizacion.ToString();
+                checkBox5.Checked = constants.iva_desglosado;
                 toolStripStatusLabel3.Text = "     [Cliente: " + constants.nombre_cotizacion + "]   [Proyecto: " + constants.nombre_proyecto + "]";
                 toolStripStatusLabel3.Text = toolStripStatusLabel3.Text.ToUpper();
                 toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;
@@ -780,7 +769,8 @@ namespace cristales_pva
             if(constants.iva_desglosado == true)
             {
                 constants.iva = constants.getPropiedadesModel();
-            }        
+            }
+            setTCLabel(constants.tc);
         }
 
         public void reloadPrecios()
@@ -1454,7 +1444,7 @@ namespace cristales_pva
         //
 
         //cargar listas
-        private void loadListaFromLocal()
+        public void loadListaFromLocal()
         {
             setFiltros();
             listas = new listas_entities_pva();
@@ -1477,13 +1467,13 @@ namespace cristales_pva
                     {
                         datagridviewNE2.DataSource = null;
                         datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                        textBox9.Text = page + "/" + pages;
+                        textBox9.Text = (page + 1) + "/" + (pages + 1);
                     });
                 }
                 else {
                     datagridviewNE2.DataSource = null;
                     datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                    textBox9.Text = page + "/" + pages;
+                    textBox9.Text = (page + 1) + "/" + (pages + 1);
                 }
             }
             else if (comboBox1.SelectedIndex == 1)
@@ -1504,13 +1494,13 @@ namespace cristales_pva
                     {
                         datagridviewNE2.DataSource = null;
                         datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                        textBox9.Text = page + "/" + pages;
+                        textBox9.Text = (page + 1) + "/" + (pages + 1);
                     });
                 }
                 else {
                     datagridviewNE2.DataSource = null;
                     datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                    textBox9.Text = page + "/" + pages;
+                    textBox9.Text = (page + 1) + "/" + (pages + 1);
                 }
             }
             else if (comboBox1.SelectedIndex == 2)
@@ -1532,13 +1522,13 @@ namespace cristales_pva
                     {
                         datagridviewNE2.DataSource = null;
                         datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                        textBox9.Text = page + "/" + pages;
+                        textBox9.Text = (page + 1) + "/" + (pages + 1);
                     });
                 }
                 else {
                     datagridviewNE2.DataSource = null;
                     datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                    textBox9.Text = page + "/" + pages;
+                    textBox9.Text = (page + 1) + "/" + (pages + 1);
                 }
             }
             else if (comboBox1.SelectedIndex == 3)
@@ -1572,13 +1562,13 @@ namespace cristales_pva
                     {
                         datagridviewNE2.DataSource = null;
                         datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                        textBox9.Text = page + "/" + pages;
+                        textBox9.Text = (page + 1) + "/" + (pages + 1);
                     });
                 }
                 else {
                     datagridviewNE2.DataSource = null;
                     datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                    textBox9.Text = page + "/" + pages;
+                    textBox9.Text = (page + 1) + "/" + (pages + 1);
                 }
             }
             else if (comboBox1.SelectedIndex == 4)
@@ -1601,13 +1591,13 @@ namespace cristales_pva
                     {
                         datagridviewNE2.DataSource = null;
                         datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                        textBox9.Text = page + "/" + pages;
+                        textBox9.Text = (page + 1) + "/" + (pages + 1);
                     });
                 }
                 else {
                     datagridviewNE2.DataSource = null;
                     datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                    textBox9.Text = page + "/" + pages;
+                    textBox9.Text = (page + 1) + "/" + (pages + 1);
                 }
             }
             else if (comboBox1.SelectedIndex == 5)
@@ -1630,13 +1620,13 @@ namespace cristales_pva
                     {
                         datagridviewNE2.DataSource = null;
                         datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                        textBox9.Text = page + "/" + pages;
+                        textBox9.Text = (page + 1) + "/" + (pages + 1);
                     });
                 }
                 else {
                     datagridviewNE2.DataSource = null;
                     datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                    textBox9.Text = page + "/" + pages;
+                    textBox9.Text = (page + 1) + "/" + (pages + 1);
                 }
             }
             else if (comboBox1.SelectedIndex == 6)
@@ -1658,14 +1648,14 @@ namespace cristales_pva
                     {
                         datagridviewNE2.DataSource = null;
                         datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                        textBox9.Text = page + "/" + pages;
+                        textBox9.Text = (page + 1) + "/" + (pages + 1);
                         setDiseñoColorGrid();
                     });
                 }
                 else {
                     datagridviewNE2.DataSource = null;
                     datagridviewNE2.DataSource = data.Skip(50 * page).Take(50).ToList();
-                    textBox9.Text = page + "/" + pages;
+                    textBox9.Text = (page + 1) + "/" + (pages + 1);
                     setDiseñoColorGrid();
                 }
             }
@@ -1694,12 +1684,31 @@ namespace cristales_pva
         // Inicia load ----------------------------------------------------------------------------------------------------------------------
         //barra de carga
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {          
+        {            
             constants.downloadPropiedadesModel();
             constants.loadPropiedadesModel();
+            //TC
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            float tc = sql.getTC();
+            constants.setPropiedadesXML(tc, sql.getCostoAluminioKG());
+            if (tc <= 0)
+            {
+                tc = constants.getTCFromXML();
+            }
+            constants.tc = tc;
+            if (constants.enable_c_tc && constants.folio_abierto > 0)
+            {
+                float c_tc = sql.getCotizacionTC(constants.folio_abierto);
+                if (c_tc > 0)
+                {
+                    constants.tc = c_tc;
+                }
+            }
+            //----------------------------------------------------------------->
             updateTablesToLocalDB();
+            constants.reloadUserItems(this);          
             reloadPrecios();
-            reloadIVA();
+            reloadIVA();           
         }
         //end barra de carga
 
@@ -1790,19 +1799,29 @@ namespace cristales_pva
         }    
 
         //updaters ------------------------------------------------------------------------------------------------------------------>
-        private void updateListaCostoCorteInstalado(string clave, string articulo, float costo_corte_m2, float costo_instalado, string proveedor)
+        private void updateListaCostoCorteInstalado(string clave, string articulo, float costo_corte_m2, float costo_instalado, string proveedor, string moneda)
         {
             listas = new listas_entities_pva();
             try
             {
                 var new_data = (from x in listas.lista_costo_corte_e_instalado where x.clave == clave select x).SingleOrDefault();
+                float tc = constants.tc;
 
                 if (new_data != null)
                 {
                     new_data.articulo = articulo;
-                    new_data.costo_corte_m2 = Math.Round(costo_corte_m2, 2);
-                    new_data.costo_instalado = Math.Round(costo_instalado, 2);
+                    if (moneda != "MXN")
+                    {
+                        new_data.costo_corte_m2 = Math.Round(costo_corte_m2 * tc, 2);
+                        new_data.costo_instalado = Math.Round(costo_instalado * tc, 2);
+                    }
+                    else
+                    {
+                        new_data.costo_corte_m2 = Math.Round(costo_corte_m2, 2);
+                        new_data.costo_instalado = Math.Round(costo_instalado, 2);
+                    }
                     new_data.proveedor = proveedor;
+                    new_data.moneda = moneda;
                 }
 
                 listas.SaveChanges();
@@ -1813,19 +1832,29 @@ namespace cristales_pva
             }
         }
 
-        private void updateListaPrecioCorteInstalado(string clave, string articulo, float precio_corte_m2, float precio_instalado, string proveedor)
+        private void updateListaPrecioCorteInstalado(string clave, string articulo, float precio_corte_m2, float precio_instalado, string proveedor, string moneda)
         {
             listas = new listas_entities_pva();
             try
             {
                 var new_data = (from x in listas.lista_precio_corte_e_instalado where x.clave == clave select x).SingleOrDefault();
+                float tc = constants.tc;
 
                 if (new_data != null)
                 {
                     new_data.articulo = articulo;
-                    new_data.precio_venta_corte_m2 = Math.Round(precio_corte_m2, 2);
-                    new_data.precio_venta_instalado = Math.Round(precio_instalado, 2);
+                    if (moneda != "MXN")
+                    {
+                        new_data.precio_venta_corte_m2 = Math.Round(precio_corte_m2 * tc, 2);
+                        new_data.precio_venta_instalado = Math.Round(precio_instalado * tc, 2);
+                    }
+                    else
+                    {
+                        new_data.precio_venta_corte_m2 = Math.Round(precio_corte_m2, 2);
+                        new_data.precio_venta_instalado = Math.Round(precio_instalado, 2);
+                    }                   
                     new_data.proveedor = proveedor;
+                    new_data.moneda = moneda;
                 }
 
                 listas.SaveChanges();
@@ -1836,20 +1865,29 @@ namespace cristales_pva
             }
         }
 
-        private void updateListaPrecioHojas(string clave, string articulo, float largo, float alto, float precio_hoja, string proveedor)
+        private void updateListaPrecioHojas(string clave, string articulo, float largo, float alto, float precio_hoja, string proveedor, string moneda)
         {
             listas = new listas_entities_pva();
             try
             {
                 var new_data = (from x in listas.lista_precios_hojas where x.clave == clave select x).SingleOrDefault();
+                float tc = constants.tc;
 
                 if (new_data != null)
                 {
                     new_data.articulo = articulo;
                     new_data.largo = Math.Round(largo, 2);
                     new_data.alto = Math.Round(alto, 2);
-                    new_data.precio_hoja = Math.Round(precio_hoja, 2);
+                    if (moneda != "MXN")
+                    {
+                        new_data.precio_hoja = Math.Round(precio_hoja * tc, 2);
+                    }
+                    else
+                    {
+                        new_data.precio_hoja = Math.Round(precio_hoja, 2);
+                    }
                     new_data.proveedor = proveedor;
+                    new_data.moneda = moneda;
                 }
 
                 listas.SaveChanges();
@@ -1882,12 +1920,13 @@ namespace cristales_pva
             }
         }
 
-        private void updateListaPerfilesCuprum(int id, string clave, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, float chocolate, float acero_inox, float bronce)
+        private void updateListaPerfilesCuprum(int id, string clave, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, float chocolate, float acero_inox, float bronce, string moneda)
         {
             listas = new listas_entities_pva();
             try
             {
                 var new_data = (from x in listas.perfiles where x.id == id select x).SingleOrDefault();
+                float tc = constants.tc;
 
                 if (new_data != null)
                 {
@@ -1897,19 +1936,38 @@ namespace cristales_pva
                     new_data.largo = Math.Round(largo, 2);
                     new_data.ancho_perfil = Math.Round(ancho, 2);
                     new_data.perimetro_dm2_ml = Math.Round(per_a, 2);
-                    new_data.crudo = Math.Round(crudo, 2);
-                    new_data.blanco = Math.Round(blanco, 2);
-                    new_data.hueso = Math.Round(hueso, 2);
-                    new_data.champagne = Math.Round(champagne, 2);
-                    new_data.gris = Math.Round(gris, 2);
-                    new_data.negro = Math.Round(negro, 2);
-                    new_data.brillante = Math.Round(brillante, 2);
-                    new_data.natural_1 = Math.Round(natural, 2);
-                    new_data.madera = Math.Round(madera, 2);
+                    if (moneda != "MXN")
+                    {
+                        new_data.crudo = Math.Round(crudo * tc, 2);
+                        new_data.blanco = Math.Round(blanco * tc, 2);
+                        new_data.hueso = Math.Round(hueso * tc, 2);
+                        new_data.champagne = Math.Round(champagne * tc, 2);
+                        new_data.gris = Math.Round(gris * tc, 2);
+                        new_data.negro = Math.Round(negro * tc, 2);
+                        new_data.brillante = Math.Round(brillante * tc, 2);
+                        new_data.natural_1 = Math.Round(natural * tc, 2);
+                        new_data.madera = Math.Round(madera * tc, 2);
+                        new_data.chocolate = Math.Round(chocolate * tc, 2);
+                        new_data.acero_inox = Math.Round(acero_inox * tc, 2);
+                        new_data.bronce = Math.Round(bronce * tc, 2);
+                    }
+                    else
+                    {
+                        new_data.crudo = Math.Round(crudo, 2);
+                        new_data.blanco = Math.Round(blanco, 2);
+                        new_data.hueso = Math.Round(hueso, 2);
+                        new_data.champagne = Math.Round(champagne, 2);
+                        new_data.gris = Math.Round(gris, 2);
+                        new_data.negro = Math.Round(negro, 2);
+                        new_data.brillante = Math.Round(brillante, 2);
+                        new_data.natural_1 = Math.Round(natural, 2);
+                        new_data.madera = Math.Round(madera, 2);
+                        new_data.chocolate = Math.Round(chocolate, 2);
+                        new_data.acero_inox = Math.Round(acero_inox, 2);
+                        new_data.bronce = Math.Round(bronce, 2);
+                    }
                     new_data.kg_peso_lineal = Math.Round(peso, 2);
-                    new_data.chocolate = Math.Round(chocolate, 2);
-                    new_data.acero_inox = Math.Round(acero_inox, 2);
-                    new_data.bronce = Math.Round(bronce, 2);
+                    new_data.moneda = moneda;
                 }
 
                 listas.SaveChanges();
@@ -1920,12 +1978,13 @@ namespace cristales_pva
             }
         }
 
-        private void updateListaHerrajes(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio)
+        private void updateListaHerrajes(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string moneda)
         {
             listas = new listas_entities_pva();
             try
             {
                 var new_data = (from x in listas.herrajes where x.id == id select x).SingleOrDefault();
+                float tc = constants.tc;
 
                 if (new_data != null)
                 {
@@ -1934,7 +1993,15 @@ namespace cristales_pva
                     new_data.linea = linea;
                     new_data.caracteristicas = caracteristicas;
                     new_data.color = color;
-                    new_data.precio = Math.Round(precio, 2);                   
+                    if (moneda != "MXN")
+                    {
+                        new_data.precio = Math.Round(precio * tc, 2);
+                    }
+                    else
+                    {
+                        new_data.precio = Math.Round(precio, 2);
+                    }
+                    new_data.moneda = moneda;
                 }
 
                 listas.SaveChanges();
@@ -1945,12 +2012,13 @@ namespace cristales_pva
             }
         }
 
-        private void updateListaOtros(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float largo, float alto, float precio)
+        private void updateListaOtros(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float largo, float alto, float precio, string moneda)
         {
             listas = new listas_entities_pva();
             try
             {
                 var new_data = (from x in listas.otros where x.id == id select x).SingleOrDefault();
+                float tc = constants.tc;
 
                 if (new_data != null)
                 {
@@ -1961,7 +2029,15 @@ namespace cristales_pva
                     new_data.color = color;
                     new_data.largo = largo;
                     new_data.alto = alto;
-                    new_data.precio = Math.Round(precio, 2);
+                    if (moneda != "MXN")
+                    {
+                        new_data.precio = Math.Round(precio * tc, 2);
+                    }
+                    else
+                    {
+                        new_data.precio = Math.Round(precio, 2);
+                    }
+                    new_data.moneda = moneda;
                 }
 
                 listas.SaveChanges();
@@ -2116,6 +2192,28 @@ namespace cristales_pva
             }
         }
 
+        private void updatePaquetes(int id, string clave, string items, string type, string articulo)
+        {
+            listas = new listas_entities_pva();
+            try
+            {
+                var new_data = (from x in listas.paquetes where x.id == id select x).SingleOrDefault();
+
+                if (new_data != null)
+                {
+                    new_data.comp_items = items;
+                    new_data.comp_type = type;
+                    new_data.comp_articulo = articulo;                  
+                }
+
+                listas.SaveChanges();
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+            }
+        }
+
         public void updateTablesToLocalDB()
         {
             try
@@ -2131,7 +2229,7 @@ namespace cristales_pva
                 {
                     if (t1.Rows[i][0] != null && t1.Rows[i][0].ToString() != "")
                     {
-                        updateListaPrecioHojas(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][2].ToString()), constants.stringToFloat(t1.Rows[i][3].ToString()), constants.stringToFloat(t1.Rows[i][6].ToString()), t1.Rows[i][8].ToString());
+                        updateListaPrecioHojas(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][2].ToString()), constants.stringToFloat(t1.Rows[i][3].ToString()), constants.stringToFloat(t1.Rows[i][6].ToString()), t1.Rows[i][8].ToString(), t1.Rows[i][9].ToString());
                     }
                 }
 
@@ -2158,7 +2256,7 @@ namespace cristales_pva
                     if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
                     {
                         updateListaPerfilesCuprum((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), constants.stringToFloat(t1.Rows[i][5].ToString()),
-                        constants.stringToFloat(t1.Rows[i][6].ToString()), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()), constants.stringToFloat(t1.Rows[i][10].ToString()), constants.stringToFloat(t1.Rows[i][11].ToString()), constants.stringToFloat(t1.Rows[i][12].ToString()), constants.stringToFloat(t1.Rows[i][13].ToString()), constants.stringToFloat(t1.Rows[i][14].ToString()), constants.stringToFloat(t1.Rows[i][15].ToString()), constants.stringToFloat(t1.Rows[i][16].ToString()), constants.stringToFloat(t1.Rows[i][17].ToString()), constants.stringToFloat(t1.Rows[i][19].ToString()), constants.stringToFloat(t1.Rows[i][20].ToString()), constants.stringToFloat(t1.Rows[i][21].ToString()));
+                        constants.stringToFloat(t1.Rows[i][6].ToString()), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()), constants.stringToFloat(t1.Rows[i][10].ToString()), constants.stringToFloat(t1.Rows[i][11].ToString()), constants.stringToFloat(t1.Rows[i][12].ToString()), constants.stringToFloat(t1.Rows[i][13].ToString()), constants.stringToFloat(t1.Rows[i][14].ToString()), constants.stringToFloat(t1.Rows[i][15].ToString()), constants.stringToFloat(t1.Rows[i][16].ToString()), constants.stringToFloat(t1.Rows[i][17].ToString()), constants.stringToFloat(t1.Rows[i][19].ToString()), constants.stringToFloat(t1.Rows[i][20].ToString()), constants.stringToFloat(t1.Rows[i][21].ToString()), t1.Rows[i][23].ToString());
                     }
                 }
 
@@ -2171,7 +2269,7 @@ namespace cristales_pva
                 {
                     if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
                     {
-                        updateListaHerrajes((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()));
+                        updateListaHerrajes((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), t1.Rows[i][9].ToString());
                     }
                 }
 
@@ -2184,7 +2282,7 @@ namespace cristales_pva
                 {
                     if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
                     {
-                        updateListaOtros((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()));
+                        updateListaOtros((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()), t1.Rows[i][11].ToString());
                     }
                 }
 
@@ -2258,6 +2356,17 @@ namespace cristales_pva
                     }
                 }
 
+                t1.Reset();
+                t1 = sql.createDataTableFromSQLTable("paquetes");
+
+                for (i = 0; i < t1.Rows.Count; i++)
+                {
+                    if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
+                    {
+                        updatePaquetes((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString());
+                    }
+                }
+
                 backgroundWorker1.ReportProgress(80);
 
                 t1.Reset();
@@ -2268,8 +2377,8 @@ namespace cristales_pva
                 {
                     if (t1.Rows[i][0] != null && t1.Rows[i][0].ToString() != "")
                     {
-                        updateListaCostoCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][5].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString());
-                        updateListaPrecioCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString());
+                        updateListaCostoCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][5].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString(), t1.Rows[i][10].ToString());
+                        updateListaPrecioCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString(), t1.Rows[i][10].ToString());
                     }
                 }
 
@@ -2277,7 +2386,6 @@ namespace cristales_pva
 
                 t1.Dispose();
                 t2.Dispose();
-                constants.reloadUserItems();
             }
             catch (Exception) { }
         }
@@ -2624,31 +2732,31 @@ namespace cristales_pva
             {
                 if (comboBox1.SelectedIndex == 0)
                 {
-                    label17.Text = Math.Round((((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
-                    label41.Text = Math.Round(((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
+                    label17.Text = Math.Round((((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
+                    label41.Text = Math.Round(((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_m2 * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
                 }
                 else if(comboBox1.SelectedIndex == 1)
                 {
-                    label17.Text = Math.Round((((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
-                    label41.Text = Math.Round(((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
+                    label17.Text = Math.Round((((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
+                    label41.Text = Math.Round(((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_m2 * precioMinimo() * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
                 }
             }
             else if (tipo == "_instalado")
             {
-                label17.Text = Math.Round((((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
-                label41.Text = Math.Round(((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
+                label17.Text = Math.Round((((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
+                label41.Text = Math.Round(((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_instalado * (stringToFloat(textBox2.Text) / 1000) * (stringToFloat(textBox3.Text) / 1000) * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
             }
             else if (tipo == "_hoja")
             {
-                label17.Text = Math.Round((((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
-                label41.Text = Math.Round(((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) - (((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
+                label17.Text = Math.Round((((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100))) * constants.iva, 2).ToString("0.00");
+                label41.Text = Math.Round(((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) + (((_hoja * stringToFloat(textBox5.Text) * filo_muerto) + calcularAcabados()) * (stringToFloat(textBox26.Text) / 100)), 2).ToString("0.00");
             }
         }
 
         //Descuento cristales
         private void textBox26_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isDesc(textBox26.Text) == true)
+            if (constants.isInteger(textBox26.Text) == true)
             {              
                 if (comboBox1.SelectedIndex == 2)
                 {
@@ -3747,7 +3855,7 @@ namespace cristales_pva
         //descuento
         private void textBox27_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isDesc(textBox27.Text) == true)
+            if (constants.isInteger(textBox27.Text) == true)
             {
                 calculoAluminio();
             }
@@ -3784,74 +3892,74 @@ namespace cristales_pva
                         case "crudo":
                             pf = (float)perfiles.crudo;
                             label34.Text = Math.Round((double)pf / largo_original, 2).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "blanco":
                             pf = (float)perfiles.blanco;
                             label34.Text = Math.Round((double)pf / largo_original, 2).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "hueso":
                             pf = (float)perfiles.hueso;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "champagne":
                             pf = (float)perfiles.champagne;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "gris":
                             pf = (float)perfiles.gris;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "negro":
                             pf = (float)perfiles.negro;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "brillante":
                             pf = (float)perfiles.brillante;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "natural":
                             pf = (float)perfiles.natural_1;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "madera":
                             pf = (float)perfiles.madera;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "chocolate":
                             pf = (float)perfiles.chocolate;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "acero_inox":
                             pf = (float)perfiles.acero_inox;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         case "bronce":
                             pf = (float)perfiles.bronce;
                             label34.Text = (Math.Round((double)pf / largo_original, 2)).ToString("0.00");
-                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) - ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
+                            label38.Text = Math.Round(((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((((double)pf / largo_original) * largo * cant) + ((((double)pf / largo_original) * largo * cant) * desc), 2).ToString("0.00");
                             break;
                         default:
                             break;
@@ -3870,8 +3978,8 @@ namespace cristales_pva
                             ext = (float)(largo_original * color.costo_extra_ml);
                             label34.Text = Math.Round((double)((pf / largo_original) + ((((perfiles.perimetro_dm2_ml/100) * color.precio) + ext) * constants.iva)), 2).ToString("0.00");
                             ext = (float)(largo * color.costo_extra_ml);
-                            label38.Text = Math.Round((double)((((pf / largo_original) * largo * cant) + (((largo * (perfiles.perimetro_dm2_ml/100) * (color.precio)) + ext) * constants.iva * cant)) - ((((pf / largo_original) * largo * cant) + (largo * (perfiles.perimetro_dm2_ml/100) * (color.precio) * constants.iva * cant)) * desc)) * constants.iva, 2).ToString("0.00");
-                            label104.Text = Math.Round((double)((((pf / largo_original) * largo * cant) + (((largo * (perfiles.perimetro_dm2_ml / 100) * (color.precio)) + ext) * constants.iva * cant)) - ((((pf / largo_original) * largo * cant) + (largo * (perfiles.perimetro_dm2_ml / 100) * (color.precio) * constants.iva * cant)) * desc)), 2).ToString("0.00");
+                            label38.Text = Math.Round((double)((((pf / largo_original) * largo * cant) + (((largo * (perfiles.perimetro_dm2_ml/100) * (color.precio)) + ext) * constants.iva * cant)) + ((((pf / largo_original) * largo * cant) + (largo * (perfiles.perimetro_dm2_ml/100) * (color.precio) * constants.iva * cant)) * desc)) * constants.iva, 2).ToString("0.00");
+                            label104.Text = Math.Round((double)((((pf / largo_original) * largo * cant) + (((largo * (perfiles.perimetro_dm2_ml / 100) * (color.precio)) + ext) * constants.iva * cant)) + ((((pf / largo_original) * largo * cant) + (largo * (perfiles.perimetro_dm2_ml / 100) * (color.precio) * constants.iva * cant)) * desc)), 2).ToString("0.00");
                         }
                     }
                 }
@@ -3888,8 +3996,8 @@ namespace cristales_pva
 
             if(herraje != null)
             {              
-                label63.Text = Math.Round(((stringToFloat(textBox33.Text) * (float)(herraje.precio)) - ((stringToFloat(textBox33.Text) * (float)(herraje.precio)) * (stringToFloat(textBox29.Text) / 100))) * constants.iva, 2).ToString("0.00");
-                label43.Text = Math.Round((stringToFloat(textBox33.Text) * (float)(herraje.precio)) - ((stringToFloat(textBox33.Text) * (float)(herraje.precio)) * (stringToFloat(textBox29.Text) / 100)), 2).ToString("0.00");
+                label63.Text = Math.Round(((stringToFloat(textBox33.Text) * (float)(herraje.precio)) + ((stringToFloat(textBox33.Text) * (float)(herraje.precio)) * (stringToFloat(textBox29.Text) / 100))) * constants.iva, 2).ToString("0.00");
+                label43.Text = Math.Round((stringToFloat(textBox33.Text) * (float)(herraje.precio)) + ((stringToFloat(textBox33.Text) * (float)(herraje.precio)) * (stringToFloat(textBox29.Text) / 100)), 2).ToString("0.00");
             }
         }
 
@@ -3911,7 +4019,7 @@ namespace cristales_pva
         //descuento herrajes
         private void textBox29_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isDesc(textBox29.Text) == true)
+            if (constants.isInteger(textBox29.Text) == true)
             {
                 calculoHerrajes();
             }
@@ -3930,15 +4038,15 @@ namespace cristales_pva
 
             if (costo != null)
             {
-                label74.Text = Math.Round(((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000) * (stringToFloat(textBox37.Text) / 1000)) - ((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000)) * (stringToFloat(textBox37.Text) / 1000) * (stringToFloat(textBox31.Text) / 100))) * constants.iva, 2).ToString("0.00");
-                label106.Text = Math.Round((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000) * (stringToFloat(textBox37.Text) / 1000)) - ((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000)) * (stringToFloat(textBox37.Text) / 1000) * (stringToFloat(textBox31.Text) / 100)), 2).ToString("0.00");
+                label74.Text = Math.Round(((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000) * (stringToFloat(textBox37.Text) / 1000)) + ((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000)) * (stringToFloat(textBox37.Text) / 1000) * (stringToFloat(textBox31.Text) / 100))) * constants.iva, 2).ToString("0.00");
+                label106.Text = Math.Round((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000) * (stringToFloat(textBox37.Text) / 1000)) + ((stringToFloat(textBox30.Text) * (float)(costo) * (stringToFloat(textBox39.Text) / 1000)) * (stringToFloat(textBox37.Text) / 1000) * (stringToFloat(textBox31.Text) / 100)), 2).ToString("0.00");
             }
         }
 
         //descuento otros
         private void textBox31_TextChanged(object sender, EventArgs e)
         {
-            if (constants.isDesc(textBox31.Text) == true)
+            if (constants.isInteger(textBox31.Text) == true)
             {
                 calculoOtros();
             }
@@ -4078,7 +4186,7 @@ namespace cristales_pva
 
         //Folio  --------------
         public void setFolioLabel()
-        {
+        {           
             label22.Text = constants.folio_abierto.ToString();
             textBox4.Text = constants.desc_cotizacion.ToString();
             textBox28.Text = constants.utilidad_cotizacion.ToString();
@@ -4918,13 +5026,17 @@ namespace cristales_pva
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            if(comboBox1.Text != "")
+            reloadLista();
+        }
+ 
+        public void reloadLista()
+        {
+            if (comboBox1.Text != "")
             {
                 page = 0;
                 loadListaFromLocal();
             }
         }
-        //
 
         //boton agregar en otros
         private void button10_Click(object sender, EventArgs e)
@@ -6651,7 +6763,12 @@ namespace cristales_pva
                 toolStripStatusLabel3.Text = string.Empty;
                 setEditImage(false, false);
                 disableTabPage();
-                tabControl1.SelectedTab = tabPage15;               
+                tabControl1.SelectedTab = tabPage15;
+                float tc = constants.getTCFromXML();
+                if(constants.tc != tc)
+                {
+                    constants.changeTC(constants.tc, tc, "USD");
+                }             
             }
             catch (Exception err)
             {
@@ -6663,6 +6780,7 @@ namespace cristales_pva
         private void BackgroundWorker4_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             label100.Text = "";
+            ((Form1)Application.OpenForms["Form1"]).setTCLabel(constants.tc);
         }
 
         //Aríticulos de Usuario
@@ -6772,6 +6890,11 @@ namespace cristales_pva
             return r;
         }
 
+        private void habilitarCambioDeParametrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new delete_password(false, true).ShowDialog();
+        }
+
         public void setModoLIVA()
         {
             if (constants.m_liva)
@@ -6791,5 +6914,10 @@ namespace cristales_pva
                 textBox28.Enabled = true;
             }
         }
+
+        public void setTCLabel(float tc)
+        {
+            label15.Text = "TC (1 = USD): $" + tc + " MXN";
+        }      
     }
 }

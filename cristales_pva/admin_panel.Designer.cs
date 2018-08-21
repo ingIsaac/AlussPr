@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(admin_panel));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -38,6 +38,9 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.button16 = new System.Windows.Forms.Button();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -130,6 +133,7 @@
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button18 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -234,6 +238,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button18);
+            this.tabPage1.Controls.Add(this.checkBox4);
+            this.tabPage1.Controls.Add(this.textBox7);
+            this.tabPage1.Controls.Add(this.label23);
             this.tabPage1.Controls.Add(this.button16);
             this.tabPage1.Controls.Add(this.comboBox7);
             this.tabPage1.Controls.Add(this.label16);
@@ -260,13 +268,43 @@
             this.tabPage1.Text = "Concentrado de Listas";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = true;
+            this.checkBox4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox4.Location = new System.Drawing.Point(604, 74);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(94, 17);
+            this.checkBox4.TabIndex = 28;
+            this.checkBox4.Text = "Habilitar C/KG";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // textBox7
+            // 
+            this.textBox7.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox7.Location = new System.Drawing.Point(689, 12);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(52, 20);
+            this.textBox7.TabIndex = 27;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(601, 15);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(82, 13);
+            this.label23.TabIndex = 26;
+            this.label23.Text = "Aluminio ($/Kg):";
+            // 
             // button16
             // 
             this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button16.Image = global::cristales_pva.Properties.Resources.refresh_icon;
-            this.button16.Location = new System.Drawing.Point(707, 62);
+            this.button16.Location = new System.Drawing.Point(707, 65);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(34, 31);
+            this.button16.Size = new System.Drawing.Size(34, 28);
             this.button16.TabIndex = 25;
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
@@ -432,6 +470,7 @@
             // textBox4
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox4.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox4.Location = new System.Drawing.Point(856, 162);
             this.textBox4.Name = "textBox4";
@@ -446,14 +485,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView6.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView6.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView6.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -658,6 +697,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox1.Location = new System.Drawing.Point(465, 42);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(97, 20);
@@ -738,7 +778,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(992, 481);
+            this.tabPage2.Size = new System.Drawing.Size(992, 501);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Historial de Actualización";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -765,7 +805,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(992, 481);
+            this.tabPage3.Size = new System.Drawing.Size(992, 501);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Historial de Acceso";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -793,7 +833,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(992, 481);
+            this.tabPage4.Size = new System.Drawing.Size(992, 501);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Categorías y Proveedores";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -823,6 +863,7 @@
             // textBox6
             // 
             this.textBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox6.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox6.Location = new System.Drawing.Point(725, 190);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(151, 20);
@@ -904,6 +945,7 @@
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.textBox3.Location = new System.Drawing.Point(121, 161);
             this.textBox3.Name = "textBox3";
@@ -976,6 +1018,7 @@
             // textBox5
             // 
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox5.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox5.Location = new System.Drawing.Point(724, 190);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(152, 20);
@@ -1056,6 +1099,7 @@
             // textBox2
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.textBox2.Location = new System.Drawing.Point(117, 161);
             this.textBox2.Name = "textBox2";
@@ -1235,6 +1279,19 @@
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // button18
+            // 
+            this.button18.Image = global::cristales_pva.Properties.Resources.save_16;
+            this.button18.Location = new System.Drawing.Point(604, 39);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(138, 23);
+            this.button18.TabIndex = 29;
+            this.button18.Text = "Guardar";
+            this.button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button18.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
             // admin_panel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1381,5 +1438,9 @@
         private System.Windows.Forms.ToolStripMenuItem añadirToolStripMenuItem;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Button button18;
     }
 }

@@ -87,7 +87,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(94, 340);
+            this.button1.Location = new System.Drawing.Point(94, 339);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 32);
             this.button1.TabIndex = 3;
@@ -201,7 +201,7 @@
             // label3
             // 
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(37, 503);
+            this.label3.Location = new System.Drawing.Point(37, 510);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(214, 21);
             this.label3.TabIndex = 17;
@@ -247,7 +247,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(94, 380);
+            this.pictureBox2.Location = new System.Drawing.Point(94, 379);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 88);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

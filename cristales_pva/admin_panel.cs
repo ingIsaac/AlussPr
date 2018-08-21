@@ -6,6 +6,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace cristales_pva
 {
@@ -20,6 +22,7 @@ namespace cristales_pva
         int[] otros = new int[] { 0, 1, 10};
         int[] colores = new int[] { 0, 1, 6};
         List<int> find_next = new List<int>();
+        string[] tc = new string[] { "MXN", "USD" };
 
         // tablas
         System.Data.DataTable tem_table = new System.Data.DataTable();
@@ -49,11 +52,24 @@ namespace cristales_pva
         string value_filter = string.Empty;
         bool ordenado = false;
         bool permiso = false;
+        float m_tc = 0;
         //
 
         public void setPermiso(bool permiso)
         {
             this.permiso = permiso;
+        }
+
+        private void checkUSERItem()
+        {
+            foreach(DataGridViewRow x in datagridviewNE1.Rows)
+            {
+                if (x.Cells["Clave"].Value.ToString().StartsWith("USER"))
+                {
+                    x.DefaultCellStyle.BackColor = Color.Yellow;
+                    x.ReadOnly = true;
+                }
+            }
         }
 
         public admin_panel()
@@ -98,7 +114,42 @@ namespace cristales_pva
 
             //columna tabla de %
             data_column.Columns.Add("data");
-            //-------                 
+            //------- 
+
+            //--
+            textBox7.KeyDown += TextBox7_KeyDown;
+            checkBox4.Click += CheckBox4_Click;
+            checkBox4.Checked = constants.enable_costo_alum_kg;
+            float alum_kg = constants.costo_aluminio_kg;
+            if (alum_kg <= 0)
+            {
+                MessageBox.Show("[Error] se no puede obtener la referencia al costo de aluminio por KG del archivo opciones.xml.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            textBox7.Text = alum_kg.ToString();
+            m_tc = constants.getTCFromXML();            
+        }
+
+        private void CheckBox4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+
+                var mv = from x in opciones_xml.Descendants("Opciones") select x;
+
+                foreach (XElement x in mv)
+                {
+                    x.SetElementValue("EAKG", checkBox4.Checked ? "true" : "false");
+                }
+
+                opciones_xml.Save(constants.opciones_xml);
+                constants.enable_costo_alum_kg = checkBox4.Checked;
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+                MessageBox.Show("[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TextBox4_KeyDown(object sender, KeyEventArgs e)
@@ -237,8 +288,8 @@ namespace cristales_pva
                         {
                             x.Style.BackColor = Color.White;
                         }
-                    }
-                }
+                    }                  
+                }              
             }
         }
 
@@ -379,6 +430,28 @@ namespace cristales_pva
                         datagridviewNE1.CurrentRow.Cells[datagridviewNE1.CurrentCell.ColumnIndex] = cb;
                         cb.Dispose();                         
                     }
+                    if (datagridviewNE1.CurrentCell.OwningColumn.HeaderText == "moneda")
+                    {
+                        DataGridViewComboBoxCell cb = new DataGridViewComboBoxCell();
+                        cb.Sorted = true;
+                        string u = string.Empty;
+                        cb.Items.Clear();
+                        cb.Items.AddRange(tc);
+                        foreach (string x in cb.Items)
+                        {
+                            if (x == datagridviewNE1.CurrentCell.Value.ToString())
+                            {
+                                u = datagridviewNE1.CurrentCell.Value.ToString();
+                            }
+                        }
+                        if (u == string.Empty)
+                        {
+                            datagridviewNE1.CurrentCell.Value = "MXN";
+                        }
+                        cb.Value = u;
+                        datagridviewNE1.CurrentRow.Cells[datagridviewNE1.CurrentCell.ColumnIndex] = cb;
+                        cb.Dispose();
+                    }
                 }
             }           
         }
@@ -427,7 +500,7 @@ namespace cristales_pva
             {
                 for (int v = 0; v < precios_costos_list.Count; v++)
                 {
-                    sql.updateListaCosto(datagridviewNE1.Rows[precios_costos_list[v]].Cells[0].Value.ToString(), datagridviewNE1.Rows[precios_costos_list[v]].Cells[1].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[2].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[3].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[4].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[6].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[7].Value.ToString()), datagridviewNE1.Rows[precios_costos_list[v]].Cells[8].Value.ToString(), datagridviewNE1.Rows[precios_costos_list[v]].Cells[9].Value.ToString());
+                    sql.updateListaCosto(datagridviewNE1.Rows[precios_costos_list[v]].Cells[0].Value.ToString(), datagridviewNE1.Rows[precios_costos_list[v]].Cells[1].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[2].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[3].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[4].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[6].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[precios_costos_list[v]].Cells[7].Value.ToString()), datagridviewNE1.Rows[precios_costos_list[v]].Cells[8].Value.ToString(), datagridviewNE1.Rows[precios_costos_list[v]].Cells[9].Value.ToString(), datagridviewNE1.Rows[precios_costos_list[v]].Cells[10].Value.ToString());
                     setVisto(false, precios_costos_list[v], 8);
                     backgroundWorker2.ReportProgress(((v + 1) * 100) / precios_costos_list.Count);
                     toolStripStatusLabel1.Text = "Subiendo Registro #" + (v + 1) + " de " + precios_costos_list.Count;                  
@@ -444,7 +517,7 @@ namespace cristales_pva
             {
                 for (int v = 0; v < instalado_list.Count; v++)
                 {
-                    sql.updateListaInstalado(datagridviewNE1.Rows[instalado_list[v]].Cells[0].Value.ToString(), datagridviewNE1.Rows[instalado_list[v]].Cells[1].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[2].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[3].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[4].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[6].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[7].Value.ToString()), datagridviewNE1.Rows[instalado_list[v]].Cells[8].Value.ToString(), datagridviewNE1.Rows[instalado_list[v]].Cells[9].Value.ToString());
+                    sql.updateListaInstalado(datagridviewNE1.Rows[instalado_list[v]].Cells[0].Value.ToString(), datagridviewNE1.Rows[instalado_list[v]].Cells[1].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[2].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[3].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[4].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[6].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[instalado_list[v]].Cells[7].Value.ToString()), datagridviewNE1.Rows[instalado_list[v]].Cells[8].Value.ToString(), datagridviewNE1.Rows[instalado_list[v]].Cells[9].Value.ToString(), datagridviewNE1.Rows[instalado_list[v]].Cells[10].Value.ToString());
                     setVisto(false, instalado_list[v], 8);
                     backgroundWorker2.ReportProgress(((v + 1) * 100) / instalado_list.Count);
                     toolStripStatusLabel1.Text = "Subiendo Registro #" + (v + 1) + " de " + instalado_list.Count;                  
@@ -461,7 +534,7 @@ namespace cristales_pva
             {
                 for (int v = 0; v < hojas_list.Count; v++)
                 {
-                    sql.updateListaHojas(datagridviewNE1.Rows[hojas_list[v]].Cells[0].Value.ToString(), datagridviewNE1.Rows[hojas_list[v]].Cells[1].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[2].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[3].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[4].Value.ToString()), stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[6].Value.ToString()), datagridviewNE1.Rows[hojas_list[v]].Cells[7].Value.ToString(), datagridviewNE1.Rows[hojas_list[v]].Cells[8].Value.ToString());
+                    sql.updateListaHojas(datagridviewNE1.Rows[hojas_list[v]].Cells[0].Value.ToString(), datagridviewNE1.Rows[hojas_list[v]].Cells[1].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[2].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[3].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[4].Value.ToString()), stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[hojas_list[v]].Cells[6].Value.ToString()), datagridviewNE1.Rows[hojas_list[v]].Cells[7].Value.ToString(), datagridviewNE1.Rows[hojas_list[v]].Cells[8].Value.ToString(), datagridviewNE1.Rows[hojas_list[v]].Cells[9].Value.ToString());
                     setVisto(false, hojas_list[v], 7);
                     backgroundWorker2.ReportProgress(((v + 1) * 100) / hojas_list.Count);
                     toolStripStatusLabel1.Text = "Subiendo Registro #" + (v + 1) + " de " + hojas_list.Count;                   
@@ -495,7 +568,7 @@ namespace cristales_pva
             {
                 for (int v = 0; v < perfiles_list.Count; v++)
                 {
-                    sql.updateListaAluminio((int)datagridviewNE1.Rows[perfiles_list[v]].Cells[0].Value, datagridviewNE1.Rows[perfiles_list[v]].Cells[2].Value.ToString(), datagridviewNE1.Rows[perfiles_list[v]].Cells[3].Value.ToString(), datagridviewNE1.Rows[perfiles_list[v]].Cells[4].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[6].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[7].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[8].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[9].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[10].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[11].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[12].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[13].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[14].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[15].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[16].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[17].Value.ToString()), datagridviewNE1.Rows[perfiles_list[v]].Cells[18].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[19].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[20].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[21].Value.ToString()));
+                    sql.updateListaAluminio((int)datagridviewNE1.Rows[perfiles_list[v]].Cells[0].Value, datagridviewNE1.Rows[perfiles_list[v]].Cells[2].Value.ToString(), datagridviewNE1.Rows[perfiles_list[v]].Cells[3].Value.ToString(), datagridviewNE1.Rows[perfiles_list[v]].Cells[4].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[5].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[6].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[7].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[8].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[9].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[10].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[11].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[12].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[13].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[14].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[15].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[16].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[17].Value.ToString()), datagridviewNE1.Rows[perfiles_list[v]].Cells[18].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[19].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[20].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[21].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[perfiles_list[v]].Cells[22].Value.ToString()), datagridviewNE1.Rows[perfiles_list[v]].Cells[23].Value.ToString());
                     setVisto(false, perfiles_list[v], 18);
                     backgroundWorker2.ReportProgress(((v + 1) * 100) / perfiles_list.Count);
                     toolStripStatusLabel1.Text = "Subiendo Registro #" + (v + 1) + " de " + perfiles_list.Count;                  
@@ -512,7 +585,7 @@ namespace cristales_pva
             {
                 for (int v = 0; v < herrajes_list.Count; v++)
                 {
-                    sql.updateListaHerrajes((int)datagridviewNE1.Rows[herrajes_list[v]].Cells[0].Value, datagridviewNE1.Rows[herrajes_list[v]].Cells[2].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[3].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[4].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[5].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[6].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[herrajes_list[v]].Cells[7].Value.ToString()), datagridviewNE1.Rows[herrajes_list[v]].Cells[8].Value.ToString());
+                    sql.updateListaHerrajes((int)datagridviewNE1.Rows[herrajes_list[v]].Cells[0].Value, datagridviewNE1.Rows[herrajes_list[v]].Cells[2].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[3].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[4].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[5].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[6].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[herrajes_list[v]].Cells[7].Value.ToString()), datagridviewNE1.Rows[herrajes_list[v]].Cells[8].Value.ToString(), datagridviewNE1.Rows[herrajes_list[v]].Cells[9].Value.ToString());
                     setVisto(false, herrajes_list[v], 8);
                     backgroundWorker2.ReportProgress(((v + 1) * 100) / herrajes_list.Count);
                     toolStripStatusLabel1.Text = "Subiendo Registro #" + (v + 1) + " de " + herrajes_list.Count;                   
@@ -529,7 +602,7 @@ namespace cristales_pva
             {
                 for (int v = 0; v < otros_list.Count; v++)
                 {
-                    sql.updateListaOtros((int)datagridviewNE1.Rows[otros_list[v]].Cells[0].Value, datagridviewNE1.Rows[otros_list[v]].Cells[2].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[3].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[4].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[5].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[6].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[otros_list[v]].Cells[9].Value.ToString()), datagridviewNE1.Rows[otros_list[v]].Cells[10].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[otros_list[v]].Cells[7].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[otros_list[v]].Cells[8].Value.ToString()));
+                    sql.updateListaOtros((int)datagridviewNE1.Rows[otros_list[v]].Cells[0].Value, datagridviewNE1.Rows[otros_list[v]].Cells[2].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[3].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[4].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[5].Value.ToString(), datagridviewNE1.Rows[otros_list[v]].Cells[6].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[otros_list[v]].Cells[9].Value.ToString()), datagridviewNE1.Rows[otros_list[v]].Cells[10].Value.ToString(), constants.stringToFloat(datagridviewNE1.Rows[otros_list[v]].Cells[7].Value.ToString()), constants.stringToFloat(datagridviewNE1.Rows[otros_list[v]].Cells[8].Value.ToString()), datagridviewNE1.Rows[otros_list[v]].Cells[11].Value.ToString());
                     setVisto(false, otros_list[v], 10);
                     backgroundWorker2.ReportProgress(((v + 1) * 100) / otros_list.Count);
                     toolStripStatusLabel1.Text = "Subiendo Registro #" + (v + 1) + " de " + otros_list.Count;
@@ -575,11 +648,11 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "costo_corte_precio", true, "articulo", value_filter);                       
+                        sql.dropTableOnGridView(table, "costo_corte_precio", true, "articulo", value_filter, true);                       
                     }
                     else if (comboBox9.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "costo_corte_precio", true, "proveedor", value_filter);                      
+                        sql.dropTableOnGridView(table, "costo_corte_precio", true, "proveedor", value_filter, true);                      
                     }
                 }
             }
@@ -594,11 +667,11 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "instalado", true, "articulo", value_filter);
+                        sql.dropTableOnGridView(table, "instalado", true, "articulo", value_filter, true);
                     }
                     else if (comboBox9.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "instalado", true, "proveedor", value_filter);
+                        sql.dropTableOnGridView(table, "instalado", true, "proveedor", value_filter, true);
                     }
                 }
             }
@@ -613,11 +686,11 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "hojas", true, "articulo", value_filter);
+                        sql.dropTableOnGridView(table, "hojas", true, "articulo", value_filter, true);
                     }
                     else if (comboBox9.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "hojas", true, "proveedor", value_filter);
+                        sql.dropTableOnGridView(table, "hojas", true, "proveedor", value_filter, true);
                     }
                 }
             }
@@ -637,11 +710,11 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "perfiles", true, "linea", value_filter);
+                        sql.dropTableOnGridView(table, "perfiles", true, "linea", value_filter, true);
                     }
                     else if (comboBox9.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "perfiles", true, "proveedor", value_filter);
+                        sql.dropTableOnGridView(table, "perfiles", true, "proveedor", value_filter, true);
                     }
                 }
             }
@@ -656,11 +729,11 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "herrajes", true, "linea", value_filter);
+                        sql.dropTableOnGridView(table, "herrajes", true, "linea", value_filter, true);
                     }
                     else if (comboBox9.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "herrajes", true, "proveedor", value_filter);
+                        sql.dropTableOnGridView(table, "herrajes", true, "proveedor", value_filter, true);
                     }
                 }
             }
@@ -675,11 +748,11 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "otros", true, "linea", value_filter);
+                        sql.dropTableOnGridView(table, "otros", true, "linea", value_filter, true);
                     }
                     else if(comboBox9.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "otros", true, "proveedor", value_filter);
+                        sql.dropTableOnGridView(table, "otros", true, "proveedor", value_filter, true);
                     }
                 }
             }
@@ -694,7 +767,7 @@ namespace cristales_pva
                 {
                     if (comboBox9.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "colores_aluminio", true, "proveedor", value_filter);
+                        sql.dropTableOnGridView(table, "colores_aluminio", true, "proveedor", value_filter, true);
                     }
                 }
             }           
@@ -733,6 +806,8 @@ namespace cristales_pva
                 toolStripStatusLabel1.Text = "Configurando Tabla...";
                 clearDatagridConfig(datagridviewNE1);
                 setDatagridConfig();
+                checkUSERItem();
+                setFilterIndicator();
                 backgroundWorker1.ReportProgress(100);
             }
             else
@@ -813,6 +888,33 @@ namespace cristales_pva
                 catch (Exception err)
                 {
                     constants.errorLog(err.ToString());
+                }
+            }
+        }
+
+        private void setFilterIndicator()
+        {
+            if (datagridviewNE1.RowCount > 0)
+            {
+                if (comboBox8.Text != string.Empty)
+                {
+                    foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                    {
+                        if (x.Cells["linea"].Value.ToString() == comboBox8.Text)
+                        {
+                            x.Cells[0].Style.BackColor = Color.Yellow;
+                        }
+                    }
+                }
+                else if (comboBox9.Text != string.Empty)
+                {
+                    foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                    {
+                        if (x.Cells["proveedor"].Value.ToString() == comboBox9.Text)
+                        {
+                            x.Cells[0].Style.BackColor = Color.Yellow;
+                        }
+                    }
                 }
             }
         }
@@ -938,7 +1040,9 @@ namespace cristales_pva
             if(comboBox1.SelectedIndex == 4)
             {
                 grid.Columns["kg_peso_lineal"].DisplayIndex = 7;
-            }      
+                grid.Columns["peso_teorico"].DisplayIndex = 8;
+                grid.Columns["moneda"].DisplayIndex = 10;
+            }
         }
         //borra config de grid
 
@@ -1061,6 +1165,11 @@ namespace cristales_pva
                                 tem_table.Rows.Add(row);
                                 perfiles_list.Add(datagridviewNE1.CurrentRow.Index);
                                 setVisto(true, datagridviewNE1.CurrentRow.Index, 18);
+                                //Calculo de Aluminio x KG
+                                if (datagridviewNE1.RowCount > 0)
+                                {
+                                    calcularCostoAluminioKG();
+                                }
                             }
                         }
                         else if (comboBox1.SelectedIndex == 5)
@@ -1478,7 +1587,7 @@ namespace cristales_pva
             }
             else
             {
-                MessageBox.Show("[Error] debes seleccionar una tabla primero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("[Error] debes seleccionar una lista primero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //
@@ -1726,7 +1835,7 @@ namespace cristales_pva
                         {
                             if (sql.findSQLValue("clave", "clave", "costo_corte_precio", x.Cells[0].Value.ToString()) == false)
                             {
-                                sql.insertListaCosto(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), 0, 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), "");
+                                sql.insertListaCosto(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), 0, 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), "", "MXN");
                                 x.DefaultCellStyle.BackColor = Color.LightGreen;                              
                             }
                             else
@@ -1747,7 +1856,7 @@ namespace cristales_pva
                         {
                             if (sql.findSQLValue("clave", "clave", "instalado", x.Cells[0].Value.ToString()) == false)
                             {                            
-                                sql.insertListaInstalado(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), 0, 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), "");
+                                sql.insertListaInstalado(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), 0, 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), "", "MXN");
                                 x.DefaultCellStyle.BackColor = Color.LightGreen;                              
                             }
                             else
@@ -1768,7 +1877,7 @@ namespace cristales_pva
                         {
                             if (sql.findSQLValue("clave", "clave", "hojas", x.Cells[0].Value.ToString()) == false)
                             {                              
-                                sql.insertListaHojas(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), "");
+                                sql.insertListaHojas(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), "", "MXN");
                                 x.DefaultCellStyle.BackColor = Color.LightGreen;                             
                             }
                             else
@@ -1810,7 +1919,7 @@ namespace cristales_pva
                         {
                             if (sql.findSQLValue("clave", "clave", "perfiles", x.Cells[0].Value.ToString()) == false)
                             {                               
-                                sql.insertListaAluminio(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), 0, 0, 0);
+                                sql.insertListaAluminio(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, DateTime.Today.ToString("dd/MM/yyyy"), 0, 0, 0, 0, "MXN");
                                 x.DefaultCellStyle.BackColor = Color.LightGreen;                                
                             }
                             else
@@ -1831,7 +1940,7 @@ namespace cristales_pva
                         {
                             if (sql.findSQLValue("clave", "clave", "herrajes", x.Cells[0].Value.ToString()) == false)
                             {                              
-                                sql.insertListaHerrajes(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), "", "", "", "", 0, DateTime.Today.ToString("dd/MM/yyyy"));
+                                sql.insertListaHerrajes(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), "", "", "", "", 0, DateTime.Today.ToString("dd/MM/yyyy"), "MXN");
                                 x.DefaultCellStyle.BackColor = Color.LightGreen;                            
                             }
                             else
@@ -1852,7 +1961,7 @@ namespace cristales_pva
                         {
                             if (sql.findSQLValue("clave", "clave", "otros", x.Cells[0].Value.ToString()) == false)
                             {                              
-                                sql.insertListaOtros(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), "", "", "", "", 0, DateTime.Today.ToString("dd/MM/yyyy"), 0, 0);
+                                sql.insertListaOtros(x.Cells[0].Value.ToString(), x.Cells[1].Value.ToString(), "", "", "", "", 0, DateTime.Today.ToString("dd/MM/yyyy"), 0, 0, "MXN");
                                 x.DefaultCellStyle.BackColor = Color.LightGreen;                               
                             }
                             else
@@ -2514,7 +2623,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show("[Error] debes seleccionar una tabla primero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("[Error] debes seleccionar una lista primero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -2559,7 +2668,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show("[Error] debes seleccionar una tabla primero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("[Error] debes seleccionar una lista primero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -2600,30 +2709,40 @@ namespace cristales_pva
 
         private void button16_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("Toda la lista se actualizara al dia de hoy. ¿Estás seguro de proceder?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if(r == DialogResult.Yes)
+            if (comboBox1.SelectedIndex < 0)
             {
-                if(datagridviewNE1.RowCount <= 100)
+                if (datagridviewNE1.Rows.Count > 0)
                 {
-                    foreach(DataGridViewRow x in datagridviewNE1.Rows)
+                    DialogResult r = MessageBox.Show("Toda la lista se actualizara al dia de hoy. ¿Estás seguro de proceder?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (r == DialogResult.Yes)
                     {
-                        foreach (DataGridViewCell v in x.Cells)
+                        if (datagridviewNE1.RowCount <= 100)
                         {
-                            if (v.OwningColumn.HeaderText == "articulo")
+                            foreach (DataGridViewRow x in datagridviewNE1.Rows)
                             {
-                                v.Selected = true;
-                                datagridviewNE1.BeginEdit(true);
-                                datagridviewNE1.EndEdit();
-                                break;
+                                foreach (DataGridViewCell v in x.Cells)
+                                {
+                                    if (v.OwningColumn.HeaderText == "articulo")
+                                    {
+                                        v.Selected = true;
+                                        datagridviewNE1.BeginEdit(true);
+                                        datagridviewNE1.EndEdit();
+                                        break;
+                                    }
+                                }
                             }
+                        }
+                        else
+                        {
+                            MessageBox.Show("[Error] el máximo número de registros para realizar está acción es de 100 registros.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
-                else
-                {
-                    MessageBox.Show("[Error] el máximo número de registros para realizar está acción es de 100 registros.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] necesitas seleccionar una lista.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2698,6 +2817,73 @@ namespace cristales_pva
                 {
                     find_next.Clear();
                     MessageBox.Show("No existen mas resultados de búsqueda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Estas seguro de modificar está información?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                new sqlDateBaseManager().setCostoAluminioKG(constants.stringToFloat(textBox7.Text));
+            }
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+            if (!constants.isFloat(textBox7.Text))
+            {
+                textBox7.Text = "";
+            }
+        }
+
+        private void calcularCostoAluminioKG(bool reload=false)
+        {
+            if(comboBox1.SelectedIndex == 4 && checkBox4.Checked)
+            {               
+                if (datagridviewNE1.RowCount > 0)
+                {
+                    float costo_kg = constants.stringToFloat(textBox7.Text);
+                    float peso_teorico = 0;
+                    float largo = 0;
+                    if (reload)
+                    {
+                        foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                        {
+                            peso_teorico = constants.stringToFloat(x.Cells[22].Value.ToString());
+                            largo = constants.stringToFloat(x.Cells[5].Value.ToString());
+                            if (costo_kg > 0 && peso_teorico > 0 && largo > 0)
+                            {
+                                x.Selected = true;
+                                datagridviewNE1.BeginEdit(true);
+                                x.Cells[8].Value = Math.Round(costo_kg * peso_teorico * largo * (x.Cells["moneda"].Value.ToString() == "MXN" ? m_tc : 1), 2);
+                                datagridviewNE1.EndEdit();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        peso_teorico = constants.stringToFloat(datagridviewNE1.CurrentRow.Cells[22].Value.ToString());
+                        largo = constants.stringToFloat(datagridviewNE1.CurrentRow.Cells[5].Value.ToString());
+                        if (costo_kg > 0 && peso_teorico > 0 && largo > 0)
+                        {
+                            datagridviewNE1.CurrentRow.Cells[8].Value = Math.Round(costo_kg * peso_teorico * largo * (datagridviewNE1.CurrentRow.Cells["moneda"].Value.ToString() == "MXN" ? m_tc : 1), 2);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void TextBox7_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                if (comboBox1.SelectedIndex == 4 && checkBox4.Checked)
+                {
+                    if (MessageBox.Show("Se modificarán todas los registros. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        calcularCostoAluminioKG(true);
+                    }
                 }
             }
         }

@@ -38,6 +38,8 @@ namespace cristales_pva
         //Properties...
         public static string licencia = string.Empty;
         public static float iva = 1.16f;
+        public static float tc = 0;
+        public static bool enable_c_tc = true;
         public static int updater_interval = 1;
         public static bool updater_enable = true;
         public static bool updater_form_close = true;
@@ -81,6 +83,8 @@ namespace cristales_pva
         public static float lim_sm = 15;
         public static int monitor_interval = 1;
         public static float fsconfig = 11;
+        public static float costo_aluminio_kg = 0;
+        public static bool enable_costo_alum_kg = true;
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;
@@ -204,17 +208,7 @@ namespace cristales_pva
         {          
             int r;
             return int.TryParse(num, out r);
-        }
-
-        public static Boolean isDesc(string num)
-        {
-            if (num == "-")
-            {
-                return true;
-            }
-            int r;
-            return int.TryParse(num, out r);
-        }
+        }    
 
         public static Boolean isFloat(string num)
         {
@@ -726,7 +720,7 @@ namespace cristales_pva
                                Perforado_dos = x.perforado_dos_pulgadas,
                                Grabado = x.grabado,
                                Esmerilado = x.esmerilado,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = Math.Round((float)x.total, 2)
                            };
                 if(buscar == true)
@@ -755,7 +749,7 @@ namespace cristales_pva
                                Perforado_dos = x.perforado_dos_pulgadas,
                                Grabado = x.grabado,
                                Esmerilado = x.esmerilado,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = Math.Round((float)x.total, 2)
                            };
                 }
@@ -805,7 +799,7 @@ namespace cristales_pva
                                Cantidad = x.cantidad,
                                Largo = x.largo_total,
                                Acabado = x.acabado,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = x.total
                            };
                 if(buscar == true)
@@ -824,7 +818,7 @@ namespace cristales_pva
                                Cantidad = x.cantidad,
                                Largo = x.largo_total,
                                Acabado = x.acabado,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = x.total
                            };
                 }
@@ -872,7 +866,7 @@ namespace cristales_pva
                                Proveedor = x.proveedor,
                                Acabado = x.color,
                                Cantidad = x.cantidad,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = x.total
                            };
                 if(buscar == true)
@@ -889,7 +883,7 @@ namespace cristales_pva
                                Proveedor = x.proveedor,
                                Acabado = x.color,
                                Cantidad = x.cantidad,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = x.total
                            };
                 }
@@ -939,7 +933,7 @@ namespace cristales_pva
                                Largo = x.largo,
                                Alto = x.alto,
                                Cantidad = x.cantidad,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = x.total
                            };
                 if(buscar == true)
@@ -958,7 +952,7 @@ namespace cristales_pva
                                Largo = x.largo,
                                Alto = x.alto,
                                Cantidad = x.cantidad,
-                               Descuento = x.descuento,
+                               Utilidad = x.descuento,
                                Total = x.total
                            };
                 }
@@ -1774,7 +1768,7 @@ namespace cristales_pva
         }
 
         //agregar a propiedades folio y nombre de cliente
-        public static void setClienteToPropiedades(int folio=-1, string name="", string proyecto="", float desc=0, float utilidad=0)
+        public static void setClienteToPropiedades(int folio=-1, string name="", string proyecto="", float desc=0, float utilidad=0, bool desglose_iva=true)
         {
             localDateBaseEntities3 propiedades = new localDateBaseEntities3();
             try {
@@ -1787,6 +1781,7 @@ namespace cristales_pva
                     k.proyecto_abierto = proyecto;
                     k.desc_cotizacion = desc;
                     k.utilidad_cotizacion = utilidad;
+                    k.desglose_iva = desglose_iva;
                 }
                 propiedades.SaveChanges();
             }
@@ -1809,6 +1804,7 @@ namespace cristales_pva
                     nombre_proyecto = k.proyecto_abierto.ToString();
                     desc_cotizacion = (float)k.desc_cotizacion;
                     utilidad_cotizacion = (float)k.utilidad_cotizacion;
+                    iva_desglosado = k.desglose_iva != null ? (bool)k.desglose_iva : true;
                 }
             }catch(Exception e)
             {
@@ -1943,11 +1939,11 @@ namespace cristales_pva
 
             if(instalado == true)
             {
-                r = ((insta * largo * alto * filo_muerto) * cantidad) - (((insta * largo * alto * filo_muerto) * cantidad) * descuento);
+                r = ((insta * largo * alto * filo_muerto) * cantidad) + (((insta * largo * alto * filo_muerto) * cantidad) * descuento);
             }
             else
             {
-                r = ((costo * largo * alto * filo_muerto) * cantidad) - (((costo * largo * alto * filo_muerto) * cantidad) * descuento);
+                r = ((costo * largo * alto * filo_muerto) * cantidad) + (((costo * largo * alto * filo_muerto) * cantidad) * descuento);
             }
             return r;
         }
@@ -1968,11 +1964,11 @@ namespace cristales_pva
 
             if (instalado == true)
             {
-                r = ((insta * largo * alto * filo_muerto) * cantidad) - (((insta * largo * alto * filo_muerto) * cantidad) * descuento);
+                r = ((insta * largo * alto * filo_muerto) * cantidad) + (((insta * largo * alto * filo_muerto) * cantidad) * descuento);
             }
             else
             {
-                r = ((costo * largo * alto * filo_muerto) * cantidad) - (((costo * largo * alto * filo_muerto) * cantidad) * descuento);
+                r = ((costo * largo * alto * filo_muerto) * cantidad) + (((costo * largo * alto * filo_muerto) * cantidad) * descuento);
             }
             return r;
         }
@@ -1990,7 +1986,7 @@ namespace cristales_pva
                 precio = (float)h.precio_hoja;               
             }
            
-            r = (precio * filo_muerto * cantidad) - ((precio * filo_muerto * cantidad) * descuento);
+            r = (precio * filo_muerto * cantidad) + ((precio * filo_muerto * cantidad) * descuento);
             return r;
         }
 
@@ -2228,47 +2224,47 @@ namespace cristales_pva
                     if (color != null)
                     {
                         ext = (float)(largo * color.costo_extra_ml);
-                        r = (float)(((((aluminio.crudo) / largo_original) * largo * cantidad) + (((largo * (aluminio.perimetro_dm2_ml/100) * (color.precio)) + ext) * cantidad)) - (float)(((((aluminio.crudo) / largo_original) * largo * cantidad) + (largo * (aluminio.perimetro_dm2_ml/100) * (color.precio) * cantidad)) * descuento));
+                        r = (float)(((((aluminio.crudo) / largo_original) * largo * cantidad) + (((largo * (aluminio.perimetro_dm2_ml/100) * (color.precio)) + ext) * cantidad)) + (float)(((((aluminio.crudo) / largo_original) * largo * cantidad) + (largo * (aluminio.perimetro_dm2_ml/100) * (color.precio) * cantidad)) * descuento));
                     }
                     else
                     {
                         switch (acabado)
                         {
                             case "crudo":
-                                r = (((float)((aluminio.crudo) / largo_original) * largo) * cantidad) - ((((float)((aluminio.crudo) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.crudo) / largo_original) * largo) * cantidad) + ((((float)((aluminio.crudo) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "blanco":
-                                r = (((float)((aluminio.blanco) / largo_original) * largo) * cantidad) - ((((float)((aluminio.blanco) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.blanco) / largo_original) * largo) * cantidad) + ((((float)((aluminio.blanco) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "hueso":
-                                r = (((float)((aluminio.hueso) / largo_original) * largo) * cantidad) - ((((float)((aluminio.hueso) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.hueso) / largo_original) * largo) * cantidad) + ((((float)((aluminio.hueso) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "champagne":
-                                r = (((float)((aluminio.champagne) / largo_original) * largo) * cantidad) - ((((float)((aluminio.champagne) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.champagne) / largo_original) * largo) * cantidad) + ((((float)((aluminio.champagne) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "gris":
-                                r = (((float)((aluminio.gris) / largo_original) * largo) * cantidad) - ((((float)((aluminio.gris) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.gris) / largo_original) * largo) * cantidad) + ((((float)((aluminio.gris) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "negro":
-                                r = (((float)((aluminio.negro) / largo_original) * largo) * cantidad) - ((((float)((aluminio.negro) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.negro) / largo_original) * largo) * cantidad) + ((((float)((aluminio.negro) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "brillante":
-                                r = (((float)((aluminio.brillante) / largo_original) * largo) * cantidad) - ((((float)((aluminio.brillante) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.brillante) / largo_original) * largo) * cantidad) + ((((float)((aluminio.brillante) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "natural":
-                                r = (((float)((aluminio.natural_1) / largo_original) * largo) * cantidad) - ((((float)((aluminio.natural_1) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.natural_1) / largo_original) * largo) * cantidad) + ((((float)((aluminio.natural_1) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "madera":
-                                r = (((float)((aluminio.madera) / largo_original) * largo) * cantidad) - ((((float)((aluminio.madera) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.madera) / largo_original) * largo) * cantidad) + ((((float)((aluminio.madera) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "chocolate":
-                                r = (((float)((aluminio.chocolate) / largo_original) * largo) * cantidad) - ((((float)((aluminio.chocolate) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.chocolate) / largo_original) * largo) * cantidad) + ((((float)((aluminio.chocolate) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "acero_inox":
-                                r = (((float)((aluminio.acero_inox) / largo_original) * largo) * cantidad) - ((((float)((aluminio.acero_inox) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.acero_inox) / largo_original) * largo) * cantidad) + ((((float)((aluminio.acero_inox) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             case "bronce":
-                                r = (((float)((aluminio.bronce) / largo_original) * largo) * cantidad) - ((((float)((aluminio.bronce) / largo_original) * largo) * cantidad) * descuento);
+                                r = (((float)((aluminio.bronce) / largo_original) * largo) * cantidad) + ((((float)((aluminio.bronce) / largo_original) * largo) * cantidad) * descuento);
                                 break;
                             default: break;
                         }
@@ -2308,7 +2304,7 @@ namespace cristales_pva
 
             if (herrajes != null)
             {               
-                r = ((float)(herrajes.precio) * cantidad) - (((float)(herrajes.precio) * cantidad) * descuento);
+                r = ((float)(herrajes.precio) * cantidad) + (((float)(herrajes.precio) * cantidad) * descuento);
             }
             return r;
         }
@@ -2382,19 +2378,19 @@ namespace cristales_pva
             {
                 if(otros.largo > 0 && otros.alto <= 0)
                 {
-                    r = (float)((otros.precio) * cantidad * largo) - (float)(((otros.precio) * cantidad * largo) * descuento);
+                    r = (float)((otros.precio) * cantidad * largo) + (float)(((otros.precio) * cantidad * largo) * descuento);
                 }
                 else if(otros.largo <= 0 && otros.alto > 0)
                 {
-                    r = (float)((otros.precio) * cantidad * alto) - (float)(((otros.precio) * cantidad * alto) * descuento);
+                    r = (float)((otros.precio) * cantidad * alto) + (float)(((otros.precio) * cantidad * alto) * descuento);
                 }
                 else if(otros.largo > 0 && otros.alto > 0)
                 {
-                    r = (float)((otros.precio) * largo * alto * cantidad) - (float)(((otros.precio) * largo * alto * cantidad) * descuento);                   
+                    r = (float)((otros.precio) * largo * alto * cantidad) + (float)(((otros.precio) * largo * alto * cantidad) * descuento);                   
                 }
                 else
                 {
-                    r = ((float)(otros.precio) * cantidad) - (((float)(otros.precio) * cantidad) * descuento);
+                    r = ((float)(otros.precio) * cantidad) + (((float)(otros.precio) * cantidad) * descuento);
                 }
             }
             return r;
@@ -4785,38 +4781,40 @@ namespace cristales_pva
             }
         }
 
-        public static string setUserItemClave()
+        public static string setUserItemClave(string lista)
         {
             string s = "";
             sqlDateBaseManager sql = new sqlDateBaseManager();
             Random r = new Random();
             s = "USER" + r.Next(100000, 199999).ToString();
 
-            while (sql.findSQLValue("clave", "clave", "otros", s) == true)
+            while (sql.findSQLValue("clave", "clave", lista, s) == true)
             {
                 s = "USER" + r.Next(100000, 199999).ToString();
             }
             return s;
         }
 
-        public static void reloadUserItems()
+        public static void reloadUserItems(Form form)
         {
             try
             {           
                 listas_entities_pva listas = new listas_entities_pva();
+                var items = (from x in listas.paquetes select x);
 
-                var otros = (from x in listas.otros where x.clave.StartsWith("USER") select x);
                 string[] n = null;
                 string[] k = null;
                 string a = string.Empty;
                 float c = 0;
+                string clave = string.Empty;
 
-                if(otros != null)
+                if(items != null)
                 {
-                    foreach(var x in otros)
+                    foreach(var x in items)
                     {
-                        a = x.caracteristicas;
-                        if (a != "" && x.linea == "paquetes")
+                        a = x.comp_items;
+                        c = 0;
+                        if (a != "")
                         {
                             n = a.Split(',');
                             foreach(string z in n)
@@ -4824,9 +4822,10 @@ namespace cristales_pva
                                 k = z.Split(':');
                                 if (k.Length == 3)
                                 {
+                                    clave = k[1];
                                     if (k[0] == "1")
                                     {
-                                        var vidrio = (from y in listas.lista_costo_corte_e_instalado where y.clave == k[1] select y).SingleOrDefault();
+                                        var vidrio = (from y in listas.lista_costo_corte_e_instalado where y.clave == clave select y).SingleOrDefault();
 
                                         if (vidrio != null)
                                         {
@@ -4835,7 +4834,7 @@ namespace cristales_pva
                                     }
                                     else if (k[0] == "2")
                                     {
-                                        var herraje = (from y in listas.herrajes where y.clave == k[1] select y).SingleOrDefault();
+                                        var herraje = (from y in listas.herrajes where y.clave == clave select y).SingleOrDefault();
 
                                         if (herraje != null)
                                         {
@@ -4844,7 +4843,7 @@ namespace cristales_pva
                                     }
                                     else if (k[0] == "3")
                                     {
-                                        var otro = (from y in listas.otros where y.clave == k[1] select y).SingleOrDefault();
+                                        var otro = (from y in listas.otros where y.clave == clave select y).SingleOrDefault();
 
                                         if (otro != null)
                                         {
@@ -4854,14 +4853,43 @@ namespace cristales_pva
                                 }
                             }
                         }
-                        x.precio = c;                    
+                        //--------------------------------------------------------------------------------------------------------->
+                        if (c > 0)
+                        {
+                            clave = x.comp_clave;
+                            if (x.comp_type == "Cristal")
+                            {
+                                var cristales = (from v in listas.lista_costo_corte_e_instalado where v.clave == clave select v).SingleOrDefault();
+                                if (cristales != null)
+                                {                                   
+                                    cristales.costo_corte_m2 = c;
+                                }
+                            }
+                            else if (x.comp_type == "Herraje")
+                            {
+                                var harrajes = (from v in listas.herrajes where v.clave == clave select v).SingleOrDefault();
+                                if (harrajes != null)
+                                {
+                                    harrajes.precio = c;
+                                }
+                            }
+                            else if (x.comp_type == "Otros Materiales")
+                            {
+                                var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+                                if (otros != null)
+                                {
+                                    otros.precio = c;
+                                }
+                            }
+                        }
                     }
-                    listas.SaveChanges();
+                    listas.SaveChanges();                
                 }
             }
-            catch (Exception)
+            catch (Exception err)
             {
-                //do nothing
+                errorLog(err.ToString());
+                MessageBox.Show(form, "[Error] no se pudierón actualizar los paquetes y servicios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -4907,6 +4935,128 @@ namespace cristales_pva
         public static bool getAlertVigencia(DateTime date)
         {          
             return DateTime.Now.AddDays(5) >= date ? true : false;
+        }
+
+        public static float getTCFromXML()
+        {
+            try
+            {
+                XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+
+                var tc = (from x in opciones_xml.Descendants("Opciones") select x.Element("TC")).SingleOrDefault();
+
+                if(tc != null)
+                {
+                    return stringToFloat(tc.Value.ToString());
+                }
+            }
+            catch (Exception err)
+            {
+                errorLog(err.ToString());
+                MessageBox.Show("[Error] no se puede obtener el tipo de cambio desde el archivo opciones.xml.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return 0;
+        }
+
+        public static void setPropiedadesXML(float tipo_cambio, float costo_aluminio)
+        {
+            try
+            {
+                //TC
+                if (tipo_cambio > 0)
+                {
+                    if (tipo_cambio != tc)
+                    {                       
+                        XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+                        var mv = from x in opciones_xml.Descendants("Opciones") select x;
+                        foreach (XElement x in mv)
+                        {
+                            x.SetElementValue("TC", tipo_cambio.ToString());
+                        }
+                        opciones_xml.Save(constants.opciones_xml);
+                    }
+                }
+
+                //Costo KG Aluminio
+                if (costo_aluminio > 0)
+                {
+                    if (costo_aluminio != costo_aluminio_kg)
+                    {
+                        costo_aluminio_kg = costo_aluminio;
+                        XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+                        var mv = from x in opciones_xml.Descendants("Opciones") select x;
+                        foreach (XElement x in mv)
+                        {
+                            x.SetElementValue("CAKG", costo_aluminio.ToString());
+                        }
+                        opciones_xml.Save(constants.opciones_xml);
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                errorLog(err.ToString());
+                MessageBox.Show("[Error] no se puede guardar el tipo de cambio en el archivo opciones.xml.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public static void changeTC(float c_tc, float tc, string type)
+        {
+            listas_entities_pva listas = new listas_entities_pva();
+
+            var c_costos = from x in listas.lista_costo_corte_e_instalado where x.moneda == type select x;
+            foreach (var v in c_costos)
+            {
+                v.costo_corte_m2 = Math.Round(((float)v.costo_corte_m2 / c_tc) * tc, 2);
+                v.costo_instalado = Math.Round(((float)v.costo_instalado / c_tc) * tc, 2);
+            }
+
+            var c_insta = from x in listas.lista_precio_corte_e_instalado where x.moneda == type select x;
+            foreach (var v in c_insta)
+            {
+                v.precio_venta_corte_m2 = Math.Round(((float)v.precio_venta_corte_m2 / c_tc) * tc, 2);
+                v.precio_venta_instalado = Math.Round(((float)v.precio_venta_instalado / c_tc) * tc, 2);
+            }
+
+            var c_hojas = from x in listas.lista_precios_hojas where x.moneda == type select x;
+            foreach (var v in c_hojas)
+            {
+                v.precio_hoja = Math.Round(((float)v.precio_hoja / c_tc) * tc, 2);
+            }
+
+            var perfiles = from x in listas.perfiles where x.moneda == type select x;
+            foreach (var v in perfiles)
+            {
+                v.crudo = Math.Round(((float)v.crudo / c_tc) * tc, 2);
+                v.hueso = Math.Round(((float)v.hueso / c_tc) * tc, 2);
+                v.natural_1 = Math.Round(((float)v.natural_1 / c_tc) * tc, 2);
+                v.blanco = Math.Round(((float)v.blanco / c_tc) * tc, 2);
+                v.champagne = Math.Round(((float)v.champagne / c_tc) * tc, 2);
+                v.brillante = Math.Round(((float)v.brillante / c_tc) * tc, 2);
+                v.bronce = Math.Round(((float)v.bronce / c_tc) * tc, 2);
+                v.gris = Math.Round(((float)v.gris / c_tc) * tc, 2);
+                v.madera = Math.Round(((float)v.madera / c_tc) * tc, 2);
+                v.chocolate = Math.Round(((float)v.chocolate / c_tc) * tc, 2);
+                v.acero_inox = Math.Round(((float)v.acero_inox / c_tc) * tc, 2);
+            }
+
+            var herrajes = from x in listas.herrajes where x.moneda == type select x;
+            foreach (var v in herrajes)
+            {
+                v.precio = Math.Round(((float)v.precio / c_tc) * tc, 2);
+            }
+
+            var otros = from x in listas.otros where x.moneda == type select x;
+            foreach (var v in otros)
+            {
+                v.precio = Math.Round(((float)v.precio / c_tc) * tc, 2);
+            }
+
+            listas.SaveChanges();
+            // ---->
+            constants.tc = tc;
+            ((Form1)Application.OpenForms["Form1"]).setTCLabel(constants.tc);
+            ((Form1)Application.OpenForms["Form1"]).loadListaFromLocal();
         }
     }
 }

@@ -160,8 +160,8 @@ namespace cristales_pva
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             label7.Text = "Abriendo cotización...";
-            constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion);
-            constants.deleteFilasBorradasFromLocalDB();
+            constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
+            constants.deleteFilasBorradasFromLocalDB();           
             if (constants.ac_cotizacion == true && constants.reload_precios == true)
             {
                 constants.errors_Open.Clear();

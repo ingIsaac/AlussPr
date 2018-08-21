@@ -24,5 +24,6 @@ namespace cristales_pva
         public Nullable<double> precio { get; set; }
         public Nullable<double> largo { get; set; }
         public Nullable<double> alto { get; set; }
+        public string moneda { get; set; }
     }
 }

@@ -782,7 +782,7 @@ namespace cristales_pva
             }
         }
 
-        public void dropTableOnGridView(DataGridView dataview, string table, bool order=false, string column="", string value="")
+        public void dropTableOnGridView(DataGridView dataview, string table, bool order=false, string column="", string value="", bool precise = false)
         {
             DataTable data = new DataTable();
             try
@@ -795,7 +795,14 @@ namespace cristales_pva
                 }
                 else
                 {
-                    query = "SELECT * FROM " + table + " ORDER BY CASE WHEN " + column + " LIKE '" + value + "%' THEN 1 END DESC";
+                    if (precise)
+                    {
+                        query = "SELECT * FROM " + table + " ORDER BY CASE WHEN " + column + "='" + value + "' THEN 1 END DESC";
+                    }
+                    else
+                    {
+                        query = "SELECT * FROM " + table + " ORDER BY CASE WHEN " + column + " LIKE '" + value + "%' THEN 1 END DESC";
+                    }
                 }
 
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
@@ -942,13 +949,13 @@ namespace cristales_pva
             }
         }
 
-        public void insertListaCosto(string clave, string articulo, float precio_proveedor, float p_desperdicio, float p_mano_obra, float costo_corte, float p_utilidad, float precio_corte, string fecha, string proveedor)
+        public void insertListaCosto(string clave, string articulo, float precio_proveedor, float p_desperdicio, float p_mano_obra, float costo_corte, float p_utilidad, float precio_corte, string fecha, string proveedor, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO costo_corte_precio (clave, articulo, precio_proveedor, p_desperdicio, p_mano_obra, costo_corte, p_utilidad, precio_corte, fecha, proveedor) VALUES (@CLAVE,@ARTICULO,@PP,@DESPER,@MO,@CC,@PU,@PC,@FECHA,@PROV)";
+            cmd.CommandText = "INSERT INTO costo_corte_precio (clave, articulo, precio_proveedor, p_desperdicio, p_mano_obra, costo_corte, p_utilidad, precio_corte, fecha, proveedor, moneda) VALUES (@CLAVE,@ARTICULO,@PP,@DESPER,@MO,@CC,@PU,@PC,@FECHA,@PROV,@MN)";
 
             cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@CLAVE"].Value = clave;
@@ -970,6 +977,8 @@ namespace cristales_pva
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -986,13 +995,13 @@ namespace cristales_pva
             }
         }
 
-        public void updateListaCosto(string clave, string articulo, float precio_proveedor, float p_desperdicio, float p_mano_obra, float costo_corte, float p_utilidad, float precio_corte, string fecha, string proveedor)
+        public void updateListaCosto(string clave, string articulo, float precio_proveedor, float p_desperdicio, float p_mano_obra, float costo_corte, float p_utilidad, float precio_corte, string fecha, string proveedor, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE costo_corte_precio SET articulo=@ARTICULO, precio_proveedor=@PP, p_desperdicio=@DESPER, p_mano_obra=@MO, costo_corte=@CC, p_utilidad=@PU, precio_corte=@PC, fecha=@FECHA, proveedor=@PROV WHERE clave='" + clave + "'";
+            cmd.CommandText = "UPDATE costo_corte_precio SET articulo=@ARTICULO, precio_proveedor=@PP, p_desperdicio=@DESPER, p_mano_obra=@MO, costo_corte=@CC, p_utilidad=@PU, precio_corte=@PC, fecha=@FECHA, proveedor=@PROV, moneda=@MN WHERE clave='" + clave + "'";
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@ARTICULO"].Value = articulo;
             cmd.Parameters.AddWithValue("@PP", System.Data.SqlDbType.Float);
@@ -1011,6 +1020,8 @@ namespace cristales_pva
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1027,14 +1038,14 @@ namespace cristales_pva
             }
         }
 
-        public void insertListaInstalado(string clave, string articulo, float mano_obra, float materiales, float flete, float costo, float utilidad, float precio, string fecha, string proveedor)
+        public void insertListaInstalado(string clave, string articulo, float mano_obra, float materiales, float flete, float costo, float utilidad, float precio, string fecha, string proveedor, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO instalado (clave, articulo, p_mano_obra_insta, p_costo_materiales, costo_flete, costo_instalado, p_utilidad_insta, precio_insta, fecha, proveedor) VALUES " 
-                + "(@CLAVE,@ARTICULO,@MANO,@MATE,@FLETE,@COSTO,@UTI,@PRECIO,@FECHA,@PROV)";
+            cmd.CommandText = "INSERT INTO instalado (clave, articulo, p_mano_obra_insta, p_costo_materiales, costo_flete, costo_instalado, p_utilidad_insta, precio_insta, fecha, proveedor, moneda) VALUES " 
+                + "(@CLAVE,@ARTICULO,@MANO,@MATE,@FLETE,@COSTO,@UTI,@PRECIO,@FECHA,@PROV,@MN)";
             cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@CLAVE"].Value = clave;
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
@@ -1055,6 +1066,8 @@ namespace cristales_pva
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1071,13 +1084,13 @@ namespace cristales_pva
             }
         }
 
-        public void updateListaInstalado(string clave, string articulo, float mano_obra, float materiales, float flete, float costo, float utilidad, float precio, string fecha, string proveedor)
+        public void updateListaInstalado(string clave, string articulo, float mano_obra, float materiales, float flete, float costo, float utilidad, float precio, string fecha, string proveedor, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE instalado SET articulo=@ARTICULO, p_mano_obra_insta=@MANO, p_costo_materiales=@MATE, costo_flete=@FLETE, costo_instalado=@COSTO, p_utilidad_insta=@UTI, precio_insta=@PRECIO, fecha=@FECHA, proveedor=@PROV WHERE clave='" + clave + "'";
+            cmd.CommandText = "UPDATE instalado SET articulo=@ARTICULO, p_mano_obra_insta=@MANO, p_costo_materiales=@MATE, costo_flete=@FLETE, costo_instalado=@COSTO, p_utilidad_insta=@UTI, precio_insta=@PRECIO, fecha=@FECHA, proveedor=@PROV, moneda=@MN WHERE clave='" + clave + "'";
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@ARTICULO"].Value = articulo;
             cmd.Parameters.AddWithValue("@MANO", System.Data.SqlDbType.Float);
@@ -1096,6 +1109,8 @@ namespace cristales_pva
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1112,14 +1127,14 @@ namespace cristales_pva
             }
         }
 
-        public void insertListaHojas(string clave, string articulo, float largo, float ancho, float costo_hoja, float utilidad, float precio, string fecha, string proveedor)
+        public void insertListaHojas(string clave, string articulo, float largo, float ancho, float costo_hoja, float utilidad, float precio, string fecha, string proveedor, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO hojas (clave, articulo, largo, ancho, costo_hoja, p_utilidad_hoja, precio_hoja, fecha, proveedor) VALUES " 
-                + "(@CLAVE,@ARTICULO,@LARGO,@ANCHO,@COSTO,@UTILIDAD,@PRECIO,@FECHA,@PROV)";
+            cmd.CommandText = "INSERT INTO hojas (clave, articulo, largo, ancho, costo_hoja, p_utilidad_hoja, precio_hoja, fecha, proveedor, moneda) VALUES " 
+                + "(@CLAVE,@ARTICULO,@LARGO,@ANCHO,@COSTO,@UTILIDAD,@PRECIO,@FECHA,@PROV,@MN)";
             cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@CLAVE"].Value = clave;
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
@@ -1138,6 +1153,8 @@ namespace cristales_pva
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1154,13 +1171,13 @@ namespace cristales_pva
             }
         }
 
-        public void updateListaHojas(string clave, string articulo, float largo, float ancho, float costo_hoja, float utilidad, float precio, string fecha, string proveedor)
+        public void updateListaHojas(string clave, string articulo, float largo, float ancho, float costo_hoja, float utilidad, float precio, string fecha, string proveedor, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE hojas SET articulo=@ARTICULO, largo=@LARGO, ancho=@ANCHO, costo_hoja=@COSTO, p_utilidad_hoja=@UTILIDAD, precio_hoja=@PRECIO, fecha=@FECHA, proveedor=@PROV WHERE clave='" + clave + "'";
+            cmd.CommandText = "UPDATE hojas SET articulo=@ARTICULO, largo=@LARGO, ancho=@ANCHO, costo_hoja=@COSTO, p_utilidad_hoja=@UTILIDAD, precio_hoja=@PRECIO, fecha=@FECHA, proveedor=@PROV, moneda=@MN WHERE clave='" + clave + "'";
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@ARTICULO"].Value = articulo;
             cmd.Parameters.AddWithValue("@LARGO", System.Data.SqlDbType.Float);
@@ -1177,6 +1194,8 @@ namespace cristales_pva
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1257,14 +1276,14 @@ namespace cristales_pva
             }
         }
 
-        public void insertListaAluminio(string clave, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, string fecha, float chocolate, float acero_inox, float bronce)
+        public void insertListaAluminio(string clave, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, string fecha, float chocolate, float acero_inox, float bronce, float peso_teorico, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO perfiles (clave, articulo, linea, proveedor, largo, ancho_perfil, perimetro_dm2_ml, crudo, blanco, hueso, champagne, gris, negro, brillante, natural_1, madera, kg_peso_lineal, fecha, chocolate, acero_inox, bronce) VALUES "
-                + "(@CLAVE,@ARTICULO,@LINEA,@PROV,@LARGO,@ANCHO,@PERA,@CRUDO,@BLANCO,@HUESO,@CHAMP,@GRIS,@NEGRO,@BRI,@NAT,@MAD,@PESO,@FECHA,@CHOCO,@ANOX,@BRONCE)";            
+            cmd.CommandText = "INSERT INTO perfiles (clave, articulo, linea, proveedor, largo, ancho_perfil, perimetro_dm2_ml, crudo, blanco, hueso, champagne, gris, negro, brillante, natural_1, madera, kg_peso_lineal, fecha, chocolate, acero_inox, bronce, moneda, peso_teorico) VALUES "
+                + "(@CLAVE,@ARTICULO,@LINEA,@PROV,@LARGO,@ANCHO,@PERA,@CRUDO,@BLANCO,@HUESO,@CHAMP,@GRIS,@NEGRO,@BRI,@NAT,@MAD,@PESO,@FECHA,@CHOCO,@ANOX,@BRONCE,@MN,@PT)";            
             cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@CLAVE"].Value = clave;
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
@@ -1307,6 +1326,10 @@ namespace cristales_pva
             cmd.Parameters["@ANOX"].Value = Math.Round(acero_inox, 2);
             cmd.Parameters.AddWithValue("@BRONCE", System.Data.SqlDbType.Float);
             cmd.Parameters["@BRONCE"].Value = Math.Round(bronce, 2);
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
+            cmd.Parameters.AddWithValue("@PT", System.Data.SqlDbType.Float);
+            cmd.Parameters["@PT"].Value = Math.Round(peso_teorico, 3);
             try
             {
                 connection.Open();
@@ -1323,13 +1346,13 @@ namespace cristales_pva
             }
         }
 
-        public void updateListaAluminio(int id, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, string fecha, float chocolate, float acero_inox, float bronce)
+        public void updateListaAluminio(int id, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, string fecha, float chocolate, float acero_inox, float bronce, float peso_teorico, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE perfiles SET articulo=@ARTICULO, linea=@LINEA, proveedor=@PROV, largo=@LARGO, ancho_perfil=@ANCHO, perimetro_dm2_ml=@PERA, crudo=@CRUDO, blanco=@BLANCO, hueso=@HUESO, champagne=@CHAMP, gris=@GRIS, negro=@NEGRO, brillante=@BRI, natural_1=@NAT, madera=@MAD, kg_peso_lineal=@PESO, fecha=@FECHA, chocolate=@CHOCO, acero_inox=@ANOX, bronce=@BRONCE WHERE id='" + id + "'";
+            cmd.CommandText = "UPDATE perfiles SET articulo=@ARTICULO, linea=@LINEA, proveedor=@PROV, largo=@LARGO, ancho_perfil=@ANCHO, perimetro_dm2_ml=@PERA, crudo=@CRUDO, blanco=@BLANCO, hueso=@HUESO, champagne=@CHAMP, gris=@GRIS, negro=@NEGRO, brillante=@BRI, natural_1=@NAT, madera=@MAD, kg_peso_lineal=@PESO, fecha=@FECHA, chocolate=@CHOCO, acero_inox=@ANOX, bronce=@BRONCE, moneda=@MN, peso_teorico=@PT WHERE id='" + id + "'";
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@ARTICULO"].Value = articulo;
             cmd.Parameters.AddWithValue("@LINEA", System.Data.SqlDbType.VarChar);
@@ -1370,6 +1393,10 @@ namespace cristales_pva
             cmd.Parameters["@ANOX"].Value = Math.Round(acero_inox, 2);
             cmd.Parameters.AddWithValue("@BRONCE", System.Data.SqlDbType.Float);
             cmd.Parameters["@BRONCE"].Value = Math.Round(bronce, 2);
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
+            cmd.Parameters.AddWithValue("@PT", System.Data.SqlDbType.Float);
+            cmd.Parameters["@PT"].Value = Math.Round(peso_teorico, 3);
             try
             {
                 connection.Open();
@@ -1386,14 +1413,14 @@ namespace cristales_pva
             }
         }
 
-        public void insertListaHerrajes(string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha)
+        public void insertListaHerrajes(string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO herrajes (clave, articulo, proveedor, linea, caracteristicas, color, precio, fecha) VALUES "
-                + "(@CLAVE,@ARTICULO,@PROV,@LINEA,@CARAC,@COLOR,@PRECIO,@FECHA)";
+            cmd.CommandText = "INSERT INTO herrajes (clave, articulo, proveedor, linea, caracteristicas, color, precio, fecha, moneda) VALUES "
+                + "(@CLAVE,@ARTICULO,@PROV,@LINEA,@CARAC,@COLOR,@PRECIO,@FECHA,@MN)";
             cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@CLAVE"].Value = clave;
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
@@ -1410,6 +1437,8 @@ namespace cristales_pva
             cmd.Parameters["@PRECIO"].Value = Math.Round(precio, 2);
             cmd.Parameters.AddWithValue("@FECHA", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@FECHA"].Value = fecha;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1426,13 +1455,13 @@ namespace cristales_pva
             }
         }
 
-        public void updateListaHerrajes(int id, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha)
+        public void updateListaHerrajes(int id, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE herrajes SET articulo=@ARTICULO, proveedor=@PROV, linea=@LINEA, caracteristicas=@CARAC, color=@COLOR, precio=@PRECIO, fecha=@FECHA WHERE id='" + id + "'";
+            cmd.CommandText = "UPDATE herrajes SET articulo=@ARTICULO, proveedor=@PROV, linea=@LINEA, caracteristicas=@CARAC, color=@COLOR, precio=@PRECIO, fecha=@FECHA, moneda=@MN WHERE id='" + id + "'";
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@ARTICULO"].Value = articulo;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
@@ -1447,6 +1476,8 @@ namespace cristales_pva
             cmd.Parameters["@PRECIO"].Value = Math.Round(precio, 2);
             cmd.Parameters.AddWithValue("@FECHA", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@FECHA"].Value = fecha;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1463,14 +1494,14 @@ namespace cristales_pva
             }
         }
 
-        public void insertListaOtros(string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha, float largo, float alto)
+        public void insertListaOtros(string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha, float largo, float alto, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO otros (clave, articulo, proveedor, linea, caracteristicas, color, largo, alto, precio, fecha) VALUES " +
-                "(@CLAVE,@ARTICULO,@PROV,@LINEA,@CARAC,@COLOR,@LARGO,@ALTO,@PRECIO,@FECHA)";
+            cmd.CommandText = "INSERT INTO otros (clave, articulo, proveedor, linea, caracteristicas, color, largo, alto, precio, fecha, moneda) VALUES " +
+                "(@CLAVE,@ARTICULO,@PROV,@LINEA,@CARAC,@COLOR,@LARGO,@ALTO,@PRECIO,@FECHA,@MN)";
             cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@CLAVE"].Value = clave;
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
@@ -1491,6 +1522,8 @@ namespace cristales_pva
             cmd.Parameters["@PRECIO"].Value = Math.Round(precio, 2);
             cmd.Parameters.AddWithValue("@FECHA", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@FECHA"].Value = fecha;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -1507,13 +1540,13 @@ namespace cristales_pva
             }
         }
 
-        public void updateListaOtros(int id, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha, float largo, float alto)
+        public void updateListaOtros(int id, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string fecha, float largo, float alto, string moneda)
         {
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE otros SET articulo=@ARTICULO, proveedor=@PROV, linea=@LINEA, caracteristicas=@CARAC, color=@COLOR, largo=@LARGO, alto=@ALTO, precio=@PRECIO, fecha=@FECHA WHERE id=" + id;
+            cmd.CommandText = "UPDATE otros SET articulo=@ARTICULO, proveedor=@PROV, linea=@LINEA, caracteristicas=@CARAC, color=@COLOR, largo=@LARGO, alto=@ALTO, precio=@PRECIO, fecha=@FECHA, moneda=@MN WHERE id=" + id;
             cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@ARTICULO"].Value = articulo;
             cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
@@ -1532,6 +1565,8 @@ namespace cristales_pva
             cmd.Parameters["@PRECIO"].Value = Math.Round(precio, 2);
             cmd.Parameters.AddWithValue("@FECHA", System.Data.SqlDbType.VarChar);
             cmd.Parameters["@FECHA"].Value = fecha;
+            cmd.Parameters.AddWithValue("@MN", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@MN"].Value = moneda;
             try
             {
                 connection.Open();
@@ -2510,13 +2545,13 @@ namespace cristales_pva
             }
         }
 
-        public void insertCotizacion(int folio, string cliente, string usuario, string fecha, string nombre_proyecto, float descuento, float utilidad, string tienda, bool iva_desglosado, string registro)
+        public void insertCotizacion(int folio, string cliente, string usuario, string fecha, string nombre_proyecto, float descuento, float utilidad, string tienda, bool iva_desglosado, string registro, float tc)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO cotizaciones (folio, cliente, fecha, usuario, nombre_proyecto, descuento, utilidad, tienda, iva_desglosado, registro) VALUES (@FOLIO, @CLIENTE, @FECHA, @USUARIO, @PROYECTO, @DESC, @UTIL, @TIENDA, @IVA, @REG)";
+            cmd.CommandText = "INSERT INTO cotizaciones (folio, cliente, fecha, usuario, nombre_proyecto, descuento, utilidad, tienda, iva_desglosado, registro, tc) VALUES (@FOLIO, @CLIENTE, @FECHA, @USUARIO, @PROYECTO, @DESC, @UTIL, @TIENDA, @IVA, @REG, @TC)";
             cmd.Parameters.AddWithValue("@FOLIO", SqlDbType.Int);
             cmd.Parameters["@FOLIO"].Value = folio;
             cmd.Parameters.AddWithValue("@CLIENTE", SqlDbType.VarChar);
@@ -2537,6 +2572,8 @@ namespace cristales_pva
             cmd.Parameters["@IVA"].Value = iva_desglosado;
             cmd.Parameters.AddWithValue("@REG", SqlDbType.VarChar);
             cmd.Parameters["@REG"].Value = registro;
+            cmd.Parameters.AddWithValue("@TC", SqlDbType.Float);
+            cmd.Parameters["@TC"].Value = tc;
             try
             {
                 connection.Open();
@@ -2554,13 +2591,13 @@ namespace cristales_pva
 
         }
 
-        public void updateCotizacion(int folio, string fecha, string cliente, string proyecto, float descuento, float utilidad, bool iva_desglosado)
+        public void updateCotizacion(int folio, string fecha, string cliente, string proyecto, float descuento, float utilidad, bool iva_desglosado, float tc)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE cotizaciones SET fecha=@FECHA, cliente=@CLIENTE, nombre_proyecto=@PROYECTO, descuento=@DESC, utilidad=@UTIL, iva_desglosado=@IVA WHERE folio='" + folio + "'";
+            cmd.CommandText = "UPDATE cotizaciones SET fecha=@FECHA, cliente=@CLIENTE, nombre_proyecto=@PROYECTO, descuento=@DESC, utilidad=@UTIL, iva_desglosado=@IVA, tc=@TC WHERE folio='" + folio + "'";
             cmd.Parameters.AddWithValue("@FECHA", SqlDbType.VarChar);
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@CLIENTE", SqlDbType.VarChar);
@@ -2573,6 +2610,8 @@ namespace cristales_pva
             cmd.Parameters["@UTIL"].Value = utilidad;
             cmd.Parameters.AddWithValue("@IVA", SqlDbType.Bit);
             cmd.Parameters["@IVA"].Value = iva_desglosado;
+            cmd.Parameters.AddWithValue("@TC", SqlDbType.Float);
+            cmd.Parameters["@TC"].Value = tc;
             try
             {
                 connection.Open();
@@ -4348,6 +4387,235 @@ namespace cristales_pva
                 connection.Dispose();
             }
             return b;
+        }
+
+        public float getTC()
+        {
+            float b = 0;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT tc FROM propiedades WHERE id='1'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    b = constants.stringToFloat(r.GetValue(0).ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+                MessageBox.Show("[Error] se no puede obtener el tipo de cambio del servidor.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return b;
+        }
+
+        public float getCotizacionTC(int folio)
+        {
+            float b = 0;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT tc FROM cotizaciones WHERE folio='" + folio + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    b = constants.stringToFloat(r.GetValue(0).ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+                MessageBox.Show("[Error] No se puedo obtener el tipo de cambio de la cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return b;
+        }
+
+        public float getCostoAluminioKG()
+        {
+            float b = 0;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT ref_kg_aluminio FROM propiedades WHERE id='1'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    b = constants.stringToFloat(r.GetValue(0).ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return b;
+        }
+
+        public void setCostoAluminioKG(float costo)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "UPDATE propiedades SET ref_kg_aluminio='" + costo + "' WHERE id='1'";
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Se ha guardado con exito la nueva configuración.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void insertNewPaquete(string comp_clave, string comp_items, string comp_type, string comp_articulo)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT INTO paquetes (comp_clave, comp_items, comp_type, comp_articulo) VALUES (@CLAVE, @ITEMS, @TYPE, @ARTICULO)";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@CLAVE"].Value = comp_clave;
+            cmd.Parameters.AddWithValue("@ITEMS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ITEMS"].Value = comp_items;
+            cmd.Parameters.AddWithValue("@TYPE", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@TYPE"].Value = comp_type;
+            cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ARTICULO"].Value = comp_articulo;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void updatePaquete(int id, string comp_clave, string comp_items, string comp_articulo)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "UPDATE paquetes SET comp_items=@ITEMS, comp_articulo=@ARTICULO WHERE id='" + id + "'";
+            cmd.Connection = connection;          
+            cmd.Parameters.AddWithValue("@ITEMS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ITEMS"].Value = comp_items;
+            cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ARTICULO"].Value = comp_articulo;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void deletePaquete(int id)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "DELETE FROM paquetes WHERE id='" + id + "'";
+            cmd.Connection = connection;
+          
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public int getIDFromClave(string clave, string table)
+        {
+            int id = 0;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT id FROM " + table + " WHERE clave='" + clave + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    id = constants.stringToInt(r.GetValue(0).ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return id;
         }
 
         ~sqlDateBaseManager()

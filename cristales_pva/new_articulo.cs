@@ -706,7 +706,14 @@ namespace cristales_pva
         //boton nuevos costos
         private void button2_Click(object sender, EventArgs e)
         {
-            new new_costos(lista).ShowDialog();
+            if (constants.user_access <= 1 && constants.permitir_cp == false)
+            {
+                new delete_password(false, true).ShowDialog();
+            }
+            else
+            {
+                new new_costos(lista).ShowDialog();
+            }
         }
     }
 }

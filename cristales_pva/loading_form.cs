@@ -14,7 +14,7 @@ namespace cristales_pva
     public partial class loading_form : Form
     {
         listas_entities_pva listas;
-        
+
         public loading_form()
         {
             InitializeComponent();
@@ -35,21 +35,41 @@ namespace cristales_pva
         }
 
         //inserter ------------------------------------------------------------------------------------------------------------------>
-        private void insertListaCostoCorteInstalado(string clave, string articulo, float costo_corte_m2, float costo_instalado, string proveedor)
+        private void insertListaCostoCorteInstalado(string clave, string articulo, float costo_corte_m2, float costo_instalado, string proveedor, string moneda)
         {
             listas = new listas_entities_pva();
+            float tc = constants.tc;
+
             try
             {
-                var k = new lista_costo_corte_e_instalado()
+                if (moneda != "MXN")
                 {
-                    clave = clave,
-                    articulo = articulo,
-                    costo_corte_m2 = Math.Round(costo_corte_m2, 2),
-                    costo_instalado = Math.Round(costo_instalado, 2),
-                    proveedor = proveedor
-                };
-                listas.lista_costo_corte_e_instalado.Add(k);
-                listas.SaveChanges();
+                    var k = new lista_costo_corte_e_instalado()
+                    {
+                        clave = clave,
+                        articulo = articulo,
+                        costo_corte_m2 = Math.Round(costo_corte_m2 * tc, 2),
+                        costo_instalado = Math.Round(costo_instalado * tc, 2),
+                        proveedor = proveedor,
+                        moneda = moneda
+                    };
+                    listas.lista_costo_corte_e_instalado.Add(k);
+                    listas.SaveChanges();
+                }
+                else
+                {
+                    var k = new lista_costo_corte_e_instalado()
+                    {
+                        clave = clave,
+                        articulo = articulo,
+                        costo_corte_m2 = Math.Round(costo_corte_m2, 2),
+                        costo_instalado = Math.Round(costo_instalado, 2),
+                        proveedor = proveedor,
+                        moneda = moneda
+                    };
+                    listas.lista_costo_corte_e_instalado.Add(k);
+                    listas.SaveChanges();
+                }
             }
             catch (Exception err)
             {
@@ -57,21 +77,41 @@ namespace cristales_pva
             }
         }
 
-        private void insertListaPrecioCorteInstalado(string clave, string articulo, float precio_corte_m2, float precio_instalado, string proveedor)
+        private void insertListaPrecioCorteInstalado(string clave, string articulo, float precio_corte_m2, float precio_instalado, string proveedor, string moneda)
         {
             listas = new listas_entities_pva();
+            float tc = constants.tc;
+
             try
             {
-                var k = new lista_precio_corte_e_instalado()
+                if (moneda != "MXN")
                 {
-                    clave = clave,
-                    articulo = articulo,
-                    precio_venta_corte_m2 = Math.Round(precio_corte_m2, 2),
-                    precio_venta_instalado = Math.Round(precio_instalado, 2),
-                    proveedor = proveedor
-                };
-                listas.lista_precio_corte_e_instalado.Add(k);
-                listas.SaveChanges();
+                    var k = new lista_precio_corte_e_instalado()
+                    {
+                        clave = clave,
+                        articulo = articulo,
+                        precio_venta_corte_m2 = Math.Round(precio_corte_m2 * tc, 2),
+                        precio_venta_instalado = Math.Round(precio_instalado * tc, 2),
+                        proveedor = proveedor,
+                        moneda = moneda
+                    };
+                    listas.lista_precio_corte_e_instalado.Add(k);
+                    listas.SaveChanges();
+                }
+                else
+                {
+                    var k = new lista_precio_corte_e_instalado()
+                    {
+                        clave = clave,
+                        articulo = articulo,
+                        precio_venta_corte_m2 = Math.Round(precio_corte_m2, 2),
+                        precio_venta_instalado = Math.Round(precio_instalado, 2),
+                        proveedor = proveedor,
+                        moneda = moneda
+                    };
+                    listas.lista_precio_corte_e_instalado.Add(k);
+                    listas.SaveChanges();
+                }
             }
             catch (Exception err)
             {
@@ -79,22 +119,43 @@ namespace cristales_pva
             }
         }
 
-        private void insertListaPrecioHojas(string clave, string articulo, float largo, float alto, float precio_hoja, string proveedor)
+        private void insertListaPrecioHojas(string clave, string articulo, float largo, float alto, float precio_hoja, string proveedor, string moneda)
         {
             listas = new listas_entities_pva();
+            float tc = constants.tc;
+
             try
             {
-                var k = new lista_precios_hojas()
+                if (moneda != "MXN")
                 {
-                    clave = clave,
-                    articulo = articulo,
-                    largo = Math.Round(largo, 2),
-                    alto = Math.Round(alto, 2),
-                    precio_hoja = Math.Round(precio_hoja, 2),
-                    proveedor = proveedor
-                };
-                listas.lista_precios_hojas.Add(k);
-                listas.SaveChanges();
+                    var k = new lista_precios_hojas()
+                    {
+                        clave = clave,
+                        articulo = articulo,
+                        largo = Math.Round(largo, 2),
+                        alto = Math.Round(alto, 2),
+                        precio_hoja = Math.Round(precio_hoja * tc, 2),
+                        proveedor = proveedor,
+                        moneda = moneda
+                    };
+                    listas.lista_precios_hojas.Add(k);
+                    listas.SaveChanges();
+                }
+                else
+                {
+                    var k = new lista_precios_hojas()
+                    {
+                        clave = clave,
+                        articulo = articulo,
+                        largo = Math.Round(largo, 2),
+                        alto = Math.Round(alto, 2),
+                        precio_hoja = Math.Round(precio_hoja, 2),
+                        proveedor = proveedor,
+                        moneda = moneda
+                    };
+                    listas.lista_precios_hojas.Add(k);
+                    listas.SaveChanges();
+                }
             }
             catch (Exception err)
             {
@@ -123,37 +184,73 @@ namespace cristales_pva
             }
         }
 
-        private void insertListaPerfilesCuprum(int id, string clave, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, float chocolate, float acero_inox, float bronce)
+        private void insertListaPerfilesCuprum(int id, string clave, string articulo, string linea, string proveedor, float largo, float ancho, float per_a, float crudo, float blanco, float hueso, float champagne, float gris, float negro, float brillante, float natural, float madera, float peso, float chocolate, float acero_inox, float bronce, string moneda)
         {
             listas = new listas_entities_pva();
+            float tc = constants.tc;
+
             try
             {
-                var k = new perfile()
+                if (moneda != "MXN")
                 {
-                    id = id,
-                    clave = clave,
-                    articulo = articulo,
-                    linea = linea,
-                    proveedor = proveedor,
-                    largo = Math.Round(largo, 2),
-                    ancho_perfil = Math.Round(ancho, 2),
-                    perimetro_dm2_ml = Math.Round(per_a, 2),
-                    crudo = Math.Round(crudo, 2),
-                    blanco = Math.Round(blanco, 2),
-                    hueso = Math.Round(hueso, 2),
-                    champagne = Math.Round(champagne, 2),
-                    gris = Math.Round(gris, 2),
-                    negro = Math.Round(negro, 2),
-                    brillante = Math.Round(brillante, 2),
-                    natural_1 = Math.Round(natural, 2),
-                    madera = Math.Round(madera, 2),  
-                    kg_peso_lineal = Math.Round(peso, 2),
-                    chocolate = Math.Round(chocolate, 2),
-                    acero_inox = Math.Round(acero_inox, 2),
-                    bronce = Math.Round(bronce, 2)
-                };
-                listas.perfiles.Add(k);
-                listas.SaveChanges();
+                    var k = new perfile()
+                    {
+                        id = id,
+                        clave = clave,
+                        articulo = articulo,
+                        linea = linea,
+                        proveedor = proveedor,
+                        largo = Math.Round(largo, 2),
+                        ancho_perfil = Math.Round(ancho, 2),
+                        perimetro_dm2_ml = Math.Round(per_a, 2),
+                        crudo = Math.Round(crudo * tc, 2),
+                        blanco = Math.Round(blanco * tc, 2),
+                        hueso = Math.Round(hueso * tc, 2),
+                        champagne = Math.Round(champagne * tc, 2),
+                        gris = Math.Round(gris * tc, 2),
+                        negro = Math.Round(negro * tc, 2),
+                        brillante = Math.Round(brillante * tc, 2),
+                        natural_1 = Math.Round(natural * tc, 2),
+                        madera = Math.Round(madera * tc, 2),
+                        chocolate = Math.Round(chocolate * tc, 2),
+                        acero_inox = Math.Round(acero_inox * tc, 2),
+                        bronce = Math.Round(bronce * tc, 2),
+                        kg_peso_lineal = Math.Round(peso, 2),
+                        moneda = moneda
+                    };
+                    listas.perfiles.Add(k);
+                    listas.SaveChanges();
+                }
+                else
+                {
+                    var k = new perfile()
+                    {
+                        id = id,
+                        clave = clave,
+                        articulo = articulo,
+                        linea = linea,
+                        proveedor = proveedor,
+                        largo = Math.Round(largo, 2),
+                        ancho_perfil = Math.Round(ancho, 2),
+                        perimetro_dm2_ml = Math.Round(per_a, 2),
+                        crudo = Math.Round(crudo, 2),
+                        blanco = Math.Round(blanco, 2),
+                        hueso = Math.Round(hueso, 2),
+                        champagne = Math.Round(champagne, 2),
+                        gris = Math.Round(gris, 2),
+                        negro = Math.Round(negro, 2),
+                        brillante = Math.Round(brillante, 2),
+                        natural_1 = Math.Round(natural, 2),
+                        madera = Math.Round(madera, 2),
+                        chocolate = Math.Round(chocolate, 2),
+                        acero_inox = Math.Round(acero_inox, 2),
+                        bronce = Math.Round(bronce, 2),
+                        kg_peso_lineal = Math.Round(peso, 2),
+                        moneda = moneda
+                    };
+                    listas.perfiles.Add(k);
+                    listas.SaveChanges();
+                }
             }
             catch (Exception err)
             {
@@ -161,24 +258,47 @@ namespace cristales_pva
             }
         }
 
-        private void insertListaHerrajes(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio)
+        private void insertListaHerrajes(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float precio, string moneda)
         {
             listas = new listas_entities_pva();
+            float tc = constants.tc;
+
             try
             {
-                var k = new herraje()
+                if (moneda != "MXN")
                 {
-                    id = id,
-                    clave = clave,
-                    articulo = articulo,
-                    proveedor = proveedor,
-                    linea = linea,
-                    caracteristicas = caracteristicas,
-                    color = color,
-                    precio = Math.Round(precio, 2)
-                };
-                listas.herrajes.Add(k);
-                listas.SaveChanges();
+                    var k = new herraje()
+                    {
+                        id = id,
+                        clave = clave,
+                        articulo = articulo,
+                        proveedor = proveedor,
+                        linea = linea,
+                        caracteristicas = caracteristicas,
+                        color = color,
+                        precio = Math.Round(precio * tc, 2),
+                        moneda = moneda
+                    };
+                    listas.herrajes.Add(k);
+                    listas.SaveChanges();
+                }
+                else
+                {
+                    var k = new herraje()
+                    {
+                        id = id,
+                        clave = clave,
+                        articulo = articulo,
+                        proveedor = proveedor,
+                        linea = linea,
+                        caracteristicas = caracteristicas,
+                        color = color,
+                        precio = Math.Round(precio, 2),
+                        moneda = moneda
+                    };
+                    listas.herrajes.Add(k);
+                    listas.SaveChanges();
+                }
             }
             catch (Exception err)
             {
@@ -186,26 +306,51 @@ namespace cristales_pva
             }
         }
 
-        private void insertListaOtros(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float largo, float alto, float precio)
+        private void insertListaOtros(int id, string clave, string articulo, string proveedor, string linea, string caracteristicas, string color, float largo, float alto, float precio, string moneda)
         {
             listas = new listas_entities_pva();
+            float tc = constants.tc;
+
             try
             {
-                var k = new otro()
+                if (moneda != "MXN")
                 {
-                    id = id,
-                    clave = clave,
-                    articulo = articulo,
-                    proveedor = proveedor,
-                    linea = linea,
-                    caracteristicas = caracteristicas,
-                    color = color,
-                    largo = largo,
-                    alto = alto,
-                    precio = Math.Round(precio, 2)
-                };
-                listas.otros.Add(k);
-                listas.SaveChanges();
+                    var k = new otro()
+                    {
+                        id = id,
+                        clave = clave,
+                        articulo = articulo,
+                        proveedor = proveedor,
+                        linea = linea,
+                        caracteristicas = caracteristicas,
+                        color = color,
+                        largo = largo,
+                        alto = alto,
+                        precio = Math.Round(precio * tc, 2),
+                        moneda = moneda
+                    };
+                    listas.otros.Add(k);
+                    listas.SaveChanges();
+                }
+                else
+                {
+                    var k = new otro()
+                    {
+                        id = id,
+                        clave = clave,
+                        articulo = articulo,
+                        proveedor = proveedor,
+                        linea = linea,
+                        caracteristicas = caracteristicas,
+                        color = color,
+                        largo = largo,
+                        alto = alto,
+                        precio = Math.Round(precio, 2),
+                        moneda = moneda
+                    };
+                    listas.otros.Add(k);
+                    listas.SaveChanges();
+                }
             }
             catch (Exception err)
             {
@@ -353,6 +498,28 @@ namespace cristales_pva
             }
         }
 
+        private void insertPaquetes(int id, string clave, string items, string type, string articulo)
+        {
+            listas = new listas_entities_pva();
+            try
+            {
+                var k = new paquete()
+                {
+                    id = id,
+                    comp_clave = clave,
+                    comp_items = items,
+                    comp_type = type,
+                    comp_articulo = articulo               
+                };
+                listas.paquetes.Add(k);
+                listas.SaveChanges();
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+            }
+        }
+
         public void checkUpdates()
         {
             label1.Text = "Buscando actualizaciones...";
@@ -376,7 +543,7 @@ namespace cristales_pva
             backgroundWorker1.ReportProgress(100);
             if (constants.stringToInt(h) < constants.stringToInt(v))
             {
-                new update(version).ShowDialog();
+                new update(version).ShowDialog(this);
             }
         }
 
@@ -397,7 +564,7 @@ namespace cristales_pva
             {
                 if (t1.Rows[i][0] != null && t1.Rows[i][0].ToString() != "")
                 {                   
-                    insertListaPrecioHojas(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][2].ToString()), constants.stringToFloat(t1.Rows[i][3].ToString()), constants.stringToFloat(t1.Rows[i][6].ToString()), t1.Rows[i][8].ToString());
+                    insertListaPrecioHojas(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][2].ToString()), constants.stringToFloat(t1.Rows[i][3].ToString()), constants.stringToFloat(t1.Rows[i][6].ToString()), t1.Rows[i][8].ToString(), t1.Rows[i][9].ToString());
                 }
             }
 
@@ -424,7 +591,7 @@ namespace cristales_pva
                 if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
                 {                   
                     insertListaPerfilesCuprum((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(),
-                    constants.stringToFloat(t1.Rows[i][5].ToString()), constants.stringToFloat(t1.Rows[i][6].ToString()), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()), constants.stringToFloat(t1.Rows[i][10].ToString()), constants.stringToFloat(t1.Rows[i][11].ToString()), constants.stringToFloat(t1.Rows[i][12].ToString()), constants.stringToFloat(t1.Rows[i][13].ToString()), constants.stringToFloat(t1.Rows[i][14].ToString()), constants.stringToFloat(t1.Rows[i][15].ToString()), constants.stringToFloat(t1.Rows[i][16].ToString()), constants.stringToFloat(t1.Rows[i][17].ToString()), constants.stringToFloat(t1.Rows[i][19].ToString()), constants.stringToFloat(t1.Rows[i][20].ToString()), constants.stringToFloat(t1.Rows[i][21].ToString()));
+                    constants.stringToFloat(t1.Rows[i][5].ToString()), constants.stringToFloat(t1.Rows[i][6].ToString()), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()), constants.stringToFloat(t1.Rows[i][10].ToString()), constants.stringToFloat(t1.Rows[i][11].ToString()), constants.stringToFloat(t1.Rows[i][12].ToString()), constants.stringToFloat(t1.Rows[i][13].ToString()), constants.stringToFloat(t1.Rows[i][14].ToString()), constants.stringToFloat(t1.Rows[i][15].ToString()), constants.stringToFloat(t1.Rows[i][16].ToString()), constants.stringToFloat(t1.Rows[i][17].ToString()), constants.stringToFloat(t1.Rows[i][19].ToString()), constants.stringToFloat(t1.Rows[i][20].ToString()), constants.stringToFloat(t1.Rows[i][21].ToString()), t1.Rows[i][23].ToString());
                 }
             }
 
@@ -437,7 +604,7 @@ namespace cristales_pva
             {
                 if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
                 {
-                    insertListaHerrajes((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()));
+                    insertListaHerrajes((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), t1.Rows[i][9].ToString());
                 }
             }
 
@@ -450,7 +617,7 @@ namespace cristales_pva
             {
                 if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
                 {
-                    insertListaOtros((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()));
+                    insertListaOtros((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString(), t1.Rows[i][5].ToString(), t1.Rows[i][6].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), constants.stringToFloat(t1.Rows[i][8].ToString()), constants.stringToFloat(t1.Rows[i][9].ToString()), t1.Rows[i][11].ToString());
                 }
             }
 
@@ -526,6 +693,17 @@ namespace cristales_pva
                 }
             }
 
+            t1.Reset();
+            t1 = sql.createDataTableFromSQLTable("paquetes");
+
+            for (i = 0; i < t1.Rows.Count; i++)
+            {
+                if (t1.Rows[i][1].ToString() != null && t1.Rows[i][1].ToString() != "")
+                {
+                    insertPaquetes((int)t1.Rows[i][0], t1.Rows[i][1].ToString(), t1.Rows[i][2].ToString(), t1.Rows[i][3].ToString(), t1.Rows[i][4].ToString());
+                }
+            }
+
             backgroundWorker1.ReportProgress(80);
 
             t1.Reset();
@@ -536,8 +714,8 @@ namespace cristales_pva
             {
                 if (t1.Rows[i][0] != null && t1.Rows[i][0].ToString() != "")
                 {                   
-                    insertListaCostoCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][5].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString());
-                    insertListaPrecioCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString());
+                    insertListaCostoCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][5].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString(), t1.Rows[i][10].ToString());
+                    insertListaPrecioCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString(), t1.Rows[i][10].ToString());
                 }
             }
 
@@ -545,7 +723,6 @@ namespace cristales_pva
 
             t1.Dispose();
             t2.Dispose();
-            constants.reloadUserItems();
         }
 
         private float getPrecioInstalado(DataTable table, string clave)
@@ -616,6 +793,7 @@ namespace cristales_pva
                 listas.Database.ExecuteSqlCommand("TRUNCATE TABLE proveedores");
                 listas.Database.ExecuteSqlCommand("TRUNCATE TABLE lineas_modulos");
                 listas.Database.ExecuteSqlCommand("TRUNCATE TABLE colores_aluminio");
+                listas.Database.ExecuteSqlCommand("TRUNCATE TABLE paquetes");
             }
             catch (Exception err)
             {
@@ -632,7 +810,7 @@ namespace cristales_pva
                 label3.Text = "";
                 label1.Text = "Configurando Datos...";
                 progressBar1.Value = 100;
-                backgroundWorker2.RunWorkerAsync();
+                backgroundWorker2.RunWorkerAsync();               
             }
         }
 
@@ -660,23 +838,41 @@ namespace cristales_pva
         {
             if (constants.local == false)
             {
-                if(constants.logged == false)
+                //TC --------------------------------------------------------------------------->
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                float tc = sql.getTC();
+                constants.setPropiedadesXML(tc, sql.getCostoAluminioKG());
+                if (tc <= 0)
+                {
+                    tc = constants.getTCFromXML();
+                }
+                constants.tc = tc;
+                if (constants.enable_c_tc && constants.folio_abierto > 0)
+                {
+                    float c_tc = sql.getCotizacionTC(constants.folio_abierto);
+                    if (c_tc > 0)
+                    {
+                        constants.tc = c_tc;
+                    }
+                }
+                // ---------------------------------------------------------------------------->
+                if (constants.logged == false)
                 {
                     constants.logged = true;
                     checkUpdates();
                     constants.downloadPropiedadesModel();
-                    constants.loadPropiedadesModel();
+                    constants.loadPropiedadesModel();                                  
                     if (constants.optimizar_inicio == true)
                     {
                         insertTablesToLocalDB();
-                    }                  
+                    }                                   
                 }
                 else
                 {
                     constants.downloadPropiedadesModel();
                     constants.loadPropiedadesModel();
                     insertTablesToLocalDB();                    
-                }
+                }              
             }
         }       
 
@@ -713,13 +909,14 @@ namespace cristales_pva
             if (constants.tipo_cotizacion > 0)
             {
                 ((Form1)Application.OpenForms["Form1"]).refreshNewArticulo();
-            }
+            }            
         }
 
         private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             label1.Text = "listo.";          
             ((Form1)Application.OpenForms["Form1"]).Enabled = true;
+            ((Form1)Application.OpenForms["Form1"]).setTCLabel(constants.tc);
             this.Close();
         }
 

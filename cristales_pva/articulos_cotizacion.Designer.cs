@@ -61,11 +61,11 @@
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
@@ -393,24 +393,6 @@
             this.label7.TabIndex = 21;
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // datagridviewNE1
-            // 
-            this.datagridviewNE1.AllowDrop = true;
-            this.datagridviewNE1.AllowUserToAddRows = false;
-            this.datagridviewNE1.AllowUserToDeleteRows = false;
-            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
-            this.datagridviewNE1.Location = new System.Drawing.Point(0, 97);
-            this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.Size = new System.Drawing.Size(1059, 467);
-            this.datagridviewNE1.TabIndex = 0;
-            // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -470,6 +452,24 @@
             this.comboBox3.Size = new System.Drawing.Size(97, 21);
             this.comboBox3.TabIndex = 25;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // datagridviewNE1
+            // 
+            this.datagridviewNE1.AllowDrop = true;
+            this.datagridviewNE1.AllowUserToAddRows = false;
+            this.datagridviewNE1.AllowUserToDeleteRows = false;
+            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
+            this.datagridviewNE1.Location = new System.Drawing.Point(0, 97);
+            this.datagridviewNE1.Name = "datagridviewNE1";
+            this.datagridviewNE1.Size = new System.Drawing.Size(1059, 467);
+            this.datagridviewNE1.TabIndex = 0;
             // 
             // articulos_cotizacion
             // 

@@ -20,5 +20,6 @@ namespace cristales_pva
         public Nullable<double> alto { get; set; }
         public Nullable<double> precio_hoja { get; set; }
         public string proveedor { get; set; }
+        public string moneda { get; set; }
     }
 }

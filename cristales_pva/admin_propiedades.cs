@@ -108,6 +108,15 @@ namespace cristales_pva
             {
                 checkBox9.Checked = false;
             }
+            //preguntar si se desea actualizar
+            if (constants.enable_c_tc == true)
+            {
+                checkBox10.Checked = true;
+            }
+            else
+            {
+                checkBox10.Checked = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -155,6 +164,7 @@ namespace cristales_pva
                                 x.SetElementValue("PAI", getPAI());
                                 x.SetElementValue("MLIVA", getMLIVA());
                                 x.SetElementValue("PAC", getPAC());
+                                x.SetElementValue("EATCC", getATCC());
                             }
                             opciones_xml.Save(constants.opciones_xml);
                         }
@@ -352,6 +362,20 @@ namespace cristales_pva
             {
                 constants.p_ac = false;
                 constants.reload_precios = true;
+                return "false";
+            }
+        }
+
+        private string getATCC()
+        {
+            if (checkBox10.Checked == true)
+            {
+                constants.enable_c_tc = true;
+                return "true";
+            }
+            else
+            {
+                constants.enable_c_tc = false;
                 return "false";
             }
         }

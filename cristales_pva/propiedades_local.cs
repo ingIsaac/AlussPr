@@ -24,5 +24,6 @@ namespace cristales_pva
         public string proyecto_abierto { get; set; }
         public Nullable<double> desc_cotizacion { get; set; }
         public Nullable<double> utilidad_cotizacion { get; set; }
+        public Nullable<bool> desglose_iva { get; set; }
     }
 }

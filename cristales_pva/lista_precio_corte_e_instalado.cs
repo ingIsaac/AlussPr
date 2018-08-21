@@ -19,5 +19,6 @@ namespace cristales_pva
         public Nullable<double> precio_venta_corte_m2 { get; set; }
         public Nullable<double> precio_venta_instalado { get; set; }
         public string proveedor { get; set; }
+        public string moneda { get; set; }
     }
 }

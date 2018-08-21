@@ -483,6 +483,9 @@
     <Compile Include="otros_cotizaciones.cs">
       <DependentUpon>cotizaciones_local.tt</DependentUpon>
     </Compile>
+    <Compile Include="paquete.cs">
+      <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
     <Compile Include="perfile.cs">
       <DependentUpon>listas.tt</DependentUpon>
     </Compile>
@@ -536,6 +539,12 @@
       <DependentUpon>setDir.cs</DependentUpon>
     </Compile>
     <Compile Include="sqlDateBaseManager.cs" />
+    <Compile Include="statusStripNE.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="statusStripNE.Designer.cs">
+      <DependentUpon>statusStripNE.cs</DependentUpon>
+    </Compile>
     <Compile Include="update.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -981,6 +990,8 @@
     <None Include="Resources\gear_icon_min.png" />
     <None Include="Resources\import_icon.png" />
     <None Include="Resources\save_16.png" />
+    <None Include="Resources\wizard_icon_128.png" />
+    <None Include="Resources\unlock_icon.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

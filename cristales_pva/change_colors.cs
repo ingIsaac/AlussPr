@@ -31,7 +31,7 @@ namespace cristales_pva
             backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = Properties.Resources.Wizard_icon_big;
+            pictureBox1.Image = Properties.Resources.wizard_icon_128;
             this.id = id;
             if (articulo != "")
             {
@@ -48,6 +48,10 @@ namespace cristales_pva
                 label18.Text = "<- " + alto + " mm";
             }
             loadLineas();
+            if (constants.user_access <= 1 && constants.permitir_cp == false)
+            {
+                checkBox3.Enabled = false;
+            }  
         }
 
         private void loadLineas()
@@ -486,7 +490,7 @@ namespace cristales_pva
                         modulo_id = (int)v.modulo_id;
                         cambiarMedidas(cotizacion, v.id);
                         var modulo = (from x in listas.modulos where x.id == modulo_id select x).SingleOrDefault();
-                        label4.Text = "Cargando... \n" + v.articulo;
+                        label4.Text = "Cargando... " + v.articulo;
                         if (checkBox3.Checked)
                         {
                             if (parmeters != null)
@@ -1118,12 +1122,18 @@ namespace cristales_pva
             if (constants.mostrar_acabado == false)
             {
                 clearBackground();
+            }           
+            Bitmap bm = new Bitmap(tableLayoutPanel1.Width, tableLayoutPanel1.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                gr.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                tableLayoutPanel1.DrawToBitmap(bm, new Rectangle(0, 0, tableLayoutPanel1.Width, tableLayoutPanel1.Height));
             }
-            Bitmap bm = new Bitmap(tableLayoutPanel1.Width, tableLayoutPanel1.Height);          
-            tableLayoutPanel1.DrawToBitmap(bm, new Rectangle(0, 0, tableLayoutPanel1.Width, tableLayoutPanel1.Height));
-            Bitmap g = new Bitmap(bm, 120, 105);
+            Bitmap pic = new Bitmap(bm, 120, 105);
             bm = null;
-            return g;
+            return pic;
         }
 
         //borrar panel image background
@@ -1534,7 +1544,7 @@ namespace cristales_pva
             }          
             MessageBox.Show(this, "Se ha completado el proceso.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
-            pictureBox1.Image = Properties.Resources.Wizard_icon_big;
+            pictureBox1.Image = Properties.Resources.wizard_icon_128;
             progressBar1.Visible = false;
             label4.Text = "";
             if (id > 0)

@@ -93,11 +93,8 @@ namespace cristales_pva
 
         private void Historial_registros_Load(object sender, EventArgs e)
         {            
-            rec = this.Bounds;
-            //----------------------------------------------------------------------------------------------->
-            // TODO: This line of code loads data into the 'reportes_dataSet.datos_reporte' table. You can move, or remove it, as needed.
+            rec = this.Bounds;            
             this.datos_reporteTableAdapter.Fill(this.reportes_dataSet.datos_reporte);
-            this.reportViewer1.RefreshReport();
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
             ReportPageSettings ps = reportViewer1.LocalReport.GetDefaultPageSettings();
             this.reportViewer1.ParentForm.Width = ps.PaperSize.Width;

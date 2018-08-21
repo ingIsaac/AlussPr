@@ -12,11 +12,13 @@ namespace cristales_pva
     public partial class delete_password : Form
     {
         bool delete;
+        bool enable_changeParam;
 
-        public delete_password(bool delete=true)
+        public delete_password(bool delete=true, bool enable_changeParam=false)
         {
             InitializeComponent();
             this.delete = delete;
+            this.enable_changeParam = enable_changeParam;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,17 +39,33 @@ namespace cristales_pva
             }
             else
             {
-                if (textBox1.Text == constants.ps_dl)
+                if (enable_changeParam)
                 {
-                    ((config_modulo)Application.OpenForms["config_modulo"]).permitirCambioParametros(true);                 
-                    label2.Text = "";
-                    this.Close();
+                    if (textBox1.Text == constants.ps_dl)
+                    {
+                        constants.permitir_cp = true;
+                        label2.Text = "";
+                        this.Close();
+                    }
+                    else
+                    {
+                        label2.Text = "Error: contraseña no válida.";
+                    }
                 }
                 else
                 {
-                    ((config_modulo)Application.OpenForms["config_modulo"]).permitirCambioParametros(false);                   
-                    label2.Text = "Error: contraseña no válida.";
-                }
+                    if (textBox1.Text == constants.ps_dl)
+                    {
+                        ((config_modulo)Application.OpenForms["config_modulo"]).permitirCambioParametros(true);
+                        label2.Text = "";
+                        this.Close();
+                    }
+                    else
+                    {
+                        ((config_modulo)Application.OpenForms["config_modulo"]).permitirCambioParametros(false);
+                        label2.Text = "Error: contraseña no válida.";
+                    }
+                }               
             }
         }
     }

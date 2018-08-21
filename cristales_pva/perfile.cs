@@ -36,5 +36,6 @@ namespace cristales_pva
         public Nullable<double> chocolate { get; set; }
         public Nullable<double> acero_inox { get; set; }
         public Nullable<double> bronce { get; set; }
+        public string moneda { get; set; }
     }
 }

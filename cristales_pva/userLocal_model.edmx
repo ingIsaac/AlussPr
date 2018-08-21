@@ -71,6 +71,7 @@
           <Property Name="proyecto_abierto" Type="varchar(max)" />
           <Property Name="desc_cotizacion" Type="float" />
           <Property Name="utilidad_cotizacion" Type="float" />
+          <Property Name="desglose_iva" Type="bit" />
         </EntityType>
         <EntityType Name="proveedores">
           <Key>
@@ -196,6 +197,7 @@
           <Property Name="proyecto_abierto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="desc_cotizacion" Type="Double" />
           <Property Name="utilidad_cotizacion" Type="Double" />
+          <Property Name="desglose_iva" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -282,6 +284,7 @@
           <EntitySetMapping Name="propiedades_local">
             <EntityTypeMapping TypeName="userLocal_model.propiedades_local">
               <MappingFragment StoreEntitySet="propiedades_local">
+                <ScalarProperty Name="desglose_iva" ColumnName="desglose_iva" />
                 <ScalarProperty Name="utilidad_cotizacion" ColumnName="utilidad_cotizacion" />
                 <ScalarProperty Name="desc_cotizacion" ColumnName="desc_cotizacion" />
                 <ScalarProperty Name="proyecto_abierto" ColumnName="proyecto_abierto" />

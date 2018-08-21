@@ -49,6 +49,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
@@ -251,6 +252,7 @@
             this.panelDeAdministradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesDelProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optimizarBaseDeDatosLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habilitarCambioDeParametrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -302,13 +304,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.label39 = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
+            this.label100 = new System.Windows.Forms.Label();
+            this.statusStripNE1 = new cristales_pva.statusStripNE();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
-            this.label100 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -352,7 +354,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.groupBox8.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.statusStripNE1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -425,6 +427,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.textBox9);
             this.groupBox1.Controls.Add(this.button20);
             this.groupBox1.Controls.Add(this.button19);
@@ -446,6 +449,17 @@
             this.groupBox1.Size = new System.Drawing.Size(983, 401);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.SystemColors.Control;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(546, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(0, 13);
+            this.label15.TabIndex = 40;
             // 
             // textBox9
             // 
@@ -819,11 +833,11 @@
             // 
             this.label45.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(209, 162);
+            this.label45.Location = new System.Drawing.Point(204, 162);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(46, 13);
+            this.label45.Size = new System.Drawing.Size(56, 13);
             this.label45.TabIndex = 20;
-            this.label45.Text = "% Desc.";
+            this.label45.Text = "% Utilidad:";
             // 
             // label5
             // 
@@ -1059,7 +1073,7 @@
             this.comboBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(54, 12);
+            this.comboBox8.Location = new System.Drawing.Point(68, 12);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(138, 21);
             this.comboBox8.TabIndex = 31;
@@ -1090,7 +1104,7 @@
             // 
             this.textBox29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox29.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox29.Location = new System.Drawing.Point(54, 36);
+            this.textBox29.Location = new System.Drawing.Point(68, 38);
             this.textBox29.Name = "textBox29";
             this.textBox29.Size = new System.Drawing.Size(47, 20);
             this.textBox29.TabIndex = 25;
@@ -1100,17 +1114,17 @@
             // 
             this.label56.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(6, 39);
+            this.label56.Location = new System.Drawing.Point(6, 41);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(46, 13);
+            this.label56.Size = new System.Drawing.Size(56, 13);
             this.label56.TabIndex = 15;
-            this.label56.Text = "% Desc.";
+            this.label56.Text = "% Utilidad:";
             // 
             // textBox33
             // 
             this.textBox33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox33.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox33.Location = new System.Drawing.Point(145, 36);
+            this.textBox33.Location = new System.Drawing.Point(159, 38);
             this.textBox33.Name = "textBox33";
             this.textBox33.Size = new System.Drawing.Size(47, 20);
             this.textBox33.TabIndex = 26;
@@ -1143,7 +1157,7 @@
             // 
             this.label54.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(107, 39);
+            this.label54.Location = new System.Drawing.Point(121, 41);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(32, 13);
             this.label54.TabIndex = 6;
@@ -1153,7 +1167,7 @@
             // 
             this.label52.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(5, 15);
+            this.label52.Location = new System.Drawing.Point(28, 16);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(34, 13);
             this.label52.TabIndex = 4;
@@ -1551,11 +1565,11 @@
             // 
             this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(7, 41);
+            this.label46.Location = new System.Drawing.Point(13, 41);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(46, 13);
+            this.label46.Size = new System.Drawing.Size(56, 13);
             this.label46.TabIndex = 19;
-            this.label46.Text = "% Desc.";
+            this.label46.Text = "% Utilidad:";
             // 
             // label38
             // 
@@ -1572,7 +1586,7 @@
             // 
             this.textBox27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox27.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox27.Location = new System.Drawing.Point(59, 39);
+            this.textBox27.Location = new System.Drawing.Point(78, 38);
             this.textBox27.Name = "textBox27";
             this.textBox27.Size = new System.Drawing.Size(47, 20);
             this.textBox27.TabIndex = 31;
@@ -1593,7 +1607,7 @@
             // 
             this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(112, 41);
+            this.label36.Location = new System.Drawing.Point(131, 40);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(32, 13);
             this.label36.TabIndex = 15;
@@ -1603,7 +1617,7 @@
             // 
             this.textBox7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox7.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox7.Location = new System.Drawing.Point(150, 38);
+            this.textBox7.Location = new System.Drawing.Point(169, 37);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(47, 20);
             this.textBox7.TabIndex = 32;
@@ -1823,9 +1837,9 @@
             this.comboBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(239, 12);
+            this.comboBox9.Location = new System.Drawing.Point(230, 11);
             this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(53, 21);
+            this.comboBox9.Size = new System.Drawing.Size(62, 21);
             this.comboBox9.TabIndex = 38;
             // 
             // label106
@@ -1916,7 +1930,7 @@
             // 
             this.textBox31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox31.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox31.Location = new System.Drawing.Point(58, 13);
+            this.textBox31.Location = new System.Drawing.Point(50, 12);
             this.textBox31.Name = "textBox31";
             this.textBox31.Size = new System.Drawing.Size(47, 20);
             this.textBox31.TabIndex = 34;
@@ -1926,7 +1940,7 @@
             // 
             this.textBox30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox30.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox30.Location = new System.Drawing.Point(149, 13);
+            this.textBox30.Location = new System.Drawing.Point(140, 12);
             this.textBox30.Name = "textBox30";
             this.textBox30.Size = new System.Drawing.Size(47, 20);
             this.textBox30.TabIndex = 35;
@@ -1937,7 +1951,7 @@
             // 
             this.label72.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(111, 16);
+            this.label72.Location = new System.Drawing.Point(102, 15);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(32, 13);
             this.label72.TabIndex = 8;
@@ -1947,17 +1961,17 @@
             // 
             this.label71.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(6, 16);
+            this.label71.Location = new System.Drawing.Point(8, 16);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(46, 13);
+            this.label71.Size = new System.Drawing.Size(36, 13);
             this.label71.TabIndex = 7;
-            this.label71.Text = "% Desc.";
+            this.label71.Text = "% Util.";
             // 
             // label70
             // 
             this.label70.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(202, 16);
+            this.label70.Location = new System.Drawing.Point(193, 15);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(34, 13);
             this.label70.TabIndex = 6;
@@ -2430,7 +2444,7 @@
             this.groupBox6.Size = new System.Drawing.Size(410, 80);
             this.groupBox6.TabIndex = 0;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Descuentos Predeterminados";
+            this.groupBox6.Text = "Utilidad Predeterminada";
             // 
             // textBox36
             // 
@@ -2641,6 +2655,7 @@
             this.panelDeAdministradorToolStripMenuItem,
             this.opcionesDelProgramaToolStripMenuItem,
             this.optimizarBaseDeDatosLocalToolStripMenuItem,
+            this.habilitarCambioDeParametrosToolStripMenuItem,
             this.errorLogToolStripMenuItem});
             this.archivoToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.Status_user_online_icon;
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
@@ -2650,40 +2665,47 @@
             // cerrarSesionToolStripMenuItem
             // 
             this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.cerrarSesionToolStripMenuItem.Text = "Cerrar sesión";
             this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesionToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(226, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(238, 6);
             // 
             // panelDeAdministradorToolStripMenuItem
             // 
             this.panelDeAdministradorToolStripMenuItem.Name = "panelDeAdministradorToolStripMenuItem";
-            this.panelDeAdministradorToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.panelDeAdministradorToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.panelDeAdministradorToolStripMenuItem.Text = "Panel de administrador";
             this.panelDeAdministradorToolStripMenuItem.Click += new System.EventHandler(this.panelDeAdministradorToolStripMenuItem_Click);
             // 
             // opcionesDelProgramaToolStripMenuItem
             // 
             this.opcionesDelProgramaToolStripMenuItem.Name = "opcionesDelProgramaToolStripMenuItem";
-            this.opcionesDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.opcionesDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.opcionesDelProgramaToolStripMenuItem.Text = "Opciones del programa";
             this.opcionesDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.opcionesDelProgramaToolStripMenuItem_Click);
             // 
             // optimizarBaseDeDatosLocalToolStripMenuItem
             // 
             this.optimizarBaseDeDatosLocalToolStripMenuItem.Name = "optimizarBaseDeDatosLocalToolStripMenuItem";
-            this.optimizarBaseDeDatosLocalToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.optimizarBaseDeDatosLocalToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.optimizarBaseDeDatosLocalToolStripMenuItem.Text = "Optimizar base de datos local";
             this.optimizarBaseDeDatosLocalToolStripMenuItem.Click += new System.EventHandler(this.optimizarBaseDeDatosLocalToolStripMenuItem_Click);
+            // 
+            // habilitarCambioDeParametrosToolStripMenuItem
+            // 
+            this.habilitarCambioDeParametrosToolStripMenuItem.Name = "habilitarCambioDeParametrosToolStripMenuItem";
+            this.habilitarCambioDeParametrosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.habilitarCambioDeParametrosToolStripMenuItem.Text = "Habilitar cambio de parámetros";
+            this.habilitarCambioDeParametrosToolStripMenuItem.Click += new System.EventHandler(this.habilitarCambioDeParametrosToolStripMenuItem_Click);
             // 
             // errorLogToolStripMenuItem
             // 
             this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
-            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.errorLogToolStripMenuItem.Text = "Error log";
             this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);
             // 
@@ -3251,18 +3273,32 @@
             this.label39.Text = "v.0.0.0.0";
             this.label39.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // statusStrip1
+            // backgroundWorker4
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backgroundWorker4.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker4_DoWork);
+            // 
+            // label100
+            // 
+            this.label100.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label100.AutoSize = true;
+            this.label100.ForeColor = System.Drawing.Color.Red;
+            this.label100.Location = new System.Drawing.Point(630, 626);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(0, 13);
+            this.label100.TabIndex = 31;
+            // 
+            // statusStripNE1
+            // 
+            this.statusStripNE1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 620);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1019, 22);
-            this.statusStrip1.TabIndex = 39;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStripNE1.Location = new System.Drawing.Point(0, 620);
+            this.statusStripNE1.Name = "statusStripNE1";
+            this.statusStripNE1.Size = new System.Drawing.Size(1019, 22);
+            this.statusStripNE1.TabIndex = 40;
+            this.statusStripNE1.Text = "statusStripNE1";
             // 
             // toolStripStatusLabel1
             // 
@@ -3285,20 +3321,6 @@
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(0, 17);
             // 
-            // backgroundWorker4
-            // 
-            this.backgroundWorker4.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker4_DoWork);
-            // 
-            // label100
-            // 
-            this.label100.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label100.AutoSize = true;
-            this.label100.ForeColor = System.Drawing.Color.Red;
-            this.label100.Location = new System.Drawing.Point(630, 626);
-            this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(0, 13);
-            this.label100.TabIndex = 31;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3311,7 +3333,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.statusStripNE1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -3375,8 +3397,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStripNE1.ResumeLayout(false);
+            this.statusStripNE1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3637,11 +3659,6 @@
         private System.Windows.Forms.ComboBox comboBox8;
         private System.Windows.Forms.ComboBox comboBox9;
         private System.Windows.Forms.ToolStripMenuItem enviarCotizaciónToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.ComponentModel.BackgroundWorker backgroundWorker4;
         private System.Windows.Forms.Label label100;
         private System.Windows.Forms.ToolStripMenuItem artículosDeUsuarioToolStripMenuItem;
@@ -3650,6 +3667,13 @@
         private System.Windows.Forms.ToolStripMenuItem opcionesDelProgramaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem producciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordenDeProducciónToolStripMenuItem;
+        private System.Windows.Forms.Label label15;
+        private statusStripNE statusStripNE1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripMenuItem habilitarCambioDeParametrosToolStripMenuItem;
     }
 }
 

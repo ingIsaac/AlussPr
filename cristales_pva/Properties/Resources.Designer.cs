@@ -1103,6 +1103,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap unlock_icon {
+            get {
+                object obj = ResourceManager.GetObject("unlock_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap user_add_icon {
             get {
                 object obj = ResourceManager.GetObject("user_add_icon", resourceCulture);
@@ -1146,6 +1156,16 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap Wizard_icon {
             get {
                 object obj = ResourceManager.GetObject("Wizard_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wizard_icon_128 {
+            get {
+                object obj = ResourceManager.GetObject("wizard_icon_128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

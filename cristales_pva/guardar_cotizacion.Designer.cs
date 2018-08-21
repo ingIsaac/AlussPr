@@ -74,24 +74,26 @@
             // button1
             // 
             this.button1.Image = global::cristales_pva.Properties.Resources.save_16;
-            this.button1.Location = new System.Drawing.Point(272, 95);
+            this.button1.Location = new System.Drawing.Point(335, 228);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 49);
+            this.button1.Size = new System.Drawing.Size(112, 34);
             this.button1.TabIndex = 3;
             this.button1.Text = "Guardar";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
             this.button2.Image = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
-            this.button2.Location = new System.Drawing.Point(353, 95);
+            this.button2.Location = new System.Drawing.Point(217, 228);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 49);
+            this.button2.Size = new System.Drawing.Size(112, 34);
             this.button2.TabIndex = 4;
             this.button2.Text = "Cancelar";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -124,9 +126,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(56, 101);
+            this.progressBar1.Location = new System.Drawing.Point(11, 101);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(210, 23);
+            this.progressBar1.Size = new System.Drawing.Size(417, 34);
             this.progressBar1.TabIndex = 6;
             // 
             // textBox1
@@ -174,21 +176,18 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.progressBar1);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(11, 57);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(436, 152);
+            this.groupBox2.Size = new System.Drawing.Size(436, 165);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
@@ -197,7 +196,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(55, 126);
+            this.label7.Location = new System.Drawing.Point(8, 138);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(0, 13);
             this.label7.TabIndex = 17;
@@ -205,10 +204,10 @@
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::cristales_pva.Properties.Resources.loading_green;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 100);
+            this.pictureBox1.Image = global::cristales_pva.Properties.Resources.progress_bar;
+            this.pictureBox1.Location = new System.Drawing.Point(11, 228);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 34);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
@@ -254,9 +253,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(458, 220);
+            this.ClientSize = new System.Drawing.Size(458, 274);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

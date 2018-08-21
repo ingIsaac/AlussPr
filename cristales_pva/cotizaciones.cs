@@ -65,7 +65,7 @@ namespace cristales_pva
                         if (textbox.Text != "")
                         {
                             deleteAllDeletedArticulos();
-                            sql.insertCotizacion(folio, textbox.Text, constants.user, DateTime.Today.ToString("dd/MM/yyyy") + " -", textbox2.Text, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.org_name, constants.iva_desglosado, "Sin Registro");
+                            sql.insertCotizacion(folio, textbox.Text, constants.user, DateTime.Today.ToString("dd/MM/yyyy") + " -", textbox2.Text, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.org_name, constants.iva_desglosado, "Sin Registro", constants.tc);
                             constants.cotizacion_error = false;
                             constants.folio_abierto = folio;
                             constants.nombre_cotizacion = textbox.Text;
@@ -148,7 +148,7 @@ namespace cristales_pva
                             if (textbox.Text != "")
                             {
                                 deleteAllDeletedArticulos();
-                                sql.insertCotizacion(folio, textbox.Text, constants.user, DateTime.Today.ToString("dd/MM/yyyy") + " -", textbox2.Text, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.org_name, constants.iva_desglosado, "Sin Registro");
+                                sql.insertCotizacion(folio, textbox.Text, constants.user, DateTime.Today.ToString("dd/MM/yyyy") + " -", textbox2.Text, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.org_name, constants.iva_desglosado, "Sin Registro", constants.tc);
                                 constants.cotizacion_error = false;
                                 constants.folio_abierto = folio;
                                 constants.nombre_cotizacion = textbox.Text;
@@ -229,7 +229,7 @@ namespace cristales_pva
                         if (r == DialogResult.Yes)
                         {
                             deleteAllDeletedArticulos();
-                            sql.updateCotizacion(constants.folio_abierto, constants.getStringToPoint(sql.getSingleSQLValueById("cotizaciones", "fecha", "folio", constants.folio_abierto, 0)) + "- UM: " + DateTime.Today.ToString("dd/MM/yyyy"), textbox.Text, textbox2.Text, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
+                            sql.updateCotizacion(constants.folio_abierto, constants.getStringToPoint(sql.getSingleSQLValueById("cotizaciones", "fecha", "folio", constants.folio_abierto, 0)) + "- UM: " + DateTime.Today.ToString("dd/MM/yyyy"), textbox.Text, textbox2.Text, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado, constants.tc);
                             constants.nombre_cotizacion = textbox.Text;
                             constants.nombre_proyecto = textbox2.Text;
 

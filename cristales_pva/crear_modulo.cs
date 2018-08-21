@@ -2558,7 +2558,12 @@ namespace cristales_pva
                 md.Tables["modulo_data"].Rows.Add(row);
             }
             createModuloPic(md);
-            new modulo_data_form(md, label2.Text, textBox7.Text + textBox1.Text, comboBox2.Text, "Largo: 1000 mm - Alto: 1000 mm", autor).ShowDialog();
+            string m = string.Empty;
+            if(textBox13.Text != string.Empty)
+            {
+                m = " " + textBox13.Text;
+            }
+            new modulo_data_form(md, label2.Text, textBox7.Text + textBox1.Text + m, comboBox2.Text, "Largo: 1000 mm - Alto: 1000 mm", autor).ShowDialog();
             md.Dispose();
         }
 

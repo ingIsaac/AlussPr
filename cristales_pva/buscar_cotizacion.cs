@@ -39,7 +39,7 @@ namespace cristales_pva
             setYears();
             comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
             comboBox3.Text = DateTime.Now.Year.ToString();
-        }
+        }      
 
         private void setYears()
         {
@@ -423,8 +423,8 @@ namespace cristales_pva
                         sqlDateBaseManager sql = new sqlDateBaseManager();
                         constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
                         constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
-                        constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion);
                         constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
+                        constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
                         //cerrar ventanas
                         if (Application.OpenForms["registro_presupuesto"] != null)
                         {
@@ -462,8 +462,8 @@ namespace cristales_pva
                     sqlDateBaseManager sql = new sqlDateBaseManager();
                     constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
                     constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
-                    constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion);
                     constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
+                    constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
                     //cerrar ventanas
                     if (Application.OpenForms["registro_presupuesto"] != null)
                     {
@@ -543,7 +543,7 @@ namespace cristales_pva
                     {
                         constants.reload_precios = false;
                     }
-                }
+                }                
                 backgroundWorker4.RunWorkerAsync();
             }
             else
@@ -608,7 +608,20 @@ namespace cristales_pva
         //abriendo cotizacion
         private void backgroundWorker4_DoWork(object sender, DoWorkEventArgs e)
         {
-            constants.deleteFilasBorradasFromLocalDB();
+            //GET TC -------------------------------------------------------------------------->
+            if (constants.enable_c_tc && constants.folio_abierto > 0)
+            {
+                float c_tc = new sqlDateBaseManager().getCotizacionTC(constants.folio_abierto);
+                if (c_tc > 0)
+                {
+                    if (c_tc != constants.tc)
+                    {
+                        constants.changeTC(constants.tc, c_tc, "USD");
+                    }
+                }
+            }
+            //--------------------------------------------------------------------------------->
+            constants.deleteFilasBorradasFromLocalDB();           
             if (constants.ac_cotizacion == true && constants.reload_precios == true)
             {
                 constants.errors_Open.Clear();
@@ -621,7 +634,7 @@ namespace cristales_pva
             ((Form1)Application.OpenForms["Form1"]).setFolioLabel();
             ((Form1)Application.OpenForms["Form1"]).seleccionarPastaña();
             ((Form1)Application.OpenForms["Form1"]).resetSubfolio();
-            ((Form1)Application.OpenForms["Form1"]).refreshNewArticulo();
+            ((Form1)Application.OpenForms["Form1"]).refreshNewArticulo();        
         }
 
         private void BackgroundWorker4_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -652,7 +665,7 @@ namespace cristales_pva
                 }
                 Application.OpenForms["articulos_cotizacion"].Select();
             }
-            Close();
+            Close();                       
         }
 
         private void gotoLastPage()

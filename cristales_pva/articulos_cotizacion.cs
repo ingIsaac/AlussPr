@@ -914,6 +914,10 @@ namespace cristales_pva
             if (constants.local == false)
             {
                 new buscar_cotizacion().ShowDialog();
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    Application.OpenForms["articulos_cotizacion"].Select();
+                }
             }
             else
             {

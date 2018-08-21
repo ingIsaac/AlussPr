@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="listas_model_pva.colores_aluminio" Width="1.5" PointX="7.75" PointY="3.875" />
         <EntityTypeShape EntityType="listas_model_pva.modulo" Width="1.5" PointX="9.5" PointY="0.75" />
         <EntityTypeShape EntityType="listas_model_pva.perfile" Width="1.5" PointX="4.25" PointY="0.75" />
+        <EntityTypeShape EntityType="listas_model_pva.paquete" Width="1.5" PointX="0.75" PointY="5.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

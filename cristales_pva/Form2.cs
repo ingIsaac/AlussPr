@@ -138,7 +138,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show("[Error] Acceso no autorizado. El usuario no está registrado en este equipo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] Acceso no autorizado. El usuario no está registrado en este equipo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else {
@@ -192,7 +192,7 @@ namespace cristales_pva
                                             }
                                             catch (Exception err)
                                             {
-                                                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                MessageBox.Show(this, "[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                                 constants.errorLog(err.ToString());
                                             }
                                             finally
@@ -211,31 +211,31 @@ namespace cristales_pva
                                     }
                                     else
                                     {
-                                        MessageBox.Show("[Error] no se a podido identificar el tipo de licencia, ingrese de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        MessageBox.Show(this, "[Error] no se a podido identificar el tipo de licencia, ingrese de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         constants.connected = false;
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("El periodo de la licencia a expirado, póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show(this, "El periodo de la licencia a expirado, póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     constants.connected = false;
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("[Error] no existe registro de esta tienda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, "[Error] no existe registro de esta tienda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 constants.connected = false;
                             }
                         }
                         else
                         {
-                            MessageBox.Show("[Error] este equipo no se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(this, "[Error] este equipo no se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             constants.connected = false;
                         }
                     }
                     else
                     {
-                        MessageBox.Show("[Error] Acceso no autorizado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "[Error] Acceso no autorizado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         constants.connected = false;
                     }
                 }
@@ -397,6 +397,9 @@ namespace cristales_pva
                 var pac = (from x in opciones_xml.Descendants("Opciones") select x.Element("PAC")).SingleOrDefault();
                 var lim_sm = (from x in opciones_xml.Descendants("Opciones") select x.Element("LIM_SM")).SingleOrDefault();
                 var fsconfig = (from x in opciones_xml.Descendants("Opciones") select x.Element("FSCONFIG")).SingleOrDefault();
+                var tc = (from x in opciones_xml.Descendants("Opciones") select x.Element("TC")).SingleOrDefault();
+                var EATCC = (from x in opciones_xml.Descendants("Opciones") select x.Element("EATCC")).SingleOrDefault();
+                var EAKG = (from x in opciones_xml.Descendants("Opciones") select x.Element("EAKG")).SingleOrDefault();
 
                 var op1 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP1")).SingleOrDefault();
                 var op2 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP2")).SingleOrDefault();
@@ -549,6 +552,35 @@ namespace cristales_pva
                 if (fsconfig != null)
                 {
                     constants.fsconfig = constants.stringToFloat(fsconfig.Value.ToString());
+                }
+
+                if (tc != null)
+                {
+                    constants.tc = constants.stringToFloat(tc.Value.ToString());
+                }
+
+                if (EATCC != null)
+                {
+                    if (EATCC.Value == "true")
+                    {
+                        constants.enable_c_tc = true;
+                    }
+                    else
+                    {
+                        constants.enable_c_tc = false;
+                    }
+                }
+
+                if (EAKG != null)
+                {
+                    if (EAKG.Value == "true")
+                    {
+                        constants.enable_costo_alum_kg = true;
+                    }
+                    else
+                    {
+                        constants.enable_costo_alum_kg = false;
+                    }
                 }
 
                 if (op1 != null)

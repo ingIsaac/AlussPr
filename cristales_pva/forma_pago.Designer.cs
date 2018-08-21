@@ -48,11 +48,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(394, 173);
+            this.button1.Image = global::cristales_pva.Properties.Resources.save_16;
+            this.button1.Location = new System.Drawing.Point(380, 173);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 32);
+            this.button1.Size = new System.Drawing.Size(89, 32);
             this.button1.TabIndex = 1;
             this.button1.Text = "Guardar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
