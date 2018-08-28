@@ -21,6 +21,7 @@ namespace cristales_pva
         public historial_registros()
         {
             InitializeComponent();
+            this.FormClosing += Historial_registros_FormClosing;
             textBox1.KeyPress += TextBox1_KeyPress;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
@@ -31,7 +32,15 @@ namespace cristales_pva
             Load += Historial_registros_Load;
             datagridviewNE1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             this.Shown += Historial_registros_Shown;
-            setYears();
+            setYears();          
+        }
+
+        private void Historial_registros_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(Application.OpenForms["monitor"] != null)
+            {
+                Application.OpenForms["monitor"].Close();
+            }
         }
 
         private void DatagridviewNE1_Click(object sender, EventArgs e)
@@ -57,6 +66,8 @@ namespace cristales_pva
             comboBox4.Text = constants.org_name;
             setTimer();
             loadPresupuestos(string.Empty, false);
+            comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
+            comboBox3.Text = DateTime.Now.Year.ToString();
         }
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
@@ -129,7 +140,7 @@ namespace cristales_pva
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            pictureBox1.Visible = false;
+            pictureBox1.Visible = false;           
         }
 
         private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -245,6 +256,23 @@ namespace cristales_pva
             else
             {
                 label7.Text = string.Empty;
+            }
+            if (Application.OpenForms["monitor"] != null)
+            {
+                ((monitor)Application.OpenForms["monitor"]).setData(datagridviewNE1.DataSource, label6.Text, getPeriodo(), checkBox3.Checked);
+                ((monitor)Application.OpenForms["monitor"]).setcolors();
+            }
+        }
+
+        private string getPeriodo()
+        {
+            if(checkBox2.Text != ""  && checkBox2.Checked)
+            {
+                return comboBox2.Text + " - " + comboBox3.Text;
+            }
+            else
+            {
+                return string.Empty;
             }
         }
 
@@ -438,6 +466,26 @@ namespace cristales_pva
             if (checkBox3.Checked)
             {
                 recorrido = comboBox4.SelectedIndex;
+                pictureBox2.Visible = true;
+            }
+            else
+            {
+                pictureBox2.Visible = false;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if(Application.OpenForms["monitor"] == null)
+            {
+                monitor m = new monitor();
+                m.setData(datagridviewNE1.DataSource, label6.Text, getPeriodo(), checkBox3.Checked);
+                m.setcolors();
+                m.Show();
+            }
+            else
+            {
+                Application.OpenForms["monitor"].Select();                
             }
         }
     }

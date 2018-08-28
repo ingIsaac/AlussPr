@@ -465,6 +465,12 @@
     <Compile Include="modulo_precios.Designer.cs">
       <DependentUpon>modulo_precios.cs</DependentUpon>
     </Compile>
+    <Compile Include="monitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="monitor.Designer.cs">
+      <DependentUpon>monitor.cs</DependentUpon>
+    </Compile>
     <Compile Include="new_articulo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -593,6 +599,9 @@
     <EmbeddedResource Include="informe.rdlc" />
     <EmbeddedResource Include="informe.resx">
       <DependentUpon>informe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="monitor.resx">
+      <DependentUpon>monitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="new_costos.resx">
       <DependentUpon>new_costos.cs</DependentUpon>
@@ -992,6 +1001,7 @@
     <None Include="Resources\save_16.png" />
     <None Include="Resources\wizard_icon_128.png" />
     <None Include="Resources\unlock_icon.png" />
+    <None Include="Resources\Monitor_icon.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>
