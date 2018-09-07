@@ -117,6 +117,7 @@ namespace cristales_pva
             //------- 
 
             //--
+            comboBox5.Text = "clave";
             textBox7.KeyDown += TextBox7_KeyDown;
             checkBox4.Click += CheckBox4_Click;
             checkBox4.Checked = constants.enable_costo_alum_kg;
@@ -155,14 +156,13 @@ namespace cristales_pva
         private void TextBox4_KeyDown(object sender, KeyEventArgs e)
         {
             bool found = false;
-            if(e.KeyData == Keys.Enter)
+            if (textBox4.Text != "" && comboBox5.Text != "")
             {
-                if (textBox4.Text != "" && comboBox5.Text != "")
+                foreach (DataGridViewRow x in datagridviewNE1.Rows)
                 {
-                    find_next.Clear();
-                    foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                    foreach (DataGridViewCell v in x.Cells)
                     {
-                        foreach (DataGridViewCell v in x.Cells)
+                        if (getNext(x.Index) == false)
                         {
                             if (v.OwningColumn.HeaderText == comboBox5.Text)
                             {
@@ -188,15 +188,16 @@ namespace cristales_pva
                                 }
                             }
                         }
-                        if(found == true)
-                        {
-                            break;
-                        }
+                    }
+                    if (found == true)
+                    {
+                        break;
                     }
                 }
-                else
+                if (found == false)
                 {
-                    datagridviewNE1.ClearSelection();
+                    find_next.Clear();
+                    MessageBox.Show("No existen mas resultados de búsqueda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

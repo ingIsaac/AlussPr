@@ -293,6 +293,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap box_icon {
+            get {
+                object obj = ResourceManager.GetObject("box_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap box_in_icon {
             get {
                 object obj = ResourceManager.GetObject("box_in_icon", resourceCulture);
@@ -543,6 +553,26 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap entradas_arrow {
+            get {
+                object obj = ResourceManager.GetObject("entradas_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap entradas_icon {
+            get {
+                object obj = ResourceManager.GetObject("entradas_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Excel_icon {
             get {
                 object obj = ResourceManager.GetObject("Excel_icon", resourceCulture);
@@ -656,6 +686,26 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap Information_icon {
             get {
                 object obj = ResourceManager.GetObject("Information_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inventario {
+            get {
+                object obj = ResourceManager.GetObject("inventario", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inventario_icon {
+            get {
+                object obj = ResourceManager.GetObject("inventario_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -986,6 +1036,26 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap Sales_report_icon {
             get {
                 object obj = ResourceManager.GetObject("Sales_report_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap salidas_arrow {
+            get {
+                object obj = ResourceManager.GetObject("salidas_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap salidas_icon {
+            get {
+                object obj = ResourceManager.GetObject("salidas_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

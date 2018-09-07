@@ -379,6 +379,12 @@
     <Compile Include="informe.Designer.cs">
       <DependentUpon>informe.cs</DependentUpon>
     </Compile>
+    <Compile Include="inventario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="inventario.Designer.cs">
+      <DependentUpon>inventario.cs</DependentUpon>
+    </Compile>
     <Compile Include="lineas_modulos.cs">
       <DependentUpon>userLocal_model.tt</DependentUpon>
     </Compile>
@@ -495,6 +501,12 @@
     <Compile Include="perfile.cs">
       <DependentUpon>listas.tt</DependentUpon>
     </Compile>
+    <Compile Include="print_inventarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="print_inventarios.Designer.cs">
+      <DependentUpon>print_inventarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="produccion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -600,11 +612,20 @@
     <EmbeddedResource Include="informe.resx">
       <DependentUpon>informe.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="inventario.resx">
+      <DependentUpon>inventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inventarios_entradas.rdlc" />
+    <EmbeddedResource Include="inventarios_salidas.rdlc" />
+    <EmbeddedResource Include="inventarios.rdlc" />
     <EmbeddedResource Include="monitor.resx">
       <DependentUpon>monitor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="new_costos.resx">
       <DependentUpon>new_costos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="print_inventarios.resx">
+      <DependentUpon>print_inventarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="produccion.rdlc" />
     <EmbeddedResource Include="analiticas.resx">
@@ -1002,6 +1023,13 @@
     <None Include="Resources\wizard_icon_128.png" />
     <None Include="Resources\unlock_icon.png" />
     <None Include="Resources\Monitor_icon.png" />
+    <None Include="Resources\inventario.png" />
+    <None Include="Resources\entradas_icon.png" />
+    <None Include="Resources\box_icon.png" />
+    <None Include="Resources\inventario_icon.png" />
+    <None Include="Resources\salidas_icon.png" />
+    <None Include="Resources\entradas_arrow.png" />
+    <None Include="Resources\salidas_arrow.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

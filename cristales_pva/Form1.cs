@@ -6895,6 +6895,45 @@ namespace cristales_pva
             new delete_password(false, true).ShowDialog();
         }
 
+        private void inventariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                if (constants.user_access >= 4)
+                {
+                    if (Application.OpenForms["inventario"] == null)
+                    {
+                        inventario inventario = new inventario();
+                        inventario.Show();
+                        if (constants.maximizar_ventanas == true)
+                        {
+                            inventario.WindowState = FormWindowState.Maximized;
+                        }
+                    }
+                    else
+                    {
+                        if (constants.maximizar_ventanas == true)
+                        {
+                            Application.OpenForms["inventario"].WindowState = FormWindowState.Maximized;
+                        }
+                        else
+                        {
+                            Application.OpenForms["inventario"].WindowState = FormWindowState.Normal;
+                        }
+                        Application.OpenForms["inventario"].Select();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (2) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public void setModoLIVA()
         {
             if (constants.m_liva)
@@ -6917,7 +6956,7 @@ namespace cristales_pva
 
         public void setTCLabel(float tc)
         {
-            label15.Text = "TC (1 = USD): $" + tc + " MXN";
+            label15.Text = "Tipo de Cambio (USD): $" + tc + " MXN";
         }      
     }
 }

@@ -15,7 +15,6 @@ namespace cristales_pva
     {
         sqlDateBaseManager sql = new sqlDateBaseManager();
         System.Timers.Timer timer = new System.Timers.Timer(constants.monitor_interval * 60 * 1000);
-        Rectangle rec;
         int recorrido = 0;
 
         public historial_registros()
@@ -104,7 +103,6 @@ namespace cristales_pva
 
         private void Historial_registros_Load(object sender, EventArgs e)
         {            
-            rec = this.Bounds;            
             this.datos_reporteTableAdapter.Fill(this.reportes_dataSet.datos_reporte);
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
             ReportPageSettings ps = reportViewer1.LocalReport.GetDefaultPageSettings();
@@ -257,10 +255,26 @@ namespace cristales_pva
             {
                 label7.Text = string.Empty;
             }
-            if (Application.OpenForms["monitor"] != null)
+            ///-------------------------------------------------------> MONITOR 
+            Form monitor = Application.OpenForms["monitor"];
+            if (monitor.InvokeRequired)
             {
-                ((monitor)Application.OpenForms["monitor"]).setData(datagridviewNE1.DataSource, label6.Text, getPeriodo(), checkBox3.Checked);
-                ((monitor)Application.OpenForms["monitor"]).setcolors();
+                monitor.Invoke((MethodInvoker)delegate
+                {
+                    if (monitor != null)
+                    {
+                        ((monitor)monitor).setData(datagridviewNE1.DataSource, label6.Text, getPeriodo(), checkBox3.Checked);
+                        ((monitor)monitor).setcolors();
+                    }
+                });              
+            }
+            else
+            {
+                if (monitor != null)
+                {
+                    ((monitor)monitor).setData(datagridviewNE1.DataSource, label6.Text, getPeriodo(), checkBox3.Checked);
+                    ((monitor)monitor).setcolors();
+                }
             }
         }
 
@@ -397,36 +411,6 @@ namespace cristales_pva
             {
                 pictureBox1.Visible = true;
                 backgroundWorker2.RunWorkerAsync(param);
-            }
-        }
-
-        private void GoFullscreen(bool fullscreen)
-        {
-            if (fullscreen)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.FormBorderStyle = FormBorderStyle.None;
-                this.Bounds = Screen.PrimaryScreen.Bounds;
-                button4.Text = "Pantalla Normal";
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-                this.FormBorderStyle = FormBorderStyle.Sizable;
-                this.Bounds = rec;
-                button4.Text = "Pantalla Completa";
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if(FormBorderStyle == FormBorderStyle.None)
-            {
-                GoFullscreen(false);
-            }
-            else
-            {
-                GoFullscreen(true);
             }
         }
 

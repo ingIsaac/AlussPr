@@ -460,4 +460,25 @@
   <data name="Monitor_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Monitor_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="inventario" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inventario.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="box_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\box_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="entradas_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\entradas_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inventario_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inventario_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="salidas_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\salidas_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="entradas_arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\entradas_arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="salidas_arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\salidas_arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

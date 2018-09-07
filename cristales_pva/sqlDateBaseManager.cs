@@ -4112,6 +4112,39 @@ namespace cristales_pva
             return result;
         }
 
+        public int getTiendaID(string tienda)
+        {
+            int result = -1;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT id FROM tiendas WHERE nombre_tienda='" + tienda + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (!r.IsDBNull(0))
+                    {
+                        result = constants.stringToInt(r.GetValue(0).ToString());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
         public DateTime getvigenciaTienda(string tienda, Form form=null)
         {
             DateTime result = new DateTime();
@@ -4616,6 +4649,471 @@ namespace cristales_pva
                 connection.Dispose();
             }
             return id;
+        }
+
+        //Inventarios ---------------------------------------------------------------------------------------------------------------->
+        public void newInventario(string clave, string articulo, string linea, string proveedor, string lista, string costeo, float existencia, int tienda_id)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT INTO inventario (clave, articulo, linea, proveedor, lista, costeo, existencia, tienda_id) VALUES (@CLAVE, @ARTICULO, @LINEA, @PROV, @LISTA, @COSTEO, @EXIST, @TIENDA)";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@CLAVE"].Value = clave;
+            cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ARTICULO"].Value = articulo;
+            cmd.Parameters.AddWithValue("@LINEA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LINEA"].Value = linea;
+            cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@LISTA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LISTA"].Value = lista;
+            cmd.Parameters.AddWithValue("@COSTEO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@COSTEO"].Value = costeo;
+            cmd.Parameters.AddWithValue("@EXIST", System.Data.SqlDbType.Float);
+            cmd.Parameters["@EXIST"].Value = existencia;
+            cmd.Parameters.AddWithValue("@TIENDA", System.Data.SqlDbType.Int);
+            cmd.Parameters["@TIENDA"].Value = tienda_id;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void updateInventario(int id, string articulo, string linea, string proveedor, string costeo)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "UPDATE inventario SET articulo=@ARTICULO, linea=@LINEA, proveedor=@PROV, costeo=@COSTEO WHERE id='" + id + "'";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ARTICULO"].Value = articulo;
+            cmd.Parameters.AddWithValue("@LINEA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LINEA"].Value = linea;
+            cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@PROV"].Value = proveedor;          
+            cmd.Parameters.AddWithValue("@COSTEO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@COSTEO"].Value = costeo;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public float getExistencia(string clave)
+        {
+            float result = 0;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT existencia FROM inventario WHERE clave='" + clave + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (!r.IsDBNull(0))
+                    {
+                        result = constants.stringToFloat(r.GetValue(0).ToString());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
+        public void updateExistencias(string clave, float cant)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "UPDATE inventario SET existencia=existencia+@CANT WHERE clave='" + clave + "'";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@CANT", System.Data.SqlDbType.Float);
+            cmd.Parameters["@CANT"].Value = cant;           
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void deleteInventario()
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "TRUNCATE TABLE inventario";
+            cmd.Connection = connection;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void deleteRegistroInventario(int id)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "DELETE FROM inventario WHERE id='" + id + "'";
+            cmd.Connection = connection;
+
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public DataTable getInventario(string lista, int tienda, string filtro="", string filtro_value="")
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = string.Empty;
+                if(filtro == "" && filtro_value == "")
+                {
+                    query = "SELECT * FROM inventario WHERE tienda_id='" + tienda + "' AND lista='" + lista + "'";
+                }
+                else
+                {
+                    query = "SELECT * FROM inventario ORDER BY CASE WHEN tienda_id='" + tienda + "' AND lista='" + lista + "' AND " + filtro + "='" + filtro_value + "' THEN 1 END DESC";
+                }
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            return dt;
+        }
+
+        public void getSalidas(int limit, DataGridView dataview, string lista, int tienda, string filtro = "", string filtro_value = "")
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+                if (filtro == "" && filtro_value == "")
+                {
+                    query = "SELECT TOP " + limit + " id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "'";
+                }
+                else
+                {
+                    query = "SELECT TOP " + limit + " id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND " + filtro + "='" + filtro_value + "'";
+                }
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+        }
+
+        public void getSalidasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+
+                query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";             
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+        }
+
+        public void getEntradas(int limit, DataGridView dataview, string lista, int tienda, string filtro = "", string filtro_value = "")
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+                if (filtro == "" && filtro_value == "")
+                {
+                    query = "SELECT TOP " + limit + " id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "'";
+                }
+                else
+                {
+                    query = "SELECT TOP " + limit + " id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND " + filtro + "='" + filtro_value + "'";
+                }
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+        }
+
+        public void getEntradasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+
+                query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+        }
+
+        public void newSalida(string clave, string articulo, string linea, string proveedor, string lista, float salidas, string fecha, int tienda, string comentarios)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT INTO salidas_inventario (clave, articulo, linea, proveedor, lista, salidas, fecha, tienda, comentarios) VALUES (@CLAVE, @ARTICULO, @LINEA, @PROV, @LISTA, @SALIDAS, @FECHA, @TIENDA, @COMENT)";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@CLAVE"].Value = clave;
+            cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ARTICULO"].Value = articulo;
+            cmd.Parameters.AddWithValue("@LINEA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LINEA"].Value = linea;
+            cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@LISTA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LISTA"].Value = lista;
+            cmd.Parameters.AddWithValue("@SALIDAS", System.Data.SqlDbType.Float);
+            cmd.Parameters["@SALIDAS"].Value = salidas;
+            cmd.Parameters.AddWithValue("@FECHA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@FECHA"].Value = fecha;
+            cmd.Parameters.AddWithValue("@TIENDA", System.Data.SqlDbType.Int);
+            cmd.Parameters["@TIENDA"].Value = tienda;
+            cmd.Parameters.AddWithValue("@COMENT", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@COMENT"].Value = comentarios;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void newEntrada(string clave, string articulo, string linea, string proveedor, string lista, float entradas, string fecha, int tienda, string comentarios)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT INTO entradas_inventario (clave, articulo, linea, proveedor, lista, entradas, fecha, tienda, comentarios) VALUES (@CLAVE, @ARTICULO, @LINEA, @PROV, @LISTA, @ENTRADAS, @FECHA, @TIENDA, @COMENT)";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@CLAVE", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@CLAVE"].Value = clave;
+            cmd.Parameters.AddWithValue("@ARTICULO", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@ARTICULO"].Value = articulo;
+            cmd.Parameters.AddWithValue("@LINEA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LINEA"].Value = linea;
+            cmd.Parameters.AddWithValue("@PROV", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@PROV"].Value = proveedor;
+            cmd.Parameters.AddWithValue("@LISTA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LISTA"].Value = lista;
+            cmd.Parameters.AddWithValue("@ENTRADAS", System.Data.SqlDbType.Float);
+            cmd.Parameters["@ENTRADAS"].Value = entradas;
+            cmd.Parameters.AddWithValue("@FECHA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@FECHA"].Value = fecha;
+            cmd.Parameters.AddWithValue("@TIENDA", System.Data.SqlDbType.Int);
+            cmd.Parameters["@TIENDA"].Value = tienda;
+            cmd.Parameters.AddWithValue("@COMENT", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@COMENT"].Value = comentarios;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public List<string> getInventarioClaves(int tienda_id, string lista)
+        {
+            List<string> dt = new List<string>();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT clave FROM inventario WHERE tienda_id='" + tienda_id + "' AND lista='" + lista + "'";
+
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    dt.Add(r.GetValue(0).ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            return dt;
         }
 
         ~sqlDateBaseManager()
