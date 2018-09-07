@@ -6925,7 +6925,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (2) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (4) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
