@@ -79,6 +79,7 @@ namespace cristales_pva
                 //----------------------------------------------------->
                 datagridviewNE1.Rows[e.RowIndex].Cells[1].Style.BackColor = Color.LightBlue;
                 datagridviewNE1.Rows[e.RowIndex].Cells[2].Style.BackColor = Color.LightBlue;
+                datagridviewNE1.Rows[e.RowIndex].Cells[6].Style.BackColor = Color.LightBlue;
             }
         }
 
@@ -170,7 +171,7 @@ namespace cristales_pva
             {
                 if (backgroundWorker1.IsBusy == false)
                 {
-                    if(datagridviewNE1.CurrentCell.ColumnIndex == 1)
+                    if(datagridviewNE1.CurrentCell.ColumnIndex == 1 || datagridviewNE1.CurrentCell.ColumnIndex == 6)
                     {
                         if(datagridviewNE1.CurrentRow.Cells[0].Value.ToString() == "-1")
                         { 
@@ -595,11 +596,27 @@ namespace cristales_pva
                 {
                     if (MessageBox.Show(this, "¿Estas seguro de eliminar este registro de forma permanente?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+                        if(constants.user_access < 6)
                         {
-                            pictureBox1.Visible = true;
-                            backgroundWorker2.RunWorkerAsync(id);
+                            acceso_password access = new acceso_password();
+                            access.ShowDialog(this);
+                            if (access.access)
+                            {
+                                if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+                                {
+                                    pictureBox1.Visible = true;
+                                    backgroundWorker2.RunWorkerAsync(id);
+                                }
+                            }                           
                         }
+                        else
+                        {
+                            if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+                            {
+                                pictureBox1.Visible = true;
+                                backgroundWorker2.RunWorkerAsync(id);
+                            }
+                        }                      
                     }
                 }
                 else
@@ -715,7 +732,7 @@ namespace cristales_pva
         {            
             if(table == null)
             {
-                label12.Text = "Se encontrarón (" + datagridviewNE1.RowCount + ") registros.";
+                label12.Text = "Se encontrarón (" + (datagridviewNE1.RowCount - 1) + ") registros.";
             }
             else if (table == datagridviewNE2)
             {
@@ -819,7 +836,7 @@ namespace cristales_pva
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (data != null)
+            if (datagridviewNE2.RowCount > 0)
             {
                 new print_inventarios(datagridviewNE2.DataSource as DataTable, comboBox5.Text, "salidas").ShowDialog(this);
             }
@@ -969,9 +986,9 @@ namespace cristales_pva
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if (data != null)
+            if (datagridviewNE3.RowCount > 0)
             {
-                new print_inventarios(data, comboBox15.Text, "entradas").ShowDialog(this);
+                new print_inventarios(datagridviewNE3.DataSource as DataTable, comboBox15.Text, "entradas").ShowDialog(this);
             }
         }
 
@@ -1099,10 +1116,12 @@ namespace cristales_pva
             if(comboBox9.Text == "Salida")
             {
                 pictureBox6.Image = Properties.Resources.salidas_arrow;
+                pictureBox9.Image = Properties.Resources.salidas_arrow;
             }
             else if(comboBox9.Text == "Entrada")
             {
                 pictureBox6.Image = Properties.Resources.entradas_arrow;
+                pictureBox9.Image = Properties.Resources.entradas_arrow;
             }
         }
 

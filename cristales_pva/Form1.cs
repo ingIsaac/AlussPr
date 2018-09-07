@@ -644,6 +644,22 @@ namespace cristales_pva
             {
                 Text = Text + " | VERSIÓN DE PRUEBA"; 
             }
+            //Changelog
+            loadChangelog();
+            //Select control
+            comboBox1.Focus();
+        }
+
+        private void loadChangelog()
+        {
+            if (constants.local == false)
+            {
+                List<string> list = new sqlDateBaseManager().getChangelog();
+                if (list.Count > 0)
+                {
+                    richTextBox4.Lines = list.ToArray();
+                }
+            }
         }
 
         public void permitirAjusteIVA(bool r)
@@ -6904,22 +6920,14 @@ namespace cristales_pva
                     if (Application.OpenForms["inventario"] == null)
                     {
                         inventario inventario = new inventario();
-                        inventario.Show();
-                        if (constants.maximizar_ventanas == true)
-                        {
-                            inventario.WindowState = FormWindowState.Maximized;
-                        }
+                        inventario.Show();                        
                     }
                     else
                     {
-                        if (constants.maximizar_ventanas == true)
-                        {
-                            Application.OpenForms["inventario"].WindowState = FormWindowState.Maximized;
-                        }
-                        else
+                        if (Application.OpenForms["inventario"].WindowState == FormWindowState.Minimized)
                         {
                             Application.OpenForms["inventario"].WindowState = FormWindowState.Normal;
-                        }
+                        }                        
                         Application.OpenForms["inventario"].Select();
                     }
                 }

@@ -119,6 +119,12 @@
     <Compile Include="acabados.Designer.cs">
       <DependentUpon>acabados.cs</DependentUpon>
     </Compile>
+    <Compile Include="acceso_password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acceso_password.Designer.cs">
+      <DependentUpon>acceso_password.cs</DependentUpon>
+    </Compile>
     <Compile Include="admin_panel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -601,6 +607,9 @@
     </Compile>
     <EmbeddedResource Include="acabados.resx">
       <DependentUpon>acabados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="acceso_password.resx">
+      <DependentUpon>acceso_password.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="admin_panel.resx">
       <DependentUpon>admin_panel.cs</DependentUpon>

@@ -5116,6 +5116,35 @@ namespace cristales_pva
             return dt;
         }
 
+        public List<string> getChangelog()
+        {
+            List<string> dt = new List<string>();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT TOP 5 title, text FROM changelog";
+
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (r.GetValue(0) != null && r.GetValue(1) != null)
+                    {
+                        dt.Add(r.GetValue(0).ToString() + "\n\n" + r.GetValue(1).ToString() + "\n\n");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            return dt;
+        }
+
         ~sqlDateBaseManager()
         {
 

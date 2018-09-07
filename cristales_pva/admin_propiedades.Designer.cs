@@ -149,9 +149,9 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(8, 73);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(119, 17);
+            this.checkBox3.Size = new System.Drawing.Size(172, 17);
             this.checkBox3.TabIndex = 3;
-            this.checkBox3.Text = "Maximizar ventanas";
+            this.checkBox3.Text = "Maximizar ventanas principales";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBox2
