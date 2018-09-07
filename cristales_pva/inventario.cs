@@ -711,7 +711,7 @@ namespace cristales_pva
                             {
                                 if (sql.findSQLValue("clave", "clave", "inventario", clave) == false)
                                 {
-                                    sql.newInventario(clave, articulo, x.Cells[3].Value.ToString(), x.Cells[4].Value.ToString(), comboBox1.Text, x.Cells[5].Value.ToString(), 0, tienda_id);
+                                    sql.newInventario(clave, articulo, x.Cells[3].Value.ToString(), x.Cells[4].Value.ToString(), comboBox1.Text, x.Cells[5].Value.ToString(), constants.stringToFloat(x.Cells[6].Value.ToString()), tienda_id);
                                 }
                                 else
                                 {
