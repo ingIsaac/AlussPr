@@ -133,6 +133,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.button15 = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -157,7 +158,10 @@
             this.comboBox9 = new System.Windows.Forms.ComboBox();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.historialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.historalDeEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -176,10 +180,12 @@
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
+            this.contextMenuStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
             // backgroundWorker1
@@ -759,6 +765,7 @@
             this.datagridviewNE3.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.datagridviewNE3.BackgroundColor = System.Drawing.SystemColors.Highlight;
             this.datagridviewNE3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE3.ContextMenuStrip = this.contextMenuStrip3;
             this.datagridviewNE3.Location = new System.Drawing.Point(3, 3);
             this.datagridviewNE3.Name = "datagridviewNE3";
             this.datagridviewNE3.ReadOnly = true;
@@ -1032,6 +1039,7 @@
             this.datagridviewNE2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.datagridviewNE2.BackgroundColor = System.Drawing.SystemColors.Highlight;
             this.datagridviewNE2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE2.ContextMenuStrip = this.contextMenuStrip2;
             this.datagridviewNE2.Location = new System.Drawing.Point(3, 3);
             this.datagridviewNE2.Name = "datagridviewNE2";
             this.datagridviewNE2.ReadOnly = true;
@@ -1205,6 +1213,16 @@
             this.groupBox4.Size = new System.Drawing.Size(1003, 496);
             this.groupBox4.TabIndex = 20;
             this.groupBox4.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox9.Location = new System.Drawing.Point(133, 364);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(68, 77);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 26;
+            this.pictureBox9.TabStop = false;
             // 
             // textBox12
             // 
@@ -1448,15 +1466,33 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Visible = false;
             // 
-            // pictureBox9
+            // contextMenuStrip2
             // 
-            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox9.Location = new System.Drawing.Point(133, 364);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(68, 77);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 26;
-            this.pictureBox9.TabStop = false;
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.historialToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(173, 26);
+            // 
+            // historialToolStripMenuItem
+            // 
+            this.historialToolStripMenuItem.Name = "historialToolStripMenuItem";
+            this.historialToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.historialToolStripMenuItem.Text = "Historial de salidas";
+            this.historialToolStripMenuItem.Click += new System.EventHandler(this.historialToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip3
+            // 
+            this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.historalDeEntradasToolStripMenuItem});
+            this.contextMenuStrip3.Name = "contextMenuStrip3";
+            this.contextMenuStrip3.Size = new System.Drawing.Size(183, 48);
+            // 
+            // historalDeEntradasToolStripMenuItem
+            // 
+            this.historalDeEntradasToolStripMenuItem.Name = "historalDeEntradasToolStripMenuItem";
+            this.historalDeEntradasToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.historalDeEntradasToolStripMenuItem.Text = "Historial de entradas";
+            this.historalDeEntradasToolStripMenuItem.Click += new System.EventHandler(this.historalDeEntradasToolStripMenuItem_Click);
             // 
             // inventario
             // 
@@ -1493,10 +1529,12 @@
             this.tabPage4.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
+            this.contextMenuStrip3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1622,5 +1660,9 @@
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem historialToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
+        private System.Windows.Forms.ToolStripMenuItem historalDeEntradasToolStripMenuItem;
     }
 }

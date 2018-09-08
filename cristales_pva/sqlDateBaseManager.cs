@@ -5124,7 +5124,7 @@ namespace cristales_pva
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT TOP 5 title, text FROM changelog";
+            cmd.CommandText = "SELECT TOP 5 title, text FROM changelog ORDER BY id DESC";
 
             try
             {
@@ -5143,6 +5143,78 @@ namespace cristales_pva
                 constants.errorLog(e.ToString());
             }
             return dt;
+        }
+
+        public void getHistorialSalidas(int limit, DataGridView dataview, string lista, int tienda, string clave)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+
+                query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND clave='" + clave + "'";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+        }
+
+        public void getHistorialEntradas(int limit, DataGridView dataview, string lista, int tienda, string clave)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+
+                query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND clave='" + clave + "'";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
         }
 
         ~sqlDateBaseManager()

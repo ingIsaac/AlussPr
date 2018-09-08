@@ -39,6 +39,8 @@ namespace cristales_pva
             backgroundWorker4.RunWorkerCompleted += BackgroundWorker4_RunWorkerCompleted;
             //--------------------------->
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
+            contextMenuStrip2.Opening += ContextMenuStrip2_Opening;
+            contextMenuStrip3.Opening += ContextMenuStrip3_Opening;
 
             //Tables
             update_table.Columns.Add("id");
@@ -57,6 +59,22 @@ namespace cristales_pva
             textBox1.KeyDown += TextBox1_KeyDown;
             textBox2.KeyDown += TextBox2_KeyDown;
             textBox9.KeyDown += TextBox9_KeyDown;
+        }
+
+        private void ContextMenuStrip3_Opening(object sender, CancelEventArgs e)
+        {
+            if (datagridviewNE3.RowCount <= 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+            if (datagridviewNE2.RowCount <= 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void reset()
@@ -324,13 +342,13 @@ namespace cristales_pva
             executeLoad();
         }
 
-        private void executeLoad(datagridviewNE datagridview=null, bool periodo=false)
+        private void executeLoad(datagridviewNE datagridview=null, bool periodo=false, bool historial=false, string clave="")
         {
             if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
             {
                 reset();
                 pictureBox1.Visible = true;
-                object[] v = new object[] { datagridview, periodo };
+                object[] v = new object[] { datagridview, periodo, historial, clave };
                 backgroundWorker1.RunWorkerAsync(v);               
             }
         }
@@ -340,6 +358,8 @@ namespace cristales_pva
             object[] dat = e.Argument as object[];
             datagridviewNE dt = dat[0] as datagridviewNE;
             bool periodo = (bool)dat[1];
+            bool historial = (bool)dat[2];
+            string clave = dat[3].ToString();
             sqlDateBaseManager sql = new sqlDateBaseManager();
             int tienda_id = sql.getTiendaID(constants.org_name);
             if (tienda_id > 0)
@@ -389,7 +409,15 @@ namespace cristales_pva
                 }
                 else if(dt == datagridviewNE2)
                 {
-                    if (!periodo)
+                    if (periodo)
+                    {
+                        sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
+                    }
+                    else if(historial)
+                    {
+                        sql.getHistorialSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, clave);
+                    }
+                    else
                     {
                         if (comboBox6.Text != "")
                         {
@@ -425,11 +453,7 @@ namespace cristales_pva
                                 default: break;
                             }
                         }
-                    }
-                    else
-                    {
-                        sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
-                    }
+                    }                  
                     //---------------------------------------------------------------------------->  
                     foreach (DataGridViewColumn x in datagridviewNE2.Columns)
                     {
@@ -441,7 +465,15 @@ namespace cristales_pva
                 }
                 else if (dt == datagridviewNE3)
                 {
-                    if (!periodo)
+                    if (periodo)
+                    {
+                        sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
+                    }
+                    else if(historial)
+                    {
+                        sql.getHistorialEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, clave);
+                    }
+                    else
                     {
                         if (comboBox14.Text != "")
                         {
@@ -477,11 +509,7 @@ namespace cristales_pva
                                 default: break;
                             }
                         }
-                    }
-                    else
-                    {
-                        sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
-                    }
+                    }                  
                     //----------------------------------------------------------------------------> 
                     foreach(DataGridViewColumn x in datagridviewNE3.Columns)
                     {
@@ -1215,6 +1243,16 @@ namespace cristales_pva
                     }
                 }
             }
+        }
+
+        private void historialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            executeLoad(datagridviewNE2, false, true, datagridviewNE2.CurrentRow.Cells[1].Value.ToString());
+        }
+
+        private void historalDeEntradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            executeLoad(datagridviewNE3, false, true, datagridviewNE3.CurrentRow.Cells[1].Value.ToString());
         }
     }
 }
