@@ -102,7 +102,7 @@ namespace cristales_pva
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT id FROM usuarios WHERE usuario='" + user + "' AND password='"+ password +"'";
+            cmd.CommandText = "SELECT id, acceso, restringir FROM usuarios WHERE usuario='" + user + "' AND password='"+ password +"'";
             try
             {
                 connection.Open();
@@ -110,7 +110,13 @@ namespace cristales_pva
                 if (r.Read())
                 {
                     b = true;
-                    constants.user_access = getUserAccess((int)r.GetValue(0));
+                    //Get user access
+                    if (r.GetValue(1) != null && r.GetValue(2) != null)
+                    {
+                        constants.user_access = (int)r.GetValue(1);
+                        //Check user forbid
+                        constants.user_forbid = (bool)r.GetValue(2);
+                    }
                 }
             }
             catch (Exception e)
@@ -141,36 +147,6 @@ namespace cristales_pva
                 if (!r.Read())
                 {
                     b = false;
-                }
-            }
-            catch (Exception e)
-            {
-                constants.errorLog(e.ToString());
-            }
-            finally
-            {
-                connection.Close();
-                connection.Dispose();
-            }
-            return b;
-        }
-
-        public int getUserAccess(int user_id)
-        {
-            int b = 0;
-            connection = new SqlConnection();
-            connection.ConnectionString = getConnectionString();
-            SqlCommand cmd = new SqlCommand();
-
-            cmd.Connection = connection;
-            cmd.CommandText = "SELECT acceso FROM usuarios WHERE id='" + user_id + "'";
-            try
-            {
-                connection.Open();
-                SqlDataReader r = cmd.ExecuteReader();
-                if (r.Read())
-                {
-                    b = r.GetInt32(0);
                 }
             }
             catch (Exception e)

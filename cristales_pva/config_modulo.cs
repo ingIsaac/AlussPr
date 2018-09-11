@@ -5902,6 +5902,12 @@ namespace cristales_pva
             }         
         }
 
+        private void config_modulo_Load(object sender, EventArgs e)
+        {
+            textBox1.Focus();
+            textBox1.Select();
+        }
+
         private void validMotor()
         {
             if (label18.Text == "CM")

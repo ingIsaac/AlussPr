@@ -339,10 +339,10 @@ namespace cristales_pva
         {
             datagridviewNE1.AllowUserToAddRows = true;
             tabControl1.SelectedIndex = 0;
-            executeLoad();
+            executeLoad(datagridviewNE1);
         }
 
-        private void executeLoad(datagridviewNE datagridview=null, bool periodo=false, bool historial=false, string clave="")
+        private void executeLoad(datagridviewNE datagridview, bool periodo=false, bool historial=false, string clave="")
         {
             if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
             {
@@ -364,163 +364,328 @@ namespace cristales_pva
             int tienda_id = sql.getTiendaID(constants.org_name);
             if (tienda_id > 0)
             {
-                if (dt == null)
-                {                   
-                    datagridviewNE1.Rows.Clear();
-                    if (comboBox2.Text != "")
-                    {
-                        data = sql.getInventario(comboBox1.Text, tienda_id, "linea", comboBox2.Text);
-                    }
-                    else if (comboBox3.Text != "")
-                    {
-                        data = sql.getInventario(comboBox1.Text, tienda_id, "proveedor", comboBox3.Text);
-                    }
-                    else
-                    {
-                        data = sql.getInventario(comboBox1.Text, tienda_id);
-                        comboBox2.Items.Clear();
-                        comboBox3.Items.Clear();
-                        switch (comboBox1.SelectedIndex)
-                        {
-                            case 0:
-                                comboBox2.Items.AddRange(constants.getCategorias("vidrio").ToArray());
-                                comboBox3.Items.AddRange(constants.getProveedores("vidrio").ToArray());
-                                break;
-                            case 1:
-                                comboBox2.Items.AddRange(constants.getCategorias("aluminio").ToArray());
-                                comboBox3.Items.AddRange(constants.getProveedores("aluminio").ToArray());
-                                break;
-                            case 2:
-                                comboBox2.Items.AddRange(constants.getCategorias("herraje").ToArray());
-                                comboBox3.Items.AddRange(constants.getProveedores("herraje").ToArray());
-                                break;
-                            case 3:
-                                comboBox2.Items.AddRange(constants.getCategorias("otros").ToArray());
-                                comboBox3.Items.AddRange(constants.getProveedores("otros").ToArray());
-                                break;
-                            default: break;
-                        }
-                    }
-                    foreach (DataRow x in data.Rows)
-                    {
-                        datagridviewNE1.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());
-                    }
-                    //---------------------------------------------------------------------------->                   
-                }
-                else if(dt == datagridviewNE2)
+                if (dt.InvokeRequired)
                 {
-                    if (periodo)
-                    {
-                        sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
-                    }
-                    else if(historial)
-                    {
-                        sql.getHistorialSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, clave);
-                    }
-                    else
-                    {
-                        if (comboBox6.Text != "")
+                    dt.Invoke((MethodInvoker)delegate { 
+                        if (dt == datagridviewNE1)
                         {
-                            sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, "linea", comboBox6.Text);
+                            dt.Rows.Clear();
+                            if (comboBox2.Text != "")
+                            {
+                                data = sql.getInventario(comboBox1.Text, tienda_id, "linea", comboBox2.Text);
+                            }
+                            else if (comboBox3.Text != "")
+                            {
+                                data = sql.getInventario(comboBox1.Text, tienda_id, "proveedor", comboBox3.Text);
+                            }
+                            else
+                            {
+                                data = sql.getInventario(comboBox1.Text, tienda_id);
+                                comboBox2.Items.Clear();
+                                comboBox3.Items.Clear();
+                                switch (comboBox1.SelectedIndex)
+                                {
+                                    case 0:
+                                        comboBox2.Items.AddRange(constants.getCategorias("vidrio").ToArray());
+                                        comboBox3.Items.AddRange(constants.getProveedores("vidrio").ToArray());
+                                        break;
+                                    case 1:
+                                        comboBox2.Items.AddRange(constants.getCategorias("aluminio").ToArray());
+                                        comboBox3.Items.AddRange(constants.getProveedores("aluminio").ToArray());
+                                        break;
+                                    case 2:
+                                        comboBox2.Items.AddRange(constants.getCategorias("herraje").ToArray());
+                                        comboBox3.Items.AddRange(constants.getProveedores("herraje").ToArray());
+                                        break;
+                                    case 3:
+                                        comboBox2.Items.AddRange(constants.getCategorias("otros").ToArray());
+                                        comboBox3.Items.AddRange(constants.getProveedores("otros").ToArray());
+                                        break;
+                                    default: break;
+                                }
+                            }
+                            foreach (DataRow x in data.Rows)
+                            {
+                                dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());
+                            }
+                            //---------------------------------------------------------------------------->                   
                         }
-                        else if (comboBox7.Text != "")
+                        else if (dt == datagridviewNE2)
                         {
-                            sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, "proveedor", comboBox7.Text);
+                            if (periodo)
+                            {
+                                sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
+                            }
+                            else if (historial)
+                            {
+                                sql.getHistorialSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, clave);
+                            }
+                            else
+                            {
+                                if (comboBox6.Text != "")
+                                {
+                                    sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, "linea", comboBox6.Text);
+                                }
+                                else if (comboBox7.Text != "")
+                                {
+                                    sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, "proveedor", comboBox7.Text);
+                                }
+                                else
+                                {
+                                    sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id);
+                                    comboBox6.Items.Clear();
+                                    comboBox7.Items.Clear();
+                                    switch (comboBox5.SelectedIndex)
+                                    {
+                                        case 0:
+                                            comboBox6.Items.AddRange(constants.getCategorias("vidrio").ToArray());
+                                            comboBox7.Items.AddRange(constants.getProveedores("vidrio").ToArray());
+                                            break;
+                                        case 1:
+                                            comboBox6.Items.AddRange(constants.getCategorias("aluminio").ToArray());
+                                            comboBox7.Items.AddRange(constants.getProveedores("aluminio").ToArray());
+                                            break;
+                                        case 2:
+                                            comboBox6.Items.AddRange(constants.getCategorias("herraje").ToArray());
+                                            comboBox7.Items.AddRange(constants.getProveedores("herraje").ToArray());
+                                            break;
+                                        case 3:
+                                            comboBox6.Items.AddRange(constants.getCategorias("otros").ToArray());
+                                            comboBox7.Items.AddRange(constants.getProveedores("otros").ToArray());
+                                            break;
+                                        default: break;
+                                    }
+                                }
+                            }
+                            //---------------------------------------------------------------------------->  
+                            foreach (DataGridViewColumn x in dt.Columns)
+                            {
+                                if (x.HeaderText == "salidas")
+                                {
+                                    x.DefaultCellStyle.BackColor = Color.Khaki;
+                                }
+                            }
+                        }
+                        else if (dt == datagridviewNE3)
+                        {
+                            if (periodo)
+                            {
+                                sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
+                            }
+                            else if (historial)
+                            {
+                                sql.getHistorialEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, clave);
+                            }
+                            else
+                            {
+                                if (comboBox14.Text != "")
+                                {
+                                    sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, "linea", comboBox14.Text);
+                                }
+                                else if (comboBox13.Text != "")
+                                {
+                                    sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, "proveedor", comboBox13.Text);
+                                }
+                                else
+                                {
+                                    sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id);
+                                    comboBox14.Items.Clear();
+                                    comboBox13.Items.Clear();
+                                    switch (comboBox15.SelectedIndex)
+                                    {
+                                        case 0:
+                                            comboBox14.Items.AddRange(constants.getCategorias("vidrio").ToArray());
+                                            comboBox13.Items.AddRange(constants.getProveedores("vidrio").ToArray());
+                                            break;
+                                        case 1:
+                                            comboBox14.Items.AddRange(constants.getCategorias("aluminio").ToArray());
+                                            comboBox13.Items.AddRange(constants.getProveedores("aluminio").ToArray());
+                                            break;
+                                        case 2:
+                                            comboBox14.Items.AddRange(constants.getCategorias("herraje").ToArray());
+                                            comboBox13.Items.AddRange(constants.getProveedores("herraje").ToArray());
+                                            break;
+                                        case 3:
+                                            comboBox14.Items.AddRange(constants.getCategorias("otros").ToArray());
+                                            comboBox13.Items.AddRange(constants.getProveedores("otros").ToArray());
+                                            break;
+                                        default: break;
+                                    }
+                                }
+                            }
+                            //----------------------------------------------------------------------------> 
+                            foreach (DataGridViewColumn x in dt.Columns)
+                            {
+                                if (x.HeaderText == "entradas")
+                                {
+                                    x.DefaultCellStyle.BackColor = Color.Khaki;
+                                }
+                            }
+                        }
+                        //------------------------->
+                        countRows(dt);
+                    });
+                }
+                else
+                {
+                    if (dt == datagridviewNE1)
+                    {
+                        dt.Rows.Clear();
+                        if (comboBox2.Text != "")
+                        {
+                            data = sql.getInventario(comboBox1.Text, tienda_id, "linea", comboBox2.Text);
+                        }
+                        else if (comboBox3.Text != "")
+                        {
+                            data = sql.getInventario(comboBox1.Text, tienda_id, "proveedor", comboBox3.Text);
                         }
                         else
                         {
-                            sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id);
-                            comboBox6.Items.Clear();
-                            comboBox7.Items.Clear();
-                            switch (comboBox5.SelectedIndex)
+                            data = sql.getInventario(comboBox1.Text, tienda_id);
+                            comboBox2.Items.Clear();
+                            comboBox3.Items.Clear();
+                            switch (comboBox1.SelectedIndex)
                             {
                                 case 0:
-                                    comboBox6.Items.AddRange(constants.getCategorias("vidrio").ToArray());
-                                    comboBox7.Items.AddRange(constants.getProveedores("vidrio").ToArray());
+                                    comboBox2.Items.AddRange(constants.getCategorias("vidrio").ToArray());
+                                    comboBox3.Items.AddRange(constants.getProveedores("vidrio").ToArray());
                                     break;
                                 case 1:
-                                    comboBox6.Items.AddRange(constants.getCategorias("aluminio").ToArray());
-                                    comboBox7.Items.AddRange(constants.getProveedores("aluminio").ToArray());
+                                    comboBox2.Items.AddRange(constants.getCategorias("aluminio").ToArray());
+                                    comboBox3.Items.AddRange(constants.getProveedores("aluminio").ToArray());
                                     break;
                                 case 2:
-                                    comboBox6.Items.AddRange(constants.getCategorias("herraje").ToArray());
-                                    comboBox7.Items.AddRange(constants.getProveedores("herraje").ToArray());
+                                    comboBox2.Items.AddRange(constants.getCategorias("herraje").ToArray());
+                                    comboBox3.Items.AddRange(constants.getProveedores("herraje").ToArray());
                                     break;
                                 case 3:
-                                    comboBox6.Items.AddRange(constants.getCategorias("otros").ToArray());
-                                    comboBox7.Items.AddRange(constants.getProveedores("otros").ToArray());
+                                    comboBox2.Items.AddRange(constants.getCategorias("otros").ToArray());
+                                    comboBox3.Items.AddRange(constants.getProveedores("otros").ToArray());
                                     break;
                                 default: break;
                             }
                         }
-                    }                  
-                    //---------------------------------------------------------------------------->  
-                    foreach (DataGridViewColumn x in datagridviewNE2.Columns)
-                    {
-                        if (x.HeaderText == "salidas")
+                        foreach (DataRow x in data.Rows)
                         {
-                            x.DefaultCellStyle.BackColor = Color.Khaki;
+                            dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());
                         }
+                        //---------------------------------------------------------------------------->                   
                     }
-                }
-                else if (dt == datagridviewNE3)
-                {
-                    if (periodo)
+                    else if (dt == datagridviewNE2)
                     {
-                        sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
-                    }
-                    else if(historial)
-                    {
-                        sql.getHistorialEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, clave);
-                    }
-                    else
-                    {
-                        if (comboBox14.Text != "")
+                        if (periodo)
                         {
-                            sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, "linea", comboBox14.Text);
+                            sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
                         }
-                        else if (comboBox13.Text != "")
+                        else if (historial)
                         {
-                            sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, "proveedor", comboBox13.Text);
+                            sql.getHistorialSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, clave);
                         }
                         else
                         {
-                            sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id);
-                            comboBox14.Items.Clear();
-                            comboBox13.Items.Clear();
-                            switch (comboBox15.SelectedIndex)
+                            if (comboBox6.Text != "")
                             {
-                                case 0:
-                                    comboBox14.Items.AddRange(constants.getCategorias("vidrio").ToArray());
-                                    comboBox13.Items.AddRange(constants.getProveedores("vidrio").ToArray());
-                                    break;
-                                case 1:
-                                    comboBox14.Items.AddRange(constants.getCategorias("aluminio").ToArray());
-                                    comboBox13.Items.AddRange(constants.getProveedores("aluminio").ToArray());
-                                    break;
-                                case 2:
-                                    comboBox14.Items.AddRange(constants.getCategorias("herraje").ToArray());
-                                    comboBox13.Items.AddRange(constants.getProveedores("herraje").ToArray());
-                                    break;
-                                case 3:
-                                    comboBox14.Items.AddRange(constants.getCategorias("otros").ToArray());
-                                    comboBox13.Items.AddRange(constants.getProveedores("otros").ToArray());
-                                    break;
-                                default: break;
+                                sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, "linea", comboBox6.Text);
+                            }
+                            else if (comboBox7.Text != "")
+                            {
+                                sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, "proveedor", comboBox7.Text);
+                            }
+                            else
+                            {
+                                sql.getSalidas(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id);
+                                comboBox6.Items.Clear();
+                                comboBox7.Items.Clear();
+                                switch (comboBox5.SelectedIndex)
+                                {
+                                    case 0:
+                                        comboBox6.Items.AddRange(constants.getCategorias("vidrio").ToArray());
+                                        comboBox7.Items.AddRange(constants.getProveedores("vidrio").ToArray());
+                                        break;
+                                    case 1:
+                                        comboBox6.Items.AddRange(constants.getCategorias("aluminio").ToArray());
+                                        comboBox7.Items.AddRange(constants.getProveedores("aluminio").ToArray());
+                                        break;
+                                    case 2:
+                                        comboBox6.Items.AddRange(constants.getCategorias("herraje").ToArray());
+                                        comboBox7.Items.AddRange(constants.getProveedores("herraje").ToArray());
+                                        break;
+                                    case 3:
+                                        comboBox6.Items.AddRange(constants.getCategorias("otros").ToArray());
+                                        comboBox7.Items.AddRange(constants.getProveedores("otros").ToArray());
+                                        break;
+                                    default: break;
+                                }
                             }
                         }
-                    }                  
-                    //----------------------------------------------------------------------------> 
-                    foreach(DataGridViewColumn x in datagridviewNE3.Columns)
-                    {
-                        if(x.HeaderText == "entradas")
+                        //---------------------------------------------------------------------------->  
+                        foreach (DataGridViewColumn x in dt.Columns)
                         {
-                            x.DefaultCellStyle.BackColor = Color.Khaki;
+                            if (x.HeaderText == "salidas")
+                            {
+                                x.DefaultCellStyle.BackColor = Color.Khaki;
+                            }
                         }
-                    }                 
-                }
-                //------------------------->
-                countRows(dt);                
+                    }
+                    else if (dt == datagridviewNE3)
+                    {
+                        if (periodo)
+                        {
+                            sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
+                        }
+                        else if (historial)
+                        {
+                            sql.getHistorialEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, clave);
+                        }
+                        else
+                        {
+                            if (comboBox14.Text != "")
+                            {
+                                sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, "linea", comboBox14.Text);
+                            }
+                            else if (comboBox13.Text != "")
+                            {
+                                sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, "proveedor", comboBox13.Text);
+                            }
+                            else
+                            {
+                                sql.getEntradas(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id);
+                                comboBox14.Items.Clear();
+                                comboBox13.Items.Clear();
+                                switch (comboBox15.SelectedIndex)
+                                {
+                                    case 0:
+                                        comboBox14.Items.AddRange(constants.getCategorias("vidrio").ToArray());
+                                        comboBox13.Items.AddRange(constants.getProveedores("vidrio").ToArray());
+                                        break;
+                                    case 1:
+                                        comboBox14.Items.AddRange(constants.getCategorias("aluminio").ToArray());
+                                        comboBox13.Items.AddRange(constants.getProveedores("aluminio").ToArray());
+                                        break;
+                                    case 2:
+                                        comboBox14.Items.AddRange(constants.getCategorias("herraje").ToArray());
+                                        comboBox13.Items.AddRange(constants.getProveedores("herraje").ToArray());
+                                        break;
+                                    case 3:
+                                        comboBox14.Items.AddRange(constants.getCategorias("otros").ToArray());
+                                        comboBox13.Items.AddRange(constants.getProveedores("otros").ToArray());
+                                        break;
+                                    default: break;
+                                }
+                            }
+                        }
+                        //----------------------------------------------------------------------------> 
+                        foreach (DataGridViewColumn x in dt.Columns)
+                        {
+                            if (x.HeaderText == "entradas")
+                            {
+                                x.DefaultCellStyle.BackColor = Color.Khaki;
+                            }
+                        }
+                    }
+                    //------------------------->
+                    countRows(dt);
+                }               
             }
             else
             {
@@ -674,12 +839,12 @@ namespace cristales_pva
         private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pictureBox1.Visible = false;
-            executeLoad();
+            executeLoad(datagridviewNE1);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            executeLoad();
+            executeLoad(datagridviewNE1);
         }
 
         private Boolean noRepeatIndex(string clave, List<string> list)
@@ -758,9 +923,9 @@ namespace cristales_pva
 
         private void countRows(datagridviewNE table)
         {            
-            if(table == null)
+            if(table == datagridviewNE1)
             {
-                label12.Text = "Se encontrarón (" + (datagridviewNE1.RowCount - 1) + ") registros.";
+                label12.Text = "Se encontrarón (" + (table.RowCount - 1) + ") registros.";
             }
             else if (table == datagridviewNE2)
             {
@@ -775,14 +940,14 @@ namespace cristales_pva
         private void BackgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pictureBox1.Visible = false;
-            executeLoad();
+            executeLoad(datagridviewNE1);
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(comboBox2.SelectedIndex >= 0)
             {
-                executeLoad();
+                executeLoad(datagridviewNE1);
             }
         }
 
@@ -790,7 +955,7 @@ namespace cristales_pva
         {
             if (comboBox3.SelectedIndex >= 0)
             {
-                executeLoad();
+                executeLoad(datagridviewNE1);
             }
         }
 

@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cm_opciones));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -39,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,24 +58,11 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.Image = global::cristales_pva.Properties.Resources.save_16;
-            this.button1.Location = new System.Drawing.Point(217, 174);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 29);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Guardar";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(73, 117);
+            this.textBox4.Location = new System.Drawing.Point(106, 117);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(206, 20);
+            this.textBox4.Size = new System.Drawing.Size(173, 20);
             this.textBox4.TabIndex = 7;
             this.textBox4.Text = "0";
             // 
@@ -89,17 +76,17 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(94, 55);
+            this.textBox2.Location = new System.Drawing.Point(106, 55);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(185, 20);
+            this.textBox2.Size = new System.Drawing.Size(173, 20);
             this.textBox2.TabIndex = 5;
             this.textBox2.Text = "5";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(94, 24);
+            this.textBox1.Location = new System.Drawing.Point(106, 24);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(185, 20);
+            this.textBox1.Size = new System.Drawing.Size(173, 20);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "10";
             // 
@@ -138,6 +125,19 @@
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "% Desperdicio:";
+            // 
+            // button1
+            // 
+            this.button1.Image = global::cristales_pva.Properties.Resources.save_16;
+            this.button1.Location = new System.Drawing.Point(217, 174);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 29);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Guardar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cm_opciones
             // 

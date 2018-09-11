@@ -648,6 +648,19 @@ namespace cristales_pva
             loadChangelog();
             //Select control
             comboBox1.Focus();
+            //Image List
+            setModueTreeImages();
+        }
+
+        private void setModueTreeImages()
+        {
+            imageList1.Images.Add(Properties.Resources.green_tree);
+            imageList1.Images.Add(Properties.Resources.red_tree);
+            treeView1.Nodes[0].Nodes[0].ImageIndex = 1;
+            treeView1.Nodes[0].Nodes[1].ImageIndex = 1;
+            treeView1.Nodes[0].Nodes[2].ImageIndex = 1;
+            treeView1.Nodes[0].Nodes[3].ImageIndex = 1;
+            treeView1.Nodes[0].Nodes[4].ImageIndex = 1;
         }
 
         private void loadChangelog()

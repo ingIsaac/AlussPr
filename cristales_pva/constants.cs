@@ -103,6 +103,7 @@ namespace cristales_pva
         public static List<int> errors_Open = new List<int>();
         public static List<string> save_onEdit = new List<string>();
         public static bool update_later = false;
+        public static bool user_forbid = false;
 
         public static void getSoftwareVersion()
         {

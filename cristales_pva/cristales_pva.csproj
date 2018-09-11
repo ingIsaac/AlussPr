@@ -1039,6 +1039,8 @@
     <None Include="Resources\salidas_icon.png" />
     <None Include="Resources\entradas_arrow.png" />
     <None Include="Resources\salidas_arrow.png" />
+    <None Include="Resources\green_tree.png" />
+    <None Include="Resources\red_tree.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>
