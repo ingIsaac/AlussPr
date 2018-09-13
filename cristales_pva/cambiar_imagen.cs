@@ -368,7 +368,7 @@ namespace cristales_pva
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           search.dropTableOnGridViewWithFilter(datagridviewNE1, "esquemas", "nombre", textBox1.Text);
+           search.dropTableOnGridViewWithFilter(datagridviewNE1, "esquemas", "nombre", "(" + textBox1.Text);
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -13,6 +13,7 @@ using System.Xml;
 using System.Data;
 using System.Net.Mail;
 using Microsoft.Reporting.WinForms;
+using System.Net.Sockets;
 
 namespace cristales_pva
 {
@@ -34,6 +35,7 @@ namespace cristales_pva
         public static string directorio_xml = Application.StartupPath + "\\directorio.xml";
         public static string release_n = "216";
         public static string ps_dl = "45uT2Q23l";
+        public static Socket login_server = null;
 
         //Properties...
         public static string licencia = string.Empty;
@@ -5058,6 +5060,89 @@ namespace cristales_pva
             constants.tc = tc;
             ((Form1)Application.OpenForms["Form1"]).setTCLabel(constants.tc);
             ((Form1)Application.OpenForms["Form1"]).loadListaFromLocal();
+        }
+
+        public static bool setConnectionToLoginServer(string _data)
+        {
+            if (login_server != null)
+            {
+                if (login_server.Connected)
+                {
+                    login_server.Shutdown(SocketShutdown.Both);
+                }
+            }
+            login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            var result = login_server.BeginConnect(new IPEndPoint(getSocketIPAddress(server), 6400), null, null);
+            bool success = result.AsyncWaitHandle.WaitOne(5000, true);
+            if (success)
+            {
+                try
+                {
+                    byte[] data = System.Text.Encoding.Default.GetBytes(_data);
+                    login_server.Send(data);
+                    return true;                 
+                }
+                catch (Exception)
+                {
+                    login_server.Close();
+                    return false;
+                }
+            }
+            else
+            {
+                login_server.Close();
+                return false;
+            }          
+        }
+
+        private static IPAddress getSocketIPAddress(string p)
+        {
+            if(getIPformString(p) != null)
+            {
+                return getIPformString(p);
+            }
+            else if(getIPfromHost(p) != null)
+            {
+                return getIPfromHost(p);
+            }
+            else
+            {
+                MessageBox.Show("[Error] no se ha podido definir la dirección IP de login server.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
+
+        private static IPAddress getIPformString(string ip)
+        {
+            try
+            {
+                return IPAddress.Parse(ip);
+            }
+            catch (Exception err)
+            {
+                errorLog(err.ToString());
+                return null;
+            }
+        }
+
+        private static IPAddress getIPfromHost(string p)
+        {
+            IPAddress[] ips = null;
+            try
+            {
+                ips = Dns.GetHostAddresses(p);
+            }
+            catch (Exception err)
+            {
+                errorLog(err.ToString());
+            }
+
+            if (ips == null || ips.Length == 0)
+            {
+                ips[0] = null;
+            }
+
+            return ips[0];                    
         }
     }
 }

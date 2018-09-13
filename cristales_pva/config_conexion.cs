@@ -125,7 +125,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show(this, "[Error] Acceso no autorizado.\n\nUsuario o contraseña incorrectos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] acceso no autorizado.\n\nUsuario o contraseña incorrectos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

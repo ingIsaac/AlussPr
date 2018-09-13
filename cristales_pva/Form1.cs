@@ -73,7 +73,7 @@ namespace cristales_pva
             tabPage14.Enter += TabPage14_Enter;
             hScrollBar1.Minimum = 1;
             checkBox3.Click += CheckBox3_Click;
-            textBox1.KeyDown += TextBox1_KeyDown;
+            textBox1.KeyDown += TextBox1_KeyDown;           
         }
 
         private void DatagridviewNE2_CellEnter(object sender, DataGridViewCellEventArgs e)

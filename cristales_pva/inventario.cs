@@ -159,7 +159,7 @@ namespace cristales_pva
         }
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
+        {          
             pictureBox1.Visible = false;
             comboBox2.SelectedIndex = -1;
             comboBox3.SelectedIndex = -1;
@@ -167,6 +167,11 @@ namespace cristales_pva
             comboBox7.SelectedIndex = -1;
             comboBox14.SelectedIndex = -1;
             comboBox13.SelectedIndex = -1;
+            if (e.Result != null)
+            {
+                datagridviewNE dt = (datagridviewNE)e.Result;
+                dt.Enabled = true;
+            }
         }
 
         private void DatagridviewNE1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -348,6 +353,7 @@ namespace cristales_pva
             {
                 reset();
                 pictureBox1.Visible = true;
+                datagridview.Enabled = false;
                 object[] v = new object[] { datagridview, periodo, historial, clave };
                 backgroundWorker1.RunWorkerAsync(v);               
             }
@@ -366,7 +372,7 @@ namespace cristales_pva
             {
                 if (dt.InvokeRequired)
                 {
-                    dt.Invoke((MethodInvoker)delegate { 
+                    dt.Invoke((MethodInvoker)delegate {                         
                         if (dt == datagridviewNE1)
                         {
                             dt.Rows.Clear();
@@ -524,6 +530,7 @@ namespace cristales_pva
                         }
                         //------------------------->
                         countRows(dt);
+                        e.Result = dt;
                     });
                 }
                 else
@@ -685,6 +692,7 @@ namespace cristales_pva
                     }
                     //------------------------->
                     countRows(dt);
+                    e.Result = dt;
                 }               
             }
             else
