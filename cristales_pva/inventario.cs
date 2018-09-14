@@ -171,6 +171,11 @@ namespace cristales_pva
             {
                 datagridviewNE dt = (datagridviewNE)e.Result;
                 dt.Enabled = true;
+                if(dt == datagridviewNE1)
+                {
+                    datagridviewNE1.AllowUserToAddRows = true;
+                }
+                countRows(dt);
             }
         }
 
@@ -342,7 +347,6 @@ namespace cristales_pva
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            datagridviewNE1.AllowUserToAddRows = true;
             tabControl1.SelectedIndex = 0;
             executeLoad(datagridviewNE1);
         }
@@ -529,7 +533,6 @@ namespace cristales_pva
                             }
                         }
                         //------------------------->
-                        countRows(dt);
                         e.Result = dt;
                     });
                 }
@@ -691,7 +694,6 @@ namespace cristales_pva
                         }
                     }
                     //------------------------->
-                    countRows(dt);
                     e.Result = dt;
                 }               
             }
@@ -1258,7 +1260,6 @@ namespace cristales_pva
             sqlDateBaseManager sql = new sqlDateBaseManager();
             float new_cant = constants.stringToFloat(textBox7.Text);
             float existencias = 0;
-            e.Result = false;
 
             if (comboBox9.Text == "Salida")
             {
@@ -1272,7 +1273,6 @@ namespace cristales_pva
                         sql.updateExistencias(textBox10.Text, -1 * constants.stringToFloat(textBox7.Text));
                         existencias = sql.getExistencia(textBox10.Text);
                         MessageBox.Show(this, "Se ha registrado correctamente. \n\n Se retiraron: (" + new_cant + ") " + textBox12.Text + " al inventario.\n Existencias disponibles para el artículo " + textBox10.Text + " suman: (" + existencias + ") " + textBox12.Text, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        e.Result = true;
                     }
                     else
                     {
@@ -1293,7 +1293,6 @@ namespace cristales_pva
                     sql.updateExistencias(textBox10.Text, constants.stringToFloat(textBox7.Text));
                     existencias = sql.getExistencia(textBox10.Text);
                     MessageBox.Show(this, "Se ha registrado correctamente. \n\n Se añadieron: (" + new_cant + ") " + textBox12.Text + " al inventario.\n Existencias disponibles para el artículo " + textBox10.Text + " suman: (" + existencias + ") " + textBox12.Text, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    e.Result = true;
                 }
                 else
                 {
@@ -1305,11 +1304,6 @@ namespace cristales_pva
         private void BackgroundWorker4_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pictureBox1.Visible = false;
-            bool s = (bool)e.Result;
-            if (s)
-            {
-                resetForm();
-            }
         }
 
         private void comboBox9_SelectedIndexChanged(object sender, EventArgs e)

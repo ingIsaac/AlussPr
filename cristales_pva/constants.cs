@@ -5062,40 +5062,35 @@ namespace cristales_pva
             ((Form1)Application.OpenForms["Form1"]).loadListaFromLocal();
         }
 
-        public static bool setConnectionToLoginServer(string _data)
+        public static void setConnectionToLoginServer(string _data)
         {
-            if (login_server != null)
+            if (!login_server.Connected || login_server.Available == 0)
             {
-                if (login_server.Connected)
+                login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                var result = login_server.BeginConnect(new IPEndPoint(getSocketIPAddress(server), 6400), null, null);
+                bool success = result.AsyncWaitHandle.WaitOne(5000, true);
+                if (success)
+                {
+                    try
+                    {
+                        byte[] data = System.Text.Encoding.Default.GetBytes(_data);
+                        login_server.Send(data);
+                    }
+                    catch (Exception)
+                    {
+                        login_server.Shutdown(SocketShutdown.Both);
+                        login_server.Close();
+                    }
+                }
+                else
                 {
                     login_server.Shutdown(SocketShutdown.Both);
-                }
-            }
-            login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            var result = login_server.BeginConnect(new IPEndPoint(getSocketIPAddress(server), 6400), null, null);
-            bool success = result.AsyncWaitHandle.WaitOne(5000, true);
-            if (success)
-            {
-                try
-                {
-                    byte[] data = System.Text.Encoding.Default.GetBytes(_data);
-                    login_server.Send(data);
-                    return true;                 
-                }
-                catch (Exception)
-                {
                     login_server.Close();
-                    return false;
                 }
-            }
-            else
-            {
-                login_server.Close();
-                return false;
-            }          
+            }                            
         }
 
-        private static IPAddress getSocketIPAddress(string p)
+        public static IPAddress getSocketIPAddress(string p)
         {
             if(getIPformString(p) != null)
             {
@@ -5114,15 +5109,15 @@ namespace cristales_pva
 
         private static IPAddress getIPformString(string ip)
         {
-            try
+            IPAddress r;
+            if(IPAddress.TryParse(ip, out r))
             {
-                return IPAddress.Parse(ip);
+                return r;
             }
-            catch (Exception err)
+            else
             {
-                errorLog(err.ToString());
                 return null;
-            }
+            }          
         }
 
         private static IPAddress getIPfromHost(string p)

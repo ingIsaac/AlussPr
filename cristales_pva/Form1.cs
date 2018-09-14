@@ -7,8 +7,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.IO;
 using System.Drawing;
-using System.Threading;
-using System.Globalization;
+using System.Net.Sockets;
 
 namespace cristales_pva
 {
@@ -73,7 +72,8 @@ namespace cristales_pva
             tabPage14.Enter += TabPage14_Enter;
             hScrollBar1.Minimum = 1;
             checkBox3.Click += CheckBox3_Click;
-            textBox1.KeyDown += TextBox1_KeyDown;           
+            textBox1.KeyDown += TextBox1_KeyDown;
+            constants.login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
         private void DatagridviewNE2_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -589,7 +589,7 @@ namespace cristales_pva
             {
                 MessageBox.Show("[Error] solo puede existir una instancia de este programa.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
-            }           
+            }            
             new Form2(false).ShowDialog();
             if (constants.error == true)
             {
@@ -1774,6 +1774,7 @@ namespace cristales_pva
         private void BackgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             new sqlDateBaseManager().checkConnection();
+            constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name);
         }
 
         private void updater()

@@ -5,10 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-using System.Timers;
 using System.Xml.Linq;
 
 namespace cristales_pva
@@ -149,98 +147,102 @@ namespace cristales_pva
                     if (sql.isUserAllowed(constants.user, constants.password) == true)
                     {
                         if (!constants.user_forbid)
-                        {
-                            if (constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name))
-                            {                             
-                                string mac = constants.getMACAddress();
-                                if (sql.findActivation("mac_pc_activada", "mac_pc_activada", "pc_activadas", mac) == true)
+                        {                                                   
+                            string mac = constants.getMACAddress();
+                            if (sql.findActivation("mac_pc_activada", "mac_pc_activada", "pc_activadas", mac) == true)
+                            {
+                                XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
+                                var mac_id = from x in propiedades_xml.Descendants("Propiedades") select x;
+                                foreach (XElement elm in mac_id)
                                 {
-                                    XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
-                                    var mac_id = from x in propiedades_xml.Descendants("Propiedades") select x;
-                                    foreach (XElement elm in mac_id)
-                                    {
-                                        elm.SetElementValue("ID", mac);
-                                    }
-                                    propiedades_xml.Save(constants.propiedades_xml);
-                                    constants.mac_address = mac;
+                                    elm.SetElementValue("ID", mac);
                                 }
-                                if (sql.getActivation() == true)
+                                propiedades_xml.Save(constants.propiedades_xml);
+                                constants.mac_address = mac;
+                            }
+                            if (sql.getActivation() == true)
+                            {
+                                if (sql.getTienda(constants.org_name) == true)
                                 {
-                                    if (sql.getTienda(constants.org_name) == true)
+                                    if (constants.getVigencia(sql.getvigenciaTienda(constants.org_name)))
                                     {
-                                        if (constants.getVigencia(sql.getvigenciaTienda(constants.org_name)))
+                                        constants.licencia = sql.getvigenciaType(constants.org_name).ToUpper();
+                                        if (constants.licencia != string.Empty)
                                         {
-                                            constants.licencia = sql.getvigenciaType(constants.org_name).ToUpper();
-                                            if (constants.licencia != string.Empty)
+                                            constants.connected = true;
+                                            pictureBox2.Image = Properties.Resources.database_icon_check;
+                                            constants.user_id = sql.getUserId(constants.user);
+                                            //Login Server ------------------------------------------------------------------>
+                                            if(constants.login_server != null)
                                             {
-                                                constants.connected = true;
-                                                pictureBox2.Image = Properties.Resources.database_icon_check;
-                                                constants.user_id = sql.getUserId(constants.user);
-                                                label3.Text = "Actualizando Historial...";
-                                                constants.crearHistorialLogin(constants.user, Environment.MachineName, constants.getPublicIP(), DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
-                                                users = new localDateBaseEntities3();
-                                                var d = (from x in users.userLocals where x.user == comboBox1.Text select x).SingleOrDefault();
-
-                                                if (d == null)
+                                                if (constants.login_server.Connected)
                                                 {
-                                                    try
-                                                    {
-                                                        userLocal lu = new userLocal()
-                                                        {
-                                                            user = comboBox1.Text,
-                                                            password = textBox2.Text,
-                                                            remember = isRemembered()
-                                                        };
-                                                        users.userLocals.Add(lu);
-                                                        users.SaveChanges();
-                                                    }
-                                                    catch (Exception err)
-                                                    {
-                                                        MessageBox.Show(this, "[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                                        constants.errorLog(err.ToString());
-                                                    }
-                                                    finally
-                                                    {
-                                                        users.Dispose();
-                                                    }
+                                                    constants.login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
+                                                    constants.login_server.Close();
                                                 }
-                                                else
+                                            }
+                                            constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name);
+                                            //-------------------------------------------------------------------------------->
+                                            label3.Text = "Actualizando Historial...";
+                                            constants.crearHistorialLogin(constants.user, Environment.MachineName, constants.getPublicIP(), DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+                                            users = new localDateBaseEntities3();
+                                            var d = (from x in users.userLocals where x.user == comboBox1.Text select x).SingleOrDefault();
+
+                                            if (d == null)
+                                            {
+                                                try
                                                 {
-                                                    if (d.remember == false && isRemembered() == true)
+                                                    userLocal lu = new userLocal()
                                                     {
-                                                        d.remember = true;
-                                                        users.SaveChanges();
-                                                    }
+                                                        user = comboBox1.Text,
+                                                        password = textBox2.Text,
+                                                        remember = isRemembered()
+                                                    };
+                                                    users.userLocals.Add(lu);
+                                                    users.SaveChanges();
+                                                }
+                                                catch (Exception err)
+                                                {
+                                                    MessageBox.Show(this, "[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                    constants.errorLog(err.ToString());
+                                                }
+                                                finally
+                                                {
+                                                    users.Dispose();
                                                 }
                                             }
                                             else
                                             {
-                                                MessageBox.Show(this, "[Error] no se a podido identificar el tipo de licencia, ingrese de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                                constants.connected = false;
+                                                if (d.remember == false && isRemembered() == true)
+                                                {
+                                                    d.remember = true;
+                                                    users.SaveChanges();
+                                                }
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show(this, "El periodo de la licencia a expirado, póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            MessageBox.Show(this, "[Error] no se a podido identificar el tipo de licencia, ingrese de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                             constants.connected = false;
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show(this, "[Error] no existe registro de esta tienda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show(this, "El periodo de la licencia a expirado, póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         constants.connected = false;
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show(this, "[Error] este equipo no se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, "[Error] no existe registro de esta tienda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     constants.connected = false;
-                                }                              
+                                }
                             }
                             else
                             {
-                                MessageBox.Show(this, "[Error] no se ha podido ingresar al login server.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
+                                MessageBox.Show(this, "[Error] este equipo no se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                constants.connected = false;
+                            }                                                     
                         }
                         else
                         {
