@@ -3921,6 +3921,22 @@ namespace cristales_pva
                     dataGridView1.CurrentRow.Cells[7].Value = "";
                     dataGridView1.CurrentRow.Cells[7].Style.BackColor = Color.White;
                 }
+                else
+                {
+                    //Aplicador de acabado automatico --------------------------------------->
+                    if(dataGridView1.CurrentRow.Cells[7].Value.ToString() == "")
+                    {
+                        if(comboBox1.Text != "")
+                        {
+                            setAcabadoLista();
+                        }
+                        else if(comboBox3.Text != "")
+                        {
+                            setAcabadoAnodizado();
+                        }
+                    }
+                    //----------------------------------------------------------------------->
+                }
                 checkAcabados();
                 getInstruction(dataGridView1.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView1.CurrentRow.Cells[4].Value.ToString()));
                 calcularCostoModulo();
