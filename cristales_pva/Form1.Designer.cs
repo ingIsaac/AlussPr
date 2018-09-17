@@ -186,13 +186,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label92 = new System.Windows.Forms.Label();
-            this.button13 = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.label95 = new System.Windows.Forms.Label();
-            this.button14 = new System.Windows.Forms.Button();
             this.tabPage14 = new System.Windows.Forms.TabPage();
-            this.button11 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBox36 = new System.Windows.Forms.TextBox();
             this.textBox35 = new System.Windows.Forms.TextBox();
@@ -203,6 +200,9 @@
             this.label81 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.label101 = new System.Windows.Forms.Label();
+            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.label113 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -238,14 +238,11 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.label39 = new System.Windows.Forms.Label();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.label100 = new System.Windows.Forms.Label();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.label101 = new System.Windows.Forms.Label();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -267,9 +264,13 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.button10 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.button13 = new System.Windows.Forms.Button();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.button18 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
@@ -339,6 +340,10 @@
             this.tabPage14.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -347,10 +352,6 @@
             this.splitContainer1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -1830,6 +1831,7 @@
             this.tabPage5.BackColor = System.Drawing.Color.White;
             this.tabPage5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.tabPage5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage5.Controls.Add(this.button26);
             this.tabPage5.Controls.Add(this.groupBox13);
             this.tabPage5.Controls.Add(this.button13);
             this.tabPage5.Controls.Add(this.groupBox7);
@@ -2006,17 +2008,6 @@
             this.label92.Size = new System.Drawing.Size(0, 13);
             this.label92.TabIndex = 3;
             // 
-            // button13
-            // 
-            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button13.Location = new System.Drawing.Point(279, 303);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(132, 23);
-            this.button13.TabIndex = 39;
-            this.button13.Text = "Configurar Módulo";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
             // groupBox7
             // 
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -2053,17 +2044,6 @@
             this.label95.TabIndex = 6;
             this.label95.Text = "Descripción:";
             // 
-            // button14
-            // 
-            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button14.Location = new System.Drawing.Point(6, 303);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(116, 23);
-            this.button14.TabIndex = 40;
-            this.button14.Text = "Ver Módulo";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
             // tabPage14
             // 
             this.tabPage14.BackColor = System.Drawing.Color.White;
@@ -2075,17 +2055,6 @@
             this.tabPage14.Size = new System.Drawing.Size(421, 336);
             this.tabPage14.TabIndex = 5;
             this.tabPage14.Text = "Opciones";
-            // 
-            // button11
-            // 
-            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button11.Location = new System.Drawing.Point(339, 308);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 45;
-            this.button11.Text = "Guardar";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // groupBox6
             // 
@@ -2189,6 +2158,50 @@
             this.tabPage15.Size = new System.Drawing.Size(421, 336);
             this.tabPage15.TabIndex = 6;
             this.tabPage15.Text = "Inicio";
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.label101);
+            this.splitContainer2.Panel1.Controls.Add(this.richTextBox4);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.pictureBox12);
+            this.splitContainer2.Size = new System.Drawing.Size(415, 330);
+            this.splitContainer2.SplitterDistance = 150;
+            this.splitContainer2.TabIndex = 1;
+            // 
+            // label101
+            // 
+            this.label101.AutoSize = true;
+            this.label101.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label101.ForeColor = System.Drawing.Color.Red;
+            this.label101.Location = new System.Drawing.Point(0, 6);
+            this.label101.Name = "label101";
+            this.label101.Size = new System.Drawing.Size(76, 17);
+            this.label101.TabIndex = 1;
+            this.label101.Text = "Changelog";
+            // 
+            // richTextBox4
+            // 
+            this.richTextBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox4.BackColor = System.Drawing.Color.White;
+            this.richTextBox4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.richTextBox4.Location = new System.Drawing.Point(3, 30);
+            this.richTextBox4.Name = "richTextBox4";
+            this.richTextBox4.ReadOnly = true;
+            this.richTextBox4.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBox4.Size = new System.Drawing.Size(145, 297);
+            this.richTextBox4.TabIndex = 0;
+            this.richTextBox4.Text = "";
             // 
             // label113
             // 
@@ -2618,6 +2631,12 @@
             this.treeView1.Size = new System.Drawing.Size(137, 138);
             this.treeView1.TabIndex = 35;
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // backgroundWorker3
             // 
             this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
@@ -2649,56 +2668,6 @@
             this.label100.Name = "label100";
             this.label100.Size = new System.Drawing.Size(0, 13);
             this.label100.TabIndex = 31;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.label101);
-            this.splitContainer2.Panel1.Controls.Add(this.richTextBox4);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.pictureBox12);
-            this.splitContainer2.Size = new System.Drawing.Size(415, 330);
-            this.splitContainer2.SplitterDistance = 150;
-            this.splitContainer2.TabIndex = 1;
-            // 
-            // richTextBox4
-            // 
-            this.richTextBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox4.BackColor = System.Drawing.Color.White;
-            this.richTextBox4.Enabled = false;
-            this.richTextBox4.Location = new System.Drawing.Point(3, 30);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.ReadOnly = true;
-            this.richTextBox4.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox4.Size = new System.Drawing.Size(145, 297);
-            this.richTextBox4.TabIndex = 0;
-            this.richTextBox4.Text = "";
-            // 
-            // label101
-            // 
-            this.label101.AutoSize = true;
-            this.label101.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label101.ForeColor = System.Drawing.Color.Red;
-            this.label101.Location = new System.Drawing.Point(0, 6);
-            this.label101.Name = "label101";
-            this.label101.Size = new System.Drawing.Size(76, 17);
-            this.label101.TabIndex = 1;
-            this.label101.Text = "Changelog";
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // button20
             // 
@@ -2955,6 +2924,20 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // button26
+            // 
+            this.button26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button26.Image = global::cristales_pva.Properties.Resources.factory;
+            this.button26.Location = new System.Drawing.Point(144, 303);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(129, 23);
+            this.button26.TabIndex = 41;
+            this.button26.Text = "Opción Fábrica";
+            this.button26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
             // pictureBox11
             // 
             this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -2977,6 +2960,20 @@
             this.pictureBox9.TabIndex = 12;
             this.pictureBox9.TabStop = false;
             // 
+            // button13
+            // 
+            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button13.Image = global::cristales_pva.Properties.Resources.config_module_x16;
+            this.button13.Location = new System.Drawing.Point(279, 303);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(132, 23);
+            this.button13.TabIndex = 39;
+            this.button13.Text = "Configurar Módulo";
+            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button13.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
             // pictureBox10
             // 
             this.pictureBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2989,6 +2986,34 @@
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox10.TabIndex = 8;
             this.pictureBox10.TabStop = false;
+            // 
+            // button14
+            // 
+            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button14.Image = global::cristales_pva.Properties.Resources.modulos_icon_x16;
+            this.button14.Location = new System.Drawing.Point(6, 303);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(132, 23);
+            this.button14.TabIndex = 40;
+            this.button14.Text = "Ver Módulo";
+            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button14.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button11
+            // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.Image = global::cristales_pva.Properties.Resources.save_16;
+            this.button11.Location = new System.Drawing.Point(310, 298);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(105, 32);
+            this.button11.TabIndex = 45;
+            this.button11.Text = "Guardar";
+            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button11.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // pictureBox12
             // 
@@ -3462,6 +3487,11 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tabPage15.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -3473,11 +3503,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -3776,6 +3801,7 @@
         private System.Windows.Forms.RichTextBox richTextBox4;
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Button button26;
     }
 }
 

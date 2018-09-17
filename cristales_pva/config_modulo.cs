@@ -347,9 +347,45 @@ namespace cristales_pva
             }
         }
 
+        private void loadFactory()
+        {
+            if(id_cotizacion == -1)
+            {
+                //Acabado
+                if (constants.factory_acabado_perfil != string.Empty)
+                {
+                    string[] a = constants.factory_acabado_perfil.Split(',');
+                    if (a.Length == 2)
+                    {
+                        if (a[0] == "0")
+                        {
+                            comboBox1.Text = a[1];
+                        }
+                        else if (a[0] == "1")
+                        {
+                            comboBox3.Text = a[1];
+                        }
+                    }
+                }
+                //Cristales
+                if(constants.factory_cristal != string.Empty)
+                {
+                    string[] a = constants.factory_cristal.Split(',');
+                    if(a.Length == 2)
+                    {
+                        foreach (DataGridViewRow x in dataGridView2.Rows)
+                        {
+                            setNewCristal(x.Index, a[0], a[1]);
+                        }
+                    }
+                }
+            }
+        }
+
         private void startSession(int module_id, int id_cotizacion)
         {
             loadParameters(module_id);
+            loadFactory();         
             loadOnEdit(id_cotizacion);      
         }
 

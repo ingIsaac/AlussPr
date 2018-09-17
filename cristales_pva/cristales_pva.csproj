@@ -334,6 +334,12 @@
     <Compile Include="esquema.cs">
       <DependentUpon>listas.tt</DependentUpon>
     </Compile>
+    <Compile Include="fabrica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fabrica.Designer.cs">
+      <DependentUpon>fabrica.cs</DependentUpon>
+    </Compile>
     <Compile Include="filas_borradas.cs">
       <DependentUpon>userLocal_model.tt</DependentUpon>
     </Compile>
@@ -616,6 +622,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="admin_propiedades.resx">
       <DependentUpon>admin_propiedades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fabrica.resx">
+      <DependentUpon>fabrica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="informe.rdlc" />
     <EmbeddedResource Include="informe.resx">
@@ -1041,6 +1050,9 @@
     <None Include="Resources\salidas_arrow.png" />
     <None Include="Resources\green_tree.png" />
     <None Include="Resources\red_tree.png" />
+    <None Include="Resources\config_module_x16.png" />
+    <None Include="Resources\modulos_icon_x16.png" />
+    <None Include="Resources\factory.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

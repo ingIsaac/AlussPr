@@ -64,6 +64,7 @@ namespace cristales_pva
             datagridviewNE3.CellClick += DatagridviewNE3_CellClick;
             datagridviewNE3.CellEndEdit += DatagridviewNE3_CellEndEdit;
             datagridviewNE3.RowsAdded += DatagridviewNE3_RowsAdded;
+            datagridviewNE3.DataError += DatagridviewNE3_DataError;
             //--------------
 
             //Others ----
@@ -74,6 +75,15 @@ namespace cristales_pva
             checkBox3.Click += CheckBox3_Click;
             textBox1.KeyDown += TextBox1_KeyDown;
             constants.login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
+
+        private void DatagridviewNE3_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is ArgumentException)
+            {
+                MessageBox.Show("[Error] dato no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                datagridviewNE3[e.ColumnIndex, e.RowIndex].Value = "";
+            }
         }
 
         private void DatagridviewNE2_CellEnter(object sender, DataGridViewCellEventArgs e)
@@ -1774,7 +1784,7 @@ namespace cristales_pva
         private void BackgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             new sqlDateBaseManager().checkConnection();
-            constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name);
+            constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name, this);
         }
 
         private void updater()
@@ -6953,6 +6963,14 @@ namespace cristales_pva
             else
             {
                 MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            if(Application.OpenForms["fabrica"] == null)
+            {
+                new fabrica().ShowDialog();
             }
         }
 

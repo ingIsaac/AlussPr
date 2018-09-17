@@ -139,7 +139,8 @@ namespace cristales_pva
                     MessageBox.Show(this, "[Error] acceso no autorizado.\n\nEl usuario no está registrado en este equipo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else {
+            else
+            {
                 sqlDateBaseManager sql = new sqlDateBaseManager();
 
                 if (sql.setServerConnection() == true)
@@ -147,102 +148,109 @@ namespace cristales_pva
                     if (sql.isUserAllowed(constants.user, constants.password) == true)
                     {
                         if (!constants.user_forbid)
-                        {                                                   
-                            string mac = constants.getMACAddress();
-                            if (sql.findActivation("mac_pc_activada", "mac_pc_activada", "pc_activadas", mac) == true)
+                        {
+                            //Connect to Login Server ------------------------------------------------------------------>
+                            if (constants.login_server != null)
                             {
-                                XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
-                                var mac_id = from x in propiedades_xml.Descendants("Propiedades") select x;
-                                foreach (XElement elm in mac_id)
+                                if (constants.login_server.Connected)
                                 {
-                                    elm.SetElementValue("ID", mac);
+                                    constants.login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
+                                    constants.login_server.Close();
                                 }
-                                propiedades_xml.Save(constants.propiedades_xml);
-                                constants.mac_address = mac;
                             }
-                            if (sql.getActivation() == true)
+                            //------------------------------------------------------------------------------------------>
+                            if (constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name, this)) //Try to Connect
                             {
-                                if (sql.getTienda(constants.org_name) == true)
+                                string mac = constants.getMACAddress();
+                                if (sql.findActivation("mac_pc_activada", "mac_pc_activada", "pc_activadas", mac) == true)
                                 {
-                                    if (constants.getVigencia(sql.getvigenciaTienda(constants.org_name)))
+                                    XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
+                                    var mac_id = from x in propiedades_xml.Descendants("Propiedades") select x;
+                                    foreach (XElement elm in mac_id)
                                     {
-                                        constants.licencia = sql.getvigenciaType(constants.org_name).ToUpper();
-                                        if (constants.licencia != string.Empty)
+                                        elm.SetElementValue("ID", mac);
+                                    }
+                                    propiedades_xml.Save(constants.propiedades_xml);
+                                    constants.mac_address = mac;
+                                }
+                                if (sql.getActivation() == true)
+                                {
+                                    if (sql.getTienda(constants.org_name) == true)
+                                    {
+                                        if (constants.getVigencia(sql.getvigenciaTienda(constants.org_name)))
                                         {
-                                            constants.connected = true;
-                                            pictureBox2.Image = Properties.Resources.database_icon_check;
-                                            constants.user_id = sql.getUserId(constants.user);
-                                            //Login Server ------------------------------------------------------------------>
-                                            if(constants.login_server != null)
+                                            constants.licencia = sql.getvigenciaType(constants.org_name).ToUpper();
+                                            if (constants.licencia != string.Empty)
                                             {
-                                                if (constants.login_server.Connected)
-                                                {
-                                                    constants.login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
-                                                    constants.login_server.Close();
-                                                }
-                                            }
-                                            constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name);
-                                            //-------------------------------------------------------------------------------->
-                                            label3.Text = "Actualizando Historial...";
-                                            constants.crearHistorialLogin(constants.user, Environment.MachineName, constants.getPublicIP(), DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
-                                            users = new localDateBaseEntities3();
-                                            var d = (from x in users.userLocals where x.user == comboBox1.Text select x).SingleOrDefault();
+                                                constants.connected = true;
+                                                pictureBox2.Image = Properties.Resources.database_icon_check;
+                                                constants.user_id = sql.getUserId(constants.user);
+                                                label3.Text = "Actualizando Historial...";
+                                                constants.crearHistorialLogin(constants.user, Environment.MachineName, constants.getPublicIP(), DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+                                                users = new localDateBaseEntities3();
+                                                var d = (from x in users.userLocals where x.user == comboBox1.Text select x).SingleOrDefault();
 
-                                            if (d == null)
-                                            {
-                                                try
+                                                if (d == null)
                                                 {
-                                                    userLocal lu = new userLocal()
+                                                    try
                                                     {
-                                                        user = comboBox1.Text,
-                                                        password = textBox2.Text,
-                                                        remember = isRemembered()
-                                                    };
-                                                    users.userLocals.Add(lu);
-                                                    users.SaveChanges();
+                                                        userLocal lu = new userLocal()
+                                                        {
+                                                            user = comboBox1.Text,
+                                                            password = textBox2.Text,
+                                                            remember = isRemembered()
+                                                        };
+                                                        users.userLocals.Add(lu);
+                                                        users.SaveChanges();
+                                                    }
+                                                    catch (Exception err)
+                                                    {
+                                                        MessageBox.Show(this, "[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                        constants.errorLog(err.ToString());
+                                                    }
+                                                    finally
+                                                    {
+                                                        users.Dispose();
+                                                    }
                                                 }
-                                                catch (Exception err)
+                                                else
                                                 {
-                                                    MessageBox.Show(this, "[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                                    constants.errorLog(err.ToString());
-                                                }
-                                                finally
-                                                {
-                                                    users.Dispose();
+                                                    if (d.remember == false && isRemembered() == true)
+                                                    {
+                                                        d.remember = true;
+                                                        users.SaveChanges();
+                                                    }
                                                 }
                                             }
                                             else
                                             {
-                                                if (d.remember == false && isRemembered() == true)
-                                                {
-                                                    d.remember = true;
-                                                    users.SaveChanges();
-                                                }
+                                                MessageBox.Show(this, "[Error] no se a podido identificar el tipo de licencia, ingrese de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                constants.connected = false;
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show(this, "[Error] no se a podido identificar el tipo de licencia, ingrese de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            MessageBox.Show(this, "El periodo de la licencia a expirado, póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                             constants.connected = false;
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show(this, "El periodo de la licencia a expirado, póngase en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        MessageBox.Show(this, "[Error] no existe registro de esta tienda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         constants.connected = false;
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show(this, "[Error] no existe registro de esta tienda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, "[Error] este equipo no se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     constants.connected = false;
                                 }
                             }
                             else
                             {
-                                MessageBox.Show(this, "[Error] este equipo no se encuentra activado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, "[Error] no se ha podido ingresar al login server.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 constants.connected = false;
-                            }                                                     
+                            }                                                    
                         }
                         else
                         {
@@ -417,6 +425,8 @@ namespace cristales_pva
                 var tc = (from x in opciones_xml.Descendants("Opciones") select x.Element("TC")).SingleOrDefault();
                 var EATCC = (from x in opciones_xml.Descendants("Opciones") select x.Element("EATCC")).SingleOrDefault();
                 var EAKG = (from x in opciones_xml.Descendants("Opciones") select x.Element("EAKG")).SingleOrDefault();
+                var FACTORY_ALU = (from x in opciones_xml.Descendants("Opciones") select x.Element("FACTORY_ALU")).SingleOrDefault();
+                var FACTORY_CRI = (from x in opciones_xml.Descendants("Opciones") select x.Element("FACTORY_CRI")).SingleOrDefault();
 
                 var op1 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP1")).SingleOrDefault();
                 var op2 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP2")).SingleOrDefault();
@@ -599,6 +609,24 @@ namespace cristales_pva
                         constants.enable_costo_alum_kg = false;
                     }
                 }
+
+                if (FACTORY_ALU != null)
+                {
+                    if (FACTORY_ALU.Value.ToString() != string.Empty)
+                    {
+                        constants.factory_acabado_perfil = FACTORY_ALU.Value.ToString();
+                    }                                 
+                }
+
+                if (FACTORY_CRI != null)
+                {
+                    if (FACTORY_CRI.Value.ToString() != string.Empty)
+                    {
+                        constants.factory_cristal = FACTORY_CRI.Value.ToString();
+                    }
+                }
+
+                //--------------------------------------------------------> Reporte
 
                 if (op1 != null)
                 {

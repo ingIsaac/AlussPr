@@ -59,6 +59,22 @@ namespace cristales_pva
             textBox1.KeyDown += TextBox1_KeyDown;
             textBox2.KeyDown += TextBox2_KeyDown;
             textBox9.KeyDown += TextBox9_KeyDown;
+
+            //Otros
+            datagridviewNE1.DataError += DatagridviewNE1_DataError;
+        }
+
+        private void DatagridviewNE1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is FormatException)
+            {
+                MessageBox.Show("[Error] dato no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (e.Exception is ArgumentException)
+            {
+                MessageBox.Show("[Error] argumento de lista no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                datagridviewNE1[e.ColumnIndex, e.RowIndex].Value = "";
+            }
         }
 
         private void ContextMenuStrip3_Opening(object sender, CancelEventArgs e)
@@ -197,7 +213,7 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
-                if (backgroundWorker1.IsBusy == false)
+                if (!backgroundWorker1.IsBusy )
                 {
                     if(datagridviewNE1.CurrentCell.ColumnIndex == 1 || datagridviewNE1.CurrentCell.ColumnIndex == 6)
                     {
@@ -312,7 +328,7 @@ namespace cristales_pva
                         }
                         if (u == string.Empty)
                         {
-                            datagridviewNE1.CurrentCell.Value = "PZA";
+                            datagridviewNE1.CurrentCell.Value = "";
                         }
                         cb.Value = u;
                         datagridviewNE1.CurrentRow.Cells[datagridviewNE1.CurrentCell.ColumnIndex] = cb;
@@ -320,29 +336,6 @@ namespace cristales_pva
                     }                            
                 }
             }
-        }
-
-        private List<string> getSuggets(string clave)
-        {
-            List<string> list = new List<string>();
-            listas_entities_pva listas = new listas_entities_pva();
-            switch (comboBox1.SelectedIndex)
-            {
-                case 0:
-                    list = listas.lista_precios_hojas.Where(x => x.clave.StartsWith(clave)).Select(x => x.clave).ToList();
-                    break;
-                case 1:
-                    list = listas.perfiles.Where(x => x.clave.StartsWith(clave)).Select(x => x.clave).ToList();
-                    break;
-                case 2:
-                    list = listas.herrajes.Where(x => x.clave.StartsWith(clave)).Select(x => x.clave).ToList();
-                    break;
-                case 3:
-                    list = listas.otros.Where(x => x.clave.StartsWith(clave)).Select(x => x.clave).ToList();
-                    break;
-                default: break;
-            }
-            return list;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -353,7 +346,7 @@ namespace cristales_pva
 
         private void executeLoad(datagridviewNE datagridview, bool periodo=false, bool historial=false, string clave="")
         {
-            if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
             {
                 reset();
                 pictureBox1.Visible = true;
@@ -805,7 +798,7 @@ namespace cristales_pva
                             access.ShowDialog(this);
                             if (access.access)
                             {
-                                if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+                                if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
                                 {
                                     pictureBox1.Visible = true;
                                     backgroundWorker2.RunWorkerAsync(id);
@@ -814,7 +807,7 @@ namespace cristales_pva
                         }
                         else
                         {
-                            if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+                            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
                             {
                                 pictureBox1.Visible = true;
                                 backgroundWorker2.RunWorkerAsync(id);
@@ -876,7 +869,7 @@ namespace cristales_pva
         {
             if (MessageBox.Show(this, "¿Deseas actualizar el registro?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+                if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
                 {
                     pictureBox1.Visible = true;
                     backgroundWorker3.RunWorkerAsync();
@@ -1114,22 +1107,9 @@ namespace cristales_pva
             richTextBox1.Clear();
         }
 
-        private void resetForm()
-        {
-            textBox11.Clear();
-            comboBox9.SelectedIndex = -1;
-            textBox10.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
-            textBox6.Clear();
-            textBox7.Clear();
-            textBox12.Clear();
-            richTextBox1.Clear();
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
-            if (!backgroundWorker1.IsBusy || !backgroundWorker2.IsBusy || !backgroundWorker3.IsBusy || !backgroundWorker4.IsBusy)
+            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
             {
                 if (textBox11.Text != "")
                 {

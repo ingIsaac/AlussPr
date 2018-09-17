@@ -413,6 +413,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap config_module_x16 {
+            get {
+                object obj = ResourceManager.GetObject("config_module_x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap constructor_logo {
             get {
                 object obj = ResourceManager.GetObject("constructor_logo", resourceCulture);
@@ -576,6 +586,16 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap Excel_icon {
             get {
                 object obj = ResourceManager.GetObject("Excel_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap factory {
+            get {
+                object obj = ResourceManager.GetObject("factory", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -846,6 +866,16 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap module_load {
             get {
                 object obj = ResourceManager.GetObject("module_load", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap modulos_icon_x16 {
+            get {
+                object obj = ResourceManager.GetObject("modulos_icon_x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

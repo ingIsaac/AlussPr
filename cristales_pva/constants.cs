@@ -106,7 +106,9 @@ namespace cristales_pva
         public static List<string> save_onEdit = new List<string>();
         public static bool update_later = false;
         public static bool user_forbid = false;
-
+        public static string factory_acabado_perfil = string.Empty;
+        public static string factory_cristal = string.Empty;            
+             
         public static void getSoftwareVersion()
         {
             try
@@ -5062,35 +5064,40 @@ namespace cristales_pva
             ((Form1)Application.OpenForms["Form1"]).loadListaFromLocal();
         }
 
-        public static void setConnectionToLoginServer(string _data)
+        public static bool setConnectionToLoginServer(string _data, Form form)
         {
             if (!login_server.Connected || login_server.Available == 0)
             {
                 login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                var result = login_server.BeginConnect(new IPEndPoint(getSocketIPAddress(server), 6400), null, null);
-                bool success = result.AsyncWaitHandle.WaitOne(5000, true);
+                var result = login_server.BeginConnect(new IPEndPoint(getSocketIPAddress(server, form), 6400), null, null);
+                bool success = result.AsyncWaitHandle.WaitOne(10000, true);
                 if (success)
                 {
                     try
                     {
                         byte[] data = System.Text.Encoding.Default.GetBytes(_data);
                         login_server.Send(data);
+                        return true;
                     }
                     catch (Exception)
                     {
-                        login_server.Shutdown(SocketShutdown.Both);
                         login_server.Close();
+                        return false;
                     }
                 }
                 else
                 {
-                    login_server.Shutdown(SocketShutdown.Both);
                     login_server.Close();
+                    return false;
                 }
-            }                            
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public static IPAddress getSocketIPAddress(string p)
+        public static IPAddress getSocketIPAddress(string p, Form form)
         {
             if(getIPformString(p) != null)
             {
@@ -5102,7 +5109,7 @@ namespace cristales_pva
             }
             else
             {
-                MessageBox.Show("[Error] no se ha podido definir la dirección IP de login server.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(form, "[Error] no se ha podido definir la dirección IP de login server.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
