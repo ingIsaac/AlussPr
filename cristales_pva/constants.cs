@@ -33,7 +33,7 @@ namespace cristales_pva
         public static string updater_xml = Application.StartupPath + "\\data_updater.xml";
         public static string folder_resources_dir = Application.StartupPath + "\\pics\\";
         public static string directorio_xml = Application.StartupPath + "\\directorio.xml";
-        public static string release_n = "216";
+        public static string release_n = "478";
         public static string ps_dl = "45uT2Q23l";
         public static Socket login_server = null;
 

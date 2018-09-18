@@ -854,7 +854,7 @@ namespace cristales_pva
             try
             {
                 SqlDataAdapter da = null;
-                da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + column + " LIKE '" + value + "%' AND user='" + constants.user + "'", getConnectionString());
+                da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + column + "='" + value + "' AND user='" + constants.user + "'", getConnectionString());
                            
                 SqlCommandBuilder cb = new SqlCommandBuilder(da);
                 da.Fill(data);

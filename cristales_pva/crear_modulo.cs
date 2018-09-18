@@ -1662,7 +1662,7 @@ namespace cristales_pva
         {
             if(constants.user_access == 4)
             {
-               new sqlDateBaseManager().getModuloFilterUser(datagridviewNE1, "modulos", "usuario", textBox2.Text);
+               new sqlDateBaseManager().getModuloFilterUser(datagridviewNE1, "modulos", "articulo", textBox2.Text);
             }
             else
             {
@@ -2575,11 +2575,11 @@ namespace cristales_pva
                 sqlDateBaseManager sql = new sqlDateBaseManager();
                 if(constants.user_access == 4)
                 {
-                    sql.getModuloFilterUser(datagridviewNE1, "modulos", "usuario", comboBox1.Text);
+                    sql.getModuloFilterUser(datagridviewNE1, "modulos", "linea", comboBox1.Text);
                 }
                 else
                 {
-                    sql.dropTableOnGridViewWithFilter(datagridviewNE1, "modulos", "linea", comboBox1.Text);
+                    sql.dropTableOnGridViewWithFilter(datagridviewNE1, "modulos", "linea", comboBox1.Text, true);
                 }
                 progressBar1.Visible = true;
                 progressBar1.Value = 0;

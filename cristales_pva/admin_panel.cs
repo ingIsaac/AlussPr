@@ -155,49 +155,52 @@ namespace cristales_pva
 
         private void TextBox4_KeyDown(object sender, KeyEventArgs e)
         {
-            bool found = false;
-            if (textBox4.Text != "" && comboBox5.Text != "")
+            if (e.KeyData == Keys.Enter)
             {
-                foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                bool found = false;
+                if (textBox4.Text != "" && comboBox5.Text != "")
                 {
-                    foreach (DataGridViewCell v in x.Cells)
+                    foreach (DataGridViewRow x in datagridviewNE1.Rows)
                     {
-                        if (getNext(x.Index) == false)
+                        foreach (DataGridViewCell v in x.Cells)
                         {
-                            if (v.OwningColumn.HeaderText == comboBox5.Text)
+                            if (getNext(x.Index) == false)
                             {
-                                if (v.Value.ToString().Equals(textBox4.Text) == true)
+                                if (v.OwningColumn.HeaderText == comboBox5.Text)
                                 {
-                                    v.Selected = true;
-                                    found = true;
-                                    datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
-                                    find_next.Add(x.Index);
-                                    break;
-                                }
-                                else if (v.Value.ToString().StartsWith(textBox4.Text) == true)
-                                {
-                                    v.Selected = true;
-                                    found = true;
-                                    datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
-                                    find_next.Add(x.Index);
-                                    break;
-                                }
-                                else
-                                {
-                                    v.Selected = false;
+                                    if (v.Value.ToString().Equals(textBox4.Text) == true)
+                                    {
+                                        v.Selected = true;
+                                        found = true;
+                                        datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
+                                        find_next.Add(x.Index);
+                                        break;
+                                    }
+                                    else if (v.Value.ToString().StartsWith(textBox4.Text) == true)
+                                    {
+                                        v.Selected = true;
+                                        found = true;
+                                        datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
+                                        find_next.Add(x.Index);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        v.Selected = false;
+                                    }
                                 }
                             }
                         }
+                        if (found == true)
+                        {
+                            break;
+                        }
                     }
-                    if (found == true)
+                    if (found == false)
                     {
-                        break;
+                        find_next.Clear();
+                        MessageBox.Show("No existen mas resultados de búsqueda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                }
-                if (found == false)
-                {
-                    find_next.Clear();
-                    MessageBox.Show("No existen mas resultados de búsqueda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -2174,6 +2177,19 @@ namespace cristales_pva
             return r;
         }
 
+        private bool isEditedField()
+        {
+            bool r = false;
+            foreach(DataGridViewRow x in datagridviewNE1.Rows)
+            {
+                if(x.Cells["fecha"].Style.BackColor == Color.Yellow)
+                {
+                    r = true;
+                }
+            }
+            return r;
+        }
+
         private void button11_Click(object sender, EventArgs e)
         {
             if (comboBox1.Text != "")
@@ -2188,9 +2204,31 @@ namespace cristales_pva
                             {
                                 if (checkNewValues() == false)
                                 {
-                                    toolStripProgressBar1.Visible = true;
-                                    ((Control)tabPage1).Enabled = false;
-                                    backgroundWorker4.RunWorkerAsync();
+                                    DialogResult r;
+                                    if (isEditedField())
+                                    {
+                                        r = MessageBox.Show("Existen artículos sin guardar. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                        if(r == DialogResult.Yes)
+                                        {
+                                            r = MessageBox.Show("¿Deseas añadir estos nuevos artículos a la lista: (" + comboBox1.Text.ToUpper() + ")?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                            if (r == DialogResult.Yes)
+                                            {
+                                                toolStripProgressBar1.Visible = true;
+                                                ((Control)tabPage1).Enabled = false;
+                                                backgroundWorker4.RunWorkerAsync();
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        r = MessageBox.Show("¿Deseas añadir estos nuevos artículos a la lista: (" + comboBox1.Text.ToUpper() + ")?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                        if (r == DialogResult.Yes)
+                                        {
+                                            toolStripProgressBar1.Visible = true;
+                                            ((Control)tabPage1).Enabled = false;
+                                            backgroundWorker4.RunWorkerAsync();
+                                        }
+                                    }                               
                                 }                              
                             }
                         }
@@ -2535,54 +2573,7 @@ namespace cristales_pva
         private void pegadoEspecialToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             constants.PasteOnGrid(dataGridView6, true, true);
-        }
-
-        //Buscar
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            bool found = false;
-            if (textBox4.Text != "" && comboBox5.Text != "")
-            {
-                find_next.Clear();
-                foreach (DataGridViewRow x in datagridviewNE1.Rows)
-                {
-                    foreach (DataGridViewCell v in x.Cells)
-                    {
-                        if (v.OwningColumn.HeaderText == comboBox5.Text)
-                        {
-                            if (v.Value.ToString().Equals(textBox4.Text) == true)
-                            {
-                                v.Selected = true;
-                                found = true;
-                                find_next.Add(x.Index);
-                                datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
-                                break;
-                            }
-                            else if (v.Value.ToString().StartsWith(textBox4.Text) == true)
-                            {
-                                v.Selected = true;
-                                found = true;
-                                find_next.Add(x.Index);
-                                datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
-                                break;
-                            }
-                            else
-                            {
-                                v.Selected = false;
-                            }
-                        }
-                    }
-                    if(found == true)
-                    {
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                datagridviewNE1.ClearSelection();
-            }
-        }
+        }       
 
         private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2886,6 +2877,53 @@ namespace cristales_pva
                         calcularCostoAluminioKG(true);
                     }
                 }
+            }
+        }
+
+        //Buscar
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            bool found = false;
+            if (textBox4.Text != "" && comboBox5.Text != "")
+            {
+                find_next.Clear();
+                foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                {
+                    foreach (DataGridViewCell v in x.Cells)
+                    {
+                        if (v.OwningColumn.HeaderText == comboBox5.Text)
+                        {
+                            if (v.Value.ToString().Equals(textBox4.Text) == true)
+                            {
+                                v.Selected = true;
+                                found = true;
+                                find_next.Add(x.Index);
+                                datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
+                                break;
+                            }
+                            else if (v.Value.ToString().StartsWith(textBox4.Text) == true)
+                            {
+                                v.Selected = true;
+                                found = true;
+                                find_next.Add(x.Index);
+                                datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
+                                break;
+                            }
+                            else
+                            {
+                                v.Selected = false;
+                            }
+                        }
+                    }
+                    if (found == true)
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                datagridviewNE1.ClearSelection();
             }
         }
     }
