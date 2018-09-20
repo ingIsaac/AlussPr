@@ -347,9 +347,9 @@ namespace cristales_pva
             }
         }
 
-        private void loadFactory()
+        private void loadFactory(int id_cotizacion)
         {
-            if(id_cotizacion == -1)
+            if(id_cotizacion <= -1)
             {
                 //Acabado
                 if (constants.factory_acabado_perfil != string.Empty)
@@ -385,7 +385,7 @@ namespace cristales_pva
         private void startSession(int module_id, int id_cotizacion)
         {
             loadParameters(module_id);
-            loadFactory();         
+            loadFactory(id_cotizacion);         
             loadOnEdit(id_cotizacion);      
         }
 
@@ -452,6 +452,7 @@ namespace cristales_pva
             checkBox12.Checked = true;
             checkBox13.Checked = true;
             checkBox14.Checked = true;
+            checkBox9.Checked = false;
             startSession(module_id, id_cotizacion);
             tableLayoutPanel1.Visible = true;           
         }
@@ -486,6 +487,7 @@ namespace cristales_pva
             tableLayoutPanel1.Controls.Clear();
             pictureBox2.Image = null;
             label37.Text = "";
+            checkBox9.Checked = false;
             loadParameters(module_id);
         }
 
@@ -499,41 +501,50 @@ namespace cristales_pva
 
         //Crear pic modulo
         private Bitmap createModuloPic()
-        {           
-            if (panel.Width > (tableLayoutPanel1.Width - 10))
-            {
-                panel.Width = tableLayoutPanel1.Width - 10;
-            }
-            if (panel.Height > (tableLayoutPanel1.Height - 10))
-            {
-                panel.Height = tableLayoutPanel1.Height - 10;
-            }
+        {
             if (constants.mostrar_acabado == false)
             {
                 clearBackground();
             }
-            
-            if (checkBox16.Checked)
+
+            Bitmap _img = null;
+
+            try
             {
-                //Si es esquema resulta muy pequeño y evitar distorción
-                if (panel.Width < 120 || panel.Height < 105)
+                Panel p = new Panel();
+                groupBox4.Controls.Add(p);
+                p.Show();
+                p.Dock = DockStyle.Fill;
+                p.BringToFront();
+
+                panel.Dock = DockStyle.Fill;
+                foreach (Control x in panel.Controls)
                 {
-                    panel.Width = 120 + getMarcoWidth();
-                    panel.Height = 105 + getMarcoHeight();
-                    foreach (Control x in panel.Controls)
-                    {
-                        x.Width = 120 / columns;
-                        x.Height = 105 / rows;
-                    }
+                    x.Width = (panel.Width - getMarcoWidth()) / columns;
+                    x.Height = (panel.Height - getMarcoHeight()) / rows;
                 }
-                //
+
+                Bitmap bm = new Bitmap(panel.Width, panel.Height);
+                panel.DrawToBitmap(bm, new Rectangle(0, 0, panel.Width, panel.Height));
+                p.Dispose();
+
+                //Reset --------------------------------------------------->
+                panel.Dock = DockStyle.None;
+                foreach (Control x in panel.Controls)
+                {
+                    x.Width = (panel.Width - getMarcoWidth()) / columns;
+                    x.Height = (panel.Height - getMarcoHeight()) / rows;
+                }
+                //--------------------------------------------------------->
+
+                _img = new Bitmap(bm, 120, 105);
+                bm = null;
             }
-                    
-            Bitmap bm = new Bitmap(panel.Width, panel.Height);
-            panel.DrawToBitmap(bm, new Rectangle(0, 0, panel.Width, panel.Height));
-            Bitmap gm_2 = new Bitmap(bm, 120, 105);            
-            bm = null;
-            return gm_2;
+            catch (Exception)
+            {
+                //Do nothing
+            }
+            return _img;
         }
         //
 
@@ -1478,6 +1489,16 @@ namespace cristales_pva
                     checkBox17.Visible = true;
                     checkBox18.Visible = true;
                     label42.Visible = true;
+                    label45.Visible = true;
+                    textBox14.Visible = true;
+                }
+                else
+                {
+                    checkBox17.Visible = false;
+                    checkBox18.Visible = false;
+                    label42.Visible = false;
+                    label45.Visible = false;
+                    textBox14.Visible = false;
                 }
                 label41.Text = "Columnas: " + diseño.columnas + " / " + "Filas: " + diseño.filas;
                 panel = new TableLayoutPanel();
@@ -3985,6 +4006,22 @@ namespace cristales_pva
                     dataGridView1.CurrentRow.Cells[7].Value = "";
                     dataGridView1.CurrentRow.Cells[7].Style.BackColor = Color.White;
                 }
+                else
+                {
+                    //Aplicador de acabado automatico --------------------------------------->
+                    if (dataGridView1.CurrentRow.Cells[7].Value.ToString() == "")
+                    {
+                        if (comboBox1.Text != "")
+                        {
+                            setAcabadoLista();
+                        }
+                        else if (comboBox3.Text != "")
+                        {
+                            setAcabadoAnodizado();
+                        }
+                    }
+                    //----------------------------------------------------------------------->
+                }
                 checkAcabados();
                 dataGridView1[e.ColumnIndex, e.RowIndex].Value = "";
                 getInstruction(dataGridView1.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView1.CurrentRow.Cells[4].Value.ToString()));
@@ -4112,7 +4149,6 @@ namespace cristales_pva
         {
             constants.ExportToExcelFile(dataGridView6);
         }
-
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
