@@ -47,7 +47,7 @@ namespace cristales_pva
             checkBox1.Checked = constants.op2;
             checkBox3.Checked = constants.op3;
             checkBox4.Checked = constants.op4;
-            checkBox5.Checked = constants.op5;
+            //OP5 ----------->
             checkBox6.Checked = constants.op6;
             checkBox7.Checked = constants.op7;
             checkBox8.Checked = constants.op8;
@@ -114,9 +114,11 @@ namespace cristales_pva
                 _utilidad = 1;
             }
 
-            //ocultar desglose
-            if (checkBox5.Checked)
+            //ocultar desglose          
+            if (!constants.iva_desglosado)
             {
+                checkBox5.Checked = true;
+                //---------------------------------------->
                 if (checkBox7.Checked)
                 {
                     reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte2_c.rdlc";
@@ -128,6 +130,8 @@ namespace cristales_pva
             }
             else
             {
+                checkBox5.Checked = false;
+                //---------------------------------------->
                 if (checkBox7.Checked)
                 {
                     reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte_c.rdlc";
@@ -149,15 +153,7 @@ namespace cristales_pva
             else
             {
                 this.Text = "Reporte (n/g).";
-            }
-            if(constants.iva_desglosado == true)
-            {
-                checkBox5.Checked = false;
-            }
-            else
-            {
-                checkBox5.Checked = true;
-            }
+            }          
             reportViewer1.LocalReport.DisplayName = textBox1.Text + " - " + constants.sub_folio;
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.EnableExternalImages = true;
@@ -866,9 +862,20 @@ namespace cristales_pva
             catch (Exception err)
             {
                 constants.errorLog(err.ToString());
-            }          
+            } 
+                     
             reportViewer1.LocalReport.Refresh();
             reportViewer1.RefreshReport();
+
+            //Check if utilidad
+            if(utilidad > 0 && !checkBox9.Checked)
+            {
+                DialogResult r = MessageBox.Show("Se esta añadiendo una utilidad al total y no esta habilitada la opción: 'incluir utilidad en partida'.\n\n¿Deseas incluir la utilidad en las partidas dentro del reporte?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if(r == DialogResult.Yes)
+                {
+                    checkBox9.Checked = true;
+                }
+            }
         }
 
         private void reportes_Load(object sender, EventArgs e)
@@ -984,24 +991,6 @@ namespace cristales_pva
                 {
                     setNewOption("OP4", "false");
                     constants.op4 = false;
-                }
-            }
-        }
-
-        private void checkBox5_CheckedChanged(object sender, EventArgs e)
-        {
-            if (load == true)
-            {
-                loadReporte(cliente, proyecto, folio, subtotal, iva, total);
-                if (checkBox5.Checked == true)
-                {
-                    setNewOption("OP5", "true");
-                    constants.op5 = true;
-                }
-                else
-                {
-                    setNewOption("OP5", "false");
-                    constants.op5 = false;
                 }
             }
         }

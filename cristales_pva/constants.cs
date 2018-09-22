@@ -1809,7 +1809,7 @@ namespace cristales_pva
                     nombre_proyecto = k.proyecto_abierto.ToString();
                     desc_cotizacion = (float)k.desc_cotizacion;
                     utilidad_cotizacion = (float)k.utilidad_cotizacion;
-                    iva_desglosado = k.desglose_iva != null ? (bool)k.desglose_iva : true;
+                    iva_desglosado = k.desglose_iva != null ? (bool)k.desglose_iva : iva_desglosado;
                 }
             }catch(Exception e)
             {

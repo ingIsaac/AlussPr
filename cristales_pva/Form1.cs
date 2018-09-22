@@ -612,8 +612,7 @@ namespace cristales_pva
             //
             tabControl1.SelectedTab = tabPage15;
             checkBox5.Checked = constants.iva_desglosado;
-            checkBox5.Enabled = constants.permitir_ajuste_iva;
-            setModoLIVA();
+            checkBox5.Enabled = constants.permitir_ajuste_iva;            
             constants.setFolioStart();           
             if (constants.folio_abierto > 0)
             {
@@ -660,6 +659,8 @@ namespace cristales_pva
             comboBox1.Focus();
             //Image List
             setModueTreeImages();
+            //Modalidad LIVA
+            setModoLIVA();
         }
 
         private void setModueTreeImages()
@@ -6887,21 +6888,25 @@ namespace cristales_pva
         //enable IVA
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBox5.Checked == true)
+            if (checkBox5.Checked)
             {
                 this.enable_iva = true;
                 constants.iva = constants.getPropiedadesModel();
                 constants.iva_desglosado = true;
             }
             else
-            {
+            {                
                 this.enable_iva = false;
                 constants.iva = 1;
                 constants.iva_desglosado = false;
             }
+            saveIVAinXML();
+            calcularTotalesCotizacion();           
+        }
+        /////----------------------------------------------------------------------------->
 
-            calcularTotalesCotizacion();
-
+        public void saveIVAinXML()
+        {
             try
             {
                 XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
@@ -6910,7 +6915,7 @@ namespace cristales_pva
 
                 foreach (XElement x in mv)
                 {
-                    x.SetElementValue("IVD", checkBox5.Checked == true ? "true" : "false");                   
+                    x.SetElementValue("IVD", constants.iva_desglosado == true ? "true" : "false");
                 }
                 opciones_xml.Save(constants.opciones_xml);
             }
@@ -6920,7 +6925,6 @@ namespace cristales_pva
                 MessageBox.Show("[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        /////----------------------------------------------------------------------------->
 
         public string[] getTotalAndDescount()
         {
@@ -6974,7 +6978,7 @@ namespace cristales_pva
             }
         }
 
-        public void setModoLIVA()
+        public void setModoLIVA(bool set=false)
         {
             if (constants.m_liva)
             {
@@ -6982,16 +6986,22 @@ namespace cristales_pva
                 {
                     textBox28.Text = "16";
                 }
-                checkBox5.Checked = false;
+                //---------------------------->
+                if (set)
+                {
+                    textBox28.Text = "16";
+                    checkBox5.Checked = false;
+                }
                 //---------------------------->
                 textBox28.Enabled = false;
-            }
-            else
-            {
-                textBox28.Text = "0";
-                checkBox5.Checked = true;
-                textBox28.Enabled = true;
-            }
+            }          
+        }
+
+        public void disableModoLIVA()
+        {
+            textBox28.Text = "0";
+            checkBox5.Checked = true;
+            textBox28.Enabled = true;
         }
 
         public void setTCLabel(float tc)

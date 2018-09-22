@@ -340,13 +340,13 @@ namespace cristales_pva
             if (checkBox8.Checked == true)
             {
                 constants.m_liva = true;
-                ((Form1)Application.OpenForms["form1"]).setModoLIVA();
+                ((Form1)Application.OpenForms["form1"]).setModoLIVA(true);
                 return "true";
             }
             else
             {
                 constants.m_liva = false;
-                ((Form1)Application.OpenForms["form1"]).setModoLIVA();
+                ((Form1)Application.OpenForms["form1"]).disableModoLIVA();
                 return "false";
             }
         }

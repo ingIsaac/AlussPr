@@ -64,9 +64,9 @@
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.checkBox10 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.datos_reporteBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportes_dataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.articulos_reporteBindingSource)).BeginInit();
@@ -307,13 +307,13 @@
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
+            this.checkBox5.Enabled = false;
             this.checkBox5.Location = new System.Drawing.Point(14, 149);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(112, 17);
             this.checkBox5.TabIndex = 17;
             this.checkBox5.Text = "*Ocultar desglose.";
             this.checkBox5.UseVisualStyleBackColor = true;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // checkBox6
             // 
@@ -421,17 +421,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Propiedades";
             // 
-            // checkBox9
-            // 
-            this.checkBox9.AutoSize = true;
-            this.checkBox9.Location = new System.Drawing.Point(14, 241);
-            this.checkBox9.Name = "checkBox9";
-            this.checkBox9.Size = new System.Drawing.Size(143, 17);
-            this.checkBox9.TabIndex = 5;
-            this.checkBox9.Text = "Incluir utilidad en partida.";
-            this.checkBox9.UseVisualStyleBackColor = true;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
-            // 
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
@@ -442,6 +431,17 @@
             this.checkBox10.Text = "N%.";
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox10_CheckedChanged);
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Location = new System.Drawing.Point(14, 241);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(143, 17);
+            this.checkBox9.TabIndex = 5;
+            this.checkBox9.Text = "Incluir utilidad en partida.";
+            this.checkBox9.UseVisualStyleBackColor = true;
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
             // 
             // reportes
             // 
