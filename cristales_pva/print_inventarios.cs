@@ -14,14 +14,16 @@ namespace cristales_pva
     {
         string lista;
         string peps;
+        string periodo;
         DataTable Table;
 
-        public print_inventarios(DataTable table, string lista, string peps="")
+        public print_inventarios(DataTable table, string lista, string peps="", string periodo="")
         {
             InitializeComponent();
             this.Table = table;
             this.lista = lista;
             this.peps = peps;
+            this.periodo = periodo;
             this.Text = constants.org_name.ToUpper() + " - Existencias";
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;           
         }
@@ -52,6 +54,7 @@ namespace cristales_pva
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("lista", lista));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("tienda", constants.org_name));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("periodo", periodo));
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             ReportPageSettings ps = reportViewer1.LocalReport.GetDefaultPageSettings();
             this.reportViewer1.ParentForm.Width = ps.PaperSize.Width;

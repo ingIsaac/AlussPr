@@ -19,7 +19,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>1.82245cm</Top>
+        <Top>2.77495cm</Top>
         <Left>0.34078cm</Left>
         <Height>0.6cm</Height>
         <Width>20cm</Width>
@@ -564,7 +564,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -645,7 +644,7 @@
         </TablixRowHierarchy>
         <RepeatColumnHeaders>true</RepeatColumnHeaders>
         <DataSetName>entradas_t</DataSetName>
-        <Top>3.9485cm</Top>
+        <Top>4.901cm</Top>
         <Left>0.34078cm</Left>
         <Height>1.8cm</Height>
         <Width>20.00001cm</Width>
@@ -673,7 +672,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox36</rd:DefaultName>
-        <Top>2.59884cm</Top>
+        <Top>3.55134cm</Top>
         <Left>0.34078cm</Left>
         <Height>0.6cm</Height>
         <Width>20cm</Width>
@@ -689,7 +688,7 @@
         </Style>
       </Textbox>
       <Line Name="Line1">
-        <Top>3.54307cm</Top>
+        <Top>4.49557cm</Top>
         <Left>0.34078cm</Left>
         <Height>0cm</Height>
         <Width>20cm</Width>
@@ -701,7 +700,7 @@
         </Style>
       </Line>
       <Line Name="Line2">
-        <Top>1.55787cm</Top>
+        <Top>2.51037cm</Top>
         <Left>0.34078cm</Left>
         <Height>0cm</Height>
         <Width>20cm</Width>
@@ -736,6 +735,36 @@
         <Height>0.78521cm</Height>
         <Width>7.68667cm</Width>
         <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox3">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!periodo.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>1.61079cm</Top>
+        <Left>0.34078cm</Left>
+        <Height>0.6cm</Height>
+        <Width>20cm</Width>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1086,6 +1115,11 @@
     </ReportParameter>
     <ReportParameter Name="Image">
       <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="periodo">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

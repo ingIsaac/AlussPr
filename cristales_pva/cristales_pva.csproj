@@ -1053,6 +1053,7 @@
     <None Include="Resources\config_module_x16.png" />
     <None Include="Resources\modulos_icon_x16.png" />
     <None Include="Resources\factory.png" />
+    <None Include="Resources\switch_icon.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

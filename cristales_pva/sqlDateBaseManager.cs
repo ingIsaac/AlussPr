@@ -4870,14 +4870,21 @@ namespace cristales_pva
             }
         }
 
-        public void getSalidasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha)
+        public void getSalidasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha, bool periodo=false)
         {
             DataTable data = new DataTable();
             try
             {
                 string query = string.Empty;
 
-                query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";             
+                if (!periodo)
+                {
+                    query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+                }
+                else
+                {
+                    query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha LIKE '%" + fecha + "'";
+                }
 
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
                 SqlCommandBuilder cb = new SqlCommandBuilder(da);
@@ -4948,14 +4955,21 @@ namespace cristales_pva
             }
         }
 
-        public void getEntradasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha)
+        public void getEntradasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha, bool periodo=false)
         {
             DataTable data = new DataTable();
             try
             {
                 string query = string.Empty;
 
-                query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+                if (!periodo)
+                {
+                    query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+                }
+                else
+                {
+                    query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha LIKE '%" + fecha + "'";
+                }
 
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
                 SqlCommandBuilder cb = new SqlCommandBuilder(da);

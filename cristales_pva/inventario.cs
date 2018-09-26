@@ -24,6 +24,7 @@ namespace cristales_pva
 
         //------>
         sqlDateBaseManager sql = new sqlDateBaseManager();
+        string periodo = string.Empty;
 
         public inventario()
         {
@@ -62,6 +63,82 @@ namespace cristales_pva
 
             //Otros
             datagridviewNE1.DataError += DatagridviewNE1_DataError;
+            setYears();
+        }
+
+        private void setYears()
+        {
+            for (int i = 2017; i <= DateTime.Today.Year; i++)
+            {
+                comboBox11.Items.Add(i);
+                comboBox17.Items.Add(i);
+            }
+        }
+
+        private string getMesInt(string mes)
+        {
+            switch (mes)
+            {
+                case "Enero":
+                    return "01";
+                case "Febrero":
+                    return "02";
+                case "Marzo":
+                    return "03";
+                case "Abril":
+                    return "04";
+                case "Mayo":
+                    return "05";
+                case "Junio":
+                    return "06";
+                case "Julio":
+                    return "07";
+                case "Agosto":
+                    return "08";
+                case "Septiembre":
+                    return "09";
+                case "Octubre":
+                    return "10";
+                case "Noviembre":
+                    return "11";
+                case "Diciembre":
+                    return "12";
+                default:
+                    return "";
+            }
+        }
+
+        private string getMesName(string mes)
+        {
+            switch (mes)
+            {
+                case "1":
+                    return "Enero";
+                case "2":
+                    return "Febrero";
+                case "3":
+                    return "Marzo";
+                case "4":
+                    return "Abril";
+                case "5":
+                    return "Mayo";
+                case "6":
+                    return "Junio";
+                case "7":
+                    return "Julio";
+                case "8":
+                    return "Agosto";
+                case "9":
+                    return "Septiembre";
+                case "10":
+                    return "Octubre";
+                case "11":
+                    return "Noviembre";
+                case "12":
+                    return "Diciembre";
+                default:
+                    return "";
+            }
         }
 
         private void DatagridviewNE1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -358,6 +435,7 @@ namespace cristales_pva
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            this.periodo = string.Empty;
             object[] dat = e.Argument as object[];
             datagridviewNE dt = dat[0] as datagridviewNE;
             bool periodo = (bool)dat[1];
@@ -417,7 +495,16 @@ namespace cristales_pva
                         {
                             if (periodo)
                             {
-                                sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
+                                if(comboBox10.Text != string.Empty && comboBox11.Text != string.Empty)
+                                {
+                                    this.periodo = comboBox10.Text + " - " + comboBox11.Text;
+                                    sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, getMesInt(comboBox10.Text) + "/" + comboBox11.Text, true);
+                                }
+                                else
+                                {
+                                    this.periodo = dateTimePicker1.Value.ToLongDateString();
+                                    sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
+                                }
                             }
                             else if (historial)
                             {
@@ -473,7 +560,16 @@ namespace cristales_pva
                         {
                             if (periodo)
                             {
-                                sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
+                                if(comboBox16.Text != string.Empty && comboBox17.Text != string.Empty)
+                                {
+                                    this.periodo = comboBox16.Text + " - " + comboBox17.Text;
+                                    sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, getMesInt(comboBox16.Text) + "/" + comboBox17.Text, true);
+                                }
+                                else
+                                {
+                                    this.periodo = dateTimePicker4.Value.ToLongDateString();
+                                    sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
+                                }
                             }
                             else if (historial)
                             {
@@ -1034,7 +1130,7 @@ namespace cristales_pva
         {
             if (datagridviewNE2.RowCount > 0)
             {
-                new print_inventarios(datagridviewNE2.DataSource as DataTable, comboBox5.Text, "salidas").ShowDialog(this);
+                new print_inventarios(datagridviewNE2.DataSource as DataTable, comboBox5.Text, "salidas", periodo).ShowDialog(this);
             }
         }
 
@@ -1171,7 +1267,7 @@ namespace cristales_pva
         {
             if (datagridviewNE3.RowCount > 0)
             {
-                new print_inventarios(datagridviewNE3.DataSource as DataTable, comboBox15.Text, "entradas").ShowDialog(this);
+                new print_inventarios(datagridviewNE3.DataSource as DataTable, comboBox15.Text, "entradas", periodo).ShowDialog(this);
             }
         }
 
@@ -1308,11 +1404,15 @@ namespace cristales_pva
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
+            comboBox10.SelectedIndex = -1;
+            comboBox11.SelectedIndex = -1;
             executeLoad(datagridviewNE2, true);
         }
 
         private void dateTimePicker4_ValueChanged(object sender, EventArgs e)
         {
+            comboBox16.SelectedIndex = -1;
+            comboBox17.SelectedIndex = -1;
             executeLoad(datagridviewNE3, true);
         }
 
@@ -1400,6 +1500,38 @@ namespace cristales_pva
         private void historalDeEntradasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             executeLoad(datagridviewNE3, false, true, datagridviewNE3.CurrentRow.Cells[1].Value.ToString());
+        }
+
+        private void comboBox10_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox10.Text != string.Empty && comboBox11.Text != string.Empty)
+            {
+                executeLoad(datagridviewNE2, true);
+            }
+        }
+
+        private void comboBox11_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox10.Text != string.Empty && comboBox11.Text != string.Empty)
+            {
+                executeLoad(datagridviewNE2, true);
+            }
+        }
+
+        private void comboBox16_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox16.Text != string.Empty && comboBox17.Text != string.Empty)
+            {
+                executeLoad(datagridviewNE3, true);
+            }
+        }
+
+        private void comboBox17_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox16.Text != string.Empty && comboBox17.Text != string.Empty)
+            {
+                executeLoad(datagridviewNE3, true);
+            }
         }
     }
 }

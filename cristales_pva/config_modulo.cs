@@ -382,11 +382,11 @@ namespace cristales_pva
             }
         }
 
-        private void startSession(int module_id, int id_cotizacion)
+        private void startSession(int module_id, int id_cotizacion, bool load=true)
         {
             loadParameters(module_id);
             loadFactory(id_cotizacion);         
-            loadOnEdit(id_cotizacion);      
+            loadOnEdit(id_cotizacion, load);
         }
 
         private void resetTextBox()
@@ -401,8 +401,8 @@ namespace cristales_pva
             label12.Text = "0.00";
         }
 
-        public void resetSession(int module_id, int id_cotizacion)
-        {           
+        public void resetSession(int module_id, int id_cotizacion, bool load=true)
+        {          
             tableLayoutPanel1.Visible = false;
             resetTextBox();
             dataGridView1.Rows.Clear();
@@ -453,9 +453,30 @@ namespace cristales_pva
             checkBox13.Checked = true;
             checkBox14.Checked = true;
             checkBox9.Checked = false;
-            startSession(module_id, id_cotizacion);
-            tableLayoutPanel1.Visible = true;           
+            setNewClaveModulo(module_id);
+            startSession(module_id, id_cotizacion, load);
+            tableLayoutPanel1.Visible = true;
         }
+
+        //Refrescar clave al intercambiar modulo
+        private void setNewClaveModulo(int modulo_id)
+        {
+            string[] c = label6.Text.Split('-');
+            listas_entities_pva listas = new listas_entities_pva();
+           
+            var modulos = (from x in listas.modulos where x.id == modulo_id select x).SingleOrDefault();
+            if(modulos != null)
+            {
+                if(c.Length == 2)
+                {
+                    label6.Text = modulos.clave + "-" + c[1];
+                }
+                else
+                {
+                    label6.Text = modulos.clave;
+                }
+            }          
+        }      
 
         //Cerrar edit express si esta cierra
         private void Config_modulo_FormClosing(object sender, FormClosingEventArgs e)
@@ -474,8 +495,8 @@ namespace cristales_pva
         //Recargar modulo original
         private void reloadModulo(int module_id)
         {
-            textBox1.Text = "1000";
-            textBox2.Text = "1000";
+            textBox1.Text = "0";
+            textBox2.Text = "0";
             dataGridView1.Rows.Clear();
             dataGridView2.Rows.Clear();
             dataGridView3.Rows.Clear();
@@ -511,10 +532,12 @@ namespace cristales_pva
 
             try
             {
+                tableLayoutPanel1.Enabled = false;
                 Panel p = new Panel();
-                groupBox4.Controls.Add(p);
+                splitContainer1.Panel2.Controls.Add(p);
                 p.Show();
                 p.Dock = DockStyle.Fill;
+                p.BackColor = Color.White;
                 p.BringToFront();
 
                 panel.Dock = DockStyle.Fill;
@@ -526,16 +549,18 @@ namespace cristales_pva
 
                 Bitmap bm = new Bitmap(panel.Width, panel.Height);
                 panel.DrawToBitmap(bm, new Rectangle(0, 0, panel.Width, panel.Height));
-                p.Dispose();
+                panel.Dock = DockStyle.None;
 
                 //Reset --------------------------------------------------->
-                panel.Dock = DockStyle.None;
                 foreach (Control x in panel.Controls)
                 {
                     x.Width = (panel.Width - getMarcoWidth()) / columns;
                     x.Height = (panel.Height - getMarcoHeight()) / rows;
                 }
                 //--------------------------------------------------------->
+
+                p.Dispose();
+                tableLayoutPanel1.Enabled = true;
 
                 _img = new Bitmap(bm, 120, 105);
                 bm = null;
@@ -705,7 +730,7 @@ namespace cristales_pva
             }
         }
 
-        private void loadOnEdit(int id_cotizacion)
+        private void loadOnEdit(int id_cotizacion, bool load=true)
         {
             this.id_cotizacion = id_cotizacion;
             bool motor = false;
@@ -725,7 +750,12 @@ namespace cristales_pva
                     textBox6.Text = modulo.flete.ToString();
                     textBox7.Text = modulo.utilidad.ToString();
                     textBox8.Text = modulo.ubicacion;
-                    label6.Text = modulo.clave;
+                    //Only if load new one--------------------------------->
+                    if (load)
+                    {
+                        label6.Text = modulo.clave;
+                    }
+                    //----------------------------------------------------->
                     if (modulo.folio > 0)
                     {
                         label38.Text = "Folio: " + modulo.folio.ToString();
@@ -876,7 +906,8 @@ namespace cristales_pva
                         textBox2.Text = dimensions[1];
                     }
 
-                    if (dataGridView2.RowCount == claves_cristales.Count)
+                    //Only if load new one--------------------------------->
+                    if (dataGridView2.RowCount == claves_cristales.Count && load)
                     {
                         for (int i = 0; i < claves_cristales.Count; i++)
                         {
@@ -906,7 +937,8 @@ namespace cristales_pva
 
                     clave = "";
 
-                    if (dataGridView4.RowCount == claves_otros.Count)
+                    //Only if load new one--------------------------------->
+                    if (dataGridView4.RowCount == claves_otros.Count && load)
                     {
                         for (int i = 0; i < claves_otros.Count; i++)
                         {
@@ -952,7 +984,8 @@ namespace cristales_pva
                         checkBox17.Checked = false;
                     }
 
-                    if (dataGridView3.RowCount == claves_herrajes.Count)
+                    //Only if load new one--------------------------------->
+                    if (dataGridView3.RowCount == claves_herrajes.Count && load)
                     {
                         for (int i = 0; i < claves_herrajes.Count; i++)
                         {
@@ -976,7 +1009,8 @@ namespace cristales_pva
 
                     clave = "";
 
-                    if (dataGridView1.RowCount == claves_perfiles.Count)
+                    //Only if load new one--------------------------------->
+                    if (dataGridView1.RowCount == claves_perfiles.Count && load)
                     {
                         for (int i = 0; i < claves_perfiles.Count; i++)
                         {
@@ -1948,6 +1982,7 @@ namespace cristales_pva
                 label6.Text = id_cotizacion > -1 ? label6.Text : modulo.clave;
                 label7.Text = modulo.articulo;
                 label8.Text = modulo.linea;
+                getLineaCompleta(modulo.linea);
                 label9.Text = modulo.secciones.ToString();
                 loadDiseño((int)modulo.id_diseño, listas);
                 cs = (bool)modulo.cs;                
@@ -3676,15 +3711,8 @@ namespace cristales_pva
 
         //desperdicio
         private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-            if (dataGridView1.RowCount > 0 && comboBox1.Text != "")
-            {
-                calcularCostoModulo();
-            }
-            else
-            {
-                MessageBox.Show("[Error] necesitas añadir un acabado al aluminio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        {            
+            calcularCostoModulo();
         }
 
         //flete
@@ -5807,7 +5835,7 @@ namespace cristales_pva
             {
                 if (m_id > 0)
                 {
-                    resetSession(m_id, id_cotizacion);
+                    resetSession(m_id, id_cotizacion, false);
                 }
                 else
                 {
@@ -5819,7 +5847,7 @@ namespace cristales_pva
             {
                 if (m_id > 0)
                 {
-                    resetSession(m_id, id_cotizacion);
+                    resetSession(m_id, id_cotizacion, false);
                 }
                 else
                 {
@@ -6096,6 +6124,39 @@ namespace cristales_pva
             else
             {
                 label43.Text = string.Empty;
+            }
+        }
+
+        //Tipos de Apertura
+        private void getLineaCompleta(string linea)
+        {
+            listas_entities_pva listas = new listas_entities_pva();
+
+            var modulos = (from x in listas.modulos where x.linea == linea orderby x.articulo ascending select x.articulo);
+
+            if (modulos != null)
+            {
+                comboBox4.Items.Clear();
+                foreach (string x in modulos)
+                {
+                    comboBox4.Items.Add(x);
+                }
+            }
+        }
+
+        //Cambiar Tipo de Apertura de la misma linea...
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox4.SelectedIndex > -1)
+            {
+                listas_entities_pva listas = new listas_entities_pva();
+                string m = comboBox4.Text;
+                var modulo = (from x in listas.modulos where x.articulo == m select x).SingleOrDefault();
+                if (modulo != null)
+                {
+                    int _id = modulo.id;
+                    resetSession(_id, id_cotizacion, false);
+                }
             }
         }
     }
