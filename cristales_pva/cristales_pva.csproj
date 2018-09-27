@@ -146,6 +146,12 @@
     <Compile Include="analiticas.Designer.cs">
       <DependentUpon>analiticas.cs</DependentUpon>
     </Compile>
+    <Compile Include="anuncios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="anuncios.Designer.cs">
+      <DependentUpon>anuncios.cs</DependentUpon>
+    </Compile>
     <Compile Include="articulos_cotizacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -623,6 +629,9 @@
     <EmbeddedResource Include="admin_propiedades.resx">
       <DependentUpon>admin_propiedades.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="anuncios.resx">
+      <DependentUpon>anuncios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="fabrica.resx">
       <DependentUpon>fabrica.cs</DependentUpon>
     </EmbeddedResource>
@@ -1054,6 +1063,7 @@
     <None Include="Resources\modulos_icon_x16.png" />
     <None Include="Resources\factory.png" />
     <None Include="Resources\switch_icon.png" />
+    <None Include="Resources\anuncios_logo.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

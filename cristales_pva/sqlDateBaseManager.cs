@@ -5135,6 +5135,35 @@ namespace cristales_pva
             return dt;
         }
 
+        public List<string> getAnuncios()
+        {
+            List<string> dt = new List<string>();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT TOP 5 texto, fecha FROM anuncios ORDER BY id DESC";
+
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (r.GetValue(0) != null && r.GetValue(1) != null)
+                    {
+                        dt.Add("[" + r.GetValue(1).ToString() + "] " + r.GetValue(0).ToString() + "\n\n");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            return dt;
+        }
+
         public void getHistorialSalidas(int limit, DataGridView dataview, string lista, int tienda, string clave)
         {
             DataTable data = new DataTable();

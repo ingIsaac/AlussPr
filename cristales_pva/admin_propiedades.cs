@@ -117,6 +117,15 @@ namespace cristales_pva
             {
                 checkBox10.Checked = false;
             }
+            //anuncios
+            if (constants.anuncios == true)
+            {
+                checkBox11.Checked = true;
+            }
+            else
+            {
+                checkBox11.Checked = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -165,6 +174,7 @@ namespace cristales_pva
                                 x.SetElementValue("MLIVA", getMLIVA());
                                 x.SetElementValue("PAC", getPAC());
                                 x.SetElementValue("EATCC", getATCC());
+                                x.SetElementValue("ANC", getAnuncios());
                             }
                             opciones_xml.Save(constants.opciones_xml);
                         }
@@ -376,6 +386,20 @@ namespace cristales_pva
             else
             {
                 constants.enable_c_tc = false;
+                return "false";
+            }
+        }
+
+        private string getAnuncios()
+        {
+            if (checkBox11.Checked == true)
+            {
+                constants.anuncios = true;
+                return "true";
+            }
+            else
+            {
+                constants.anuncios = false;
                 return "false";
             }
         }

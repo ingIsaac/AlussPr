@@ -44,11 +44,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBox11);
             this.groupBox1.Controls.Add(this.checkBox10);
             this.groupBox1.Controls.Add(this.checkBox9);
             this.groupBox1.Controls.Add(this.checkBox8);
@@ -65,7 +67,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(15, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(289, 334);
+            this.groupBox1.Size = new System.Drawing.Size(289, 347);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Actualización de datos";
@@ -180,7 +182,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(56, 299);
+            this.textBox4.Location = new System.Drawing.Point(56, 317);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(227, 20);
             this.textBox4.TabIndex = 8;
@@ -188,7 +190,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 298);
+            this.label4.Location = new System.Drawing.Point(6, 316);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 6;
@@ -196,7 +198,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(168, 273);
+            this.textBox1.Location = new System.Drawing.Point(168, 291);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(115, 20);
             this.textBox1.TabIndex = 7;
@@ -204,7 +206,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 275);
+            this.label2.Location = new System.Drawing.Point(6, 293);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 13);
             this.label2.TabIndex = 0;
@@ -213,7 +215,7 @@
             // button1
             // 
             this.button1.Image = global::cristales_pva.Properties.Resources.save_16;
-            this.button1.Location = new System.Drawing.Point(195, 353);
+            this.button1.Location = new System.Drawing.Point(195, 366);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 28);
             this.button1.TabIndex = 9;
@@ -223,11 +225,21 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Location = new System.Drawing.Point(8, 257);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(120, 17);
+            this.checkBox11.TabIndex = 13;
+            this.checkBox11.Text = "Desplegar anuncios";
+            this.checkBox11.UseVisualStyleBackColor = true;
+            // 
             // admin_propiedades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 389);
+            this.ClientSize = new System.Drawing.Size(319, 400);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -263,5 +275,6 @@
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.CheckBox checkBox11;
     }
 }

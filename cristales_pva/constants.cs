@@ -87,6 +87,7 @@ namespace cristales_pva
         public static float fsconfig = 11;
         public static float costo_aluminio_kg = 0;
         public static bool enable_costo_alum_kg = true;
+        public static bool anuncios = true;
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;

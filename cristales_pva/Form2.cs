@@ -427,6 +427,7 @@ namespace cristales_pva
                 var EAKG = (from x in opciones_xml.Descendants("Opciones") select x.Element("EAKG")).SingleOrDefault();
                 var FACTORY_ALU = (from x in opciones_xml.Descendants("Opciones") select x.Element("FACTORY_ALU")).SingleOrDefault();
                 var FACTORY_CRI = (from x in opciones_xml.Descendants("Opciones") select x.Element("FACTORY_CRI")).SingleOrDefault();
+                var ANUNCIOS = (from x in opciones_xml.Descendants("Opciones") select x.Element("ANC")).SingleOrDefault();
 
                 var op1 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP1")).SingleOrDefault();
                 var op2 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP2")).SingleOrDefault();
@@ -623,6 +624,18 @@ namespace cristales_pva
                     if (FACTORY_CRI.Value.ToString() != string.Empty)
                     {
                         constants.factory_cristal = FACTORY_CRI.Value.ToString();
+                    }
+                }
+
+                if (ANUNCIOS != null)
+                {
+                    if (ANUNCIOS.Value == "true")
+                    {
+                        constants.anuncios = true;
+                    }
+                    else
+                    {
+                        constants.anuncios = false;
                     }
                 }
 

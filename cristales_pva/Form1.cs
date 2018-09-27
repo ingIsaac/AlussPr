@@ -661,6 +661,11 @@ namespace cristales_pva
             setModueTreeImages();
             //Modalidad LIVA
             setModoLIVA();
+            //Anuncios
+            if (!constants.local && constants.anuncios)
+            {
+                new anuncios().ShowDialog(this);
+            }
         }
 
         private void setModueTreeImages()
@@ -6995,6 +7000,11 @@ namespace cristales_pva
                 //---------------------------->
                 textBox28.Enabled = false;
             }          
+        }
+
+        private void anunciosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new anuncios().ShowDialog(this);
         }
 
         public void disableModoLIVA()
