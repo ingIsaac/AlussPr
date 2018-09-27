@@ -14,13 +14,18 @@ namespace cristales_pva
         public anuncios()
         {
             InitializeComponent();
-            backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+            this.KeyDown += Anuncios_KeyDown;
+            richTextBox1.KeyDown += RichTextBox1_KeyDown;
         }
 
-        private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void RichTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            button1.Select();
-            button1.Focus();
+            this.Close();
+        }
+
+        private void Anuncios_KeyDown(object sender, KeyEventArgs e)
+        {
+            this.Close();            
         }
 
         private void anuncios_Load(object sender, EventArgs e)
@@ -53,11 +58,6 @@ namespace cristales_pva
             {
                 this.Close();
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
