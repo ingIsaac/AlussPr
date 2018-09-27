@@ -664,7 +664,9 @@ namespace cristales_pva
             //Anuncios
             if (!constants.local && constants.anuncios)
             {
-                new anuncios().ShowDialog(this);
+                anuncios anuncios = new anuncios();
+                anuncios.ShowDialog(this);
+                anuncios.Select();
             }
         }
 
@@ -7004,7 +7006,9 @@ namespace cristales_pva
 
         private void anunciosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new anuncios().ShowDialog(this);
+            anuncios anuncios = new anuncios();
+            anuncios.ShowDialog(this);
+            anuncios.Select();
         }
 
         public void disableModoLIVA()
