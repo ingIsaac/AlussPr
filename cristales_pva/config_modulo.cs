@@ -421,6 +421,7 @@ namespace cristales_pva
             label29.Text = "...";
             label30.Text = "...";
             label25.Text = "";
+            label43.Text = "";
             panel.Controls.Clear();
             panel.BackColor = Color.White;
             tableLayoutPanel1.Controls.Clear();
@@ -430,9 +431,9 @@ namespace cristales_pva
             claves_cristales.Clear();
             claves_otros.Clear();
             claves_herrajes.Clear();
-            claves_perfiles.Clear();
+            claves_perfiles.Clear();           
             new_items.Clear();
-            new_costos.Clear();
+            new_costos.Clear();            
             marco_width = 0;
             marco_height = 0;
             c = 1;
@@ -766,6 +767,7 @@ namespace cristales_pva
                     int c = 0;
                     string[] v;
 
+                    //Carga las dimensiones del modulo guardado
                     foreach (char x in modulo.dimensiones)
                     {
                         if (x == ',')
@@ -776,6 +778,7 @@ namespace cristales_pva
                         }
                         buffer = buffer + x.ToString();
                     }
+                    //
 
                     if (modulo.claves_cristales.Length > 0)
                     {
@@ -889,15 +892,18 @@ namespace cristales_pva
                     {
                         for (int i = 0; i < dimensions.Count; i++)
                         {
-                            if (i % 2 == 0)
+                            if (c <= (dataGridView5.RowCount - 1))
                             {
-                                dataGridView5.Rows[c].Cells[2].Value = dimensions[i];
-                            }
-                            else
-                            {
-                                dataGridView5.Rows[c].Cells[3].Value = dimensions[i];
-                                c++;
-                            }
+                                if (i % 2 == 0)
+                                {
+                                    dataGridView5.Rows[c].Cells[2].Value = dimensions[i];
+                                }
+                                else
+                                {
+                                    dataGridView5.Rows[c].Cells[3].Value = dimensions[i];
+                                    c++;
+                                }
+                            }                       
                         }
                     }
                     else if (dimensions.Count == 2)
@@ -5830,29 +5836,34 @@ namespace cristales_pva
         //incluir mosquiteros
         private void CheckBox19_Click(object sender, EventArgs e)
         {
-            int m_id = getModuloMosquiteros(label7.Text, label7.Text.Contains("S/M") == true ? "C/M" : label7.Text.Contains("C/M") == true ? "S/M" : "");
-            if (checkBox19.Checked)
+            DialogResult r = MessageBox.Show("Se restablecerán los componentes predeterminados a este módulo. ¿Desea continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (r == DialogResult.Yes)
             {
-                if (m_id > 0)
+                int m_id = getModuloMosquiteros(label7.Text, label7.Text.Contains("S/M") == true ? "C/M" : label7.Text.Contains("C/M") == true ? "S/M" : "");
+                if (checkBox19.Checked)
                 {
-                    resetSession(m_id, id_cotizacion, false);
+                    if (m_id > 0)
+                    {
+                        resetSession(m_id, id_cotizacion, false);
+                    }
+                    else
+                    {
+                        checkBox19.Checked = false;
+                        MessageBox.Show("[Error] no existe dicho diseño de apertura con mosquitero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    checkBox19.Checked = false;
-                    MessageBox.Show("[Error] no existe dicho diseño de apertura con mosquitero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                if (m_id > 0)
-                {
-                    resetSession(m_id, id_cotizacion, false);
-                }
-                else
-                {
-                    checkBox19.Checked = false;
-                    MessageBox.Show("[Error] no existe dicho diseño de apertura sin mosquitero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (m_id > 0)
+                    {
+                        resetSession(m_id, id_cotizacion, false);
+                    }
+                    else
+                    {
+                        checkBox19.Checked = false;
+                        MessageBox.Show("[Error] no existe dicho diseño de apertura sin mosquitero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -6149,13 +6160,18 @@ namespace cristales_pva
         {
             if (comboBox4.SelectedIndex > -1)
             {
-                listas_entities_pva listas = new listas_entities_pva();
-                string m = comboBox4.Text;
-                var modulo = (from x in listas.modulos where x.articulo == m select x).SingleOrDefault();
-                if (modulo != null)
+                DialogResult r = MessageBox.Show("Se restablecerán los componentes predeterminados a este módulo. ¿Desea continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (r == DialogResult.Yes)
                 {
-                    int _id = modulo.id;
-                    resetSession(_id, id_cotizacion, false);
+                    listas_entities_pva listas = new listas_entities_pva();
+                    string m = comboBox4.Text;
+                    var modulo = (from x in listas.modulos where x.articulo == m select x).SingleOrDefault();
+                    if (modulo != null)
+                    {
+                        int _id = modulo.id;
+                        resetSession(_id, id_cotizacion, false);
+                    }
                 }
             }
         }

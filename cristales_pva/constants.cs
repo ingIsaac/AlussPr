@@ -5147,5 +5147,19 @@ namespace cristales_pva
 
             return ips[0];                    
         }
+
+        public static void setTiendas(ComboBox box)
+        {
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            List<string> tiendas = sql.getTiendas();
+            if (tiendas.Count > 0)
+            {
+                box.Items.Clear();
+                foreach (string x in tiendas)
+                {
+                    box.Items.Add(x);
+                }
+            }
+        }
     }
 }

@@ -394,6 +394,48 @@ namespace cristales_pva
         }
         //
 
+        public void abrirCotizacion()
+        {
+            label3.Text = "Cargando...";
+            pictureBox1.Visible = true;
+            label3.Visible = true;
+            datagridviewNE1.Enabled = false;
+            constants.sub_folio = 1;
+            ((Form1)Application.OpenForms["form1"]).resetEdit();
+            ((Form1)Application.OpenForms["form1"]).setSubFolioLabel();
+            constants.folio_abierto = (int)datagridviewNE1.CurrentRow.Cells[1].Value;
+            constants.nombre_cotizacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
+            constants.nombre_proyecto = datagridviewNE1.CurrentRow.Cells[5].Value.ToString();
+            constants.fecha_cotizacion = datagridviewNE1.CurrentRow.Cells[3].Value.ToString();
+            constants.autor_cotizacion = datagridviewNE1.CurrentRow.Cells[4].Value.ToString();
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
+            constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
+            constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
+            constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
+            //cerrar ventanas
+            if (Application.OpenForms["registro_presupuesto"] != null)
+            {
+                Application.OpenForms["registro_presupuesto"].Close();
+            }
+            if (Application.OpenForms["articulos_cotizacion"] != null)
+            {
+                Application.OpenForms["articulos_cotizacion"].Close();
+            }
+            if (Application.OpenForms["config_modulo"] != null)
+            {
+                Application.OpenForms["config_modulo"].Close();
+            }
+            //
+            if (!backgroundWorker3.IsBusy)
+            {
+                //Disable Form 1
+                Application.OpenForms["form1"].Enabled = false;
+                //
+                backgroundWorker3.RunWorkerAsync();
+            }
+        }
+
         //ABRIR COTIZACION ---------------------------------------------------------------------------------------------------------------------->
         private void verToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -405,41 +447,11 @@ namespace cristales_pva
 
                     if(r == DialogResult.Yes)
                     {
-                        new guardar_cotizacion().ShowDialog();
+                        new guardar_cotizacion(true).ShowDialog();
                     }
                     else if(r == DialogResult.No)
                     {
-                        label3.Text = "Cargando...";
-                        pictureBox1.Visible = true;
-                        label3.Visible = true;
-                        datagridviewNE1.Enabled = false;
-                        constants.sub_folio = 1;
-                        ((Form1)Application.OpenForms["form1"]).setSubFolioLabel();
-                        constants.folio_abierto = (int)datagridviewNE1.CurrentRow.Cells[1].Value;
-                        constants.nombre_cotizacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
-                        constants.nombre_proyecto = datagridviewNE1.CurrentRow.Cells[5].Value.ToString();
-                        constants.fecha_cotizacion = datagridviewNE1.CurrentRow.Cells[3].Value.ToString();
-                        constants.autor_cotizacion = datagridviewNE1.CurrentRow.Cells[4].Value.ToString();
-                        sqlDateBaseManager sql = new sqlDateBaseManager();
-                        constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
-                        constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
-                        constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
-                        constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
-                        //cerrar ventanas
-                        if (Application.OpenForms["registro_presupuesto"] != null)
-                        {
-                            Application.OpenForms["registro_presupuesto"].Close();
-                        }
-                        if (Application.OpenForms["articulos_cotizacion"] != null)
-                        {
-                            Application.OpenForms["articulos_cotizacion"].Close();
-                        }
-                        if (Application.OpenForms["config_modulo"] != null)
-                        {
-                            Application.OpenForms["config_modulo"].Close();
-                        }
-                        //
-                        backgroundWorker3.RunWorkerAsync();
+                        abrirCotizacion();
                     }
                     else if(r == DialogResult.Cancel)
                     {
@@ -448,37 +460,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    label3.Text = "Cargando...";
-                    pictureBox1.Visible = true;
-                    label3.Visible = true;
-                    datagridviewNE1.Enabled = false;
-                    constants.sub_folio = 1;
-                    ((Form1)Application.OpenForms["form1"]).setSubFolioLabel();
-                    constants.folio_abierto = (int)datagridviewNE1.CurrentRow.Cells[1].Value;
-                    constants.nombre_cotizacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
-                    constants.nombre_proyecto = datagridviewNE1.CurrentRow.Cells[5].Value.ToString();
-                    constants.fecha_cotizacion = datagridviewNE1.CurrentRow.Cells[3].Value.ToString();
-                    constants.autor_cotizacion = datagridviewNE1.CurrentRow.Cells[4].Value.ToString();
-                    sqlDateBaseManager sql = new sqlDateBaseManager();
-                    constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
-                    constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
-                    constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
-                    constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
-                    //cerrar ventanas
-                    if (Application.OpenForms["registro_presupuesto"] != null)
-                    {
-                        Application.OpenForms["registro_presupuesto"].Close();
-                    }
-                    if (Application.OpenForms["articulos_cotizacion"] != null)
-                    {
-                        Application.OpenForms["articulos_cotizacion"].Close();
-                    }
-                    if (Application.OpenForms["config_modulo"] != null)
-                    {
-                        Application.OpenForms["config_modulo"].Close();
-                    }
-                    //
-                    backgroundWorker3.RunWorkerAsync();
+                    abrirCotizacion();
                 }
             }
         }
@@ -551,8 +533,11 @@ namespace cristales_pva
                 pictureBox1.Visible = false;
                 label3.Visible = false;
                 datagridviewNE1.Enabled = true;
+                //Enable Form 1
+                Application.OpenForms["form1"].Enabled = true;
+                //
                 MessageBox.Show(this, "[Error] no se pudo abrir esta cotización, intenta de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }           
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -665,7 +650,10 @@ namespace cristales_pva
                 }
                 Application.OpenForms["articulos_cotizacion"].Select();
             }
-            Close();                       
+            Close();
+            //Enable Form 1
+            Application.OpenForms["form1"].Enabled = true;
+            //                      
         }
 
         private void gotoLastPage()

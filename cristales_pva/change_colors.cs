@@ -387,7 +387,10 @@ namespace cristales_pva
 
                     if (checkBox4.Checked)
                     {
-                        changeLine(comboBox5.Text, modulos_c);
+                        if (comboBox5.Text != string.Empty)
+                        {
+                            changeLine(comboBox5.Text, modulos_c);
+                        }
                     }
                 }         
             }
@@ -423,23 +426,26 @@ namespace cristales_pva
 
                     if (checkBox4.Checked)
                     {
-                        u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
-
-                        foreach(var y in u_m)
+                        if (comboBox5.Text != string.Empty)
                         {
-                            y.linea = comboBox5.Text;
+                            u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
+
+                            foreach (var y in u_m)
+                            {
+                                y.linea = comboBox5.Text;
+                            }
+
+                            changeLine(comboBox5.Text, modulos_c);
+
+                            linea = comboBox5.Text;
+                            no_u = from x in cotizacion.modulos_cotizaciones where x.modulo_id > 0 && x.merge_id < 0 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
+
+                            u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
+                            m_m = from x in cotizacion.modulos_cotizaciones where u_m.Any(v => v.id == x.merge_id) select x;
+
+                            modulos_c = no_u.Concat(m_m);
+                            modulos_count = modulos_c.Count();
                         }
-
-                        changeLine(comboBox5.Text, modulos_c);
-
-                        linea = comboBox5.Text;
-                        no_u = from x in cotizacion.modulos_cotizaciones where x.modulo_id > 0 && x.merge_id < 0 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
-
-                        u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
-                        m_m = from x in cotizacion.modulos_cotizaciones where u_m.Any(v => v.id == x.merge_id) select x;
-
-                        modulos_c = no_u.Concat(m_m);
-                        modulos_count = modulos_c.Count();
                     }
                 }
                 else if(filter == "Ubicación")
@@ -1651,8 +1657,12 @@ namespace cristales_pva
 
         private void changeLine(string new_line, IQueryable<modulos_cotizaciones> w)
         {
-            listas_entities_pva listas = new listas_entities_pva();            
-           
+            listas_entities_pva listas = new listas_entities_pva();
+            string clave = string.Empty;
+            string[] p_dim = null;
+            string[,] dimensiones = null;
+            int c = 0;
+            int y = 0;
             if (w != null)
             {
                 foreach (var m in w)
@@ -1668,6 +1678,24 @@ namespace cristales_pva
                         m.articulo = modulos.articulo;
                         m.modulo_id = modulos.id;
                         m.news = "";
+                        p_dim = m.dimensiones.Split(',');
+                        
+                        if (p_dim.Length > 0)
+                        {
+                            dimensiones = new string[(p_dim.Length / 2), 2];
+                            y = 0;
+                            c = 0;
+                            for (int i = 0; i < p_dim.Length - 1; i++)
+                            {
+                                dimensiones[y, c] = p_dim[i];
+                                c++;
+                                if (c == 2)
+                                {
+                                    c = 0;
+                                    y++;
+                                }
+                            }
+                        }
 
                         string[] k = m.clave.Split('-');
                         if(k.Length > 1)
@@ -1690,7 +1718,48 @@ namespace cristales_pva
                                 string[] p = v.Split(new char[] { ':', '-', '$' }, StringSplitOptions.RemoveEmptyEntries);
                                 if (p.Length > 1)
                                 {
-                                    buffer = buffer + p[0] + "-" + p[1] + "-" + ",";
+                                    clave = p[0];
+                                    var perfil = (from x in listas.perfiles where x.clave == clave select x).SingleOrDefault();
+                                    if(perfil != null)
+                                    {
+                                        if(perfil.linea == "celosia" || perfil.linea == "duelas" || perfil.linea == "lama")
+                                        {
+                                            if(p[2] == "largo")
+                                            {
+                                                if(constants.stringToInt(p[3]) > 0)
+                                                {
+                                                    p[1] = Math.Floor((float)(constants.stringToFloat(dimensiones[constants.stringToInt(p[3]), 1]) / perfil.ancho_perfil)).ToString();
+                                                    buffer = buffer + p[0] + "-" + p[1] + "-" + ",";
+                                                }
+                                                else
+                                                {
+                                                    p[1] = Math.Floor((float)(m.alto / perfil.ancho_perfil)).ToString();
+                                                    buffer = buffer + p[0] + "-" + p[1] + "-" + ",";
+                                                }
+                                            }
+                                            else if(p[2] == "alto")
+                                            {
+                                                if (constants.stringToInt(p[3]) > 0)
+                                                {
+                                                    p[1] = Math.Floor((float)(constants.stringToFloat(dimensiones[constants.stringToInt(p[3]), 0]) / perfil.ancho_perfil)).ToString();
+                                                    buffer = buffer + p[0] + "-" + p[1] + "-" + ",";
+                                                }
+                                                else
+                                                {
+                                                    p[1] = Math.Floor((float)(m.largo / perfil.ancho_perfil)).ToString();
+                                                    buffer = buffer + p[0] + "-" + p[1] + "-" + ",";
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            buffer = buffer + p[0] + "-" + p[1] + "-" + ",";
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("[Error] perfil no identificado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                 }
                             }
                         }
@@ -2009,6 +2078,19 @@ namespace cristales_pva
                             }
                         }
                     }                
+                }
+            }
+        }
+
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox5.SelectedIndex >= 0)
+            {
+                DialogResult r = MessageBox.Show(this, "Se eliminarán los costos adicionales y nuevos materiales incluidos en " + (id > 0 ? "esta partida" : "estas partidas") + ". ¿Desea continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (r == DialogResult.No)
+                {
+                    comboBox5.SelectedIndex = -1;
                 }
             }
         }

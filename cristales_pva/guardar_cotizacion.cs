@@ -12,8 +12,9 @@ namespace cristales_pva
     public partial class guardar_cotizacion : Form
     {
         public bool new_cotizacion = false;
+        bool abrir_otra = false;
 
-        public guardar_cotizacion()
+        public guardar_cotizacion(bool abrir_otra=false)
         {
             InitializeComponent();
             backgroundWorker1.WorkerReportsProgress = true;
@@ -21,6 +22,7 @@ namespace cristales_pva
             backgroundWorker1.ProgressChanged += BackgroundWorker1_ProgressChanged;
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
             this.FormClosing += Guardar_cotizacion_FormClosing;
+            this.abrir_otra = abrir_otra;
         }
 
         private void Guardar_cotizacion_FormClosing(object sender, FormClosingEventArgs e)
@@ -105,9 +107,20 @@ namespace cristales_pva
                 if (constants.cotizacion_error == false)
                 {
                     MessageBox.Show(this, "Se ha guardado está cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    constants.save_onEdit.Clear();
-                    pictureBox1.Visible = true;
-                    backgroundWorker2.RunWorkerAsync();
+                    if (!abrir_otra)
+                    {
+                        constants.save_onEdit.Clear();
+                        pictureBox1.Visible = true;
+                        backgroundWorker2.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        this.Close();
+                        if(Application.OpenForms["buscar_cotizacion"] != null)
+                        {
+                            ((buscar_cotizacion)Application.OpenForms["buscar_cotizacion"]).abrirCotizacion();
+                        }
+                    }
                 }
             }
             label7.Text = "";

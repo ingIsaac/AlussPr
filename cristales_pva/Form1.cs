@@ -4757,6 +4757,11 @@ namespace cristales_pva
 
         private void button12_Click(object sender, EventArgs e)
         {
+            resetEdit();
+        }
+
+        public void resetEdit()
+        {
             constants.id_articulo_cotizacion = -1;
             setEditImage(false, false);
         }
@@ -5212,7 +5217,7 @@ namespace cristales_pva
                 tabPage3.Refresh();
                 tabPage4.Refresh();
                 tabPage5.Refresh();               
-            }
+            }                
         }
         //
 
@@ -6128,7 +6133,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show("[Error] el módulo con el ID " + opened_module + " ya no existe.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("[Error] el módulo con el ID " + opened_module + " ya no esta disponible.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);                   
                 }
             }
         }
@@ -7009,6 +7014,11 @@ namespace cristales_pva
             anuncios anuncios = new anuncios();
             anuncios.ShowDialog(this);
             anuncios.Select();
+        }
+
+        private void cambiarTiendaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new cambiar_tienda().ShowDialog(this);
         }
 
         public void disableModoLIVA()
