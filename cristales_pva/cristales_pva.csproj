@@ -227,6 +227,12 @@
     <Compile Include="config_items.Designer.cs">
       <DependentUpon>config_items.cs</DependentUpon>
     </Compile>
+    <Compile Include="config_mail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="config_mail.Designer.cs">
+      <DependentUpon>config_mail.cs</DependentUpon>
+    </Compile>
     <Compile Include="config_modulo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -640,6 +646,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="cambiar_tienda.resx">
       <DependentUpon>cambiar_tienda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="config_mail.resx">
+      <DependentUpon>config_mail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fabrica.resx">
       <DependentUpon>fabrica.cs</DependentUpon>
@@ -1073,6 +1082,7 @@
     <None Include="Resources\factory.png" />
     <None Include="Resources\switch_icon.png" />
     <None Include="Resources\anuncios_logo.png" />
+    <None Include="Resources\alusspr_gif.gif" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

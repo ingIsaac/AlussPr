@@ -88,6 +88,9 @@ namespace cristales_pva
         public static float costo_aluminio_kg = 0;
         public static bool enable_costo_alum_kg = true;
         public static bool anuncios = true;
+        public static string smtp = "smtp.live.com";
+        public static int m_port = 587;
+        public static int timeout = 10000;
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;
@@ -4436,7 +4439,7 @@ namespace cristales_pva
         {
             bool r = true;
             MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.live.com");
+            SmtpClient SmtpServer = new SmtpClient(smtp);
             try {              
                 mail.From = new MailAddress(from);
                 mail.To.Add(to);
@@ -4456,8 +4459,8 @@ namespace cristales_pva
                     }
                 }
 
-                SmtpServer.Port = 587;
-                SmtpServer.Timeout = 100;
+                SmtpServer.Port = m_port;
+                SmtpServer.Timeout = timeout;
                 SmtpServer.Credentials = new NetworkCredential(from, password);
                 SmtpServer.EnableSsl = true;
 

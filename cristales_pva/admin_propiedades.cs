@@ -155,7 +155,7 @@ namespace cristales_pva
                         catch (Exception err)
                         {
                             constants.errorLog(err.ToString());
-                            MessageBox.Show("[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(this, "[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
                         try
@@ -181,7 +181,7 @@ namespace cristales_pva
                         catch (Exception err)
                         {
                             constants.errorLog(err.ToString());
-                            MessageBox.Show("[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(this, "[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
                         if (constants.user_access == 6 && constants.local == false)
@@ -203,32 +203,32 @@ namespace cristales_pva
                                 }
                                 else
                                 {
-                                    MessageBox.Show("[Error]: dato de IVA no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show(this, "[Error]: dato de IVA no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             catch (Exception err)
                             {
                                 constants.errorLog(err.ToString());
-                                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, "[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         // ---------------------------------------------------------------------------------------------------
-                        MessageBox.Show("Se necesita reiniciar el programa para ver algunos cambios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(this, "Se necesita reiniciar el programa para ver algunos cambios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
                     }
                     else
                     {
-                        MessageBox.Show("[Error]: dato de IVA no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "[Error]: dato de IVA no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("[Error]: intervalo no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error]: intervalo no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("[Error]: intervalo no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error]: intervalo no válido.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }                   
         }
 

@@ -67,6 +67,7 @@
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.datos_reporteBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportes_dataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.articulos_reporteBindingSource)).BeginInit();
@@ -505,5 +506,6 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

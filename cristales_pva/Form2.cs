@@ -785,6 +785,9 @@ namespace cristales_pva
                 var ingreso_ac = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("INGRESO_AC")).SingleOrDefault();
                 var user_ac = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("USER_AC")).SingleOrDefault();
                 var password_ac = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("PASSWORD_AC")).SingleOrDefault();
+                var smtp = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("SMTP")).SingleOrDefault();
+                var m_port = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("M_PORT")).SingleOrDefault();
+                var timeout = (from x in propiedades_xml.Descendants("Propiedades") select x.Element("TIMEOUT")).SingleOrDefault();
 
                 if (server != null)
                 {
@@ -848,6 +851,21 @@ namespace cristales_pva
                 if (password_ac != null)
                 {
                     constants.password_ac = password_ac.Value;
+                }
+
+                if (smtp != null)
+                {
+                    constants.smtp = smtp.Value;
+                }
+
+                if (m_port != null)
+                {
+                    constants.m_port = constants.stringToInt(m_port.Value.ToString());
+                }
+
+                if (timeout != null)
+                {
+                    constants.timeout = constants.stringToInt(timeout.Value.ToString());
                 }
 
                 //load porcentajes de articulos

@@ -64,7 +64,7 @@ namespace cristales_pva
             }
             loadReporte(cliente, proyecto, folio, subtotal, iva, total);
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
-            //
+            //            
         }
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
@@ -1016,18 +1016,38 @@ namespace cristales_pva
         //correo
         private void button4_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["mail"] == null)
+            DialogResult r = MessageBox.Show(this, "¿Deseas adjuntar el reporte de cotización a este correo?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string file = string.Empty;
+            if (r == DialogResult.Yes)
             {
-                mail mail = new mail(textBox5.Text);
-                mail.Show();
-                mail.Select();
+                openFileDialog1.ShowDialog();
+                file = openFileDialog1.FileName;
+                if (Application.OpenForms["mail"] == null)
+                {
+                    mail mail = new mail(textBox5.Text, file);
+                    mail.Show(this);
+                    mail.Select();
+                }
+                else
+                {
+                    Application.OpenForms["mail"].Select();
+                }
             }
-            else
+            else if(r == DialogResult.No)
             {
-                Application.OpenForms["mail"].Select();
-            }
+                if (Application.OpenForms["mail"] == null)
+                {
+                    mail mail = new mail(textBox5.Text, file);
+                    mail.Show(this);
+                    mail.Select();
+                }
+                else
+                {
+                    Application.OpenForms["mail"].Select();
+                }
+            }           
         }
-
+         
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
         {
             if (load == true)

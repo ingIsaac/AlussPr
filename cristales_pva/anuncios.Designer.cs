@@ -32,17 +32,19 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
             this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(12, 63);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 107);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(405, 285);
+            this.richTextBox1.Size = new System.Drawing.Size(405, 241);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -53,9 +55,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::cristales_pva.Properties.Resources.logo_title;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(6, 26);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(405, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(393, 51);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -70,20 +72,30 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "*Presione cualquier tecla para salir";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(405, 95);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            // 
             // anuncios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(429, 374);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "anuncios";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.anuncios_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,5 +107,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

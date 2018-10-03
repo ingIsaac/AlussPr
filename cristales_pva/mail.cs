@@ -20,7 +20,7 @@ namespace cristales_pva
         int item_index = -1;
         bool enviado = false;
 
-        public mail(string to)
+        public mail(string to, string reporte)
         {
             InitializeComponent();
             comboBox1.Text = to;
@@ -31,7 +31,14 @@ namespace cristales_pva
             comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
             comboBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
             listBox1.SelectedIndexChanged += ListBox1_SelectedIndexChanged;
-            loadContactos();           
+            loadContactos();
+            //Add Reporte
+            addFile(reporte);
+            //Check
+            if (textBox1.Text == string.Empty || textBox2.Text == string.Empty)
+            {
+                MessageBox.Show(this, "[Error] la aplicación de correo no ha sido configurada.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void getEmailCredentials()
@@ -40,7 +47,7 @@ namespace cristales_pva
 
             var email = (from x in doc.Descendants("Propiedades") select x.Element("EMAIL")).SingleOrDefault();
             var pw = (from x in doc.Descendants("Propiedades") select x.Element("PW")).SingleOrDefault();
-
+           
             if(email != null)
             {
                 textBox1.Text = email.Value;
@@ -94,7 +101,7 @@ namespace cristales_pva
                     }
                     else
                     {
-                        DialogResult r = MessageBox.Show("El correo no tiene asunto. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult r = MessageBox.Show(this, "El correo no tiene asunto. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                         if(r == DialogResult.Yes)
                         {
@@ -107,7 +114,7 @@ namespace cristales_pva
             }
             else
             {
-                MessageBox.Show("[Error] Necesitas colocar la dirección del correo del destinatario.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error] Necesitas colocar la dirección del correo del destinatario.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -116,15 +123,23 @@ namespace cristales_pva
         {
             openFileDialog1.Title = "Selecciona un archivo";
             openFileDialog1.FileName = "";
-            string[] s = null;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                files.Add(openFileDialog1.FileName);
+                addFile(openFileDialog1.FileName);
+            }
+        }
+
+        private void addFile(string file_name)
+        {
+            if (file_name != string.Empty)
+            {
+                string[] s = null;
+                files.Add(file_name);
                 listView1.Items.Clear();
-                foreach(string x in files)
+                foreach (string x in files)
                 {
                     s = x.Split('\\');
-                    listView1.Items.Add(s[s.Length-1]);
+                    listView1.Items.Add(s[s.Length - 1]);
                 }
             }
         }
@@ -172,13 +187,13 @@ namespace cristales_pva
             if(enviado == true)
             {
                 label7.Text = "";
-                MessageBox.Show("El correo ha sido enviado!", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "El correo ha sido enviado!", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
             }
             else
             {
                 label7.Text = "";
-                MessageBox.Show("[Error] El correo no ha podido ser enviado, intenta de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error] El correo no ha podido ser enviado, intenta de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -214,7 +229,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    MessageBox.Show("[Error] El contacto ya existe en el directorio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] El contacto ya existe en el directorio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception err)
@@ -312,7 +327,7 @@ namespace cristales_pva
             else
             {
                 textBox3.Focus();
-                MessageBox.Show("[Error] Necesitas añadir una dirección de correo electrónico al contacto.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error] Necesitas añadir una dirección de correo electrónico al contacto.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -326,7 +341,7 @@ namespace cristales_pva
 
         private void button5_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("Se borrarán todos los contactos en el directorio. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult r = MessageBox.Show(this, "Se borrarán todos los contactos en el directorio. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (r == DialogResult.Yes)
             {
@@ -349,13 +364,41 @@ namespace cristales_pva
                     x.SetElementValue("PW", textBox2.Text);
                 }
                 propiedades_xml.Save(constants.propiedades_xml);
-                MessageBox.Show("Se ha guardado la configuración de el correo electrónico.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, "Se ha guardado la configuración de el correo electrónico.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception err)
             {
                 constants.errorLog(err.ToString());
-                MessageBox.Show("[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }        
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                textBox1.Enabled = true;
+                textBox2.Enabled = true;
+            }
+            else
+            {
+                textBox1.Enabled = false;
+                textBox2.Enabled = false;
+            }
+        }
+
+        private void configuraciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["config_mail"] == null)
+            {
+                config_mail config = new config_mail();
+                config.Show(this);
+                config.Select();
+            }
+            else
+            {
+                Application.OpenForms["config_mail"].Select();
+            }
         }
     }
 }
