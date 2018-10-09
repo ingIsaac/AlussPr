@@ -111,8 +111,8 @@ namespace cristales_pva
         public static bool update_later = false;
         public static bool user_forbid = false;
         public static string factory_acabado_perfil = string.Empty;
-        public static string factory_cristal = string.Empty;            
-             
+        public static string factory_cristal = string.Empty;
+
         public static void getSoftwareVersion()
         {
             try
@@ -2356,7 +2356,7 @@ namespace cristales_pva
                 {
                     if (modulo.modulo_id > 0)
                     {
-                        modulo.total = Math.Round(reloadCalcularCostoModulo((int)modulo.modulo_id, (float)modulo.mano_obra / 100, (int)modulo.cantidad, modulo.dimensiones, modulo.claves_cristales, (float)modulo.flete / 100, (float)modulo.desperdicio / 100, (float)modulo.utilidad / 100, modulo.claves_otros, modulo.claves_herrajes, modulo.claves_perfiles, modulo.news, modulo.acabado_perfil, modulo.id), 2);
+                        modulo.total = Math.Round(reloadCalcularCostoModulo((int)modulo.modulo_id, (float)modulo.mano_obra / 100, (int)modulo.cantidad, modulo.dimensiones, modulo.claves_cristales, (float)modulo.flete / 100, (float)modulo.desperdicio / 100, (float)modulo.utilidad / 100, modulo.claves_otros, modulo.claves_herrajes, modulo.claves_perfiles, modulo.news, modulo.acabado_perfil, modulo.id), 2);                        
                     }                  
                 }
             }

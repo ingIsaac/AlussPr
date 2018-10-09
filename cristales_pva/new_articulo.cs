@@ -683,21 +683,25 @@ namespace cristales_pva
                     {
                         ((config_modulo)Application.OpenForms["config_modulo"]).setNewItem(2, datagridviewNE1.CurrentRow.Cells[0].Value.ToString());
                         ((config_modulo)Application.OpenForms["config_modulo"]).selectTab(2);
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setComponentEnable(2);
                     }
                     else if(comboBox1.SelectedIndex == 1)
                     {
                         ((config_modulo)Application.OpenForms["config_modulo"]).setNewItem(1, datagridviewNE1.CurrentRow.Cells[1].Value.ToString());
                         ((config_modulo)Application.OpenForms["config_modulo"]).selectTab(1);
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setComponentEnable(1);
                     }
                     else if (comboBox1.SelectedIndex == 2)
                     {
                         ((config_modulo)Application.OpenForms["config_modulo"]).setNewItem(3, datagridviewNE1.CurrentRow.Cells[1].Value.ToString());
                         ((config_modulo)Application.OpenForms["config_modulo"]).selectTab(3);
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setComponentEnable(3);
                     }
                     else if (comboBox1.SelectedIndex == 3)
                     {
                         ((config_modulo)Application.OpenForms["config_modulo"]).setNewItem(4, datagridviewNE1.CurrentRow.Cells[1].Value.ToString());
                         ((config_modulo)Application.OpenForms["config_modulo"]).selectTab(4);
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setComponentEnable(4);
                     }
                 }
             }

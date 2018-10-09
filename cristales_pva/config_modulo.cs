@@ -875,7 +875,39 @@ namespace cristales_pva
                             t = x.Split(',');
                             if(t.Length > 0)
                             {
-                                if(t[0] == "5")
+                                if(t[0] == "1")
+                                {
+                                    if (!checkBox11.Checked)
+                                    {
+                                        checkBox11.Checked = true;
+                                    }
+                                }
+                                //-------------------------------->
+                                if (t[0] == "2")
+                                {
+                                    if (!checkBox12.Checked)
+                                    {
+                                        checkBox12.Checked = true;
+                                    }
+                                }
+                                //-------------------------------->
+                                if (t[0] == "3")
+                                {
+                                    if (!checkBox13.Checked)
+                                    {
+                                        checkBox13.Checked = true;
+                                    }
+                                }
+                                //-------------------------------->
+                                if (t[0] == "4")
+                                {
+                                    if (!checkBox13.Checked)
+                                    {
+                                        checkBox13.Checked = true;
+                                    }
+                                }
+                                //-------------------------------->
+                                if (t[0] == "5")
                                 {
                                     if (t.Length == 4)
                                     {
@@ -1240,52 +1272,55 @@ namespace cristales_pva
 
         private void checkWeight()
         {
-            if (checkBox17.Checked)
+            if (label18.Text == "CM")
             {
-                if(peso_aluminio > constants.lim_sm)
+                if (checkBox17.Checked)
                 {
-                    MessageBox.Show("[Error] El peso de la cortina no es el indicado para un sistema de elevación manual.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    label42.ForeColor = Color.Red;
-                }
-                else
-                {
-                    label42.ForeColor = Color.Green;
-                }
-
-                string clave = string.Empty;
-                listas_entities_pva listas = new listas_entities_pva();
-
-                foreach (DataGridViewRow x in dataGridView4.Rows)
-                {
-                    clave = x.Cells[2].Value.ToString();
-                    var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
-
-                    if (otros != null)
+                    if (peso_aluminio > constants.lim_sm)
                     {
-                        if (otros.linea == "carrete" || otros.linea == "motores")
+                        MessageBox.Show("[Error] El peso de la cortina no es el indicado para un sistema de elevación manual.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        label42.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        label42.ForeColor = Color.Green;
+                    }
+
+                    string clave = string.Empty;
+                    listas_entities_pva listas = new listas_entities_pva();
+
+                    foreach (DataGridViewRow x in dataGridView4.Rows)
+                    {
+                        clave = x.Cells[2].Value.ToString();
+                        var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+
+                        if (otros != null)
                         {
-                            x.Cells[4].Value = "0";
+                            if (otros.linea == "carrete" || otros.linea == "motores")
+                            {
+                                x.Cells[4].Value = "0";
+                            }
+                        }
+                    }
+
+                    foreach (DataGridViewRow x in dataGridView4.Rows)
+                    {
+                        clave = x.Cells[2].Value.ToString();
+                        var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+
+                        if (otros != null)
+                        {
+                            if (otros.linea == "carrete")
+                            {
+                                x.Cells[4].Value = "1";
+                            }
                         }
                     }
                 }
-
-                foreach (DataGridViewRow x in dataGridView4.Rows)
+                else if (checkBox18.Checked)
                 {
-                    clave = x.Cells[2].Value.ToString();
-                    var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
-
-                    if (otros != null)
-                    {
-                        if (otros.linea == "carrete")
-                        {
-                            x.Cells[4].Value = "1";
-                        }
-                    }
+                    validMotor();
                 }
-            }
-            else if(checkBox18.Checked)
-            {
-                validMotor();
             }
         }
 
@@ -2046,7 +2081,7 @@ namespace cristales_pva
                         }
                     }
                 }
-                //
+                //             
 
                 buffer = "";
                 count = 0;
@@ -2173,7 +2208,27 @@ namespace cristales_pva
                     }
                 }
             }
-        }
+            //Check  
+            if (dataGridView1.RowCount == 0)
+            {
+                checkBox11.Checked = false;
+            }           
+            //----------------------------------->
+            if (dataGridView2.RowCount == 0)
+            {
+                checkBox12.Checked = false;
+            }            
+            //----------------------------------->
+            if (dataGridView3.RowCount == 0)
+            {
+                checkBox13.Checked = false;
+            }            
+            //----------------------------------->
+            if (dataGridView4.RowCount == 0)
+            {
+                checkBox14.Checked = false;
+            }            
+        }      
 
         private float[] getMedidas(int seccion)
         {
@@ -5649,7 +5704,7 @@ namespace cristales_pva
                         dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[5].ReadOnly = false;
                         dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[6].ReadOnly = false;
                         dataGridView1.Rows[dataGridView1.Rows.Count - 1].Selected = true;
-                        dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Index;
+                        dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.Rows[dataGridView1.Rows.Count - 1].Index;                        
                     }
                     break;
                 case 2:
@@ -5661,7 +5716,7 @@ namespace cristales_pva
                         dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells[4].Style.BackColor = Color.FromArgb(192, 192, 255);
                         dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells[4].ReadOnly = false;
                         dataGridView2.Rows[dataGridView2.Rows.Count - 1].Cells[4].Selected = true;
-                        dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.Rows[dataGridView2.Rows.Count - 1].Index;
+                        dataGridView2.FirstDisplayedScrollingRowIndex = dataGridView2.Rows[dataGridView2.Rows.Count - 1].Index;                       
                     }
                     break;
                 case 3:
@@ -5673,7 +5728,7 @@ namespace cristales_pva
                         dataGridView3.Rows[dataGridView3.Rows.Count - 1].Cells[5].Style.BackColor = Color.FromArgb(192, 192, 255);
                         dataGridView3.Rows[dataGridView3.Rows.Count - 1].Cells[5].ReadOnly = false;
                         dataGridView3.Rows[dataGridView3.Rows.Count - 1].Selected = true;
-                        dataGridView3.FirstDisplayedScrollingRowIndex = dataGridView3.Rows[dataGridView3.Rows.Count - 1].Index;
+                        dataGridView3.FirstDisplayedScrollingRowIndex = dataGridView3.Rows[dataGridView3.Rows.Count - 1].Index;                     
                     }
                     break;
                 case 4:
@@ -5687,12 +5742,12 @@ namespace cristales_pva
                         dataGridView4.Rows[dataGridView4.Rows.Count - 1].Cells[5].ReadOnly = false;
                         dataGridView4.Rows[dataGridView4.Rows.Count - 1].Cells[6].ReadOnly = false;
                         dataGridView4.Rows[dataGridView4.Rows.Count - 1].Selected = true;
-                        dataGridView4.FirstDisplayedScrollingRowIndex = dataGridView4.Rows[dataGridView4.Rows.Count - 1].Index;
+                        dataGridView4.FirstDisplayedScrollingRowIndex = dataGridView4.Rows[dataGridView4.Rows.Count - 1].Index;                        
                     }
                     break;
                 default:
                     break;
-            }
+            }          
         }
 
         private void comboBoxSelection(DataGridView datagrid)
@@ -5957,53 +6012,56 @@ namespace cristales_pva
 
         private void setSistManual()
         {
-            if (checkBox17.Checked)
+            if (label18.Text == "CM")
             {
-                if (peso_aluminio <= constants.lim_sm)
+                if (checkBox17.Checked)
                 {
-                    checkBox18.Checked = false;
-                    string clave = string.Empty;
-                    listas_entities_pva listas = new listas_entities_pva();
-
-                    foreach (DataGridViewRow x in dataGridView4.Rows)
+                    if (peso_aluminio <= constants.lim_sm)
                     {
-                        clave = x.Cells[2].Value.ToString();
-                        var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+                        checkBox18.Checked = false;
+                        string clave = string.Empty;
+                        listas_entities_pva listas = new listas_entities_pva();
 
-                        if (otros != null)
+                        foreach (DataGridViewRow x in dataGridView4.Rows)
                         {
-                            if (otros.linea == "carrete" || otros.linea == "motores")
+                            clave = x.Cells[2].Value.ToString();
+                            var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+
+                            if (otros != null)
                             {
-                                x.Cells[4].Value = "0";
+                                if (otros.linea == "carrete" || otros.linea == "motores")
+                                {
+                                    x.Cells[4].Value = "0";
+                                }
                             }
                         }
-                    }
 
-                    foreach (DataGridViewRow x in dataGridView4.Rows)
-                    {
-                        clave = x.Cells[2].Value.ToString();
-                        var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
-
-                        if (otros != null)
+                        foreach (DataGridViewRow x in dataGridView4.Rows)
                         {
-                            if (otros.linea == "carrete")
+                            clave = x.Cells[2].Value.ToString();
+                            var otros = (from v in listas.otros where v.clave == clave select v).SingleOrDefault();
+
+                            if (otros != null)
                             {
-                                x.Cells[4].Value = "1";
+                                if (otros.linea == "carrete")
+                                {
+                                    x.Cells[4].Value = "1";
+                                }
                             }
                         }
+                        calcularCostoModulo();
+                        label42.ForeColor = Color.Green;
                     }
-                    calcularCostoModulo();
-                    label42.ForeColor = Color.Green;
+                    else
+                    {
+                        MessageBox.Show("[Error] El peso de la cortina no es el indicado para un sistema de elevación manual.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        checkBox17.Checked = false;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("[Error] El peso de la cortina no es el indicado para un sistema de elevación manual.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    checkBox17.Checked = false;
+                    calcularCostoModulo();
                 }
-            }
-            else
-            {
-                calcularCostoModulo();
             }
         }
 
@@ -6171,6 +6229,50 @@ namespace cristales_pva
                     {
                         int _id = modulo.id;
                         resetSession(_id, id_cotizacion, false);
+                    }
+                }
+            }
+        }
+
+        public void setComponentEnable(int component)
+        {
+            if (component == 1)
+            {
+                if (dataGridView1.RowCount > 0)
+                {
+                    if (!checkBox11.Checked)
+                    {
+                        checkBox11.Checked = true;
+                    }
+                }
+            }
+            else if(component == 2)
+            {
+                if (dataGridView2.RowCount > 0)
+                {
+                    if (!checkBox12.Checked)
+                    {
+                        checkBox12.Checked = true;
+                    }
+                }
+            }
+            else if (component == 3)
+            {
+                if (dataGridView3.RowCount > 0)
+                {
+                    if (!checkBox13.Checked)
+                    {
+                        checkBox13.Checked = true;
+                    }
+                }
+            }
+            else if (component == 4)
+            {
+                if (dataGridView4.RowCount > 0)
+                {
+                    if (!checkBox14.Checked)
+                    {
+                        checkBox14.Checked = true;
                     }
                 }
             }
