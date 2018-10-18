@@ -16,6 +16,7 @@ namespace cristales_pva
         List<string> claves_herrajes = new List<string>();
         List<string> claves_perfiles = new List<string>();
         List<string> new_items = new List<string>();
+        float factor = 1;
 
         public desglose_materiales()
         {
@@ -38,12 +39,22 @@ namespace cristales_pva
 
         private void desglose_materiales_Load(object sender, EventArgs e)
         {
+            try
+            {
+                factor = float.Parse(textBox1.Text);
+            }
+            catch (Exception)
+            {
+                factor = 1;
+            }
             cargarMateriales();       
         }      
 
         private void cargarTabla()
         {
             cotizaciones_local cotizaciones = new cotizaciones_local();
+            setFactor(cotizaciones);
+            //-------------------------->
 
             var data = from x in cotizaciones.materiales_modulos
                        orderby x.concepto ascending
@@ -55,7 +66,7 @@ namespace cristales_pva
                            Acabado = x.acabado,
                            Cantidad = Math.Round((float)x.cantidad, 2),
                            Metros_Lineales = x.metros_lineales > 0 ? Math.Round((float)(x.metros_lineales / 1000), 2) + " m" : "",
-                           Metros_Cuadrados = x.metros_cuadrados > 0 ? Math.Round((float)x.metros_cuadrados / 1000, 2) + " m2" : "",
+                           Metros_Cuadrados = x.metros_cuadrados > 0 ? Math.Round((float)(x.metros_cuadrados / 1000), 2) + " m2" : "",
                            Perfiles = x.concepto == 1 ? Math.Round(Math.Round((float)(x.metros_lineales / 1000), 2) / (float)x.largo_perfil, 2) + "/" + x.largo_perfil : ""
                        };
             if (data != null)
@@ -123,9 +134,24 @@ namespace cristales_pva
         {
             if(backgroundWorker1.IsBusy == false)
             {
+                Enabled = false;
+                progressBar1.Visible = true;
                 backgroundWorker1.RunWorkerAsync();
             }
         }
+
+        private void setFactor(cotizaciones_local cotizaciones)
+        {            
+            var desglose = from x in cotizaciones.materiales_modulos select x;
+            foreach(var x in desglose)
+            {
+                x.cantidad = x.metros_lineales > 0 ? 0 : x.metros_cuadrados > 0 ? 0 : x.cantidad * factor;
+                x.metros_lineales = x.metros_lineales * factor;
+                x.metros_cuadrados = x.metros_cuadrados * factor;
+            }
+            cotizaciones.SaveChanges();
+        }
+
 
         private void insertarMateriales(int concepto, string clave, string articulo, float cant, float m_lineales, float m_cuadrados, string acabado="", float largo_perfil=0)
         {
@@ -818,7 +844,7 @@ namespace cristales_pva
         {
             if (Application.OpenForms["desglose"] == null)
             {
-                new desglose().Show();
+                new desglose(factor.ToString()).Show();
             }
         }
 
@@ -836,6 +862,19 @@ namespace cristales_pva
                     Application.OpenForms["cortes"].WindowState = FormWindowState.Normal;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                factor = float.Parse(textBox1.Text);
+            }
+            catch (Exception)
+            {
+                factor = 1;
+            }
+            cargarMateriales();
         }
     }
 }

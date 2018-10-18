@@ -2670,7 +2670,7 @@ namespace cristales_pva
             {
                 if (activar_filtro == true)
                 {
-                    cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '" + constants.stringToInt(filtro) + "%' OR nombre_proyecto LIKE '" + filtro + "%')";
+                    cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '%" + constants.stringToInt(filtro) + "' OR nombre_proyecto LIKE '" + filtro + "%')";
                 }
                 else
                 {
@@ -2681,7 +2681,7 @@ namespace cristales_pva
             {
                 if (activar_filtro == true)
                 {
-                    cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '" + constants.stringToInt(filtro) + "%' OR nombre_proyecto LIKE '" + filtro + "%')";
+                    cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '%" + constants.stringToInt(filtro) + "' OR nombre_proyecto LIKE '" + filtro + "%')";
                 }
                 else
                 {
