@@ -1641,7 +1641,7 @@ namespace cristales_pva
                                         {
                                             if (z.cantidad > 1)
                                             {
-                                                if (u[2] == "0")
+                                                if (u[2] == "1")
                                                 {
                                                     concepto.largo = concepto.largo + (z.largo * z.cantidad);
                                                 }
@@ -1669,7 +1669,7 @@ namespace cristales_pva
                                         {
                                             if (z.cantidad > 1)
                                             {
-                                                if (u[2] == "1")
+                                                if (u[2] == "0")
                                                 {
                                                     concepto.alto = concepto.alto + (z.alto * z.cantidad);
                                                 }

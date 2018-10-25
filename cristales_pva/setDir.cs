@@ -33,7 +33,7 @@ namespace cristales_pva
             comboBox1.Text = "1";
             comboBox2.Text = "1";
         }
-
+       
         private void loadTable()
         {
             tableLayoutPanel1.RowStyles.Clear();
@@ -72,6 +72,10 @@ namespace cristales_pva
                 {
                     ((merge_items)Application.OpenForms["merge_items"]).reloadMergedItems();
                 }
+                if(Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                }
             }
             Close();
         }
@@ -86,6 +90,10 @@ namespace cristales_pva
                 if (Application.OpenForms["merge_items"] != null)
                 {
                     ((merge_items)Application.OpenForms["merge_items"]).reloadMergedItems();
+                }
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
                 }
             }
             Close();
@@ -165,6 +173,10 @@ namespace cristales_pva
                 if (Application.OpenForms["merge_items"] != null)
                 {
                     ((merge_items)Application.OpenForms["merge_items"]).reloadMergedItems();
+                }
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
                 }
             }
             Close();
