@@ -1273,6 +1273,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap variaciones {
+            get {
+                object obj = ResourceManager.GetObject("variaciones", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ver_icon_herrajes {
             get {
                 object obj = ResourceManager.GetObject("ver_icon_herrajes", resourceCulture);

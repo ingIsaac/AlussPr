@@ -125,6 +125,12 @@
     <Compile Include="acceso_password.Designer.cs">
       <DependentUpon>acceso_password.cs</DependentUpon>
     </Compile>
+    <Compile Include="add_variaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="add_variaciones.Designer.cs">
+      <DependentUpon>add_variaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="admin_panel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -385,6 +391,12 @@
     <Compile Include="guardar_cotizacion.Designer.cs">
       <DependentUpon>guardar_cotizacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="g_variaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="g_variaciones.Designer.cs">
+      <DependentUpon>g_variaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="herraje.cs">
       <DependentUpon>listas.tt</DependentUpon>
     </Compile>
@@ -623,6 +635,12 @@
     <Compile Include="user_items.Designer.cs">
       <DependentUpon>user_items.cs</DependentUpon>
     </Compile>
+    <Compile Include="variaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="variaciones.Designer.cs">
+      <DependentUpon>variaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="vigencia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -634,6 +652,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="acceso_password.resx">
       <DependentUpon>acceso_password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="add_variaciones.resx">
+      <DependentUpon>add_variaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="admin_panel.resx">
       <DependentUpon>admin_panel.cs</DependentUpon>
@@ -652,6 +673,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fabrica.resx">
       <DependentUpon>fabrica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="g_variaciones.resx">
+      <DependentUpon>g_variaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="informe.rdlc" />
     <EmbeddedResource Include="informe.resx">
@@ -822,6 +846,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="user_items.resx">
       <DependentUpon>user_items.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="variaciones.resx">
+      <DependentUpon>variaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="vigencia.resx">
       <DependentUpon>vigencia.cs</DependentUpon>
@@ -1083,6 +1110,7 @@
     <None Include="Resources\switch_icon.png" />
     <None Include="Resources\anuncios_logo.png" />
     <None Include="Resources\alusspr_gif.gif" />
+    <None Include="Resources\variaciones.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

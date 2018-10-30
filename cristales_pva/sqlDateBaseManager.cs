@@ -5236,6 +5236,212 @@ namespace cristales_pva
             }
         }
 
+        public void getVariaciones(DataGridView dataview, string linea)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+
+                query = "SELECT id, nombre, linea, descripcion FROM variaciones WHERE linea='" + linea + "'";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+        }
+
+        public List<string> getVariacion(int id)
+        {
+            List<string> result = new List<string>();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT id, nombre, linea, cambios, nuevos, descripcion FROM variaciones WHERE id='" + id + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (!r.IsDBNull(0))
+                    {
+                        result.Add(r.GetValue(0).ToString());
+                    }
+                    if (!r.IsDBNull(1))
+                    {
+                        result.Add(r.GetValue(1).ToString());
+                    }
+                    if (!r.IsDBNull(2))
+                    {
+                        result.Add(r.GetValue(2).ToString());
+                    }
+                    if (!r.IsDBNull(3))
+                    {
+                        result.Add(r.GetValue(3).ToString());
+                    }
+                    if (!r.IsDBNull(4))
+                    {
+                        result.Add(r.GetValue(4).ToString());
+                    }
+                    if (!r.IsDBNull(5))
+                    {
+                        result.Add(r.GetValue(5).ToString());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
+        public void deleteVariacion(int id)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "DELETE FROM variaciones WHERE id='" + id + "'";
+            cmd.Connection = connection;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void newVariacion(string nombre, string linea, string cambios, string nuevos, string descripcion)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT INTO variaciones (nombre, linea, cambios, nuevos, descripcion) VALUES (@NOM, @LINEA, @CAMBIOS, @NUEVOS, @DESC)";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@NOM", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@NOM"].Value = nombre;
+            cmd.Parameters.AddWithValue("@LINEA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LINEA"].Value = linea;
+            cmd.Parameters.AddWithValue("@CAMBIOS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@CAMBIOS"].Value = cambios;
+            cmd.Parameters.AddWithValue("@NUEVOS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@NUEVOS"].Value = nuevos;
+            cmd.Parameters.AddWithValue("@DESC", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@DESC"].Value = descripcion;           
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void updateVariacion(int id, string linea, string cambios, string nuevos, string descripcion)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "UPDATE variaciones SET linea=@LINEA, cambios=@CAMBIOS, nuevos=@NUEVOS, descripcion=@DESC WHERE id='" + id + "'";
+            cmd.Connection = connection;          
+            cmd.Parameters.AddWithValue("@LINEA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@LINEA"].Value = linea;
+            cmd.Parameters.AddWithValue("@CAMBIOS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@CAMBIOS"].Value = cambios;
+            cmd.Parameters.AddWithValue("@NUEVOS", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@NUEVOS"].Value = nuevos;
+            cmd.Parameters.AddWithValue("@DESC", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@DESC"].Value = descripcion;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public Boolean existVariacion(string nombre)
+        {
+            Boolean result = false;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT nombre FROM variaciones WHERE nombre='" + nombre + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                if (r.Read())
+                {
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
         ~sqlDateBaseManager()
         {
 

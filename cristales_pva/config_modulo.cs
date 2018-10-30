@@ -4741,7 +4741,7 @@ namespace cristales_pva
         {
             if (Application.OpenForms["new_articulo"] == null)
             {
-                new new_articulo(new_costos).Show();
+                new new_articulo(new_costos).Show(this);
             }
             else
             {
@@ -6196,6 +6196,23 @@ namespace cristales_pva
             }
         }
 
+        //Variaciones
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["variaciones"] == null)
+            {
+                new variaciones(label8.Text).Show(this);
+            }
+            else
+            {
+                if (Application.OpenForms["variaciones"].WindowState == FormWindowState.Minimized)
+                {
+                    Application.OpenForms["variaciones"].WindowState = FormWindowState.Normal;
+                }
+                Application.OpenForms["variaciones"].Select();
+            }
+        }
+
         //Tipos de Apertura
         private void getLineaCompleta(string linea)
         {
@@ -6275,6 +6292,179 @@ namespace cristales_pva
                         checkBox14.Checked = true;
                     }
                 }
+            }
+        }
+
+        public void loadVariaciones(string cambios, string nuevos, string descripcion)
+        {
+            try
+            {
+                listas_entities_pva listas = new listas_entities_pva();
+                int cp = -1;
+                string clave = string.Empty;
+                string[] c = cambios.Split(',');
+                string[] p = null;
+                bool error = false;
+                bool p_error = false;
+
+                foreach (string x in c)
+                {
+                    p = x.Split(':');
+                    if (p.Length == 4)
+                    {
+                        cp = constants.stringToInt(p[0]);
+                        if (cp == 1)
+                        {
+                            p_error = false;
+                            foreach (DataGridViewRow r in dataGridView1.Rows)
+                            {
+                                if (r.Cells[2].Value.ToString() == p[3])
+                                {
+                                    clave = p[1];
+                                    var perfiles = (from n in listas.perfiles where n.clave == clave select n).SingleOrDefault();
+                                    if (perfiles != null)
+                                    {
+                                        p_error = true;
+                                        r.Cells[1].Value = perfiles.id;
+                                        r.Cells[2].Value = clave;
+                                        r.Cells[3].Value = perfiles.articulo;
+                                        if (p[2] != "-1")
+                                        {
+                                            r.Cells[4].Value = p[2];
+                                        }
+                                        getInstruction(clave);
+                                        getSeccionesReady(constants.stringToInt(r.Cells[6].Value.ToString()));
+                                    }
+                                }
+                            }
+                            if (!p_error)
+                            {
+                                error = true;
+                            }
+                        }
+                        else if (cp == 2)
+                        {
+                            p_error = false;
+                            foreach (DataGridViewRow r in dataGridView2.Rows)
+                            {
+                                if (r.Cells[2].Value.ToString() == p[3])
+                                {
+                                    clave = p[1];
+                                    var cristales = (from n in listas.lista_costo_corte_e_instalado where n.clave == clave select n).SingleOrDefault();
+                                    if (cristales != null)
+                                    {
+                                        p_error = true;
+                                        r.Cells[1].Value = clave;
+                                        r.Cells[2].Value = cristales.articulo;
+                                        if (p[2] != "-1")
+                                        {
+                                            r.Cells[3].Value = p[2];
+                                        }
+                                        getInstruction(clave);
+                                        getSeccionesReady(constants.stringToInt(r.Cells[4].Value.ToString()));
+                                    }
+                                }
+                            }
+                            if (!p_error)
+                            {
+                                error = true;
+                            }
+                        }
+                        else if (cp == 3)
+                        {
+                            p_error = false;
+                            foreach (DataGridViewRow r in dataGridView3.Rows)
+                            {
+                                if (r.Cells[2].Value.ToString() == p[3])
+                                {
+                                    clave = p[1];
+                                    var herrajes = (from n in listas.herrajes where n.clave == clave select n).SingleOrDefault();
+                                    if (herrajes != null)
+                                    {
+                                        p_error = true;
+                                        r.Cells[1].Value = herrajes.id;
+                                        r.Cells[2].Value = clave;
+                                        r.Cells[3].Value = herrajes.articulo;
+                                        if (p[2] != "-1")
+                                        {
+                                            r.Cells[4].Value = p[2];
+                                        }
+                                        getInstruction(clave);
+                                        getSeccionesReady(constants.stringToInt(r.Cells[5].Value.ToString()));
+                                    }
+                                }
+                            }
+                            if (!p_error)
+                            {
+                                error = true;
+                            }
+                        }
+                        else if (cp == 4)
+                        {
+                            p_error = false;
+                            foreach (DataGridViewRow r in dataGridView4.Rows)
+                            {
+                                if (r.Cells[2].Value.ToString() == p[3])
+                                {
+                                    clave = p[1];
+                                    var otros = (from n in listas.otros where n.clave == clave select n).SingleOrDefault();
+                                    if (otros != null)
+                                    {
+                                        p_error = true;
+                                        r.Cells[1].Value = otros.id;
+                                        r.Cells[2].Value = clave;
+                                        r.Cells[3].Value = otros.articulo;
+                                        if (p[2] != "-1")
+                                        {
+                                            r.Cells[4].Value = p[2];
+                                        }
+                                        getInstruction(clave);
+                                        getSeccionesReady(constants.stringToInt(r.Cells[6].Value.ToString()));
+                                    }
+                                }
+                            }
+                            if (!p_error)
+                            {
+                                error = true;
+                            }
+                        }
+                    }
+                }
+                            
+                //Nuevos
+                cp = -1;
+                clave = string.Empty;
+                c = nuevos.Split(',');
+                p = null;
+                foreach (string x in c)
+                {
+                    p = x.Split(':');
+                    if (p.Length == 4)
+                    {
+                        setNewItem(constants.stringToInt(p[0]), p[1], p[2] == "-1" ? "0" : p[2]);
+                    }
+                }
+                //End   
+                if (!error)
+                {
+                    if (richTextBox1.TextLength > 0)
+                    {
+                        richTextBox1.Text = richTextBox1.Text + "/n-" + descripcion.ToUpper();
+                    }
+                    else
+                    {
+                        richTextBox1.Text = "-" + descripcion.ToUpper();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("[Error] al parecer este módulo no es 100% compatible con esta variación.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                calcularCostoModulo();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("[Error] se produjo un error al cargar la variación.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

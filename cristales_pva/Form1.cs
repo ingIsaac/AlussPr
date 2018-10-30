@@ -6834,40 +6834,7 @@ namespace cristales_pva
         {
             label100.Text = "";
             ((Form1)Application.OpenForms["Form1"]).setTCLabel(constants.tc);
-        }
-
-        //Aríticulos de Usuario
-        private void artículosDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (constants.local == false)
-            {
-                if (constants.user_access >= 5)
-                {
-                    if (Application.OpenForms["user_items"] == null)
-                    {
-                        user_items user_items = new user_items();
-                        user_items.Show();
-                        if (constants.maximizar_ventanas == true)
-                        {
-                            user_items.WindowState = FormWindowState.Maximized;
-                        }
-                    }
-                    else
-                    {
-                        Application.OpenForms["user_items"].WindowState = FormWindowState.Normal;
-                        Application.OpenForms["user_items"].Select();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        }     
 
         //Opciones del programa
         private void opcionesDelProgramaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -7019,6 +6986,71 @@ namespace cristales_pva
         private void cambiarTiendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new cambiar_tienda().ShowDialog(this);
+        }
+
+        private void generarPaquetesOServiciosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                if (constants.user_access >= 5)
+                {
+                    if (Application.OpenForms["user_items"] == null)
+                    {
+                        user_items user_items = new user_items();
+                        user_items.Show();
+                        if (constants.maximizar_ventanas == true)
+                        {
+                            user_items.WindowState = FormWindowState.Maximized;
+                        }
+                    }
+                    else
+                    {
+                        Application.OpenForms["user_items"].WindowState = FormWindowState.Normal;
+                        Application.OpenForms["user_items"].Select();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Variaciones
+        private void vareacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                if (constants.user_access >= 5)
+                {
+                    if (Application.OpenForms["g_variaciones"] == null)
+                    {
+                        g_variaciones variaciones = new g_variaciones();
+                        variaciones.Show();
+                        if (constants.maximizar_ventanas == true)
+                        {
+                            variaciones.WindowState = FormWindowState.Maximized;
+                        }
+                    }
+                    else
+                    {
+                        Application.OpenForms["g_variaciones"].WindowState = FormWindowState.Normal;
+                        Application.OpenForms["g_variaciones"].Select();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void disableModoLIVA()
