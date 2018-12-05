@@ -34,11 +34,22 @@ namespace cristales_pva
             {
                 Application.OpenForms["edit_express"].Close();
             }          
-            loadALL();           
+            loadALL();
+        }
+
+        private void loadtitles()
+        {
             string m = constants.nombre_cotizacion;
-            if(constants.nombre_proyecto != string.Empty)
+            if (constants.nombre_proyecto != string.Empty)
             {
                 m = m + " - " + constants.nombre_proyecto;
+            }
+            if(constants.getSubfoliotitle(constants.sub_folio) != string.Empty)
+            {
+                if(m.Length > 0)
+                {
+                    m = m + " - " + constants.getSubfoliotitle(constants.sub_folio);
+                }
             }
             label7.Text = m;
         }
@@ -171,8 +182,9 @@ namespace cristales_pva
                 string[] r = ((Form1)Application.OpenForms["form1"]).getTotalAndDescount();
                 label3.Text = "$ " + r[0] + " (-" + r[1] + "%)";
                 label5.Text = "Sub-Folio: " + constants.sub_folio;
-                label6.Text = constants.sub_folio.ToString();   
-                if(constants.tipo_cotizacion == 5)
+                label6.Text = constants.sub_folio.ToString();
+                loadtitles();
+                if (constants.tipo_cotizacion == 5)
                 {
                     string[] y = null;
                     foreach (string x in constants.save_onEdit)
@@ -1145,6 +1157,11 @@ namespace cristales_pva
         private void loadFontSize()
         {
             comboBox3.Text = constants.fsconfig.ToString();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            new subfolio_title().ShowDialog();
         }
     }
 }

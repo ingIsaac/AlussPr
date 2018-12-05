@@ -822,25 +822,34 @@ namespace cristales_pva
 
         private void loading_form_Load(object sender, EventArgs e)
         {
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            if (sql.setServerConnection() == true)
+            if (constants.local == false)
             {
-                ((Form1)Application.OpenForms["Form1"]).Enabled = false;
-                backgroundWorker1.RunWorkerAsync();
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                if (sql.setServerConnection() == true)
+                {
+                    ((Form1)Application.OpenForms["Form1"]).Enabled = false;
+                    backgroundWorker1.RunWorkerAsync();
+                }
+                else
+                {
+                    Close();
+                }
             }
             else
             {
-                Close();
+                ((Form1)Application.OpenForms["Form1"]).Enabled = false;
+                backgroundWorker1.RunWorkerAsync();
             }
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            float tc = 0;
             if (constants.local == false)
             {
                 //TC --------------------------------------------------------------------------->
                 sqlDateBaseManager sql = new sqlDateBaseManager();
-                float tc = sql.getTC();
+                tc = sql.getTC();
                 constants.setPropiedadesXML(tc, sql.getCostoAluminioKG());
                 if (tc <= 0)
                 {
@@ -854,6 +863,10 @@ namespace cristales_pva
                     {
                         constants.tc = c_tc;
                     }
+                }
+                if(constants.tc <= 0)
+                {
+                    MessageBox.Show(this, "[Error] no se encontro referencia al tipo de cambio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 // ---------------------------------------------------------------------------->
                 if (constants.logged == false)
@@ -873,6 +886,18 @@ namespace cristales_pva
                     constants.loadPropiedadesModel();
                     insertTablesToLocalDB();                    
                 }              
+            }
+            else
+            {
+                if (tc <= 0)
+                {
+                    tc = constants.getTCFromXML();
+                }
+                constants.tc = tc;
+                if (constants.tc <= 0)
+                {
+                    MessageBox.Show(this, "[Error] no se encontro referencia al tipo de cambio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }       
 

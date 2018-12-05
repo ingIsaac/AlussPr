@@ -411,6 +411,7 @@ namespace cristales_pva
             sqlDateBaseManager sql = new sqlDateBaseManager();
             constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
             constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
+            constants.unserializeSubfolio(sql.getSingleSQLValue("cotizaciones", "subfolio_titles", "folio", constants.folio_abierto.ToString(), 0));
             constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
             constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
             //cerrar ventanas

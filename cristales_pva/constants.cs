@@ -98,6 +98,7 @@ namespace cristales_pva
         public static string nombre_proyecto = string.Empty;
         public static string fecha_cotizacion = string.Empty;
         public static string autor_cotizacion = string.Empty;
+        public static List<string> subfolio_titles = new List<string>();
         public static float desc_cotizacion = 0;
         public static float utilidad_cotizacion = 0;
         public static int folio_eliminacion = -1;
@@ -5163,6 +5164,116 @@ namespace cristales_pva
                     box.Items.Add(x);
                 }
             }
+        }
+
+        //Sub-Folio Titles
+        public static string getSubfoliotitle(int subfolio)
+        {
+            string u = string.Empty;
+            try
+            {
+                if (subfolio_titles.Count > 0)
+                {
+                    subfolio = subfolio - 1;
+                    if (subfolio >= 0 && subfolio <= 4)
+                    {
+                        if (subfolio_titles[subfolio] != null)
+                        {
+                            u = subfolio_titles[subfolio];
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("[Error] error al obtener los títulos de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLog(e.ToString());
+            }
+            return u;
+        }
+
+        public static void setSubfoliotitle(int subfolio, string title)
+        {
+            try
+            {
+                subfolio = subfolio - 1;
+                subfolio_titles[subfolio] = title;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("[Error] error al añadir el título de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLog(e.ToString());
+            }
+        }
+
+        public static string serializeSubfolio()
+        {
+            string r = string.Empty;
+            try
+            {
+                foreach (string x in subfolio_titles)
+                {
+                    if (r.Length > 0)
+                    {
+                        r = r + "," + x;
+                    }
+                    else
+                    {
+                        r = x;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("[Error] error al serializar títulos de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLog(e.ToString());
+            }
+            return r;
+        }
+
+        public static void unserializeSubfolio(string titles)
+        {
+            try
+            {
+                subfolio_titles.Clear();
+                initsubfoliotitles();
+                string[] r = titles.Split(',');
+                if (r.Length > 0)
+                {
+                    for (int i = 0; i < r.Length; i++)
+                    {
+                        subfolio_titles[i] = r[i];
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("[Error] error al deserializar títulos de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLog(e.ToString());
+            }
+        }
+
+        public static void loadSubfoliotitles()
+        {
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            try
+            {
+                unserializeSubfolio(sql.getSingleSQLValue("cotizaciones", "subfolio_titles", "folio", folio_abierto.ToString(), 0));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("[Error] no se pudo obtener los títulos de los sub-folios\n¿Cuenta con conexión a internet?.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLog(e.ToString());
+            }
+        }
+
+        public static void initsubfoliotitles()
+        {
+            subfolio_titles.Add("");
+            subfolio_titles.Add("");
+            subfolio_titles.Add("");
+            subfolio_titles.Add("");
+            subfolio_titles.Add("");
         }
     }
 }

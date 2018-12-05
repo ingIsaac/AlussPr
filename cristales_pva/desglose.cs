@@ -13,13 +13,15 @@ namespace cristales_pva
     public partial class desglose : Form
     {
         string factor = string.Empty;
+        string titulo = string.Empty;
 
-        public desglose(string factor)
+        public desglose(string factor, string titulo)
         {
             InitializeComponent();
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
             this.factor = factor;
+            this.titulo = titulo;
         }
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
@@ -37,6 +39,7 @@ namespace cristales_pva
             reportViewer1.LocalReport.SetParameters(new ReportParameter("proyecto", constants.nombre_proyecto == "" ? "n/a" : constants.nombre_proyecto));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("folio", constants.folio_abierto.ToString()));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("factor", "x" + factor));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("titulo", titulo));
             ReportPageSettings ps = reportViewer1.LocalReport.GetDefaultPageSettings();
             this.reportViewer1.ParentForm.Width = ps.PaperSize.Width;
             this.reportViewer1.RefreshReport();

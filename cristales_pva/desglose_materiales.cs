@@ -47,7 +47,9 @@ namespace cristales_pva
             {
                 factor = 1;
             }
-            cargarMateriales();       
+            cargarMateriales();
+            //Subfolio Title
+            textBox2.Text = constants.getSubfoliotitle(constants.sub_folio);     
         }      
 
         private void cargarTabla()
@@ -844,7 +846,7 @@ namespace cristales_pva
         {
             if (Application.OpenForms["desglose"] == null)
             {
-                new desglose(factor.ToString()).Show();
+                new desglose(factor.ToString(), textBox2.Text).Show();
             }
         }
 

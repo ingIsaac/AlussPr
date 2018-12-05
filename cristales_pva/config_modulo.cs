@@ -518,6 +518,7 @@ namespace cristales_pva
             reloadModulo(id);
             calcularCostoModulo();
             recountItems();
+            richTextBox1.Clear();
         }
         //
 
@@ -5901,6 +5902,7 @@ namespace cristales_pva
                     if (m_id > 0)
                     {
                         resetSession(m_id, id_cotizacion, false);
+                        richTextBox1.Clear();
                     }
                     else
                     {
@@ -5913,14 +5915,15 @@ namespace cristales_pva
                     if (m_id > 0)
                     {
                         resetSession(m_id, id_cotizacion, false);
+                        richTextBox1.Clear();
                     }
                     else
                     {
-                        checkBox19.Checked = false;
+                        checkBox19.Checked = true;
                         MessageBox.Show("[Error] no existe dicho diseño de apertura sin mosquitero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }
+            }           
         }
 
         private int getModuloMosquiteros(string a_name, string c)
@@ -6246,7 +6249,12 @@ namespace cristales_pva
                     {
                         int _id = modulo.id;
                         resetSession(_id, id_cotizacion, false);
+                        richTextBox1.Clear();
                     }
+                }
+                else
+                {
+                    comboBox4.SelectedIndex = -1;
                 }
             }
         }
@@ -6449,7 +6457,7 @@ namespace cristales_pva
                 {
                     if (richTextBox1.TextLength > 0)
                     {
-                        richTextBox1.Text = richTextBox1.Text + "/n-" + descripcion.ToUpper();
+                        richTextBox1.Text = richTextBox1.Text + "\n-" + descripcion.ToUpper();
                     }
                     else
                     {

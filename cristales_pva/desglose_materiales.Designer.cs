@@ -41,6 +41,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.SuspendLayout();
@@ -111,7 +113,7 @@
             this.datagridviewNE1.Location = new System.Drawing.Point(0, 0);
             this.datagridviewNE1.Name = "datagridviewNE1";
             this.datagridviewNE1.ReadOnly = true;
-            this.datagridviewNE1.Size = new System.Drawing.Size(1040, 499);
+            this.datagridviewNE1.Size = new System.Drawing.Size(1040, 471);
             this.datagridviewNE1.TabIndex = 0;
             // 
             // label3
@@ -141,11 +143,31 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // textBox2
+            // 
+            this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(116, 477);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(912, 23);
+            this.textBox2.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 482);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Título de Sub-Folio:";
+            // 
             // desglose_materiales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1040, 609);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
@@ -182,5 +204,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
     }
 }

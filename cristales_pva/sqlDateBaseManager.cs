@@ -2521,13 +2521,13 @@ namespace cristales_pva
             }
         }
 
-        public void insertCotizacion(int folio, string cliente, string usuario, string fecha, string nombre_proyecto, float descuento, float utilidad, string tienda, bool iva_desglosado, string registro, float tc)
+        public void insertCotizacion(int folio, string cliente, string usuario, string fecha, string nombre_proyecto, float descuento, float utilidad, string tienda, bool iva_desglosado, string registro, float tc, string subfolio_titles)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO cotizaciones (folio, cliente, fecha, usuario, nombre_proyecto, descuento, utilidad, tienda, iva_desglosado, registro, tc) VALUES (@FOLIO, @CLIENTE, @FECHA, @USUARIO, @PROYECTO, @DESC, @UTIL, @TIENDA, @IVA, @REG, @TC)";
+            cmd.CommandText = "INSERT INTO cotizaciones (folio, cliente, fecha, usuario, nombre_proyecto, descuento, utilidad, tienda, iva_desglosado, registro, tc, subfolio_titles) VALUES (@FOLIO, @CLIENTE, @FECHA, @USUARIO, @PROYECTO, @DESC, @UTIL, @TIENDA, @IVA, @REG, @TC, @SFOL)";
             cmd.Parameters.AddWithValue("@FOLIO", SqlDbType.Int);
             cmd.Parameters["@FOLIO"].Value = folio;
             cmd.Parameters.AddWithValue("@CLIENTE", SqlDbType.VarChar);
@@ -2550,6 +2550,8 @@ namespace cristales_pva
             cmd.Parameters["@REG"].Value = registro;
             cmd.Parameters.AddWithValue("@TC", SqlDbType.Float);
             cmd.Parameters["@TC"].Value = tc;
+            cmd.Parameters.AddWithValue("@SFOL", SqlDbType.VarChar);
+            cmd.Parameters["@SFOL"].Value = subfolio_titles;
             try
             {
                 connection.Open();
@@ -2567,13 +2569,13 @@ namespace cristales_pva
 
         }
 
-        public void updateCotizacion(int folio, string fecha, string cliente, string proyecto, float descuento, float utilidad, bool iva_desglosado, float tc)
+        public void updateCotizacion(int folio, string fecha, string cliente, string proyecto, float descuento, float utilidad, bool iva_desglosado, float tc, string subfolio_titles)
         {
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE cotizaciones SET fecha=@FECHA, cliente=@CLIENTE, nombre_proyecto=@PROYECTO, descuento=@DESC, utilidad=@UTIL, iva_desglosado=@IVA, tc=@TC WHERE folio='" + folio + "'";
+            cmd.CommandText = "UPDATE cotizaciones SET fecha=@FECHA, cliente=@CLIENTE, nombre_proyecto=@PROYECTO, descuento=@DESC, utilidad=@UTIL, iva_desglosado=@IVA, tc=@TC, subfolio_titles=@SFOL WHERE folio='" + folio + "'";
             cmd.Parameters.AddWithValue("@FECHA", SqlDbType.VarChar);
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@CLIENTE", SqlDbType.VarChar);
@@ -2588,6 +2590,8 @@ namespace cristales_pva
             cmd.Parameters["@IVA"].Value = iva_desglosado;
             cmd.Parameters.AddWithValue("@TC", SqlDbType.Float);
             cmd.Parameters["@TC"].Value = tc;
+            cmd.Parameters.AddWithValue("@SFOL", SqlDbType.VarChar);
+            cmd.Parameters["@SFOL"].Value = subfolio_titles;
             try
             {
                 connection.Open();
@@ -3064,6 +3068,8 @@ namespace cristales_pva
                 constants.folio_abierto = -1;
                 constants.nombre_cotizacion = string.Empty;
                 constants.nombre_proyecto = string.Empty;
+                constants.subfolio_titles.Clear();
+                constants.initsubfoliotitles();
                 constants.errorLog(err.ToString());
             }
             finally

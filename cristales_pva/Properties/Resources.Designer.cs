@@ -1223,6 +1223,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap title_icon {
+            get {
+                object obj = ResourceManager.GetObject("title_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tool_box_preferences_icon {
             get {
                 object obj = ResourceManager.GetObject("tool_box_preferences_icon", resourceCulture);

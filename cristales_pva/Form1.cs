@@ -605,6 +605,7 @@ namespace cristales_pva
             {
                 Environment.Exit(0);
             }
+            constants.loadSubfoliotitles();
             WindowState = FormWindowState.Maximized;
             toolStripProgressBar1.Visible = false;
             //Client version
@@ -623,12 +624,22 @@ namespace cristales_pva
                 toolStripStatusLabel3.Text = "     [Cliente: " + constants.nombre_cotizacion + "]   [Proyecto: " + constants.nombre_proyecto + "]";
                 toolStripStatusLabel3.Text = toolStripStatusLabel3.Text.ToUpper();
                 toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;
+                if (constants.local == false)
+                {
+                    constants.loadSubfoliotitles();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo obtener los títulos de sub-folio dado a que se ingreso de manera local.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }               
             }
             setTextCaptionForm();
             loadIntervalo();
+            //Load Data
+            new loading_form().ShowDialog();
+            //----------------------------->
             if (constants.local == false)
             {
-                new loading_form().ShowDialog();
                 checkConnection();
                 connectionChecker();
                 updater();
@@ -713,7 +724,7 @@ namespace cristales_pva
                 checkBox5.Checked = constants.iva_desglosado;
                 toolStripStatusLabel3.Text = "     [Cliente: " + constants.nombre_cotizacion + "]   [Proyecto: " + constants.nombre_proyecto + "]";
                 toolStripStatusLabel3.Text = toolStripStatusLabel3.Text.ToUpper();
-                toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;
+                toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;                    
             }
             setTextCaptionForm();
             tabControl1.SelectedTab = tabPage15;
@@ -1750,6 +1761,10 @@ namespace cristales_pva
                 {
                     constants.tc = c_tc;
                 }
+            }
+            if (constants.tc <= 0)
+            {
+                MessageBox.Show(this, "[Error] no se encontro referencia al tipo de cambio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //----------------------------------------------------------------->
             updateTablesToLocalDB();
@@ -6798,6 +6813,8 @@ namespace cristales_pva
                 constants.nombre_proyecto = "";
                 constants.autor_cotizacion = "";
                 constants.fecha_cotizacion = "";
+                constants.subfolio_titles.Clear();
+                constants.initsubfoliotitles();
                 constants.cotizacion_proceso = false;
                 constants.cotizacion_guardada = false;
                 constants.setClienteToPropiedades();
@@ -6821,7 +6838,11 @@ namespace cristales_pva
                 if(constants.tc != tc)
                 {
                     constants.changeTC(constants.tc, tc, "USD");
-                }             
+                }
+                if (constants.tc <= 0)
+                {
+                    MessageBox.Show("[Error] no se encontro referencia al tipo de cambio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception err)
             {
@@ -6978,14 +6999,28 @@ namespace cristales_pva
 
         private void anunciosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            anuncios anuncios = new anuncios();
-            anuncios.ShowDialog(this);
-            anuncios.Select();
+            if (constants.local == false)
+            {
+                anuncios anuncios = new anuncios();
+                anuncios.ShowDialog(this);
+                anuncios.Select();
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cambiarTiendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new cambiar_tienda().ShowDialog(this);
+            if (constants.local == false)
+            {
+                new cambiar_tienda().ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void generarPaquetesOServiciosToolStripMenuItem_Click(object sender, EventArgs e)

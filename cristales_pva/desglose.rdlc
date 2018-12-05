@@ -3,8 +3,8 @@
   <Body>
     <ReportItems>
       <Line Name="Line1">
-        <Top>3.88532cm</Top>
-        <Left>0.28787cm</Left>
+        <Top>4.67907cm</Top>
+        <Left>0.28785cm</Left>
         <Height>0cm</Height>
         <Width>20.10021cm</Width>
         <Style>
@@ -582,7 +582,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -646,8 +645,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>materiales_modulo</DataSetName>
-        <Top>4.23152cm</Top>
-        <Left>0.28787cm</Left>
+        <Top>5.15756cm</Top>
+        <Left>0.28786cm</Left>
         <Height>1.2cm</Height>
         <Width>20.1002cm</Width>
         <ZIndex>1</ZIndex>
@@ -954,8 +953,70 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox37">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Título de Sub-Folio:</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox32</rd:DefaultName>
+        <Top>3.56782cm</Top>
+        <Left>0.28786cm</Left>
+        <Height>0.6cm</Height>
+        <Width>3.95931cm</Width>
+        <ZIndex>12</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox38">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!titulo.Value</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox36</rd:DefaultName>
+        <Top>3.56782cm</Top>
+        <Left>4.42356cm</Left>
+        <Height>0.6cm</Height>
+        <Width>11.21896cm</Width>
+        <ZIndex>13</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>2.21875in</Height>
+    <Height>2.66667in</Height>
     <Style />
   </Body>
   <Width>8.07356in</Width>
@@ -987,7 +1048,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>0.70542cm</Height>
+      <Height>0.7848cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1008,6 +1069,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
+          <Top>0cm</Top>
           <Left>0.28787cm</Left>
           <Height>0.6cm</Height>
           <Width>1.28292cm</Width>
@@ -1038,6 +1100,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox14</rd:DefaultName>
+          <Top>0cm</Top>
           <Left>1.74717cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
@@ -1071,6 +1134,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox15</rd:DefaultName>
+          <Top>0cm</Top>
           <Left>16.67099cm</Left>
           <Height>0.6cm</Height>
           <Width>3.71708cm</Width>
@@ -1183,6 +1247,12 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="factor">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="titulo">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
