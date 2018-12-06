@@ -29,20 +29,31 @@ namespace cristales_pva
                 try
                 {
                     XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
+                    string alias = string.Empty;
 
-                    var propiedades = from x in propiedades_xml.Descendants("Propiedades") select x;
+                    alias = new sqlDateBaseManager().getAliasTienda(comboBox1.Text);
 
-                    foreach (XElement x in propiedades)
+                    if (alias != string.Empty)
                     {
-                        x.SetElementValue("ORG_N", comboBox1.Text);
+                        var propiedades = from x in propiedades_xml.Descendants("Propiedades") select x;
+
+                        foreach (XElement x in propiedades)
+                        {
+                            x.SetElementValue("ORG", alias);
+                            x.SetElementValue("ORG_N", comboBox1.Text);
+                        }
+                        propiedades_xml.Save(constants.propiedades_xml);
+
+                        DialogResult r = MessageBox.Show(this, "El programa debe ser reiniciado. ¿Deseas reiniciar ahora mismo?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (r == DialogResult.Yes)
+                        {
+                            Environment.Exit(0);
+                        }
                     }
-                    propiedades_xml.Save(constants.propiedades_xml);
-
-                    DialogResult r = MessageBox.Show(this, "El programa debe ser reiniciado. ¿Deseas reiniciar ahora mismo?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if(r == DialogResult.Yes)
+                    else
                     {
-                        Environment.Exit(0);
+                        MessageBox.Show(this, "[Error] no se pudo encontrar el 'alias' de esta tienda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception err)

@@ -4127,6 +4127,39 @@ namespace cristales_pva
             return result;
         }
 
+        public string getAliasTienda(string tienda)
+        {
+            string result = string.Empty;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT alias FROM tiendas WHERE nombre_tienda='" + tienda + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (!r.IsDBNull(0))
+                    {
+                        result = r.GetValue(0).ToString();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
         public DateTime getvigenciaTienda(string tienda, Form form=null)
         {
             DateTime result = new DateTime();
