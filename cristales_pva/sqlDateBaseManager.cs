@@ -4909,7 +4909,7 @@ namespace cristales_pva
             }
         }
 
-        public void getSalidasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha, bool periodo=false)
+        public void getSalidasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha, bool periodo=false, string fecha_2="")
         {
             DataTable data = new DataTable();
             try
@@ -4918,11 +4918,18 @@ namespace cristales_pva
 
                 if (!periodo)
                 {
-                    query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+                    if (fecha_2 == "")
+                    {
+                        query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+                    }
+                    else
+                    {
+                        query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha between '" + fecha + "' AND '" + fecha_2 + "'";
+                    }
                 }
                 else
                 {
-                    query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha LIKE '%" + fecha + "'";
+                    query = "SELECT id, clave, articulo, linea, proveedor, salidas, comentarios, fecha FROM salidas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha LIKE '" + fecha + "%'";
                 }
 
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
@@ -4994,7 +5001,7 @@ namespace cristales_pva
             }
         }
 
-        public void getEntradasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha, bool periodo=false)
+        public void getEntradasPeriodo(int limit, DataGridView dataview, string lista, int tienda, string fecha, bool periodo=false, string fecha_2="")
         {
             DataTable data = new DataTable();
             try
@@ -5003,11 +5010,18 @@ namespace cristales_pva
 
                 if (!periodo)
                 {
-                    query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+                    if (fecha_2 == "")
+                    {
+                        query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha='" + fecha + "'";
+                    }
+                    else
+                    {
+                        query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha between '" + fecha + "' AND '" + fecha_2 + "'";
+                    }
                 }
                 else
                 {
-                    query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha LIKE '%" + fecha + "'";
+                    query = "SELECT id, clave, articulo, linea, proveedor, entradas, comentarios, fecha FROM entradas_inventario WHERE tienda='" + tienda + "' AND lista='" + lista + "' AND fecha LIKE '" + fecha + "%'";
                 }
 
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());

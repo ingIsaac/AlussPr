@@ -166,6 +166,8 @@
             this.comboBox9 = new System.Windows.Forms.ComboBox();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -507,6 +509,8 @@
             this.tabPage3.Controls.Add(this.label31);
             this.tabPage3.Controls.Add(this.groupBox3);
             this.tabPage3.Controls.Add(this.datagridviewNE3);
+            this.tabPage3.Controls.Add(this.textBox8);
+            this.tabPage3.Controls.Add(this.label23);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -529,14 +533,13 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.dateTimePicker3);
             this.groupBox3.Controls.Add(this.comboBox17);
             this.groupBox3.Controls.Add(this.comboBox16);
             this.groupBox3.Controls.Add(this.pictureBox8);
             this.groupBox3.Controls.Add(this.pictureBox4);
             this.groupBox3.Controls.Add(this.button11);
             this.groupBox3.Controls.Add(this.button12);
-            this.groupBox3.Controls.Add(this.textBox8);
-            this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.button13);
             this.groupBox3.Controls.Add(this.comboBox12);
             this.groupBox3.Controls.Add(this.label24);
@@ -561,7 +564,7 @@
             // 
             this.comboBox17.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox17.FormattingEnabled = true;
-            this.comboBox17.Location = new System.Drawing.Point(530, 44);
+            this.comboBox17.Location = new System.Drawing.Point(582, 18);
             this.comboBox17.Name = "comboBox17";
             this.comboBox17.Size = new System.Drawing.Size(75, 21);
             this.comboBox17.TabIndex = 4;
@@ -584,9 +587,9 @@
             "Octubre",
             "Noviembre",
             "Diciembre"});
-            this.comboBox16.Location = new System.Drawing.Point(405, 44);
+            this.comboBox16.Location = new System.Drawing.Point(442, 18);
             this.comboBox16.Name = "comboBox16";
-            this.comboBox16.Size = new System.Drawing.Size(119, 21);
+            this.comboBox16.Size = new System.Drawing.Size(134, 21);
             this.comboBox16.TabIndex = 25;
             this.comboBox16.SelectedIndexChanged += new System.EventHandler(this.comboBox16_SelectedIndexChanged);
             // 
@@ -615,9 +618,9 @@
             // button11
             // 
             this.button11.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
-            this.button11.Location = new System.Drawing.Point(562, 71);
+            this.button11.Location = new System.Drawing.Point(614, 44);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(43, 22);
+            this.button11.Size = new System.Drawing.Size(43, 48);
             this.button11.TabIndex = 21;
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
@@ -625,7 +628,7 @@
             // button12
             // 
             this.button12.Image = global::cristales_pva.Properties.Resources.pdf_icon;
-            this.button12.Location = new System.Drawing.Point(611, 16);
+            this.button12.Location = new System.Drawing.Point(663, 16);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(75, 76);
             this.button12.TabIndex = 20;
@@ -634,20 +637,22 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(445, 17);
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox8.Location = new System.Drawing.Point(922, 384);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(160, 20);
+            this.textBox8.Size = new System.Drawing.Size(87, 20);
             this.textBox8.TabIndex = 19;
             this.textBox8.Text = "150";
             // 
             // label23
             // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(402, 21);
+            this.label23.Location = new System.Drawing.Point(822, 387);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(37, 13);
+            this.label23.Size = new System.Drawing.Size(94, 13);
             this.label23.TabIndex = 18;
-            this.label23.Text = "Limite:";
+            this.label23.Text = "Limite de registros:";
             // 
             // button13
             // 
@@ -717,7 +722,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(353, 48);
+            this.label27.Location = new System.Drawing.Point(390, 21);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(46, 13);
             this.label27.TabIndex = 9;
@@ -725,9 +730,9 @@
             // 
             // dateTimePicker4
             // 
-            this.dateTimePicker4.Location = new System.Drawing.Point(351, 72);
+            this.dateTimePicker4.Location = new System.Drawing.Point(351, 45);
             this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(205, 20);
+            this.dateTimePicker4.Size = new System.Drawing.Size(257, 20);
             this.dateTimePicker4.TabIndex = 8;
             this.dateTimePicker4.ValueChanged += new System.EventHandler(this.dateTimePicker4_ValueChanged);
             // 
@@ -828,6 +833,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.label26);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.datagridviewNE2);
@@ -853,14 +860,13 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.dateTimePicker2);
             this.groupBox2.Controls.Add(this.comboBox11);
             this.groupBox2.Controls.Add(this.pictureBox7);
             this.groupBox2.Controls.Add(this.comboBox10);
             this.groupBox2.Controls.Add(this.pictureBox3);
             this.groupBox2.Controls.Add(this.button8);
             this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Controls.Add(this.textBox3);
-            this.groupBox2.Controls.Add(this.label14);
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.comboBox8);
             this.groupBox2.Controls.Add(this.label10);
@@ -885,7 +891,7 @@
             // 
             this.comboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Location = new System.Drawing.Point(530, 44);
+            this.comboBox11.Location = new System.Drawing.Point(582, 18);
             this.comboBox11.Name = "comboBox11";
             this.comboBox11.Size = new System.Drawing.Size(75, 21);
             this.comboBox11.TabIndex = 4;
@@ -919,9 +925,9 @@
             "Octubre",
             "Noviembre",
             "Diciembre"});
-            this.comboBox10.Location = new System.Drawing.Point(405, 44);
+            this.comboBox10.Location = new System.Drawing.Point(442, 18);
             this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(119, 21);
+            this.comboBox10.Size = new System.Drawing.Size(134, 21);
             this.comboBox10.TabIndex = 3;
             this.comboBox10.SelectedIndexChanged += new System.EventHandler(this.comboBox10_SelectedIndexChanged);
             // 
@@ -939,9 +945,9 @@
             // button8
             // 
             this.button8.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
-            this.button8.Location = new System.Drawing.Point(562, 71);
+            this.button8.Location = new System.Drawing.Point(614, 44);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(43, 22);
+            this.button8.Size = new System.Drawing.Size(43, 48);
             this.button8.TabIndex = 21;
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
@@ -949,7 +955,7 @@
             // button7
             // 
             this.button7.Image = global::cristales_pva.Properties.Resources.pdf_icon;
-            this.button7.Location = new System.Drawing.Point(611, 16);
+            this.button7.Location = new System.Drawing.Point(663, 16);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 76);
             this.button7.TabIndex = 20;
@@ -958,20 +964,22 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(445, 17);
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.Location = new System.Drawing.Point(922, 384);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 20);
+            this.textBox3.Size = new System.Drawing.Size(87, 20);
             this.textBox3.TabIndex = 19;
             this.textBox3.Text = "150";
             // 
             // label14
             // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(402, 21);
+            this.label14.Location = new System.Drawing.Point(822, 387);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(37, 13);
+            this.label14.Size = new System.Drawing.Size(94, 13);
             this.label14.TabIndex = 18;
-            this.label14.Text = "Limite:";
+            this.label14.Text = "Limite de registros:";
             // 
             // button6
             // 
@@ -1041,7 +1049,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(353, 48);
+            this.label11.Location = new System.Drawing.Point(390, 21);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(46, 13);
             this.label11.TabIndex = 9;
@@ -1049,9 +1057,9 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(351, 72);
+            this.dateTimePicker1.Location = new System.Drawing.Point(351, 45);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(205, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(257, 20);
             this.dateTimePicker1.TabIndex = 8;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
@@ -1571,6 +1579,22 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Visible = false;
             // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(351, 71);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(257, 20);
+            this.dateTimePicker2.TabIndex = 24;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Location = new System.Drawing.Point(351, 71);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(257, 20);
+            this.dateTimePicker3.TabIndex = 26;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
             // inventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1746,5 +1770,7 @@
         private System.Windows.Forms.ComboBox comboBox10;
         private System.Windows.Forms.ComboBox comboBox17;
         private System.Windows.Forms.ComboBox comboBox16;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
     }
 }

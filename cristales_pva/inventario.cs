@@ -498,12 +498,20 @@ namespace cristales_pva
                                 if(comboBox10.Text != string.Empty && comboBox11.Text != string.Empty)
                                 {
                                     this.periodo = comboBox10.Text + " - " + comboBox11.Text;
-                                    sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, getMesInt(comboBox10.Text) + "/" + comboBox11.Text, true);
+                                    sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, comboBox11.Text + "/" + getMesInt(comboBox10.Text), true);
                                 }
                                 else
                                 {
-                                    this.periodo = dateTimePicker1.Value.ToLongDateString();
-                                    sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToShortDateString());
+                                    if(dateTimePicker1.Value == dateTimePicker2.Value)
+                                    {
+                                        this.periodo = dateTimePicker1.Value.ToLongDateString();
+                                        sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToString("yyyy/MM/dd"));
+                                    }
+                                    else
+                                    {
+                                        this.periodo = dateTimePicker1.Value.ToLongDateString() + " - " + dateTimePicker2.Value.ToLongDateString();
+                                        sql.getSalidasPeriodo(constants.stringToInt(textBox3.Text), dt, comboBox5.Text, tienda_id, dateTimePicker1.Value.ToString("yyyy/MM/dd"), false, dateTimePicker2.Value.ToString("yyyy/MM/dd"));
+                                    }                                  
                                 }
                             }
                             else if (historial)
@@ -563,12 +571,20 @@ namespace cristales_pva
                                 if(comboBox16.Text != string.Empty && comboBox17.Text != string.Empty)
                                 {
                                     this.periodo = comboBox16.Text + " - " + comboBox17.Text;
-                                    sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, getMesInt(comboBox16.Text) + "/" + comboBox17.Text, true);
+                                    sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, comboBox17.Text + "/" + getMesInt(comboBox16.Text), true);
                                 }
                                 else
                                 {
-                                    this.periodo = dateTimePicker4.Value.ToLongDateString();
-                                    sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToShortDateString());
+                                    if (dateTimePicker4.Value == dateTimePicker3.Value)
+                                    {
+                                        this.periodo = dateTimePicker4.Value.ToLongDateString();
+                                        sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToString("yyyy/MM/dd"));
+                                    }
+                                    else
+                                    {
+                                        this.periodo = dateTimePicker4.Value.ToLongDateString() + " - " + dateTimePicker3.Value.ToLongDateString();
+                                        sql.getEntradasPeriodo(constants.stringToInt(textBox8.Text), dt, comboBox15.Text, tienda_id, dateTimePicker4.Value.ToString("yyyy/MM/dd"), false, dateTimePicker3.Value.ToString("yyyy/MM/dd"));
+                                    }
                                 }
                             }
                             else if (historial)
@@ -1130,7 +1146,7 @@ namespace cristales_pva
         {
             if (datagridviewNE2.RowCount > 0)
             {
-                new print_inventarios(datagridviewNE2.DataSource as DataTable, comboBox5.Text, "salidas", periodo).ShowDialog(this);
+                new print_inventarios(datagridviewNE2.DataSource as DataTable, comboBox5.Text, "Salidas", periodo).ShowDialog(this);
             }
         }
 
@@ -1267,7 +1283,7 @@ namespace cristales_pva
         {
             if (datagridviewNE3.RowCount > 0)
             {
-                new print_inventarios(datagridviewNE3.DataSource as DataTable, comboBox15.Text, "entradas", periodo).ShowDialog(this);
+                new print_inventarios(datagridviewNE3.DataSource as DataTable, comboBox15.Text, "Entradas", periodo).ShowDialog(this);
             }
         }
 
@@ -1345,7 +1361,7 @@ namespace cristales_pva
                     existencias = sql.getExistencia(textBox10.Text);
                     if (existencias >= new_cant)
                     {
-                        sql.newSalida(textBox10.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox11.Text, new_cant, DateTime.Today.ToString("dd/MM/yyyy"), tienda, richTextBox1.Text);
+                        sql.newSalida(textBox10.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox11.Text, new_cant, DateTime.Today.ToString("yyyy/MM/dd"), tienda, richTextBox1.Text);
                         sql.updateExistencias(textBox10.Text, -1 * constants.stringToFloat(textBox7.Text));
                         existencias = sql.getExistencia(textBox10.Text);
                         MessageBox.Show(this, "Se ha registrado correctamente. \n\n Se retiraron: (" + new_cant + ") " + textBox12.Text + " al inventario.\n Existencias disponibles para el artículo " + textBox10.Text + " suman: (" + existencias + ") " + textBox12.Text, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1365,7 +1381,7 @@ namespace cristales_pva
                 int tienda = sql.getTiendaID(constants.org_name);
                 if (tienda > 0)
                 {
-                    sql.newEntrada(textBox10.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox11.Text, new_cant, DateTime.Today.ToString("dd/MM/yyyy"), tienda, richTextBox1.Text);
+                    sql.newEntrada(textBox10.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox11.Text, new_cant, DateTime.Today.ToString("yyyy/MM/dd"), tienda, richTextBox1.Text);
                     sql.updateExistencias(textBox10.Text, constants.stringToFloat(textBox7.Text));
                     existencias = sql.getExistencia(textBox10.Text);
                     MessageBox.Show(this, "Se ha registrado correctamente. \n\n Se añadieron: (" + new_cant + ") " + textBox12.Text + " al inventario.\n Existencias disponibles para el artículo " + textBox10.Text + " suman: (" + existencias + ") " + textBox12.Text, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1404,16 +1420,30 @@ namespace cristales_pva
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            comboBox10.SelectedIndex = -1;
-            comboBox11.SelectedIndex = -1;
-            executeLoad(datagridviewNE2, true);
+            if (dateTimePicker1.Value <= dateTimePicker2.Value)
+            {
+                comboBox10.SelectedIndex = -1;
+                comboBox11.SelectedIndex = -1;
+                executeLoad(datagridviewNE2, true);
+            }
+            else
+            {
+                MessageBox.Show(this, "[Error] se debe seleccionar una fecha anterior a la fecha final.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dateTimePicker4_ValueChanged(object sender, EventArgs e)
         {
-            comboBox16.SelectedIndex = -1;
-            comboBox17.SelectedIndex = -1;
-            executeLoad(datagridviewNE3, true);
+            if (dateTimePicker4.Value <= dateTimePicker3.Value)
+            {
+                comboBox16.SelectedIndex = -1;
+                comboBox17.SelectedIndex = -1;
+                executeLoad(datagridviewNE3, true);
+            }
+            else
+            {
+                MessageBox.Show(this, "[Error] se debe seleccionar una fecha anterior a la fecha final.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TextBox9_KeyDown(object sender, KeyEventArgs e)
@@ -1531,6 +1561,34 @@ namespace cristales_pva
             if (comboBox16.Text != string.Empty && comboBox17.Text != string.Empty)
             {
                 executeLoad(datagridviewNE3, true);
+            }
+        }
+
+        private void dateTimePicker3_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker3.Value >= dateTimePicker4.Value)
+            {
+                comboBox16.SelectedIndex = -1;
+                comboBox17.SelectedIndex = -1;
+                executeLoad(datagridviewNE3, true);
+            }
+            else
+            {
+                MessageBox.Show(this, "[Error] se debe seleccionar una fecha posterior a la fecha de inicio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker2.Value >= dateTimePicker1.Value)
+            {
+                comboBox10.SelectedIndex = -1;
+                comboBox11.SelectedIndex = -1;
+                executeLoad(datagridviewNE2, true);
+            }
+            else
+            {
+                MessageBox.Show(this, "[Error] se debe seleccionar una fecha posterior a la fecha de inicio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

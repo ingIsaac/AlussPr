@@ -24,7 +24,6 @@ namespace cristales_pva
             this.lista = lista;
             this.peps = peps;
             this.periodo = periodo;
-            this.Text = constants.org_name.ToUpper() + " - Existencias";
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;           
         }
 
@@ -36,18 +35,21 @@ namespace cristales_pva
 
         private void print_inventarios_Load(object sender, EventArgs e)
         {            
-            if (peps == "salidas")
+            if (peps == "Salidas")
             {
+                this.Text = constants.org_name.ToUpper() + " - " + peps;
                 reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.inventarios_salidas.rdlc";
                 this.salidas_tBindingSource.DataSource = Table;
             }
-            else if (peps == "entradas")
+            else if (peps == "Entradas")
             {
+                this.Text = constants.org_name.ToUpper() + " - " + peps;
                 reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.inventarios_entradas.rdlc";
                 this.entradas_tBindingSource.DataSource = Table;
             }
             else
             {
+                this.Text = constants.org_name.ToUpper() + " - Existencias";
                 this.inventarios_tBindingSource.DataSource = Table;
             }
             //----------------------------------------------------------------------------------------------------------->

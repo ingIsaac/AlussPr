@@ -5086,12 +5086,14 @@ namespace cristales_pva
                     }
                     catch (Exception)
                     {
+                        login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
                         login_server.Close();
                         return false;
                     }
                 }
                 else
                 {
+                    login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
                     login_server.Close();
                     return false;
                 }
