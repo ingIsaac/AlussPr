@@ -2701,7 +2701,7 @@ namespace cristales_pva
 
         private void button16_Click(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedIndex < 0)
+            if (comboBox1.SelectedIndex >= 0)
             {
                 if (datagridviewNE1.Rows.Count > 0)
                 {
