@@ -285,6 +285,28 @@ namespace cristales_pva
             }
         }
 
+        //Contar los controles incluidos
+        private int getControlCount()
+        {
+            int r = 0;
+            foreach (Control x in tableLayoutPanel1.Controls)
+            {
+                if (tableLayoutPanel1.GetColumnSpan(x) > 1)
+                {
+                    r = r + tableLayoutPanel1.GetColumnSpan(x);
+                }
+                else if (tableLayoutPanel1.GetRowSpan(x) > 1)
+                {
+                    r = r + tableLayoutPanel1.GetRowSpan(x);
+                }
+                else
+                {
+                    r++;
+                }
+            }
+            return r;
+        }
+
         //Agregar esquema
         private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -292,7 +314,7 @@ namespace cristales_pva
             {
                 try
                 {
-                    if (tableLayoutPanel1.Controls.Count < (tableLayoutPanel1.ColumnCount * tableLayoutPanel1.RowCount))
+                    if (getControlCount() < (tableLayoutPanel1.ColumnCount * tableLayoutPanel1.RowCount))
                     {
                         PictureBox a1 = new PictureBox();
                         a1.Dock = DockStyle.Fill;
@@ -333,14 +355,14 @@ namespace cristales_pva
                     }
                     else
                     {
-                        MessageBox.Show("[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception)
                 {
-                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
                     tableLayoutPanel1.Controls.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
-                    MessageBox.Show("[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                    MessageBox.Show(this, "[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -348,55 +370,76 @@ namespace cristales_pva
         //Columns
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (constants.stringToInt(comboBox1.Text) >= tableLayoutPanel1.Controls.Count)
+            try
             {
-                tableLayoutPanel1.ColumnCount = constants.stringToInt(comboBox1.Text);
-                tableLayoutPanel1.ColumnStyles.Clear();
-                for (int i = 0; i < tableLayoutPanel1.ColumnCount; i++)
+                if (constants.stringToInt(comboBox1.Text) >= tableLayoutPanel1.Controls.Count)
                 {
-                    tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / tableLayoutPanel1.ColumnCount));
+                    tableLayoutPanel1.ColumnCount = constants.stringToInt(comboBox1.Text);
+                    tableLayoutPanel1.ColumnStyles.Clear();
+                    for (int i = 0; i < tableLayoutPanel1.ColumnCount; i++)
+                    {
+                        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / tableLayoutPanel1.ColumnCount));
+                    }
                 }
+                comboBox1.Text = tableLayoutPanel1.ColumnCount.ToString();
+                comboBox6.Items.Clear();
+                for (int i = 0; i < tableLayoutPanel1.ColumnStyles.Count - 1; i++)
+                {
+                    comboBox6.Items.Add(i);
+                }
+                comboBox5.Text = "0";
+                comboBox6.Text = "0";
             }
-            comboBox1.Text = tableLayoutPanel1.ColumnCount.ToString();
-            comboBox6.Items.Clear();
-            for (int i = 0; i < tableLayoutPanel1.ColumnStyles.Count-1; i++)
+            catch (Exception)
             {
-                comboBox6.Items.Add(i);
+                MessageBox.Show(this, "[Error]: existe una mala conversión de esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            comboBox5.Text = "0";
-            comboBox6.Text = "0";
         }
 
         //Filas
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((constants.stringToInt(comboBox2.Text) * tableLayoutPanel1.ColumnCount) >= tableLayoutPanel1.Controls.Count)
+            try
             {
-                tableLayoutPanel1.RowCount = constants.stringToInt(comboBox2.Text);
-                tableLayoutPanel1.RowStyles.Clear();
-                for (int i = 0; i < tableLayoutPanel1.RowCount; i++)
+                if ((constants.stringToInt(comboBox2.Text) * tableLayoutPanel1.ColumnCount) >= tableLayoutPanel1.Controls.Count)
                 {
-                    tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / tableLayoutPanel1.RowCount));
+                    tableLayoutPanel1.RowCount = constants.stringToInt(comboBox2.Text);
+                    tableLayoutPanel1.RowStyles.Clear();
+                    for (int i = 0; i < tableLayoutPanel1.RowCount; i++)
+                    {
+                        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / tableLayoutPanel1.RowCount));
+                    }
                 }
+                comboBox2.Text = tableLayoutPanel1.RowCount.ToString();
+                comboBox5.Items.Clear();
+                for (int i = 0; i < tableLayoutPanel1.RowStyles.Count - 1; i++)
+                {
+                    comboBox5.Items.Add(i);
+                }
+                comboBox5.Text = "0";
+                comboBox6.Text = "0";
             }
-            comboBox2.Text = tableLayoutPanel1.RowCount.ToString();
-            comboBox5.Items.Clear();
-            for(int i = 0; i < tableLayoutPanel1.RowStyles.Count-1; i++)
+            catch (Exception)
             {
-                comboBox5.Items.Add(i);
-            }           
-            comboBox5.Text = "0";
-            comboBox6.Text = "0";
+                MessageBox.Show(this, "[Error]: existe una mala conversión de esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //Eliminar esquema
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (tableLayoutPanel1.Controls.Count > 0)
+            try
             {
-                esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
-                config.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
-                tableLayoutPanel1.Controls.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                if (tableLayoutPanel1.Controls.Count > 0)
+                {
+                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                    config.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                    tableLayoutPanel1.Controls.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(this, "[Error]: existe una mala conversión de esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -725,7 +768,7 @@ namespace cristales_pva
             {
                 try
                 {
-                    if (tableLayoutPanel1.Controls.Count < (tableLayoutPanel1.ColumnCount * tableLayoutPanel1.RowCount))
+                    if (getControlCount() < (tableLayoutPanel1.ColumnCount * tableLayoutPanel1.RowCount))
                     {
                         PictureBox a1 = new PictureBox();
                         a1.Dock = DockStyle.Fill;
@@ -789,14 +832,14 @@ namespace cristales_pva
                     }
                     else
                     {
-                        MessageBox.Show("[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception)
                 {
-                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
                     tableLayoutPanel1.Controls.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
-                    MessageBox.Show("[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                    MessageBox.Show(this, "[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

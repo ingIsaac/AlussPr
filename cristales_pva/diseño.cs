@@ -132,31 +132,66 @@ namespace cristales_pva
         //Secciones en columnas
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (constants.stringToInt(comboBox2.Text) >= tableLayoutPanel1.Controls.Count)
+            try
             {
-                tableLayoutPanel1.ColumnCount = constants.stringToInt(comboBox2.Text);
-                tableLayoutPanel1.ColumnStyles.Clear();
-                for (int i = 0; i < tableLayoutPanel1.ColumnCount; i++)
+                if (constants.stringToInt(comboBox2.Text) >= tableLayoutPanel1.Controls.Count)
                 {
-                    tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / tableLayoutPanel1.ColumnCount));
+                    tableLayoutPanel1.ColumnCount = constants.stringToInt(comboBox2.Text);
+                    tableLayoutPanel1.ColumnStyles.Clear();
+                    for (int i = 0; i < tableLayoutPanel1.ColumnCount; i++)
+                    {
+                        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / tableLayoutPanel1.ColumnCount));
+                    }
                 }
+                comboBox2.Text = tableLayoutPanel1.ColumnCount.ToString();
             }
-            comboBox2.Text = tableLayoutPanel1.ColumnCount.ToString();
+            catch (Exception)
+            {
+                MessageBox.Show(this, "[Error]: existe una mala conversión de esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //Secciones en filas
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {       
-            if ((constants.stringToInt(comboBox1.Text) * tableLayoutPanel1.ColumnCount) >= tableLayoutPanel1.Controls.Count)
+        {
+            try
             {
-                tableLayoutPanel1.RowCount = constants.stringToInt(comboBox1.Text);
-                tableLayoutPanel1.RowStyles.Clear();
-                for (int i = 0; i < tableLayoutPanel1.RowCount; i++)
+                if ((constants.stringToInt(comboBox1.Text) * tableLayoutPanel1.ColumnCount) >= tableLayoutPanel1.Controls.Count)
                 {
-                    tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / tableLayoutPanel1.RowCount));
+                    tableLayoutPanel1.RowCount = constants.stringToInt(comboBox1.Text);
+                    tableLayoutPanel1.RowStyles.Clear();
+                    for (int i = 0; i < tableLayoutPanel1.RowCount; i++)
+                    {
+                        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / tableLayoutPanel1.RowCount));
+                    }
                 }
-            }          
-            comboBox1.Text = tableLayoutPanel1.RowCount.ToString();
+                comboBox1.Text = tableLayoutPanel1.RowCount.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(this, "[Error]: existe una mala conversión de esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Contar los controles incluidos
+        private int getControlCount()
+        {
+            int r = 0;
+            foreach(Control x in tableLayoutPanel1.Controls)
+            {
+                if (tableLayoutPanel1.GetColumnSpan(x) > 1) {
+                    r = r + tableLayoutPanel1.GetColumnSpan(x);
+                }
+                else if(tableLayoutPanel1.GetRowSpan(x) > 1)
+                {
+                    r = r + tableLayoutPanel1.GetRowSpan(x);
+                }
+                else
+                {
+                    r++;
+                }
+            }
+            return r;
         }
 
         //Agregar Esquema
@@ -166,7 +201,7 @@ namespace cristales_pva
             {
                 try
                 {
-                    if (tableLayoutPanel1.Controls.Count < (tableLayoutPanel1.ColumnCount * tableLayoutPanel1.RowCount))
+                    if (getControlCount() < (tableLayoutPanel1.ColumnCount * tableLayoutPanel1.RowCount))
                     {
                         PictureBox a1 = new PictureBox();
                         a1.Dock = DockStyle.Fill;
@@ -202,14 +237,14 @@ namespace cristales_pva
                     }
                     else
                     {
-                        MessageBox.Show("[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch(Exception)
                 {
-                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
                     tableLayoutPanel1.Controls.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
-                    MessageBox.Show("[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                    MessageBox.Show(this, "[Error]: no queda mas espacio dentro del panel.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -219,9 +254,16 @@ namespace cristales_pva
         {
             if (tableLayoutPanel1.Controls.Count > 0)
             {
-                esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
-                config.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
-                tableLayoutPanel1.Controls.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                try
+                {
+                    esquemas_diseño.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                    config.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                    tableLayoutPanel1.Controls.RemoveAt(tableLayoutPanel1.Controls.Count - 1);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(this, "[Error]: existe una mala conversión de esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 textBox1.Text = getConfig();
             }
         }
@@ -273,22 +315,22 @@ namespace cristales_pva
                             if (checkBox1.Checked == true)
                             {
                                 sql.crearEsquema(name, constants.stringToInt(comboBox1.Text), constants.stringToInt(comboBox2.Text), textBox1.Text, capturarEsquemas(), true, comboBox3.Text);
-                                MessageBox.Show("Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(this, "Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             else
                             {
                                 sql.crearEsquema(name, constants.stringToInt(comboBox1.Text), constants.stringToInt(comboBox2.Text), textBox1.Text, capturarEsquemas(), false, comboBox3.Text);
-                                MessageBox.Show("Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(this, "Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("[Error] el diseño no maneja esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(this, "[Error] el diseño no maneja esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        DialogResult r = MessageBox.Show("Ya existe un diseño con ese nombre, ¿Desea continuar?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        DialogResult r = MessageBox.Show(this, "Ya existe un diseño con ese nombre, ¿Desea continuar?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (r == DialogResult.Yes)
                         {
                             if (tableLayoutPanel1.Controls.Count > 0)
@@ -296,29 +338,29 @@ namespace cristales_pva
                                 if (checkBox1.Checked == true)
                                 {
                                     sql.crearEsquema(name, constants.stringToInt(comboBox1.Text), constants.stringToInt(comboBox2.Text), textBox1.Text, capturarEsquemas(), true, comboBox3.Text);
-                                    MessageBox.Show("Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show(this, "Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                                 else
                                 {
                                     sql.crearEsquema(name, constants.stringToInt(comboBox1.Text), constants.stringToInt(comboBox2.Text), textBox1.Text, capturarEsquemas(), false, comboBox3.Text);
-                                    MessageBox.Show("Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show(this, "Se ha creado un nuevo diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("[Error] el diseño no maneja esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(this, "[Error] el diseño no maneja esquemas.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }                  
                 }
                 else
                 {
-                    MessageBox.Show("[Error] necesitas asignarle un grupo al diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] necesitas asignarle un grupo al diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("[Error] necesitas darle nombre a al diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error] necesitas darle nombre a al diseño.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
