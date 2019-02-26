@@ -265,6 +265,26 @@ namespace cristales_pva
             }
         }
 
+        public static double stringToDouble(string num, bool round = false)
+        {
+            double r = 0;
+            if (double.TryParse(num, out r) == true)
+            {
+                if (round == true)
+                {
+                    return Math.Round(r, 2);
+                }
+                else
+                {
+                    return r;
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         //tools --------------------------------------------------------------------------------------------------------------
         public static void copyAlltoClipboard(DataGridView table)
         {           
