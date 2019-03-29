@@ -505,4 +505,7 @@
   <data name="title_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\title_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Collection_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Collection-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -198,6 +198,7 @@ namespace cristales_pva
                 label5.Text = "Sub-Folio: " + constants.sub_folio;
                 label6.Text = constants.sub_folio.ToString();
                 loadtitles();
+                countSubfolio();
                 if (constants.tipo_cotizacion == 5)
                 {
                     string[] y = null;
@@ -224,6 +225,24 @@ namespace cristales_pva
                 }           
             }
             catch (Exception) { }        
+        }
+
+        private void countSubfolio()
+        {
+            using (cotizaciones_local context = new cotizaciones_local())
+            {
+                var cotizacion = (from x in context.modulos_cotizaciones where x.sub_folio > 1 select x).SingleOrDefault();
+                if(cotizacion != null)
+                {
+                    pictureBox2.Visible = true;
+                    label10.Text = "*Este presupuesto incluye Sub-Folios.";
+                }
+                else
+                {
+                    pictureBox2.Visible = false;
+                    label10.Text = string.Empty;
+                }
+            }
         }
 
         //Set ONLY articulos to uppercase

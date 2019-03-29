@@ -1121,6 +1121,7 @@
     <None Include="Resources\alusspr_gif.gif" />
     <None Include="Resources\variaciones.png" />
     <None Include="Resources\title_icon.png" />
+    <None Include="Resources\Collection-icon.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>
