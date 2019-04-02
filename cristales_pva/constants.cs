@@ -127,6 +127,18 @@ namespace cristales_pva
             }
         }
 
+        public static FileVersionInfo getFileInfoVersion()
+        {
+            try
+            {
+                return FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
+            }
+            catch(Exception)
+            {
+                return null;
+            }
+        }
+
         public static int countRowsSQL(string table)
         {
             return new sqlDateBaseManager().countSQLRows(table);
