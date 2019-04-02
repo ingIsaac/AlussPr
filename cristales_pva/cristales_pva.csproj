@@ -460,6 +460,12 @@
     <Compile Include="loading_form.Designer.cs">
       <DependentUpon>loading_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="loading_icon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loading_icon.Designer.cs">
+      <DependentUpon>loading_icon.cs</DependentUpon>
+    </Compile>
     <Compile Include="load_report.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -693,6 +699,9 @@
     <EmbeddedResource Include="inventarios_entradas.rdlc" />
     <EmbeddedResource Include="inventarios_salidas.rdlc" />
     <EmbeddedResource Include="inventarios.rdlc" />
+    <EmbeddedResource Include="loading_icon.resx">
+      <DependentUpon>loading_icon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="monitor.resx">
       <DependentUpon>monitor.cs</DependentUpon>
     </EmbeddedResource>
@@ -1122,6 +1131,8 @@
     <None Include="Resources\variaciones.png" />
     <None Include="Resources\title_icon.png" />
     <None Include="Resources\Collection-icon.png" />
+    <None Include="Resources\loading_background.jpg" />
+    <None Include="Resources\circulo_cargando.gif" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

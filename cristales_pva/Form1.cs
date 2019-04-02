@@ -595,12 +595,16 @@ namespace cristales_pva
         private void Form1_Load(object sender, EventArgs e)
         {
             System.Diagnostics.Process[] p = System.Diagnostics.Process.GetProcessesByName(System.Diagnostics.Process.GetCurrentProcess().ProcessName);
-            if(p.Length > 1)
+            if (p.Length > 1)
             {
                 MessageBox.Show("[Error] solo puede existir una instancia de este programa.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
-            }            
+            }
+            //Loading Form
+            new loading_icon().ShowDialog(); 
+            //Login Form                  
             new Form2(false).ShowDialog();
+            //Shutdown at error
             if (constants.error == true)
             {
                 Environment.Exit(0);

@@ -5167,7 +5167,7 @@ namespace cristales_pva
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT TOP 5 title, text FROM changelog ORDER BY id DESC";
+            cmd.CommandText = "SELECT TOP 10 title, text FROM changelog ORDER BY id DESC";
 
             try
             {
