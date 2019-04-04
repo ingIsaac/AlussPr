@@ -14,7 +14,6 @@ namespace cristales_pva
         public clientes()
         {
             InitializeComponent();
-            dataGridView1.CellContextMenuStripNeeded += DataGridView1_CellContextMenuStripNeeded;
             textBox2.Leave += TextBox2_Leave;
             textBox2.Enter += TextBox2_Enter;
             textBox3.Leave += TextBox3_Leave;
@@ -24,7 +23,16 @@ namespace cristales_pva
             textBox6.Leave += TextBox6_Leave;
             textBox6.Enter += TextBox6_Enter;
             textBox7.KeyPress += TextBox7_KeyPress;
+            contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+        }
+
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if(dataGridView1.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void TextBox7_KeyPress(object sender, KeyPressEventArgs e)
@@ -33,12 +41,7 @@ namespace cristales_pva
             {
                 loadClients();
             }
-        }
-
-        private void DataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            contextMenuStrip1.Show(MousePosition);
-        }
+        }       
 
         public void setEditTab()
         {
@@ -107,29 +110,35 @@ namespace cristales_pva
         //edit button
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            textBox5.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-            textBox6.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-            textBox9.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-            textBox5.ForeColor = SystemColors.WindowText;
-            textBox6.ForeColor = SystemColors.WindowText;
+            if (dataGridView1.RowCount > 0)
+            {
+                textBox4.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                textBox5.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                textBox6.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                textBox9.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                textBox5.ForeColor = SystemColors.WindowText;
+                textBox6.ForeColor = SystemColors.WindowText;
+            }
         }
         //
 
         //eliminar button
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            DialogResult r = MessageBox.Show("¿Estás seguro de eliminar este cliente?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (r == DialogResult.Yes)
+            if (dataGridView1.RowCount > 0)
             {
-                sql.deleteClient(dataGridView1.CurrentRow.Cells[1].Value.ToString());
-                textBox4.Text = "";
-                textBox5.Text = "";
-                textBox6.Text = "";
-                textBox9.Text = "";
-                loadClients();
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                DialogResult r = MessageBox.Show("¿Estás seguro de eliminar este cliente?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (r == DialogResult.Yes)
+                {
+                    sql.deleteClient(dataGridView1.CurrentRow.Cells[1].Value.ToString());
+                    textBox4.Text = "";
+                    textBox5.Text = "";
+                    textBox6.Text = "";
+                    textBox9.Text = "";
+                    loadClients();
+                }
             }
         }
 

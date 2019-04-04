@@ -75,14 +75,13 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label31 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.comboBox17 = new System.Windows.Forms.ComboBox();
             this.comboBox16 = new System.Windows.Forms.ComboBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.comboBox12 = new System.Windows.Forms.ComboBox();
             this.label24 = new System.Windows.Forms.Label();
@@ -100,17 +99,20 @@
             this.datagridviewNE3 = new cristales_pva.datagridviewNE();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.historalDeEntradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.comboBox11 = new System.Windows.Forms.ComboBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.comboBox10 = new System.Windows.Forms.ComboBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -166,8 +168,6 @@
             this.comboBox9 = new System.Windows.Forms.ComboBox();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -408,19 +408,20 @@
             this.pegadoEspecialToolStripMenuItem,
             this.pEPSToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(192, 92);
             // 
             // borrarRegistroToolStripMenuItem
             // 
             this.borrarRegistroToolStripMenuItem.Name = "borrarRegistroToolStripMenuItem";
-            this.borrarRegistroToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.borrarRegistroToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.borrarRegistroToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.borrarRegistroToolStripMenuItem.Text = "Borrar registro";
             this.borrarRegistroToolStripMenuItem.Click += new System.EventHandler(this.borrarRegistroToolStripMenuItem_Click);
             // 
             // pegadoEspecialToolStripMenuItem
             // 
             this.pegadoEspecialToolStripMenuItem.Name = "pegadoEspecialToolStripMenuItem";
-            this.pegadoEspecialToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.pegadoEspecialToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.pegadoEspecialToolStripMenuItem.Text = "Pegado especial";
             this.pegadoEspecialToolStripMenuItem.Click += new System.EventHandler(this.pegadoEspecialToolStripMenuItem_Click);
             // 
@@ -430,14 +431,15 @@
             this.salidaToolStripMenuItem,
             this.entradaToolStripMenuItem});
             this.pEPSToolStripMenuItem.Name = "pEPSToolStripMenuItem";
-            this.pEPSToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.pEPSToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.pEPSToolStripMenuItem.Text = "Entrada/Salida";
             // 
             // salidaToolStripMenuItem
             // 
             this.salidaToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.salidas_arrow;
             this.salidaToolStripMenuItem.Name = "salidaToolStripMenuItem";
-            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.salidaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.salidaToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.salidaToolStripMenuItem.Text = "Salida";
             this.salidaToolStripMenuItem.Click += new System.EventHandler(this.salidaToolStripMenuItem_Click);
             // 
@@ -445,7 +447,8 @@
             // 
             this.entradaToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.entradas_arrow;
             this.entradaToolStripMenuItem.Name = "entradaToolStripMenuItem";
-            this.entradaToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.entradaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.entradaToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.entradaToolStripMenuItem.Text = "Entrada";
             this.entradaToolStripMenuItem.Click += new System.EventHandler(this.entradaToolStripMenuItem_Click);
             // 
@@ -560,6 +563,14 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Location = new System.Drawing.Point(351, 71);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(257, 20);
+            this.dateTimePicker3.TabIndex = 26;
+            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
             // comboBox17
             // 
             this.comboBox17.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -634,25 +645,6 @@
             this.button12.TabIndex = 20;
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // textBox8
-            // 
-            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox8.Location = new System.Drawing.Point(922, 384);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(87, 20);
-            this.textBox8.TabIndex = 19;
-            this.textBox8.Text = "150";
-            // 
-            // label23
-            // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(822, 387);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(94, 13);
-            this.label23.TabIndex = 18;
-            this.label23.Text = "Limite de registros:";
             // 
             // button13
             // 
@@ -822,14 +814,34 @@
             this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.historalDeEntradasToolStripMenuItem});
             this.contextMenuStrip3.Name = "contextMenuStrip3";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(183, 26);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(226, 26);
             // 
             // historalDeEntradasToolStripMenuItem
             // 
             this.historalDeEntradasToolStripMenuItem.Name = "historalDeEntradasToolStripMenuItem";
-            this.historalDeEntradasToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.historalDeEntradasToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.historalDeEntradasToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.historalDeEntradasToolStripMenuItem.Text = "Historial de entradas";
             this.historalDeEntradasToolStripMenuItem.Click += new System.EventHandler(this.historalDeEntradasToolStripMenuItem_Click);
+            // 
+            // textBox8
+            // 
+            this.textBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox8.Location = new System.Drawing.Point(922, 384);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(87, 20);
+            this.textBox8.TabIndex = 19;
+            this.textBox8.Text = "150";
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(822, 387);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(94, 13);
+            this.label23.TabIndex = 18;
+            this.label23.Text = "Limite de registros:";
             // 
             // tabPage2
             // 
@@ -845,6 +857,25 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Salidas";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox3.Location = new System.Drawing.Point(922, 384);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(87, 20);
+            this.textBox3.TabIndex = 19;
+            this.textBox3.Text = "150";
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(822, 387);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(94, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Limite de registros:";
             // 
             // label26
             // 
@@ -886,6 +917,14 @@
             this.groupBox2.Size = new System.Drawing.Size(1003, 100);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(351, 71);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(257, 20);
+            this.dateTimePicker2.TabIndex = 24;
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // comboBox11
             // 
@@ -961,25 +1000,6 @@
             this.button7.TabIndex = 20;
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // textBox3
-            // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Location = new System.Drawing.Point(922, 384);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(87, 20);
-            this.textBox3.TabIndex = 19;
-            this.textBox3.Text = "150";
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(822, 387);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(94, 13);
-            this.label14.TabIndex = 18;
-            this.label14.Text = "Limite de registros:";
             // 
             // button6
             // 
@@ -1149,12 +1169,13 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.historialToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(173, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(216, 26);
             // 
             // historialToolStripMenuItem
             // 
             this.historialToolStripMenuItem.Name = "historialToolStripMenuItem";
-            this.historialToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.historialToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.historialToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.historialToolStripMenuItem.Text = "Historial de salidas";
             this.historialToolStripMenuItem.Click += new System.EventHandler(this.historialToolStripMenuItem_Click);
             // 
@@ -1261,7 +1282,7 @@
             // dataGridViewTextBoxColumn7
             // 
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Khaki;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
             this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn7.HeaderText = "existencia";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
@@ -1579,22 +1600,6 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Visible = false;
             // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(351, 71);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(257, 20);
-            this.dateTimePicker2.TabIndex = 24;
-            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
-            // 
-            // dateTimePicker3
-            // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(351, 71);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(257, 20);
-            this.dateTimePicker3.TabIndex = 26;
-            this.dateTimePicker3.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
-            // 
             // inventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1759,6 +1764,12 @@
         private System.Windows.Forms.ToolStripMenuItem historialToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem historalDeEntradasToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBox11;
+        private System.Windows.Forms.ComboBox comboBox10;
+        private System.Windows.Forms.ComboBox comboBox17;
+        private System.Windows.Forms.ComboBox comboBox16;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -1766,11 +1777,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.ComboBox comboBox11;
-        private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.ComboBox comboBox17;
-        private System.Windows.Forms.ComboBox comboBox16;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
     }
 }

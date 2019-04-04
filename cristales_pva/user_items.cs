@@ -661,19 +661,22 @@ namespace cristales_pva
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy)
+            if (datagridviewNE1.RowCount > 0)
             {
-                if (constants.user_access >= 5)
+                if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy)
                 {
-                    if (datagridviewNE1.Rows.Count > 0)
+                    if (constants.user_access >= 5)
                     {
-                        pictureBox1.Visible = true;
-                        backgroundWorker3.RunWorkerAsync();                       
+                        if (datagridviewNE1.Rows.Count > 0)
+                        {
+                            pictureBox1.Visible = true;
+                            backgroundWorker3.RunWorkerAsync();
+                        }
                     }
-                }
-                else
-                {
-                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

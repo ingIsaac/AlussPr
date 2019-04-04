@@ -308,8 +308,7 @@ namespace cristales_pva
             else
             {
                 if (datagridviewNE1.RowCount > 0)
-                {
-                    contextMenuStrip1.Items[0].Visible = true;
+                {                  
                     contextMenuStrip1.Items[1].Visible = true;
                     contextMenuStrip1.Items[5].Visible = true;
                     contextMenuStrip1.Items[6].Visible = true;
@@ -324,10 +323,12 @@ namespace cristales_pva
                     if (datagridviewNE1.CurrentRow.Cells[5].Value.ToString() != "-2")
                     {
                         contextMenuStrip1.Items[7].Visible = true;
+                        contextMenuStrip1.Items[0].Visible = true;
                     }
                     else
                     {
                         contextMenuStrip1.Items[7].Visible = false;
+                        contextMenuStrip1.Items[0].Visible = false;
                     }
                 }
                 else
@@ -645,25 +646,35 @@ namespace cristales_pva
         //editar
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (constants.tipo_cotizacion == 5)
+            if (datagridviewNE1.RowCount > 0)
             {
-                if (datagridviewNE1.CurrentRow.Cells[5].Value.ToString() != "-1")
+                if (constants.tipo_cotizacion == 5)
+                {
+                    if (datagridviewNE1.CurrentRow.Cells[5].Value.ToString() != "-2")
+                    {
+                        if (datagridviewNE1.CurrentRow.Cells[5].Value.ToString() != "-1")
+                        {
+                            this.WindowState = FormWindowState.Minimized;
+                        }
+                        ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                    }
+                }
+                else
                 {
                     this.WindowState = FormWindowState.Minimized;
+                    ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
                 }
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Minimized;
-            }
-            ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);            
+            }       
         }
 
         //eliminar
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ((Form1)Application.OpenForms["Form1"]).eliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
-            loadALL();
+            if (datagridviewNE1.RowCount > 0)
+            {
+                ((Form1)Application.OpenForms["Form1"]).eliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                loadALL();
+            }
         }     
 
         //Unificar conceptos
@@ -726,13 +737,16 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
-                if (Application.OpenForms["merge_items"] == null)
+                if (constants.tipo_cotizacion == 5 && datagridviewNE1.CurrentRow.Cells[5].Value.ToString() == "-1")
                 {
-                    new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
-                }
-                else
-                {
-                    Application.OpenForms["merge_items"].Select();
+                    if (Application.OpenForms["merge_items"] == null)
+                    {
+                        new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
+                    }
+                    else
+                    {
+                        Application.OpenForms["merge_items"].Select();
+                    }
                 }
             }
         }
@@ -831,16 +845,25 @@ namespace cristales_pva
         //copybox
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ((Form1)Application.OpenForms["Form1"]).openCopybox((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+            if (datagridviewNE1.RowCount > 0)
+            {
+                if (constants.tipo_cotizacion == 5)
+                {
+                    ((Form1)Application.OpenForms["Form1"]).openCopybox((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                }
+            }
         }
 
         //duplicar concepto
         private void duplicarConceptoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            resetRowSelect();
-            constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
-            ((Form1)Application.OpenForms["Form1"]).reloadAll();
-            loadALL();
+            if (datagridviewNE1.RowCount > 0)
+            {
+                resetRowSelect();
+                constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                ((Form1)Application.OpenForms["Form1"]).reloadAll();
+                loadALL();
+            }
         }
 
         //cargar al cerrar
@@ -1086,17 +1109,26 @@ namespace cristales_pva
 
         private void acabadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            change_colors colors = new change_colors((int)datagridviewNE1.CurrentRow.Cells[0].Value, datagridviewNE1.CurrentRow.Cells[6].Value.ToString(), datagridviewNE1.CurrentRow.Cells[13].Value.ToString(), datagridviewNE1.CurrentRow.Cells[14].Value.ToString());
-            if (Application.OpenForms["change_colors"] == null)
+            if (datagridviewNE1.RowCount > 0)
             {
-                colors.ShowDialog();
-                colors.Select();
-            }
-            else
-            {
-                Application.OpenForms["change_colors"].Close();
-                colors.ShowDialog();
-                colors.Select();
+                if (constants.tipo_cotizacion == 5)
+                {
+                    if (datagridviewNE1.CurrentRow.Cells[5].Value.ToString() != "-2")
+                    {
+                        change_colors colors = new change_colors((int)datagridviewNE1.CurrentRow.Cells[0].Value, datagridviewNE1.CurrentRow.Cells[6].Value.ToString(), datagridviewNE1.CurrentRow.Cells[13].Value.ToString(), datagridviewNE1.CurrentRow.Cells[14].Value.ToString());
+                        if (Application.OpenForms["change_colors"] == null)
+                        {
+                            colors.ShowDialog();
+                            colors.Select();
+                        }
+                        else
+                        {
+                            Application.OpenForms["change_colors"].Close();
+                            colors.ShowDialog();
+                            colors.Select();
+                        }
+                    }
+                }
             }
         }
 

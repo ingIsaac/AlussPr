@@ -54,8 +54,11 @@ namespace cristales_pva
 
         private void seleccionarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ((guardar_cotizacion)Application.OpenForms["guardar_cotizacion"]).setCliente(dataGridView1.CurrentRow.Cells[1].Value.ToString());
-            this.Close();
+            if (dataGridView1.RowCount > 0)
+            {
+                ((guardar_cotizacion)Application.OpenForms["guardar_cotizacion"]).setCliente(dataGridView1.CurrentRow.Cells[1].Value.ToString());
+                this.Close();
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

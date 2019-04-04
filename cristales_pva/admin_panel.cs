@@ -88,17 +88,18 @@ namespace cristales_pva
             //datagridview_1 events
             datagridviewNE1.CellClick += datagridviewNE1_CellClick;
             datagridviewNE1.CellLeave += datagridviewNE1_CellLeave;
-            datagridviewNE1.CellContextMenuStripNeeded += datagridviewNE1_CellContextMenuStripNeeded;
             datagridviewNE1.DataError += DatagridviewNE1_DataError;
             datagridviewNE1.EditingControlShowing += DatagridviewNE1_EditingControlShowing;
             //
 
+            //Other Events
+            contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
+            contextMenuStrip2.Opening += ContextMenuStrip2_Opening;
+            contextMenuStrip3.Opening += ContextMenuStrip3_Opening;
             backgroundWorker3.ProgressChanged += BackgroundWorker3_ProgressChanged;
             backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             backgroundWorker4.ProgressChanged += BackgroundWorker4_ProgressChanged;
             backgroundWorker4.RunWorkerCompleted += BackgroundWorker4_RunWorkerCompleted;
-            dataGridView4.CellContextMenuStripNeeded += DataGridView4_CellContextMenuStripNeeded;
-            dataGridView5.CellContextMenuStripNeeded += DataGridView5_CellContextMenuStripNeeded;
             dataGridView6.EditingControlShowing += DataGridView6_EditingControlShowing;
             dataGridView6.CellClick += DataGridView6_CellClick;
             tabPage2.Enter += TabPage2_Enter;
@@ -128,6 +129,30 @@ namespace cristales_pva
             }
             textBox7.Text = alum_kg.ToString();
             m_tc = constants.getTCFromXML();            
+        }
+
+        private void ContextMenuStrip3_Opening(object sender, CancelEventArgs e)
+        {
+            if(dataGridView5.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+            if(dataGridView4.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if (datagridviewNE1.Rows.Count == 0 || datagridviewNE1.CurrentCell.OwningColumn.HeaderText == "proveedor" || datagridviewNE1.CurrentCell.OwningColumn.HeaderText == "linea")
+            {
+                e.Cancel = true;              
+            }
         }
 
         private void CheckBox4_Click(object sender, EventArgs e)
@@ -1475,19 +1500,7 @@ namespace cristales_pva
             toolStripProgressBar1.Value = e.ProgressPercentage;
             toolStripStatusLabel2.Text = " " + e.ProgressPercentage + "%";
         }
-        //ends exportar a Excel
-
-        //Pegar en el Grid ------------------------------
-        private void datagridviewNE1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            if (datagridviewNE1.Rows.Count > 0)
-            {
-                if (datagridviewNE1.CurrentCell.OwningColumn.HeaderText != "proveedor" && datagridviewNE1.CurrentCell.OwningColumn.HeaderText != "linea")
-                {
-                    contextMenuStrip1.Show(MousePosition);
-                }
-            }
-        }
+        //ends exportar a Excel     
 
         private void pegadoEspecialToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1698,16 +1711,6 @@ namespace cristales_pva
                 MessageBox.Show("[Error] debes nombrar la categoría.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void DataGridView4_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            contextMenuStrip2.Show(MousePosition);
-        }
-
-        private void DataGridView5_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            contextMenuStrip3.Show(MousePosition);
-        }    
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2335,16 +2338,9 @@ namespace cristales_pva
         //Quitar nuevo item
         private void eliminarToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            if (dataGridView6.RowCount > 0)
+            if (dataGridView6.CurrentRow != dataGridView6.Rows[dataGridView6.RowCount - 1])
             {
-                try
-                {
-                    dataGridView6.Rows.Remove(dataGridView6.CurrentRow);
-                }
-                catch (Exception err)
-                {
-                    constants.errorLog(err.ToString());
-                }
+                dataGridView6.Rows.Remove(dataGridView6.CurrentRow);             
             }
         }
 
@@ -2680,10 +2676,13 @@ namespace cristales_pva
         {
             if (!datagridviewNE1.CurrentCell.ReadOnly)
             {
-                datagridviewNE1.CurrentCell.Selected = true;
-                datagridviewNE1.BeginEdit(true);
-                datagridviewNE1.CurrentCell.Value = datagridviewNE1.CurrentCell.Value.ToString().ToUpper();
-                datagridviewNE1.EndEdit();
+                if (datagridviewNE1.CurrentCell.OwningColumn.HeaderText != "proveedor" && datagridviewNE1.CurrentCell.OwningColumn.HeaderText != "linea")
+                {
+                    datagridviewNE1.CurrentCell.Selected = true;
+                    datagridviewNE1.BeginEdit(true);
+                    datagridviewNE1.CurrentCell.Value = datagridviewNE1.CurrentCell.Value.ToString().ToUpper();
+                    datagridviewNE1.EndEdit();
+                }
             }
         }
 
@@ -2692,10 +2691,13 @@ namespace cristales_pva
         {
             if (!datagridviewNE1.CurrentCell.ReadOnly)
             {
-                datagridviewNE1.CurrentCell.Selected = true;
-                datagridviewNE1.BeginEdit(true);
-                datagridviewNE1.CurrentCell.Value = datagridviewNE1.CurrentCell.Value.ToString().ToLower();
-                datagridviewNE1.EndEdit();
+                if (datagridviewNE1.CurrentCell.OwningColumn.HeaderText != "proveedor" && datagridviewNE1.CurrentCell.OwningColumn.HeaderText != "linea")
+                {
+                    datagridviewNE1.CurrentCell.Selected = true;
+                    datagridviewNE1.BeginEdit(true);
+                    datagridviewNE1.CurrentCell.Value = datagridviewNE1.CurrentCell.Value.ToString().ToLower();
+                    datagridviewNE1.EndEdit();
+                }
             }
         }
 

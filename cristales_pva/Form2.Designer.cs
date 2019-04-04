@@ -146,28 +146,29 @@
             // borrarHistorialDeUsuariosToolStripMenuItem
             // 
             this.borrarHistorialDeUsuariosToolStripMenuItem.Name = "borrarHistorialDeUsuariosToolStripMenuItem";
-            this.borrarHistorialDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.borrarHistorialDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.borrarHistorialDeUsuariosToolStripMenuItem.Text = "Borrar historial de usuarios";
             this.borrarHistorialDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.borrarHistorialDeUsuariosToolStripMenuItem_Click);
             // 
             // configuraciónDeConexiónToolStripMenuItem
             // 
             this.configuraciónDeConexiónToolStripMenuItem.Name = "configuraciónDeConexiónToolStripMenuItem";
-            this.configuraciónDeConexiónToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.configuraciónDeConexiónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
+            this.configuraciónDeConexiónToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.configuraciónDeConexiónToolStripMenuItem.Text = "Configuración de conexión";
             this.configuraciónDeConexiónToolStripMenuItem.Click += new System.EventHandler(this.configuraciónDeConexiónToolStripMenuItem_Click);
             // 
             // códigoDeVigenciaToolStripMenuItem
             // 
             this.códigoDeVigenciaToolStripMenuItem.Name = "códigoDeVigenciaToolStripMenuItem";
-            this.códigoDeVigenciaToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.códigoDeVigenciaToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.códigoDeVigenciaToolStripMenuItem.Text = "Licencia";
             this.códigoDeVigenciaToolStripMenuItem.Click += new System.EventHandler(this.códigoDeVigenciaToolStripMenuItem_Click);
             // 
             // errorLogToolStripMenuItem
             // 
             this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
-            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.errorLogToolStripMenuItem.Text = "Error log";
             this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);
             // 

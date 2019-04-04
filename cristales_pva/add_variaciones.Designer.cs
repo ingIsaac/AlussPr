@@ -149,19 +149,21 @@
             this.añadirToolStripMenuItem,
             this.asignarOperaciónToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(171, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(214, 70);
             // 
             // añadirToolStripMenuItem
             // 
             this.añadirToolStripMenuItem.Name = "añadirToolStripMenuItem";
-            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.añadirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.añadirToolStripMenuItem.Text = "Añadir";
             this.añadirToolStripMenuItem.Click += new System.EventHandler(this.añadirToolStripMenuItem_Click_1);
             // 
             // asignarOperaciónToolStripMenuItem
             // 
             this.asignarOperaciónToolStripMenuItem.Name = "asignarOperaciónToolStripMenuItem";
-            this.asignarOperaciónToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.asignarOperaciónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.asignarOperaciónToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.asignarOperaciónToolStripMenuItem.Text = "Asignar operación";
             this.asignarOperaciónToolStripMenuItem.Click += new System.EventHandler(this.asignarOperaciónToolStripMenuItem_Click);
             // 

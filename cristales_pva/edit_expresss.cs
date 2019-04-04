@@ -101,11 +101,14 @@ namespace cristales_pva
 
         private void DatagridviewNE1_MouseDown(object sender, MouseEventArgs e)
         {
-            id = 0;
-            if ((int)datagridviewNE1.CurrentRow.Cells[3].Value > 0)
-            {
-                id = (int)datagridviewNE1.CurrentRow.Cells[0].Value;
-                img = constants.byteToImage((Byte[])datagridviewNE1.CurrentRow.Cells[1].Value);
+            if(datagridviewNE1.RowCount > 0)
+            { 
+                id = 0;
+                if ((int)datagridviewNE1.CurrentRow.Cells[3].Value > 0)
+                {
+                    id = (int)datagridviewNE1.CurrentRow.Cells[0].Value;
+                    img = constants.byteToImage((Byte[])datagridviewNE1.CurrentRow.Cells[1].Value);
+                }
             }
         }       
 
@@ -113,20 +116,16 @@ namespace cristales_pva
         {           
             if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
             {
-                DragDropEffects dropEffect = datagridviewNE1.DoDragDrop(id, DragDropEffects.Move);               
+                if (id > 0)
+                {
+                    DragDropEffects dropEffect = datagridviewNE1.DoDragDrop(id, DragDropEffects.Move);
+                }              
             }                       
         }
 
         private void DatagridviewNE2_DragOver(object sender, DragEventArgs e)
         {
-            if (id > 0)
-            {            
-                e.Effect = DragDropEffects.Move;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.Move;
-            }
+            e.Effect = DragDropEffects.Move;       
         }
 
         private void DatagridviewNE2_DragDrop(object sender, DragEventArgs e)
@@ -256,6 +255,10 @@ namespace cristales_pva
             {
                 if (c != null)
                 {
+                    if(c.pic == null)
+                    {
+                        c.pic = constants.imageToByte(Properties.Resources.new_concepto);
+                    }
                     datagridviewNE1.Rows.Add(c.id, c.pic, c.ubicacion, c.modulo_id);
                     sum = (sum + (float)c.total);
                 }
@@ -333,9 +336,12 @@ namespace cristales_pva
         //Eliminar
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ((Form1)Application.OpenForms["Form1"]).eliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
-            datagridviewNE2.Rows.Clear();
-            cargarModulosCotizados();
+            if (datagridviewNE1.RowCount > 0)
+            {
+                ((Form1)Application.OpenForms["Form1"]).eliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                datagridviewNE2.Rows.Clear();
+                cargarModulosCotizados();
+            }
         }
 
         //Unificar Conceptos
@@ -393,25 +399,35 @@ namespace cristales_pva
         //Eliminar desde marged items
         private void eliminarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ((Form1)Application.OpenForms["Form1"]).eliminarArticuloCotizado((int)datagridviewNE2.CurrentRow.Cells[0].Value);
-            cargarMergedItems(merged_id);
+            if (datagridviewNE2.RowCount > 0)
+            {
+                ((Form1)Application.OpenForms["Form1"]).eliminarArticuloCotizado((int)datagridviewNE2.CurrentRow.Cells[0].Value);
+                cargarMergedItems(merged_id);
+                cargarModulosCotizados();
+            }
         }
 
         //Remover de concepto
         private void removerDeConceptoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ((Form1)Application.OpenForms["form1"]).setArticuloPersonalizacion((int)datagridviewNE2.CurrentRow.Cells[0].Value, merged_id, 0, true);
-            cargarMergedItems(merged_id);
-            cargarModulosCotizados();
+            if (datagridviewNE2.RowCount > 0)
+            {
+                ((Form1)Application.OpenForms["form1"]).setArticuloPersonalizacion((int)datagridviewNE2.CurrentRow.Cells[0].Value, merged_id, 0, true);
+                cargarMergedItems(merged_id);
+                cargarModulosCotizados();
+            }
         }
 
         //Cambiar esquema
         private void cambiarEsquemaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Application.OpenForms["cambiar_imagen"] == null)
+            if (datagridviewNE1.RowCount > 0)
             {
-                new cambiar_imagen((int)datagridviewNE1.CurrentRow.Cells[0].Value).ShowDialog();
-                ((Form1)Application.OpenForms["form1"]).refreshNewArticulo(5);
+                if (Application.OpenForms["cambiar_imagen"] == null)
+                {
+                    new cambiar_imagen((int)datagridviewNE1.CurrentRow.Cells[0].Value).ShowDialog();
+                    ((Form1)Application.OpenForms["form1"]).refreshNewArticulo(5);
+                }
             }
         }
         //---------------------------------------------------->

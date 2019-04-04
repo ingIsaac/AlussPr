@@ -62,26 +62,29 @@
             this.unificarAConceptosToolStripMenuItem,
             this.cambiarEsquemaToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(185, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(227, 70);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // unificarAConceptosToolStripMenuItem
             // 
             this.unificarAConceptosToolStripMenuItem.Name = "unificarAConceptosToolStripMenuItem";
-            this.unificarAConceptosToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.unificarAConceptosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.unificarAConceptosToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.unificarAConceptosToolStripMenuItem.Text = "Unificar a Conceptos";
             this.unificarAConceptosToolStripMenuItem.Click += new System.EventHandler(this.unificarAConceptosToolStripMenuItem_Click);
             // 
             // cambiarEsquemaToolStripMenuItem
             // 
             this.cambiarEsquemaToolStripMenuItem.Name = "cambiarEsquemaToolStripMenuItem";
-            this.cambiarEsquemaToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.cambiarEsquemaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+            this.cambiarEsquemaToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.cambiarEsquemaToolStripMenuItem.Text = "Cambiar Esquema";
             this.cambiarEsquemaToolStripMenuItem.Click += new System.EventHandler(this.cambiarEsquemaToolStripMenuItem_Click);
             // 
@@ -91,19 +94,21 @@
             this.eliminarToolStripMenuItem1,
             this.removerDeConceptoToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(193, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(230, 48);
             // 
             // eliminarToolStripMenuItem1
             // 
             this.eliminarToolStripMenuItem1.Name = "eliminarToolStripMenuItem1";
-            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
+            this.eliminarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(229, 22);
             this.eliminarToolStripMenuItem1.Text = "Eliminar";
             this.eliminarToolStripMenuItem1.Click += new System.EventHandler(this.eliminarToolStripMenuItem1_Click);
             // 
             // removerDeConceptoToolStripMenuItem
             // 
             this.removerDeConceptoToolStripMenuItem.Name = "removerDeConceptoToolStripMenuItem";
-            this.removerDeConceptoToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.removerDeConceptoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
+            this.removerDeConceptoToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.removerDeConceptoToolStripMenuItem.Text = "Remover de Concepto";
             this.removerDeConceptoToolStripMenuItem.Click += new System.EventHandler(this.removerDeConceptoToolStripMenuItem_Click);
             // 
@@ -183,7 +188,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 28);
             this.label3.TabIndex = 10;
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
             // 

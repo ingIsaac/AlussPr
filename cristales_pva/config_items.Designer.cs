@@ -59,12 +59,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cambiarToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(120, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 48);
             // 
             // cambiarToolStripMenuItem
             // 
             this.cambiarToolStripMenuItem.Name = "cambiarToolStripMenuItem";
-            this.cambiarToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.cambiarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.cambiarToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.cambiarToolStripMenuItem.Text = "Cambiar";
             this.cambiarToolStripMenuItem.Click += new System.EventHandler(this.cambiarToolStripMenuItem_Click);
             // 

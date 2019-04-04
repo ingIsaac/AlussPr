@@ -43,7 +43,7 @@ namespace cristales_pva
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(datagridviewNE1.RowCount > 0)
+            if(datagridviewNE1.CurrentRow != datagridviewNE1.Rows[datagridviewNE1.RowCount-1])
             {
                 datagridviewNE1.Rows.Remove(datagridviewNE1.CurrentRow);
             }

@@ -25,11 +25,7 @@ namespace cristales_pva
             InitializeComponent();
             dataGridView1.CellClick += DataGridView1_CellClick1;
             dataGridView1.CellLeave += DataGridView1_CellLeave;
-            dataGridView4.CellContextMenuStripNeeded += DataGridView4_CellContextMenuStripNeeded1;
-            datagridviewNE1.CellContextMenuStripNeeded += datagridviewNE1_CellContextMenuStripNeeded1;
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
-            dataGridView1.CellContextMenuStripNeeded += DataGridView1_CellContextMenuStripNeeded;
-            dataGridView6.CellContextMenuStripNeeded += DataGridView6_CellContextMenuStripNeeded;
             dataGridView6.CellEndEdit += DataGridView6_CellEndEdit;
             dataGridView6.CellClick += DataGridView6_CellClick1;
             dataGridView6.CellLeave += DataGridView6_CellLeave;
@@ -48,7 +44,61 @@ namespace cristales_pva
             checkBox4.Click += CheckBox4_Click;
             textBox5.KeyDown += TextBox5_KeyDown;
             this.module_id = module_id;
+            contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
+            contextMenuStrip2.Opening += ContextMenuStrip2_Opening;
+            contextMenuStrip3.Opening += ContextMenuStrip3_Opening;
+            contextMenuStrip4.Opening += ContextMenuStrip4_Opening;
+            contextMenuStrip5.Opening += ContextMenuStrip5_Opening;
+            contextMenuStrip6.Opening += ContextMenuStrip6_Opening;
             loadAll();
+        }
+
+        private void ContextMenuStrip6_Opening(object sender, CancelEventArgs e)
+        {
+            if(dataGridView6.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip5_Opening(object sender, CancelEventArgs e)
+        {
+            if (dataGridView2.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip4_Opening(object sender, CancelEventArgs e)
+        {
+            if (dataGridView6.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip3_Opening(object sender, CancelEventArgs e)
+        {
+            if (dataGridView1.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip2_Opening(object sender, CancelEventArgs e)
+        {
+            if(dataGridView4.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if(dataGridView1.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void TextBox5_KeyDown(object sender, KeyEventArgs e)
@@ -349,56 +399,44 @@ namespace cristales_pva
             }
         }
 
-        //Agregar componente-------------------------------------------
-        private void DataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dataGridView1.RowCount > 0)
             {
-                contextMenuStrip3.Show(MousePosition);
+                if (comboBox3.SelectedIndex == 0)
+                {
+                    dataGridView6.Rows.Add("Cristal", "", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, 1, "", checkBox2.Checked ? "" : "0");
+                }
+                else if (comboBox3.SelectedIndex == 1)
+                {
+                    dataGridView6.Rows.Add("Perfil", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, dataGridView1.CurrentRow.Cells[2].Value, 1, "", checkBox2.Checked ? "" : "0");
+                }
+                else if (comboBox3.SelectedIndex == 2)
+                {
+                    dataGridView6.Rows.Add("Herraje", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, dataGridView1.CurrentRow.Cells[2].Value, 1, "", checkBox2.Checked ? "" : "0");
+                }
+                else if (comboBox3.SelectedIndex == 3)
+                {
+                    dataGridView6.Rows.Add("Otros", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, dataGridView1.CurrentRow.Cells[2].Value, 1, "", checkBox2.Checked ? "" : "0");
+                }
+                countItems();
+                tabControl1.SelectedTab = tabPage4;
             }
-        }
-
-        private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (comboBox3.SelectedIndex == 0)
-            {              
-                dataGridView6.Rows.Add("Cristal", "", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, 1, "",  checkBox2.Checked ? "" : "0");
-            }
-            else if (comboBox3.SelectedIndex == 1)
-            {
-                dataGridView6.Rows.Add("Perfil", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, dataGridView1.CurrentRow.Cells[2].Value, 1, "", checkBox2.Checked ? "" : "0");
-            }
-            else if (comboBox3.SelectedIndex == 2)
-            {
-                dataGridView6.Rows.Add("Herraje", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, dataGridView1.CurrentRow.Cells[2].Value, 1, "", checkBox2.Checked ? "" : "0");
-            }
-            else if (comboBox3.SelectedIndex == 3)
-            {
-                dataGridView6.Rows.Add("Otros", dataGridView1.CurrentRow.Cells[0].Value, dataGridView1.CurrentRow.Cells[1].Value, dataGridView1.CurrentRow.Cells[2].Value, 1, "", checkBox2.Checked ? "" : "0");
-            }
-            countItems();
-            tabControl1.SelectedTab = tabPage4;
         }
         //------------------------------------------------------------
 
-        //eliminar componente-----------------------------------------
-        private void DataGridView6_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        private void eliminarToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             if (dataGridView6.RowCount > 0)
             {
-                contextMenuStrip4.Show(MousePosition);
-            }
-        }
-
-        private void eliminarToolStripMenuItem2_Click(object sender, EventArgs e)
-        {           
-            dataGridView6.Rows.RemoveAt(dataGridView6.CurrentRow.Index);
-            dataGridView6.Refresh();
-            countItems();
-            tableLayoutPanel1.BackColor = Color.LightBlue;
-            for (int i = 0; i < tableLayoutPanel1.Controls.Count; i++)
-            {
-                tableLayoutPanel1.Controls[i].BackColor = Color.LightBlue;
+                dataGridView6.Rows.RemoveAt(dataGridView6.CurrentRow.Index);
+                dataGridView6.Refresh();
+                countItems();
+                tableLayoutPanel1.BackColor = Color.LightBlue;
+                for (int i = 0; i < tableLayoutPanel1.Controls.Count; i++)
+                {
+                    tableLayoutPanel1.Controls[i].BackColor = Color.LightBlue;
+                }
             }
         }
         //-----------------------------------------------------------
@@ -1824,51 +1862,52 @@ namespace cristales_pva
         }
 
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
-        {           
-            module_id = constants.stringToInt(datagridviewNE1.CurrentRow.Cells[0].Value.ToString());
-            modificar(module_id);
+        {
+            if (datagridviewNE1.RowCount > 0)
+            {
+                module_id = constants.stringToInt(datagridviewNE1.CurrentRow.Cells[0].Value.ToString());
+                modificar(module_id);
+            }
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try {
-                DialogResult r = MessageBox.Show("¿Estás seguro de eliminar esté modulo?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (r == DialogResult.Yes)
+            if (datagridviewNE1.RowCount > 0)
+            {
+                try
                 {
-                    string clave = datagridviewNE1.CurrentRow.Cells[1].Value.ToString();
-                    if (clave != label2.Text)
+                    DialogResult r = MessageBox.Show("¿Estás seguro de eliminar esté modulo?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (r == DialogResult.Yes)
                     {
-                        if (constants.user_access == 6)
-                        {                           
-                            sqlDateBaseManager sql = new sqlDateBaseManager();
-                            sql.deleteModule((int)datagridviewNE1.CurrentRow.Cells[0].Value);
-                            sql.dropTableOnGridView(datagridviewNE1, "modulos");
-                            MessageBox.Show("El módulo fue eliminado exitosamente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string clave = datagridviewNE1.CurrentRow.Cells[1].Value.ToString();
+                        if (clave != label2.Text)
+                        {
+                            if (constants.user_access == 6)
+                            {
+                                sqlDateBaseManager sql = new sqlDateBaseManager();
+                                sql.deleteModule((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                                sql.dropTableOnGridView(datagridviewNE1, "modulos");
+                                MessageBox.Show("El módulo fue eliminado exitosamente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("[Error] solo un administrador puede ejecutar esta orden.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("[Error] solo un administrador puede ejecutar esta orden.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("[Error] no se puede eliminar el módulo mientras esta abierto.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("[Error] no se puede eliminar el módulo mientras esta abierto.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                }
+                catch (Exception err)
+                {
+                    constants.errorLog(err.ToString());
+                    MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception err)
-            {
-                constants.errorLog(err.ToString());
-                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
-
-        private void datagridviewNE1_CellContextMenuStripNeeded1(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            contextMenuStrip1.Show(MousePosition);
-        }
-        //
 
         //Lineas
         private void button5_Click(object sender, EventArgs e)
@@ -1916,38 +1955,35 @@ namespace cristales_pva
 
         private void eliminarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView4.RowCount > 0)
             {
-                DialogResult r = MessageBox.Show("¿Estás seguro de eliminar está linea?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (r == DialogResult.Yes)
+                try
                 {
-                    if (constants.user_access == 6)
+                    DialogResult r = MessageBox.Show("¿Estás seguro de eliminar está linea?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (r == DialogResult.Yes)
                     {
-                        sqlDateBaseManager sql = new sqlDateBaseManager();
-                        sql.deleteLine((int)dataGridView4.CurrentRow.Cells[0].Value);
-                        sql.dropTableOnGridView(dataGridView4, "lineas_modulos");
-                        setLines();
-                        MessageBox.Show("La linea fue eliminada exitosamente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("[Error] solo un administrador puede ejecutar esta orden.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (constants.user_access == 6)
+                        {
+                            sqlDateBaseManager sql = new sqlDateBaseManager();
+                            sql.deleteLine((int)dataGridView4.CurrentRow.Cells[0].Value);
+                            sql.dropTableOnGridView(dataGridView4, "lineas_modulos");
+                            setLines();
+                            MessageBox.Show("La linea fue eliminada exitosamente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("[Error] solo un administrador puede ejecutar esta orden.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-            }
-            catch (Exception err)
-            {
-                constants.errorLog(err.ToString());
-                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception err)
+                {
+                    constants.errorLog(err.ToString());
+                    MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-
-        private void DataGridView4_CellContextMenuStripNeeded1(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            contextMenuStrip2.Show(MousePosition);
-        }
-        //
 
         private void crear_modulo_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -1963,30 +1999,7 @@ namespace cristales_pva
             module_id = 0;
             afterSave();
             button6.Visible = false;
-        }
-
-        //boton organizar
-        private void button7_Click(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked == true)
-            {
-                contextMenuStrip6.Show(MousePosition);           
-            }
-            else
-            {
-                loadArticulosModulo();
-                var data = (from x in articulos.modulos_articulos orderby x.componente descending select x);
-
-                if (data != null)
-                {
-                    foreach (var c in data)
-                    {
-                        dataGridView6.Rows.Add(c.componente, c.id_articulo, c.clave, c.articulo, c.cantidad, c.ubicacion, c.seccion);
-                    }
-                    setColors();
-                }
-            }      
-        }
+        }     
 
         private void seccionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2344,36 +2357,39 @@ namespace cristales_pva
 
         private void eliminarToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            try
+            if (dataGridView2.RowCount > 0)
             {
-                DialogResult r = MessageBox.Show("¿Estás seguro de eliminar esté diseño de apertura?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (r == DialogResult.Yes)
+                try
                 {
-                    if (constants.user_access == 6)
+                    DialogResult r = MessageBox.Show("¿Estás seguro de eliminar esté diseño de apertura?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (r == DialogResult.Yes)
                     {
-                        string id_diseño = dataGridView2.CurrentRow.Cells[0].Value.ToString();
-                        if (File.Exists(constants.folder_resources_dir + "\\modulos\\" + id_diseño + ".jpg") == true)
+                        if (constants.user_access == 6)
                         {
-                            File.Delete(constants.folder_resources_dir + "\\modulos\\" + id_diseño + ".jpg");
+                            string id_diseño = dataGridView2.CurrentRow.Cells[0].Value.ToString();
+                            if (File.Exists(constants.folder_resources_dir + "\\modulos\\" + id_diseño + ".jpg") == true)
+                            {
+                                File.Delete(constants.folder_resources_dir + "\\modulos\\" + id_diseño + ".jpg");
+                            }
+                            sqlDateBaseManager sql = new sqlDateBaseManager();
+                            sql.borrarEsquema(constants.stringToInt(dataGridView2.CurrentRow.Cells[0].Value.ToString()));
+                            borrarDiseñoArbol(dataGridView2.CurrentRow.Cells[0].Value.ToString() + "-" + dataGridView2.CurrentRow.Cells[1].Value.ToString());
+                            sql.dropTableOnGridView(dataGridView2, "esquemas");
+                            clearDiseño();
+                            MessageBox.Show("El diseño de apertura fue eliminado exitosamente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        sqlDateBaseManager sql = new sqlDateBaseManager();
-                        sql.borrarEsquema(constants.stringToInt(dataGridView2.CurrentRow.Cells[0].Value.ToString()));
-                        borrarDiseñoArbol(dataGridView2.CurrentRow.Cells[0].Value.ToString() + "-" + dataGridView2.CurrentRow.Cells[1].Value.ToString());
-                        sql.dropTableOnGridView(dataGridView2, "esquemas");
-                        clearDiseño();
-                        MessageBox.Show("El diseño de apertura fue eliminado exitosamente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("[Error] solo un administrador puede ejecutar esta orden.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        else
+                        {
+                            MessageBox.Show("[Error] solo un administrador puede ejecutar esta orden.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-            }
-            catch (Exception err)
-            {
-                constants.errorLog(err.ToString());
-                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                catch (Exception err)
+                {
+                    constants.errorLog(err.ToString());
+                    MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -2399,8 +2415,7 @@ namespace cristales_pva
             {
                 return 1;
             }
-        }      
-       
+        }        
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -2606,27 +2621,36 @@ namespace cristales_pva
         //Copiar
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView6.Rows.Add(dataGridView6.CurrentRow.Cells[0].Value.ToString(), dataGridView6.CurrentRow.Cells[1].Value.ToString(), dataGridView6.CurrentRow.Cells[2].Value.ToString(), dataGridView6.CurrentRow.Cells[3].Value.ToString(), 1, "", checkBox2.Checked ? "" : "0");
-            countItems();
-            tabControl1.SelectedTab = tabPage4;
+            if (dataGridView6.RowCount > 0)
+            {
+                dataGridView6.Rows.Add(dataGridView6.CurrentRow.Cells[0].Value.ToString(), dataGridView6.CurrentRow.Cells[1].Value.ToString(), dataGridView6.CurrentRow.Cells[2].Value.ToString(), dataGridView6.CurrentRow.Cells[3].Value.ToString(), 1, "", checkBox2.Checked ? "" : "0");
+                countItems();
+                tabControl1.SelectedTab = tabPage4;
+            }
         }
 
         //Copiar articulos
         private void copiarArticulosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            copiarArticulos(constants.stringToInt(datagridviewNE1.CurrentRow.Cells[0].Value.ToString()));
+            if (datagridviewNE1.RowCount > 0)
+            {
+                copiarArticulos(constants.stringToInt(datagridviewNE1.CurrentRow.Cells[0].Value.ToString()));
+            }
         }
 
         //Eliminar Todos
         private void eliminarTodosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView6.Rows.Clear();
-            dataGridView6.Refresh();
-            countItems();
-            tableLayoutPanel1.BackColor = Color.LightBlue;
-            for (int i = 0; i < tableLayoutPanel1.Controls.Count; i++)
+            if (dataGridView6.RowCount > 0)
             {
-                tableLayoutPanel1.Controls[i].BackColor = Color.LightBlue;
+                dataGridView6.Rows.Clear();
+                dataGridView6.Refresh();
+                countItems();
+                tableLayoutPanel1.BackColor = Color.LightBlue;
+                for (int i = 0; i < tableLayoutPanel1.Controls.Count; i++)
+                {
+                    tableLayoutPanel1.Controls[i].BackColor = Color.LightBlue;
+                }
             }
         }
 
@@ -2850,6 +2874,30 @@ namespace cristales_pva
             if (!checkBox5.Checked)
             {
                 checkBox4.Checked = false;
+            }
+        }
+        //
+
+        //Boton organizar
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked == true)
+            {
+                contextMenuStrip6.Show(MousePosition);
+            }
+            else
+            {
+                loadArticulosModulo();
+                var data = (from x in articulos.modulos_articulos orderby x.componente descending select x);
+
+                if (data != null)
+                {
+                    foreach (var c in data)
+                    {
+                        dataGridView6.Rows.Add(c.componente, c.id_articulo, c.clave, c.articulo, c.cantidad, c.ubicacion, c.seccion);
+                    }
+                    setColors();
+                }
             }
         }
         //

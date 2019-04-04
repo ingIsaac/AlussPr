@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cristales");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Aluminio");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Herrajes");
@@ -41,6 +40,7 @@
             treeNode3,
             treeNode4,
             treeNode5});
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,29 +51,16 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox9 = new System.Windows.Forms.TextBox();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.datagridviewNE2 = new cristales_pva.datagridviewNE();
-            this.button3 = new System.Windows.Forms.Button();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.label88 = new System.Windows.Forms.Label();
-            this.button12 = new System.Windows.Forms.Button();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.button22 = new System.Windows.Forms.Button();
             this.label114 = new System.Windows.Forms.Label();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.datagridviewNE3 = new cristales_pva.datagridviewNE();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox39 = new System.Windows.Forms.CheckBox();
@@ -86,7 +73,6 @@
             this.label45 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -94,14 +80,12 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.button23 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.label43 = new System.Windows.Forms.Label();
@@ -115,11 +99,8 @@
             this.label52 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label62 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label61 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
             this.label60 = new System.Windows.Forms.Label();
             this.label48 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
@@ -130,8 +111,6 @@
             this.label53 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
             this.label111 = new System.Windows.Forms.Label();
             this.label110 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -139,7 +118,6 @@
             this.label87 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label109 = new System.Windows.Forms.Label();
@@ -153,9 +131,7 @@
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label34 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
             this.label33 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -168,7 +144,6 @@
             this.label29 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.button25 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.comboBox9 = new System.Windows.Forms.ComboBox();
             this.label106 = new System.Windows.Forms.Label();
@@ -186,11 +161,8 @@
             this.label70 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label78 = new System.Windows.Forms.Label();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label77 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
             this.label76 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.label75 = new System.Windows.Forms.Label();
@@ -200,13 +172,10 @@
             this.label69 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.button26 = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.label91 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label97 = new System.Windows.Forms.Label();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.label93 = new System.Windows.Forms.Label();
             this.label94 = new System.Windows.Forms.Label();
             this.label90 = new System.Windows.Forms.Label();
@@ -218,13 +187,9 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label92 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.label95 = new System.Windows.Forms.Label();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
             this.tabPage14 = new System.Windows.Forms.TabPage();
-            this.button11 = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.textBox36 = new System.Windows.Forms.TextBox();
             this.textBox35 = new System.Windows.Forms.TextBox();
@@ -234,11 +199,6 @@
             this.label82 = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
-            this.tabPage15 = new System.Windows.Forms.TabPage();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.label113 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -251,6 +211,72 @@
             this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicarConceptoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label112 = new System.Windows.Forms.Label();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.label108 = new System.Windows.Forms.Label();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.label107 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.textBox28 = new System.Windows.Forms.TextBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
+            this.label39 = new System.Windows.Forms.Label();
+            this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
+            this.label100 = new System.Windows.Forms.Label();
+            this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.button22 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button23 = new System.Windows.Forms.Button();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button24 = new System.Windows.Forms.Button();
+            this.button21 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button25 = new System.Windows.Forms.Button();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -280,90 +306,42 @@
             this.producciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ordenDeProducciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inventariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label112 = new System.Windows.Forms.Label();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.label108 = new System.Windows.Forms.Label();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.button15 = new System.Windows.Forms.Button();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label107 = new System.Windows.Forms.Label();
+            this.consultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultaRapidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.datagridviewNE2 = new cristales_pva.datagridviewNE();
+            this.datagridviewNE3 = new cristales_pva.datagridviewNE();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.datagridviewNE1 = new cristales_pva.datagridviewNE();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.textBox28 = new System.Windows.Forms.TextBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.button8 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
-            this.label39 = new System.Windows.Forms.Label();
-            this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
-            this.label100 = new System.Windows.Forms.Label();
             this.statusStripNE1 = new cristales_pva.statusStripNE();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).BeginInit();
             this.contextMenuStrip4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.tabPage5.SuspendLayout();
             this.groupBox13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.tabPage14.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.tabPage15.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.groupBox14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -371,8 +349,21 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.statusStripNE1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -490,52 +481,6 @@
             this.textBox9.TabIndex = 29;
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // button20
-            // 
-            this.button20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button20.Image = global::cristales_pva.Properties.Resources.Actions_arrow_right_icon;
-            this.button20.Location = new System.Drawing.Point(505, 369);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(23, 23);
-            this.button20.TabIndex = 28;
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button19
-            // 
-            this.button19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button19.Image = global::cristales_pva.Properties.Resources.Actions_arrow_left_icon;
-            this.button19.Location = new System.Drawing.Point(441, 369);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(23, 23);
-            this.button19.TabIndex = 27;
-            this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // datagridviewNE2
-            // 
-            this.datagridviewNE2.AllowUserToAddRows = false;
-            this.datagridviewNE2.AllowUserToDeleteRows = false;
-            this.datagridviewNE2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.datagridviewNE2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.datagridviewNE2.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE2.Location = new System.Drawing.Point(9, 111);
-            this.datagridviewNE2.Name = "datagridviewNE2";
-            this.datagridviewNE2.Size = new System.Drawing.Size(519, 254);
-            this.datagridviewNE2.TabIndex = 26;
-            // 
-            // button3
-            // 
-            this.button3.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
-            this.button3.Location = new System.Drawing.Point(498, 29);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(30, 23);
-            this.button3.TabIndex = 5;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
             // comboBox6
             // 
             this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -554,31 +499,6 @@
             this.label88.Size = new System.Drawing.Size(59, 13);
             this.label88.TabIndex = 23;
             this.label88.Text = "Proveedor:";
-            // 
-            // button12
-            // 
-            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button12.BackgroundImage = global::cristales_pva.Properties.Resources.Actions_application_exit_icon;
-            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button12.Location = new System.Drawing.Point(911, 19);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(26, 26);
-            this.button12.TabIndex = 22;
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Visible = false;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox8.Image = global::cristales_pva.Properties.Resources.Actions_edit_undo_icon;
-            this.pictureBox8.Location = new System.Drawing.Point(943, 19);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(25, 25);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox8.TabIndex = 22;
-            this.pictureBox8.TabStop = false;
-            this.pictureBox8.Visible = false;
             // 
             // tabControl1
             // 
@@ -651,17 +571,6 @@
             this.groupBox9.TabIndex = 24;
             this.groupBox9.TabStop = false;
             // 
-            // button22
-            // 
-            this.button22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button22.Image = global::cristales_pva.Properties.Resources.label_icon;
-            this.button22.Location = new System.Drawing.Point(320, 313);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(26, 23);
-            this.button22.TabIndex = 32;
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
             // label114
             // 
             this.label114.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -717,65 +626,18 @@
             this.label40.TabIndex = 27;
             this.label40.Text = "$:";
             // 
-            // datagridviewNE3
-            // 
-            this.datagridviewNE3.AllowUserToDeleteRows = false;
-            this.datagridviewNE3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.datagridviewNE3.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
-            this.datagridviewNE3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
-            this.datagridviewNE3.ContextMenuStrip = this.contextMenuStrip4;
-            this.datagridviewNE3.Location = new System.Drawing.Point(9, 208);
-            this.datagridviewNE3.Name = "datagridviewNE3";
-            this.datagridviewNE3.Size = new System.Drawing.Size(415, 96);
-            this.datagridviewNE3.TabIndex = 26;
-            // 
-            // Column1
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column1.HeaderText = "Acabado";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Tipo";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Largo (mm)";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Alto (mm)";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Cantidad";
-            this.Column6.Name = "Column6";
-            // 
             // contextMenuStrip4
             // 
             this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.removerToolStripMenuItem});
             this.contextMenuStrip4.Name = "contextMenuStrip4";
-            this.contextMenuStrip4.Size = new System.Drawing.Size(122, 26);
+            this.contextMenuStrip4.Size = new System.Drawing.Size(164, 26);
             // 
             // removerToolStripMenuItem
             // 
             this.removerToolStripMenuItem.Name = "removerToolStripMenuItem";
-            this.removerToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.removerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.removerToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.removerToolStripMenuItem.Text = "Remover";
             this.removerToolStripMenuItem.Click += new System.EventHandler(this.removerToolStripMenuItem_Click);
             // 
@@ -878,21 +740,6 @@
             this.textBox2.Text = "1000";
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox1.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox1.Location = new System.Drawing.Point(277, 14);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 134);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -964,19 +811,6 @@
             this.checkBox1.TabIndex = 6;
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
-            this.button1.Location = new System.Drawing.Point(352, 313);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "Agregar";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label7
             // 
@@ -1055,17 +889,6 @@
             this.groupBox10.Size = new System.Drawing.Size(415, 330);
             this.groupBox10.TabIndex = 26;
             this.groupBox10.TabStop = false;
-            // 
-            // button23
-            // 
-            this.button23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button23.Image = global::cristales_pva.Properties.Resources.label_icon;
-            this.button23.Location = new System.Drawing.Point(302, 301);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(26, 23);
-            this.button23.TabIndex = 29;
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // groupBox4
             // 
@@ -1214,19 +1037,6 @@
             this.richTextBox1.TabIndex = 22;
             this.richTextBox1.Text = "";
             // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox4.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox4.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox4.Location = new System.Drawing.Point(259, 14);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(150, 100);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 14;
-            this.pictureBox4.TabStop = false;
-            // 
             // label62
             // 
             this.label62.AutoSize = true;
@@ -1236,18 +1046,6 @@
             this.label62.Size = new System.Drawing.Size(0, 13);
             this.label62.TabIndex = 21;
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pictureBox5.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox5.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox5.Location = new System.Drawing.Point(10, 256);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(262, 68);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 26;
-            this.pictureBox5.TabStop = false;
-            // 
             // label61
             // 
             this.label61.AutoSize = true;
@@ -1256,19 +1054,6 @@
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(0, 13);
             this.label61.TabIndex = 20;
-            // 
-            // button9
-            // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
-            this.button9.Location = new System.Drawing.Point(334, 301);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 27;
-            this.button9.Text = "Agregar";
-            this.button9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label60
             // 
@@ -1391,28 +1176,6 @@
             this.groupBox11.TabIndex = 26;
             this.groupBox11.TabStop = false;
             // 
-            // button24
-            // 
-            this.button24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button24.Image = global::cristales_pva.Properties.Resources.label_icon;
-            this.button24.Location = new System.Drawing.Point(320, 313);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(26, 23);
-            this.button24.TabIndex = 37;
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // button21
-            // 
-            this.button21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button21.Image = global::cristales_pva.Properties.Resources.search_icon_16px_;
-            this.button21.Location = new System.Drawing.Point(218, 172);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(23, 23);
-            this.button21.TabIndex = 36;
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
             // label111
             // 
             this.label111.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1481,19 +1244,6 @@
             this.label86.Size = new System.Drawing.Size(59, 13);
             this.label86.TabIndex = 24;
             this.label86.Text = "Proveedor:";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox2.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox2.Location = new System.Drawing.Point(277, 14);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(150, 100);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
             // 
             // groupBox3
             // 
@@ -1643,19 +1393,6 @@
             this.textBox7.Text = "1";
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox3.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox3.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox3.Location = new System.Drawing.Point(9, 266);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(262, 70);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 21;
-            this.pictureBox3.TabStop = false;
-            // 
             // label34
             // 
             this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1666,19 +1403,6 @@
             this.label34.Size = new System.Drawing.Size(28, 13);
             this.label34.TabIndex = 12;
             this.label34.Text = "0.00";
-            // 
-            // button7
-            // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
-            this.button7.Location = new System.Drawing.Point(352, 313);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 33;
-            this.button7.Text = "Agregar";
-            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // label33
             // 
@@ -1815,17 +1539,6 @@
             this.groupBox12.Size = new System.Drawing.Size(433, 342);
             this.groupBox12.TabIndex = 26;
             this.groupBox12.TabStop = false;
-            // 
-            // button25
-            // 
-            this.button25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button25.Image = global::cristales_pva.Properties.Resources.label_icon;
-            this.button25.Location = new System.Drawing.Point(320, 313);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(26, 23);
-            this.button25.TabIndex = 39;
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // groupBox5
             // 
@@ -2015,19 +1728,6 @@
             this.label79.Size = new System.Drawing.Size(0, 13);
             this.label79.TabIndex = 22;
             // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox6.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox6.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox6.Location = new System.Drawing.Point(277, 14);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(150, 100);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 15;
-            this.pictureBox6.TabStop = false;
-            // 
             // label78
             // 
             this.label78.AutoSize = true;
@@ -2037,18 +1737,6 @@
             this.label78.Size = new System.Drawing.Size(0, 13);
             this.label78.TabIndex = 21;
             // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pictureBox7.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox7.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox7.Location = new System.Drawing.Point(9, 257);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(262, 79);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 16;
-            this.pictureBox7.TabStop = false;
-            // 
             // label77
             // 
             this.label77.AutoSize = true;
@@ -2057,19 +1745,6 @@
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(0, 13);
             this.label77.TabIndex = 20;
-            // 
-            // button10
-            // 
-            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button10.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
-            this.button10.Location = new System.Drawing.Point(352, 313);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 38;
-            this.button10.Text = "Agregar";
-            this.button10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // label76
             // 
@@ -2166,20 +1841,6 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Módulos";
             // 
-            // button26
-            // 
-            this.button26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button26.Image = global::cristales_pva.Properties.Resources.factory;
-            this.button26.Location = new System.Drawing.Point(144, 303);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(129, 23);
-            this.button26.TabIndex = 41;
-            this.button26.Text = "Opción Fábrica";
-            this.button26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
-            // 
             // groupBox13
             // 
             this.groupBox13.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2197,15 +1858,6 @@
             this.groupBox13.Size = new System.Drawing.Size(408, 214);
             this.groupBox13.TabIndex = 26;
             this.groupBox13.TabStop = false;
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox11.Location = new System.Drawing.Point(381, 12);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(21, 19);
-            this.pictureBox11.TabIndex = 27;
-            this.pictureBox11.TabStop = false;
             // 
             // label91
             // 
@@ -2245,19 +1897,6 @@
             this.label97.Size = new System.Drawing.Size(180, 23);
             this.label97.TabIndex = 13;
             this.label97.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox9.Location = new System.Drawing.Point(17, 68);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(147, 69);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox9.TabIndex = 12;
-            this.pictureBox9.TabStop = false;
             // 
             // label93
             // 
@@ -2381,19 +2020,6 @@
             this.groupBox7.TabIndex = 19;
             this.groupBox7.TabStop = false;
             // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox10.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
-            this.pictureBox10.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
-            this.pictureBox10.Location = new System.Drawing.Point(204, 27);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(198, 50);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox10.TabIndex = 8;
-            this.pictureBox10.TabStop = false;
-            // 
             // richTextBox3
             // 
             this.richTextBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2416,34 +2042,6 @@
             this.label95.TabIndex = 6;
             this.label95.Text = "Descripción:";
             // 
-            // button13
-            // 
-            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button13.Image = global::cristales_pva.Properties.Resources.config_module_x16;
-            this.button13.Location = new System.Drawing.Point(279, 303);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(132, 23);
-            this.button13.TabIndex = 39;
-            this.button13.Text = "Configurar Módulo";
-            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button13.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
-            // 
-            // button14
-            // 
-            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button14.Image = global::cristales_pva.Properties.Resources.modulos_icon_x16;
-            this.button14.Location = new System.Drawing.Point(6, 303);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(132, 23);
-            this.button14.TabIndex = 40;
-            this.button14.Text = "Ver Módulo";
-            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button14.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.Click += new System.EventHandler(this.button14_Click);
-            // 
             // tabPage14
             // 
             this.tabPage14.BackColor = System.Drawing.Color.White;
@@ -2455,20 +2053,6 @@
             this.tabPage14.Size = new System.Drawing.Size(421, 336);
             this.tabPage14.TabIndex = 5;
             this.tabPage14.Text = "Opciones";
-            // 
-            // button11
-            // 
-            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button11.Image = global::cristales_pva.Properties.Resources.save_16;
-            this.button11.Location = new System.Drawing.Point(310, 298);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(105, 32);
-            this.button11.TabIndex = 45;
-            this.button11.Text = "Guardar";
-            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button11.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // groupBox6
             // 
@@ -2561,72 +2145,6 @@
             this.label80.TabIndex = 0;
             this.label80.Text = "Cristales (%):";
             // 
-            // tabPage15
-            // 
-            this.tabPage15.BackColor = System.Drawing.Color.White;
-            this.tabPage15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.tabPage15.Controls.Add(this.splitContainer2);
-            this.tabPage15.Location = new System.Drawing.Point(4, 22);
-            this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage15.Size = new System.Drawing.Size(421, 336);
-            this.tabPage15.TabIndex = 6;
-            this.tabPage15.Text = "Inicio";
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.groupBox14);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.pictureBox12);
-            this.splitContainer2.Size = new System.Drawing.Size(415, 330);
-            this.splitContainer2.SplitterDistance = 150;
-            this.splitContainer2.TabIndex = 1;
-            // 
-            // groupBox14
-            // 
-            this.groupBox14.Controls.Add(this.richTextBox4);
-            this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox14.Location = new System.Drawing.Point(0, 0);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(150, 330);
-            this.groupBox14.TabIndex = 0;
-            this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "ChangeLog";
-            // 
-            // richTextBox4
-            // 
-            this.richTextBox4.BackColor = System.Drawing.Color.White;
-            this.richTextBox4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.richTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox4.Location = new System.Drawing.Point(3, 16);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.ReadOnly = true;
-            this.richTextBox4.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox4.Size = new System.Drawing.Size(144, 311);
-            this.richTextBox4.TabIndex = 0;
-            this.richTextBox4.Text = "";
-            // 
-            // pictureBox12
-            // 
-            this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox12.Image = global::cristales_pva.Properties.Resources.app_logo;
-            this.pictureBox12.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Padding = new System.Windows.Forms.Padding(60);
-            this.pictureBox12.Size = new System.Drawing.Size(261, 330);
-            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox12.TabIndex = 0;
-            this.pictureBox12.TabStop = false;
-            // 
             // label113
             // 
             this.label113.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -2675,54 +2193,61 @@
             this.copiarToolStripMenuItem,
             this.duplicarConceptoToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(176, 158);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(218, 158);
             // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.editarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // personalizarMóduloToolStripMenuItem
             // 
             this.personalizarMóduloToolStripMenuItem.Name = "personalizarMóduloToolStripMenuItem";
-            this.personalizarMóduloToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.personalizarMóduloToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.personalizarMóduloToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.personalizarMóduloToolStripMenuItem.Text = "Unificar Conceptos";
             this.personalizarMóduloToolStripMenuItem.Click += new System.EventHandler(this.personalizarMóduloToolStripMenuItem_Click);
             // 
             // agregarConceptoToolStripMenuItem
             // 
             this.agregarConceptoToolStripMenuItem.Name = "agregarConceptoToolStripMenuItem";
-            this.agregarConceptoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.agregarConceptoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.agregarConceptoToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.agregarConceptoToolStripMenuItem.Text = "Añadir a Concepto";
             this.agregarConceptoToolStripMenuItem.Click += new System.EventHandler(this.agregarConceptoToolStripMenuItem_Click);
             // 
             // nuevoConceptoToolStripMenuItem
             // 
             this.nuevoConceptoToolStripMenuItem.Name = "nuevoConceptoToolStripMenuItem";
-            this.nuevoConceptoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.nuevoConceptoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.nuevoConceptoToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.nuevoConceptoToolStripMenuItem.Text = "Nuevo Concepto";
             this.nuevoConceptoToolStripMenuItem.Click += new System.EventHandler(this.nuevoConceptoToolStripMenuItem_Click);
             // 
             // copiarToolStripMenuItem
             // 
             this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.copiarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.copiarToolStripMenuItem.Text = "Copiar";
             this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
             // 
             // duplicarConceptoToolStripMenuItem
             // 
             this.duplicarConceptoToolStripMenuItem.Name = "duplicarConceptoToolStripMenuItem";
-            this.duplicarConceptoToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.duplicarConceptoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.D)));
+            this.duplicarConceptoToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.duplicarConceptoToolStripMenuItem.Text = "Duplicar Concepto";
             this.duplicarConceptoToolStripMenuItem.Click += new System.EventHandler(this.duplicarConceptoToolStripMenuItem_Click);
             // 
@@ -2744,234 +2269,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(1019, 28);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "v.0.0.0.0";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cerrarSesionToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.panelDeAdministradorToolStripMenuItem,
-            this.opcionesDelProgramaToolStripMenuItem,
-            this.optimizarBaseDeDatosLocalToolStripMenuItem,
-            this.habilitarCambioDeParametrosToolStripMenuItem,
-            this.opcionesDeEmpresaToolStripMenuItem,
-            this.anunciosToolStripMenuItem,
-            this.errorLogToolStripMenuItem});
-            this.archivoToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.Status_user_online_icon;
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
-            this.archivoToolStripMenuItem.Text = "Herramientas de usuario";
-            // 
-            // cerrarSesionToolStripMenuItem
-            // 
-            this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
-            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.cerrarSesionToolStripMenuItem.Text = "Cerrar sesión";
-            this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesionToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(238, 6);
-            // 
-            // panelDeAdministradorToolStripMenuItem
-            // 
-            this.panelDeAdministradorToolStripMenuItem.Name = "panelDeAdministradorToolStripMenuItem";
-            this.panelDeAdministradorToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.panelDeAdministradorToolStripMenuItem.Text = "Panel de administrador";
-            this.panelDeAdministradorToolStripMenuItem.Click += new System.EventHandler(this.panelDeAdministradorToolStripMenuItem_Click);
-            // 
-            // opcionesDelProgramaToolStripMenuItem
-            // 
-            this.opcionesDelProgramaToolStripMenuItem.Name = "opcionesDelProgramaToolStripMenuItem";
-            this.opcionesDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.opcionesDelProgramaToolStripMenuItem.Text = "Opciones del programa";
-            this.opcionesDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.opcionesDelProgramaToolStripMenuItem_Click);
-            // 
-            // optimizarBaseDeDatosLocalToolStripMenuItem
-            // 
-            this.optimizarBaseDeDatosLocalToolStripMenuItem.Name = "optimizarBaseDeDatosLocalToolStripMenuItem";
-            this.optimizarBaseDeDatosLocalToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.optimizarBaseDeDatosLocalToolStripMenuItem.Text = "Optimizar base de datos local";
-            this.optimizarBaseDeDatosLocalToolStripMenuItem.Click += new System.EventHandler(this.optimizarBaseDeDatosLocalToolStripMenuItem_Click);
-            // 
-            // habilitarCambioDeParametrosToolStripMenuItem
-            // 
-            this.habilitarCambioDeParametrosToolStripMenuItem.Name = "habilitarCambioDeParametrosToolStripMenuItem";
-            this.habilitarCambioDeParametrosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.habilitarCambioDeParametrosToolStripMenuItem.Text = "Habilitar cambio de parámetros";
-            this.habilitarCambioDeParametrosToolStripMenuItem.Click += new System.EventHandler(this.habilitarCambioDeParametrosToolStripMenuItem_Click);
-            // 
-            // opcionesDeEmpresaToolStripMenuItem
-            // 
-            this.opcionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cambiarTiendaToolStripMenuItem});
-            this.opcionesDeEmpresaToolStripMenuItem.Name = "opcionesDeEmpresaToolStripMenuItem";
-            this.opcionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.opcionesDeEmpresaToolStripMenuItem.Text = "Opciones de empresa";
-            // 
-            // cambiarTiendaToolStripMenuItem
-            // 
-            this.cambiarTiendaToolStripMenuItem.Name = "cambiarTiendaToolStripMenuItem";
-            this.cambiarTiendaToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.cambiarTiendaToolStripMenuItem.Text = "Cambiar tienda";
-            this.cambiarTiendaToolStripMenuItem.Click += new System.EventHandler(this.cambiarTiendaToolStripMenuItem_Click);
-            // 
-            // anunciosToolStripMenuItem
-            // 
-            this.anunciosToolStripMenuItem.Name = "anunciosToolStripMenuItem";
-            this.anunciosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.anunciosToolStripMenuItem.Text = "Anuncios";
-            this.anunciosToolStripMenuItem.Click += new System.EventHandler(this.anunciosToolStripMenuItem_Click);
-            // 
-            // errorLogToolStripMenuItem
-            // 
-            this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
-            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.errorLogToolStripMenuItem.Text = "Error log";
-            this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);
-            // 
-            // clientesToolStripMenuItem
-            // 
-            this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuevoToolStripMenuItem,
-            this.editarClienteToolStripMenuItem});
-            this.clientesToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.client_account_template_icon;
-            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
-            this.clientesToolStripMenuItem.Text = "Clientes";
-            // 
-            // nuevoToolStripMenuItem
-            // 
-            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.nuevoToolStripMenuItem.Text = "Crear nuevo";
-            this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
-            // 
-            // editarClienteToolStripMenuItem
-            // 
-            this.editarClienteToolStripMenuItem.Name = "editarClienteToolStripMenuItem";
-            this.editarClienteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.editarClienteToolStripMenuItem.Text = "Editar cliente";
-            this.editarClienteToolStripMenuItem.Click += new System.EventHandler(this.editarClienteToolStripMenuItem_Click);
-            // 
-            // reportesToolStripMenuItem
-            // 
-            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generarReporteToolStripMenuItem});
-            this.reportesToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.Sales_report_icon;
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
-            this.reportesToolStripMenuItem.Text = "Reportes";
-            // 
-            // generarReporteToolStripMenuItem
-            // 
-            this.generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
-            this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.generarReporteToolStripMenuItem.Text = "Imprimir / exportar cotización";
-            this.generarReporteToolStripMenuItem.Click += new System.EventHandler(this.generarReporteToolStripMenuItem_Click);
-            // 
-            // desgloseToolStripMenuItem
-            // 
-            this.desgloseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generarDesgloseToolStripMenuItem});
-            this.desgloseToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.ver_icon_herrajes;
-            this.desgloseToolStripMenuItem.Name = "desgloseToolStripMenuItem";
-            this.desgloseToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
-            this.desgloseToolStripMenuItem.Text = "Desglose de material";
-            // 
-            // generarDesgloseToolStripMenuItem
-            // 
-            this.generarDesgloseToolStripMenuItem.Name = "generarDesgloseToolStripMenuItem";
-            this.generarDesgloseToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.generarDesgloseToolStripMenuItem.Text = "Generar desglose de material";
-            this.generarDesgloseToolStripMenuItem.Click += new System.EventHandler(this.generarDesgloseToolStripMenuItem_Click);
-            // 
-            // presupuestosToolStripMenuItem
-            // 
-            this.presupuestosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resToolStripMenuItem,
-            this.historialDePresupuestosToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.enviarCotizaciónToolStripMenuItem});
-            this.presupuestosToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.document_construction_icon;
-            this.presupuestosToolStripMenuItem.Name = "presupuestosToolStripMenuItem";
-            this.presupuestosToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
-            this.presupuestosToolStripMenuItem.Text = "Cotizaciones";
-            // 
-            // resToolStripMenuItem
-            // 
-            this.resToolStripMenuItem.Name = "resToolStripMenuItem";
-            this.resToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.resToolStripMenuItem.Text = "Registro de cotización";
-            this.resToolStripMenuItem.Click += new System.EventHandler(this.resToolStripMenuItem_Click);
-            // 
-            // historialDePresupuestosToolStripMenuItem
-            // 
-            this.historialDePresupuestosToolStripMenuItem.Name = "historialDePresupuestosToolStripMenuItem";
-            this.historialDePresupuestosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.historialDePresupuestosToolStripMenuItem.Text = "Historial de cotizaciones";
-            this.historialDePresupuestosToolStripMenuItem.Click += new System.EventHandler(this.historialDePresupuestosToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(199, 6);
-            // 
-            // enviarCotizaciónToolStripMenuItem
-            // 
-            this.enviarCotizaciónToolStripMenuItem.Name = "enviarCotizaciónToolStripMenuItem";
-            this.enviarCotizaciónToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.enviarCotizaciónToolStripMenuItem.Text = "Enviar cotización";
-            this.enviarCotizaciónToolStripMenuItem.Click += new System.EventHandler(this.enviarCotizaciónToolStripMenuItem_Click);
-            // 
-            // artículosDeUsuarioToolStripMenuItem
-            // 
-            this.artículosDeUsuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.generarPaquetesOServiciosToolStripMenuItem,
-            this.vareacionesToolStripMenuItem});
-            this.artículosDeUsuarioToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.small_packet;
-            this.artículosDeUsuarioToolStripMenuItem.Name = "artículosDeUsuarioToolStripMenuItem";
-            this.artículosDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
-            this.artículosDeUsuarioToolStripMenuItem.Text = "Paquetes y Servicios";
-            // 
-            // generarPaquetesOServiciosToolStripMenuItem
-            // 
-            this.generarPaquetesOServiciosToolStripMenuItem.Name = "generarPaquetesOServiciosToolStripMenuItem";
-            this.generarPaquetesOServiciosToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.generarPaquetesOServiciosToolStripMenuItem.Text = "Generar paquetes o servicios";
-            this.generarPaquetesOServiciosToolStripMenuItem.Click += new System.EventHandler(this.generarPaquetesOServiciosToolStripMenuItem_Click);
-            // 
-            // vareacionesToolStripMenuItem
-            // 
-            this.vareacionesToolStripMenuItem.Name = "vareacionesToolStripMenuItem";
-            this.vareacionesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.vareacionesToolStripMenuItem.Text = "Variaciones";
-            this.vareacionesToolStripMenuItem.Click += new System.EventHandler(this.vareacionesToolStripMenuItem_Click);
-            // 
-            // producciónToolStripMenuItem
-            // 
-            this.producciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ordenDeProducciónToolStripMenuItem});
-            this.producciónToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.production_icon;
-            this.producciónToolStripMenuItem.Name = "producciónToolStripMenuItem";
-            this.producciónToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
-            this.producciónToolStripMenuItem.Text = "Producción";
-            // 
-            // ordenDeProducciónToolStripMenuItem
-            // 
-            this.ordenDeProducciónToolStripMenuItem.Name = "ordenDeProducciónToolStripMenuItem";
-            this.ordenDeProducciónToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.ordenDeProducciónToolStripMenuItem.Text = "Generar orden de producción";
-            this.ordenDeProducciónToolStripMenuItem.Click += new System.EventHandler(this.ordenDeProducciónToolStripMenuItem_Click);
-            // 
-            // inventariosToolStripMenuItem
-            // 
-            this.inventariosToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.inventario;
-            this.inventariosToolStripMenuItem.Name = "inventariosToolStripMenuItem";
-            this.inventariosToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
-            this.inventariosToolStripMenuItem.Text = "Inventario";
-            this.inventariosToolStripMenuItem.Click += new System.EventHandler(this.inventariosToolStripMenuItem_Click);
             // 
             // backgroundWorker1
             // 
@@ -3069,42 +2366,6 @@
             this.label108.TabIndex = 27;
             this.label108.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button18
-            // 
-            this.button18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button18.BackgroundImage = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
-            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button18.Location = new System.Drawing.Point(609, 135);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(33, 23);
-            this.button18.TabIndex = 42;
-            this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button18_Click);
-            // 
-            // button17
-            // 
-            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button17.BackgroundImage = global::cristales_pva.Properties.Resources.Trash_can_icon;
-            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button17.Location = new System.Drawing.Point(147, 134);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(33, 24);
-            this.button17.TabIndex = 41;
-            this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(this.button17_Click);
-            // 
-            // button16
-            // 
-            this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button16.BackgroundImage = global::cristales_pva.Properties.Resources.copy_icon;
-            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button16.Location = new System.Drawing.Point(648, 108);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(30, 44);
-            this.button16.TabIndex = 40;
-            this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(this.button16_Click);
-            // 
             // checkBox3
             // 
             this.checkBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -3116,17 +2377,6 @@
             this.checkBox3.TabIndex = 39;
             this.checkBox3.Text = "CS";
             this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // button15
-            // 
-            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button15.Image = global::cristales_pva.Properties.Resources.box_in_icon;
-            this.button15.Location = new System.Drawing.Point(648, 18);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(30, 89);
-            this.button15.TabIndex = 38;
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // comboBox5
             // 
@@ -3155,22 +2405,6 @@
             this.label107.Size = new System.Drawing.Size(54, 13);
             this.label107.TabIndex = 40;
             this.label107.Text = "Sub-Folio:";
-            // 
-            // datagridviewNE1
-            // 
-            this.datagridviewNE1.AllowUserToDeleteRows = false;
-            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip2;
-            this.datagridviewNE1.Location = new System.Drawing.Point(147, 45);
-            this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.Size = new System.Drawing.Size(495, 86);
-            this.datagridviewNE1.TabIndex = 26;
             // 
             // groupBox8
             // 
@@ -3352,6 +2586,443 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // backgroundWorker3
+            // 
+            this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
+            // 
+            // label39
+            // 
+            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.Color.White;
+            this.label39.Location = new System.Drawing.Point(958, 8);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(49, 13);
+            this.label39.TabIndex = 38;
+            this.label39.Text = "v.0.0.0.0";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // backgroundWorker4
+            // 
+            this.backgroundWorker4.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker4_DoWork);
+            // 
+            // label100
+            // 
+            this.label100.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label100.AutoSize = true;
+            this.label100.ForeColor = System.Drawing.Color.Red;
+            this.label100.Location = new System.Drawing.Point(630, 626);
+            this.label100.Name = "label100";
+            this.label100.Size = new System.Drawing.Size(0, 13);
+            this.label100.TabIndex = 31;
+            // 
+            // tabPage15
+            // 
+            this.tabPage15.BackColor = System.Drawing.Color.White;
+            this.tabPage15.BackgroundImage = global::cristales_pva.Properties.Resources.app_logo;
+            this.tabPage15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.tabPage15.Location = new System.Drawing.Point(4, 22);
+            this.tabPage15.Name = "tabPage15";
+            this.tabPage15.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage15.Size = new System.Drawing.Size(421, 336);
+            this.tabPage15.TabIndex = 6;
+            this.tabPage15.Text = "Inicio";
+            // 
+            // button20
+            // 
+            this.button20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button20.Image = global::cristales_pva.Properties.Resources.Actions_arrow_right_icon;
+            this.button20.Location = new System.Drawing.Point(505, 369);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(23, 23);
+            this.button20.TabIndex = 28;
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // button19
+            // 
+            this.button19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button19.Image = global::cristales_pva.Properties.Resources.Actions_arrow_left_icon;
+            this.button19.Location = new System.Drawing.Point(441, 369);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(23, 23);
+            this.button19.TabIndex = 27;
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
+            // button3
+            // 
+            this.button3.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
+            this.button3.Location = new System.Drawing.Point(498, 29);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(30, 23);
+            this.button3.TabIndex = 5;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // button12
+            // 
+            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button12.BackgroundImage = global::cristales_pva.Properties.Resources.Actions_application_exit_icon;
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button12.Location = new System.Drawing.Point(911, 19);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(26, 26);
+            this.button12.TabIndex = 22;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Visible = false;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox8.Image = global::cristales_pva.Properties.Resources.Actions_edit_undo_icon;
+            this.pictureBox8.Location = new System.Drawing.Point(943, 19);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 22;
+            this.pictureBox8.TabStop = false;
+            this.pictureBox8.Visible = false;
+            // 
+            // button22
+            // 
+            this.button22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button22.Image = global::cristales_pva.Properties.Resources.label_icon;
+            this.button22.Location = new System.Drawing.Point(320, 313);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(26, 23);
+            this.button22.TabIndex = 32;
+            this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox1.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox1.Location = new System.Drawing.Point(277, 14);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 134);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
+            this.button1.Location = new System.Drawing.Point(352, 313);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Agregar";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button23
+            // 
+            this.button23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button23.Image = global::cristales_pva.Properties.Resources.label_icon;
+            this.button23.Location = new System.Drawing.Point(302, 301);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(26, 23);
+            this.button23.TabIndex = 29;
+            this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox4.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox4.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox4.Location = new System.Drawing.Point(259, 14);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(150, 100);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 14;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pictureBox5.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox5.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox5.Location = new System.Drawing.Point(10, 256);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(262, 68);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 26;
+            this.pictureBox5.TabStop = false;
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
+            this.button9.Location = new System.Drawing.Point(334, 301);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 27;
+            this.button9.Text = "Agregar";
+            this.button9.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button24
+            // 
+            this.button24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button24.Image = global::cristales_pva.Properties.Resources.label_icon;
+            this.button24.Location = new System.Drawing.Point(320, 313);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(26, 23);
+            this.button24.TabIndex = 37;
+            this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
+            // 
+            // button21
+            // 
+            this.button21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button21.Image = global::cristales_pva.Properties.Resources.search_icon_16px_;
+            this.button21.Location = new System.Drawing.Point(218, 172);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(23, 23);
+            this.button21.TabIndex = 36;
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox2.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox2.Location = new System.Drawing.Point(277, 14);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(150, 100);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox3.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox3.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox3.Location = new System.Drawing.Point(9, 266);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(262, 70);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 21;
+            this.pictureBox3.TabStop = false;
+            // 
+            // button7
+            // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button7.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
+            this.button7.Location = new System.Drawing.Point(352, 313);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 33;
+            this.button7.Text = "Agregar";
+            this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button25
+            // 
+            this.button25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button25.Image = global::cristales_pva.Properties.Resources.label_icon;
+            this.button25.Location = new System.Drawing.Point(320, 313);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(26, 23);
+            this.button25.TabIndex = 39;
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox6.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox6.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox6.Location = new System.Drawing.Point(277, 14);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(150, 100);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 15;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pictureBox7.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox7.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox7.Location = new System.Drawing.Point(9, 257);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(262, 79);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 16;
+            this.pictureBox7.TabStop = false;
+            // 
+            // button10
+            // 
+            this.button10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button10.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
+            this.button10.Location = new System.Drawing.Point(352, 313);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 38;
+            this.button10.Text = "Agregar";
+            this.button10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button26
+            // 
+            this.button26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button26.Image = global::cristales_pva.Properties.Resources.factory;
+            this.button26.Location = new System.Drawing.Point(144, 303);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(129, 23);
+            this.button26.TabIndex = 41;
+            this.button26.Text = "Opción Fábrica";
+            this.button26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button26.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox11.Location = new System.Drawing.Point(381, 12);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(21, 19);
+            this.pictureBox11.TabIndex = 27;
+            this.pictureBox11.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox9.Location = new System.Drawing.Point(17, 68);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(147, 69);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 12;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox10.ErrorImage = global::cristales_pva.Properties.Resources.Imagen_no_disponible;
+            this.pictureBox10.InitialImage = global::cristales_pva.Properties.Resources.loading_gif;
+            this.pictureBox10.Location = new System.Drawing.Point(204, 27);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(198, 50);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.TabIndex = 8;
+            this.pictureBox10.TabStop = false;
+            // 
+            // button13
+            // 
+            this.button13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button13.Image = global::cristales_pva.Properties.Resources.config_module_x16;
+            this.button13.Location = new System.Drawing.Point(279, 303);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(132, 23);
+            this.button13.TabIndex = 39;
+            this.button13.Text = "Configurar Módulo";
+            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button13.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button14
+            // 
+            this.button14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button14.Image = global::cristales_pva.Properties.Resources.modulos_icon_x16;
+            this.button14.Location = new System.Drawing.Point(6, 303);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(132, 23);
+            this.button14.TabIndex = 40;
+            this.button14.Text = "Ver Módulo";
+            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button14.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // button11
+            // 
+            this.button11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button11.Image = global::cristales_pva.Properties.Resources.save_16;
+            this.button11.Location = new System.Drawing.Point(310, 298);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(105, 32);
+            this.button11.TabIndex = 45;
+            this.button11.Text = "Guardar";
+            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button11.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button18
+            // 
+            this.button18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button18.BackgroundImage = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
+            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button18.Location = new System.Drawing.Point(609, 135);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(33, 23);
+            this.button18.TabIndex = 42;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button17
+            // 
+            this.button17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button17.BackgroundImage = global::cristales_pva.Properties.Resources.Trash_can_icon;
+            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button17.Location = new System.Drawing.Point(147, 134);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(33, 24);
+            this.button17.TabIndex = 41;
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // button16
+            // 
+            this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button16.BackgroundImage = global::cristales_pva.Properties.Resources.copy_icon;
+            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button16.Location = new System.Drawing.Point(648, 108);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(30, 44);
+            this.button16.TabIndex = 40;
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button15
+            // 
+            this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button15.Image = global::cristales_pva.Properties.Resources.box_in_icon;
+            this.button15.Location = new System.Drawing.Point(648, 18);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(30, 89);
+            this.button15.TabIndex = 38;
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
             // button8
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3412,37 +3083,337 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // backgroundWorker3
+            // archivoToolStripMenuItem
             // 
-            this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cerrarSesionToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.panelDeAdministradorToolStripMenuItem,
+            this.opcionesDelProgramaToolStripMenuItem,
+            this.optimizarBaseDeDatosLocalToolStripMenuItem,
+            this.habilitarCambioDeParametrosToolStripMenuItem,
+            this.opcionesDeEmpresaToolStripMenuItem,
+            this.anunciosToolStripMenuItem,
+            this.errorLogToolStripMenuItem});
+            this.archivoToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.Status_user_online_icon;
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.archivoToolStripMenuItem.Text = "Herramientas de usuario";
             // 
-            // label39
+            // cerrarSesionToolStripMenuItem
             // 
-            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label39.AutoSize = true;
-            this.label39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.White;
-            this.label39.Location = new System.Drawing.Point(958, 8);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(49, 13);
-            this.label39.TabIndex = 38;
-            this.label39.Text = "v.0.0.0.0";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.cerrarSesionToolStripMenuItem.Name = "cerrarSesionToolStripMenuItem";
+            this.cerrarSesionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
+            this.cerrarSesionToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.cerrarSesionToolStripMenuItem.Text = "Cerrar sesión";
+            this.cerrarSesionToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesionToolStripMenuItem_Click);
             // 
-            // backgroundWorker4
+            // toolStripSeparator1
             // 
-            this.backgroundWorker4.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker4_DoWork);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(238, 6);
             // 
-            // label100
+            // panelDeAdministradorToolStripMenuItem
             // 
-            this.label100.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label100.AutoSize = true;
-            this.label100.ForeColor = System.Drawing.Color.Red;
-            this.label100.Location = new System.Drawing.Point(630, 626);
-            this.label100.Name = "label100";
-            this.label100.Size = new System.Drawing.Size(0, 13);
-            this.label100.TabIndex = 31;
+            this.panelDeAdministradorToolStripMenuItem.Name = "panelDeAdministradorToolStripMenuItem";
+            this.panelDeAdministradorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.panelDeAdministradorToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.panelDeAdministradorToolStripMenuItem.Text = "Panel de administrador";
+            this.panelDeAdministradorToolStripMenuItem.Click += new System.EventHandler(this.panelDeAdministradorToolStripMenuItem_Click);
+            // 
+            // opcionesDelProgramaToolStripMenuItem
+            // 
+            this.opcionesDelProgramaToolStripMenuItem.Name = "opcionesDelProgramaToolStripMenuItem";
+            this.opcionesDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.opcionesDelProgramaToolStripMenuItem.Text = "Opciones del programa";
+            this.opcionesDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.opcionesDelProgramaToolStripMenuItem_Click);
+            // 
+            // optimizarBaseDeDatosLocalToolStripMenuItem
+            // 
+            this.optimizarBaseDeDatosLocalToolStripMenuItem.Name = "optimizarBaseDeDatosLocalToolStripMenuItem";
+            this.optimizarBaseDeDatosLocalToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.optimizarBaseDeDatosLocalToolStripMenuItem.Text = "Optimizar base de datos local";
+            this.optimizarBaseDeDatosLocalToolStripMenuItem.Click += new System.EventHandler(this.optimizarBaseDeDatosLocalToolStripMenuItem_Click);
+            // 
+            // habilitarCambioDeParametrosToolStripMenuItem
+            // 
+            this.habilitarCambioDeParametrosToolStripMenuItem.Name = "habilitarCambioDeParametrosToolStripMenuItem";
+            this.habilitarCambioDeParametrosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.habilitarCambioDeParametrosToolStripMenuItem.Text = "Habilitar cambio de parámetros";
+            this.habilitarCambioDeParametrosToolStripMenuItem.Click += new System.EventHandler(this.habilitarCambioDeParametrosToolStripMenuItem_Click);
+            // 
+            // opcionesDeEmpresaToolStripMenuItem
+            // 
+            this.opcionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cambiarTiendaToolStripMenuItem});
+            this.opcionesDeEmpresaToolStripMenuItem.Name = "opcionesDeEmpresaToolStripMenuItem";
+            this.opcionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.opcionesDeEmpresaToolStripMenuItem.Text = "Opciones de empresa";
+            // 
+            // cambiarTiendaToolStripMenuItem
+            // 
+            this.cambiarTiendaToolStripMenuItem.Name = "cambiarTiendaToolStripMenuItem";
+            this.cambiarTiendaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
+            this.cambiarTiendaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.cambiarTiendaToolStripMenuItem.Text = "Cambiar tienda";
+            this.cambiarTiendaToolStripMenuItem.Click += new System.EventHandler(this.cambiarTiendaToolStripMenuItem_Click);
+            // 
+            // anunciosToolStripMenuItem
+            // 
+            this.anunciosToolStripMenuItem.Name = "anunciosToolStripMenuItem";
+            this.anunciosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.anunciosToolStripMenuItem.Text = "Anuncios";
+            this.anunciosToolStripMenuItem.Click += new System.EventHandler(this.anunciosToolStripMenuItem_Click);
+            // 
+            // errorLogToolStripMenuItem
+            // 
+            this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
+            this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.errorLogToolStripMenuItem.Text = "Error log";
+            this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);
+            // 
+            // clientesToolStripMenuItem
+            // 
+            this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevoToolStripMenuItem,
+            this.editarClienteToolStripMenuItem});
+            this.clientesToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.client_account_template_icon;
+            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
+            this.clientesToolStripMenuItem.Text = "Clientes";
+            // 
+            // nuevoToolStripMenuItem
+            // 
+            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.nuevoToolStripMenuItem.Text = "Crear nuevo";
+            this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
+            // 
+            // editarClienteToolStripMenuItem
+            // 
+            this.editarClienteToolStripMenuItem.Name = "editarClienteToolStripMenuItem";
+            this.editarClienteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.editarClienteToolStripMenuItem.Text = "Editar cliente";
+            this.editarClienteToolStripMenuItem.Click += new System.EventHandler(this.editarClienteToolStripMenuItem_Click);
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generarReporteToolStripMenuItem});
+            this.reportesToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.Sales_report_icon;
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(85, 24);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // generarReporteToolStripMenuItem
+            // 
+            this.generarReporteToolStripMenuItem.Name = "generarReporteToolStripMenuItem";
+            this.generarReporteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.generarReporteToolStripMenuItem.Size = new System.Drawing.Size(272, 22);
+            this.generarReporteToolStripMenuItem.Text = "Imprimir / exportar cotización";
+            this.generarReporteToolStripMenuItem.Click += new System.EventHandler(this.generarReporteToolStripMenuItem_Click);
+            // 
+            // desgloseToolStripMenuItem
+            // 
+            this.desgloseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generarDesgloseToolStripMenuItem});
+            this.desgloseToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.ver_icon_herrajes;
+            this.desgloseToolStripMenuItem.Name = "desgloseToolStripMenuItem";
+            this.desgloseToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
+            this.desgloseToolStripMenuItem.Text = "Desglose de material";
+            // 
+            // generarDesgloseToolStripMenuItem
+            // 
+            this.generarDesgloseToolStripMenuItem.Name = "generarDesgloseToolStripMenuItem";
+            this.generarDesgloseToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.J)));
+            this.generarDesgloseToolStripMenuItem.Size = new System.Drawing.Size(264, 22);
+            this.generarDesgloseToolStripMenuItem.Text = "Generar desglose de material";
+            this.generarDesgloseToolStripMenuItem.Click += new System.EventHandler(this.generarDesgloseToolStripMenuItem_Click);
+            // 
+            // presupuestosToolStripMenuItem
+            // 
+            this.presupuestosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resToolStripMenuItem,
+            this.historialDePresupuestosToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.enviarCotizaciónToolStripMenuItem});
+            this.presupuestosToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.document_construction_icon;
+            this.presupuestosToolStripMenuItem.Name = "presupuestosToolStripMenuItem";
+            this.presupuestosToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
+            this.presupuestosToolStripMenuItem.Text = "Cotizaciones";
+            // 
+            // resToolStripMenuItem
+            // 
+            this.resToolStripMenuItem.Name = "resToolStripMenuItem";
+            this.resToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.resToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.resToolStripMenuItem.Text = "Registro de cotización";
+            this.resToolStripMenuItem.Click += new System.EventHandler(this.resToolStripMenuItem_Click);
+            // 
+            // historialDePresupuestosToolStripMenuItem
+            // 
+            this.historialDePresupuestosToolStripMenuItem.Name = "historialDePresupuestosToolStripMenuItem";
+            this.historialDePresupuestosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.historialDePresupuestosToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.historialDePresupuestosToolStripMenuItem.Text = "Historial de cotizaciones";
+            this.historialDePresupuestosToolStripMenuItem.Click += new System.EventHandler(this.historialDePresupuestosToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(242, 6);
+            // 
+            // enviarCotizaciónToolStripMenuItem
+            // 
+            this.enviarCotizaciónToolStripMenuItem.Name = "enviarCotizaciónToolStripMenuItem";
+            this.enviarCotizaciónToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.enviarCotizaciónToolStripMenuItem.Text = "Enviar cotización";
+            this.enviarCotizaciónToolStripMenuItem.Click += new System.EventHandler(this.enviarCotizaciónToolStripMenuItem_Click);
+            // 
+            // artículosDeUsuarioToolStripMenuItem
+            // 
+            this.artículosDeUsuarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.generarPaquetesOServiciosToolStripMenuItem,
+            this.vareacionesToolStripMenuItem});
+            this.artículosDeUsuarioToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.small_packet;
+            this.artículosDeUsuarioToolStripMenuItem.Name = "artículosDeUsuarioToolStripMenuItem";
+            this.artículosDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.artículosDeUsuarioToolStripMenuItem.Text = "Paquetes y Servicios";
+            // 
+            // generarPaquetesOServiciosToolStripMenuItem
+            // 
+            this.generarPaquetesOServiciosToolStripMenuItem.Name = "generarPaquetesOServiciosToolStripMenuItem";
+            this.generarPaquetesOServiciosToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.generarPaquetesOServiciosToolStripMenuItem.Text = "Generar paquetes o servicios";
+            this.generarPaquetesOServiciosToolStripMenuItem.Click += new System.EventHandler(this.generarPaquetesOServiciosToolStripMenuItem_Click);
+            // 
+            // vareacionesToolStripMenuItem
+            // 
+            this.vareacionesToolStripMenuItem.Name = "vareacionesToolStripMenuItem";
+            this.vareacionesToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.vareacionesToolStripMenuItem.Text = "Variaciones";
+            this.vareacionesToolStripMenuItem.Click += new System.EventHandler(this.vareacionesToolStripMenuItem_Click);
+            // 
+            // producciónToolStripMenuItem
+            // 
+            this.producciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ordenDeProducciónToolStripMenuItem});
+            this.producciónToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.production_icon;
+            this.producciónToolStripMenuItem.Name = "producciónToolStripMenuItem";
+            this.producciónToolStripMenuItem.Size = new System.Drawing.Size(100, 24);
+            this.producciónToolStripMenuItem.Text = "Producción";
+            // 
+            // ordenDeProducciónToolStripMenuItem
+            // 
+            this.ordenDeProducciónToolStripMenuItem.Name = "ordenDeProducciónToolStripMenuItem";
+            this.ordenDeProducciónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.K)));
+            this.ordenDeProducciónToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.ordenDeProducciónToolStripMenuItem.Text = "Generar orden de producción";
+            this.ordenDeProducciónToolStripMenuItem.Click += new System.EventHandler(this.ordenDeProducciónToolStripMenuItem_Click);
+            // 
+            // inventariosToolStripMenuItem
+            // 
+            this.inventariosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.consultaToolStripMenuItem,
+            this.consultaRapidaToolStripMenuItem});
+            this.inventariosToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.inventario;
+            this.inventariosToolStripMenuItem.Name = "inventariosToolStripMenuItem";
+            this.inventariosToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
+            this.inventariosToolStripMenuItem.Text = "Inventario";
+            // 
+            // consultaToolStripMenuItem
+            // 
+            this.consultaToolStripMenuItem.Name = "consultaToolStripMenuItem";
+            this.consultaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
+            this.consultaToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.consultaToolStripMenuItem.Text = "Gestionar inventario";
+            this.consultaToolStripMenuItem.Click += new System.EventHandler(this.consultaToolStripMenuItem_Click);
+            // 
+            // consultaRapidaToolStripMenuItem
+            // 
+            this.consultaRapidaToolStripMenuItem.Name = "consultaRapidaToolStripMenuItem";
+            this.consultaRapidaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.consultaRapidaToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.consultaRapidaToolStripMenuItem.Text = "Consulta rápida";
+            this.consultaRapidaToolStripMenuItem.Click += new System.EventHandler(this.consultaRapidaToolStripMenuItem_Click);
+            // 
+            // datagridviewNE2
+            // 
+            this.datagridviewNE2.AllowUserToAddRows = false;
+            this.datagridviewNE2.AllowUserToDeleteRows = false;
+            this.datagridviewNE2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.datagridviewNE2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.datagridviewNE2.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE2.Location = new System.Drawing.Point(9, 111);
+            this.datagridviewNE2.Name = "datagridviewNE2";
+            this.datagridviewNE2.Size = new System.Drawing.Size(519, 254);
+            this.datagridviewNE2.TabIndex = 26;
+            // 
+            // datagridviewNE3
+            // 
+            this.datagridviewNE3.AllowUserToDeleteRows = false;
+            this.datagridviewNE3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.datagridviewNE3.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.datagridviewNE3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.datagridviewNE3.ContextMenuStrip = this.contextMenuStrip4;
+            this.datagridviewNE3.Location = new System.Drawing.Point(9, 208);
+            this.datagridviewNE3.Name = "datagridviewNE3";
+            this.datagridviewNE3.Size = new System.Drawing.Size(415, 96);
+            this.datagridviewNE3.TabIndex = 26;
+            // 
+            // Column1
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column1.HeaderText = "Acabado";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Tipo";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Largo (mm)";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Alto (mm)";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Cantidad";
+            this.Column6.Name = "Column6";
+            // 
+            // datagridviewNE1
+            // 
+            this.datagridviewNE1.AllowUserToDeleteRows = false;
+            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip2;
+            this.datagridviewNE1.Location = new System.Drawing.Point(147, 45);
+            this.datagridviewNE1.Name = "datagridviewNE1";
+            this.datagridviewNE1.Size = new System.Drawing.Size(495, 86);
+            this.datagridviewNE1.TabIndex = 26;
             // 
             // statusStripNE1
             // 
@@ -3498,57 +3469,37 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).EndInit();
             this.contextMenuStrip4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.tabPage14.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.tabPage15.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.groupBox14.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -3558,9 +3509,22 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             this.statusStripNE1.ResumeLayout(false);
             this.statusStripNE1.PerformLayout();
             this.ResumeLayout(false);
@@ -3683,7 +3647,6 @@
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TabPage tabPage15;
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editarClienteToolStripMenuItem;
@@ -3839,17 +3802,16 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripMenuItem habilitarCambioDeParametrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inventariosToolStripMenuItem;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.RichTextBox richTextBox4;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.GroupBox groupBox14;
         private System.Windows.Forms.ToolStripMenuItem anunciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opcionesDeEmpresaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cambiarTiendaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generarPaquetesOServiciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vareacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consultaRapidaToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage15;
     }
 }
 

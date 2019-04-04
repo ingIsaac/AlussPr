@@ -253,6 +253,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap aunucios_wallpaper {
+            get {
+                object obj = ResourceManager.GetObject("aunucios_wallpaper", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap await {
             get {
                 object obj = ResourceManager.GetObject("await", resourceCulture);
@@ -1316,6 +1326,16 @@ namespace cristales_pva.Properties {
         internal static System.Drawing.Bitmap ver_icon_herrajes {
             get {
                 object obj = ResourceManager.GetObject("ver_icon_herrajes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap version_pic {
+            get {
+                object obj = ResourceManager.GetObject("version_pic", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

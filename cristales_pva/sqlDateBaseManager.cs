@@ -4867,6 +4867,24 @@ namespace cristales_pva
             return dt;
         }
 
+        public DataTable getArticuloInventario(string lista, int tienda, string value)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = string.Empty;              
+                query = "SELECT id, clave, articulo, linea, proveedor, costeo, existencia FROM inventario WHERE tienda_id='" + tienda + "' AND lista='" + lista + "' AND (clave LIKE '" + value + "%' OR articulo LIKE '" + value + "%' OR linea LIKE '" + value + "%' OR proveedor LIKE '" + value + "%')";            
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            return dt;
+        }
+
         public void getSalidas(int limit, DataGridView dataview, string lista, int tienda, string filtro = "", string filtro_value = "")
         {
             DataTable data = new DataTable();
@@ -5196,7 +5214,7 @@ namespace cristales_pva
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT TOP 5 texto, fecha FROM anuncios ORDER BY id DESC";
+            cmd.CommandText = "SELECT TOP 10 texto, fecha FROM anuncios ORDER BY id DESC";
 
             try
             {
@@ -5206,7 +5224,7 @@ namespace cristales_pva
                 {
                     if (r.GetValue(0) != null && r.GetValue(1) != null)
                     {
-                        dt.Add("[" + r.GetValue(1).ToString() + "] " + r.GetValue(0).ToString() + "\n\n");
+                        dt.Add("[" + r.GetValue(1).ToString() + "]\n\n" + r.GetValue(0).ToString() + "\n---------------------------------------\n");
                     }
                 }
             }

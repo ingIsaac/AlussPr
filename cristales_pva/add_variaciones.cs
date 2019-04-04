@@ -209,11 +209,11 @@ namespace cristales_pva
        
         private void añadirToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            if (comboBox4.Text != "")
+            if (datagridviewNE1.RowCount > 0)
             {
-                if ((comboBox4.Text == "Cambio" && textBox2.Text != "") || (comboBox4.Text == "Nuevo" && textBox2.Text == ""))
+                if (comboBox4.Text != "")
                 {
-                    if (datagridviewNE1.RowCount > 0)
+                    if ((comboBox4.Text == "Cambio" && textBox2.Text != "") || (comboBox4.Text == "Nuevo" && textBox2.Text == ""))
                     {
                         if (Application.OpenForms["g_variaciones"] != null)
                         {
@@ -235,15 +235,15 @@ namespace cristales_pva
                             }
                         }
                     }
+                    else
+                    {
+                        MessageBox.Show("[Error] debes asignar un artículo de operación.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("[Error] debes asignar un artículo de operación.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("[Error] debes asignar un tipo de operación.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else
-            {
-                MessageBox.Show("[Error] debes asignar un tipo de operación.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

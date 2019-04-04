@@ -54,33 +54,37 @@
             this.removerDeConceptoToolStripMenuItem,
             this.configuraciónToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(193, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 136);
             // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.editarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // añadirAConceptoToolStripMenuItem
             // 
             this.añadirAConceptoToolStripMenuItem.Name = "añadirAConceptoToolStripMenuItem";
-            this.añadirAConceptoToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.añadirAConceptoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.añadirAConceptoToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.añadirAConceptoToolStripMenuItem.Text = "Añadir a Concepto";
             this.añadirAConceptoToolStripMenuItem.Click += new System.EventHandler(this.añadirAConceptoToolStripMenuItem_Click);
             // 
             // removerDeConceptoToolStripMenuItem
             // 
             this.removerDeConceptoToolStripMenuItem.Name = "removerDeConceptoToolStripMenuItem";
-            this.removerDeConceptoToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.removerDeConceptoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.R)));
+            this.removerDeConceptoToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.removerDeConceptoToolStripMenuItem.Text = "Remover de Concepto";
             this.removerDeConceptoToolStripMenuItem.Click += new System.EventHandler(this.removerDeConceptoToolStripMenuItem_Click);
             // 
@@ -91,27 +95,31 @@
             this.asignaciónManualToolStripMenuItem,
             this.eliminarConfiguraciónToolStripMenuItem});
             this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
-            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.configuraciónToolStripMenuItem.Text = "Configuración";
             // 
             // indefinidoToolStripMenuItem
             // 
             this.indefinidoToolStripMenuItem.Name = "indefinidoToolStripMenuItem";
-            this.indefinidoToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.indefinidoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
+            this.indefinidoToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.indefinidoToolStripMenuItem.Text = "Cambiar Configuración";
             this.indefinidoToolStripMenuItem.Click += new System.EventHandler(this.indefinidoToolStripMenuItem_Click);
             // 
             // asignaciónManualToolStripMenuItem
             // 
             this.asignaciónManualToolStripMenuItem.Name = "asignaciónManualToolStripMenuItem";
-            this.asignaciónManualToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.asignaciónManualToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.M)));
+            this.asignaciónManualToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.asignaciónManualToolStripMenuItem.Text = "Asignación Manual";
             this.asignaciónManualToolStripMenuItem.Click += new System.EventHandler(this.asignaciónManualToolStripMenuItem_Click);
             // 
             // eliminarConfiguraciónToolStripMenuItem
             // 
             this.eliminarConfiguraciónToolStripMenuItem.Name = "eliminarConfiguraciónToolStripMenuItem";
-            this.eliminarConfiguraciónToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.eliminarConfiguraciónToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Z)));
+            this.eliminarConfiguraciónToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.eliminarConfiguraciónToolStripMenuItem.Text = "Eliminar Configuración";
             this.eliminarConfiguraciónToolStripMenuItem.Click += new System.EventHandler(this.eliminarConfiguraciónToolStripMenuItem_Click);
             // 

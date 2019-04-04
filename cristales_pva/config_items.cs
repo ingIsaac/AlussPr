@@ -324,30 +324,33 @@ namespace cristales_pva
 
         private void cambiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (wizard == false)
+            if (dataGridView1.RowCount > 0)
             {
-                if (componente == 0)
+                if (wizard == false)
                 {
-                    ((config_modulo)Application.OpenForms["config_modulo"]).setNewHerraje(index, constants.stringToInt(dataGridView1.CurrentRow.Cells[0].Value.ToString()), dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[2].Value.ToString(), dataGridView1.CurrentRow.Cells[5].Value.ToString());
+                    if (componente == 0)
+                    {
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setNewHerraje(index, constants.stringToInt(dataGridView1.CurrentRow.Cells[0].Value.ToString()), dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[2].Value.ToString(), dataGridView1.CurrentRow.Cells[5].Value.ToString());
+                    }
+                    else if (componente == 1)
+                    {
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setNewOtros(index, constants.stringToInt(dataGridView1.CurrentRow.Cells[0].Value.ToString()), dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[2].Value.ToString(), dataGridView1.CurrentRow.Cells[5].Value.ToString());
+                    }
+                    else if (componente == 2)
+                    {
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setNewCristal(index, dataGridView1.CurrentRow.Cells[0].Value.ToString(), dataGridView1.CurrentRow.Cells[1].Value.ToString());
+                    }
+                    else if (componente == 3)
+                    {
+                        ((config_modulo)Application.OpenForms["config_modulo"]).setNewPerfiles(index, constants.stringToInt(dataGridView1.CurrentRow.Cells[0].Value.ToString()), dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[2].Value.ToString());
+                    }
                 }
-                else if (componente == 1)
+                else
                 {
-                    ((config_modulo)Application.OpenForms["config_modulo"]).setNewOtros(index, constants.stringToInt(dataGridView1.CurrentRow.Cells[0].Value.ToString()), dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[2].Value.ToString(), dataGridView1.CurrentRow.Cells[5].Value.ToString());
+                    ((change_colors)Application.OpenForms["change_colors"]).setCristal(dataGridView1.CurrentRow.Cells[0].Value.ToString());
                 }
-                else if (componente == 2)
-                {
-                    ((config_modulo)Application.OpenForms["config_modulo"]).setNewCristal(index, dataGridView1.CurrentRow.Cells[0].Value.ToString(), dataGridView1.CurrentRow.Cells[1].Value.ToString());
-                }
-                else if (componente == 3)
-                {
-                    ((config_modulo)Application.OpenForms["config_modulo"]).setNewPerfiles(index, constants.stringToInt(dataGridView1.CurrentRow.Cells[0].Value.ToString()), dataGridView1.CurrentRow.Cells[1].Value.ToString(), dataGridView1.CurrentRow.Cells[2].Value.ToString());
-                }
+                this.Close();
             }
-            else
-            {
-                ((change_colors)Application.OpenForms["change_colors"]).setCristal(dataGridView1.CurrentRow.Cells[0].Value.ToString());
-            }
-            this.Close();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

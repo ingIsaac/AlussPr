@@ -354,7 +354,14 @@ namespace cristales_pva
             {
                 if (datagridviewNE1.RowCount > 0)
                 {
-                    contextMenuStrip2.Items[0].Visible = true;
+                    if (datagridviewNE1.CurrentRow.Cells[4].Value.ToString() == "-2")
+                    {
+                        contextMenuStrip2.Items[0].Visible = false;
+                    }
+                    else
+                    {
+                        contextMenuStrip2.Items[0].Visible = true;
+                    }
                     contextMenuStrip2.Items[1].Visible = true;
                     contextMenuStrip2.Items[5].Visible = true;
                     contextMenuStrip2.Items[6].Visible = true;
@@ -460,7 +467,7 @@ namespace cristales_pva
                 }
                 cb.Value = u;
                 datagridviewNE3.CurrentRow.Cells[datagridviewNE3.CurrentCell.ColumnIndex] = cb;
-                cb.Dispose();
+                cb.Dispose();               
             }                         
         }
 
@@ -586,7 +593,10 @@ namespace cristales_pva
             {
                 if (x.Cells[0].Value.ToString().StartsWith(acabado))
                 {
-                    r = x.Cells[0].Value + "," + x.Cells[1].Value + "," + x.Cells[2].Value + "," + x.Cells[3].Value + "," + x.Cells[4].Value;
+                    if (x.Cells[1].Value.ToString() != string.Empty)
+                    {
+                        r = x.Cells[0].Value + "," + x.Cells[1].Value + "," + x.Cells[2].Value + "," + x.Cells[3].Value + "," + x.Cells[4].Value;
+                    }
                 }               
             }
             return r;
@@ -667,9 +677,7 @@ namespace cristales_pva
             if(constants.licencia == "DEMO")
             {
                 Text = Text + " | VERSIÓN DE PRUEBA"; 
-            }
-            //Changelog
-            loadChangelog();
+            }            
             //Select control
             comboBox1.Focus();
             //Image List
@@ -694,18 +702,6 @@ namespace cristales_pva
             treeView1.Nodes[0].Nodes[2].ImageIndex = 1;
             treeView1.Nodes[0].Nodes[3].ImageIndex = 1;
             treeView1.Nodes[0].Nodes[4].ImageIndex = 1;
-        }
-
-        private void loadChangelog()
-        {
-            if (constants.local == false)
-            {
-                List<string> list = new sqlDateBaseManager().getChangelog();
-                if (list.Count > 0)
-                {
-                    richTextBox4.Lines = list.ToArray();
-                }
-            }
         }
 
         public void permitirAjusteIVA(bool r)
@@ -4587,7 +4583,10 @@ namespace cristales_pva
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            eliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+            if (datagridviewNE1.RowCount > 0)
+            {
+                eliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+            }
         }
         //------------------------------------------------------------------
 
@@ -5168,7 +5167,20 @@ namespace cristales_pva
 
         private void editarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+            if (datagridviewNE1.RowCount > 0)
+            {
+                if (constants.tipo_cotizacion == 5)
+                {
+                    if (datagridviewNE1.CurrentRow.Cells[4].Value.ToString() != "-2")
+                    {
+                        setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                    }
+                }
+                else
+                {
+                    setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                }
+            }
         }
         //---------------------------------------------------------------------------------
 
@@ -5397,6 +5409,7 @@ namespace cristales_pva
                         createAcabadoRow(c.perforado_dos_pulgadas);
                         createAcabadoRow(c.grabado);
                         createAcabadoRow(c.esmerilado);
+                        validarAcabado();
                     }
                     else
                     {
@@ -5950,13 +5963,16 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
-                if (Application.OpenForms["merge_items"] == null)
+                if (constants.tipo_cotizacion == 5 && datagridviewNE1.CurrentRow.Cells[4].Value.ToString() == "-1")
                 {
-                    new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
-                }
-                else
-                {
-                    Application.OpenForms["merge_items"].Select();
+                    if (Application.OpenForms["merge_items"] == null)
+                    {
+                        new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
+                    }
+                    else
+                    {
+                        Application.OpenForms["merge_items"].Select();
+                    }
                 }
             }
         }
@@ -6304,7 +6320,13 @@ namespace cristales_pva
 
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openCopybox((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+            if (datagridviewNE1.RowCount > 0)
+            {
+                if (constants.tipo_cotizacion == 5)
+                {
+                    openCopybox((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                }
+            }
         }
 
         //Habilitar cs
@@ -6575,11 +6597,14 @@ namespace cristales_pva
         //duplicar concepto
         private void duplicarConceptoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
-            reloadAll();
-            if (Application.OpenForms["articulos_cotizacion"] != null)
+            if (datagridviewNE1.RowCount > 0)
             {
-                ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                reloadAll();
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                }
             }
         }   
         
@@ -6943,37 +6968,6 @@ namespace cristales_pva
             new delete_password(false, true).ShowDialog();
         }
 
-        private void inventariosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (constants.local == false)
-            {
-                if (constants.user_access >= 4)
-                {
-                    if (Application.OpenForms["inventario"] == null)
-                    {
-                        inventario inventario = new inventario();
-                        inventario.Show();                        
-                    }
-                    else
-                    {
-                        if (Application.OpenForms["inventario"].WindowState == FormWindowState.Minimized)
-                        {
-                            Application.OpenForms["inventario"].WindowState = FormWindowState.Normal;
-                        }                        
-                        Application.OpenForms["inventario"].Select();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (4) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void button26_Click(object sender, EventArgs e)
         {
             if(Application.OpenForms["fabrica"] == null)
@@ -7084,6 +7078,61 @@ namespace cristales_pva
                 else
                 {
                     MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                if (constants.user_access >= 4)
+                {
+                    if (Application.OpenForms["inventario"] == null)
+                    {
+                        inventario inventario = new inventario();
+                        inventario.Show();
+                    }
+                    else
+                    {
+                        if (Application.OpenForms["inventario"].WindowState == FormWindowState.Minimized)
+                        {
+                            Application.OpenForms["inventario"].WindowState = FormWindowState.Normal;
+                        }
+                        Application.OpenForms["inventario"].Select();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (4) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void consultaRapidaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                if (Application.OpenForms["consulta_rapida"] == null)
+                {
+                    consulta_rapida consulta_rapida = new consulta_rapida();
+                    consulta_rapida.Show();
+                }
+                else
+                {
+                    if (Application.OpenForms["consulta_rapida"].WindowState == FormWindowState.Minimized)
+                    {
+                        Application.OpenForms["consulta_rapida"].WindowState = FormWindowState.Normal;
+                    }
+                    Application.OpenForms["consulta_rapida"].Select();
                 }
             }
             else

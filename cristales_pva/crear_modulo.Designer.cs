@@ -68,6 +68,10 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.datagridviewNE1 = new cristales_pva.datagridviewNE();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copiarArticulosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -77,6 +81,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.eliminarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label26 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
@@ -114,12 +120,6 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copiarArticulosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.eliminarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -156,8 +156,10 @@
             this.contextMenuStrip4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            this.contextMenuStrip2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.contextMenuStrip5.SuspendLayout();
@@ -165,8 +167,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.contextMenuStrip1.SuspendLayout();
-            this.contextMenuStrip2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -434,26 +434,30 @@
             this.copiarToolStripMenuItem,
             this.eliminarTodosToolStripMenuItem});
             this.contextMenuStrip4.Name = "contextMenuStrip4";
-            this.contextMenuStrip4.Size = new System.Drawing.Size(154, 70);
+            this.contextMenuStrip4.Size = new System.Drawing.Size(219, 70);
             // 
             // eliminarToolStripMenuItem2
             // 
             this.eliminarToolStripMenuItem2.Name = "eliminarToolStripMenuItem2";
-            this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(153, 22);
+            this.eliminarToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(218, 22);
             this.eliminarToolStripMenuItem2.Text = "Eliminar";
             this.eliminarToolStripMenuItem2.Click += new System.EventHandler(this.eliminarToolStripMenuItem2_Click);
             // 
             // copiarToolStripMenuItem
             // 
             this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.copiarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.copiarToolStripMenuItem.Text = "Copiar";
             this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
             // 
             // eliminarTodosToolStripMenuItem
             // 
             this.eliminarTodosToolStripMenuItem.Name = "eliminarTodosToolStripMenuItem";
-            this.eliminarTodosToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.eliminarTodosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.D)));
+            this.eliminarTodosToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.eliminarTodosToolStripMenuItem.Text = "Eliminar Todos";
             this.eliminarTodosToolStripMenuItem.Click += new System.EventHandler(this.eliminarTodosToolStripMenuItem_Click);
             // 
@@ -558,11 +562,45 @@
             this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
             this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
             this.datagridviewNE1.Location = new System.Drawing.Point(3, 3);
             this.datagridviewNE1.Name = "datagridviewNE1";
             this.datagridviewNE1.ReadOnly = true;
             this.datagridviewNE1.Size = new System.Drawing.Size(481, 195);
             this.datagridviewNE1.TabIndex = 4;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modificarToolStripMenuItem,
+            this.eliminarToolStripMenuItem,
+            this.copiarArticulosToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(198, 70);
+            // 
+            // modificarToolStripMenuItem
+            // 
+            this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
+            this.modificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
+            // 
+            // eliminarToolStripMenuItem
+            // 
+            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
+            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
+            // 
+            // copiarArticulosToolStripMenuItem
+            // 
+            this.copiarArticulosToolStripMenuItem.Name = "copiarArticulosToolStripMenuItem";
+            this.copiarArticulosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.copiarArticulosToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.copiarArticulosToolStripMenuItem.Text = "Copiar Artículos";
+            this.copiarArticulosToolStripMenuItem.Click += new System.EventHandler(this.copiarArticulosToolStripMenuItem_Click);
             // 
             // tabPage6
             // 
@@ -663,11 +701,27 @@
             this.dataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView4.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.ContextMenuStrip = this.contextMenuStrip2;
             this.dataGridView4.Location = new System.Drawing.Point(3, 3);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.ReadOnly = true;
             this.dataGridView4.Size = new System.Drawing.Size(481, 208);
             this.dataGridView4.TabIndex = 0;
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.eliminarToolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(160, 26);
+            // 
+            // eliminarToolStripMenuItem1
+            // 
+            this.eliminarToolStripMenuItem1.Name = "eliminarToolStripMenuItem1";
+            this.eliminarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(159, 22);
+            this.eliminarToolStripMenuItem1.Text = "Eliminar";
+            this.eliminarToolStripMenuItem1.Click += new System.EventHandler(this.eliminarToolStripMenuItem1_Click);
             // 
             // tabPage1
             // 
@@ -758,12 +812,13 @@
             this.contextMenuStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eliminarToolStripMenuItem3});
             this.contextMenuStrip5.Name = "contextMenuStrip5";
-            this.contextMenuStrip5.Size = new System.Drawing.Size(118, 26);
+            this.contextMenuStrip5.Size = new System.Drawing.Size(160, 26);
             // 
             // eliminarToolStripMenuItem3
             // 
             this.eliminarToolStripMenuItem3.Name = "eliminarToolStripMenuItem3";
-            this.eliminarToolStripMenuItem3.Size = new System.Drawing.Size(117, 22);
+            this.eliminarToolStripMenuItem3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem3.Size = new System.Drawing.Size(159, 22);
             this.eliminarToolStripMenuItem3.Text = "Eliminar";
             this.eliminarToolStripMenuItem3.Click += new System.EventHandler(this.eliminarToolStripMenuItem3_Click);
             // 
@@ -1114,50 +1169,6 @@
             this.button6.Visible = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.modificarToolStripMenuItem,
-            this.eliminarToolStripMenuItem,
-            this.copiarArticulosToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(160, 70);
-            // 
-            // modificarToolStripMenuItem
-            // 
-            this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.modificarToolStripMenuItem.Text = "Modificar";
-            this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
-            // 
-            // eliminarToolStripMenuItem
-            // 
-            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
-            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
-            // 
-            // copiarArticulosToolStripMenuItem
-            // 
-            this.copiarArticulosToolStripMenuItem.Name = "copiarArticulosToolStripMenuItem";
-            this.copiarArticulosToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.copiarArticulosToolStripMenuItem.Text = "Copiar Artículos";
-            this.copiarArticulosToolStripMenuItem.Click += new System.EventHandler(this.copiarArticulosToolStripMenuItem_Click);
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.eliminarToolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(118, 26);
-            // 
-            // eliminarToolStripMenuItem1
-            // 
-            this.eliminarToolStripMenuItem1.Name = "eliminarToolStripMenuItem1";
-            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
-            this.eliminarToolStripMenuItem1.Text = "Eliminar";
-            this.eliminarToolStripMenuItem1.Click += new System.EventHandler(this.eliminarToolStripMenuItem1_Click);
-            // 
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1350,6 +1361,7 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Highlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip3;
             this.dataGridView1.Location = new System.Drawing.Point(6, 97);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(448, 125);
@@ -1360,12 +1372,13 @@
             this.contextMenuStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarToolStripMenuItem});
             this.contextMenuStrip3.Name = "contextMenuStrip3";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(117, 26);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(157, 26);
             // 
             // agregarToolStripMenuItem
             // 
             this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.agregarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.agregarToolStripMenuItem.Text = "Agregar";
             this.agregarToolStripMenuItem.Click += new System.EventHandler(this.agregarToolStripMenuItem_Click);
             // 
@@ -1473,9 +1486,11 @@
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            this.contextMenuStrip2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
@@ -1486,8 +1501,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.contextMenuStrip2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1498,16 +1511,6 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        private void DataGridView4_CellContextMenuStripNeeded(object sender, System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void DataGridView3_CellContextMenuStripNeeded(object sender, System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
 
         #endregion

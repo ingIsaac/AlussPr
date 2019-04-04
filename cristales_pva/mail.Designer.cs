@@ -304,12 +304,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.quitarToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(108, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 26);
             // 
             // quitarToolStripMenuItem
             // 
             this.quitarToolStripMenuItem.Name = "quitarToolStripMenuItem";
-            this.quitarToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.quitarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.quitarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitarToolStripMenuItem.Text = "Quitar";
             this.quitarToolStripMenuItem.Click += new System.EventHandler(this.quitarToolStripMenuItem_Click);
             // 
@@ -390,12 +391,13 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.quitarToolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(108, 26);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(153, 48);
             // 
             // quitarToolStripMenuItem1
             // 
             this.quitarToolStripMenuItem1.Name = "quitarToolStripMenuItem1";
-            this.quitarToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.quitarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.quitarToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.quitarToolStripMenuItem1.Text = "Quitar";
             this.quitarToolStripMenuItem1.Click += new System.EventHandler(this.quitarToolStripMenuItem1_Click);
             // 

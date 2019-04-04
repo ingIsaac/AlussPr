@@ -52,12 +52,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verCortesToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(135, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(176, 48);
             // 
             // verCortesToolStripMenuItem
             // 
             this.verCortesToolStripMenuItem.Name = "verCortesToolStripMenuItem";
-            this.verCortesToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.verCortesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.verCortesToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.verCortesToolStripMenuItem.Text = "Ver detalles";
             this.verCortesToolStripMenuItem.Click += new System.EventHandler(this.verCortesToolStripMenuItem_Click);
             // 

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(admin_panel));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
@@ -74,6 +74,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button12 = new System.Windows.Forms.Button();
             this.datagridviewNE1 = new cristales_pva.datagridviewNE();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pegadoEspecialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toUpperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toLowerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.añadirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button15 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -120,12 +126,6 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.pegadoEspecialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarRegistroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toUpperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toLowerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.añadirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,6 +144,7 @@
             this.contextMenuStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -154,7 +155,6 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             this.contextMenuStrip3.SuspendLayout();
             this.SuspendLayout();
@@ -512,14 +512,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView6.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView6.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView6.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView6.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -558,6 +558,7 @@
             // eliminarToolStripMenuItem2
             // 
             this.eliminarToolStripMenuItem2.Name = "eliminarToolStripMenuItem2";
+            this.eliminarToolStripMenuItem2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
             this.eliminarToolStripMenuItem2.Size = new System.Drawing.Size(159, 22);
             this.eliminarToolStripMenuItem2.Text = "Eliminar";
             this.eliminarToolStripMenuItem2.Click += new System.EventHandler(this.eliminarToolStripMenuItem2_Click);
@@ -670,6 +671,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
             this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
             this.datagridviewNE1.Location = new System.Drawing.Point(5, 103);
             this.datagridviewNE1.MultiSelect = false;
             this.datagridviewNE1.Name = "datagridviewNE1";
@@ -677,9 +679,58 @@
             this.datagridviewNE1.Size = new System.Drawing.Size(981, 184);
             this.datagridviewNE1.TabIndex = 1;
             this.datagridviewNE1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridviewNE1_CellClick);
-            this.datagridviewNE1.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.datagridviewNE1_CellContextMenuStripNeeded);
             this.datagridviewNE1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridviewNE1_CellEndEdit);
             this.datagridviewNE1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.datagridviewNE1_CellLeave);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pegadoEspecialToolStripMenuItem,
+            this.eliminarRegistroToolStripMenuItem,
+            this.toUpperToolStripMenuItem,
+            this.toLowerToolStripMenuItem,
+            this.añadirToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(232, 114);
+            // 
+            // pegadoEspecialToolStripMenuItem
+            // 
+            this.pegadoEspecialToolStripMenuItem.Name = "pegadoEspecialToolStripMenuItem";
+            this.pegadoEspecialToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.pegadoEspecialToolStripMenuItem.Text = "Pegado Especial";
+            this.pegadoEspecialToolStripMenuItem.Click += new System.EventHandler(this.pegadoEspecialToolStripMenuItem_Click);
+            // 
+            // eliminarRegistroToolStripMenuItem
+            // 
+            this.eliminarRegistroToolStripMenuItem.Name = "eliminarRegistroToolStripMenuItem";
+            this.eliminarRegistroToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarRegistroToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.eliminarRegistroToolStripMenuItem.Text = "Eliminar Registro";
+            this.eliminarRegistroToolStripMenuItem.Click += new System.EventHandler(this.eliminarRegistroToolStripMenuItem_Click);
+            // 
+            // toUpperToolStripMenuItem
+            // 
+            this.toUpperToolStripMenuItem.Name = "toUpperToolStripMenuItem";
+            this.toUpperToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
+            this.toUpperToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.toUpperToolStripMenuItem.Text = "Cambiar a Mayúsculas";
+            this.toUpperToolStripMenuItem.Click += new System.EventHandler(this.toUpperToolStripMenuItem_Click);
+            // 
+            // toLowerToolStripMenuItem
+            // 
+            this.toLowerToolStripMenuItem.Name = "toLowerToolStripMenuItem";
+            this.toLowerToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+            this.toLowerToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.toLowerToolStripMenuItem.Text = "Cambiar a Minúsculas";
+            this.toLowerToolStripMenuItem.Click += new System.EventHandler(this.toLowerToolStripMenuItem_Click);
+            // 
+            // añadirToolStripMenuItem
+            // 
+            this.añadirToolStripMenuItem.Name = "añadirToolStripMenuItem";
+            this.añadirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.añadirToolStripMenuItem.Text = "Añadir %";
+            this.añadirToolStripMenuItem.Click += new System.EventHandler(this.añadirToolStripMenuItem_Click);
             // 
             // button15
             // 
@@ -1013,6 +1064,7 @@
             this.dataGridView5.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView5.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.ContextMenuStrip = this.contextMenuStrip3;
             this.dataGridView5.Location = new System.Drawing.Point(6, 19);
             this.dataGridView5.Name = "dataGridView5";
             this.dataGridView5.ReadOnly = true;
@@ -1166,6 +1218,7 @@
             this.dataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView4.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.ContextMenuStrip = this.contextMenuStrip2;
             this.dataGridView4.Location = new System.Drawing.Point(6, 19);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.ReadOnly = true;
@@ -1207,71 +1260,27 @@
             // 
             this.backgroundWorker3.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker3_DoWork);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pegadoEspecialToolStripMenuItem,
-            this.eliminarRegistroToolStripMenuItem,
-            this.toUpperToolStripMenuItem,
-            this.toLowerToolStripMenuItem,
-            this.añadirToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(194, 114);
-            // 
-            // pegadoEspecialToolStripMenuItem
-            // 
-            this.pegadoEspecialToolStripMenuItem.Name = "pegadoEspecialToolStripMenuItem";
-            this.pegadoEspecialToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.pegadoEspecialToolStripMenuItem.Text = "Pegado Especial";
-            this.pegadoEspecialToolStripMenuItem.Click += new System.EventHandler(this.pegadoEspecialToolStripMenuItem_Click);
-            // 
-            // eliminarRegistroToolStripMenuItem
-            // 
-            this.eliminarRegistroToolStripMenuItem.Name = "eliminarRegistroToolStripMenuItem";
-            this.eliminarRegistroToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.eliminarRegistroToolStripMenuItem.Text = "Eliminar Registro";
-            this.eliminarRegistroToolStripMenuItem.Click += new System.EventHandler(this.eliminarRegistroToolStripMenuItem_Click);
-            // 
-            // toUpperToolStripMenuItem
-            // 
-            this.toUpperToolStripMenuItem.Name = "toUpperToolStripMenuItem";
-            this.toUpperToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.toUpperToolStripMenuItem.Text = "Cambiar a Mayúsculas";
-            this.toUpperToolStripMenuItem.Click += new System.EventHandler(this.toUpperToolStripMenuItem_Click);
-            // 
-            // toLowerToolStripMenuItem
-            // 
-            this.toLowerToolStripMenuItem.Name = "toLowerToolStripMenuItem";
-            this.toLowerToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.toLowerToolStripMenuItem.Text = "Cambiar a Minúsculas";
-            this.toLowerToolStripMenuItem.Click += new System.EventHandler(this.toLowerToolStripMenuItem_Click);
-            // 
-            // añadirToolStripMenuItem
-            // 
-            this.añadirToolStripMenuItem.Name = "añadirToolStripMenuItem";
-            this.añadirToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-            this.añadirToolStripMenuItem.Text = "Añadir %";
-            this.añadirToolStripMenuItem.Click += new System.EventHandler(this.añadirToolStripMenuItem_Click);
-            // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eliminarToolStripMenuItem,
             this.modificarToolStripMenuItem1});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(126, 48);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(171, 48);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.eliminarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem1
             // 
             this.modificarToolStripMenuItem1.Name = "modificarToolStripMenuItem1";
-            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
+            this.modificarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.modificarToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
             this.modificarToolStripMenuItem1.Text = "Modificar";
             this.modificarToolStripMenuItem1.Click += new System.EventHandler(this.modificarToolStripMenuItem1_Click);
             // 
@@ -1281,19 +1290,21 @@
             this.eliminarToolStripMenuItem1,
             this.modificarToolStripMenuItem});
             this.contextMenuStrip3.Name = "contextMenuStrip3";
-            this.contextMenuStrip3.Size = new System.Drawing.Size(126, 48);
+            this.contextMenuStrip3.Size = new System.Drawing.Size(171, 48);
             // 
             // eliminarToolStripMenuItem1
             // 
             this.eliminarToolStripMenuItem1.Name = "eliminarToolStripMenuItem1";
-            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
+            this.eliminarToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
             this.eliminarToolStripMenuItem1.Text = "Eliminar";
             this.eliminarToolStripMenuItem1.Click += new System.EventHandler(this.eliminarToolStripMenuItem1_Click);
             // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.modificarToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.modificarToolStripMenuItem.Text = "Modificar";
             this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
@@ -1332,6 +1343,7 @@
             this.contextMenuStrip4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -1345,7 +1357,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             this.contextMenuStrip3.ResumeLayout(false);
             this.ResumeLayout(false);

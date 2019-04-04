@@ -252,6 +252,12 @@
       <DependentUpon>confirm_password.cs</DependentUpon>
     </Compile>
     <Compile Include="constants.cs" />
+    <Compile Include="consulta_rapida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="consulta_rapida.Designer.cs">
+      <DependentUpon>consulta_rapida.cs</DependentUpon>
+    </Compile>
     <Compile Include="copy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -682,6 +688,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="config_mail.resx">
       <DependentUpon>config_mail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="consulta_rapida.resx">
+      <DependentUpon>consulta_rapida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fabrica.resx">
       <DependentUpon>fabrica.cs</DependentUpon>
@@ -1133,6 +1142,10 @@
     <None Include="Resources\Collection-icon.png" />
     <None Include="Resources\loading_background.jpg" />
     <None Include="Resources\circulo_cargando.gif" />
+    <None Include="Resources\aunucios_wallpaper.jpg" />
+    <None Include="Resources\main_init_background.jpg" />
+    <None Include="Resources\main_init_background_.jpg" />
+    <None Include="Resources\version_pic.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

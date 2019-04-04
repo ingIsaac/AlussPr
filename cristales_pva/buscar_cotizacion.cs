@@ -30,16 +30,24 @@ namespace cristales_pva
             backgroundWorker3.WorkerReportsProgress = true;
             backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             backgroundWorker4.RunWorkerCompleted += BackgroundWorker4_RunWorkerCompleted;
-            datagridviewNE1.CellContextMenuStripNeeded += DataGridView1_CellContextMenuStripNeeded;
             datagridviewNE1.CellClick += DataGridView1_CellClick;
             datagridviewNE1.CellLeave += DataGridView1_CellLeave;
             monthCalendar1.DateSelected += MonthCalendar1_DateSelected;
+            contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             textBox1.KeyPress += TextBox1_KeyPress;
             this.FormClosing += Buscar_cotizacion_FormClosing;
             setYears();
             comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
             comboBox3.Text = DateTime.Now.Year.ToString();
-        }      
+        }
+
+        private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            if(datagridviewNE1.RowCount == 0)
+            {
+                e.Cancel = true;
+            }
+        }
 
         private void setYears()
         {
@@ -83,14 +91,6 @@ namespace cristales_pva
                 label3.Visible = true;
                 datagridviewNE1.Enabled = false;
                 backgroundWorker1.RunWorkerAsync(e.Start.ToString("dd/MM/yyyy"));
-            }
-        }
-
-        private void DataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-            if (datagridviewNE1.Rows.Count > 0)
-            {
-                contextMenuStrip1.Show(MousePosition);
             }
         }
 
@@ -372,13 +372,16 @@ namespace cristales_pva
         //ELIMINAR COTIZACION ------------------------->
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false && backgroundWorker4.IsBusy == false)
+            if (datagridviewNE1.RowCount > 0)
             {
-                DialogResult r = MessageBox.Show(this, "¿Estás seguro de eliminar de forma permanente esta cotización?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                if (r == DialogResult.Yes)
+                if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false && backgroundWorker4.IsBusy == false)
                 {
-                    new confirm_password().ShowDialog();
+                    DialogResult r = MessageBox.Show(this, "¿Estás seguro de eliminar de forma permanente esta cotización?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                    if (r == DialogResult.Yes)
+                    {
+                        new confirm_password().ShowDialog();
+                    }
                 }
             }
         }
@@ -440,28 +443,31 @@ namespace cristales_pva
         //ABRIR COTIZACION ---------------------------------------------------------------------------------------------------------------------->
         private void verToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false && backgroundWorker4.IsBusy == false)
+            if (datagridviewNE1.RowCount > 0)
             {
-                if (constants.cotizacion_proceso == true)
+                if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false && backgroundWorker4.IsBusy == false)
                 {
-                    DialogResult r = MessageBox.Show(this, "Existe una cotización en progreso. ¿Desea guardarla?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                    if(r == DialogResult.Yes)
+                    if (constants.cotizacion_proceso == true)
                     {
-                        new guardar_cotizacion(true).ShowDialog();
+                        DialogResult r = MessageBox.Show(this, "Existe una cotización en progreso. ¿Desea guardarla?", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                        if (r == DialogResult.Yes)
+                        {
+                            new guardar_cotizacion(true).ShowDialog();
+                        }
+                        else if (r == DialogResult.No)
+                        {
+                            abrirCotizacion();
+                        }
+                        else if (r == DialogResult.Cancel)
+                        {
+                            //DONOTHING
+                        }
                     }
-                    else if(r == DialogResult.No)
+                    else
                     {
                         abrirCotizacion();
                     }
-                    else if(r == DialogResult.Cancel)
-                    {
-                        //DONOTHING
-                    }                   
-                }
-                else
-                {
-                    abrirCotizacion();
                 }
             }
         }

@@ -488,6 +488,14 @@ namespace cristales_pva
                             foreach (DataRow x in data.Rows)
                             {
                                 dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());
+                                if (x[7].ToString() != "0")
+                                {
+                                    dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.LightGreen;
+                                }
+                                else
+                                {
+                                    dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.Red;
+                                }
                             }
                             //---------------------------------------------------------------------------->                   
                         }
@@ -633,7 +641,7 @@ namespace cristales_pva
                             {
                                 if (x.HeaderText == "entradas")
                                 {
-                                    x.DefaultCellStyle.BackColor = Color.Khaki;
+                                    x.DefaultCellStyle.BackColor = Color.LightGreen;
                                 }
                             }
                         }
@@ -683,6 +691,14 @@ namespace cristales_pva
                         foreach (DataRow x in data.Rows)
                         {
                             dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());
+                            if (x[7].ToString() != "0")
+                            {
+                                dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.LightGreen;
+                            }
+                            else
+                            {
+                                dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.Red;
+                            }
                         }
                         //---------------------------------------------------------------------------->                   
                     }
@@ -794,7 +810,7 @@ namespace cristales_pva
                         {
                             if (x.HeaderText == "entradas")
                             {
-                                x.DefaultCellStyle.BackColor = Color.Khaki;
+                                x.DefaultCellStyle.BackColor = Color.LightGreen;
                             }
                         }
                     }
@@ -895,46 +911,49 @@ namespace cristales_pva
         }
 
         private void borrarRegistroToolStripMenuItem_Click(object sender, EventArgs e)
-        {        
-            if (datagridviewNE1.CurrentRow.Cells[0].Value != null)
+        {
+            if (datagridviewNE1.RowCount > 0)
             {
-                int id = constants.stringToInt(datagridviewNE1.CurrentRow.Cells[0].Value.ToString());
-                string clave = datagridviewNE1.CurrentRow.Cells[1].Value.ToString();
-                if (id > 0)
+                if (datagridviewNE1.CurrentRow.Cells[0].Value != null)
                 {
-                    if (MessageBox.Show(this, "¿Estas seguro de eliminar este registro de forma permanente?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    int id = constants.stringToInt(datagridviewNE1.CurrentRow.Cells[0].Value.ToString());
+                    string clave = datagridviewNE1.CurrentRow.Cells[1].Value.ToString();
+                    if (id > 0)
                     {
-                        if(constants.user_access < 6)
+                        if (MessageBox.Show(this, "¿Estas seguro de eliminar este registro de forma permanente?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            acceso_password access = new acceso_password();
-                            access.ShowDialog(this);
-                            if (access.access)
+                            if (constants.user_access < 6)
+                            {
+                                acceso_password access = new acceso_password();
+                                access.ShowDialog(this);
+                                if (access.access)
+                                {
+                                    if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
+                                    {
+                                        pictureBox1.Visible = true;
+                                        backgroundWorker2.RunWorkerAsync(id);
+                                    }
+                                }
+                            }
+                            else
                             {
                                 if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
                                 {
                                     pictureBox1.Visible = true;
                                     backgroundWorker2.RunWorkerAsync(id);
                                 }
-                            }                           
-                        }
-                        else
-                        {
-                            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
-                            {
-                                pictureBox1.Visible = true;
-                                backgroundWorker2.RunWorkerAsync(id);
                             }
-                        }                      
+                        }
                     }
-                }
-                else
-                {
-                    if (datagridviewNE1.CurrentRow.Index < datagridviewNE1.Rows.Count - 1)
+                    else
                     {
-                        datagridviewNE1.Rows.Remove(datagridviewNE1.CurrentRow);
+                        if (datagridviewNE1.CurrentRow.Index < datagridviewNE1.Rows.Count - 1)
+                        {
+                            datagridviewNE1.Rows.Remove(datagridviewNE1.CurrentRow);
+                        }
                     }
                 }
-            }            
+            }           
         }
 
         //Delete
@@ -1524,12 +1543,18 @@ namespace cristales_pva
 
         private void historialToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            executeLoad(datagridviewNE2, false, true, datagridviewNE2.CurrentRow.Cells[1].Value.ToString());
+            if (datagridviewNE2.RowCount > 0)
+            {
+                executeLoad(datagridviewNE2, false, true, datagridviewNE2.CurrentRow.Cells[1].Value.ToString());
+            }
         }
 
         private void historalDeEntradasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            executeLoad(datagridviewNE3, false, true, datagridviewNE3.CurrentRow.Cells[1].Value.ToString());
+            if (datagridviewNE3.RowCount > 0)
+            {
+                executeLoad(datagridviewNE3, false, true, datagridviewNE3.CurrentRow.Cells[1].Value.ToString());
+            }
         }
 
         private void comboBox10_SelectedIndexChanged(object sender, EventArgs e)
