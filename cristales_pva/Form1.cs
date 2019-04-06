@@ -5144,7 +5144,7 @@ namespace cristales_pva
         //
 
         //boton editar cotizacion
-        public void setArticuloCotizadoToEdit(int id)
+        public void setArticuloCotizadoToEdit(int id, Form form)
         {
             try
             {
@@ -5157,7 +5157,7 @@ namespace cristales_pva
                         constants.save_onEdit.Add(id + "-" + constants.tipo_cotizacion);
                     }
                 }                          
-                setArticuloToEdit(constants.tipo_cotizacion, constants.id_articulo_cotizacion);
+                setArticuloToEdit(constants.tipo_cotizacion, constants.id_articulo_cotizacion, form);
             }
             catch (Exception err)
             {
@@ -5173,12 +5173,12 @@ namespace cristales_pva
                 {
                     if (datagridviewNE1.CurrentRow.Cells[4].Value.ToString() != "-2")
                     {
-                        setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                        setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value, this);
                     }
                 }
                 else
                 {
-                    setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                    setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value, this);
                 }
             }
         }
@@ -5349,7 +5349,7 @@ namespace cristales_pva
         }
         //
 
-        private void setArticuloToEdit(int tipo, int id)
+        private void setArticuloToEdit(int tipo, int id, Form form)
         {
             cotizaciones_local cotizaciones = new cotizaciones_local();
             listas = new listas_entities_pva();
@@ -5543,10 +5543,14 @@ namespace cristales_pva
                     {
                         if (Application.OpenForms["merge_items"] == null)
                         {
-                            new merge_items(true, false, id).Show();
+                            new merge_items(true, false, id).Show(form);
                         }
                         else
                         {
+                            if (Application.OpenForms["merge_items"].WindowState == FormWindowState.Minimized)
+                            {
+                                Application.OpenForms["merge_items"].WindowState = FormWindowState.Normal;
+                            }
                             Application.OpenForms["merge_items"].Select();
                         }
                     }
@@ -5967,10 +5971,14 @@ namespace cristales_pva
                 {
                     if (Application.OpenForms["merge_items"] == null)
                     {
-                        new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
+                        new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show(this);
                     }
                     else
                     {
+                        if (Application.OpenForms["merge_items"].WindowState == FormWindowState.Minimized)
+                        {
+                            Application.OpenForms["merge_items"].WindowState = FormWindowState.Normal;
+                        }
                         Application.OpenForms["merge_items"].Select();
                     }
                 }
@@ -6364,7 +6372,13 @@ namespace cristales_pva
         //Borrar articulos
         private void button17_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("¿Desea eliminar todos los artículos seleccionados?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            eliminarTodos();
+        }
+
+        //Borrar todos los articulos
+        public void eliminarTodos()
+        {
+            DialogResult r = MessageBox.Show("¿Desea eliminar todos los artículos seleccionados?\n\n*Se eliminarán todos los artículos correspondientes incluyendo sub-folios del tipo de artículo seleccionado.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (r == DialogResult.Yes)
             {
@@ -6848,6 +6862,7 @@ namespace cristales_pva
                 constants.cotizacion_guardada = false;
                 constants.setClienteToPropiedades();
                 constants.deleteFilasBorradasFromLocalDB();
+                constants.errors_Open.Clear();
                 setModoLIVA();
                 resetCountArticulos();
                 resetDatagridCotizaciones();

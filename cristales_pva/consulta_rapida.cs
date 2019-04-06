@@ -80,13 +80,13 @@ namespace cristales_pva
                     datagridviewNE1.DataSource = dt;
                     foreach(DataGridViewRow x in datagridviewNE1.Rows)
                     {
-                        if(x.Cells[5].Value.ToString() != "0")
+                        if(x.Cells[6].Value.ToString() != "0")
                         {
-                            x.Cells[5].Style.BackColor = Color.LightGreen;
+                            x.Cells[6].Style.BackColor = Color.LightGreen;
                         }
                         else
                         {
-                            x.Cells[5].Style.BackColor = Color.Red;
+                            x.Cells[6].Style.BackColor = Color.Red;
                         }
                     }
                 });
@@ -97,13 +97,13 @@ namespace cristales_pva
                 datagridviewNE1.DataSource = dt;
                 foreach (DataGridViewRow x in datagridviewNE1.Rows)
                 {
-                    if (x.Cells[5].Value.ToString() != "0")
+                    if (x.Cells[6].Value.ToString() != "0")
                     {
-                        x.Cells[5].Style.BackColor = Color.LightGreen;
+                        x.Cells[6].Style.BackColor = Color.LightGreen;
                     }
                     else
                     {
-                        x.Cells[5].Style.BackColor = Color.Red;
+                        x.Cells[6].Style.BackColor = Color.Red;
                     }
                 }
             }

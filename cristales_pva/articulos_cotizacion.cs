@@ -231,16 +231,23 @@ namespace cristales_pva
         {
             using (cotizaciones_local context = new cotizaciones_local())
             {
-                var cotizacion = (from x in context.modulos_cotizaciones where x.sub_folio > 1 select x).SingleOrDefault();
-                if(cotizacion != null)
+                try
                 {
-                    pictureBox2.Visible = true;
-                    label10.Text = "*Este presupuesto incluye Sub-Folios.";
+                    var cotizacion = (from x in context.modulos_cotizaciones where x.sub_folio > 1 select x).FirstOrDefault();
+                    if (cotizacion != null)
+                    {
+                        pictureBox2.Visible = true;
+                        label10.Text = "*Este presupuesto incluye Sub-Folios.";
+                    }
+                    else
+                    {
+                        pictureBox2.Visible = false;
+                        label10.Text = string.Empty;
+                    }
                 }
-                else
+                catch (Exception err)
                 {
-                    pictureBox2.Visible = false;
-                    label10.Text = string.Empty;
+                    constants.errorLog(err.ToString());
                 }
             }
         }
@@ -656,13 +663,13 @@ namespace cristales_pva
                         {
                             this.WindowState = FormWindowState.Minimized;
                         }
-                        ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                        ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value, this);
                     }
                 }
                 else
                 {
                     this.WindowState = FormWindowState.Minimized;
-                    ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                    ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value, this);
                 }
             }       
         }
@@ -741,10 +748,14 @@ namespace cristales_pva
                 {
                     if (Application.OpenForms["merge_items"] == null)
                     {
-                        new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show();
+                        new merge_items(false, true, (int)datagridviewNE1.CurrentRow.Cells[0].Value).Show(this);
                     }
                     else
                     {
+                        if(Application.OpenForms["merge_items"].WindowState == FormWindowState.Minimized)
+                        {
+                            Application.OpenForms["merge_items"].WindowState = FormWindowState.Normal;
+                        }
                         Application.OpenForms["merge_items"].Select();
                     }
                 }
@@ -1273,6 +1284,26 @@ namespace cristales_pva
         private void button9_Click(object sender, EventArgs e)
         {
             new subfolio_title().ShowDialog();
+        }
+
+        //Eliminar Todos los articulos
+        private void button10_Click(object sender, EventArgs e)
+        {
+            ((Form1)Application.OpenForms["form1"]).eliminarTodos();
+        }
+
+        //Copybox
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms["copy"] == null)
+            {
+                new copy().Show();
+            }
+            else
+            {
+                ((copy)Application.OpenForms["copy"]).Select();
+                ((copy)Application.OpenForms["copy"]).WindowState = FormWindowState.Normal;
+            }
         }
     }
 }

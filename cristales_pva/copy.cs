@@ -21,50 +21,97 @@ namespace cristales_pva
             loadCopy();
         }
 
-        public void loadCopy()
+        public void loadCopy(string filter="")
         {
             cotizaciones_local cotizaciones = new cotizaciones_local();
             StringConverter converter = new StringConverter();
 
-            var data = (from x in cotizaciones.copyboxes where x.merge_id <= 0 select x).AsEnumerable().Select(o => new                     
-                       {
-                           Id = o.id,
-                           CS = o.pic,
-                           Folio = o.folio,
-                           Clave = o.clave,
-                           Modulo_Id = o.modulo_id,
-                           Artículo = o.articulo,
-                           Linea = o.linea,
-                           Diseño = o.diseño,
-                           Descripción = o.descripcion,
-                           Ubicación = o.ubicacion,
-                           Cristales = constants.getCristales(o.claves_cristales, o.news),
-                           Acabado = o.acabado_perfil,
-                           Largo = o.largo,
-                           Alto = o.alto,
-                           Cantidad = o.cantidad,
-                           Total = o.total
-                       });           
-            if (data != null)
+            if (filter != "")
             {
-                if (datagridviewNE1.InvokeRequired == true)
+                var data = (from x in cotizaciones.copyboxes where x.merge_id <= 0 && (x.ubicacion.StartsWith(filter) || x.clave.StartsWith(filter) || x.id.ToString().StartsWith(filter)) select x).AsEnumerable().Select(o => new
                 {
-                    datagridviewNE1.Invoke((MethodInvoker)delegate
+                    Id = o.id,
+                    CS = o.pic,
+                    Folio = o.folio,
+                    Clave = o.clave,
+                    Modulo_Id = o.modulo_id,
+                    Artículo = o.articulo,
+                    Linea = o.linea,
+                    Diseño = o.diseño,
+                    Descripción = o.descripcion,
+                    Ubicación = o.ubicacion,
+                    Cristales = constants.getCristales(o.claves_cristales, o.news),
+                    Acabado = o.acabado_perfil,
+                    Largo = o.largo,
+                    Alto = o.alto,
+                    Cantidad = o.cantidad,
+                    Total = o.total
+                });
+                if (data != null)
+                {
+                    if (datagridviewNE1.InvokeRequired == true)
+                    {
+                        datagridviewNE1.Invoke((MethodInvoker)delegate
+                        {
+                            datagridviewNE1.DataSource = data.ToList();
+                            if (datagridviewNE1.RowCount <= 0)
+                            {
+                                datagridviewNE1.DataSource = null;
+                            }
+                        });
+                    }
+                    else
                     {
                         datagridviewNE1.DataSource = data.ToList();
                         if (datagridviewNE1.RowCount <= 0)
                         {
                             datagridviewNE1.DataSource = null;
-                        }                       
-                    });
+                        }
+                    }
                 }
-                else
+            }
+            else
+            {
+                var data = (from x in cotizaciones.copyboxes where x.merge_id <= 0 select x).AsEnumerable().Select(o => new
                 {
-                    datagridviewNE1.DataSource = data.ToList();
-                    if (datagridviewNE1.RowCount <= 0)
+                    Id = o.id,
+                    CS = o.pic,
+                    Folio = o.folio,
+                    Clave = o.clave,
+                    Modulo_Id = o.modulo_id,
+                    Artículo = o.articulo,
+                    Linea = o.linea,
+                    Diseño = o.diseño,
+                    Descripción = o.descripcion,
+                    Ubicación = o.ubicacion,
+                    Cristales = constants.getCristales(o.claves_cristales, o.news),
+                    Acabado = o.acabado_perfil,
+                    Largo = o.largo,
+                    Alto = o.alto,
+                    Cantidad = o.cantidad,
+                    Total = o.total
+                });
+                if (data != null)
+                {
+                    if (datagridviewNE1.InvokeRequired == true)
                     {
-                        datagridviewNE1.DataSource = null;
-                    }                  
+                        datagridviewNE1.Invoke((MethodInvoker)delegate
+                        {
+                            datagridviewNE1.DataSource = data.ToList();
+                            if (datagridviewNE1.RowCount <= 0)
+                            {
+                                datagridviewNE1.DataSource = null;
+                            }
+                        });
+                    }
+                    else
+                    {
+                        datagridviewNE1.DataSource = data.ToList();
+                        if (datagridviewNE1.RowCount <= 0)
+                        {
+                            datagridviewNE1.DataSource = null;
+                        }
+                    }
                 }
             }
         }
@@ -234,6 +281,12 @@ namespace cristales_pva
                     this.Close();
                 }
             }
+        }
+
+        //Buscar
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            loadCopy(textBox1.Text);
         }
     }
 }

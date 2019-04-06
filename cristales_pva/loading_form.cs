@@ -929,6 +929,21 @@ namespace cristales_pva
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
+            if (constants.folio_abierto > 0)
+            {
+                if (constants.ac_cotizacion == true && constants.p_ac == true)
+                {
+                    DialogResult r = MessageBox.Show(this, "¿Deseas actualizar los precios de está cotización?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (r == DialogResult.Yes)
+                    {
+                        constants.reload_precios = true;
+                    }
+                    else if (r == DialogResult.No)
+                    {
+                        constants.reload_precios = false;
+                    }
+                }
+            }
             ((Form1)Application.OpenForms["Form1"]).reloadPrecios();
             ((Form1)Application.OpenForms["Form1"]).seleccionarPastaña();
             if (constants.tipo_cotizacion > 0)

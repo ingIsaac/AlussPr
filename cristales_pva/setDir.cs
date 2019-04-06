@@ -28,7 +28,7 @@ namespace cristales_pva
             pictureBox1.Image = img;
             textBox1.Text = largo.ToString();
             textBox2.Text = alto.ToString();
-            label3.Text = "*Nota: Usar siempre de referencia la apartura de mayor dimension para relacionar niveles.\n\n*Nota: Para asignar de forma manual la medida total, seleccione la configuración de manera indefinida.";
+            label3.Text = "*Nota: Para asignar de forma manual la medida total, seleccione la configuración de manera indefinida.";
             loadTable();
             comboBox1.Text = "1";
             comboBox2.Text = "1";
@@ -182,13 +182,6 @@ namespace cristales_pva
             Close();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            label7.Text = "Fila";
-            setCoords(true);
-            getNext(true);
-        }
-
         private void setCoords(bool row)
         {
             foreach(Control p in tableLayoutPanel1.Controls)
@@ -217,21 +210,28 @@ namespace cristales_pva
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            label7.Text = "Columna";
+            label7.Text = "Vertical";
             setCoords(false);
             getNext(false);
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            label7.Text = "Horizontal";
+            setCoords(true);
+            getNext(true);
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
-            label7.Text = "Fila";
+            label7.Text = "Horizontal";
             setCoords(true);
             getNext(true);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            label7.Text = "Columna";
+            label7.Text = "Vertical";
             setCoords(false);
             getNext(false);
         }

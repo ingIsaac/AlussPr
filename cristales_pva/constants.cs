@@ -1373,34 +1373,57 @@ namespace cristales_pva
         }
 
         //ver articulos para personalizados
-        public static void getItemsToGetMerged(DataGridView datagrid)
+        public static void getItemsToGetMerged(DataGridView datagrid, string filter="")
         {
             cotizaciones_local cotizaciones = new cotizaciones_local();
-            var data = (from x in cotizaciones.modulos_cotizaciones
-                       where x.merge_id <= 0 && x.concept_id < 0 && x.sub_folio == sub_folio orderby x.orden select x).AsEnumerable().Select(o => new
-                       {
-                           Id = o.id,
-                           CS = o.pic,
-                           Folio = o.folio,
-                           Clave = o.clave,
-                           Modulo_Id = o.modulo_id,
-                           Artículo = o.articulo,
-                           Linea = o.linea,
-                           Diseño = o.diseño,
-                           Descripción = o.descripcion,
-                           Ubicación = o.ubicacion,
-                           Cristales = getCristales(o.claves_cristales, o.news),
-                           Acabado = o.acabado_perfil,
-                           Largo = o.largo,
-                           Alto = o.alto,
-                           Cantidad = o.cantidad,
-                           Total = o.total
-                       });
-            if (data != null)
+            if (filter != "")
             {
-                if (datagrid.InvokeRequired == true)
+                var data = (from x in cotizaciones.modulos_cotizaciones
+                            where x.merge_id <= 0 && x.concept_id < 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(filter) || x.ubicacion.StartsWith(filter) || x.id.ToString().StartsWith(filter))
+                            orderby x.orden
+                            select x).AsEnumerable().Select(o => new
+                            {
+                                Id = o.id,
+                                CS = o.pic,
+                                Folio = o.folio,
+                                Clave = o.clave,
+                                Modulo_Id = o.modulo_id,
+                                Artículo = o.articulo,
+                                Linea = o.linea,
+                                Diseño = o.diseño,
+                                Descripción = o.descripcion,
+                                Ubicación = o.ubicacion,
+                                Cristales = getCristales(o.claves_cristales, o.news),
+                                Acabado = o.acabado_perfil,
+                                Largo = o.largo,
+                                Alto = o.alto,
+                                Cantidad = o.cantidad,
+                                Total = o.total
+                            });
+                if (data != null)
                 {
-                    datagrid.Invoke((MethodInvoker)delegate
+                    if (datagrid.InvokeRequired == true)
+                    {
+                        datagrid.Invoke((MethodInvoker)delegate
+                        {
+                            datagrid.DataSource = data.ToList();
+                            if (datagrid.RowCount <= 0)
+                            {
+                                datagrid.DataSource = null;
+                            }
+                            else
+                            {
+                                foreach (DataGridViewColumn x in datagrid.Columns)
+                                {
+                                    if (x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
+                                    {
+                                        x.DefaultCellStyle.BackColor = Color.LightGreen;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    else
                     {
                         datagrid.DataSource = data.ToList();
                         if (datagrid.RowCount <= 0)
@@ -1417,61 +1440,57 @@ namespace cristales_pva
                                 }
                             }
                         }
-                    });
-                }
-                else
-                {
-                    datagrid.DataSource = data.ToList();
-                    if (datagrid.RowCount <= 0)
-                    {
-                        datagrid.DataSource = null;
-                    }
-                    else
-                    {
-                        foreach (DataGridViewColumn x in datagrid.Columns)
-                        {
-                            if (x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
-                            {
-                                x.DefaultCellStyle.BackColor = Color.LightGreen;
-                            }
-                        }
                     }
                 }
             }
-        }
-        //
-
-        //ver articulos personalizados
-        public static void getMargedItems(DataGridView datagrid, int perso_id)
-        {
-            cotizaciones_local cotizaciones = new cotizaciones_local();
-                        
-            var data = (from x in cotizaciones.modulos_cotizaciones
-                       where x.merge_id == perso_id && x.sub_folio == sub_folio orderby x.orden select x).AsEnumerable().Select(o => new
-                           {
-                               Id = o.id,
-                               CS = o.pic,
-                               Folio = o.folio,
-                               Clave = o.clave,
-                               Modulo_Id = o.modulo_id,
-                               Artículo = o.articulo,
-                               Linea = o.linea,
-                               Configuración = o.dir == 0 ? "Indefinido" : o.dir >= 110 ? o.dir.ToString()[0] + "," + o.dir.ToString()[1] + "," + o.dir.ToString()[2] : o.dir.ToString(),
-                               Diseño = o.diseño,
-                               Descripción = o.descripcion,
-                               Ubicación = o.ubicacion,
-                               Cristales = getCristales(o.claves_cristales, o.news),
-                               Acabado = o.acabado_perfil,
-                               Largo = o.largo,
-                               Alto = o.alto,
-                               Cantidad = o.cantidad,
-                               Total = o.total
-                           });
-            if (data != null)
+            else
             {
-                if (datagrid.InvokeRequired == true)
+                var data = (from x in cotizaciones.modulos_cotizaciones
+                            where x.merge_id <= 0 && x.concept_id < 0 && x.sub_folio == sub_folio
+                            orderby x.orden
+                            select x).AsEnumerable().Select(o => new
+                            {
+                                Id = o.id,
+                                CS = o.pic,
+                                Folio = o.folio,
+                                Clave = o.clave,
+                                Modulo_Id = o.modulo_id,
+                                Artículo = o.articulo,
+                                Linea = o.linea,
+                                Diseño = o.diseño,
+                                Descripción = o.descripcion,
+                                Ubicación = o.ubicacion,
+                                Cristales = getCristales(o.claves_cristales, o.news),
+                                Acabado = o.acabado_perfil,
+                                Largo = o.largo,
+                                Alto = o.alto,
+                                Cantidad = o.cantidad,
+                                Total = o.total
+                            });
+                if (data != null)
                 {
-                    datagrid.Invoke((MethodInvoker)delegate
+                    if (datagrid.InvokeRequired == true)
+                    {
+                        datagrid.Invoke((MethodInvoker)delegate
+                        {
+                            datagrid.DataSource = data.ToList();
+                            if (datagrid.RowCount <= 0)
+                            {
+                                datagrid.DataSource = null;
+                            }
+                            else
+                            {
+                                foreach (DataGridViewColumn x in datagrid.Columns)
+                                {
+                                    if (x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
+                                    {
+                                        x.DefaultCellStyle.BackColor = Color.LightGreen;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    else
                     {
                         datagrid.DataSource = data.ToList();
                         if (datagrid.RowCount <= 0)
@@ -1479,36 +1498,161 @@ namespace cristales_pva
                             datagrid.DataSource = null;
                         }
                         else
-                        {                         
+                        {
                             foreach (DataGridViewColumn x in datagrid.Columns)
                             {
-                                if(x.HeaderText == "Configuración" || x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
+                                if (x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
                                 {
                                     x.DefaultCellStyle.BackColor = Color.LightGreen;
                                 }
-                            }                          
-                        }
-                    });
-                }
-                else
-                {
-                    datagrid.DataSource = data.ToList();
-                    if (datagrid.RowCount <= 0)
-                    {
-                        datagrid.DataSource = null;
-                    }
-                    else
-                    {
-                        foreach (DataGridViewColumn x in datagrid.Columns)
-                        {
-                            if (x.HeaderText == "Configuración" || x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
-                            {
-                                x.DefaultCellStyle.BackColor = Color.LightGreen;
                             }
                         }
                     }
-                }              
+                }
+            }            
+        }
+        //
+
+        //ver articulos personalizados
+        public static void getMargedItems(DataGridView datagrid, int perso_id, string filter="")
+        {
+            cotizaciones_local cotizaciones = new cotizaciones_local();
+            if (filter != "")
+            {
+                var data = (from x in cotizaciones.modulos_cotizaciones
+                        where x.merge_id == perso_id && x.sub_folio == sub_folio && (x.clave.StartsWith(filter) || x.ubicacion.StartsWith(filter) || x.id.ToString().StartsWith(filter))
+                        orderby x.orden
+                        select x).AsEnumerable().Select(o => new
+                        {
+                            Id = o.id,
+                            CS = o.pic,
+                            Folio = o.folio,
+                            Clave = o.clave,
+                            Modulo_Id = o.modulo_id,
+                            Artículo = o.articulo,
+                            Linea = o.linea,
+                            Configuración = o.dir == 0 ? "Indefinido" : o.dir >= 110 ? o.dir.ToString()[0] + "," + o.dir.ToString()[1] + "," + o.dir.ToString()[2] : o.dir.ToString(),
+                            Diseño = o.diseño,
+                            Descripción = o.descripcion,
+                            Ubicación = o.ubicacion,
+                            Cristales = getCristales(o.claves_cristales, o.news),
+                            Acabado = o.acabado_perfil,
+                            Largo = o.largo,
+                            Alto = o.alto,
+                            Cantidad = o.cantidad,
+                            Total = o.total
+                        });
+                if (data != null)
+                {
+                    if (datagrid.InvokeRequired == true)
+                    {
+                        datagrid.Invoke((MethodInvoker)delegate
+                        {
+                            datagrid.DataSource = data.ToList();
+                            if (datagrid.RowCount <= 0)
+                            {
+                                datagrid.DataSource = null;
+                            }
+                            else
+                            {
+                                foreach (DataGridViewColumn x in datagrid.Columns)
+                                {
+                                    if (x.HeaderText == "Configuración" || x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
+                                    {
+                                        x.DefaultCellStyle.BackColor = Color.LightGreen;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        datagrid.DataSource = data.ToList();
+                        if (datagrid.RowCount <= 0)
+                        {
+                            datagrid.DataSource = null;
+                        }
+                        else
+                        {
+                            foreach (DataGridViewColumn x in datagrid.Columns)
+                            {
+                                if (x.HeaderText == "Configuración" || x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
+                                {
+                                    x.DefaultCellStyle.BackColor = Color.LightGreen;
+                                }
+                            }
+                        }
+                    }
+                }
             }
+            else
+            {
+                var data = (from x in cotizaciones.modulos_cotizaciones
+                        where x.merge_id == perso_id && x.sub_folio == sub_folio
+                        orderby x.orden
+                        select x).AsEnumerable().Select(o => new
+                        {
+                            Id = o.id,
+                            CS = o.pic,
+                            Folio = o.folio,
+                            Clave = o.clave,
+                            Modulo_Id = o.modulo_id,
+                            Artículo = o.articulo,
+                            Linea = o.linea,
+                            Configuración = o.dir == 0 ? "Indefinido" : o.dir >= 110 ? o.dir.ToString()[0] + "," + o.dir.ToString()[1] + "," + o.dir.ToString()[2] : o.dir.ToString(),
+                            Diseño = o.diseño,
+                            Descripción = o.descripcion,
+                            Ubicación = o.ubicacion,
+                            Cristales = getCristales(o.claves_cristales, o.news),
+                            Acabado = o.acabado_perfil,
+                            Largo = o.largo,
+                            Alto = o.alto,
+                            Cantidad = o.cantidad,
+                            Total = o.total
+                        });
+                if (data != null)
+                {
+                    if (datagrid.InvokeRequired == true)
+                    {
+                        datagrid.Invoke((MethodInvoker)delegate
+                        {
+                            datagrid.DataSource = data.ToList();
+                            if (datagrid.RowCount <= 0)
+                            {
+                                datagrid.DataSource = null;
+                            }
+                            else
+                            {
+                                foreach (DataGridViewColumn x in datagrid.Columns)
+                                {
+                                    if (x.HeaderText == "Configuración" || x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
+                                    {
+                                        x.DefaultCellStyle.BackColor = Color.LightGreen;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    else
+                    {
+                        datagrid.DataSource = data.ToList();
+                        if (datagrid.RowCount <= 0)
+                        {
+                            datagrid.DataSource = null;
+                        }
+                        else
+                        {
+                            foreach (DataGridViewColumn x in datagrid.Columns)
+                            {
+                                if (x.HeaderText == "Configuración" || x.HeaderText == "Cristales" || x.HeaderText == "Acabado")
+                                {
+                                    x.DefaultCellStyle.BackColor = Color.LightGreen;
+                                }
+                            }
+                        }
+                    }
+                }
+            }           
         }
 
         public static void updateModuloPersonalizado(int id)
@@ -1662,8 +1806,49 @@ namespace cristales_pva
 
                                 string[] u = null;
                                 int w = -1;
+                                int max = 0;
+                                int _y = 0;
+                                g = null;
 
-                                foreach (string p in rows.OrderByDescending(n => n.Count).FirstOrDefault())
+                                //Get the largest row
+                                for(int i = 0; i < rows.Count; i++)
+                                {
+                                    _y = 0;
+                                    foreach (string f in rows[i])
+                                    {
+                                        u = f.Split(',');                                        
+                                        if(u.Length >= 2)
+                                        {
+                                            w = stringToInt((u[0] + u[1] + u[2]));
+                                            var z = (from v in cotizaciones.modulos_cotizaciones where v.merge_id == concepto.concept_id && v.dir == w select v).FirstOrDefault();
+                                            if(z != null)
+                                            {
+                                                if (z.cantidad > 1)
+                                                {
+                                                    if (u[2] == "1")
+                                                    {
+                                                        _y = _y + (int)(z.largo * z.cantidad);
+                                                    }
+                                                    else
+                                                    {
+                                                        _y = _y + (int)z.largo;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    _y = _y + (int)z.largo;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if(max < _y)
+                                    {
+                                        max = _y;
+                                        g = rows[i];
+                                    }
+                                }                       
+
+                                foreach (string p in g)
                                 {
                                     u = p.Split(',');
                                     if (u.Length >= 2)
@@ -1676,22 +1861,62 @@ namespace cristales_pva
                                             {
                                                 if (u[2] == "1")
                                                 {
-                                                    concepto.largo = concepto.largo + (z.largo * z.cantidad);
+                                                    concepto.largo = concepto.largo + (z.largo * z.cantidad);                                                  
                                                 }
                                                 else
                                                 {
-                                                    concepto.largo = concepto.largo + z.largo;
+                                                    concepto.largo = concepto.largo + z.largo;                                                   
                                                 }
                                             }
                                             else
                                             {
-                                                concepto.largo = concepto.largo + z.largo;
+                                                concepto.largo = concepto.largo + z.largo;                                               
                                             }
                                         }
                                     }
                                 }
 
-                                foreach (string p in columns.OrderByDescending(n => n.Count).FirstOrDefault())
+                                g = null;
+                                max = 0;
+                                //Get the hightest column
+                                for (int i = 0; i < columns.Count; i++)
+                                {
+                                    _y = 0;
+                                    foreach (string f in columns[i])
+                                    {
+                                        u = f.Split(',');
+                                        if (u.Length >= 2)
+                                        {
+                                            w = stringToInt((u[0] + u[1] + u[2]));
+                                            var z = (from v in cotizaciones.modulos_cotizaciones where v.merge_id == concepto.concept_id && v.dir == w select v).FirstOrDefault();
+                                            if (z != null)
+                                            {
+                                                if (z.cantidad > 1)
+                                                {
+                                                    if (u[2] == "0")
+                                                    {
+                                                        _y = _y + (int)(z.alto * z.cantidad);
+                                                    }
+                                                    else
+                                                    {
+                                                        _y = _y + (int)z.alto;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    _y = _y + (int)z.alto;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (max < _y)
+                                    {
+                                        max = _y;
+                                        g = columns[i];
+                                    }
+                                }
+
+                                foreach (string p in g)
                                 {
                                     u = p.Split(',');
                                     if (u.Length >= 2)
@@ -1704,21 +1929,21 @@ namespace cristales_pva
                                             {
                                                 if (u[2] == "0")
                                                 {
-                                                    concepto.alto = concepto.alto + (z.alto * z.cantidad);
+                                                    concepto.alto = concepto.alto + (z.alto * z.cantidad);                                                  
                                                 }
                                                 else
                                                 {
-                                                    concepto.alto = concepto.alto + z.alto;
+                                                    concepto.alto = concepto.alto + z.alto;                                                  
                                                 }
                                             }
                                             else
                                             {
-                                                concepto.alto = concepto.alto + z.alto;
+                                                concepto.alto = concepto.alto + z.alto;                                               
                                             }
                                         }
                                     }
-                                }                            
-
+                                }
+                             
                                 //clear
                                 buffer = null;
                                 rows = null;

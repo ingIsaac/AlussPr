@@ -23,20 +23,34 @@ namespace cristales_pva
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
             datagridviewNE1.CellLeave += DatagridviewNE1_CellLeave;
             datagridviewNE1.DataBindingComplete += DatagridviewNE1_DataBindingComplete;
+            textBox1.KeyDown += TextBox1_KeyDown;
             contextMenuStrip1.Items[2].Visible = false;
             contextMenuStrip1.Items[3].Visible = false;
             this.FormClosed += Merge_items_FormClosed;
             this.get_merged = get_merged;
             this.personalizacion = personalizacion;
             this.perso_id = perso_id;
+            initLoad();
+        }
+
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Enter)
+            {
+                initLoad(textBox1.Text);
+            }
+        }
+
+        public void initLoad(string filter="")
+        {
             if (personalizacion == true)
             {
-                constants.getItemsToGetMerged(datagridviewNE1);
+                constants.getItemsToGetMerged(datagridviewNE1, filter);
                 this.Text = "Añadir artículos...";
             }
             else if (get_merged == true)
             {
-                constants.getMargedItems(datagridviewNE1, perso_id);
+                constants.getMargedItems(datagridviewNE1, perso_id, filter);
                 this.Text = "Artículos de esté concepto...";
             }
         }
@@ -172,12 +186,12 @@ namespace cristales_pva
                     }
                     else
                     {
-                        MessageBox.Show("[Error] este concepto ya tiene demaciados artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, "[Error] este concepto ya tiene demaciados artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("[Error] no posible añadir esté artículo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] no posible añadir esté artículo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -247,7 +261,7 @@ namespace cristales_pva
         {
             if (datagridviewNE1.RowCount > 0)
             {
-                ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                ((Form1)Application.OpenForms["Form1"]).setArticuloCotizadoToEdit((int)datagridviewNE1.CurrentRow.Cells[0].Value, this);
                 if (Application.OpenForms["articulos_cotizacion"] != null)
                 {
                     Application.OpenForms["articulos_cotizacion"].Close();
@@ -313,7 +327,7 @@ namespace cristales_pva
                 }
                 catch (Exception err)
                 {
-                    MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     constants.errorLog(err.ToString());
                 }
             }
@@ -336,7 +350,7 @@ namespace cristales_pva
 
         private void eliminarConfiguraciónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Deseas eliminar toda la configuración de integración?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show(this, "¿Deseas eliminar toda la configuración de integración?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 cotizaciones_local cotizacion = new cotizaciones_local();
 
@@ -352,6 +366,18 @@ namespace cristales_pva
                     reloadMergedItems();
                 }
             }
+        }
+
+        //Buscar
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            initLoad(textBox1.Text);
+        }
+
+        //Reload
+        private void button1_Click(object sender, EventArgs e)
+        {
+            initLoad();
         }
     }
 }
