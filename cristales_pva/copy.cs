@@ -14,6 +14,15 @@ namespace cristales_pva
         public copy()
         {
             InitializeComponent();
+            textBox1.KeyDown += TextBox1_KeyDown;
+        }
+
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                loadCopy(textBox1.Text);
+            }
         }
 
         private void copy_Load(object sender, EventArgs e)

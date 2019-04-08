@@ -4854,7 +4854,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    query = "SELECT * FROM inventario ORDER BY CASE WHEN tienda_id='" + tienda + "' AND lista='" + lista + "' AND " + filtro + "='" + filtro_value + "' THEN 1 END DESC";
+                    query = "SELECT * FROM inventario WHERE tienda_id='" + tienda + "' AND lista='" + lista + "' ORDER BY CASE WHEN " + filtro + "='" + filtro_value + "' THEN 1 END DESC, articulo ASC";
                 }
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
                 SqlCommandBuilder cb = new SqlCommandBuilder(da);
@@ -4873,7 +4873,7 @@ namespace cristales_pva
             try
             {
                 string query = string.Empty;              
-                query = "SELECT id, clave, articulo, linea, proveedor, costeo, existencia FROM inventario WHERE tienda_id='" + tienda + "' AND lista='" + lista + "' AND (clave LIKE '" + value + "%' OR articulo LIKE '" + value + "%' OR linea LIKE '" + value + "%' OR proveedor LIKE '" + value + "%')";            
+                query = "SELECT id, clave, articulo, linea, proveedor, costeo, existencia FROM inventario WHERE tienda_id='" + tienda + "' AND lista='" + lista + "' AND (clave LIKE '" + value + "%' OR articulo LIKE '" + value + "%' OR linea LIKE '" + value + "%' OR proveedor LIKE '" + value + "%') ORDER BY articulo";            
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
                 SqlCommandBuilder cb = new SqlCommandBuilder(da);
                 da.Fill(dt);

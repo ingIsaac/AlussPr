@@ -1079,7 +1079,7 @@ namespace cristales_pva
                             if(buscar == true)
                             {
                                 data = null;
-                                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(param) || x.articulo.StartsWith(param) || x.ubicacion.StartsWith(param)) orderby x.orden select x);
+                                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(param) || x.articulo.StartsWith(param) || x.ubicacion.StartsWith(param) || x.id.ToString().StartsWith(param)) orderby x.orden select x);
                             }
                             foreach(var c in data)
                             {
@@ -1140,7 +1140,7 @@ namespace cristales_pva
                         if (buscar == true)
                         {
                             data = null;
-                            data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(param) || x.articulo.StartsWith(param) || x.ubicacion.StartsWith(param)) orderby x.orden select x);
+                            data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(param) || x.articulo.StartsWith(param) || x.ubicacion.StartsWith(param) || x.id.ToString().StartsWith(param)) orderby x.orden select x);
                         }
                         foreach (var c in data)
                         {
@@ -1678,6 +1678,7 @@ namespace cristales_pva
                 concepto.acabado_perfil = "";
                 concepto.diseño = "";
                 concepto.claves_cristales = "";
+                concepto.news = "";
                 int dir_p = -1;
 
                 var modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id select x);
@@ -1700,6 +1701,7 @@ namespace cristales_pva
                         concepto.acabado_perfil = concepto.acabado_perfil == "" ? v.acabado_perfil : concepto.acabado_perfil;
                         concepto.diseño = concepto.diseño.Length > 0 ? concepto.diseño + "/" + v.diseño : v.diseño;
                         concepto.claves_cristales = concepto.claves_cristales + v.claves_cristales;
+                        concepto.news = concepto.news + v.news;
                     }
                     concepto.total = concepto.total * concepto.cantidad;
                 }
@@ -4942,6 +4944,7 @@ namespace cristales_pva
             string buffer = string.Empty;
             bool t = false;
             string c_clave = string.Empty;
+            float c = 0;
 
             //obtener claves cristales new
             string[] news = news_c.Split(';');
@@ -4960,7 +4963,7 @@ namespace cristales_pva
                         }
                     }
 
-                    if (n_c == false)
+                    if (n_c == false && stringToFloat(o[2]) > 0)
                     {
                         cris_list.Add(o[1]);
                     }
@@ -4972,6 +4975,10 @@ namespace cristales_pva
             {
                 if (cri != ',')
                 {
+                    if (t)
+                    {
+                        c = stringToFloat(cri.ToString());
+                    }
                     if (cri != '-' && t == false)
                     {
                         buffer = buffer + cri.ToString();
@@ -4996,7 +5003,7 @@ namespace cristales_pva
                         }
                     }
 
-                    if (n_c == false)
+                    if (n_c == false && c > 0)
                     {
                         cris_list.Add(c_clave);
                     }

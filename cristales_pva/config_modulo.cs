@@ -282,26 +282,50 @@ namespace cristales_pva
         //Remove new Items
         private void removerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
-            calcularCostoModulo();
+            if (dataGridView1.RowCount > 0)
+            {
+                if (dataGridView1.CurrentRow.Cells[0].Style.BackColor == Color.Yellow)
+                {
+                    dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
+                    calcularCostoModulo();
+                }
+            }
         }
 
         private void removerToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            dataGridView2.Rows.Remove(dataGridView2.CurrentRow);
-            calcularCostoModulo();
+            if (dataGridView2.RowCount > 0)
+            {
+                if (dataGridView2.CurrentRow.Cells[0].Style.BackColor == Color.Yellow)
+                {
+                    dataGridView2.Rows.Remove(dataGridView2.CurrentRow);
+                    calcularCostoModulo();
+                }
+            }
         }
 
         private void removerToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            dataGridView3.Rows.Remove(dataGridView3.CurrentRow);
-            calcularCostoModulo();
+            if (dataGridView3.RowCount > 0)
+            {
+                if (dataGridView3.CurrentRow.Cells[0].Style.BackColor == Color.Yellow)
+                {
+                    dataGridView3.Rows.Remove(dataGridView3.CurrentRow);
+                    calcularCostoModulo();
+                }
+            }
         }
 
         private void removerToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            dataGridView4.Rows.Remove(dataGridView4.CurrentRow);
-            calcularCostoModulo();
+            if (dataGridView4.RowCount > 0)
+            {
+                if (dataGridView4.CurrentRow.Cells[0].Style.BackColor == Color.Yellow)
+                {
+                    dataGridView4.Rows.Remove(dataGridView4.CurrentRow);
+                    calcularCostoModulo();
+                }
+            }
         }           
         //----------------------------------------------------------------------->
 
@@ -784,6 +808,7 @@ namespace cristales_pva
                     if (modulo.claves_cristales.Length > 0)
                     {
                         checkBox12.Checked = true;
+                        dataGridView2.Enabled = true;
                         foreach (char x in modulo.claves_cristales)
                         {
                             if (x == ',')
@@ -798,11 +823,13 @@ namespace cristales_pva
                     else
                     {
                         checkBox12.Checked = false;
+                        dataGridView2.Enabled = false;
                     }
 
                     if (modulo.claves_otros.Length > 0)
                     {
                         checkBox14.Checked = true;
+                        dataGridView4.Enabled = true;
                         foreach (char x in modulo.claves_otros)
                         {
                             if (x == ',')
@@ -817,11 +844,13 @@ namespace cristales_pva
                     else
                     {
                         checkBox14.Checked = false;
+                        dataGridView4.Enabled = false;
                     }
 
                     if (modulo.claves_herrajes.Length > 0)
                     {
                         checkBox13.Checked = true;
+                        dataGridView3.Enabled = true;
                         foreach (char x in modulo.claves_herrajes)
                         {
                             if (x == ',')
@@ -836,11 +865,13 @@ namespace cristales_pva
                     else
                     {
                         checkBox13.Checked = false;
+                        dataGridView3.Enabled = false;
                     }
 
                     if (modulo.claves_perfiles.Length > 0)
                     {
                         checkBox11.Checked = true;
+                        dataGridView1.Enabled = true;
                         foreach (char x in modulo.claves_perfiles)
                         {
                             if (x == ',')
@@ -855,6 +886,7 @@ namespace cristales_pva
                     else
                     {
                         checkBox11.Checked = false;
+                        dataGridView1.Enabled = true;
                     }
 
                     //new items
@@ -881,6 +913,7 @@ namespace cristales_pva
                                     if (!checkBox11.Checked)
                                     {
                                         checkBox11.Checked = true;
+                                        dataGridView1.Enabled = true;
                                     }
                                 }
                                 //-------------------------------->
@@ -889,6 +922,7 @@ namespace cristales_pva
                                     if (!checkBox12.Checked)
                                     {
                                         checkBox12.Checked = true;
+                                        dataGridView2.Enabled = true;
                                     }
                                 }
                                 //-------------------------------->
@@ -897,14 +931,16 @@ namespace cristales_pva
                                     if (!checkBox13.Checked)
                                     {
                                         checkBox13.Checked = true;
+                                        dataGridView3.Enabled = true;
                                     }
                                 }
                                 //-------------------------------->
                                 if (t[0] == "4")
                                 {
-                                    if (!checkBox13.Checked)
+                                    if (!checkBox14.Checked)
                                     {
-                                        checkBox13.Checked = true;
+                                        checkBox14.Checked = true;
+                                        dataGridView4.Enabled = true;
                                     }
                                 }
                                 //-------------------------------->
@@ -1740,19 +1776,19 @@ namespace cristales_pva
             }
 
             foreach (DataGridViewRow x in dataGridView5.Rows)
+            {
+                if (constants.stringToInt(x.Cells[0].Value.ToString()) == seccion)
                 {
-                    if (constants.stringToInt(x.Cells[0].Value.ToString()) == seccion)
+                    if (ready == true)
                     {
-                        if (ready == true)
-                        {
-                            x.DefaultCellStyle.BackColor = Color.LightGreen;
-                        }
-                        else
-                        {
-                            x.DefaultCellStyle.BackColor = Color.Red;
-                        }
+                        x.DefaultCellStyle.BackColor = Color.LightGreen;
                     }
-                }                         
+                    else
+                    {
+                        x.DefaultCellStyle.BackColor = Color.Red;
+                    }
+                }
+            }                         
         }        
 
         public void setNewCristal(int index, string clave, string articulo)
@@ -3233,7 +3269,7 @@ namespace cristales_pva
                 {
                     if (x.Cells[0].Style.BackColor != Color.Yellow)
                     {
-                        r = r + x.Cells[1].Value.ToString() + "-" + x.Cells[3].Value.ToString() + ",";
+                        r = r + x.Cells[1].Value.ToString() + "-" + x.Cells[3].Value.ToString() + ",";                       
                     }
                 }
             }
@@ -4664,15 +4700,23 @@ namespace cristales_pva
             {
                 if (checkBox14.Checked)
                 {
-                    checkBox14.Checked = false;
-                    dataGridView4.Enabled = false;
+                    if (!checkNewItems(dataGridView4))
+                    {
+                        checkBox14.Checked = false;
+                        dataGridView4.Enabled = false;
+                        calcularCostoModulo();
+                    }
+                    else
+                    {
+                        MessageBox.Show("[Error] Se deben de eliminar los nuevos artículos para deshabilitar dicho componente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
                     checkBox14.Checked = true;
                     dataGridView4.Enabled = true;
+                    calcularCostoModulo();
                 }
-                calcularCostoModulo();
             }
         }
 
@@ -4684,15 +4728,23 @@ namespace cristales_pva
             {
                 if (checkBox13.Checked)
                 {
-                    checkBox13.Checked = false;
-                    dataGridView3.Enabled = false;
+                    if (!checkNewItems(dataGridView3))
+                    {
+                        checkBox13.Checked = false;
+                        dataGridView3.Enabled = false;
+                        calcularCostoModulo();
+                    }
+                    else
+                    {
+                        MessageBox.Show("[Error] Se deben de eliminar los nuevos artículos para deshabilitar dicho componente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
                     checkBox13.Checked = true;
                     dataGridView3.Enabled = true;
+                    calcularCostoModulo();
                 }
-                calcularCostoModulo();
             }
         }
 
@@ -4704,15 +4756,23 @@ namespace cristales_pva
             {
                 if (checkBox12.Checked)
                 {
-                    checkBox12.Checked = false;
-                    dataGridView2.Enabled = false;
+                    if (!checkNewItems(dataGridView2))
+                    {
+                        checkBox12.Checked = false;
+                        dataGridView2.Enabled = false;
+                        calcularCostoModulo();
+                    }
+                    else
+                    {
+                        MessageBox.Show("[Error] Se deben de eliminar los nuevos artículos para deshabilitar dicho componente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
                     checkBox12.Checked = true;
                     dataGridView2.Enabled = true;
+                    calcularCostoModulo();
                 }
-                calcularCostoModulo();
             }
         }
 
@@ -4721,21 +4781,43 @@ namespace cristales_pva
             DialogResult r = MessageBox.Show("¿Desea habilitar/deshabilitar esté componente?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (r == DialogResult.Yes)
-            {
+            {             
                 if (checkBox11.Checked)
                 {
-                    checkBox11.Checked = false;
-                    dataGridView1.Enabled = false;
+                    if (!checkNewItems(dataGridView1))
+                    {
+                        checkBox11.Checked = false;
+                        dataGridView1.Enabled = false;
+                        calcularCostoModulo();
+                    }
+                    else
+                    {
+                        MessageBox.Show("[Error] Se deben de eliminar los nuevos artículos para deshabilitar dicho componente.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
                     checkBox11.Checked = true;
                     dataGridView1.Enabled = true;
+                    calcularCostoModulo();
                 }
-                calcularCostoModulo();
             }
         }
         // --------------------------------------------------------------------------------->
+
+        private bool checkNewItems(DataGridView table)
+        {
+            bool r = false;
+            foreach(DataGridViewRow x in table.Rows)
+            {
+                if(x.Cells[0].Style.BackColor == Color.Yellow)
+                {
+                    r = true;
+                    break;
+                }
+            }
+            return r;
+        }
 
         //add new item
         private void button8_Click(object sender, EventArgs e)
@@ -6268,6 +6350,7 @@ namespace cristales_pva
                     if (!checkBox11.Checked)
                     {
                         checkBox11.Checked = true;
+                        dataGridView1.Enabled = true;
                     }
                 }
             }
@@ -6278,6 +6361,7 @@ namespace cristales_pva
                     if (!checkBox12.Checked)
                     {
                         checkBox12.Checked = true;
+                        dataGridView2.Enabled = true;
                     }
                 }
             }
@@ -6288,6 +6372,7 @@ namespace cristales_pva
                     if (!checkBox13.Checked)
                     {
                         checkBox13.Checked = true;
+                        dataGridView3.Enabled = true;
                     }
                 }
             }
@@ -6298,6 +6383,7 @@ namespace cristales_pva
                     if (!checkBox14.Checked)
                     {
                         checkBox14.Checked = true;
+                        dataGridView4.Enabled = true;
                     }
                 }
             }

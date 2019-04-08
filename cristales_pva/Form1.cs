@@ -5930,6 +5930,7 @@ namespace cristales_pva
                             concepto.acabado_perfil = concepto.acabado_perfil == "" ? modulo.acabado_perfil : concepto.acabado_perfil;
                             concepto.diseño = concepto.diseño.Length > 0 ? concepto.diseño + "/" + modulo.diseño : modulo.diseño;
                             concepto.claves_cristales = concepto.claves_cristales + modulo.claves_cristales;
+                            concepto.news = concepto.news + modulo.news;
                         }
                         cotizaciones.SaveChanges();
                         countCotizacionesArticulo();

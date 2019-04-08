@@ -46,15 +46,8 @@ namespace cristales_pva
                 {
                     if (comboBox1.Text != string.Empty)
                     {
-                        if (textBox1.Text != string.Empty)
-                        {
-                            pictureBox1.Visible = true;
-                            bg.RunWorkerAsync();
-                        }
-                        else
-                        {
-                            MessageBox.Show("[Error] se necesita ingresar un parámetro de búsqueda.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        pictureBox1.Visible = true;
+                        bg.RunWorkerAsync();                       
                     }
                     else
                     {

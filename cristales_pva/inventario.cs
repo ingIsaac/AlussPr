@@ -31,7 +31,7 @@ namespace cristales_pva
             InitializeComponent();
             datagridviewNE1.RowsAdded += DatagridviewNE1_RowsAdded;
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
-            datagridviewNE1.EditingControlShowing += DatagridviewNE1_EditingControlShowing;          
+            datagridviewNE1.EditingControlShowing += DatagridviewNE1_EditingControlShowing;
             datagridviewNE1.CellEndEdit += DatagridviewNE1_CellEndEdit;
             //------------------------->
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
@@ -50,7 +50,7 @@ namespace cristales_pva
             update_table.Columns.Add("linea");
             update_table.Columns.Add("proveedor");
             update_table.Columns.Add("costeo");
-          
+
             //--------------------------->
             comboBox4.Text = "clave";
             comboBox8.Text = "clave";
@@ -178,7 +178,7 @@ namespace cristales_pva
 
         private void DatagridviewNE1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            if(datagridviewNE1.Rows[e.RowIndex].Cells[0].Value == null)
+            if (datagridviewNE1.Rows[e.RowIndex].Cells[0].Value == null)
             {
                 datagridviewNE1.Rows[e.RowIndex].Cells[0].Value = "-1";
                 datagridviewNE1.Rows[e.RowIndex].Cells[1].Value = "";
@@ -196,12 +196,12 @@ namespace cristales_pva
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if(datagridviewNE1.RowCount <= 0)
+            if (datagridviewNE1.RowCount <= 0)
             {
                 e.Cancel = true;
             }
             //------------------------------------------------------------->
-            if(datagridviewNE1.CurrentRow.Cells[0].Value.ToString() == "-1")
+            if (datagridviewNE1.CurrentRow.Cells[0].Value.ToString() == "-1")
             {
                 contextMenuStrip1.Items[2].Visible = false;
             }
@@ -213,12 +213,12 @@ namespace cristales_pva
 
         private void DatagridviewNE1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if(datagridviewNE1.RowCount > 0)
+            if (datagridviewNE1.RowCount > 0)
             {
                 if (datagridviewNE1.CurrentRow.Cells[0].Value.ToString() != "-1")
                 {
                     if (datagridviewNE1.CurrentRow.Cells[0].Value != null && datagridviewNE1.CurrentRow.Cells[1].Value != null && datagridviewNE1.CurrentRow.Cells[2].Value != null)
-                    {                        
+                    {
                         setVisto(true, datagridviewNE1.CurrentRow.Index, 0);
                         string clave = datagridviewNE1.CurrentRow.Cells[1].Value.ToString();
                         if (noRepeatIndex(clave, update_data) == false)
@@ -245,14 +245,14 @@ namespace cristales_pva
                                     x[5] = datagridviewNE1.CurrentRow.Cells[5].Value.ToString();
                                 }
                             }
-                        }                       
+                        }
                     }
-                }                
+                }
             }
         }
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {          
+        {
             pictureBox1.Visible = false;
             comboBox2.SelectedIndex = -1;
             comboBox3.SelectedIndex = -1;
@@ -264,7 +264,7 @@ namespace cristales_pva
             {
                 datagridviewNE dt = (datagridviewNE)e.Result;
                 dt.Enabled = true;
-                if(dt == datagridviewNE1)
+                if (dt == datagridviewNE1)
                 {
                     datagridviewNE1.AllowUserToAddRows = true;
                 }
@@ -282,7 +282,7 @@ namespace cristales_pva
                     {
                         ((TextBox)(e.Control)).CharacterCasing = CharacterCasing.Upper;
                     }
-                }               
+                }
             }
         }
 
@@ -290,12 +290,12 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
-                if (!backgroundWorker1.IsBusy )
+                if (!backgroundWorker1.IsBusy)
                 {
-                    if(datagridviewNE1.CurrentCell.ColumnIndex == 1 || datagridviewNE1.CurrentCell.ColumnIndex == 6)
+                    if (datagridviewNE1.CurrentCell.ColumnIndex == 1 || datagridviewNE1.CurrentCell.ColumnIndex == 6)
                     {
-                        if(datagridviewNE1.CurrentRow.Cells[0].Value.ToString() == "-1")
-                        { 
+                        if (datagridviewNE1.CurrentRow.Cells[0].Value.ToString() == "-1")
+                        {
                             if (datagridviewNE1.CurrentCell.ReadOnly)
                             {
                                 datagridviewNE1.CurrentCell.ReadOnly = false;
@@ -308,7 +308,7 @@ namespace cristales_pva
                                 datagridviewNE1.CurrentCell.ReadOnly = true;
                             }
                         }
-                    }                  
+                    }
                     //---> importante
                     if (datagridviewNE1.CurrentCell.Value == null)
                     {
@@ -326,7 +326,7 @@ namespace cristales_pva
                             case 0:
                                 cb.Items.AddRange(constants.getProveedores("vidrio").ToArray());
                                 break;
-                            case 1:                          
+                            case 1:
                                 cb.Items.AddRange(constants.getProveedores("aluminio").ToArray());
                                 break;
                             case 2:
@@ -334,7 +334,7 @@ namespace cristales_pva
                                 break;
                             case 3:
                                 cb.Items.AddRange(constants.getProveedores("otros").ToArray());
-                                break;                           
+                                break;
                             default: break;
                         }
                         foreach (string x in cb.Items)
@@ -362,7 +362,7 @@ namespace cristales_pva
                         {
                             case 0:
                                 cb.Items.AddRange(constants.getCategorias("vidrio").ToArray());
-                                break;                         
+                                break;
                             case 1:
                                 cb.Items.AddRange(constants.getCategorias("aluminio").ToArray());
                                 break;
@@ -410,7 +410,7 @@ namespace cristales_pva
                         cb.Value = u;
                         datagridviewNE1.CurrentRow.Cells[datagridviewNE1.CurrentCell.ColumnIndex] = cb;
                         cb.Dispose();
-                    }                            
+                    }
                 }
             }
         }
@@ -421,7 +421,7 @@ namespace cristales_pva
             executeLoad(datagridviewNE1);
         }
 
-        private void executeLoad(datagridviewNE datagridview, bool periodo=false, bool historial=false, string clave="")
+        private void executeLoad(datagridviewNE datagridview, bool periodo = false, bool historial = false, string clave = "")
         {
             if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
             {
@@ -429,7 +429,25 @@ namespace cristales_pva
                 pictureBox1.Visible = true;
                 datagridview.Enabled = false;
                 object[] v = new object[] { datagridview, periodo, historial, clave };
-                backgroundWorker1.RunWorkerAsync(v);               
+                backgroundWorker1.RunWorkerAsync(v);
+            }
+        }
+
+        private void setColors(datagridviewNE dt)
+        {
+            foreach (DataGridViewRow x in dt.Rows)
+            {
+                if (x.Cells[0].Value.ToString() != "-1")
+                {
+                    if (x.Cells[6].Value.ToString() != "0")
+                    {
+                        x.Cells[6].Style.BackColor = Color.LightGreen;
+                    }
+                    else
+                    {
+                        x.Cells[6].Style.BackColor = Color.Red;
+                    }
+                }
             }
         }
 
@@ -487,16 +505,9 @@ namespace cristales_pva
                             }
                             foreach (DataRow x in data.Rows)
                             {
-                                dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());
-                                if (x[7].ToString() != "0")
-                                {
-                                    dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.LightGreen;
-                                }
-                                else
-                                {
-                                    dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.Red;
-                                }
+                                dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());                               
                             }
+                            setColors(dt);
                             //---------------------------------------------------------------------------->                   
                         }
                         else if (dt == datagridviewNE2)
@@ -690,16 +701,9 @@ namespace cristales_pva
                         }
                         foreach (DataRow x in data.Rows)
                         {
-                            dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());
-                            if (x[7].ToString() != "0")
-                            {
-                                dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.LightGreen;
-                            }
-                            else
-                            {
-                                dt.Rows[dt.Rows.Count - 1].Cells[6].Style.BackColor = Color.Red;
-                            }
+                            dt.Rows.Add(x[0].ToString(), x[1].ToString(), x[2].ToString(), x[3].ToString(), x[4].ToString(), x[6].ToString(), x[7].ToString());                           
                         }
+                        setColors(dt);
                         //---------------------------------------------------------------------------->                   
                     }
                     else if (dt == datagridviewNE2)

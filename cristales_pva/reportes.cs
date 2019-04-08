@@ -29,6 +29,7 @@ namespace cristales_pva
         float utilidad = 0;
         bool sort_a_z = true;
         bool load = false;
+        float _c = 0;
 
         public reportes(string cliente, string proyecto, string folio, float subtotal, float iva, float total, float descuento, float desc_cant, float utilidad)
         {
@@ -260,7 +261,7 @@ namespace cristales_pva
                                 }
                             }
 
-                            if (n_c == false)
+                            if (n_c == false && constants.stringToFloat(o[2]) > 0)
                             {
                                 cris_list.Add(o[1]);
                             }
@@ -271,6 +272,10 @@ namespace cristales_pva
                     {
                         if (cri != ',')
                         {
+                            if (t)
+                            {
+                                _c = constants.stringToFloat(cri.ToString());
+                            }
                             if (cri != '-' && t == false)
                             {
                                 buffer = buffer + cri.ToString();
@@ -295,7 +300,7 @@ namespace cristales_pva
                                 }
                             }
 
-                            if (n_c == false)
+                            if (n_c == false && _c > 0)
                             {
                                 cris_list.Add(c_clave);
                             }
