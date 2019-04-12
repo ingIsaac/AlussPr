@@ -105,6 +105,7 @@ namespace cristales_pva
             comboBox1.SelectedIndex = comboBox1.SelectedIndex;
             comboBox3.SelectedIndex = comboBox3.SelectedIndex;
             checkBox21.Checked = constants.siempre_permitir_ac;
+            checkBox16.Checked = constants.ajustar_medidas_aut;
             if (checkBox21.Checked)
             {
                 checkBox6.Checked = true;
@@ -128,7 +129,25 @@ namespace cristales_pva
             textBox14.KeyDown += TextBox14_KeyDown;
             textBox14.Leave += TextBox14_Leave;    
             textBox14.Text = constants.lim_sm.ToString();
-        }      
+            this.KeyPreview = true;
+            this.KeyDown += Config_modulo_KeyDown;
+        }
+
+        private void Config_modulo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.F5)
+            {
+                if (Application.OpenForms["edit_expresss"] == null)
+                {
+                    new edit_expresss().Show();
+                }
+                else
+                {
+                    Application.OpenForms["edit_expresss"].Select();
+                    Application.OpenForms["edit_expresss"].WindowState = FormWindowState.Normal;
+                }
+            }
+        }
 
         private void setLimitSM(float lim)
         {
@@ -1692,12 +1711,47 @@ namespace cristales_pva
             label19.Text = "x -" + (hScrollBar1.Maximum - hScrollBar1.Value);
         }
 
+        private void ajustGlobalDimension()
+        {
+            if(dataGridView5.RowCount > 0)
+            {
+                if (dataGridView5.CurrentRow.Index != 0)
+                {
+                    int g_largo = 0;
+                    int g_alto = 0;
+                    if (dataGridView5.CurrentCell.OwningColumn.Index == 2)
+                    {
+                        foreach (DataGridViewRow x in dataGridView5.Rows)
+                        {
+                            if (x.Index != 0)
+                            {
+                                g_largo = g_largo + constants.stringToInt(x.Cells[2].Value.ToString());
+                            }
+                        }
+                        dataGridView5.Rows[0].Cells[2].Value = (int)(g_largo / panel.RowCount);
+                    }
+                    else if (dataGridView5.CurrentCell.OwningColumn.Index == 3)
+                    {
+                        foreach (DataGridViewRow x in dataGridView5.Rows)
+                        {
+                            if (x.Index != 0)
+                            {
+                                g_alto = g_alto + constants.stringToInt(x.Cells[3].Value.ToString());
+                            }
+                        }
+                        dataGridView5.Rows[0].Cells[3].Value = (int)(g_alto / panel.ColumnCount);
+                    }
+                }
+            }
+        }
+
         private void DataGridView5_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView5.CurrentCell.Value != null)
             {
                 if (constants.stringToInt(dataGridView5.CurrentCell.Value.ToString()) > 0)
                 {
+                    ajustGlobalDimension();
                     checkDimensions();
                     calcularCostoModulo();
                 }
@@ -5988,24 +6042,35 @@ namespace cristales_pva
                     }
                     else
                     {
-                        checkBox19.Checked = false;
+                        checkBox19.Checked = true;
                         MessageBox.Show("[Error] no existe dicho diseño de apertura con mosquitero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
                     if (m_id > 0)
-                    {
+                    {                       
                         resetSession(m_id, id_cotizacion, false);
                         richTextBox1.Clear();
                     }
                     else
                     {
-                        checkBox19.Checked = true;
+                        checkBox19.Checked = false;
                         MessageBox.Show("[Error] no existe dicho diseño de apertura sin mosquitero.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-            }           
+            }
+            else
+            {
+                if (checkBox19.Checked)
+                {
+                    checkBox19.Checked = true;
+                }
+                else
+                {
+                    checkBox19.Checked = false;
+                }
+            }          
         }
 
         private int getModuloMosquiteros(string a_name, string c)
@@ -6315,6 +6380,35 @@ namespace cristales_pva
             }
         }
 
+        private void checkBox16_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox16.Checked)
+            {
+                constants.ajustar_medidas_aut = true;
+            }
+            else
+            {
+                constants.ajustar_medidas_aut = false;
+            }
+            try
+            {
+                XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+
+                var ajma = from x in opciones_xml.Descendants("Opciones") select x;
+
+                foreach (XElement x in ajma)
+                {
+                    x.SetElementValue("AJMA", constants.ajustar_medidas_aut == true ? "true" : "false");
+                }
+                opciones_xml.Save(constants.opciones_xml);
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+                MessageBox.Show("[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         //Cambiar Tipo de Apertura de la misma linea...
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -6543,7 +6637,10 @@ namespace cristales_pva
                 {
                     if (richTextBox1.TextLength > 0)
                     {
-                        richTextBox1.Text = richTextBox1.Text + "\n-" + descripcion.ToUpper();
+                        if (!richTextBox1.Text.Contains(descripcion.ToUpper()))
+                        {
+                            richTextBox1.Text = richTextBox1.Text + "\n-" + descripcion.ToUpper();
+                        }
                     }
                     else
                     {

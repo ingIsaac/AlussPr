@@ -4535,7 +4535,7 @@ namespace cristales_pva
                             }
                             else
                             {
-                                DialogResult re = MessageBox.Show("¿Deseas borrar todos los artículos añadidos?.", constants.msg_box_caption, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                DialogResult re = MessageBox.Show("¿Deseas borrar todos los artículos añadidos?.", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                                 int concept = (int)modulos.concept_id;
                                 var n = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concept select x);
@@ -4559,7 +4559,7 @@ namespace cristales_pva
                                             g.merge_id = -1;
                                         }
                                     }                                    
-                                }
+                                }                                                             
                                 cotizaciones.SaveChanges();
                             }
                             constants.loadCotizacionesLocales("modulos", datagridviewNE1);
@@ -6526,10 +6526,7 @@ namespace cristales_pva
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox5.SelectedIndex >= 0)
-            {
-                if (Application.OpenForms["config_modulo"] != null) { Application.OpenForms["config_modulo"].Close(); }
-                constants.id_articulo_cotizacion = -1;
-                setEditImage(false, false);
+            {                
                 constants.sub_folio = constants.stringToInt(comboBox5.Text);
                 setSubFolioLabel();
                 reloadAll();

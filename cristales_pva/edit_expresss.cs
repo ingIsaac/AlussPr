@@ -32,7 +32,7 @@ namespace cristales_pva
             if (Application.OpenForms["articulos_cotizacion"] != null)
             {
                 Application.OpenForms["articulos_cotizacion"].Close();
-            }
+            }         
         }
 
         private void borrarImagenPredeterminada(int perso_id)
@@ -183,15 +183,16 @@ namespace cristales_pva
         {
             if (datagridviewNE1.RowCount > 0)
             {
+                datagridviewNE1.CurrentRow.Selected = true;
                 if(datagridviewNE1.CurrentRow.Cells[3].Value.ToString() == "-1")
                 {
-                    pictureBox2.Image = Properties.Resources.Forward_icon;
+                    string id = datagridviewNE1.CurrentRow.Cells[0].Value.ToString();
+                    string ubicacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
+                    label3.Text = "ID: " + id + (ubicacion != string.Empty ? " - " + ubicacion : string.Empty);
                     cargarMergedItems((int)datagridviewNE1.CurrentRow.Cells[0].Value);
                 }
                 else
                 {
-                    pictureBox2.Image = null;
-                    label3.Text = "";
                     label6.Text = "";
                     label7.Text = "";
                     if (Application.OpenForms["config_modulo"] != null)
@@ -249,7 +250,7 @@ namespace cristales_pva
             {
                 string param = textBox1.Text;
                 data = null;
-                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.clave.StartsWith(param) || x.articulo.StartsWith(param) || x.ubicacion.StartsWith(param)) select x);
+                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.id.ToString().StartsWith(param) || x.ubicacion.StartsWith(param)) select x);
             }
             foreach (var c in data)
             {
@@ -316,7 +317,6 @@ namespace cristales_pva
                 }
             }
             sum = sum * constants.iva;
-            label3.Text = "$ " + sum.ToString("n");
 
             var modulo = (from x in cotizaciones.modulos_cotizaciones where x.id == id select x).SingleOrDefault();
             if (modulo != null)
@@ -429,6 +429,27 @@ namespace cristales_pva
                     ((Form1)Application.OpenForms["form1"]).refreshNewArticulo(5);
                 }
             }
+        }
+
+        //Cambiar sub-folio
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex >= 0)
+            {
+                switchSubFolio(comboBox1.Text);
+            }
+        }
+
+        private void switchSubFolio(string subfolio)
+        {
+            ((Form1)Application.OpenForms["form1"]).setSubFolio(subfolio);
+            label4.Text = "Sub-Folio: " + constants.sub_folio;
+            label3.Text = string.Empty;
+            merged_id = -1;
+            datagridviewNE2.Rows.Clear();
+            datagridviewNE2.Columns.Clear();
+            comboBox1.SelectedIndex = -1;         
+            cargarModulosCotizados();
         }
         //---------------------------------------------------->
     }

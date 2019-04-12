@@ -1148,6 +1148,8 @@
     <None Include="Resources\version_pic.png" />
     <None Include="Resources\cargando_ani.gif" />
     <None Include="Resources\cargando_ani_.gif" />
+    <None Include="Resources\xml_icon.png" />
+    <None Include="Resources\large_arrow.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

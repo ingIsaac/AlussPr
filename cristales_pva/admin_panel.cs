@@ -90,7 +90,6 @@ namespace cristales_pva
             datagridviewNE1.CellLeave += datagridviewNE1_CellLeave;
             datagridviewNE1.DataError += DatagridviewNE1_DataError;
             datagridviewNE1.EditingControlShowing += DatagridviewNE1_EditingControlShowing;
-            //
 
             //Other Events
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
@@ -2926,6 +2925,188 @@ namespace cristales_pva
             else
             {
                 datagridviewNE1.ClearSelection();
+            }
+        }
+
+        private void exportToXML()
+        {
+            SaveFileDialog save_dir = new SaveFileDialog();
+            save_dir.FileName = comboBox1.Text;
+            save_dir.Filter = "XML-FILE | *.xml";
+            if(save_dir.ShowDialog() == DialogResult.OK && save_dir.FileName != string.Empty)
+            {
+                try
+                {
+                    using (BackgroundWorker export = new BackgroundWorker())
+                    {
+                        export.WorkerReportsProgress = true;
+                        XDocument doc = new XDocument();
+                        int c = 0, n = datagridviewNE1.RowCount;
+                        export.DoWork += (sender, e) =>
+                        {
+                            XElement root = new XElement("Articulos");
+                            root.Add(new XAttribute("Lista", comboBox1.Text));
+                            foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                            {
+                                root.Add(new XElement("Articulo"));
+                                foreach (DataGridViewCell v in x.Cells)
+                                {
+                                    root.Elements("Articulo").Last().Add(new XAttribute(v.OwningColumn.HeaderText, v.Value.ToString()));
+                                }
+                                c++;
+                                export.ReportProgress((c * 100) / n);
+                            }
+                            doc.Add(root);
+                            doc.Save(save_dir.FileName);
+                            e.Result = true;
+                        };
+                        export.ProgressChanged += (sender, e) =>
+                        {
+                            label24.Text = e.ProgressPercentage + "%";
+                        };
+                        export.RunWorkerCompleted += (sender, e) =>
+                        {
+                            if ((bool)e.Result)
+                            {
+                                MessageBox.Show("Se ha exportado con exito la lista " + comboBox1.Text + " con (" + n + ") objetos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            label24.Text = string.Empty;
+                        };
+                        export.RunWorkerAsync();
+                    }
+                }
+                catch (Exception err)
+                {
+                    constants.errorLog(err.ToString());
+                    MessageBox.Show("[Error] se detecto un problema al exportar, intente de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    label24.Text = string.Empty;
+                }
+            }
+        }
+
+        private void importFromXML()
+        {
+            OpenFileDialog open_xml = new OpenFileDialog();
+            open_xml.Filter = "XML-File | *.xml";
+            if(open_xml.ShowDialog() == DialogResult.OK && open_xml.FileName != string.Empty)
+            {
+                try
+                {
+                    using (BackgroundWorker import = new BackgroundWorker())
+                    {
+                        import.WorkerReportsProgress = true;
+                        import.DoWork += (sender, e) =>
+                        {
+                            XDocument doc = XDocument.Load(open_xml.FileName);
+                            if (doc != null)
+                            {
+                                string lista = doc.Element("Articulos").Attribute("Lista").Value;
+                                if (lista == comboBox1.Text)
+                                {
+                                    var articulos = from x in doc.Element("Articulos").Elements() select x;
+                                    int n = datagridviewNE1.RowCount;
+                                    if (articulos != null)
+                                    {
+                                        int c = 0;
+                                        string val = string.Empty;
+                                        e.Result = true;
+                                        foreach (XElement v in articulos)
+                                        {
+                                            val = v.Attribute("clave").Value;
+                                            foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                                            {
+                                                if (x.Cells["clave"].Value.ToString() == val)
+                                                {
+                                                    foreach (DataGridViewCell p in x.Cells)
+                                                    {
+                                                        if (p.OwningColumn.HeaderText != "id" || p.OwningColumn.HeaderText != "clave")
+                                                        {
+                                                            if (v.Attribute(p.OwningColumn.HeaderText) != null)
+                                                            {
+                                                                p.Value = v.Attribute(p.OwningColumn.HeaderText).Value;
+                                                            }
+                                                            else
+                                                            {
+                                                                e.Result = false;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            c++;
+                                            import.ReportProgress((c * 100) / n);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("[Error] este archivo XML esta guardado con una lista diferente, por lo tanto no es compatible.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        };
+                        import.ProgressChanged += (sender, e) =>
+                        {
+                            label24.Text = e.ProgressPercentage + "%";
+                        };
+                        import.RunWorkerCompleted += (sender, e) =>
+                        {
+                            if (e.Result != null)
+                            {
+                                if ((bool)e.Result)
+                                {
+                                    MessageBox.Show("Se ha importado con exito la lista " + Path.GetFileName(open_xml.FileName) + ".", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("[Error] al parecer el archivo XML no es compatible con esta lista.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("[Error] se detecto un problema al importar, intente de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            label24.Text = string.Empty;
+                        };
+                        import.RunWorkerAsync();
+                    }
+                }
+                catch(Exception err)
+                {
+                    constants.errorLog(err.ToString());
+                    MessageBox.Show("[Error] se detecto un problema al importar, intente de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    label24.Text = string.Empty;
+                }
+            }
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (datagridviewNE1.RowCount > 0 && comboBox1.Text != string.Empty)
+            {
+                exportToXML();               
+            }
+            else
+            {
+                MessageBox.Show("[Error] necesitas seleccionar una lista.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if(comboBox1.Text != string.Empty)
+            {
+                importFromXML();              
+            }
+            else
+            {
+                MessageBox.Show("[Error] necesitas seleccionar una lista.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

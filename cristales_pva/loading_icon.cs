@@ -78,6 +78,7 @@ namespace cristales_pva
                 var ivd = (from x in opciones_xml.Descendants("Opciones") select x.Element("IVD")).SingleOrDefault();
                 var pai = (from x in opciones_xml.Descendants("Opciones") select x.Element("PAI")).SingleOrDefault();
                 var spac = (from x in opciones_xml.Descendants("Opciones") select x.Element("SPAC")).SingleOrDefault();
+                var ajma = (from x in opciones_xml.Descendants("Opciones") select x.Element("AJMA")).SingleOrDefault();
                 var m_liva = (from x in opciones_xml.Descendants("Opciones") select x.Element("MLIVA")).SingleOrDefault();
                 var pac = (from x in opciones_xml.Descendants("Opciones") select x.Element("PAC")).SingleOrDefault();
                 var lim_sm = (from x in opciones_xml.Descendants("Opciones") select x.Element("LIM_SM")).SingleOrDefault();
@@ -205,6 +206,18 @@ namespace cristales_pva
                     else
                     {
                         constants.siempre_permitir_ac = false;
+                    }
+                }
+
+                if (ajma != null)
+                {
+                    if (ajma.Value == "true")
+                    {
+                        constants.ajustar_medidas_aut = true;
+                    }
+                    else
+                    {
+                        constants.ajustar_medidas_aut = false;
                     }
                 }
 

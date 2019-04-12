@@ -95,7 +95,7 @@ namespace cristales_pva
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if(dataGridView1.RowCount == 0)
+            if(datagridviewNE1.RowCount == 0)
             {
                 e.Cancel = true;
             }
@@ -421,6 +421,7 @@ namespace cristales_pva
                 }
                 countItems();
                 tabControl1.SelectedTab = tabPage4;
+                dataGridView6.FirstDisplayedScrollingRowIndex = dataGridView6.Rows[dataGridView6.RowCount - 1].Index;
             }
         }
         //------------------------------------------------------------

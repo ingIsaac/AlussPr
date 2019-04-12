@@ -66,6 +66,7 @@ namespace cristales_pva
         public static bool iva_desglosado = true;
         public static bool permitir_ajuste_iva = true;
         public static bool siempre_permitir_ac = true;
+        public static bool ajustar_medidas_aut = true;
         public static bool op1 = false;
         public static bool op2 = false;
         public static bool op3 = false;
@@ -1671,19 +1672,18 @@ namespace cristales_pva
                 concepto.articulo = "";
                 concepto.total = 0;
                 concepto.linea = "";
-                if (concepto.ubicacion == null)
-                {
-                    concepto.ubicacion = "";
-                }
+                concepto.ubicacion = "";              
                 concepto.acabado_perfil = "";
                 concepto.diseño = "";
                 concepto.claves_cristales = "";
                 concepto.news = "";
+                concepto.largo = 0;
+                concepto.alto = 0;
                 int dir_p = -1;
 
                 var modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id select x);
                 if (modulos != null)
-                {
+                {                  
                     Image img = null;
                     cotizaciones.SaveChanges();
                     foreach (var v in modulos)
@@ -1704,7 +1704,7 @@ namespace cristales_pva
                         concepto.news = concepto.news + v.news;
                     }
                     concepto.total = concepto.total * concepto.cantidad;
-                }
+                }                          
 
                 //New Medidas ------------------------------------------------------------------------------------------->
                 var c = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id && x.dir > 0 select x).Count();
