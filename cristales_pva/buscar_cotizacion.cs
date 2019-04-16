@@ -32,6 +32,7 @@ namespace cristales_pva
             backgroundWorker4.RunWorkerCompleted += BackgroundWorker4_RunWorkerCompleted;
             datagridviewNE1.CellClick += DataGridView1_CellClick;
             datagridviewNE1.CellLeave += DataGridView1_CellLeave;
+            datagridviewNE1.Sorted += DatagridviewNE1_Sorted;
             monthCalendar1.DateSelected += MonthCalendar1_DateSelected;
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             textBox1.KeyPress += TextBox1_KeyPress;
@@ -39,6 +40,11 @@ namespace cristales_pva
             setYears();
             comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
             comboBox3.Text = DateTime.Now.Year.ToString();
+        }
+
+        private void DatagridviewNE1_Sorted(object sender, EventArgs e)
+        {
+            setIndicador();
         }
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -106,28 +112,7 @@ namespace cristales_pva
                 checkBox1.Visible = false;
                 checkBox1.Checked = false;
             }
-            if (constants.licencia != "DEMO")
-            {
-                sqlDateBaseManager sql = new sqlDateBaseManager();
-                List<string> tiendas = sql.getTiendas();
-                if (tiendas.Count > 0)
-                {
-                    comboBox1.Items.Clear();
-                    foreach (string x in tiendas)
-                    {
-                        comboBox1.Items.Add(x);
-                    }
-                    comboBox1.Text = constants.org_name;
-                }
-            }
-            else
-            {
-                if (constants.org_name != string.Empty)
-                {
-                    comboBox1.Items.Add(constants.org_name);
-                    comboBox1.Text = constants.org_name;
-                }
-            }
+            constants.setTiendas(comboBox1);
             org_search = constants.org_name;
             pictureBox1.Visible = false;
             label3.Visible = false;

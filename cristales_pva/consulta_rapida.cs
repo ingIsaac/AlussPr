@@ -22,6 +22,12 @@ namespace cristales_pva
             bg.DoWork += Bg_DoWork;
             bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
             textBox1.KeyDown += TextBox1_KeyDown;
+            datagridviewNE1.Sorted += DatagridviewNE1_Sorted;
+        }
+
+        private void DatagridviewNE1_Sorted(object sender, EventArgs e)
+        {
+            setIndicador();
         }
 
         private void Bg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -71,50 +77,35 @@ namespace cristales_pva
                 {
                     dt = sql.getArticuloInventario(comboBox2.Text, tienda_id, textBox1.Text);
                     datagridviewNE1.DataSource = dt;
-                    foreach(DataGridViewRow x in datagridviewNE1.Rows)
-                    {
-                        if(x.Cells[6].Value.ToString() != "0")
-                        {
-                            x.Cells[6].Style.BackColor = Color.LightGreen;
-                        }
-                        else
-                        {
-                            x.Cells[6].Style.BackColor = Color.Red;
-                        }
-                    }
+                    setIndicador();
                 });
             }
             else
             {
                 dt = sql.getArticuloInventario(comboBox2.Text, tienda_id, textBox1.Text);
                 datagridviewNE1.DataSource = dt;
-                foreach (DataGridViewRow x in datagridviewNE1.Rows)
+                setIndicador();
+            }
+        }
+
+        private void setIndicador()
+        {
+            foreach (DataGridViewRow x in datagridviewNE1.Rows)
+            {
+                if (x.Cells[6].Value.ToString() != "0")
                 {
-                    if (x.Cells[6].Value.ToString() != "0")
-                    {
-                        x.Cells[6].Style.BackColor = Color.LightGreen;
-                    }
-                    else
-                    {
-                        x.Cells[6].Style.BackColor = Color.Red;
-                    }
+                    x.Cells[6].Style.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    x.Cells[6].Style.BackColor = Color.Red;
                 }
             }
         }
 
         private void consulta_rapida_Load(object sender, EventArgs e)
         {
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            List<string> tiendas = sql.getTiendas();
-            if (tiendas.Count > 0)
-            {
-                comboBox1.Items.Clear();
-                foreach (string x in tiendas)
-                {
-                    comboBox1.Items.Add(x);
-                }
-                comboBox1.Text = constants.org_name;
-            }
+            constants.setTiendas(comboBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)

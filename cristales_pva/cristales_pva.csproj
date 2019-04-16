@@ -100,6 +100,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -157,6 +158,12 @@
     </Compile>
     <Compile Include="anuncios.Designer.cs">
       <DependentUpon>anuncios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="anuncios_manager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="anuncios_manager.Designer.cs">
+      <DependentUpon>anuncios_manager.cs</DependentUpon>
     </Compile>
     <Compile Include="articulos_cotizacion.cs">
       <SubType>Form</SubType>
@@ -295,6 +302,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>cotizaciones_local.edmx</DependentUpon>
     </Compile>
+    <Compile Include="cotizacion_info.cs" />
     <Compile Include="crear_modulo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,6 +371,12 @@
     </Compile>
     <Compile Include="esquema.cs">
       <DependentUpon>listas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="estadisticas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="estadisticas.Designer.cs">
+      <DependentUpon>estadisticas.cs</DependentUpon>
     </Compile>
     <Compile Include="fabrica.cs">
       <SubType>Form</SubType>
@@ -581,6 +595,7 @@
     <Compile Include="proveedore.cs">
       <DependentUpon>userLocal_model.tt</DependentUpon>
     </Compile>
+    <Compile Include="p_registros.cs" />
     <Compile Include="registro_presupuesto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -683,6 +698,9 @@
     <EmbeddedResource Include="anuncios.resx">
       <DependentUpon>anuncios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="anuncios_manager.resx">
+      <DependentUpon>anuncios_manager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cambiar_tienda.resx">
       <DependentUpon>cambiar_tienda.cs</DependentUpon>
     </EmbeddedResource>
@@ -691,6 +709,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="consulta_rapida.resx">
       <DependentUpon>consulta_rapida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="estadisticas.resx">
+      <DependentUpon>estadisticas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fabrica.resx">
       <DependentUpon>fabrica.cs</DependentUpon>

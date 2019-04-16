@@ -36,6 +36,11 @@ namespace cristales_pva
             string etapa = sql.selectRegistroPresupuestos(constants.folio_abierto, "etapa");
             string informe = sql.selectRegistroPresupuestos(constants.folio_abierto, "informe");
             string fecha_entrega = sql.selectRegistroPresupuestos(constants.folio_abierto, "fecha_entrega");
+            string fecha_inicio = sql.selectRegistroPresupuestos(constants.folio_abierto, "fecha_inicio");
+            if(fecha_inicio != string.Empty)
+            {
+                label14.Text = fecha_inicio;
+            }
             comboBox1.Text = etapa;
             if (comboBox1.Text == "")
             {

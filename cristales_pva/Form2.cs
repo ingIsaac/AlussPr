@@ -179,6 +179,7 @@ namespace cristales_pva
                                 {
                                     if (sql.getTienda(constants.org_name) == true)
                                     {
+                                        //Licencia                                      
                                         if (constants.getVigencia(sql.getvigenciaTienda(constants.org_name)))
                                         {
                                             constants.licencia = sql.getvigenciaType(constants.org_name).ToUpper();

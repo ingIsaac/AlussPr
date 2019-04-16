@@ -52,16 +52,8 @@ namespace cristales_pva
         }
 
         private void Historial_registros_Shown(object sender, EventArgs e)
-        {           
-            List<string> tiendas = new sqlDateBaseManager().getTiendas();
-            if(tiendas.Count > 0)
-            {
-                comboBox4.Items.Clear();
-                foreach(string x in tiendas)
-                {
-                    comboBox4.Items.Add(x);
-                }
-            }
+        {
+            constants.setTiendas(comboBox4);
             comboBox4.Text = constants.org_name;
             setTimer();
             loadPresupuestos(string.Empty, false);

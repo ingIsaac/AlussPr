@@ -256,7 +256,11 @@
             this.habilitarCambioDeParametrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarTiendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.estadísticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anunciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administrarAnunciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.licenciaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -2701,6 +2705,7 @@
             this.habilitarCambioDeParametrosToolStripMenuItem,
             this.opcionesDeEmpresaToolStripMenuItem,
             this.anunciosToolStripMenuItem,
+            this.licenciaToolStripMenuItem,
             this.errorLogToolStripMenuItem});
             this.archivoToolStripMenuItem.Image = global::cristales_pva.Properties.Resources.Status_user_online_icon;
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
@@ -2752,7 +2757,8 @@
             // opcionesDeEmpresaToolStripMenuItem
             // 
             this.opcionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cambiarTiendaToolStripMenuItem});
+            this.cambiarTiendaToolStripMenuItem,
+            this.estadísticasToolStripMenuItem});
             this.opcionesDeEmpresaToolStripMenuItem.Name = "opcionesDeEmpresaToolStripMenuItem";
             this.opcionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.opcionesDeEmpresaToolStripMenuItem.Text = "Opciones de empresa";
@@ -2765,16 +2771,51 @@
             this.cambiarTiendaToolStripMenuItem.Text = "Cambiar tienda";
             this.cambiarTiendaToolStripMenuItem.Click += new System.EventHandler(this.cambiarTiendaToolStripMenuItem_Click);
             // 
+            // estadísticasToolStripMenuItem
+            // 
+            this.estadísticasToolStripMenuItem.Name = "estadísticasToolStripMenuItem";
+            this.estadísticasToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.estadísticasToolStripMenuItem.Text = "Estadísticas";
+            this.estadísticasToolStripMenuItem.Click += new System.EventHandler(this.estadísticasToolStripMenuItem_Click);
+            // 
             // anunciosToolStripMenuItem
             // 
+            this.anunciosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verToolStripMenuItem,
+            this.administrarAnunciosToolStripMenuItem});
             this.anunciosToolStripMenuItem.Name = "anunciosToolStripMenuItem";
             this.anunciosToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.anunciosToolStripMenuItem.Text = "Anuncios";
-            this.anunciosToolStripMenuItem.Click += new System.EventHandler(this.anunciosToolStripMenuItem_Click);
+            // 
+            // verToolStripMenuItem
+            // 
+            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
+            this.verToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F6;
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.verToolStripMenuItem.Text = "Ver anuncios";
+            this.verToolStripMenuItem.Click += new System.EventHandler(this.verToolStripMenuItem_Click);
+            // 
+            // administrarAnunciosToolStripMenuItem
+            // 
+            this.administrarAnunciosToolStripMenuItem.Name = "administrarAnunciosToolStripMenuItem";
+            this.administrarAnunciosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F6)));
+            this.administrarAnunciosToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.administrarAnunciosToolStripMenuItem.Text = "Administrar anuncios";
+            this.administrarAnunciosToolStripMenuItem.Click += new System.EventHandler(this.administrarAnunciosToolStripMenuItem_Click);
+            // 
+            // licenciaToolStripMenuItem
+            // 
+            this.licenciaToolStripMenuItem.Name = "licenciaToolStripMenuItem";
+            this.licenciaToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.licenciaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.licenciaToolStripMenuItem.Text = "Licencia";
+            this.licenciaToolStripMenuItem.Click += new System.EventHandler(this.licenciaToolStripMenuItem_Click);
             // 
             // errorLogToolStripMenuItem
             // 
             this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
+            this.errorLogToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.errorLogToolStripMenuItem.Text = "Error log";
             this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);
@@ -3812,6 +3853,10 @@
         private System.Windows.Forms.ToolStripMenuItem consultaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaRapidaToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage15;
+        private System.Windows.Forms.ToolStripMenuItem estadísticasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem administrarAnunciosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem licenciaToolStripMenuItem;
     }
 }
 

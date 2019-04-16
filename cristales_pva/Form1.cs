@@ -7008,20 +7008,6 @@ namespace cristales_pva
             }          
         }
 
-        private void anunciosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (constants.local == false)
-            {
-                anuncios anuncios = new anuncios();
-                anuncios.ShowDialog(this);
-                anuncios.Select();
-            }
-            else
-            {
-                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void cambiarTiendaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (constants.local == false)
@@ -7152,6 +7138,51 @@ namespace cristales_pva
             {
                 MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void estadísticasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new estadisticas().ShowDialog();
+        }
+
+        private void verToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                anuncios anuncios = new anuncios();
+                anuncios.ShowDialog(this);
+                anuncios.Select();
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void administrarAnunciosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.local == false)
+            {
+                if (constants.user_access >= 5)
+                {
+                    anuncios_manager anuncios = new anuncios_manager();
+                    anuncios.ShowDialog(this);
+                    anuncios.Select();
+                }
+                else
+                {
+                    MessageBox.Show("[Error] solo un usuario con privilegios de grado (5) puede acceder a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void licenciaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new vigencia().ShowDialog(this);
         }
 
         public void disableModoLIVA()

@@ -49,15 +49,7 @@ namespace cristales_pva
                 }
             }
             //
-            List<string> tiendas = sql.getTiendas();
-            if (tiendas.Count > 0)
-            {
-                comboBox1.Items.Clear();
-                foreach (string x in tiendas)
-                {
-                    comboBox1.Items.Add(x);
-                }
-            }
+            constants.setTiendas(comboBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)

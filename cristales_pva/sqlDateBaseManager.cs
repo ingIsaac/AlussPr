@@ -4165,7 +4165,7 @@ namespace cristales_pva
             DateTime result = new DateTime();
             connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
-            SqlCommand cmd = new SqlCommand();
+            SqlCommand cmd = new SqlCommand();           
 
             cmd.Connection = connection;
             cmd.CommandText = "SELECT vigencia FROM tiendas WHERE nombre_tienda='" + tienda + "'";
@@ -4175,7 +4175,10 @@ namespace cristales_pva
                 SqlDataReader r = cmd.ExecuteReader();
                 if (r.Read())
                 {
-                    result = Convert.ToDateTime(r.GetValue(0));
+                    if (!r.IsDBNull(0))
+                    {
+                        result = Convert.ToDateTime(r.GetValue(0));
+                    }
                 }
             }
             catch (Exception e)
@@ -4211,7 +4214,10 @@ namespace cristales_pva
                 SqlDataReader r = cmd.ExecuteReader();
                 if (r.Read())
                 {
-                    result = r.GetValue(0).ToString();
+                    if (!r.IsDBNull(0))
+                    {
+                        result = r.GetValue(0).ToString();
+                    }
                 }
             }
             catch (Exception e)
@@ -5193,7 +5199,7 @@ namespace cristales_pva
                 SqlDataReader r = cmd.ExecuteReader();
                 while (r.Read())
                 {
-                    if (r.GetValue(0) != null && r.GetValue(1) != null)
+                    if (!r.IsDBNull(0) && !r.IsDBNull(1))
                     {
                         dt.Add(r.GetValue(0).ToString() + "\n\n" + r.GetValue(1).ToString() + "\n\n");
                     }
@@ -5222,7 +5228,7 @@ namespace cristales_pva
                 SqlDataReader r = cmd.ExecuteReader();
                 while (r.Read())
                 {
-                    if (r.GetValue(0) != null && r.GetValue(1) != null)
+                    if (!r.IsDBNull(0) && !r.IsDBNull(1))
                     {
                         dt.Add("[" + r.GetValue(1).ToString() + "]\n\n" + r.GetValue(0).ToString() + "\n---------------------------------------\n");
                     }
@@ -5511,6 +5517,191 @@ namespace cristales_pva
                 connection.Dispose();
             }
             return result;
+        }
+
+        public List<cotizacion_info> getCountPresupuestos(string empresa)
+        {
+            List<cotizacion_info> result = new List<cotizacion_info>();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "select folio, fecha from cotizaciones where tienda=@EMPRESA";
+            cmd.Parameters.AddWithValue("@EMPRESA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@EMPRESA"].Value = empresa;
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while(r.Read())
+                {
+                    if (!r.IsDBNull(0) && !r.IsDBNull(1))
+                    {
+                        result.Add(new cotizacion_info((int)r.GetValue(0), r.GetValue(1).ToString()));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
+        public List<p_registros> getCountRegistros(string empresa)
+        {
+            List<p_registros> result = new List<p_registros>();
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "select folio, fecha_inicio from registro_presupuestos where org=@EMPRESA";
+            cmd.Parameters.AddWithValue("@EMPRESA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@EMPRESA"].Value = empresa;
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (!r.IsDBNull(0) && !r.IsDBNull(1))
+                    {
+                        result.Add(new p_registros((int)r.GetValue(0), r.GetValue(1).ToString()));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
+        }
+
+        public void getAnunciosTable(DataGridView dataview)
+        {
+            DataTable data = new DataTable();
+            try
+            {
+                string query = string.Empty;
+
+                query = "SELECT * FROM anuncios";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
+                SqlCommandBuilder cb = new SqlCommandBuilder(da);
+                da.Fill(data);
+                //crear un puntero si la peticion se genera desde otro thread...
+                if (dataview.InvokeRequired == true)
+                {
+                    dataview.Invoke((MethodInvoker)delegate
+                    {
+                        dataview.DataSource = data;
+                    });
+                }
+                else
+                {
+                    dataview.DataSource = data;
+                }
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                constants.errorLog(err.ToString());
+            }
+            finally
+            {
+                data.Dispose();
+            }
+        }
+
+        public void newAnuncio(string texto, string fecha)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "INSERT INTO anuncios (texto, fecha) VALUES (@TXT, @FECHA)";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@TXT", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@TXT"].Value = texto;
+            cmd.Parameters.AddWithValue("@FECHA", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@FECHA"].Value = fecha;          
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void modificarAnuncio(int id, string texto)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "UPDATE anuncios SET texto=@TXT WHERE id=@ID";
+            cmd.Connection = connection;
+            cmd.Parameters.AddWithValue("@TXT", System.Data.SqlDbType.VarChar);
+            cmd.Parameters["@TXT"].Value = texto;
+            cmd.Parameters.AddWithValue("@ID", System.Data.SqlDbType.Int);
+            cmd.Parameters["@ID"].Value = id;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+
+        public void eliminarAnuncio(int id)
+        {
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "DELETE FROM anuncios WHERE id=@ID";
+            cmd.Connection = connection;           
+            cmd.Parameters.AddWithValue("@ID", System.Data.SqlDbType.Int);
+            cmd.Parameters["@ID"].Value = id;
+            try
+            {
+                connection.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
         }
 
         ~sqlDateBaseManager()

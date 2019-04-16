@@ -20,7 +20,7 @@ namespace cristales_pva
             bw = new BackgroundWorker();
             bw.DoWork += Bw_DoWork;
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
-            System.Diagnostics.FileVersionInfo info = constants.getFileInfoVersion();
+            System.Diagnostics.FileVersionInfo info = constants.getFileInfoVersion();           
             label4.Text = info != null ? info.LegalCopyright : string.Empty;
         }
 

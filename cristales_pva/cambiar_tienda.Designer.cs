@@ -38,18 +38,18 @@
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(27, 35);
+            this.comboBox1.Location = new System.Drawing.Point(12, 28);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(273, 21);
+            this.comboBox1.Size = new System.Drawing.Size(344, 21);
             this.comboBox1.TabIndex = 0;
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = global::cristales_pva.Properties.Resources.save_16;
-            this.button1.Location = new System.Drawing.Point(217, 77);
+            this.button1.Location = new System.Drawing.Point(251, 59);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 26);
+            this.button1.Size = new System.Drawing.Size(105, 41);
             this.button1.TabIndex = 1;
             this.button1.Text = "Guardar";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 19);
+            this.label1.Location = new System.Drawing.Point(9, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 13);
             this.label1.TabIndex = 2;
@@ -70,7 +70,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 115);
+            this.ClientSize = new System.Drawing.Size(368, 112);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox1);

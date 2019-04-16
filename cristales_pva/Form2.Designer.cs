@@ -161,6 +161,7 @@
             // códigoDeVigenciaToolStripMenuItem
             // 
             this.códigoDeVigenciaToolStripMenuItem.Name = "códigoDeVigenciaToolStripMenuItem";
+            this.códigoDeVigenciaToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
             this.códigoDeVigenciaToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.códigoDeVigenciaToolStripMenuItem.Text = "Licencia";
             this.códigoDeVigenciaToolStripMenuItem.Click += new System.EventHandler(this.códigoDeVigenciaToolStripMenuItem_Click);
@@ -168,6 +169,7 @@
             // errorLogToolStripMenuItem
             // 
             this.errorLogToolStripMenuItem.Name = "errorLogToolStripMenuItem";
+            this.errorLogToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.errorLogToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
             this.errorLogToolStripMenuItem.Text = "Error log";
             this.errorLogToolStripMenuItem.Click += new System.EventHandler(this.errorLogToolStripMenuItem_Click);

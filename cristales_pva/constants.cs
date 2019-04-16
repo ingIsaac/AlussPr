@@ -5419,7 +5419,7 @@ namespace cristales_pva
         }
 
         public static void setTiendas(ComboBox box)
-        {
+        {        
             sqlDateBaseManager sql = new sqlDateBaseManager();
             List<string> tiendas = sql.getTiendas();
             if (tiendas.Count > 0)
@@ -5429,7 +5429,8 @@ namespace cristales_pva
                 {
                     box.Items.Add(x);
                 }
-            }
+                box.Text = org_name;
+            }          
         }
 
         //Sub-Folio Titles
