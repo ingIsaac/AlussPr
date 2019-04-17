@@ -1884,6 +1884,19 @@ namespace cristales_pva
             getInstruction(clave);
             getSeccionesReady(constants.stringToInt(dataGridView1.CurrentRow.Cells[6].Value.ToString()));
             calcularCostoModulo();
+            //Reload Acabado
+            if(comboBox1.Text != string.Empty)
+            {
+                int s = comboBox1.SelectedIndex;
+                comboBox1.SelectedIndex = -1;
+                comboBox1.SelectedIndex = s;
+            }
+            else if(comboBox3.Text != string.Empty)
+            {
+                int s = comboBox3.SelectedIndex;
+                comboBox3.SelectedIndex = -1;
+                comboBox3.SelectedIndex = s;
+            }
         }
 
         private void DataGridView4_CellClick(object sender, DataGridViewCellEventArgs e)
