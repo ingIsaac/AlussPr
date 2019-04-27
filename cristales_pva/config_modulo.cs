@@ -147,6 +147,21 @@ namespace cristales_pva
                     Application.OpenForms["edit_expresss"].WindowState = FormWindowState.Normal;
                 }
             }
+            else if(e.KeyData == Keys.F6)
+            {
+                if (Application.OpenForms["new_articulo"] == null)
+                {
+                    new new_articulo(new_costos).Show(this);
+                }
+                else
+                {
+                    if (Application.OpenForms["new_articulo"].WindowState == FormWindowState.Minimized)
+                    {
+                        Application.OpenForms["new_articulo"].WindowState = FormWindowState.Normal;
+                    }
+                    Application.OpenForms["new_articulo"].Select();
+                }
+            }
         }
 
         private void setLimitSM(float lim)

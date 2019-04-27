@@ -57,10 +57,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -121,7 +121,7 @@
             this.textBox8.Location = new System.Drawing.Point(69, 95);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(458, 20);
-            this.textBox8.TabIndex = 8;
+            this.textBox8.TabIndex = 6;
             // 
             // label8
             // 
@@ -139,7 +139,7 @@
             this.button1.Location = new System.Drawing.Point(465, 212);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 58);
-            this.button1.TabIndex = 6;
+            this.button1.TabIndex = 7;
             this.button1.Text = "Nuevo";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
@@ -246,7 +246,7 @@
             this.textBox9.Location = new System.Drawing.Point(64, 207);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(476, 20);
-            this.textBox9.TabIndex = 13;
+            this.textBox9.TabIndex = 7;
             // 
             // label9
             // 
@@ -297,7 +297,7 @@
             this.button3.Location = new System.Drawing.Point(291, 244);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(30, 25);
-            this.button3.TabIndex = 8;
+            this.button3.TabIndex = 11;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -383,10 +383,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(534, 115);
             this.dataGridView1.TabIndex = 0;
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -410,6 +406,10 @@
             this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // clientes
             // 

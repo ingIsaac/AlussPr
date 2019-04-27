@@ -140,6 +140,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(109, 17);
             this.checkBox1.TabIndex = 2;
+            this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Cargar Imagenes.";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -153,6 +154,7 @@
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(187, 17);
             this.checkBox2.TabIndex = 1;
+            this.checkBox2.TabStop = false;
             this.checkBox2.Text = "Ordenar por Ubicación/Concepto.";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
@@ -200,7 +202,7 @@
             this.textBox1.Location = new System.Drawing.Point(16, 284);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(177, 20);
-            this.textBox1.TabIndex = 4;
+            this.textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
@@ -209,7 +211,7 @@
             this.textBox2.Location = new System.Drawing.Point(16, 323);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(177, 20);
-            this.textBox2.TabIndex = 5;
+            this.textBox2.TabIndex = 2;
             // 
             // textBox3
             // 
@@ -218,7 +220,7 @@
             this.textBox3.Location = new System.Drawing.Point(16, 362);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(177, 20);
-            this.textBox3.TabIndex = 6;
+            this.textBox3.TabIndex = 3;
             // 
             // textBox4
             // 
@@ -227,7 +229,7 @@
             this.textBox4.Location = new System.Drawing.Point(16, 401);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(177, 20);
-            this.textBox4.TabIndex = 7;
+            this.textBox4.TabIndex = 4;
             // 
             // button1
             // 
@@ -235,7 +237,7 @@
             this.button1.Location = new System.Drawing.Point(16, 474);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 56);
-            this.button1.TabIndex = 8;
+            this.button1.TabIndex = 6;
             this.button1.Text = "Actualizar";
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -251,6 +253,7 @@
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(100, 17);
             this.checkBox3.TabIndex = 3;
+            this.checkBox3.TabStop = false;
             this.checkBox3.Text = "Forma de pago.";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
@@ -262,6 +265,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(38, 23);
             this.button2.TabIndex = 12;
+            this.button2.TabStop = false;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -272,6 +276,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(38, 23);
             this.button3.TabIndex = 13;
+            this.button3.TabStop = false;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -284,6 +289,7 @@
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(125, 17);
             this.checkBox4.TabIndex = 14;
+            this.checkBox4.TabStop = false;
             this.checkBox4.Text = "Mostrar descuentos -";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged_1);
@@ -303,7 +309,7 @@
             this.textBox5.Location = new System.Drawing.Point(16, 440);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(177, 20);
-            this.textBox5.TabIndex = 16;
+            this.textBox5.TabIndex = 5;
             // 
             // checkBox5
             // 
@@ -313,6 +319,7 @@
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(112, 17);
             this.checkBox5.TabIndex = 17;
+            this.checkBox5.TabStop = false;
             this.checkBox5.Text = "*Ocultar desglose.";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
@@ -325,6 +332,7 @@
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(101, 17);
             this.checkBox6.TabIndex = 18;
+            this.checkBox6.TabStop = false;
             this.checkBox6.Text = "Marca de agua.";
             this.checkBox6.UseVisualStyleBackColor = true;
             this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
@@ -336,7 +344,7 @@
             this.button4.Location = new System.Drawing.Point(107, 474);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(85, 56);
-            this.button4.TabIndex = 4;
+            this.button4.TabIndex = 7;
             this.button4.Text = "Enviar Correo";
             this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button4.UseVisualStyleBackColor = true;
@@ -360,6 +368,7 @@
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(110, 17);
             this.checkBox7.TabIndex = 21;
+            this.checkBox7.TabStop = false;
             this.checkBox7.Text = "Formato ajustado.";
             this.checkBox7.UseVisualStyleBackColor = true;
             this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
@@ -371,6 +380,7 @@
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(175, 17);
             this.checkBox8.TabIndex = 22;
+            this.checkBox8.TabStop = false;
             this.checkBox8.Text = "Mostrar descuentos por partida.";
             this.checkBox8.UseVisualStyleBackColor = true;
             this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
@@ -382,6 +392,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(38, 24);
             this.button5.TabIndex = 5;
+            this.button5.TabStop = false;
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -429,6 +440,7 @@
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(45, 17);
             this.checkBox10.TabIndex = 5;
+            this.checkBox10.TabStop = false;
             this.checkBox10.Text = "N%.";
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox10_CheckedChanged);
@@ -440,6 +452,7 @@
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(143, 17);
             this.checkBox9.TabIndex = 5;
+            this.checkBox9.TabStop = false;
             this.checkBox9.Text = "Incluir utilidad en partida.";
             this.checkBox9.UseVisualStyleBackColor = true;
             this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);

@@ -102,6 +102,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(151, 17);
             this.checkBox1.TabIndex = 4;
+            this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Recordar datos de usuario";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -186,6 +187,7 @@
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(142, 17);
             this.checkBox2.TabIndex = 5;
+            this.checkBox2.TabStop = false;
             this.checkBox2.Text = "Ingresar de manera local";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
@@ -197,6 +199,7 @@
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(114, 17);
             this.checkBox3.TabIndex = 13;
+            this.checkBox3.TabStop = false;
             this.checkBox3.Text = "Mostrar caracteres";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
@@ -218,6 +221,7 @@
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(116, 17);
             this.checkBox4.TabIndex = 18;
+            this.checkBox4.TabStop = false;
             this.checkBox4.Text = "Ingreso automático";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
@@ -244,6 +248,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(40, 30);
             this.button2.TabIndex = 15;
+            this.button2.TabStop = false;
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

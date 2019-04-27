@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -44,7 +45,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.checkBox11 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +72,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Actualización de datos";
             // 
+            // checkBox11
+            // 
+            this.checkBox11.AutoSize = true;
+            this.checkBox11.Location = new System.Drawing.Point(8, 257);
+            this.checkBox11.Name = "checkBox11";
+            this.checkBox11.Size = new System.Drawing.Size(120, 17);
+            this.checkBox11.TabIndex = 13;
+            this.checkBox11.TabStop = false;
+            this.checkBox11.Text = "Desplegar anuncios";
+            this.checkBox11.UseVisualStyleBackColor = true;
+            // 
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
@@ -79,6 +90,7 @@
             this.checkBox10.Name = "checkBox10";
             this.checkBox10.Size = new System.Drawing.Size(135, 17);
             this.checkBox10.TabIndex = 12;
+            this.checkBox10.TabStop = false;
             this.checkBox10.Text = "Ajustar TC a cotización";
             this.checkBox10.UseVisualStyleBackColor = true;
             // 
@@ -89,6 +101,7 @@
             this.checkBox9.Name = "checkBox9";
             this.checkBox9.Size = new System.Drawing.Size(227, 17);
             this.checkBox9.TabIndex = 11;
+            this.checkBox9.TabStop = false;
             this.checkBox9.Text = "Preguntar si se desea actualizar cotización";
             this.checkBox9.UseVisualStyleBackColor = true;
             // 
@@ -99,6 +112,7 @@
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(101, 17);
             this.checkBox8.TabIndex = 10;
+            this.checkBox8.TabStop = false;
             this.checkBox8.Text = "Modalidad LIVA";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
@@ -109,6 +123,7 @@
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(117, 17);
             this.checkBox7.TabIndex = 9;
+            this.checkBox7.TabStop = false;
             this.checkBox7.Text = "Permitir (ajuste IVA)";
             this.checkBox7.UseVisualStyleBackColor = true;
             // 
@@ -121,6 +136,7 @@
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(123, 17);
             this.checkBox6.TabIndex = 6;
+            this.checkBox6.TabStop = false;
             this.checkBox6.Text = "Actualizar cotización";
             this.checkBox6.UseVisualStyleBackColor = true;
             // 
@@ -131,6 +147,7 @@
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(106, 17);
             this.checkBox5.TabIndex = 5;
+            this.checkBox5.TabStop = false;
             this.checkBox5.Text = "Mostrar acabado";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
@@ -143,6 +160,7 @@
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(125, 17);
             this.checkBox4.TabIndex = 4;
+            this.checkBox4.TabStop = false;
             this.checkBox4.Text = "Optimizar DB al inicio";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
@@ -153,6 +171,7 @@
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(172, 17);
             this.checkBox3.TabIndex = 3;
+            this.checkBox3.TabStop = false;
             this.checkBox3.Text = "Maximizar ventanas principales";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
@@ -165,6 +184,7 @@
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(166, 17);
             this.checkBox2.TabIndex = 2;
+            this.checkBox2.TabStop = false;
             this.checkBox2.Text = "Actualizar al cerrar formularios";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
@@ -177,6 +197,7 @@
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(144, 17);
             this.checkBox1.TabIndex = 1;
+            this.checkBox1.TabStop = false;
             this.checkBox1.Text = "Actualización automática";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -185,7 +206,7 @@
             this.textBox4.Location = new System.Drawing.Point(56, 317);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(227, 20);
-            this.textBox4.TabIndex = 8;
+            this.textBox4.TabIndex = 2;
             // 
             // label4
             // 
@@ -201,7 +222,7 @@
             this.textBox1.Location = new System.Drawing.Point(168, 291);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(115, 20);
-            this.textBox1.TabIndex = 7;
+            this.textBox1.TabIndex = 1;
             // 
             // label2
             // 
@@ -218,22 +239,12 @@
             this.button1.Location = new System.Drawing.Point(195, 366);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 28);
-            this.button1.TabIndex = 9;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Guardar";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // checkBox11
-            // 
-            this.checkBox11.AutoSize = true;
-            this.checkBox11.Location = new System.Drawing.Point(8, 257);
-            this.checkBox11.Name = "checkBox11";
-            this.checkBox11.Size = new System.Drawing.Size(120, 17);
-            this.checkBox11.TabIndex = 13;
-            this.checkBox11.Text = "Desplegar anuncios";
-            this.checkBox11.UseVisualStyleBackColor = true;
             // 
             // admin_propiedades
             // 

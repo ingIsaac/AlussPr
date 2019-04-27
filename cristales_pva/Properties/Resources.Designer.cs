@@ -883,6 +883,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap merge_icon {
+            get {
+                object obj = ResourceManager.GetObject("merge_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Misc_Download_Database_icon {
             get {
                 object obj = ResourceManager.GetObject("Misc_Download_Database_icon", resourceCulture);

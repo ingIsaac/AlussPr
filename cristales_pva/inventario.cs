@@ -38,6 +38,7 @@ namespace cristales_pva
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
             backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             backgroundWorker4.RunWorkerCompleted += BackgroundWorker4_RunWorkerCompleted;
+            backgroundWorker5.RunWorkerCompleted += BackgroundWorker5_RunWorkerCompleted;
             //--------------------------->
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             contextMenuStrip2.Opening += ContextMenuStrip2_Opening;
@@ -254,6 +255,7 @@ namespace cristales_pva
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pictureBox1.Visible = false;
+            comboBox1.Enabled = true;
             comboBox2.SelectedIndex = -1;
             comboBox3.SelectedIndex = -1;
             comboBox6.SelectedIndex = -1;
@@ -423,11 +425,12 @@ namespace cristales_pva
 
         private void executeLoad(datagridviewNE datagridview, bool periodo = false, bool historial = false, string clave = "")
         {
-            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
+            if (!backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy && !backgroundWorker5.IsBusy)
             {
                 reset();
                 pictureBox1.Visible = true;
                 datagridview.Enabled = false;
+                comboBox1.Enabled = false;
                 object[] v = new object[] { datagridview, periodo, historial, clave };
                 backgroundWorker1.RunWorkerAsync(v);
             }
@@ -1218,13 +1221,20 @@ namespace cristales_pva
         {
             if(datagridviewNE1.Rows.Count > 0)
             {
-                if (constants.stringToFloat(datagridviewNE1.CurrentRow.Cells[6].Value.ToString()) > 0)
+                if (datagridviewNE1.CurrentRow.Cells[0].Value.ToString() != "-1")
                 {
-                    PEPS(comboBox1.Text, "Salida", datagridviewNE1.CurrentRow.Cells[1].Value.ToString(), datagridviewNE1.CurrentRow.Cells[2].Value.ToString(), datagridviewNE1.CurrentRow.Cells[3].Value.ToString(), datagridviewNE1.CurrentRow.Cells[4].Value.ToString(), datagridviewNE1.CurrentRow.Cells[5].Value.ToString());
+                    if (constants.stringToFloat(datagridviewNE1.CurrentRow.Cells[6].Value.ToString()) > 0)
+                    {
+                        PEPS(comboBox1.Text, "Salida", datagridviewNE1.CurrentRow.Cells[1].Value.ToString(), datagridviewNE1.CurrentRow.Cells[2].Value.ToString(), datagridviewNE1.CurrentRow.Cells[3].Value.ToString(), datagridviewNE1.CurrentRow.Cells[4].Value.ToString(), datagridviewNE1.CurrentRow.Cells[5].Value.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show(this, "[Error] no existe suficiente número de existencias.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    MessageBox.Show(this, "[Error] no existe suficiente número de existencias.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] necesitas dar de alta el artículo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -1233,7 +1243,14 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
-                PEPS(comboBox1.Text, "Entrada", datagridviewNE1.CurrentRow.Cells[1].Value.ToString(), datagridviewNE1.CurrentRow.Cells[2].Value.ToString(), datagridviewNE1.CurrentRow.Cells[3].Value.ToString(), datagridviewNE1.CurrentRow.Cells[4].Value.ToString(), datagridviewNE1.CurrentRow.Cells[5].Value.ToString());
+                if (datagridviewNE1.CurrentRow.Cells[0].Value.ToString() != "-1")
+                {
+                    PEPS(comboBox1.Text, "Entrada", datagridviewNE1.CurrentRow.Cells[1].Value.ToString(), datagridviewNE1.CurrentRow.Cells[2].Value.ToString(), datagridviewNE1.CurrentRow.Cells[3].Value.ToString(), datagridviewNE1.CurrentRow.Cells[4].Value.ToString(), datagridviewNE1.CurrentRow.Cells[5].Value.ToString());
+                }
+                else
+                {
+                    MessageBox.Show(this, "[Error] necesitas dar de alta el artículo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -1619,6 +1636,127 @@ namespace cristales_pva
             {
                 MessageBox.Show(this, "[Error] se debe seleccionar una fecha posterior a la fecha de inicio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private bool checkClaves(string clave)
+        {
+            bool r = false;
+            if(datagridviewNE1.RowCount > 0)
+            {
+                foreach(DataGridViewRow v in datagridviewNE1.Rows)
+                {
+                    if(v.Cells[1].Value.ToString() == clave)
+                    {
+                        r = true;
+                        break;
+                    }
+                }
+            }
+            return r;
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            DialogResult r = MessageBox.Show(this, "Se incluirán todos los artículos de la lista general de " + comboBox1.Text + ".\n\n¿Desea continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(r == DialogResult.Yes)
+            {
+                if (!backgroundWorker5.IsBusy && !backgroundWorker1.IsBusy && !backgroundWorker2.IsBusy && !backgroundWorker3.IsBusy && !backgroundWorker4.IsBusy)
+                {
+                    pictureBox1.Visible = true;
+                    comboBox1.Enabled = false;
+                    backgroundWorker5.RunWorkerAsync();
+                }
+            }
+        }
+
+        private void BackgroundWorker5_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            pictureBox1.Visible = false;
+            comboBox1.Enabled = true;
+            if (e.Result != null)
+            {
+                MessageBox.Show(this, "Se han incluido (" + (int)e.Result + ") artículos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                datagridviewNE1.FirstDisplayedScrollingRowIndex = datagridviewNE1.Rows.Count - 1;
+            }
+        }
+
+        private void backgroundWorker5_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int c = 0;
+            listas_entities_pva context = new listas_entities_pva();
+            if (comboBox1.SelectedIndex == 0)
+            {
+                var cristales = from x in context.lista_costo_corte_e_instalado select x;
+                if (cristales != null)
+                {
+                    foreach (var v in cristales)
+                    {
+                        if (!checkClaves(v.clave))
+                        {
+                            datagridviewNE1.Rows.Add("-1", v.clave, v.articulo, "", v.proveedor, "", 0);
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[1].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[2].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[6].Style.BackColor = Color.LightBlue;
+                            c++;
+                        }
+                    }
+                }
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+                var aluminio = from x in context.perfiles select x;
+                if (aluminio != null)
+                {
+                    foreach (var v in aluminio)
+                    {
+                        if (!checkClaves(v.clave))
+                        {
+                            datagridviewNE1.Rows.Add("-1", v.clave, v.articulo, v.linea, v.proveedor, "", 0);
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[1].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[2].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[6].Style.BackColor = Color.LightBlue;
+                            c++;
+                        }
+                    }
+                }
+            }
+            else if (comboBox1.SelectedIndex == 2)
+            {
+                var herrajes = from x in context.herrajes select x;
+                if (herrajes != null)
+                {
+                    foreach (var v in herrajes)
+                    {
+                        if (!checkClaves(v.clave))
+                        {
+                            datagridviewNE1.Rows.Add("-1", v.clave, v.articulo, v.linea, v.proveedor, "", 0);
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[1].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[2].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[6].Style.BackColor = Color.LightBlue;
+                            c++;
+                        }
+                    }
+                }
+            }
+            else if (comboBox1.SelectedIndex == 3)
+            {
+                var otros = from x in context.otros select x;
+                if (otros != null)
+                {
+                    foreach (var v in otros)
+                    {
+                        if (!checkClaves(v.clave))
+                        {
+                            datagridviewNE1.Rows.Add("-1", v.clave, v.articulo, v.linea, v.proveedor, "", 0);
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[1].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[2].Style.BackColor = Color.LightBlue;
+                            datagridviewNE1.Rows[datagridviewNE1.RowCount - 2].Cells[6].Style.BackColor = Color.LightBlue;
+                            c++;
+                        }
+                    }
+                }
+            }
+            e.Result = c;
         }
     }
 }
