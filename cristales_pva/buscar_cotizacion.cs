@@ -599,12 +599,12 @@ namespace cristales_pva
             }
             //--------------------------------------------------------------------------------->
             constants.deleteFilasBorradasFromLocalDB();           
-            if (constants.ac_cotizacion == true && constants.reload_precios == true)
+            if (constants.ac_cotizacion == true)
             {
                 constants.errors_Open.Clear();
                 for (int i = 1; i < 5; i++)
                 {
-                    constants.reloadPreciosCotizaciones(i);
+                    constants.reloadPreciosCotizaciones(i, constants.reload_precios);
                 }
             }
             constants.reloadCotizaciones();

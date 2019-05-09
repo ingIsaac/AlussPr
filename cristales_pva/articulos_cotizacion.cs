@@ -951,9 +951,9 @@ namespace cristales_pva
                 }
                 cotizaciones.SaveChanges();
                 constants.errors_Open.Clear();
+                constants.reloadPreciosCotizaciones(0, reload);
                 if (reload == true)
                 {
-                    constants.reloadPreciosCotizaciones();
                     ((Form1)Application.OpenForms["Form1"]).reloadAll();
                 }
                 else

@@ -2599,7 +2599,7 @@ namespace cristales_pva
         }
 
         //modulos ----->
-        public static void reloadModulos(int s_folio=0)
+        public static void reloadModulos(int s_folio=0, bool reload_c=true)
         {
             if(s_folio == 0)
             {
@@ -2608,20 +2608,23 @@ namespace cristales_pva
 
             cotizaciones_local cotizaciones = new cotizaciones_local();
 
-            var t_modulos = (from x in cotizaciones.modulos_cotizaciones where x.sub_folio == s_folio select x);
-
-            foreach (var modulo in t_modulos)
+            if (reload_c)
             {
-                if (modulo != null)
-                {
-                    if (modulo.modulo_id > 0)
-                    {
-                        modulo.total = Math.Round(reloadCalcularCostoModulo((int)modulo.modulo_id, (float)modulo.mano_obra / 100, (int)modulo.cantidad, modulo.dimensiones, modulo.claves_cristales, (float)modulo.flete / 100, (float)modulo.desperdicio / 100, (float)modulo.utilidad / 100, modulo.claves_otros, modulo.claves_herrajes, modulo.claves_perfiles, modulo.news, modulo.acabado_perfil, modulo.id), 2);                        
-                    }                  
-                }
-            }
+                var t_modulos = (from x in cotizaciones.modulos_cotizaciones where x.sub_folio == s_folio select x);
 
-            cotizaciones.SaveChanges();
+                foreach (var modulo in t_modulos)
+                {
+                    if (modulo != null)
+                    {
+                        if (modulo.modulo_id > 0)
+                        {
+                            modulo.total = Math.Round(reloadCalcularCostoModulo((int)modulo.modulo_id, (float)modulo.mano_obra / 100, (int)modulo.cantidad, modulo.dimensiones, modulo.claves_cristales, (float)modulo.flete / 100, (float)modulo.desperdicio / 100, (float)modulo.utilidad / 100, modulo.claves_otros, modulo.claves_herrajes, modulo.claves_perfiles, modulo.news, modulo.acabado_perfil, modulo.id), 2);
+                        }
+                    }
+                }
+
+                cotizaciones.SaveChanges();
+            }
 
             var n_conceptos = (from x in cotizaciones.modulos_cotizaciones where x.concept_id > 0 select x);
 
@@ -2665,13 +2668,16 @@ namespace cristales_pva
             return r;
         }
 
-        public static void reloadPreciosCotizaciones(int s_folio=0)
+        public static void reloadPreciosCotizaciones(int s_folio=0, bool reload_p=true)
         {
-            reloadCristales();
-            reloadAluminio();
-            reloadHerrajes();
-            reloadOtros();
-            reloadModulos(s_folio);
+            if (reload_p)
+            {
+                reloadCristales();
+                reloadAluminio();
+                reloadHerrajes();
+                reloadOtros();
+            }
+            reloadModulos(s_folio, reload_p);
         }
 
         public static string getStringToPoint(string texto)
