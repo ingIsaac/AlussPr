@@ -162,6 +162,10 @@ namespace cristales_pva
                     Application.OpenForms["new_articulo"].Select();
                 }
             }
+            else if(e.KeyData == Keys.F1)
+            {
+                agregar();
+            }
         }
 
         private void setLimitSM(float lim)
@@ -548,7 +552,7 @@ namespace cristales_pva
             if (Application.OpenForms["new_articulo"] != null)
             {
                 Application.OpenForms["new_articulo"].Close();
-            }
+            }          
         }
 
         //Recargar modulo original
@@ -3570,6 +3574,11 @@ namespace cristales_pva
         //Agregar
         private void button1_Click(object sender, EventArgs e)
         {
+            agregar();
+        }
+
+        private void agregar()
+        {
             if (getAllReady() == true)
             {
                 if (getSeccionesOK() == true)
@@ -3845,6 +3854,7 @@ namespace cristales_pva
                                             ((edit_expresss)Application.OpenForms["edit_expresss"]).reloadALL(id_cotizacion);
                                             Application.OpenForms["edit_expresss"].Select();
                                             Application.OpenForms["edit_expresss"].WindowState = FormWindowState.Normal;
+                                            ((edit_expresss)Application.OpenForms["edit_expresss"]).selectEdited();
                                         }
                                     }
                                     else

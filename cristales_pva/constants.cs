@@ -92,6 +92,7 @@ namespace cristales_pva
         public static string smtp = "smtp.live.com";
         public static int m_port = 587;
         public static int timeout = 10000;
+        public static string ac_sort = "Orden";
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;
@@ -1672,7 +1673,6 @@ namespace cristales_pva
                 concepto.articulo = "";
                 concepto.total = 0;
                 concepto.linea = "";
-                concepto.ubicacion = "";              
                 concepto.acabado_perfil = "";
                 concepto.diseño = "";
                 concepto.claves_cristales = "";
@@ -5547,6 +5547,47 @@ namespace cristales_pva
             subfolio_titles.Add("");
             subfolio_titles.Add("");
             subfolio_titles.Add("");
+        }
+
+        public static object getOptionXMLValue(string key)
+        {
+            object o = null;
+            try
+            {
+                XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+
+                var tc = (from x in opciones_xml.Descendants("Opciones") select x.Element(key)).SingleOrDefault();
+
+                if (tc != null)
+                {
+                    o = tc.Value;
+                }
+            }
+            catch (Exception err)
+            {
+                errorLog(err.ToString());
+                MessageBox.Show("[Error] no se puede obtener datos del archivo opciones.xml.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return o;
+        }
+
+        public static void setOptionXML(string key, string value)
+        {
+            try
+            {              
+                XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+                var mv = from x in opciones_xml.Descendants("Opciones") select x;
+                foreach (XElement x in mv)
+                {
+                    x.SetElementValue(key, value);
+                }
+                opciones_xml.Save(constants.opciones_xml);                   
+            }
+            catch (Exception err)
+            {
+                errorLog(err.ToString());
+                MessageBox.Show("[Error] no se puede añadir datos del archivo opciones.xml.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

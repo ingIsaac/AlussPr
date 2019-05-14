@@ -34,8 +34,20 @@ namespace cristales_pva
             if (Application.OpenForms["edit_express"] != null)
             {
                 Application.OpenForms["edit_express"].Close();
-            }          
+            }         
             loadALL();
+            comboBox4.Text = constants.ac_sort;
+        }
+
+        private void sortDatagridview(string column)
+        {
+            if (column != string.Empty)
+            {
+                if (column != "Orden")
+                {
+                    datagridviewNE1.Sort(datagridviewNE1.Columns[column], ListSortDirection.Ascending);
+                }
+            }
         }
 
         private void DatagridviewNE1_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
@@ -222,7 +234,9 @@ namespace cristales_pva
                             }
                         }
                     }
-                }           
+                }
+                //----------------------------->
+                sortDatagridview(comboBox4.Text); 
             }
             catch (Exception) { }        
         }
@@ -1304,6 +1318,14 @@ namespace cristales_pva
                 ((copy)Application.OpenForms["copy"]).Select();
                 ((copy)Application.OpenForms["copy"]).WindowState = FormWindowState.Normal;
             }
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sortDatagridview(comboBox4.Text);
+            constants.ac_sort = comboBox4.Text;
+            constants.setOptionXML("AC_SORT", comboBox4.Text);
+            loadALL();
         }
     }
 }

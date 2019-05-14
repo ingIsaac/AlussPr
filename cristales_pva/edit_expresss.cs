@@ -14,12 +14,14 @@ namespace cristales_pva
         cotizaciones_local cotizaciones;
         int merged_id = -1;
         int id;
+        int row_id = -1;
         Image img = null;
 
         public edit_expresss()
         {
             InitializeComponent();        
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
+            datagridviewNE1.CellEnter += DatagridviewNE1_CellEnter;
             datagridviewNE1.MouseMove += DatagridviewNE1_MouseMove;
             datagridviewNE1.MouseDown += DatagridviewNE1_MouseDown;
             datagridviewNE2.CellClick += DatagridviewNE2_CellClick;
@@ -174,6 +176,7 @@ namespace cristales_pva
             {
                 if (Application.OpenForms["config_modulo"] != null)
                 {
+                    row_id = (int)datagridviewNE1.CurrentRow.Cells[0].Value;
                     ((config_modulo)Application.OpenForms["config_modulo"]).resetSession((int)datagridviewNE2.CurrentRow.Cells[2].Value, (int)datagridviewNE2.CurrentRow.Cells[0].Value);                   
                 }
             }
@@ -184,21 +187,45 @@ namespace cristales_pva
             if (datagridviewNE1.RowCount > 0)
             {
                 datagridviewNE1.CurrentRow.Selected = true;
-                if(datagridviewNE1.CurrentRow.Cells[3].Value.ToString() == "-1")
+                string id = datagridviewNE1.CurrentRow.Cells[0].Value.ToString();
+                if (datagridviewNE1.CurrentRow.Cells[3].Value.ToString() == "-1")
                 {
-                    string id = datagridviewNE1.CurrentRow.Cells[0].Value.ToString();
                     string ubicacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
                     label3.Text = "ID: " + id + (ubicacion != string.Empty ? " - " + ubicacion : string.Empty);
                     cargarMergedItems((int)datagridviewNE1.CurrentRow.Cells[0].Value);
                 }
                 else
                 {
+                    row_id = constants.stringToInt(id);
                     label6.Text = "";
                     label7.Text = "";
+                    label3.Text = "";
+                    datagridviewNE2.Rows.Clear();
                     if (Application.OpenForms["config_modulo"] != null)
                     {
                         ((config_modulo)Application.OpenForms["config_modulo"]).resetSession((int)datagridviewNE1.CurrentRow.Cells[3].Value, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
                     }
+                }
+            }
+        }
+
+        private void DatagridviewNE1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (datagridviewNE1.RowCount > 0)
+            {
+                datagridviewNE1.CurrentRow.Selected = true;
+                if (datagridviewNE1.CurrentRow.Cells[3].Value.ToString() == "-1")
+                {
+                    string id = datagridviewNE1.CurrentRow.Cells[0].Value.ToString();
+                    string ubicacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
+                    label3.Text = "ID: " + id + (ubicacion != string.Empty ? " - " + ubicacion : string.Empty);
+                }
+                else
+                {
+                    label6.Text = "";
+                    label7.Text = "";
+                    label3.Text = "";
+                    datagridviewNE2.Rows.Clear();                    
                 }
             }
         }
@@ -244,7 +271,7 @@ namespace cristales_pva
             datagridviewNE1.Columns[2].DefaultCellStyle.Font = new Font("Arial", 12f, FontStyle.Bold);
             datagridviewNE1.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             cotizaciones = new cotizaciones_local();
-            var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.modulo_id != -2 && x.sub_folio == constants.sub_folio select x);
+            var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio select x);
             float sum = 0;
             if (textBox1.Text != "")
             {
@@ -452,5 +479,19 @@ namespace cristales_pva
             cargarModulosCotizados();
         }
         //---------------------------------------------------->
+
+        public void selectEdited()
+        {
+            foreach(DataGridViewRow x in datagridviewNE1.Rows)
+            {
+                if((int)x.Cells[0].Value == this.row_id)
+                {
+                    datagridviewNE1.Focus();
+                    x.Selected = true;
+                    datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
+                    datagridviewNE1.CurrentCell = x.Cells[0];
+                }
+            }
+        }
     }
 }

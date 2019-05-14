@@ -209,6 +209,7 @@ namespace cristales_pva
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadListas();
+            textBox1.Focus();
         }
 
         //Cargar proveedores
@@ -395,6 +396,7 @@ namespace cristales_pva
                     break;
             }
             listas.Dispose();
+            textBox1.Focus();
         }
 
         //carga con filtros
@@ -581,6 +583,7 @@ namespace cristales_pva
                     break;
             }
             listas.Dispose();
+            textBox1.Focus();
         }
 
         //reset button
