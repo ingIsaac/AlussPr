@@ -14,6 +14,7 @@ namespace cristales_pva
     {
         bool reload = false;
         int row = -1;
+        bool loaded = false;
 
         public articulos_cotizacion()
         {
@@ -37,6 +38,7 @@ namespace cristales_pva
             }         
             loadALL();
             comboBox4.Text = constants.ac_sort;
+            loaded = true;
         }
 
         private void sortDatagridview(string column)
@@ -46,7 +48,7 @@ namespace cristales_pva
                 if (column != "Orden")
                 {
                     datagridviewNE1.Sort(datagridviewNE1.Columns[column], ListSortDirection.Ascending);
-                }
+                }              
             }
         }
 
@@ -1325,7 +1327,10 @@ namespace cristales_pva
             sortDatagridview(comboBox4.Text);
             constants.ac_sort = comboBox4.Text;
             constants.setOptionXML("AC_SORT", comboBox4.Text);
-            loadALL();
+            if(comboBox4.Text == "Orden" && loaded)
+            {
+                loadALL();
+            }
         }
     }
 }
