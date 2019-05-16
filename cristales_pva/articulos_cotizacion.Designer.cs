@@ -39,6 +39,7 @@
             this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicarConceptoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acabadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desgloseDeCostosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,6 +74,7 @@
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.datagridviewNE1 = new cristales_pva.datagridviewNE();
+            this.button18 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -89,9 +91,10 @@
             this.nuevoConceptoToolStripMenuItem,
             this.copiarToolStripMenuItem,
             this.duplicarConceptoToolStripMenuItem,
-            this.acabadosToolStripMenuItem});
+            this.acabadosToolStripMenuItem,
+            this.desgloseDeCostosToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(227, 180);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(227, 202);
             // 
             // editarToolStripMenuItem
             // 
@@ -156,6 +159,14 @@
             this.acabadosToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.acabadosToolStripMenuItem.Text = "Wizard";
             this.acabadosToolStripMenuItem.Click += new System.EventHandler(this.acabadosToolStripMenuItem_Click);
+            // 
+            // desgloseDeCostosToolStripMenuItem
+            // 
+            this.desgloseDeCostosToolStripMenuItem.Name = "desgloseDeCostosToolStripMenuItem";
+            this.desgloseDeCostosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.desgloseDeCostosToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.desgloseDeCostosToolStripMenuItem.Text = "Desglose de Costos";
+            this.desgloseDeCostosToolStripMenuItem.Click += new System.EventHandler(this.desgloseDeCostosToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -461,9 +472,9 @@
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::cristales_pva.Properties.Resources.progress_bar;
-            this.pictureBox1.Location = new System.Drawing.Point(76, 56);
+            this.pictureBox1.Location = new System.Drawing.Point(140, 56);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(264, 35);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 35);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -513,10 +524,13 @@
             // button11
             // 
             this.button11.Image = global::cristales_pva.Properties.Resources.copy_icon;
-            this.button11.Location = new System.Drawing.Point(40, 56);
+            this.button11.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button11.Location = new System.Drawing.Point(79, 56);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(30, 35);
+            this.button11.Size = new System.Drawing.Size(55, 35);
             this.button11.TabIndex = 30;
+            this.button11.Text = "(F1)";
+            this.button11.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -563,11 +577,23 @@
             this.datagridviewNE1.Size = new System.Drawing.Size(1059, 448);
             this.datagridviewNE1.TabIndex = 0;
             // 
+            // button18
+            // 
+            this.button18.BackgroundImage = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
+            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button18.Location = new System.Drawing.Point(43, 56);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(30, 35);
+            this.button18.TabIndex = 43;
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
             // articulos_cotizacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 610);
+            this.Controls.Add(this.button18);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.button11);
@@ -600,6 +626,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.datagridviewNE1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "articulos_cotizacion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.articulos_cotizacion_Load);
@@ -657,5 +684,7 @@
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ToolStripMenuItem desgloseDeCostosToolStripMenuItem;
+        private System.Windows.Forms.Button button18;
     }
 }

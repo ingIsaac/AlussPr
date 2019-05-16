@@ -692,19 +692,22 @@ namespace cristales_pva
                             buffer = buffer + x.ToString();
                         }
 
+                        string[] nw;
+                        int concept = 0;
                         //news
                         foreach (string n in new_items)
                         {
-                            string[] nw = n.Split(',');
-                            int concept = constants.stringToInt(nw[0]);
-                            c_clave = nw[1];
-                            count = constants.stringToFloat(nw[2]) * v_count;
-                            dir = nw[3];
-                            seccion = constants.stringToInt(nw[4]);
-                            acabado = nw[5];
-
+                            nw = n.Split(',');
+                            concept = constants.stringToInt(nw[0]);                           
                             if (concept == 1)
                             {
+                                //Values
+                                c_clave = nw[1];
+                                count = constants.stringToFloat(nw[2]) * v_count;
+                                dir = nw[3];
+                                seccion = constants.stringToInt(nw[4]);
+                                acabado = nw[5];
+                                //------------------------------------------------------>
                                 var perfiles = (from x in listas.perfiles where x.clave == c_clave select x).SingleOrDefault();
 
                                 if (perfiles != null)
@@ -733,6 +736,13 @@ namespace cristales_pva
                             }
                             else if (concept == 2)
                             {
+                                //Values
+                                c_clave = nw[1];
+                                count = constants.stringToFloat(nw[2]) * v_count;
+                                dir = nw[3];
+                                seccion = constants.stringToInt(nw[4]);
+                                acabado = nw[5];
+                                //------------------------------------------------------>
                                 var cristal = (from x in listas.lista_costo_corte_e_instalado where x.clave == c_clave select x).SingleOrDefault();
 
                                 if (cristal != null)
@@ -768,6 +778,13 @@ namespace cristales_pva
                             }
                             else if (concept == 3)
                             {
+                                //Values
+                                c_clave = nw[1];
+                                count = constants.stringToFloat(nw[2]) * v_count;
+                                dir = nw[3];
+                                seccion = constants.stringToInt(nw[4]);
+                                acabado = nw[5];
+                                //------------------------------------------------------>
                                 var herrajes = (from s in listas.herrajes where s.clave == c_clave select s).SingleOrDefault();
 
                                 if (herrajes != null)
@@ -789,6 +806,13 @@ namespace cristales_pva
                             }
                             else if (concept == 4)
                             {
+                                //Values
+                                c_clave = nw[1];
+                                count = constants.stringToFloat(nw[2]) * v_count;
+                                dir = nw[3];
+                                seccion = constants.stringToInt(nw[4]);
+                                acabado = nw[5];
+                                //------------------------------------------------------>
                                 var otros = (from x in listas.otros where x.clave == c_clave select x).SingleOrDefault();
 
                                 if (otros != null)

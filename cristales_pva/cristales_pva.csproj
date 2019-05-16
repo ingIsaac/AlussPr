@@ -339,6 +339,12 @@
     <Compile Include="desglose.Designer.cs">
       <DependentUpon>desglose.cs</DependentUpon>
     </Compile>
+    <Compile Include="desglose_costo_m.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="desglose_costo_m.Designer.cs">
+      <DependentUpon>desglose_costo_m.cs</DependentUpon>
+    </Compile>
     <Compile Include="desglose_materiales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -709,6 +715,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="consulta_rapida.resx">
       <DependentUpon>consulta_rapida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="desglose_costo_m.resx">
+      <DependentUpon>desglose_costo_m.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="estadisticas.resx">
       <DependentUpon>estadisticas.cs</DependentUpon>

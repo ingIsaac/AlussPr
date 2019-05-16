@@ -39,6 +39,23 @@ namespace cristales_pva
             loadALL();
             comboBox4.Text = constants.ac_sort;
             loaded = true;
+            this.KeyDown += Articulos_cotizacion_KeyDown;
+        }
+
+        private void Articulos_cotizacion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.F1)
+            {
+                if (Application.OpenForms["copy"] == null)
+                {
+                    new copy().Show();
+                }
+                else
+                {
+                    ((copy)Application.OpenForms["copy"]).Select();
+                    ((copy)Application.OpenForms["copy"]).WindowState = FormWindowState.Normal;
+                }
+            }
         }
 
         private void sortDatagridview(string column)
@@ -317,6 +334,7 @@ namespace cristales_pva
                 contextMenuStrip1.Items[4].Visible = false;
                 contextMenuStrip1.Items[5].Visible = false;
                 contextMenuStrip1.Items[7].Visible = false;
+                contextMenuStrip1.Items[8].Visible = false;
                 if (datagridviewNE1.RowCount > 0)
                 {
                     contextMenuStrip1.Items[0].Visible = true;
@@ -346,11 +364,13 @@ namespace cristales_pva
                     if (datagridviewNE1.CurrentRow.Cells[5].Value.ToString() != "-2")
                     {
                         contextMenuStrip1.Items[7].Visible = true;
+                        contextMenuStrip1.Items[8].Visible = true;
                         contextMenuStrip1.Items[0].Visible = true;
                     }
                     else
                     {
                         contextMenuStrip1.Items[7].Visible = false;
+                        contextMenuStrip1.Items[8].Visible = false;
                         contextMenuStrip1.Items[0].Visible = false;
                     }
                 }
@@ -361,6 +381,7 @@ namespace cristales_pva
                     contextMenuStrip1.Items[5].Visible = false;
                     contextMenuStrip1.Items[6].Visible = false;
                     contextMenuStrip1.Items[7].Visible = false;
+                    contextMenuStrip1.Items[8].Visible = false;
                 }
                 contextMenuStrip1.Items[2].Visible = true;               
                 contextMenuStrip1.Items[4].Visible = true;
@@ -1331,6 +1352,43 @@ namespace cristales_pva
             {
                 loadALL();
             }
+        }
+
+        private void desgloseDeCostosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(datagridviewNE1.RowCount > 0)
+            {
+                if (constants.tipo_cotizacion == 5)
+                {
+                    if (datagridviewNE1.CurrentRow.Cells[5].Value.ToString() != "-2")
+                    {
+                        int id = (int)datagridviewNE1.CurrentRow.Cells[0].Value;
+                        if (id > 0)
+                        {
+                            if (Application.OpenForms["desglose_costo_m"] != null)
+                            {
+                                if (Application.OpenForms["desglose_costo_m"].WindowState == FormWindowState.Minimized)
+                                {
+                                    Application.OpenForms["desglose_costo_m"].WindowState = FormWindowState.Normal;
+                                }
+                                Application.OpenForms["desglose_costo_m"].Select();
+                                Application.OpenForms["desglose_costo_m"].Focus();
+                            }
+                            else
+                            {
+                                desglose_costo_m desglose = new desglose_costo_m(id);
+                                desglose.Show(this);
+                                desglose.Focus();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            ((Form1)Application.OpenForms["Form1"]).borrarConceptos();
         }
     }
 }

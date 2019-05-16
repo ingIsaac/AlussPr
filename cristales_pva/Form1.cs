@@ -6487,6 +6487,11 @@ namespace cristales_pva
         //Eliminar articulos sub-folio
         private void button18_Click(object sender, EventArgs e)
         {
+            borrarConceptos();
+        }
+
+        public void borrarConceptos()
+        {
             DialogResult r = MessageBox.Show("¿Desea eliminar todos los módulos del SUB-FOLIO seleccionado?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (r == DialogResult.Yes)
@@ -6504,7 +6509,7 @@ namespace cristales_pva
                     }
                 }
                 cotizaciones.SaveChanges();
-               
+
                 if (Application.OpenForms["config_modulo"] != null)
                 {
                     Application.OpenForms["config_modulo"].Close();
