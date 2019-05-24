@@ -371,7 +371,7 @@
             // 
             this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button8.Image = global::cristales_pva.Properties.Resources.chart_icon;
-            this.button8.Location = new System.Drawing.Point(346, 56);
+            this.button8.Location = new System.Drawing.Point(329, 56);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(96, 35);
             this.button8.TabIndex = 19;
@@ -386,7 +386,7 @@
             // 
             this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.Image = global::cristales_pva.Properties.Resources.Wizard_icon;
-            this.button7.Location = new System.Drawing.Point(448, 56);
+            this.button7.Location = new System.Drawing.Point(431, 56);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(96, 35);
             this.button7.TabIndex = 17;
@@ -401,7 +401,7 @@
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Image = global::cristales_pva.Properties.Resources.save_24;
-            this.button6.Location = new System.Drawing.Point(550, 56);
+            this.button6.Location = new System.Drawing.Point(533, 56);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(96, 35);
             this.button6.TabIndex = 13;
@@ -415,7 +415,7 @@
             // 
             this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button5.Image = global::cristales_pva.Properties.Resources.look_24;
-            this.button5.Location = new System.Drawing.Point(652, 56);
+            this.button5.Location = new System.Drawing.Point(635, 56);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(96, 35);
             this.button5.TabIndex = 12;
@@ -429,7 +429,7 @@
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Image = global::cristales_pva.Properties.Resources.pdf_24;
-            this.button4.Location = new System.Drawing.Point(754, 56);
+            this.button4.Location = new System.Drawing.Point(737, 56);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 35);
             this.button4.TabIndex = 11;
@@ -443,7 +443,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Image = global::cristales_pva.Properties.Resources.printer_24;
-            this.button3.Location = new System.Drawing.Point(856, 56);
+            this.button3.Location = new System.Drawing.Point(839, 56);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(96, 35);
             this.button3.TabIndex = 10;
@@ -457,11 +457,11 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(958, 56);
+            this.button2.Location = new System.Drawing.Point(941, 56);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 35);
+            this.button2.Size = new System.Drawing.Size(113, 35);
             this.button2.TabIndex = 8;
-            this.button2.Text = "Incluir otros...";
+            this.button2.Text = "Incluir otros (F2)";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button2.UseVisualStyleBackColor = true;
@@ -474,7 +474,7 @@
             this.pictureBox1.Image = global::cristales_pva.Properties.Resources.progress_bar;
             this.pictureBox1.Location = new System.Drawing.Point(140, 56);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 35);
+            this.pictureBox1.Size = new System.Drawing.Size(183, 35);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -484,10 +484,12 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(1014, 572);
+            this.button1.Location = new System.Drawing.Point(1014, 550);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(40, 33);
+            this.button1.Size = new System.Drawing.Size(40, 55);
             this.button1.TabIndex = 4;
+            this.button1.Text = "(F3)";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -506,9 +508,9 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(611, 551);
+            this.label10.Location = new System.Drawing.Point(611, 550);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(443, 14);
+            this.label10.Size = new System.Drawing.Size(397, 17);
             this.label10.TabIndex = 28;
             // 
             // button10

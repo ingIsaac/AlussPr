@@ -74,7 +74,37 @@ namespace cristales_pva
             hScrollBar1.Minimum = 1;
             checkBox3.Click += CheckBox3_Click;
             textBox1.KeyDown += TextBox1_KeyDown;
+            this.KeyDown += Form1_KeyDown;
             constants.login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.F1)
+            {
+                if (Application.OpenForms["articulos_cotizacion"] == null)
+                {
+                    articulos_cotizacion articulos = new articulos_cotizacion();
+                    articulos.Show();
+                    if (constants.maximizar_ventanas == true)
+                    {
+                        articulos.WindowState = FormWindowState.Maximized;
+                    }
+                    articulos.Select();
+                }
+                else
+                {
+                    if (constants.maximizar_ventanas == true)
+                    {
+                        Application.OpenForms["articulos_cotizacion"].WindowState = FormWindowState.Maximized;
+                    }
+                    else
+                    {
+                        Application.OpenForms["articulos_cotizacion"].WindowState = FormWindowState.Normal;
+                    }
+                    Application.OpenForms["articulos_cotizacion"].Select();
+                }
+            }
         }
 
         private void DatagridviewNE3_DataError(object sender, DataGridViewDataErrorEventArgs e)

@@ -40,6 +40,26 @@ namespace cristales_pva
             setYears();
             comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
             comboBox3.Text = DateTime.Now.Year.ToString();
+            //
+            checkBox2.MouseClick += CheckBox2_MouseClick;
+        }
+
+        private void CheckBox2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!checkBox2.Checked)
+            {
+                checkBox2.Checked = true;
+                new confirm_password(true).ShowDialog(this);
+            }
+            else
+            {
+                checkBox2.Checked = true;
+            }
+        }
+
+        public void habilitarEliminacionSegura(bool check=true)
+        {
+            checkBox2.Checked = check;
         }
 
         private void DatagridviewNE1_Sorted(object sender, EventArgs e)
@@ -365,7 +385,14 @@ namespace cristales_pva
 
                     if (r == DialogResult.Yes)
                     {
-                        new confirm_password().ShowDialog();
+                        if (checkBox2.Checked)
+                        {
+                            new confirm_password().ShowDialog(this);
+                        }
+                        else
+                        {
+                            confirmarEliminacion();
+                        }
                     }
                 }
             }
@@ -438,7 +465,7 @@ namespace cristales_pva
 
                         if (r == DialogResult.Yes)
                         {
-                            new guardar_cotizacion(true).ShowDialog();
+                            new guardar_cotizacion(true).ShowDialog(this);
                         }
                         else if (r == DialogResult.No)
                         {

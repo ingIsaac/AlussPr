@@ -3045,7 +3045,7 @@
             this.label112.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label112.AutoSize = true;
             this.label112.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label112.Location = new System.Drawing.Point(381, 139);
+            this.label112.Location = new System.Drawing.Point(376, 139);
             this.label112.Name = "label112";
             this.label112.Size = new System.Drawing.Size(80, 13);
             this.label112.TabIndex = 44;
@@ -3062,7 +3062,7 @@
             "3",
             "4",
             "5"});
-            this.comboBox7.Location = new System.Drawing.Point(467, 136);
+            this.comboBox7.Location = new System.Drawing.Point(462, 136);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(35, 21);
             this.comboBox7.TabIndex = 43;
@@ -3077,7 +3077,7 @@
             this.label108.ForeColor = System.Drawing.Color.Red;
             this.label108.Location = new System.Drawing.Point(147, 18);
             this.label108.Name = "label108";
-            this.label108.Size = new System.Drawing.Size(495, 23);
+            this.label108.Size = new System.Drawing.Size(490, 23);
             this.label108.TabIndex = 27;
             this.label108.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -3086,7 +3086,7 @@
             this.button18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button18.BackgroundImage = global::cristales_pva.Properties.Resources.Actions_edit_delete_icon;
             this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button18.Location = new System.Drawing.Point(609, 135);
+            this.button18.Location = new System.Drawing.Point(604, 135);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(33, 23);
             this.button18.TabIndex = 42;
@@ -3110,9 +3110,9 @@
             this.button16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button16.BackgroundImage = global::cristales_pva.Properties.Resources.copy_icon;
             this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button16.Location = new System.Drawing.Point(648, 108);
+            this.button16.Location = new System.Drawing.Point(643, 108);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(30, 44);
+            this.button16.Size = new System.Drawing.Size(35, 44);
             this.button16.TabIndex = 40;
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
@@ -3132,11 +3132,15 @@
             // button15
             // 
             this.button15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button15.Image = global::cristales_pva.Properties.Resources.box_in_icon;
-            this.button15.Location = new System.Drawing.Point(648, 18);
+            this.button15.Location = new System.Drawing.Point(643, 18);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(30, 89);
+            this.button15.Size = new System.Drawing.Size(35, 89);
             this.button15.TabIndex = 38;
+            this.button15.Text = "(F1)";
+            this.button15.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button15.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -3151,7 +3155,7 @@
             "3",
             "4",
             "5"});
-            this.comboBox5.Location = new System.Drawing.Point(568, 136);
+            this.comboBox5.Location = new System.Drawing.Point(563, 136);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(35, 21);
             this.comboBox5.TabIndex = 39;
@@ -3162,7 +3166,7 @@
             this.label107.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label107.AutoSize = true;
             this.label107.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label107.Location = new System.Drawing.Point(508, 139);
+            this.label107.Location = new System.Drawing.Point(503, 139);
             this.label107.Name = "label107";
             this.label107.Size = new System.Drawing.Size(54, 13);
             this.label107.TabIndex = 40;
@@ -3181,7 +3185,7 @@
             this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip2;
             this.datagridviewNE1.Location = new System.Drawing.Point(147, 45);
             this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.Size = new System.Drawing.Size(495, 86);
+            this.datagridviewNE1.Size = new System.Drawing.Size(490, 86);
             this.datagridviewNE1.TabIndex = 26;
             // 
             // groupBox8
@@ -3504,6 +3508,7 @@
             this.Controls.Add(this.label21);
             this.Controls.Add(this.statusStripNE1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

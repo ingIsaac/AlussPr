@@ -21,6 +21,7 @@ namespace cristales_pva
         public setDir(int id, int perso_id, Image img, float largo, float alto, bool remove = false, bool reload = false)
         {
             InitializeComponent();
+            this.KeyDown += SetDir_KeyDown;
             this.id = id;
             this.perso_id = perso_id;
             this.remove = remove;
@@ -33,7 +34,28 @@ namespace cristales_pva
             comboBox1.Text = "1";
             comboBox2.Text = "1";
         }
-       
+
+        private void SetDir_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.F1)
+            {
+                ((Form1)Application.OpenForms["form1"]).setArticuloPersonalizacion(id, perso_id, constants.stringToInt(dir), remove);
+                close = true;
+                if (reload)
+                {
+                    if (Application.OpenForms["merge_items"] != null)
+                    {
+                        ((merge_items)Application.OpenForms["merge_items"]).reloadMergedItems();
+                    }
+                    if (Application.OpenForms["articulos_cotizacion"] != null)
+                    {
+                        ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                    }
+                }
+                Close();
+            }
+        }
+
         private void loadTable()
         {
             tableLayoutPanel1.RowStyles.Clear();

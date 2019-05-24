@@ -56,6 +56,14 @@ namespace cristales_pva
                     ((copy)Application.OpenForms["copy"]).WindowState = FormWindowState.Normal;
                 }
             }
+            else if(e.KeyData == Keys.F2)
+            {
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else if(e.KeyData == Keys.F3)
+            {
+                loadALL();
+            }
         }
 
         private void sortDatagridview(string column)

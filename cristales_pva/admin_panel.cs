@@ -2931,7 +2931,7 @@ namespace cristales_pva
         private void exportToXML()
         {
             SaveFileDialog save_dir = new SaveFileDialog();
-            save_dir.FileName = comboBox1.Text;
+            save_dir.FileName = comboBox1.Text + " - (" + DateTime.Now.ToString("dd-MM-yyyy") + ")";
             save_dir.Filter = "XML-FILE | *.xml";
             if(save_dir.ShowDialog() == DialogResult.OK && save_dir.FileName != string.Empty)
             {
@@ -2966,13 +2966,23 @@ namespace cristales_pva
                         };
                         export.RunWorkerCompleted += (sender, e) =>
                         {
-                            if ((bool)e.Result)
+                            if (e.Result != null)
                             {
-                                MessageBox.Show("Se ha exportado con exito la lista " + comboBox1.Text + " con (" + n + ") objetos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                if ((bool)e.Result)
+                                {
+                                    MessageBox.Show("Se ha exportado con exito la lista " + comboBox1.Text + " con (" + n + ") objetos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("[Error] se detecto un problema al exportar, intente de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             label24.Text = string.Empty;
                         };
-                        export.RunWorkerAsync();
+                        if (!export.IsBusy)
+                        {
+                            export.RunWorkerAsync();
+                        }
                     }
                 }
                 catch (Exception err)
@@ -3007,7 +3017,7 @@ namespace cristales_pva
                                 if (lista == comboBox1.Text)
                                 {
                                     var articulos = from x in doc.Element("Articulos").Elements() select x;
-                                    int n = datagridviewNE1.RowCount;
+                                    int n = articulos.Count();
                                     if (articulos != null)
                                     {
                                         int c = 0;
@@ -3071,7 +3081,10 @@ namespace cristales_pva
                             }
                             label24.Text = string.Empty;
                         };
-                        import.RunWorkerAsync();
+                        if (!import.IsBusy)
+                        {
+                            import.RunWorkerAsync();
+                        }
                     }
                 }
                 catch(Exception err)

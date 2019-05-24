@@ -11,16 +11,26 @@ namespace cristales_pva
 {
     public partial class confirm_password : Form
     {
-        public confirm_password()
+        bool checkbox;
+
+        public confirm_password(bool checkbox=false)
         {
             InitializeComponent();
+            this.checkbox = checkbox;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if(textBox1.Text == constants.password)
             {
-                ((buscar_cotizacion)Application.OpenForms["buscar_cotizacion"]).confirmarEliminacion();
+                if (!checkbox)
+                {
+                    ((buscar_cotizacion)Application.OpenForms["buscar_cotizacion"]).confirmarEliminacion();
+                }
+                else
+                {
+                    ((buscar_cotizacion)Application.OpenForms["buscar_cotizacion"]).habilitarEliminacionSegura(false);
+                }
                 label2.Text = "";
                 this.Close();
             }
