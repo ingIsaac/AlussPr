@@ -1764,7 +1764,7 @@ namespace cristales_pva
 
                             if (g.Count > 0)
                             {
-                                for (int i = 1; i < 8; i++)
+                                for (int i = 1; i <= 8; i++)
                                 {
                                     buffer = new List<string>();
                                     foreach (string v in g)
@@ -1786,7 +1786,7 @@ namespace cristales_pva
 
                                 k = null;
 
-                                for (int i = 1; i < 8; i++)
+                                for (int i = 1; i <= 8; i++)
                                 {
                                     buffer = new List<string>();
                                     foreach (string v in g)

@@ -136,11 +136,11 @@ namespace cristales_pva
                 {
                     if (row)
                     {
-                        dir = (comboBox1.Text + (i+1).ToString() + (label7.Text == "Fila" ? "0" : "1"));
+                        dir = (comboBox1.Text + (i+1).ToString() + (label7.Text == "Vertical" ? "0" : "1"));
                     }
                     else
                     {  
-                        dir = ((i+1).ToString() + comboBox2.Text + (label7.Text == "Fila" ? "0" : "1"));
+                        dir = ((i+1).ToString() + comboBox2.Text + (label7.Text == "Vertical" ? "0" : "1"));
                     }
 
                     r = false;
