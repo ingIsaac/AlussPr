@@ -1732,33 +1732,42 @@ namespace cristales_pva
 
         private void ajustGlobalDimension()
         {
-            if(dataGridView5.RowCount > 0)
+            if (checkBox16.Checked)
             {
-                if (dataGridView5.CurrentRow.Index != 0)
+                if (dataGridView5.RowCount > 0)
                 {
-                    int g_largo = 0;
-                    int g_alto = 0;
-                    if (dataGridView5.CurrentCell.OwningColumn.Index == 2)
+                    if (dataGridView5.Rows[0].Cells[0].Value != null)
                     {
-                        foreach (DataGridViewRow x in dataGridView5.Rows)
+                        if (dataGridView5.Rows[0].Cells[0].Value.ToString() == "0")
                         {
-                            if (x.Index != 0)
+                            if (dataGridView5.CurrentRow.Index != 0)
                             {
-                                g_largo = g_largo + constants.stringToInt(x.Cells[2].Value.ToString());
+                                int g_largo = 0;
+                                int g_alto = 0;
+                                if (dataGridView5.CurrentCell.OwningColumn.Index == 2)
+                                {
+                                    foreach (DataGridViewRow x in dataGridView5.Rows)
+                                    {
+                                        if (x.Index != 0)
+                                        {
+                                            g_largo = g_largo + constants.stringToInt(x.Cells[2].Value.ToString());
+                                        }
+                                    }
+                                    dataGridView5.Rows[0].Cells[2].Value = (int)(g_largo / panel.RowCount);
+                                }
+                                else if (dataGridView5.CurrentCell.OwningColumn.Index == 3)
+                                {
+                                    foreach (DataGridViewRow x in dataGridView5.Rows)
+                                    {
+                                        if (x.Index != 0)
+                                        {
+                                            g_alto = g_alto + constants.stringToInt(x.Cells[3].Value.ToString());
+                                        }
+                                    }
+                                    dataGridView5.Rows[0].Cells[3].Value = (int)(g_alto / panel.ColumnCount);
+                                }
                             }
                         }
-                        dataGridView5.Rows[0].Cells[2].Value = (int)(g_largo / panel.RowCount);
-                    }
-                    else if (dataGridView5.CurrentCell.OwningColumn.Index == 3)
-                    {
-                        foreach (DataGridViewRow x in dataGridView5.Rows)
-                        {
-                            if (x.Index != 0)
-                            {
-                                g_alto = g_alto + constants.stringToInt(x.Cells[3].Value.ToString());
-                            }
-                        }
-                        dataGridView5.Rows[0].Cells[3].Value = (int)(g_alto / panel.ColumnCount);
                     }
                 }
             }
