@@ -16,11 +16,11 @@ namespace cristales_pva
         public anuncios()
         {
             InitializeComponent();
-            richTextBox1.KeyDown += RichTextBox1_KeyDown;
             label2.Text = "v." + constants.version;
+            this.KeyDown += Anuncios_KeyDown;
         }
 
-        private void RichTextBox1_KeyDown(object sender, KeyEventArgs e)
+        private void Anuncios_KeyDown(object sender, KeyEventArgs e)
         {
             this.Close();
         }

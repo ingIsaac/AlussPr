@@ -387,27 +387,30 @@ namespace cristales_pva
         {
             bool find = false;
             metros_lineales = metros_lineales / 1000f;
-            foreach(DataGridViewRow x in datagridviewNE1.Rows)
+            if (cantidad > 0)
             {
-                if(x.Cells[2].Value.ToString() == clave)
+                foreach (DataGridViewRow x in datagridviewNE1.Rows)
                 {
-                    x.Cells[4].Value = constants.stringToFloat(x.Cells[4].Value.ToString()) + cantidad;
-                    if (metros_lineales > 0)
+                    if (x.Cells[2].Value.ToString() == clave)
                     {
-                        x.Cells[5].Value = Math.Round(constants.stringToFloat(x.Cells[5].Value.ToString()) + metros_lineales, 2);
+                        x.Cells[4].Value = constants.stringToFloat(x.Cells[4].Value.ToString()) + cantidad;
+                        if (metros_lineales > 0)
+                        {
+                            x.Cells[5].Value = Math.Round(constants.stringToFloat(x.Cells[5].Value.ToString()) + metros_lineales, 2);
+                        }
+                        if (metros_cuadrados > 0)
+                        {
+                            x.Cells[6].Value = Math.Round(constants.stringToFloat(x.Cells[6].Value.ToString()) + metros_cuadrados, 2);
+                        }
+                        x.Cells[8].Value = constants.stringToFloat(x.Cells[8].Value.ToString()) + total;
+                        find = true;
+                        break;
                     }
-                    if (metros_cuadrados > 0)
-                    {
-                        x.Cells[6].Value = Math.Round(constants.stringToFloat(x.Cells[6].Value.ToString()) + metros_cuadrados, 2);
-                    }
-                    x.Cells[8].Value = constants.stringToFloat(x.Cells[8].Value.ToString()) + total;
-                    find = true;
-                    break;
                 }
-            }
-            if (!find)
-            {
-                datagridviewNE1.Rows.Add(componente, id_articulo.ToString() != "0" ? id_articulo.ToString() : "", clave, articulo, cantidad, metros_lineales.ToString() != "0" ? Math.Round(metros_lineales, 2).ToString() : "", metros_cuadrados.ToString() != "0" ? Math.Round(metros_cuadrados, 2).ToString() : "", precio_u, total);
+                if (!find)
+                {
+                    datagridviewNE1.Rows.Add(componente, id_articulo.ToString() != "0" ? id_articulo.ToString() : "", clave, articulo, cantidad, metros_lineales.ToString() != "0" ? Math.Round(metros_lineales, 2).ToString() : "", metros_cuadrados.ToString() != "0" ? Math.Round(metros_cuadrados, 2).ToString() : "", precio_u, total);
+                }
             }
         }
 
@@ -1232,7 +1235,7 @@ namespace cristales_pva
                 DataRow row_2 = md.Tables["img_modulo"].NewRow();
                 row_2[0] = constants.imageToByte(gm_2);
                 md.Tables["img_modulo"].Rows.Add(row_2);
-                new modulo_precios(md, textBox7.Text, textBox6.Text, textBox12.Text, textBox11.Text, textBox5.Text, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Math.Round(total_t*1.16, 2).ToString(), "Largo: " + textBox9.Text + " - " + "Alto: " + textBox10.Text, textBox14.Text, textBox15.Text, textBox16.Text, textBox17.Text, total_t.ToString(), cost_add > 0 ? ("+ (" + cost_add.ToString() + ")") : "").ShowDialog();
+                new modulo_precios(md, textBox7.Text, textBox6.Text, textBox12.Text, textBox11.Text, textBox5.Text, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Math.Round(total_t*1.16, 2).ToString(), "Largo: " + textBox9.Text + " - " + "Alto: " + textBox10.Text, textBox14.Text, textBox15.Text, textBox16.Text, textBox17.Text, total_t.ToString(), cost_add > 0 ? ("+ (" + cost_add.ToString() + ")") : "", "M/L", "M/C", textBox8.Text).ShowDialog();
                 bm = null;
                 gm_2 = null;
             }

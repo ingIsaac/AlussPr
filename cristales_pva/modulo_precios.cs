@@ -12,7 +12,7 @@ namespace cristales_pva
 {
     public partial class modulo_precios : Form
     {
-        public modulo_precios(modulo_data md, string clave, string name, string linea, string acabado, string cant, string desp, string flete, string m_o, string util, string tot, string dimensiones, string tot_alum, string tot_herraje, string tot_otros, string tot_cristales, string subtot, string costo_add)
+        public modulo_precios(modulo_data md, string clave, string name, string linea, string acabado, string cant, string desp, string flete, string m_o, string util, string tot, string dimensiones, string tot_alum, string tot_herraje, string tot_otros, string tot_cristales, string subtot, string costo_add, string d_1, string d_2, string ubicacion)
         {
             InitializeComponent();
             this.Text = name + " - " + linea;
@@ -38,6 +38,17 @@ namespace cristales_pva
             reportViewer1.LocalReport.SetParameters(new ReportParameter("tot_cristales", tot_cristales));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("subtot", subtot));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("costo_add", costo_add));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("d_1", d_1));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("d_2", d_2));
+            if (tot_otros.Contains("+"))
+            {
+                string[] y = tot_otros.Split(' ');
+                if(y.Length > 0)
+                {
+                    tot_otros = y[0];
+                }
+            }
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("modulo_ubicacion", ubicacion));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("cost_mats", Math.Round(constants.stringToFloat(tot_alum.Replace("$", "")) + constants.stringToFloat(tot_herraje.Replace("$", "")) + constants.stringToFloat(tot_otros.Replace("$", "")) + constants.stringToFloat(tot_cristales.Replace("$", "")), 2).ToString()));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("header", constants.getExternalImage("header")));
             reportViewer1.LocalReport.Refresh();
