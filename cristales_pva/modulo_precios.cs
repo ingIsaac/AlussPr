@@ -48,7 +48,7 @@ namespace cristales_pva
                     tot_otros = y[0];
                 }
             }
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("modulo_ubicacion", ubicacion));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("modulo_ubicacion", "Ubicación: " + ubicacion));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("cost_mats", Math.Round(constants.stringToFloat(tot_alum.Replace("$", "")) + constants.stringToFloat(tot_herraje.Replace("$", "")) + constants.stringToFloat(tot_otros.Replace("$", "")) + constants.stringToFloat(tot_cristales.Replace("$", "")), 2).ToString()));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("header", constants.getExternalImage("header")));
             reportViewer1.LocalReport.Refresh();

@@ -234,7 +234,7 @@
             // button1
             // 
             this.button1.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
-            this.button1.Location = new System.Drawing.Point(16, 474);
+            this.button1.Location = new System.Drawing.Point(16, 472);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(85, 56);
             this.button1.TabIndex = 6;
@@ -306,6 +306,7 @@
             // textBox5
             // 
             this.textBox5.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox5.Location = new System.Drawing.Point(16, 440);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(177, 20);
@@ -341,7 +342,7 @@
             // 
             this.button4.Image = global::cristales_pva.Properties.Resources.email_send_icon;
             this.button4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button4.Location = new System.Drawing.Point(107, 474);
+            this.button4.Location = new System.Drawing.Point(107, 472);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(85, 56);
             this.button4.TabIndex = 7;

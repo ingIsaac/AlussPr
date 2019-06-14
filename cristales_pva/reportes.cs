@@ -61,7 +61,7 @@ namespace cristales_pva
             sqlDateBaseManager sql = new sqlDateBaseManager();
             if (cliente != "")
             {
-                setData(cliente, proyecto, sql.getSingleSQLValue("clientes", "domicilio", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "telefono", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "correo_electronico", "nombre", cliente, 0));
+                setData(cliente, proyecto + (constants.getSubfoliotitle(constants.sub_folio) != string.Empty ? " - " + constants.getSubfoliotitle(constants.sub_folio) : string.Empty), sql.getSingleSQLValue("clientes", "domicilio", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "telefono", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "correo_electronico", "nombre", cliente, 0));
             }
             loadReporte(cliente, proyecto, folio, subtotal, iva, total);
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
@@ -149,13 +149,13 @@ namespace cristales_pva
             cotizaciones_local cotizaciones = new cotizaciones_local();
             if (proyecto != "" || cliente != "")
             {
-                this.Text = proyecto + " - " + cliente;
+                this.Text = cliente + (proyecto != string.Empty ? " - " + proyecto : string.Empty);
             }
             else
             {
                 this.Text = "Reporte (n/g).";
             }          
-            reportViewer1.LocalReport.DisplayName = textBox1.Text + " - " + constants.sub_folio;
+            reportViewer1.LocalReport.DisplayName = textBox1.Text + " - " + (constants.getSubfoliotitle(constants.sub_folio) != string.Empty ? constants.getSubfoliotitle(constants.sub_folio) : constants.sub_folio.ToString());
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
@@ -951,22 +951,26 @@ namespace cristales_pva
         //actualizar datos
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] r = ((Form1)Application.OpenForms["form1"]).getDesglose();
-            this.cliente = constants.nombre_cotizacion;
-            this.folio = constants.folio_abierto.ToString();
-            this.proyecto = constants.nombre_proyecto;
-            this.subtotal = constants.stringToFloat(r[0]);
-            this.iva = constants.stringToFloat(r[1]);
-            this.total = constants.stringToFloat(r[2]);
-            this.descuento = constants.desc_cotizacion;
-            this.desc_cant = constants.desc_cant;
-            this.utilidad = constants.utilidad_cotizacion;
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            if (cliente != "")
+            DialogResult re = MessageBox.Show(this, "¿Deseas actualizar los datos del reporte?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (re == DialogResult.Yes)
             {
-                setData(cliente, proyecto, sql.getSingleSQLValue("clientes", "domicilio", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "telefono", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "correo_electronico", "nombre", cliente, 0));
+                string[] r = ((Form1)Application.OpenForms["form1"]).getDesglose();
+                this.cliente = textBox1.Text;
+                this.folio = constants.folio_abierto.ToString();
+                this.proyecto = textBox2.Text;
+                this.subtotal = constants.stringToFloat(r[0]);
+                this.iva = constants.stringToFloat(r[1]);
+                this.total = constants.stringToFloat(r[2]);
+                this.descuento = constants.desc_cotizacion;
+                this.desc_cant = constants.desc_cant;
+                this.utilidad = constants.utilidad_cotizacion;
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                if (cliente != "")
+                {
+                    setData(cliente, proyecto, textBox3.Text, textBox4.Text, textBox5.Text);
+                }
+                loadReporte(cliente, proyecto, folio, subtotal, iva, total);
             }
-            loadReporte(cliente, proyecto, folio, subtotal, iva, total);
         }
         //
 
