@@ -916,7 +916,7 @@ namespace cristales_pva
             if (datagridviewNE1.RowCount > 0)
             {
                 resetRowSelect();
-                constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value, -1, true);
                 ((Form1)Application.OpenForms["Form1"]).reloadAll();
                 loadALL();
             }

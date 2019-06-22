@@ -90,6 +90,7 @@ namespace cristales_pva
                 var FACTORY_CRI = (from x in opciones_xml.Descendants("Opciones") select x.Element("FACTORY_CRI")).SingleOrDefault();
                 var ANUNCIOS = (from x in opciones_xml.Descendants("Opciones") select x.Element("ANC")).SingleOrDefault();
                 var AC_SORT = (from x in opciones_xml.Descendants("Opciones") select x.Element("AC_SORT")).SingleOrDefault();
+                var CB_OP = (from x in opciones_xml.Descendants("Opciones") select x.Element("CB_OP")).SingleOrDefault();
 
                 var op1 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP1")).SingleOrDefault();
                 var op2 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP2")).SingleOrDefault();
@@ -319,6 +320,18 @@ namespace cristales_pva
                     {
                         constants.ac_sort = AC_SORT.Value.ToString();
                     }                   
+                }
+
+                if (CB_OP != null)
+                {
+                    if (CB_OP.Value == "true")
+                    {
+                        constants.copybox_option = true;
+                    }
+                    else
+                    {
+                        constants.copybox_option = false;
+                    }
                 }
 
                 //--------------------------------------------------------------------------------------------------> Reporte

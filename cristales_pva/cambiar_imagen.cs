@@ -195,19 +195,24 @@ namespace cristales_pva
 
         //Buscar imagen
         private void button1_Click(object sender, EventArgs e)
-        {
-            if (tableLayoutPanel1.Controls.Count > 0)
-            {
-                tableLayoutPanel1.Controls.Clear();
-                tableLayoutPanel1.ColumnCount = 1;
-                tableLayoutPanel1.RowCount = 1;
-                tableLayoutPanel1.BackgroundImage = null;
-            }
+        {         
+            openFileDialog1.FileName = string.Empty;
             openFileDialog1.Title = "Selecciona una imagen.";
             openFileDialog1.Filter = "Image files (*.jpg, *.jpeg) | *.jpg; *.jpeg";
-
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                //Format Table
+                if (tableLayoutPanel1.Controls.Count > 0)
+                {
+                    tableLayoutPanel1.Controls.Clear();
+                    tableLayoutPanel1.ColumnCount = 1;
+                    tableLayoutPanel1.RowCount = 1;
+                    tableLayoutPanel1.BackgroundImage = null;
+                }
+                label1.Text = string.Empty;
+                //------------------------------------------------------>
+
+                //Set Image uploaded
                 Bitmap bm = new Bitmap(openFileDialog1.FileName);
                 pic = new Bitmap(bm, 120, 105);
                 bm = null;

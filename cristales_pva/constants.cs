@@ -93,6 +93,7 @@ namespace cristales_pva
         public static int m_port = 587;
         public static int timeout = 10000;
         public static string ac_sort = "Orden";
+        public static bool copybox_option = true;
 
         //Temporales...
         public static int folio_abierto = -1, id_articulo_cotizacion = -1, tipo_cotizacion = 0;
@@ -4439,7 +4440,7 @@ namespace cristales_pva
             return img;
         }
 
-        public static void duplicarConcepto(int tipo_cotizacion, int id_concepto, int sub_folio=-1)
+        public static void duplicarConcepto(int tipo_cotizacion, int id_concepto, int sub_folio=-1, bool new_order=false)
         {
             cotizaciones_local cotizaciones = new cotizaciones_local();
 
@@ -4554,40 +4555,80 @@ namespace cristales_pva
                 var modulos = (from x in cotizaciones.modulos_cotizaciones where x.id == id_concepto select x).SingleOrDefault();
                 if (modulos != null)
                 {
-                    var paste_k = new modulos_cotizaciones()
+                    if (new_order)
                     {
-                        folio = 00000,
-                        modulo_id = modulos.modulo_id,
-                        descripcion = modulos.descripcion,
-                        mano_obra = modulos.mano_obra,
-                        dimensiones = modulos.dimensiones,
-                        acabado_perfil = modulos.acabado_perfil,
-                        claves_cristales = modulos.claves_cristales,
-                        cantidad = modulos.cantidad,
-                        articulo = modulos.articulo,
-                        linea = modulos.linea,
-                        diseño = modulos.diseño,
-                        clave = getClave(modulos.clave),
-                        total = modulos.total,
-                        largo = modulos.largo,
-                        alto = modulos.alto,
-                        flete = modulos.flete,
-                        utilidad = modulos.utilidad,
-                        desperdicio = modulos.desperdicio,
-                        claves_otros = modulos.claves_otros,
-                        claves_herrajes = modulos.claves_herrajes,
-                        ubicacion = modulos.ubicacion,
-                        pic = modulos.pic,
-                        claves_perfiles = modulos.claves_perfiles,
-                        merge_id = modulos.merge_id,
-                        concept_id = modulos.concept_id,
-                        sub_folio = sub_folio <= 0 ? modulos.sub_folio : sub_folio,
-                        dir = modulos.dir,
-                        news = modulos.news,
-                        new_desing = modulos.new_desing,
-                        orden = getCountPartidas()
-                    };
-                    cotizaciones.modulos_cotizaciones.Add(paste_k);
+                        var paste_k = new modulos_cotizaciones()
+                        {
+                            folio = 00000,
+                            modulo_id = modulos.modulo_id,
+                            descripcion = modulos.descripcion,
+                            mano_obra = modulos.mano_obra,
+                            dimensiones = modulos.dimensiones,
+                            acabado_perfil = modulos.acabado_perfil,
+                            claves_cristales = modulos.claves_cristales,
+                            cantidad = modulos.cantidad,
+                            articulo = modulos.articulo,
+                            linea = modulos.linea,
+                            diseño = modulos.diseño,
+                            clave = getClave(modulos.clave),
+                            total = modulos.total,
+                            largo = modulos.largo,
+                            alto = modulos.alto,
+                            flete = modulos.flete,
+                            utilidad = modulos.utilidad,
+                            desperdicio = modulos.desperdicio,
+                            claves_otros = modulos.claves_otros,
+                            claves_herrajes = modulos.claves_herrajes,
+                            ubicacion = modulos.ubicacion,
+                            pic = modulos.pic,
+                            claves_perfiles = modulos.claves_perfiles,
+                            merge_id = modulos.merge_id,
+                            concept_id = modulos.concept_id,
+                            sub_folio = sub_folio <= 0 ? modulos.sub_folio : sub_folio,
+                            dir = modulos.dir,
+                            news = modulos.news,
+                            new_desing = modulos.new_desing,
+                            orden = getCountPartidas()
+                        };
+                        cotizaciones.modulos_cotizaciones.Add(paste_k);
+                    }
+                    else
+                    {
+                        var paste_k = new modulos_cotizaciones()
+                        {
+                            folio = 00000,
+                            modulo_id = modulos.modulo_id,
+                            descripcion = modulos.descripcion,
+                            mano_obra = modulos.mano_obra,
+                            dimensiones = modulos.dimensiones,
+                            acabado_perfil = modulos.acabado_perfil,
+                            claves_cristales = modulos.claves_cristales,
+                            cantidad = modulos.cantidad,
+                            articulo = modulos.articulo,
+                            linea = modulos.linea,
+                            diseño = modulos.diseño,
+                            clave = getClave(modulos.clave),
+                            total = modulos.total,
+                            largo = modulos.largo,
+                            alto = modulos.alto,
+                            flete = modulos.flete,
+                            utilidad = modulos.utilidad,
+                            desperdicio = modulos.desperdicio,
+                            claves_otros = modulos.claves_otros,
+                            claves_herrajes = modulos.claves_herrajes,
+                            ubicacion = modulos.ubicacion,
+                            pic = modulos.pic,
+                            claves_perfiles = modulos.claves_perfiles,
+                            merge_id = modulos.merge_id,
+                            concept_id = modulos.concept_id,
+                            sub_folio = sub_folio <= 0 ? modulos.sub_folio : sub_folio,
+                            dir = modulos.dir,
+                            news = modulos.news,
+                            new_desing = modulos.new_desing,
+                            orden = modulos.orden
+                        };
+                        cotizaciones.modulos_cotizaciones.Add(paste_k);
+                    }
                     cotizaciones.SaveChanges();
 
                     if (modulos.modulo_id == -1)

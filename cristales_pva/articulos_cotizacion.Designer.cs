@@ -94,7 +94,7 @@
             this.acabadosToolStripMenuItem,
             this.desgloseDeCostosToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(227, 202);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(227, 224);
             // 
             // editarToolStripMenuItem
             // 
@@ -163,7 +163,7 @@
             // desgloseDeCostosToolStripMenuItem
             // 
             this.desgloseDeCostosToolStripMenuItem.Name = "desgloseDeCostosToolStripMenuItem";
-            this.desgloseDeCostosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.desgloseDeCostosToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.desgloseDeCostosToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.desgloseDeCostosToolStripMenuItem.Text = "Desglose de Costos";
             this.desgloseDeCostosToolStripMenuItem.Click += new System.EventHandler(this.desgloseDeCostosToolStripMenuItem_Click);

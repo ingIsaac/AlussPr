@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace cristales_pva
 {
@@ -15,6 +16,37 @@ namespace cristales_pva
         {
             InitializeComponent();
             textBox1.KeyDown += TextBox1_KeyDown;
+            checkBox1.MouseClick += CheckBox1_MouseClick;
+            checkBox1.Checked = constants.copybox_option;
+        }
+
+        private void setCopyboxOption()
+        {
+            try
+            {
+                XDocument opciones_xml = XDocument.Load(constants.opciones_xml);
+
+                var mv = from x in opciones_xml.Descendants("Opciones") select x;
+                //Set new value to constants
+                constants.copybox_option = checkBox1.Checked;
+                //Set values to XML
+                foreach (XElement x in mv)
+                {
+                    x.SetElementValue("CB_OP", checkBox1.Checked ? "true" : "false");                
+                }
+                opciones_xml.Save(constants.opciones_xml);
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+                MessageBox.Show(this, "[Error] el archivo opciones.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void CheckBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            setCopyboxOption();
         }
 
         private void TextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -210,7 +242,11 @@ namespace cristales_pva
                     orden = constants.getCountPartidas()
                 };
                 cotizaciones.modulos_cotizaciones.Add(paste);
-                cotizaciones.copyboxes.Remove(copy);
+                //Remove copy from copybox
+                if (!checkBox1.Checked)
+                {
+                    cotizaciones.copyboxes.Remove(copy);
+                }
                 cotizaciones.SaveChanges();
 
                 if (copy.modulo_id == -1)

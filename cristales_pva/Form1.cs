@@ -6646,7 +6646,7 @@ namespace cristales_pva
         {
             if (datagridviewNE1.RowCount > 0)
             {
-                constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value, -1, true);
                 reloadAll();
                 if (Application.OpenForms["articulos_cotizacion"] != null)
                 {
