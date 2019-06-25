@@ -34,7 +34,17 @@ namespace cristales_pva
             cargarEsquemasInherentes();
             comboBox5.Enabled = false;
             comboBox6.Enabled = false;
-            checkBox1.Checked = true;         
+            checkBox1.Checked = true;
+            checkBox2.MouseClick += CheckBox2_MouseClick;
+            this.KeyDown += Diseño_p_KeyDown;
+        }
+
+        private void Diseño_p_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control && e.KeyCode == Keys.D)
+            {
+                eliminarEsquema();
+            }
         }
 
         private void Diseño_p_Shown(object sender, EventArgs e)
@@ -372,7 +382,8 @@ namespace cristales_pva
         {
             try
             {
-                if (constants.stringToInt(comboBox1.Text) >= tableLayoutPanel1.Controls.Count)
+                tableLayoutPanel1.Visible = false;             
+                if ((constants.stringToInt(comboBox1.Text) * tableLayoutPanel1.RowCount) >= tableLayoutPanel1.Controls.Count)
                 {
                     tableLayoutPanel1.ColumnCount = constants.stringToInt(comboBox1.Text);
                     tableLayoutPanel1.ColumnStyles.Clear();
@@ -380,8 +391,9 @@ namespace cristales_pva
                     {
                         tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / tableLayoutPanel1.ColumnCount));
                     }
-                }
-                comboBox1.Text = tableLayoutPanel1.ColumnCount.ToString();
+                }        
+                comboBox1.Text = tableLayoutPanel1.ColumnCount.ToString();                         
+                //Clear
                 comboBox6.Items.Clear();
                 for (int i = 0; i < tableLayoutPanel1.ColumnStyles.Count - 1; i++)
                 {
@@ -389,6 +401,8 @@ namespace cristales_pva
                 }
                 comboBox5.Text = "0";
                 comboBox6.Text = "0";
+                //
+                tableLayoutPanel1.Visible = true;
             }
             catch (Exception)
             {
@@ -401,6 +415,7 @@ namespace cristales_pva
         {
             try
             {
+                tableLayoutPanel1.Visible = false;             
                 if ((constants.stringToInt(comboBox2.Text) * tableLayoutPanel1.ColumnCount) >= tableLayoutPanel1.Controls.Count)
                 {
                     tableLayoutPanel1.RowCount = constants.stringToInt(comboBox2.Text);
@@ -409,8 +424,9 @@ namespace cristales_pva
                     {
                         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / tableLayoutPanel1.RowCount));
                     }
-                }
+                }              
                 comboBox2.Text = tableLayoutPanel1.RowCount.ToString();
+                //Clear
                 comboBox5.Items.Clear();
                 for (int i = 0; i < tableLayoutPanel1.RowStyles.Count - 1; i++)
                 {
@@ -418,6 +434,8 @@ namespace cristales_pva
                 }
                 comboBox5.Text = "0";
                 comboBox6.Text = "0";
+                //
+                tableLayoutPanel1.Visible = true;
             }
             catch (Exception)
             {
@@ -427,6 +445,11 @@ namespace cristales_pva
 
         //Eliminar esquema
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            eliminarEsquema();
+        }
+
+        private void eliminarEsquema()
         {
             try
             {
@@ -491,6 +514,7 @@ namespace cristales_pva
         //set width to control
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
+            tableLayoutPanel1.Visible = false;
             if (checkBox2.Checked == false)
             {
                 if (hScrollBar1.Value > (hScrollBar1.Maximum * 0.2))
@@ -504,7 +528,7 @@ namespace cristales_pva
                 tableLayoutPanel1.ColumnStyles[tableLayoutPanel1.ColumnCount-1].Width = getOtherColumns();
                 tableLayoutPanel1.Refresh();
             }
-            
+            tableLayoutPanel1.Visible = true;
         }
 
         private float getOtherColumns()
@@ -534,6 +558,7 @@ namespace cristales_pva
         //set height to control
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
+            tableLayoutPanel1.Visible = false;
             if (checkBox2.Checked == false)
             {
                 if (vScrollBar1.Value > (vScrollBar1.Maximum * 0.2))
@@ -547,6 +572,7 @@ namespace cristales_pva
                 tableLayoutPanel1.RowStyles[tableLayoutPanel1.RowCount-1].Height = getOtherRows();
                 tableLayoutPanel1.Refresh();
             }
+            tableLayoutPanel1.Visible = true;
         }
 
         private void diseño_p_Load(object sender, EventArgs e)
@@ -845,7 +871,8 @@ namespace cristales_pva
         }
 
         private void changeStyleRow(SizeType size, float num)
-        {          
+        {
+            tableLayoutPanel1.Visible = false;
             if (tableLayoutPanel1.RowCount > 0)
             {
                 tableLayoutPanel1.RowStyles.Clear();
@@ -854,10 +881,12 @@ namespace cristales_pva
                     tableLayoutPanel1.RowStyles.Add(new RowStyle(size, num));                  
                 }                
             }
+            tableLayoutPanel1.Visible = true;
         }
 
         private void changeStyleColumn(SizeType size, float num)
         {
+            tableLayoutPanel1.Visible = false;
             if (tableLayoutPanel1.ColumnCount > 0)
             {
                 tableLayoutPanel1.ColumnStyles.Clear();
@@ -865,10 +894,11 @@ namespace cristales_pva
                 {
                     tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(size, num));                  
                 }
-            }          
+            }
+            tableLayoutPanel1.Visible = true;
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox2_MouseClick(object sender, MouseEventArgs e)
         {
             if (checkBox2.Checked == true)
             {

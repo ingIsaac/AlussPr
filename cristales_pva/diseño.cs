@@ -26,6 +26,15 @@ namespace cristales_pva
             treeView1.NodeMouseClick += TreeView1_NodeMouseClick;
             treeView1.AfterSelect += TreeView1_AfterSelect;
             checkBox1.Checked = true;
+            this.KeyDown += Diseño_KeyDown;
+        }
+
+        private void Diseño_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control && e.KeyCode == Keys.D)
+            {
+                eliminarSeccion();
+            }
         }
 
         //esquema preview
@@ -252,6 +261,11 @@ namespace cristales_pva
         //Eliminar Seccion
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            eliminarSeccion();
+        }
+
+        private void eliminarSeccion()
+        {
             if (tableLayoutPanel1.Controls.Count > 0)
             {
                 try
@@ -267,6 +281,7 @@ namespace cristales_pva
                 textBox1.Text = getConfig();
             }
         }
+        //
 
         //Eliminar todas las secciones
         private void button1_Click(object sender, EventArgs e)

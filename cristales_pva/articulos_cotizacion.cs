@@ -928,7 +928,7 @@ namespace cristales_pva
             if (backgroundWorker1.IsBusy == false)
             {
                 constants.errors_Open.Clear();
-                constants.reloadPreciosCotizaciones();
+                constants.reloadPreciosCotizaciones(0, constants.reload_precios);
                 ((Form1)Application.OpenForms["Form1"]).reloadAll();
             }
         }
@@ -996,7 +996,7 @@ namespace cristales_pva
                 }
                 cotizaciones.SaveChanges();
                 constants.errors_Open.Clear();
-                constants.reloadPreciosCotizaciones(0, reload);
+                constants.reloadPreciosCotizaciones(0, constants.reload_precios);
                 if (reload == true)
                 {
                     ((Form1)Application.OpenForms["Form1"]).reloadAll();
@@ -1016,7 +1016,7 @@ namespace cristales_pva
         private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             pictureBox1.Visible = false;
-            if(reload == true)
+            if (reload == true)
             {
                 loadALL();
             }           

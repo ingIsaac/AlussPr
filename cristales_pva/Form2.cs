@@ -84,7 +84,7 @@ namespace cristales_pva
             }
             if (checkBox4.Checked)
             {
-                if (MessageBox.Show(this, "¿Deseas ingresar de manera automática?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(new Form {TopMost = true}, "¿Deseas ingresar de manera automática?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     if (constants.user_ac != "" && constants.password_ac != "")
                     {
