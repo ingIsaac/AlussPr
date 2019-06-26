@@ -40,6 +40,14 @@ namespace cristales_pva
             comboBox4.Text = constants.ac_sort;
             loaded = true;
             this.KeyDown += Articulos_cotizacion_KeyDown;
+            toolStripComboBox1.SelectedIndexChanged += ToolStripComboBox1_SelectedIndexChanged;
+            toolStripComboBox2.SelectedIndexChanged += ToolStripComboBox2_SelectedIndexChanged;
+            moverAToolStripMenuItem.Click += MoverAToolStripMenuItem_Click;
+            copiarAToolStripMenuItem.Click += CopiarAToolStripMenuItem_Click;
+            moverAToolStripMenuItem.MouseHover += MoverAToolStripMenuItem_MouseHover;
+            copiarAToolStripMenuItem.MouseHover += CopiarAToolStripMenuItem_MouseHover;
+            toolStripComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            toolStripComboBox2.DropDownStyle = ComboBoxStyle.DropDownList;       
         }
 
         private void Articulos_cotizacion_KeyDown(object sender, KeyEventArgs e)
@@ -996,7 +1004,7 @@ namespace cristales_pva
                 }
                 cotizaciones.SaveChanges();
                 constants.errors_Open.Clear();
-                constants.reloadPreciosCotizaciones(0, constants.reload_precios);
+                constants.reloadPreciosCotizaciones(0, constants.reload_precios, id, (int)concepto.concept_id);
                 if (reload == true)
                 {
                     ((Form1)Application.OpenForms["Form1"]).reloadAll();
@@ -1121,11 +1129,16 @@ namespace cristales_pva
         {
             if (comboBox1.SelectedIndex >= 0)
             {
-                ((Form1)Application.OpenForms["form1"]).setSubFolio(comboBox1.Text);
-                label5.Text = "Sub-Folio: " + constants.sub_folio;
-                label6.Text = constants.sub_folio.ToString();
-                comboBox1.SelectedIndex = -1;
+                loadSubFolio(comboBox1.Text);
             }
+        }
+
+        private void loadSubFolio(string sub_folio)
+        {
+            ((Form1)Application.OpenForms["form1"]).setSubFolio(sub_folio);
+            label5.Text = "Sub-Folio: " + constants.sub_folio;
+            label6.Text = constants.sub_folio.ToString();
+            comboBox1.SelectedIndex = -1;
         }
 
         //acabado rapido
@@ -1397,6 +1410,83 @@ namespace cristales_pva
         private void button18_Click(object sender, EventArgs e)
         {
             ((Form1)Application.OpenForms["Form1"]).borrarConceptos();
+        }
+
+        //Mover concepto a subfolio
+        private void ToolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (datagridviewNE1.RowCount > 0)
+            {
+                int sub_folio = constants.stringToInt(toolStripComboBox1.SelectedItem.ToString());
+                if (sub_folio > 0)
+                {
+                    DialogResult r = MessageBox.Show("¿Deseas mover este concepto al sub-folio (" + sub_folio + ")?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (r == DialogResult.Yes)
+                    {
+                        constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value, sub_folio, true);
+                        ((Form1)Application.OpenForms["Form1"]).forzarEliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
+                        comboBox1.Text = sub_folio.ToString();
+                    }
+                }
+            }
+        }
+
+        private void MoverAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setDestinos(toolStripComboBox1);
+            toolStripComboBox1.SelectedIndex = 0;
+        }
+
+        private void MoverAToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            setDestinos(toolStripComboBox1);
+            toolStripComboBox1.SelectedIndex = 0;
+        }
+
+        //Copiar concepto a subfolio
+        private void ToolStripComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (datagridviewNE1.RowCount > 0)
+            {
+                int sub_folio = constants.stringToInt(toolStripComboBox2.SelectedItem.ToString());
+                if (sub_folio > 0)
+                {
+                    DialogResult r = MessageBox.Show("¿Deseas copiar este concepto al sub-folio (" + sub_folio + ")?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (r == DialogResult.Yes)
+                    {
+                        constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value, sub_folio, true);
+                        comboBox1.Text = sub_folio.ToString();
+                    }
+                }
+            }
+        }
+
+        private void CopiarAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setDestinos(toolStripComboBox2);
+            toolStripComboBox2.SelectedIndex = 0;
+        }
+
+
+        private void CopiarAToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            setDestinos(toolStripComboBox2);
+            toolStripComboBox2.SelectedIndex = 0;
+        }
+
+        //----------------------------------------------------------------------------------------->
+
+        private void setDestinos(ToolStripComboBox c)
+        {
+            c.Items.Clear();
+            c.Items.Add("Sub-Folio");
+            for (int i = 1; i <= 5; i++)
+            {
+                if (constants.sub_folio != i)
+                {
+                    c.Items.Add(i);
+                }
+            }
         }
     }
 }

@@ -4611,6 +4611,164 @@ namespace cristales_pva
             }
         }
 
+        //eliminar articulo del grid
+        public void forzarEliminarArticuloCotizado(int id)
+        {         
+            cotizaciones_local cotizaciones = new cotizaciones_local();
+            DataTable table = new DataTable();
+            try
+            {
+                if (constants.tipo_cotizacion == 1)
+                {
+                    var cristales = (from x in cotizaciones.cristales_cotizados where x.id == id select x).SingleOrDefault();
+                    if (cristales != null)
+                    {
+                        cotizaciones.cristales_cotizados.Remove(cristales);
+                        cotizaciones.SaveChanges();
+                        if (constants.count_cristales > 0)
+                        {
+                            constants.count_cristales = constants.count_cristales - 1;
+                        }
+                        if (cristales.folio > 0)
+                        {
+                            constants.setFilaBorradaOnLocalDB(1, (int)cristales.folio, constants.getIDFromClave(cristales.clave));
+                        }
+                        if (constants.id_articulo_cotizacion == cristales.id)
+                        {
+                            constants.id_articulo_cotizacion = -1;
+                            setEditImage(false, false);
+                        }
+                        constants.loadCotizacionesLocales("cristales", datagridviewNE1);
+                    }
+                }
+                else if (constants.tipo_cotizacion == 2)
+                {
+                    var aluminio = (from x in cotizaciones.aluminio_cotizado where x.id == id select x).SingleOrDefault();
+                    if (aluminio != null)
+                    {
+                        cotizaciones.aluminio_cotizado.Remove(aluminio);
+                        cotizaciones.SaveChanges();
+                        if (constants.count_aluminio > 0)
+                        {
+                            constants.count_aluminio = constants.count_aluminio - 1;
+                        }
+                        if (aluminio.folio > 0)
+                        {
+                            constants.setFilaBorradaOnLocalDB(2, (int)aluminio.folio, constants.getIDFromClave(aluminio.clave));
+                        }
+                        if (constants.id_articulo_cotizacion == aluminio.id)
+                        {
+                            constants.id_articulo_cotizacion = -1;
+                            setEditImage(false, false);
+                        }
+                        constants.loadCotizacionesLocales("aluminio", datagridviewNE1);
+                    }
+                }
+                else if (constants.tipo_cotizacion == 3)
+                {
+                    var herrajes = (from x in cotizaciones.herrajes_cotizados where x.id == id select x).SingleOrDefault();
+                    if (herrajes != null)
+                    {
+                        cotizaciones.herrajes_cotizados.Remove(herrajes);
+                        cotizaciones.SaveChanges();
+                        if (constants.count_herrajes > 0)
+                        {
+                            constants.count_herrajes = constants.count_herrajes - 1;
+                        }
+                        if (herrajes.folio > 0)
+                        {
+                            constants.setFilaBorradaOnLocalDB(3, (int)herrajes.folio, constants.getIDFromClave(herrajes.clave));
+                        }
+                        if (constants.id_articulo_cotizacion == herrajes.id)
+                        {
+                            constants.id_articulo_cotizacion = -1;
+                            setEditImage(false, false);
+                        }
+                        constants.loadCotizacionesLocales("herrajes", datagridviewNE1);
+                    }
+                }
+                else if (constants.tipo_cotizacion == 4)
+                {
+                    var otros = (from x in cotizaciones.otros_cotizaciones where x.id == id select x).SingleOrDefault();
+                    if (otros != null)
+                    {
+                        cotizaciones.otros_cotizaciones.Remove(otros);
+                        cotizaciones.SaveChanges();
+                        if (constants.count_otros > 0)
+                        {
+                            constants.count_otros = constants.count_otros - 1;
+                        }
+                        if (otros.folio > 0)
+                        {
+                            constants.setFilaBorradaOnLocalDB(4, (int)otros.folio, constants.getIDFromClave(otros.clave));
+                        }
+                        if (constants.id_articulo_cotizacion == otros.id)
+                        {
+                            constants.id_articulo_cotizacion = -1;
+                            setEditImage(false, false);
+                        }
+                        constants.loadCotizacionesLocales("otros", datagridviewNE1);
+                    }
+                }
+                else if (constants.tipo_cotizacion == 5)
+                {
+                    var modulos = (from x in cotizaciones.modulos_cotizaciones where x.id == id select x).SingleOrDefault();
+                    if (modulos != null)
+                    {
+                        cotizaciones.modulos_cotizaciones.Remove(modulos);
+                        cotizaciones.SaveChanges();
+                        if (constants.count_modulos > 0)
+                        {
+                            constants.count_modulos = constants.count_modulos - 1;
+                        }
+                        if (modulos.folio > 0)
+                        {
+                            constants.setFilaBorradaOnLocalDB(5, (int)modulos.folio, constants.getIDFromClave(modulos.clave));
+                        }
+                        if (constants.id_articulo_cotizacion == modulos.id)
+                        {
+                            constants.id_articulo_cotizacion = -1;
+                            setEditImage(false, false);
+                        }
+                        if (modulos.concept_id <= 0)
+                        {
+                            if (modulos.merge_id > 0)
+                            {
+                                constants.updateModuloPersonalizado((int)modulos.merge_id);
+                            }
+                        }
+                        else
+                        {
+                            int concept = (int)modulos.concept_id;
+                            var n = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concept select x);
+                              
+                            foreach (var g in n)
+                            {
+                                if (g != null)
+                                {
+                                    eliminarArticuloCotizado(g.id, true);
+                                }
+                            }                                                          
+                            cotizaciones.SaveChanges();
+                        }
+                        constants.loadCotizacionesLocales("modulos", datagridviewNE1);
+                    }
+                }
+                countCotizacionesArticulo();
+                loadCountArticulos();
+                calcularTotalesCotizacion();
+                constants.cotizacion_guardada = false;
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                }
+            }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+            }         
+        }
+
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (datagridviewNE1.RowCount > 0)
