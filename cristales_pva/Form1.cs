@@ -6310,6 +6310,7 @@ namespace cristales_pva
                                 {
                                     modulo.WindowState = FormWindowState.Maximized;
                                 }
+                                modulo.Activate();
                             }
                             else
                             {
@@ -6325,6 +6326,7 @@ namespace cristales_pva
                                     ((config_modulo)Application.OpenForms["config_modulo"]).WindowState = FormWindowState.Normal;
                                 }
                                 ((config_modulo)Application.OpenForms["config_modulo"]).Focus();
+                                ((config_modulo)Application.OpenForms["config_modulo"]).Activate();
                             }                        
                         }
                         else
@@ -6339,6 +6341,7 @@ namespace cristales_pva
                                     {
                                         modulo.WindowState = FormWindowState.Maximized;
                                     }
+                                    modulo.Activate();
                                 }
                                 else
                                 {
@@ -6354,6 +6357,7 @@ namespace cristales_pva
                                         ((config_modulo)Application.OpenForms["config_modulo"]).WindowState = FormWindowState.Normal;
                                     }
                                     ((config_modulo)Application.OpenForms["config_modulo"]).Focus();
+                                    ((config_modulo)Application.OpenForms["config_modulo"]).Activate();
                                 }
                             }
                             else

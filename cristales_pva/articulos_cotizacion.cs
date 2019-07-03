@@ -1033,6 +1033,20 @@ namespace cristales_pva
         private void button2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+            if (Application.OpenForms["form1"] != null)
+            {
+                if (Application.OpenForms["form1"].WindowState == FormWindowState.Minimized)
+                {
+                    Application.OpenForms["form1"].WindowState = FormWindowState.Maximized;
+                    Application.OpenForms["form1"].Select();
+                    Application.OpenForms["form1"].Activate();
+                }
+                else
+                {
+                    Application.OpenForms["form1"].Select();
+                    Application.OpenForms["form1"].Activate();
+                }
+            }
         }
 
         //Imprimir
