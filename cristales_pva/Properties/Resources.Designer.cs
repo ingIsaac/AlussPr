@@ -363,6 +363,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap circle_loading_gif {
+            get {
+                object obj = ResourceManager.GetObject("circle_loading_gif", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap client_account_template_icon {
             get {
                 object obj = ResourceManager.GetObject("client_account_template_icon", resourceCulture);

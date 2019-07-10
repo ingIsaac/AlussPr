@@ -1181,6 +1181,7 @@
     <None Include="Resources\xml_icon.png" />
     <None Include="Resources\large_arrow.png" />
     <None Include="Resources\merge_icon.png" />
+    <None Include="Resources\circle_loading_gif.gif" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>

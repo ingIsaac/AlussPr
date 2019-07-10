@@ -4986,7 +4986,7 @@ namespace cristales_pva
                             {
                                 modulos_config = false;
                                 label97.Text = "Cargando...";
-                                pictureBox9.Image = Properties.Resources.lg_dual_gear_loading_icon;
+                                pictureBox9.Image = Properties.Resources.circle_loading_gif;
                                 backgroundWorker3.RunWorkerAsync();
                             }
                         }
@@ -5031,7 +5031,7 @@ namespace cristales_pva
             {
                 modulos_config = true;
                 label97.Text = "Cargando...";
-                pictureBox9.Image = Properties.Resources.lg_dual_gear_loading_icon;
+                pictureBox9.Image = Properties.Resources.circle_loading_gif;
                 backgroundWorker3.RunWorkerAsync();
             }
         }

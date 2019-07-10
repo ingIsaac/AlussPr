@@ -1662,7 +1662,7 @@ namespace cristales_pva
         {           
             cotizaciones_local cotizaciones = new cotizaciones_local();
             
-            var concepto = (from c in cotizaciones.modulos_cotizaciones where c.concept_id == id select c).SingleOrDefault();
+            var concepto = (from c in cotizaciones.modulos_cotizaciones where c.modulo_id == -1 && c.concept_id == id select c).SingleOrDefault();
 
             if (concepto != null)
             {

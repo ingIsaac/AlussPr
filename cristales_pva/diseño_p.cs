@@ -686,6 +686,14 @@ namespace cristales_pva
                     checkBox1.Checked = a[0] == "t" ? true : false;
                     checkBox2.Checked = a[1] == "t" ? true : false;
                     comboBox3.Text = a[2];
+                    //Enable Rows and Columns
+                    if (checkBox2.Checked)
+                    {
+                        comboBox5.Enabled = true;
+                        comboBox6.Enabled = true;
+                        comboBox5.Text = "0";
+                        comboBox6.Text = "0";
+                    }
                 }
                 string[] c = r[1].Split(':');
                 for (int i = 0; i < tableLayoutPanel1.ColumnStyles.Count; i++)
