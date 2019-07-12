@@ -6234,7 +6234,7 @@ namespace cristales_pva
         //Load modulos ver-config
         private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
         {
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(500);
             sqlDateBaseManager sql = new sqlDateBaseManager();
             if(sql.isModuleAlive(opened_module) == false)
             {

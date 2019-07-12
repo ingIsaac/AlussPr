@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Cristales");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Aluminio");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Herrajes");
@@ -41,6 +40,7 @@
             treeNode3,
             treeNode4,
             treeNode5});
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -53,7 +53,6 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
-            this.datagridviewNE2 = new cristales_pva.datagridviewNE();
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.label88 = new System.Windows.Forms.Label();
@@ -68,12 +67,6 @@
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label41 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.datagridviewNE3 = new cristales_pva.datagridviewNE();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBox39 = new System.Windows.Forms.CheckBox();
@@ -296,7 +289,6 @@
             this.button15 = new System.Windows.Forms.Button();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label107 = new System.Windows.Forms.Label();
-            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.textBox28 = new System.Windows.Forms.TextBox();
@@ -320,18 +312,24 @@
             this.label39 = new System.Windows.Forms.Label();
             this.backgroundWorker4 = new System.ComponentModel.BackgroundWorker();
             this.label100 = new System.Windows.Forms.Label();
+            this.datagridviewNE2 = new cristales_pva.datagridviewNE();
+            this.datagridviewNE3 = new cristales_pva.datagridviewNE();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.statusStripNE1 = new cristales_pva.statusStripNE();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).BeginInit();
             this.contextMenuStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -366,8 +364,10 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.statusStripNE1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -506,20 +506,6 @@
             this.button19.TabIndex = 27;
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
-            // 
-            // datagridviewNE2
-            // 
-            this.datagridviewNE2.AllowUserToAddRows = false;
-            this.datagridviewNE2.AllowUserToDeleteRows = false;
-            this.datagridviewNE2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.datagridviewNE2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.datagridviewNE2.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE2.Location = new System.Drawing.Point(9, 111);
-            this.datagridviewNE2.Name = "datagridviewNE2";
-            this.datagridviewNE2.Size = new System.Drawing.Size(519, 254);
-            this.datagridviewNE2.TabIndex = 26;
             // 
             // button3
             // 
@@ -711,54 +697,6 @@
             this.label40.Size = new System.Drawing.Size(16, 13);
             this.label40.TabIndex = 27;
             this.label40.Text = "$:";
-            // 
-            // datagridviewNE3
-            // 
-            this.datagridviewNE3.AllowUserToDeleteRows = false;
-            this.datagridviewNE3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.datagridviewNE3.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
-            this.datagridviewNE3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6});
-            this.datagridviewNE3.ContextMenuStrip = this.contextMenuStrip4;
-            this.datagridviewNE3.Location = new System.Drawing.Point(9, 208);
-            this.datagridviewNE3.Name = "datagridviewNE3";
-            this.datagridviewNE3.Size = new System.Drawing.Size(415, 96);
-            this.datagridviewNE3.TabIndex = 26;
-            // 
-            // Column1
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column1.HeaderText = "Acabado";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Tipo";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Largo (mm)";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Alto (mm)";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Cantidad";
-            this.Column6.Name = "Column6";
             // 
             // contextMenuStrip4
             // 
@@ -2244,13 +2182,11 @@
             // 
             // pictureBox9
             // 
-            this.pictureBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox9.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox9.Location = new System.Drawing.Point(17, 68);
+            this.pictureBox9.Location = new System.Drawing.Point(30, 69);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(147, 69);
+            this.pictureBox9.Size = new System.Drawing.Size(121, 69);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox9.TabIndex = 12;
             this.pictureBox9.TabStop = false;
@@ -3172,22 +3108,6 @@
             this.label107.TabIndex = 40;
             this.label107.Text = "Sub-Folio:";
             // 
-            // datagridviewNE1
-            // 
-            this.datagridviewNE1.AllowUserToDeleteRows = false;
-            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip2;
-            this.datagridviewNE1.Location = new System.Drawing.Point(147, 45);
-            this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.Size = new System.Drawing.Size(490, 86);
-            this.datagridviewNE1.TabIndex = 26;
-            // 
             // groupBox8
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -3460,6 +3380,84 @@
             this.label100.Size = new System.Drawing.Size(0, 13);
             this.label100.TabIndex = 31;
             // 
+            // datagridviewNE2
+            // 
+            this.datagridviewNE2.AllowUserToAddRows = false;
+            this.datagridviewNE2.AllowUserToDeleteRows = false;
+            this.datagridviewNE2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.datagridviewNE2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.datagridviewNE2.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE2.Location = new System.Drawing.Point(9, 111);
+            this.datagridviewNE2.Name = "datagridviewNE2";
+            this.datagridviewNE2.Size = new System.Drawing.Size(519, 254);
+            this.datagridviewNE2.TabIndex = 26;
+            // 
+            // datagridviewNE3
+            // 
+            this.datagridviewNE3.AllowUserToDeleteRows = false;
+            this.datagridviewNE3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.datagridviewNE3.BackgroundColor = System.Drawing.SystemColors.MenuHighlight;
+            this.datagridviewNE3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.datagridviewNE3.ContextMenuStrip = this.contextMenuStrip4;
+            this.datagridviewNE3.Location = new System.Drawing.Point(9, 208);
+            this.datagridviewNE3.Name = "datagridviewNE3";
+            this.datagridviewNE3.Size = new System.Drawing.Size(415, 96);
+            this.datagridviewNE3.TabIndex = 26;
+            // 
+            // Column1
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column1.HeaderText = "Acabado";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Tipo";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Largo (mm)";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Alto (mm)";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Cantidad";
+            this.Column6.Name = "Column6";
+            // 
+            // datagridviewNE1
+            // 
+            this.datagridviewNE1.AllowUserToDeleteRows = false;
+            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.datagridviewNE1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip2;
+            this.datagridviewNE1.Location = new System.Drawing.Point(147, 45);
+            this.datagridviewNE1.Name = "datagridviewNE1";
+            this.datagridviewNE1.Size = new System.Drawing.Size(490, 86);
+            this.datagridviewNE1.TabIndex = 26;
+            // 
             // statusStripNE1
             // 
             this.statusStripNE1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -3515,13 +3513,11 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).EndInit();
             this.contextMenuStrip4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -3568,9 +3564,11 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             this.statusStripNE1.ResumeLayout(false);
             this.statusStripNE1.PerformLayout();
             this.ResumeLayout(false);
