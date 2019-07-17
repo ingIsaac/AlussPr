@@ -31,6 +31,18 @@ namespace cristales_pva
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
+            string display = "Analíticas";
+            if (cliente != string.Empty)
+            {
+                display = display + " - " + cliente;
+            }          
+            //------------------------>
+            if (proyecto != string.Empty)
+            {
+                display = display + " - " + proyecto;
+            }
+            //------------------------>                    
+            reportViewer1.LocalReport.DisplayName = display;
             this.cliente = cliente;
             this.folio = folio;
             this.proyecto = proyecto;

@@ -18,6 +18,27 @@ namespace cristales_pva
             this.Text = name + " - " + linea;
             ReportDataSource rd = new ReportDataSource("modulo_data", md.Tables[0]);
             ReportDataSource rd_2 = new ReportDataSource("img_modulo", md.Tables[2]);
+            string display = string.Empty;
+            if(clave != string.Empty)
+            {
+                display = clave;
+            }
+            //------------------------>
+            if(name != string.Empty)
+            {
+                display = display + " - " + name;
+            }
+            //------------------------>
+            if (linea != string.Empty)
+            {
+                display = display + " - " + linea;
+            }
+            //------------------------>
+            if (display == string.Empty)
+            {
+                display = "n/a";
+            }
+            reportViewer1.LocalReport.DisplayName = display;
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.DataSources.Add(rd);
             reportViewer1.LocalReport.DataSources.Add(rd_2);

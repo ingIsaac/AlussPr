@@ -20,6 +20,18 @@ namespace cristales_pva
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
+            string display = "Producción";
+            if (constants.nombre_cotizacion != string.Empty)
+            {
+                display = display + " - " + constants.nombre_cotizacion;
+            }        
+            //------------------------>
+            if (constants.nombre_proyecto != string.Empty)
+            {
+                display = display + " - " + constants.nombre_proyecto;
+            }
+            //------------------------>                    
+            reportViewer1.LocalReport.DisplayName = display;
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker2.WorkerReportsProgress = true;
             ////

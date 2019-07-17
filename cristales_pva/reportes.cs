@@ -146,6 +146,7 @@ namespace cristales_pva
 
             string[] modelo = null;
             string[] acabado_c = null;
+            string display = string.Empty;
             cotizaciones_local cotizaciones = new cotizaciones_local();
             if (proyecto != "" || cliente != "")
             {
@@ -155,7 +156,15 @@ namespace cristales_pva
             {
                 this.Text = "Reporte (n/g).";
             }          
-            reportViewer1.LocalReport.DisplayName = textBox1.Text + " - " + (constants.getSubfoliotitle(constants.sub_folio) != string.Empty ? constants.getSubfoliotitle(constants.sub_folio) : constants.sub_folio.ToString());
+            if(textBox1.Text != string.Empty)
+            {
+                display = textBox1.Text;
+            }
+            else
+            {
+                display = this.Text;
+            }
+            reportViewer1.LocalReport.DisplayName = display + " - " + (constants.getSubfoliotitle(constants.sub_folio) != string.Empty ? constants.getSubfoliotitle(constants.sub_folio) : constants.sub_folio.ToString());
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));

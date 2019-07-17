@@ -16,6 +16,7 @@ namespace cristales_pva
         {
             InitializeComponent();
             this.Text = name + " - " + linea;
+            reportViewer1.LocalReport.DisplayName = clave + " - " + linea + (ubicacion != string.Empty ? " - " + ubicacion : "");
             ReportDataSource rd = new ReportDataSource("modulo_precios", md.Tables[1]);
             ReportDataSource rd_2 = new ReportDataSource("img_modulo", md.Tables[2]);
             reportViewer1.ZoomMode = ZoomMode.PageWidth;

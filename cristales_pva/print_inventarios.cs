@@ -26,7 +26,7 @@ namespace cristales_pva
             this.peps = peps;
             this.periodo = periodo;
             this.tienda = tienda != string.Empty ? tienda : constants.org_name;
-            reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;           
+            reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;
         }
 
         private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
@@ -53,7 +53,8 @@ namespace cristales_pva
             {
                 this.Text = constants.org_name.ToUpper() + " - Existencias";
                 this.inventarios_tBindingSource.DataSource = Table;
-            }
+            }                
+            reportViewer1.LocalReport.DisplayName = this.Text;
             //----------------------------------------------------------------------------------------------------------->
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("lista", lista));

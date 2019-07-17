@@ -17,7 +17,7 @@ namespace cristales_pva
         bool loaded = false;
 
         public articulos_cotizacion()
-        {
+        {           
             InitializeComponent();
             datagridviewNE1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             datagridviewNE1.CellClick += DatagridviewNE1_CellClick;
@@ -110,6 +110,10 @@ namespace cristales_pva
                 if(m.Length > 0)
                 {
                     m = m + " - " + constants.getSubfoliotitle(constants.sub_folio);
+                }
+                else
+                {
+                    m = constants.getSubfoliotitle(constants.sub_folio);
                 }
             }
             label7.Text = m;
