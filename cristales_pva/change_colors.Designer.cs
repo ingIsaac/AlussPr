@@ -456,7 +456,7 @@
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(174, 20);
             this.textBox5.TabIndex = 6;
-            this.textBox5.Text = "30";
+            this.textBox5.Text = "20";
             // 
             // textBox4
             // 

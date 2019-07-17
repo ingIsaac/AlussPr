@@ -215,7 +215,6 @@ namespace cristales_pva
                             if (get >= 0)
                             {
                                 costo = costo + get;
-                                alum_t = alum_t + get;
                             }
                             else
                             {
@@ -228,6 +227,7 @@ namespace cristales_pva
 
                 //Calcular Desperdicio
                 costo = costo + (costo * desperdicio);
+                alum_t = alum_t + costo;
                 //-------------------------------->
 
                 if (claves_herrajes.Length > 0)
