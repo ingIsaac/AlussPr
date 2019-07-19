@@ -719,7 +719,10 @@ namespace cristales_pva
             {
                 anuncios anuncios = new anuncios();
                 anuncios.ShowDialog(this);
-                anuncios.Select();
+                anuncios.Activate();
+                a_presupuestos a_presupuestos = new a_presupuestos();
+                a_presupuestos.ShowDialog(this);
+                a_presupuestos.Activate();
             }
         }
 
@@ -7339,7 +7342,7 @@ namespace cristales_pva
 
         private void estadísticasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new estadisticas().ShowDialog();
+            new estadisticas().ShowDialog(this);
         }
 
         private void verToolStripMenuItem_Click(object sender, EventArgs e)

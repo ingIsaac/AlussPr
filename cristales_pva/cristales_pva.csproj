@@ -180,6 +180,12 @@
     <Compile Include="asignar_dir.Designer.cs">
       <DependentUpon>asignar_dir.cs</DependentUpon>
     </Compile>
+    <Compile Include="a_presupuestos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="a_presupuestos.Designer.cs">
+      <DependentUpon>a_presupuestos.cs</DependentUpon>
+    </Compile>
     <Compile Include="buscar_cotizacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -707,6 +713,9 @@
     <EmbeddedResource Include="anuncios_manager.resx">
       <DependentUpon>anuncios_manager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="a_presupuestos.resx">
+      <DependentUpon>a_presupuestos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cambiar_tienda.resx">
       <DependentUpon>cambiar_tienda.cs</DependentUpon>
     </EmbeddedResource>
@@ -1182,6 +1191,7 @@
     <None Include="Resources\large_arrow.png" />
     <None Include="Resources\merge_icon.png" />
     <None Include="Resources\circle_loading_gif.gif" />
+    <None Include="Resources\chart-icon-64.png" />
     <Content Include="userLocal_model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>userLocal_model.edmx</DependentUpon>
