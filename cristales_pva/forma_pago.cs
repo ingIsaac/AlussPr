@@ -28,7 +28,7 @@ namespace cristales_pva
             }
             catch (Exception err)
             {
-                MessageBox.Show("[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 constants.errorLog(err.ToString());
             }
         }
@@ -50,14 +50,14 @@ namespace cristales_pva
                     }
 
                     propiedades_xml.Save(constants.propiedades_xml);
-                    MessageBox.Show("Se han guardado los cambios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(this, "Se han guardado los cambios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     ((reportes)Application.OpenForms["reportes"]).reload();
                     Close();
                 }
                 catch (Exception err)
                 {
                     constants.errorLog(err.ToString());
-                    MessageBox.Show("[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

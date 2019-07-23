@@ -668,14 +668,24 @@ namespace cristales_pva
                 toolStripStatusLabel3.Text = "     [Cliente: " + constants.nombre_cotizacion + "]   [Proyecto: " + constants.nombre_proyecto + "]";
                 toolStripStatusLabel3.Text = toolStripStatusLabel3.Text.ToUpper();
                 toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;
+                //Load Special Parameters
                 if (constants.local == false)
                 {
                     constants.loadSubfoliotitles();
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo obtener los títulos de sub-folio dado a que se ingreso de manera local.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }               
+                    MessageBox.Show("No se ha podido obtener los títulos de sub-folio dado a que se ingreso de manera local.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                if (constants.local == false)
+                {
+                    constants.loadPrecioEspecialDesc();
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo obtener la descripción del atributo 'precio especial' de este presupuesto dado a que se ingreso de manera local.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                //------------------------->
             }
             setTextCaptionForm();
             loadIntervalo();
@@ -7055,6 +7065,7 @@ namespace cristales_pva
                 constants.autor_cotizacion = "";
                 constants.fecha_cotizacion = "";
                 constants.subfolio_titles.Clear();
+                constants.precio_especial_desc = string.Empty;
                 constants.initsubfoliotitles();
                 constants.cotizacion_proceso = false;
                 constants.cotizacion_guardada = false;

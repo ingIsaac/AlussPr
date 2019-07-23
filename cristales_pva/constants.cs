@@ -116,6 +116,7 @@ namespace cristales_pva
         public static bool user_forbid = false;
         public static string factory_acabado_perfil = string.Empty;
         public static string factory_cristal = string.Empty;
+        public static string precio_especial_desc = string.Empty;
 
         public static void getSoftwareVersion()
         {
@@ -5605,7 +5606,7 @@ namespace cristales_pva
             }
             catch (Exception e)
             {
-                MessageBox.Show("[Error] no se pudo obtener los títulos de los sub-folios\n¿Cuenta con conexión a internet?.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("[Error] no se ha podido obtener los títulos de los sub-folios.\n¿Cuenta con conexión a internet?.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorLog(e.ToString());
             }
         }
@@ -5617,6 +5618,24 @@ namespace cristales_pva
             subfolio_titles.Add("");
             subfolio_titles.Add("");
             subfolio_titles.Add("");
+        }
+
+        public static void loadPrecioEspecialDesc()
+        {
+            sqlDateBaseManager sql = new sqlDateBaseManager();
+            try
+            {
+                var t = sql.getSingleSQLValue("cotizaciones", "precio_especial", "folio", folio_abierto.ToString(), 0);
+                if(t != null)
+                {
+                    precio_especial_desc = t.ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("[Error] no se pudo obtener la descripción del atributo 'precio especial' de este presupuesto.\n¿Cuenta con conexión a internet?.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLog(e.ToString());
+            }
         }
 
         public static object getOptionXMLValue(string key)

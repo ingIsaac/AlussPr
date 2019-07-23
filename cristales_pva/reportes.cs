@@ -168,6 +168,7 @@ namespace cristales_pva
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("precio_especial", constants.precio_especial_desc));
             if (checkBox6.Checked)
             {
                 reportViewer1.LocalReport.SetParameters(new ReportParameter("marca", constants.getExternalImage("marca")));
@@ -1168,6 +1169,12 @@ namespace cristales_pva
         private void button5_Click(object sender, EventArgs e)
         {
             new forma_pago().ShowDialog();
+        }
+
+        //Precio Especial
+        private void button6_Click(object sender, EventArgs e)
+        {
+            new precio_especial().ShowDialog();
         }
     }
 }

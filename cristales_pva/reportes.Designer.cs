@@ -49,30 +49,31 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkBox7 = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.datos_reporteBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportes_dataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.articulos_reporteBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // datos_reporteBindingSource
@@ -231,19 +232,6 @@
             this.textBox4.Size = new System.Drawing.Size(177, 20);
             this.textBox4.TabIndex = 4;
             // 
-            // button1
-            // 
-            this.button1.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
-            this.button1.Location = new System.Drawing.Point(16, 472);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(85, 56);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Actualizar";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
@@ -257,28 +245,6 @@
             this.checkBox3.Text = "Forma de pago.";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // button2
-            // 
-            this.button2.Image = global::cristales_pva.Properties.Resources.a_z;
-            this.button2.Location = new System.Drawing.Point(14, 51);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(38, 23);
-            this.button2.TabIndex = 12;
-            this.button2.TabStop = false;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Image = global::cristales_pva.Properties.Resources.z_a;
-            this.button3.Location = new System.Drawing.Point(58, 51);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(38, 23);
-            this.button3.TabIndex = 13;
-            this.button3.TabStop = false;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // checkBox4
             // 
@@ -338,30 +304,6 @@
             this.checkBox6.UseVisualStyleBackColor = true;
             this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
-            // button4
-            // 
-            this.button4.Image = global::cristales_pva.Properties.Resources.email_send_icon;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button4.Location = new System.Drawing.Point(107, 472);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(85, 56);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Enviar Correo";
-            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::cristales_pva.Properties.Resources.logo_title;
-            this.pictureBox1.Location = new System.Drawing.Point(16, 538);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(177, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 20;
-            this.pictureBox1.TabStop = false;
-            // 
             // checkBox7
             // 
             this.checkBox7.AutoSize = true;
@@ -386,21 +328,11 @@
             this.checkBox8.UseVisualStyleBackColor = true;
             this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox8_CheckedChanged);
             // 
-            // button5
-            // 
-            this.button5.Image = global::cristales_pva.Properties.Resources.gear_icon_min;
-            this.button5.Location = new System.Drawing.Point(110, 99);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(38, 24);
-            this.button5.TabIndex = 5;
-            this.button5.TabStop = false;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.checkBox10);
             this.groupBox1.Controls.Add(this.checkBox9);
             this.groupBox1.Controls.Add(this.button5);
@@ -434,6 +366,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Propiedades";
             // 
+            // button6
+            // 
+            this.button6.Image = global::cristales_pva.Properties.Resources.coin_us_dollar_icon;
+            this.button6.Location = new System.Drawing.Point(154, 99);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(38, 24);
+            this.button6.TabIndex = 23;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // checkBox10
             // 
             this.checkBox10.AutoSize = true;
@@ -458,6 +400,76 @@
             this.checkBox9.UseVisualStyleBackColor = true;
             this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox9_CheckedChanged);
             // 
+            // button5
+            // 
+            this.button5.Image = global::cristales_pva.Properties.Resources.gear_icon_min;
+            this.button5.Location = new System.Drawing.Point(110, 99);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(38, 24);
+            this.button5.TabIndex = 5;
+            this.button5.TabStop = false;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::cristales_pva.Properties.Resources.logo_title;
+            this.pictureBox1.Location = new System.Drawing.Point(16, 538);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(177, 50);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 20;
+            this.pictureBox1.TabStop = false;
+            // 
+            // button4
+            // 
+            this.button4.Image = global::cristales_pva.Properties.Resources.email_send_icon;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button4.Location = new System.Drawing.Point(107, 472);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(85, 56);
+            this.button4.TabIndex = 7;
+            this.button4.Text = "Enviar Correo";
+            this.button4.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Image = global::cristales_pva.Properties.Resources.z_a;
+            this.button3.Location = new System.Drawing.Point(58, 51);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(38, 23);
+            this.button3.TabIndex = 13;
+            this.button3.TabStop = false;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Image = global::cristales_pva.Properties.Resources.a_z;
+            this.button2.Location = new System.Drawing.Point(14, 51);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(38, 23);
+            this.button2.TabIndex = 12;
+            this.button2.TabStop = false;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
+            this.button1.Location = new System.Drawing.Point(16, 472);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(85, 56);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Actualizar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // reportes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,9 +487,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.datos_reporteBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportes_dataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.articulos_reporteBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -521,5 +533,6 @@
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox10;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button6;
     }
 }

@@ -393,6 +393,16 @@ namespace cristales_pva.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap coin_us_dollar_icon {
+            get {
+                object obj = ResourceManager.GetObject("coin_us_dollar_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Collection_icon {
             get {
                 object obj = ResourceManager.GetObject("Collection_icon", resourceCulture);
