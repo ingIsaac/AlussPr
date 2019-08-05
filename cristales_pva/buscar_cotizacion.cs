@@ -411,50 +411,71 @@ namespace cristales_pva
 
         public void abrirCotizacion()
         {
-            label3.Text = "Cargando...";
-            pictureBox1.Visible = true;
-            label3.Visible = true;
-            datagridviewNE1.Enabled = false;
-            constants.sub_folio = 1;
-            ((Form1)Application.OpenForms["form1"]).resetEdit();
-            ((Form1)Application.OpenForms["form1"]).setSubFolioLabel();
-            constants.folio_abierto = (int)datagridviewNE1.CurrentRow.Cells[1].Value;
-            constants.nombre_cotizacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
-            constants.nombre_proyecto = datagridviewNE1.CurrentRow.Cells[5].Value.ToString();
-            constants.fecha_cotizacion = datagridviewNE1.CurrentRow.Cells[3].Value.ToString();
-            constants.autor_cotizacion = datagridviewNE1.CurrentRow.Cells[4].Value.ToString();
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
-            constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
-            constants.unserializeSubfolio(sql.getSingleSQLValue("cotizaciones", "subfolio_titles", "folio", constants.folio_abierto.ToString(), 0));
-            constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
-            var t = sql.getSingleSQLValue("cotizaciones", "precio_especial", "folio", constants.folio_abierto.ToString(), 0);
-            if (t != null)
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.DoWork += (sender, e) =>
             {
-                constants.precio_especial_desc = t.ToString();
-            }
-            constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
-            //cerrar ventanas
-            if (Application.OpenForms["registro_presupuesto"] != null)
+                ((Form1)Application.OpenForms["form1"]).resetEdit();
+                ((Form1)Application.OpenForms["form1"]).setSubFolioLabel();
+                constants.folio_abierto = (int)datagridviewNE1.CurrentRow.Cells[1].Value;
+                constants.nombre_cotizacion = datagridviewNE1.CurrentRow.Cells[2].Value.ToString();
+                constants.nombre_proyecto = datagridviewNE1.CurrentRow.Cells[5].Value.ToString();
+                constants.fecha_cotizacion = datagridviewNE1.CurrentRow.Cells[3].Value.ToString();
+                constants.autor_cotizacion = datagridviewNE1.CurrentRow.Cells[4].Value.ToString();
+                //Load Data
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                constants.desc_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "descuento", "folio", constants.folio_abierto.ToString(), 0));
+                constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
+                constants.unserializeSubfolio(sql.getSingleSQLValue("cotizaciones", "subfolio_titles", "folio", constants.folio_abierto.ToString(), 0));
+                constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
+                var t = sql.getSingleSQLValue("cotizaciones", "precio_especial", "folio", constants.folio_abierto.ToString(), 0);
+                if (t != null)
+                {
+                    constants.precio_especial_desc = t.ToString();
+                }
+                //Set Properties
+                constants.setClienteToPropiedades(constants.folio_abierto, constants.nombre_cotizacion, constants.nombre_proyecto, constants.desc_cotizacion, constants.utilidad_cotizacion, constants.iva_desglosado);
+                e.Result = true;
+            };
+            bg.RunWorkerCompleted += (sender, e) =>
             {
-                Application.OpenForms["registro_presupuesto"].Close();
-            }
-            if (Application.OpenForms["articulos_cotizacion"] != null)
+                if (e.Result != null)
+                {
+                    //cerrar ventanas
+                    if (Application.OpenForms["registro_presupuesto"] != null)
+                    {
+                        Application.OpenForms["registro_presupuesto"].Close();
+                    }
+                    if (Application.OpenForms["articulos_cotizacion"] != null)
+                    {
+                        Application.OpenForms["articulos_cotizacion"].Close();
+                    }
+                    if (Application.OpenForms["config_modulo"] != null)
+                    {
+                        Application.OpenForms["config_modulo"].Close();
+                    }
+                    //
+                    if (!backgroundWorker3.IsBusy)
+                    {
+                        //Disable Form 1
+                        Application.OpenForms["form1"].Enabled = false;
+                        //
+                        backgroundWorker3.RunWorkerAsync();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(this, "[Error] no se pudo abrir esta cotización, intenta de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+            if (!bg.IsBusy)
             {
-                Application.OpenForms["articulos_cotizacion"].Close();
-            }
-            if (Application.OpenForms["config_modulo"] != null)
-            {
-                Application.OpenForms["config_modulo"].Close();
-            }
-            //
-            if (!backgroundWorker3.IsBusy)
-            {
-                //Disable Form 1
-                Application.OpenForms["form1"].Enabled = false;
-                //
-                backgroundWorker3.RunWorkerAsync();
-            }
+                label3.Text = "Cargando...";
+                pictureBox1.Visible = true;
+                label3.Visible = true;
+                datagridviewNE1.Enabled = false;
+                constants.sub_folio = 1;
+                bg.RunWorkerAsync();
+            }                             
         }
 
         //ABRIR COTIZACION ---------------------------------------------------------------------------------------------------------------------->

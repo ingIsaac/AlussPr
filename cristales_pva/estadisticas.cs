@@ -29,80 +29,101 @@ namespace cristales_pva
 
         private void loadInfo()
         {
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            List<cotizacion_info> info = sql.getCountPresupuestos(comboBox3.Text);
-            List<p_registros> info_2 = sql.getCountRegistros(comboBox3.Text);
-            string[] meses = new string[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
-            int año = constants.stringToInt(comboBox2.Text);
-            int mes = getMesInt(comboBox1.Text);
-            int _c = 0, total = 0;
-            chart1.Series.Clear();
-            //Series
-            //Serie 1
-            if (checkBox1.Checked)
+            List<cotizacion_info> info = new List<cotizacion_info>();
+            List<p_registros> info_2 = new List<p_registros>();
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.DoWork += (sender, e) =>
             {
-                Series serie = chart1.Series.Add("Conteo de presupuestos");
-                serie.ChartType = SeriesChartType.Line;
-                if (info.Count > 0)
+                //Load Data
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                info = sql.getCountPresupuestos(comboBox3.Text);
+                info_2 = sql.getCountRegistros(comboBox3.Text);
+            };
+            bg.RunWorkerCompleted += (sender, e) =>
+            {
+                try
                 {
-                    if (mes > 0)
+                    string[] meses = new string[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" };
+                    int año = constants.stringToInt(comboBox2.Text);
+                    int mes = getMesInt(comboBox1.Text);
+                    int _c = 0, total = 0;
+                    chart1.Series.Clear();
+                    //Series
+                    //Serie 1
+                    if (checkBox1.Checked)
                     {
-                        for (int i = 1; i < DateTime.DaysInMonth(año, mes); i++)
+                        Series serie = chart1.Series.Add("Conteo de presupuestos");
+                        serie.ChartType = SeriesChartType.Line;
+                        if (info.Count > 0)
                         {
-                            _c = info.Where(v => v.dia == i && v.mes == mes && v.año == año).Count();
-                            total = total + _c;
-                            serie.Points.AddXY(i, _c);
+                            if (mes > 0)
+                            {
+                                for (int i = 1; i < DateTime.DaysInMonth(año, mes); i++)
+                                {
+                                    _c = info.Where(v => v.dia == i && v.mes == mes && v.año == año).Count();
+                                    total = total + _c;
+                                    serie.Points.AddXY(i, _c);
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < meses.Length; i++)
+                                {
+                                    _c = info.Where(v => v.mes == (i + 1) && v.año == año).Count();
+                                    total = total + _c;
+                                    serie.Points.AddXY(meses[i], _c);
+                                }
+                            }
                         }
+                        serie.LegendText = serie.Name + "\n\n-Total: " + total + "\n-Año: " + año + "\n-Mes: " + getMesName(mes.ToString()) + "\n\n";
                     }
-                    else
+                    //Serie 2
+                    if (checkBox2.Checked)
                     {
-                        for (int i = 0; i < meses.Length; i++)
+                        _c = 0;
+                        total = 0;
+                        Series serie2 = chart1.Series.Add("Conteo de registros");
+                        serie2.ChartType = SeriesChartType.Line;
+                        serie2.Color = Color.Red;
+                        if (info_2.Count > 0)
                         {
-                            _c = info.Where(v => v.mes == (i + 1) && v.año == año).Count();
-                            total = total + _c;
-                            serie.Points.AddXY(meses[i], _c);
+                            if (mes > 0)
+                            {
+                                for (int i = 1; i < DateTime.DaysInMonth(año, mes); i++)
+                                {
+                                    _c = info_2.Where(v => v.dia == i && v.mes == mes && v.año == año).Count();
+                                    total = total + _c;
+                                    serie2.Points.AddXY(i, _c);
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < meses.Length; i++)
+                                {
+                                    _c = info_2.Where(v => v.mes == (i + 1) && v.año == año).Count();
+                                    total = total + _c;
+                                    serie2.Points.AddXY(meses[i], _c);
+                                }
+                            }
                         }
+                        serie2.LegendText = serie2.Name + "\n\n-Total: " + total + "\n-Año: " + año + "\n-Mes: " + getMesName(mes.ToString());
                     }
+                    if (chart1.Titles.Count > 0)
+                    {
+                        chart1.Titles[0].Text = "Presupuestos\n\n" + comboBox3.Text;
+                    }
+                    info.Clear();
+                    info_2.Clear();
                 }
-                serie.LegendText = serie.Name + "\n\n-Total: " + total + "\n-Año: " + año + "\n-Mes: " + getMesName(mes.ToString()) + "\n\n";
-            }
-            //Serie 2
-            if (checkBox2.Checked)
-            {
-                _c = 0;
-                total = 0;
-                Series serie2 = chart1.Series.Add("Conteo de registros");
-                serie2.ChartType = SeriesChartType.Line;
-                serie2.Color = Color.Red;
-                if (info_2.Count > 0)
+                catch (Exception)
                 {
-                    if (mes > 0)
-                    {
-                        for (int i = 1; i < DateTime.DaysInMonth(año, mes); i++)
-                        {
-                            _c = info_2.Where(v => v.dia == i && v.mes == mes && v.año == año).Count();
-                            total = total + _c;
-                            serie2.Points.AddXY(i, _c);
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < meses.Length; i++)
-                        {
-                            _c = info_2.Where(v => v.mes == (i + 1) && v.año == año).Count();
-                            total = total + _c;
-                            serie2.Points.AddXY(meses[i], _c);
-                        }
-                    }
+                    //Do nothing
                 }
-                serie2.LegendText = serie2.Name + "\n\n-Total: " + total + "\n-Año: " + año + "\n-Mes: " + getMesName(mes.ToString());
-            }
-            if (chart1.Titles.Count > 0)
+            };
+            if (!bg.IsBusy)
             {
-                chart1.Titles[0].Text = "Presupuestos\n\n" + comboBox3.Text;
+                bg.RunWorkerAsync();
             }
-            info.Clear();
-            info_2.Clear();
         }
 
         private void setYears()

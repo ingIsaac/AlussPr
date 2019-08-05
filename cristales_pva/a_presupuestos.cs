@@ -36,21 +36,43 @@ namespace cristales_pva
                 this.Close();
             }
             label3.Text = empresa;
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            List<cotizacion_info> info = sql.getCountPresupuestos(empresa);
-            List<p_registros> info_2 = sql.getCountRegistros(empresa);
-            int presupuestos = 0;
-            int registros = 0;
-            int mes = DateTime.Today.Month;
-            if(info.Count > 0)
+            List<cotizacion_info> info = new List<cotizacion_info>();
+            List<p_registros> info_2 = new List<p_registros>();
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.DoWork += (sender, e) =>
             {
-                presupuestos = info.Where(v => v.mes == mes && v.año == DateTime.Today.Year).Count();
-            }
-            if(info_2.Count > 0)
+                //Load Data
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                info = sql.getCountPresupuestos(empresa);
+                info_2 = sql.getCountRegistros(empresa);
+            };
+            bg.RunWorkerCompleted += (sender, e) =>
             {
-                registros = info_2.Where(v => v.mes == mes && v.año == DateTime.Today.Year).Count();
-            }
-            label1.Text = "En lo que va del mes de " + getMesName(mes.ToString()) + " se han guardado (" + presupuestos + ") presupuestos de los cuales se han registrado (" + registros + ").";
+                try
+                {
+                    int presupuestos = 0;
+                    int registros = 0;
+                    int mes = DateTime.Today.Month;
+                    if (info.Count > 0)
+                    {
+                        presupuestos = info.Where(v => v.mes == mes && v.año == DateTime.Today.Year).Count();
+                    }
+                    if (info_2.Count > 0)
+                    {
+                        registros = info_2.Where(v => v.mes == mes && v.año == DateTime.Today.Year).Count();
+                    }
+                    label1.Text = "En lo que va del mes de " + getMesName(mes.ToString()) + " se han guardado (" + presupuestos + ") presupuestos de los cuales se han registrado (" + registros + ").";
+                }
+                catch (Exception)
+                {
+                    //Do nothing
+                }
+            };
+            if (!bg.IsBusy)
+            {
+                label1.Text = "Cargando...";
+                bg.RunWorkerAsync();
+            }        
         }
 
         private string getMesName(string mes)
