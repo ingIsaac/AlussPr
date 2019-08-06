@@ -69,7 +69,7 @@ namespace cristales_pva
 
             if (filter != "")
             {
-                var data = (from x in cotizaciones.copyboxes where x.merge_id <= 0 && (x.ubicacion.StartsWith(filter) || x.clave.StartsWith(filter) || x.id.ToString().StartsWith(filter)) select x).AsEnumerable().Select(o => new
+                var data = (from x in cotizaciones.copyboxes where x.merge_id <= 0 && (x.ubicacion.Contains(filter) || x.clave.Contains(filter) || x.id.ToString().StartsWith(filter)) select x).AsEnumerable().Select(o => new
                 {
                     Id = o.id,
                     CS = o.pic,

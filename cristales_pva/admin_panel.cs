@@ -200,7 +200,7 @@ namespace cristales_pva
                                         find_next.Add(x.Index);
                                         break;
                                     }
-                                    else if (v.Value.ToString().StartsWith(textBox4.Text) == true)
+                                    else if (v.Value.ToString().Contains(textBox4.Text) == true)
                                     {
                                         v.Selected = true;
                                         found = true;
@@ -2786,7 +2786,7 @@ namespace cristales_pva
                                     find_next.Add(x.Index);
                                     break;
                                 }
-                                else if (v.Value.ToString().StartsWith(textBox4.Text) == true)
+                                else if (v.Value.ToString().Contains(textBox4.Text) == true)
                                 {
                                     v.Selected = true;
                                     found = true;
@@ -2902,7 +2902,7 @@ namespace cristales_pva
                                 datagridviewNE1.FirstDisplayedScrollingRowIndex = x.Index;
                                 break;
                             }
-                            else if (v.Value.ToString().StartsWith(textBox4.Text) == true)
+                            else if (v.Value.ToString().Contains(textBox4.Text) == true)
                             {
                                 v.Selected = true;
                                 found = true;

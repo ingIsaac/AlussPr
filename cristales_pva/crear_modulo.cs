@@ -110,7 +110,7 @@ namespace cristales_pva
                 {
                     case 0:
                         var costo_corte = from x in listas.lista_costo_corte_e_instalado
-                                          where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                          where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                           orderby x.articulo ascending
                                           select new
                                           {
@@ -125,7 +125,7 @@ namespace cristales_pva
                         break;
                     case 1:
                         var perfiles = from x in listas.perfiles
-                                       where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                       where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                        orderby x.articulo ascending
                                        select new
                                        {
@@ -153,7 +153,7 @@ namespace cristales_pva
                         break;
                     case 2:
                         var herrajes = from x in listas.herrajes
-                                       where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                       where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                        orderby x.articulo ascending
                                        select new
                                        {
@@ -171,7 +171,7 @@ namespace cristales_pva
                         break;
                     case 3:
                         var otros = from x in listas.otros
-                                    where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                    where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                     orderby x.articulo ascending
                                     select new
                                     {
@@ -625,7 +625,7 @@ namespace cristales_pva
                     if (comboBox5.Text != "")
                     {
                         var filter = from x in listas.lista_costo_corte_e_instalado
-                                     where (x.articulo.StartsWith(comboBox5.Text)) && (x.proveedor == comboBox4.Text)
+                                     where (x.articulo.Contains(comboBox5.Text)) && (x.proveedor == comboBox4.Text)
                                      orderby x.articulo ascending
                                      select new
                                      {
@@ -811,7 +811,7 @@ namespace cristales_pva
                     if (comboBox4.Text != "")
                     {
                         var filter = from x in listas.lista_costo_corte_e_instalado
-                                     where (x.articulo.StartsWith(comboBox5.Text)) && (x.proveedor == comboBox4.Text)
+                                     where (x.articulo.Contains(comboBox5.Text)) && (x.proveedor == comboBox4.Text)
                                      orderby x.articulo ascending
                                      select new
                                      {
@@ -827,7 +827,7 @@ namespace cristales_pva
                     else
                     {
                         var filter = from x in listas.lista_costo_corte_e_instalado
-                                     where x.articulo.StartsWith(comboBox5.Text)
+                                     where x.articulo.Contains(comboBox5.Text)
                                      orderby x.articulo ascending
                                      select new
                                      {
@@ -995,7 +995,7 @@ namespace cristales_pva
             {
                 case 0:
                     var costo_corte = from x in listas.lista_costo_corte_e_instalado
-                                      where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                      where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                       orderby x.articulo ascending
                                       select new
                                       {
@@ -1010,7 +1010,7 @@ namespace cristales_pva
                     break;                
                 case 1:
                     var perfiles = from x in listas.perfiles
-                                   where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                   where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                    orderby x.articulo ascending
                                    select new
                                     {
@@ -1038,7 +1038,7 @@ namespace cristales_pva
                     break;
                 case 2:
                     var herrajes = from x in listas.herrajes
-                                   where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                   where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                    orderby x.articulo ascending
                                    select new
                                    {
@@ -1056,7 +1056,7 @@ namespace cristales_pva
                     break;
                 case 3:
                     var otros = from x in listas.otros
-                                where x.articulo.StartsWith(textBox5.Text) || x.clave.StartsWith(textBox5.Text)
+                                where x.articulo.Contains(textBox5.Text) || x.clave.Contains(textBox5.Text)
                                 orderby x.articulo ascending
                                 select new
                                 {

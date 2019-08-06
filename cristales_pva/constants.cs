@@ -772,7 +772,7 @@ namespace cristales_pva
                 if(buscar == true)
                 {
                     data = null;
-                    data = from x in cotizaciones.cristales_cotizados where x.clave.StartsWith(param) || x.articulo.StartsWith(param)
+                    data = from x in cotizaciones.cristales_cotizados where x.clave.Contains(param) || x.articulo.Contains(param)
                            select new
                            {
                                Id = x.id,
@@ -851,7 +851,7 @@ namespace cristales_pva
                 if(buscar == true)
                 {
                     data = null;
-                    data = from x in cotizaciones.aluminio_cotizado where x.clave.StartsWith(param) || x.articulo.StartsWith(param)
+                    data = from x in cotizaciones.aluminio_cotizado where x.clave.Contains(param) || x.articulo.Contains(param)
                            select new
                            {
                                Id = x.id,
@@ -918,7 +918,7 @@ namespace cristales_pva
                 if(buscar == true)
                 {
                     data = null;
-                    data = from x in cotizaciones.herrajes_cotizados where x.clave.StartsWith(param) || x.articulo.StartsWith(param)
+                    data = from x in cotizaciones.herrajes_cotizados where x.clave.Contains(param) || x.articulo.Contains(param)
                            select new
                            {
                                Id = x.id,
@@ -985,7 +985,7 @@ namespace cristales_pva
                 if(buscar == true)
                 {
                     data = null;
-                    data = from x in cotizaciones.otros_cotizaciones where x.clave.StartsWith(param) || x.articulo.StartsWith(param)
+                    data = from x in cotizaciones.otros_cotizaciones where x.clave.Contains(param) || x.articulo.Contains(param)
                            select new
                            {
                                Id = x.id,
@@ -1083,7 +1083,7 @@ namespace cristales_pva
                             if(buscar == true)
                             {
                                 data = null;
-                                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(param) || x.articulo.StartsWith(param) || x.ubicacion.StartsWith(param) || x.id.ToString().StartsWith(param)) orderby x.orden select x);
+                                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.Contains(param) || x.articulo.Contains(param) || x.ubicacion.Contains(param) || x.id.ToString().StartsWith(param)) orderby x.orden select x);
                             }
                             foreach(var c in data)
                             {
@@ -1144,7 +1144,7 @@ namespace cristales_pva
                         if (buscar == true)
                         {
                             data = null;
-                            data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(param) || x.articulo.StartsWith(param) || x.ubicacion.StartsWith(param) || x.id.ToString().StartsWith(param)) orderby x.orden select x);
+                            data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.Contains(param) || x.articulo.Contains(param) || x.ubicacion.Contains(param) || x.id.ToString().StartsWith(param)) orderby x.orden select x);
                         }
                         foreach (var c in data)
                         {
@@ -1383,7 +1383,7 @@ namespace cristales_pva
             if (filter != "")
             {
                 var data = (from x in cotizaciones.modulos_cotizaciones
-                            where x.merge_id <= 0 && x.concept_id < 0 && x.sub_folio == sub_folio && (x.clave.StartsWith(filter) || x.ubicacion.StartsWith(filter) || x.id.ToString().StartsWith(filter))
+                            where x.merge_id <= 0 && x.concept_id < 0 && x.sub_folio == sub_folio && (x.clave.Contains(filter) || x.ubicacion.Contains(filter) || x.id.ToString().StartsWith(filter))
                             orderby x.orden
                             select x).AsEnumerable().Select(o => new
                             {
@@ -1524,7 +1524,7 @@ namespace cristales_pva
             if (filter != "")
             {
                 var data = (from x in cotizaciones.modulos_cotizaciones
-                        where x.merge_id == perso_id && x.sub_folio == sub_folio && (x.clave.StartsWith(filter) || x.ubicacion.StartsWith(filter) || x.id.ToString().StartsWith(filter))
+                        where x.merge_id == perso_id && x.sub_folio == sub_folio && (x.clave.Contains(filter) || x.ubicacion.Contains(filter) || x.id.ToString().StartsWith(filter))
                         orderby x.orden
                         select x).AsEnumerable().Select(o => new
                         {

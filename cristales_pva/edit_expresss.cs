@@ -277,7 +277,7 @@ namespace cristales_pva
             {
                 string param = textBox1.Text;
                 data = null;
-                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.id.ToString().StartsWith(param) || x.ubicacion.StartsWith(param)) select x);
+                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.id.ToString().StartsWith(param) || x.ubicacion.Contains(param)) select x);
             }
             foreach (var c in data)
             {

@@ -31,7 +31,7 @@ namespace cristales_pva
             Load += Historial_registros_Load;
             datagridviewNE1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             this.Shown += Historial_registros_Shown;
-            setYears();          
+            setYears();   
         }
 
         private void Historial_registros_FormClosing(object sender, FormClosingEventArgs e)
@@ -94,7 +94,8 @@ namespace cristales_pva
         }
 
         private void Historial_registros_Load(object sender, EventArgs e)
-        {            
+        {
+            resetReport(new cotizaciones_local());
             this.datos_reporteTableAdapter.Fill(this.reportes_dataSet.datos_reporte);
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
             ReportPageSettings ps = reportViewer1.LocalReport.GetDefaultPageSettings();
@@ -184,7 +185,14 @@ namespace cristales_pva
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadPresupuestos(comboBox1.Text);           
+            if (comboBox1.SelectedIndex >= 0)
+            {
+                loadPresupuestos(comboBox1.Text);
+            }
+            else
+            {
+                loadPresupuestos();
+            }
         }
 
         private void setcolors()
@@ -282,6 +290,12 @@ namespace cristales_pva
             }
         }
 
+        private void resetReport(cotizaciones_local cotizaciones)
+        {
+            cotizaciones.Database.ExecuteSqlCommand("TRUNCATE TABLE datos_reporte");
+            cotizaciones.Database.ExecuteSqlCommand("DBCC CHECKIDENT (datos_reporte, RESEED, 1)");
+        }
+
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
             if (reportViewer1.InvokeRequired == true)
@@ -291,8 +305,7 @@ namespace cristales_pva
                     try
                     {
                         cotizaciones_local cotizaciones = new cotizaciones_local();
-                        cotizaciones.Database.ExecuteSqlCommand("TRUNCATE TABLE datos_reporte");
-                        cotizaciones.Database.ExecuteSqlCommand("DBCC CHECKIDENT (datos_reporte, RESEED, 1)");
+                        resetReport(cotizaciones);
                         string[] p = e.Argument as string[];
                         if (p.Length == 7)
                         {
@@ -463,6 +476,11 @@ namespace cristales_pva
             {
                 Application.OpenForms["monitor"].Select();                
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            comboBox1.SelectedIndex = -1;
         }
     }
 }

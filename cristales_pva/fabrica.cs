@@ -132,7 +132,7 @@ namespace cristales_pva
         {
             listas_entities_pva listas = new listas_entities_pva();
             var filter = from x in listas.lista_costo_corte_e_instalado
-                         where x.articulo.StartsWith(comboBox2.Text)
+                         where x.articulo.Contains(comboBox2.Text)
                          orderby x.articulo ascending
                          select new
                          {

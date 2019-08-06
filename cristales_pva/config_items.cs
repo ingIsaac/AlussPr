@@ -72,7 +72,7 @@ namespace cristales_pva
                         if (filter != "")
                         {
                             var herraje = from u in lista.herrajes
-                                          where u.linea == linea && (u.clave.StartsWith(filter) || u.articulo.StartsWith(filter))
+                                          where u.linea == linea && (u.clave.Contains(filter) || u.articulo.Contains(filter))
                                           select new
                                           {
                                               Id = u.id,
@@ -109,7 +109,7 @@ namespace cristales_pva
                         if (filter != "")
                         {
                             var herraje = from u in lista.herrajes
-                                          where u.clave.StartsWith(filter) || u.articulo.StartsWith(filter)
+                                          where u.clave.Contains(filter) || u.articulo.Contains(filter)
                                           select new
                                           {
                                               Id = u.id,
@@ -153,7 +153,7 @@ namespace cristales_pva
                         if (filter != "")
                         {
                             var otros = from u in lista.otros
-                                        where u.linea == linea && (u.clave.StartsWith(filter) || u.articulo.StartsWith(filter))
+                                        where u.linea == linea && (u.clave.Contains(filter) || u.articulo.Contains(filter))
                                         select new
                                         {
                                             Id = u.id,
@@ -190,7 +190,7 @@ namespace cristales_pva
                         if (filter != "")
                         {
                             var otros = from u in lista.otros
-                                        where u.clave.StartsWith(filter) || u.articulo.StartsWith(filter)
+                                        where u.clave.Contains(filter) || u.articulo.Contains(filter)
                                         select new
                                         {
                                             Id = u.id,
@@ -228,7 +228,7 @@ namespace cristales_pva
                 if (filter != "")
                 {
                     var cristales = from x in lista.lista_costo_corte_e_instalado
-                                    where x.clave.StartsWith(filter) || x.articulo.StartsWith(filter)
+                                    where x.clave.Contains(filter) || x.articulo.Contains(filter)
                                     select new
                                     {
                                         Clave = x.clave,
@@ -260,7 +260,7 @@ namespace cristales_pva
                 if (filter != "")
                 {
                     var perfiles = from x in lista.perfiles
-                                    where x.clave.StartsWith(filter) || x.articulo.StartsWith(filter)
+                                    where x.clave.Contains(filter) || x.articulo.Contains(filter)
                                     select new
                                     {                                      
                                         Id = x.id,

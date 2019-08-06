@@ -551,7 +551,7 @@ namespace cristales_pva
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + column_target + " LIKE '" + value_target + "%'";
+            cmd.CommandText = "SELECT " + column + " FROM " + table + " WHERE " + column_target + " LIKE '%" + value_target + "%'";
             try
             {
                 connection.Open();
@@ -777,7 +777,7 @@ namespace cristales_pva
                     }
                     else
                     {
-                        query = "SELECT * FROM " + table + " ORDER BY CASE WHEN " + column + " LIKE '" + value + "%' THEN 1 END DESC";
+                        query = "SELECT * FROM " + table + " ORDER BY CASE WHEN " + column + " LIKE '%" + value + "%' THEN 1 END DESC";
                     }
                 }
 
@@ -816,7 +816,7 @@ namespace cristales_pva
                 SqlDataAdapter da = null;
                 if (accurate == false)
                 {
-                    da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + column + " LIKE '" + value + "%'", getConnectionString());
+                    da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + column + " LIKE '%" + value + "%'", getConnectionString());
                 }
                 else
                 {
@@ -1887,7 +1887,7 @@ namespace cristales_pva
             DataTable dt = new DataTable();
             try
             {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + column + " LIKE '" + value + "%'", getConnectionString());
+                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM " + table + " WHERE " + column + " LIKE '%" + value + "%'", getConnectionString());
                 SqlCommandBuilder cb = new SqlCommandBuilder(da);
                 da.Fill(dt);
             }
@@ -2678,7 +2678,15 @@ namespace cristales_pva
             {
                 if (activar_filtro == true)
                 {
-                    cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '%" + constants.stringToInt(filtro) + "' OR nombre_proyecto LIKE '" + filtro + "%')";
+                    int folio = constants.stringToInt(filtro);
+                    if(folio > 0)
+                    {
+                        cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE tienda ='" + org + "' AND folio LIKE '%" + constants.stringToInt(filtro) + "'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE tienda ='" + org + "' AND (cliente LIKE '%" + filtro + "%' OR nombre_proyecto LIKE '%" + filtro + "%')";
+                    }
                 }
                 else
                 {
@@ -2689,7 +2697,15 @@ namespace cristales_pva
             {
                 if (activar_filtro == true)
                 {
-                    cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '%" + constants.stringToInt(filtro) + "' OR nombre_proyecto LIKE '" + filtro + "%')";
+                    int folio = constants.stringToInt(filtro);
+                    if(folio > 0)
+                    {
+                        cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND folio LIKE '%" + constants.stringToInt(filtro) + "'";
+                    }
+                    else
+                    {
+                        cmd.CommandText = "SELECT COUNT(*) FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND (cliente LIKE '%" + filtro + "%' OR nombre_proyecto LIKE '%" + filtro + "%')";
+                    }
                 }
                 else
                 {
@@ -2722,7 +2738,16 @@ namespace cristales_pva
                 {
                     if (activar_filtro == true)
                     {
-                        SqlDataAdapter da = new SqlDataAdapter("SELECT id, folio, cliente, fecha, usuario, nombre_proyecto, registro FROM cotizaciones WHERE tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '%" + constants.stringToInt(filtro) + "' OR nombre_proyecto LIKE '" + filtro + "%') ORDER BY id OFFSET " + offset + " ROWS FETCH NEXT " + div + " ROWS ONLY", getConnectionString());
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        int folio = constants.stringToInt(filtro);
+                        if(folio > 0)
+                        {
+                            da.SelectCommand = new SqlCommand("SELECT id, folio, cliente, fecha, usuario, nombre_proyecto, registro FROM cotizaciones WHERE tienda ='" + org + "' AND folio LIKE '%" + constants.stringToInt(filtro) + "' ORDER BY id OFFSET " + offset + " ROWS FETCH NEXT " + div + " ROWS ONLY", new SqlConnection(getConnectionString()));
+                        }
+                        else
+                        {
+                            da.SelectCommand = new SqlCommand("SELECT id, folio, cliente, fecha, usuario, nombre_proyecto, registro FROM cotizaciones WHERE tienda ='" + org + "' AND (cliente LIKE '%" + filtro + "%' OR nombre_proyecto LIKE '%" + filtro + "%') ORDER BY id OFFSET " + offset + " ROWS FETCH NEXT " + div + " ROWS ONLY", new SqlConnection(getConnectionString()));
+                        }
                         SqlCommandBuilder cb = new SqlCommandBuilder(da);
                         da.Fill(data);
                     }
@@ -2737,7 +2762,16 @@ namespace cristales_pva
                 {
                     if (activar_filtro == true)
                     {
-                        SqlDataAdapter da = new SqlDataAdapter("SELECT id, folio, cliente, fecha, usuario, nombre_proyecto, registro FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND (cliente LIKE '" + filtro + "%' OR folio LIKE '%" + constants.stringToInt(filtro) + "' OR nombre_proyecto LIKE '" + filtro + "%') ORDER BY id OFFSET " + offset + " ROWS FETCH NEXT " + div + " ROWS ONLY", getConnectionString());
+                        SqlDataAdapter da = new SqlDataAdapter();
+                        int folio = constants.stringToInt(filtro);
+                        if(folio > 0)
+                        {
+                            da.SelectCommand = new SqlCommand("SELECT id, folio, cliente, fecha, usuario, nombre_proyecto, registro FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND folio LIKE '%" + constants.stringToInt(filtro) + "' ORDER BY id OFFSET " + offset + " ROWS FETCH NEXT " + div + " ROWS ONLY", new SqlConnection(getConnectionString()));
+                        }
+                        else
+                        {
+                            da.SelectCommand = new SqlCommand("SELECT id, folio, cliente, fecha, usuario, nombre_proyecto, registro FROM cotizaciones WHERE usuario ='" + constants.user + "' AND tienda ='" + org + "' AND (cliente LIKE '%" + filtro + "%' OR nombre_proyecto LIKE '%" + filtro + "%') ORDER BY id OFFSET " + offset + " ROWS FETCH NEXT " + div + " ROWS ONLY", new SqlConnection(getConnectionString()));
+                        }
                         SqlCommandBuilder cb = new SqlCommandBuilder(da);
                         da.Fill(data);
                     }
@@ -3979,7 +4013,7 @@ namespace cristales_pva
                 }
                 else
                 {
-                    query = "SELECT TOP " + limit + " registro_presupuestos.folio, cotizaciones.cliente, cotizaciones.nombre_proyecto, cotizaciones.usuario, registro_presupuestos.etapa, registro_presupuestos.fecha_inicio, registro_presupuestos.fecha_entrega FROM registro_presupuestos INNER JOIN cotizaciones ON registro_presupuestos.folio = cotizaciones.folio WHERE registro_presupuestos.org = '" + tienda + "' AND (registro_presupuestos.fecha_inicio LIKE '%" + fecha + "%' OR registro_presupuestos.fecha_entrega LIKE '%" + fecha + "%') AND (registro_presupuestos.folio LIKE '%" + constants.stringToInt(search) + "' OR cotizaciones.cliente LIKE '" + search + "%' OR cotizaciones.nombre_proyecto LIKE '" + search + "%' OR registro_presupuestos.etapa = '" + search + "') ORDER BY folio DESC";
+                    query = "SELECT TOP " + limit + " registro_presupuestos.folio, cotizaciones.cliente, cotizaciones.nombre_proyecto, cotizaciones.usuario, registro_presupuestos.etapa, registro_presupuestos.fecha_inicio, registro_presupuestos.fecha_entrega FROM registro_presupuestos INNER JOIN cotizaciones ON registro_presupuestos.folio = cotizaciones.folio WHERE registro_presupuestos.org = '" + tienda + "' AND (registro_presupuestos.folio LIKE '%" + constants.stringToInt(search) + "' OR cotizaciones.cliente LIKE '%" + search + "%' OR cotizaciones.nombre_proyecto LIKE '%" + search + "%' OR registro_presupuestos.etapa = '" + search + "') ORDER BY folio DESC";
                 }
 
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
@@ -4884,7 +4918,7 @@ namespace cristales_pva
             try
             {
                 string query = string.Empty;              
-                query = "SELECT id, clave, articulo, linea, proveedor, costeo, existencia FROM inventario WHERE tienda_id='" + tienda + "' AND lista='" + lista + "' AND (clave LIKE '" + value + "%' OR articulo LIKE '" + value + "%' OR linea LIKE '" + value + "%' OR proveedor LIKE '" + value + "%') ORDER BY articulo";            
+                query = "SELECT id, clave, articulo, linea, proveedor, costeo, existencia FROM inventario WHERE tienda_id='" + tienda + "' AND lista='" + lista + "' AND (clave LIKE '%" + value + "%' OR articulo LIKE '%" + value + "%' OR linea LIKE '%" + value + "%' OR proveedor LIKE '%" + value + "%') ORDER BY articulo";            
                 SqlDataAdapter da = new SqlDataAdapter(query, getConnectionString());
                 SqlCommandBuilder cb = new SqlCommandBuilder(da);
                 da.Fill(dt);

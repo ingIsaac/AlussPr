@@ -854,7 +854,7 @@ namespace cristales_pva
                                     table.FirstDisplayedScrollingRowIndex = x.Index;
                                     break;
                                 }
-                                else if (v.Value.ToString().StartsWith(textBox1.Text) == true)
+                                else if (v.Value.ToString().Contains(textBox1.Text) == true)
                                 {
                                     v.Selected = true;
                                     found = true;
@@ -1131,7 +1131,7 @@ namespace cristales_pva
                                     table.FirstDisplayedScrollingRowIndex = x.Index;
                                     break;
                                 }
-                                else if (v.Value.ToString().StartsWith(textBox2.Text) == true)
+                                else if (v.Value.ToString().Contains(textBox2.Text) == true)
                                 {
                                     v.Selected = true;
                                     found = true;
@@ -1355,7 +1355,7 @@ namespace cristales_pva
                                     table.FirstDisplayedScrollingRowIndex = x.Index;
                                     break;
                                 }
-                                else if (v.Value.ToString().StartsWith(textBox9.Text) == true)
+                                else if (v.Value.ToString().Contains(textBox9.Text) == true)
                                 {
                                     v.Selected = true;
                                     found = true;
@@ -1533,7 +1533,7 @@ namespace cristales_pva
                                         find_next.Add(x.Index);
                                         break;
                                     }
-                                    else if (v.Value.ToString().StartsWith(text.Text) == true)
+                                    else if (v.Value.ToString().Contains(text.Text) == true)
                                     {
                                         v.Selected = true;
                                         found = true;
