@@ -1069,18 +1069,26 @@ namespace cristales_pva
                             datagrid.Columns.Add("Largo", "Largo");
                             datagrid.Columns.Add("Alto", "Alto");
                             datagrid.Columns.Add("Cantidad", "Cantidad");
+                            datagrid.Columns.Add("Precio Unit.", "Precio Unit.");
                             datagrid.Columns.Add("Total", "Total");
 
                             var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio orderby x.orden select x);
                             DataGridViewColumn descripcion = datagrid.Columns[9];
                             DataGridViewColumn orden = datagrid.Columns[1];
+                            DataGridViewColumn precio_u = datagrid.Columns[16];
+                            DataGridViewColumn total = datagrid.Columns[17];
+
                             descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                             descripcion.Width = 280;
                             orden.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                             orden.DefaultCellStyle.Font = new Font("Arial", 15, FontStyle.Bold);
                             orden.DefaultCellStyle.ForeColor = Color.Red;
+                            precio_u.DefaultCellStyle.ForeColor = Color.DarkSlateGray;
+                            precio_u.DefaultCellStyle.Format = "c";
+                            total.DefaultCellStyle.ForeColor = Color.DarkBlue;
+                            total.DefaultCellStyle.Format = "c";
 
-                            if(buscar == true)
+                            if (buscar == true)
                             {
                                 data = null;
                                 data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio && (x.clave.Contains(param) || x.articulo.Contains(param) || x.ubicacion.Contains(param) || x.id.ToString().StartsWith(param)) orderby x.orden select x);
@@ -1091,7 +1099,7 @@ namespace cristales_pva
                                 {
                                     c.pic = constants.imageToByte(Properties.Resources.new_concepto);
                                 }
-                                datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, c.total);                               
+                                datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, Math.Round((float)c.total / (float)(c.cantidad <= 0 ? 1 : c.cantidad), 2), c.total);                               
                             }
                             if (datagrid.RowCount > 0)
                             {
@@ -1130,16 +1138,24 @@ namespace cristales_pva
                         datagrid.Columns.Add("Largo", "Largo");
                         datagrid.Columns.Add("Alto", "Alto");
                         datagrid.Columns.Add("Cantidad", "Cantidad");
+                        datagrid.Columns.Add("Precio Unit.", "Precio Unit.");
                         datagrid.Columns.Add("Total", "Total");
 
                         var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == sub_folio orderby x.orden select x);
                         DataGridViewColumn descripcion = datagrid.Columns[9];
                         DataGridViewColumn orden = datagrid.Columns[1];
+                        DataGridViewColumn precio_u = datagrid.Columns[16];
+                        DataGridViewColumn total = datagrid.Columns[17];
+
                         descripcion.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                         descripcion.Width = 280;
                         orden.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                         orden.DefaultCellStyle.Font = new Font("Arial", 15, FontStyle.Bold);
                         orden.DefaultCellStyle.ForeColor = Color.Red;
+                        precio_u.DefaultCellStyle.ForeColor = Color.DarkSlateGray;
+                        precio_u.DefaultCellStyle.Format = "c";
+                        total.DefaultCellStyle.ForeColor = Color.DarkBlue;
+                        total.DefaultCellStyle.Format = "c";
 
                         if (buscar == true)
                         {
@@ -1152,7 +1168,7 @@ namespace cristales_pva
                             {
                                 c.pic = constants.imageToByte(Properties.Resources.new_concepto);
                             }
-                            datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, c.total);                            
+                            datagrid.Rows.Add(c.id, c.orden, c.pic, c.folio, c.clave, c.modulo_id, c.articulo, c.linea, c.diseño, c.descripcion, c.ubicacion, getCristales(c.claves_cristales, c.news), c.acabado_perfil, c.largo, c.alto, c.cantidad, Math.Round((float)c.total/(float)(c.cantidad <= 0 ? 1 : c.cantidad), 2), c.total);                            
                         }                       
                         if (datagrid.RowCount > 0)
                         {
@@ -1327,7 +1343,7 @@ namespace cristales_pva
                     {
                         foreach (DataGridViewCell v in x.Cells)
                         {
-                            if (v.ColumnIndex == 1 || v.ColumnIndex == 6 || v.ColumnIndex == 9 || v.ColumnIndex == 10 || v.ColumnIndex > 12)
+                            if (v.ColumnIndex == 1 || v.ColumnIndex == 6 || v.ColumnIndex == 9 || v.ColumnIndex == 10 || (v.ColumnIndex > 12 && v.ColumnIndex != 16))
                             {
                                 v.ReadOnly = false;
                                 v.Style.BackColor = Color.LightBlue;

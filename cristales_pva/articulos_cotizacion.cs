@@ -89,7 +89,14 @@ namespace cristales_pva
         {
             try
             {
-                e.SortResult = System.String.Compare(e.CellValue1.ToString(), e.CellValue2.ToString());
+                if(e.Column.HeaderText == "Orden")
+                {
+                    e.SortResult = int.Parse(e.CellValue1.ToString()).CompareTo(int.Parse(e.CellValue2.ToString()));
+                }
+                else
+                {
+                    e.SortResult = System.String.Compare(e.CellValue1.ToString(), e.CellValue2.ToString());
+                }
                 e.Handled = true;
             }
             catch (Exception)
@@ -675,6 +682,32 @@ namespace cristales_pva
                                 backgroundWorker2.RunWorkerAsync(arguments);
                             }
                         }
+                        else if (datagridviewNE1.CurrentCell.ColumnIndex == 17)
+                        {
+                            if (datagridviewNE1.CurrentCell.Value != null)
+                            {
+                                if (constants.stringToFloat(datagridviewNE1.CurrentCell.Value.ToString()) > 0)
+                                {
+                                    datagridviewNE1.CurrentCell.Value = constants.stringToFloat(datagridviewNE1.CurrentCell.Value.ToString());
+                                }
+                                else
+                                {
+                                    datagridviewNE1.CurrentCell.Value = 0;
+                                }
+                                arguments[0] = 12;
+                                arguments[1] = datagridviewNE1.CurrentRow.Cells[0].Value;
+                                arguments[2] = datagridviewNE1.CurrentCell.Value;
+                                backgroundWorker2.RunWorkerAsync(arguments);
+                            }
+                            else
+                            {
+                                datagridviewNE1.CurrentCell.Value = 0;
+                                arguments[0] = 12;
+                                arguments[1] = datagridviewNE1.CurrentRow.Cells[0].Value;
+                                arguments[2] = datagridviewNE1.CurrentCell.Value;
+                                backgroundWorker2.RunWorkerAsync(arguments);
+                            }
+                        }
                     }
                 }               
             }
@@ -996,11 +1029,13 @@ namespace cristales_pva
                         if (concepto.modulo_id != -2)
                         {
                             concepto.total = Math.Round((float)concepto.total * constants.stringToInt(a[2].ToString()), 2);
-                            reload = true;
                         }
+                        //Reload
+                        reload = true;
                         break;
-                    case 11:
+                    case 12:
                         concepto.total = Math.Round(constants.stringToFloat(a[2].ToString()), 2);
+                        //Reload
                         reload = true;
                         break;
                     default:
