@@ -7396,6 +7396,11 @@ namespace cristales_pva
             new vigencia().ShowDialog(this);
         }
 
+        private void cambiarCabezeraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new c_header().ShowDialog(this);
+        }
+
         public void disableModoLIVA()
         {
             textBox28.Text = "0";

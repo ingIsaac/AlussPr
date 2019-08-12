@@ -257,6 +257,7 @@
             this.opcionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarTiendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadísticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambiarCabezeraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.anunciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administrarAnunciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -2756,7 +2757,8 @@
             // 
             this.opcionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cambiarTiendaToolStripMenuItem,
-            this.estadísticasToolStripMenuItem});
+            this.estadísticasToolStripMenuItem,
+            this.cambiarCabezeraToolStripMenuItem});
             this.opcionesDeEmpresaToolStripMenuItem.Name = "opcionesDeEmpresaToolStripMenuItem";
             this.opcionesDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
             this.opcionesDeEmpresaToolStripMenuItem.Text = "Opciones de empresa";
@@ -2765,7 +2767,7 @@
             // 
             this.cambiarTiendaToolStripMenuItem.Name = "cambiarTiendaToolStripMenuItem";
             this.cambiarTiendaToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.cambiarTiendaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.cambiarTiendaToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.cambiarTiendaToolStripMenuItem.Text = "Cambiar tienda";
             this.cambiarTiendaToolStripMenuItem.Click += new System.EventHandler(this.cambiarTiendaToolStripMenuItem_Click);
             // 
@@ -2773,9 +2775,17 @@
             // 
             this.estadísticasToolStripMenuItem.Name = "estadísticasToolStripMenuItem";
             this.estadísticasToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.estadísticasToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
             this.estadísticasToolStripMenuItem.Text = "Estadísticas";
             this.estadísticasToolStripMenuItem.Click += new System.EventHandler(this.estadísticasToolStripMenuItem_Click);
+            // 
+            // cambiarCabezeraToolStripMenuItem
+            // 
+            this.cambiarCabezeraToolStripMenuItem.Name = "cambiarCabezeraToolStripMenuItem";
+            this.cambiarCabezeraToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.cambiarCabezeraToolStripMenuItem.Size = new System.Drawing.Size(230, 22);
+            this.cambiarCabezeraToolStripMenuItem.Text = "Cambiar Encabezado";
+            this.cambiarCabezeraToolStripMenuItem.Click += new System.EventHandler(this.cambiarCabezeraToolStripMenuItem_Click);
             // 
             // anunciosToolStripMenuItem
             // 
@@ -3861,6 +3871,7 @@
         private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administrarAnunciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem licenciaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cambiarCabezeraToolStripMenuItem;
     }
 }
 

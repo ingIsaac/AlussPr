@@ -318,6 +318,12 @@
     <Compile Include="cristales_cotizados.cs">
       <DependentUpon>cotizaciones_local.tt</DependentUpon>
     </Compile>
+    <Compile Include="c_header.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="c_header.Designer.cs">
+      <DependentUpon>c_header.cs</DependentUpon>
+    </Compile>
     <Compile Include="datagridviewNE.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -730,6 +736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="consulta_rapida.resx">
       <DependentUpon>consulta_rapida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="c_header.resx">
+      <DependentUpon>c_header.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="desglose_costo_m.resx">
       <DependentUpon>desglose_costo_m.cs</DependentUpon>
