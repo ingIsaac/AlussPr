@@ -1235,7 +1235,7 @@ namespace cristales_pva
                 DataRow row_2 = md.Tables["img_modulo"].NewRow();
                 row_2[0] = constants.imageToByte(gm_2);
                 md.Tables["img_modulo"].Rows.Add(row_2);
-                new modulo_precios(md, textBox7.Text, textBox6.Text, textBox12.Text, textBox11.Text, textBox5.Text, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Math.Round(total_t*1.16, 2).ToString(), "Largo: " + textBox9.Text + " - " + "Alto: " + textBox10.Text, textBox14.Text, textBox15.Text, textBox16.Text, textBox17.Text, total_t.ToString(), cost_add > 0 ? ("+ (" + cost_add.ToString() + ")") : "", "M/L", "M/C", textBox8.Text).ShowDialog();
+                new modulo_precios(md, textBox7.Text, textBox6.Text, textBox12.Text, textBox11.Text, textBox5.Text, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Math.Round(total_t*1.16, 2).ToString(), "Largo: " + textBox9.Text + " - " + "Alto: " + textBox10.Text, textBox14.Text, textBox15.Text, textBox16.Text, textBox17.Text, total_t.ToString(), cost_add > 0 ? ("+ (" + cost_add.ToString() + ")") : "", "M/L", "M/C", textBox8.Text).ShowDialog(this);
                 bm = null;
                 gm_2 = null;
             }

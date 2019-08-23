@@ -1451,7 +1451,7 @@ namespace cristales_pva
                             else
                             {
                                 desglose_costo_m desglose = new desglose_costo_m(id);
-                                desglose.Show(this);
+                                desglose.ShowDialog(this);
                                 desglose.Focus();
                             }
                         }
