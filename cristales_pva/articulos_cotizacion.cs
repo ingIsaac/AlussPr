@@ -981,83 +981,86 @@ namespace cristales_pva
         //cargar al modificar
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            object[] a = e.Argument as object[];
-
-            cotizaciones_local cotizaciones = new cotizaciones_local();
-
-            reload = false;
-            int id = (int)a[1];
-
-            var concepto = (from x in cotizaciones.modulos_cotizaciones where x.id == id select x).SingleOrDefault();
-
-            if (concepto != null)
+            try
             {
-                switch ((int)a[0])
+                object[] a = e.Argument as object[];
+
+                cotizaciones_local cotizaciones = new cotizaciones_local();
+
+                reload = false;
+                int id = (int)a[1];
+
+                var concepto = (from x in cotizaciones.modulos_cotizaciones where x.id == id select x).SingleOrDefault();
+
+                if (concepto != null)
                 {
-                    case 0:
-                        concepto.orden = constants.stringToInt(a[2].ToString());
-                        break;
-                    case 1:
-                        concepto.articulo = a[2].ToString();
-                        break;
-                    case 2:
-                        concepto.linea = a[2].ToString();
-                        break;
-                    case 3:
-                        concepto.diseño = a[2].ToString();
-                        break;
-                    case 4:
-                        concepto.descripcion = a[2].ToString();
-                        break;
-                    case 5:
-                        concepto.ubicacion = a[2].ToString();
-                        break;
-                    case 6:
-                        concepto.claves_cristales = a[2].ToString();
-                        break;
-                    case 7:
-                        concepto.acabado_perfil = a[2].ToString();
-                        break;
-                    case 8:
-                        concepto.largo = constants.stringToInt(a[2].ToString());
-                        break;
-                    case 9:
-                        concepto.alto = constants.stringToInt(a[2].ToString());
-                        break;
-                    case 10:                       
-                        concepto.cantidad = constants.stringToInt(a[2].ToString());
-                        if (concepto.modulo_id != -2)
-                        {
-                            concepto.total = Math.Round((float)concepto.total * constants.stringToInt(a[2].ToString()), 2);
-                        }
-                        //Reload
-                        reload = true;
-                        break;
-                    case 12:
-                        concepto.total = Math.Round(constants.stringToFloat(a[2].ToString()), 2);
-                        //Reload
-                        reload = true;
-                        break;
-                    default:
-                        break;
-                }
-                cotizaciones.SaveChanges();
-                constants.errors_Open.Clear();
-                constants.reloadPreciosCotizaciones(0, constants.reload_precios, id, (int)concepto.concept_id);
-                if (reload == true)
-                {
-                    ((Form1)Application.OpenForms["Form1"]).reloadAll();
-                }
-                else
-                {
-                    ((Form1)Application.OpenForms["Form1"]).reloadCotizacion();
-                }
-                //Sort
-                if((int)a[0] == 0)
-                {
-                    datagridviewNE1.Sort(datagridviewNE1.Columns[1], ListSortDirection.Ascending);
+                    switch ((int)a[0])
+                    {
+                        case 0:
+                            concepto.orden = constants.stringToInt(a[2].ToString());
+                            break;
+                        case 1:
+                            concepto.articulo = a[2].ToString();
+                            break;
+                        case 2:
+                            concepto.linea = a[2].ToString();
+                            break;
+                        case 3:
+                            concepto.diseño = a[2].ToString();
+                            break;
+                        case 4:
+                            concepto.descripcion = a[2].ToString();
+                            break;
+                        case 5:
+                            concepto.ubicacion = a[2].ToString();
+                            break;
+                        case 6:
+                            concepto.claves_cristales = a[2].ToString();
+                            break;
+                        case 7:
+                            concepto.acabado_perfil = a[2].ToString();
+                            break;
+                        case 8:
+                            concepto.largo = constants.stringToInt(a[2].ToString());
+                            break;
+                        case 9:
+                            concepto.alto = constants.stringToInt(a[2].ToString());
+                            break;
+                        case 10:
+                            concepto.cantidad = constants.stringToInt(a[2].ToString());
+                            if (concepto.modulo_id != -2)
+                            {
+                                concepto.total = Math.Round((float)concepto.total * constants.stringToInt(a[2].ToString()), 2);
+                            }
+                            //Reload
+                            reload = true;
+                            break;
+                        case 12:
+                            concepto.total = Math.Round(constants.stringToFloat(a[2].ToString()), 2);
+                            //Reload
+                            reload = true;
+                            break;
+                        default:
+                            break;
+                    }
+                    cotizaciones.SaveChanges();
+                    constants.errors_Open.Clear();
+                    constants.reloadPreciosCotizaciones(0, constants.reload_precios, id, (int)concepto.concept_id);
+                    if (reload == true)
+                    {
+                        ((Form1)Application.OpenForms["Form1"]).reloadAll();
+                    }
+                    else
+                    {
+                        ((Form1)Application.OpenForms["Form1"]).reloadCotizacion();
+                    }
                 }
             }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+                MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }       
         }
 
         private void BackgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1419,10 +1422,15 @@ namespace cristales_pva
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
+            sortTable();
+        }
+
+        private void sortTable()
+        {
             sortDatagridview(comboBox4.Text);
             constants.ac_sort = comboBox4.Text;
             constants.setOptionXML("AC_SORT", comboBox4.Text);
-            if(comboBox4.Text == "Orden" && loaded)
+            if (comboBox4.Text == "Orden" && loaded)
             {
                 loadALL();
             }
@@ -1540,6 +1548,11 @@ namespace cristales_pva
                     c.Items.Add(i);
                 }
             }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            sortTable();
         }
     }
 }

@@ -42,6 +42,8 @@
             this.desgloseDeCostosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moverAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.copiarAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -77,8 +79,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.button18 = new System.Windows.Forms.Button();
-            this.copiarAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBox2 = new System.Windows.Forms.ToolStripComboBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -100,7 +101,7 @@
             this.moverAToolStripMenuItem,
             this.copiarAToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(227, 268);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(227, 246);
             // 
             // editarToolStripMenuItem
             // 
@@ -187,6 +188,20 @@
             this.toolStripComboBox1.Name = "toolStripComboBox1";
             this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
             this.toolStripComboBox1.Text = "Sub-Folio";
+            // 
+            // copiarAToolStripMenuItem
+            // 
+            this.copiarAToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox2});
+            this.copiarAToolStripMenuItem.Name = "copiarAToolStripMenuItem";
+            this.copiarAToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.copiarAToolStripMenuItem.Text = "Copiar a";
+            // 
+            // toolStripComboBox2
+            // 
+            this.toolStripComboBox2.Name = "toolStripComboBox2";
+            this.toolStripComboBox2.Size = new System.Drawing.Size(121, 23);
+            this.toolStripComboBox2.Text = "Sub-Folio";
             // 
             // label1
             // 
@@ -610,25 +625,23 @@
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
-            // copiarAToolStripMenuItem
+            // button12
             // 
-            this.copiarAToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBox2});
-            this.copiarAToolStripMenuItem.Name = "copiarAToolStripMenuItem";
-            this.copiarAToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.copiarAToolStripMenuItem.Text = "Copiar a";
-            // 
-            // toolStripComboBox2
-            // 
-            this.toolStripComboBox2.Name = "toolStripComboBox2";
-            this.toolStripComboBox2.Size = new System.Drawing.Size(121, 23);
-            this.toolStripComboBox2.Text = "Sub-Folio";
+            this.button12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button12.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
+            this.button12.Location = new System.Drawing.Point(378, 550);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(30, 23);
+            this.button12.TabIndex = 44;
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // articulos_cotizacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 610);
+            this.Controls.Add(this.button12);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.comboBox4);
@@ -726,5 +739,6 @@
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
         private System.Windows.Forms.ToolStripMenuItem copiarAToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBox2;
+        private System.Windows.Forms.Button button12;
     }
 }
