@@ -709,15 +709,7 @@ namespace cristales_pva
             treeView1.Nodes[0].Expand();
             constants.loadPropiedadesModel();
             reloadIVA();          
-            disableTabPage();           
-            if (constants.getAlertVigencia(new sqlDateBaseManager().getvigenciaTienda(constants.org_name)))
-            {
-                MessageBox.Show("La fecha de expiración esta próxima, pónganse en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            if(constants.licencia == "DEMO")
-            {
-                Text = Text + " | VERSIÓN DE PRUEBA"; 
-            }            
+            disableTabPage();
             //Select control
             comboBox1.Focus();
             //Image List
@@ -733,6 +725,29 @@ namespace cristales_pva
                 a_presupuestos a_presupuestos = new a_presupuestos();
                 a_presupuestos.ShowDialog(this);
                 a_presupuestos.Activate();
+            }
+            //Verificar Licencia
+            if (!constants.local)
+            {
+                BackgroundWorker bg = new BackgroundWorker();
+                bg.DoWork += (_sender, _e) =>
+                {
+                    if (constants.getAlertVigencia(new sqlDateBaseManager().getvigenciaTienda(constants.org_name)))
+                    {
+                        MessageBox.Show("La fecha de expiración de la licencia esta próxima, pónganse en contacto con el proveedor del sistema.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                };
+                bg.RunWorkerCompleted += (_sender, _e) =>
+                {
+                    if (constants.licencia == "DEMO")
+                    {
+                        Text = Text + " | VERSIÓN DE PRUEBA";
+                    }
+                };
+                if (!bg.IsBusy)
+                {
+                    bg.RunWorkerAsync();
+                }
             }
         }
 
@@ -7393,7 +7408,14 @@ namespace cristales_pva
 
         private void licenciaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new vigencia().ShowDialog(this);
+            if (constants.local == false)
+            {
+                new vigencia().ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show("[Error] se ha ingresado de manera local, no es posible ingresar a esta característica.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cambiarCabezeraToolStripMenuItem_Click(object sender, EventArgs e)

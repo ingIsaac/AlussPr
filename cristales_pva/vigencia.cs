@@ -19,7 +19,7 @@ namespace cristales_pva
         private void loadVigencia()
         {
             sqlDateBaseManager sql = new sqlDateBaseManager();
-            DateTime t = sql.getvigenciaTienda(constants.org_name, this);          
+            DateTime t = sql.getvigenciaTienda(constants.org_name, this);            
             DateTime date = Convert.ToDateTime(t);
             textBox1.Text = date.ToShortDateString();
             textBox2.Text = sql.getvigenciaType(constants.org_name).ToUpper();
