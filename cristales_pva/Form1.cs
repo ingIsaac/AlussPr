@@ -649,7 +649,6 @@ namespace cristales_pva
             {
                 Environment.Exit(0);
             }
-            constants.loadSubfoliotitles();
             WindowState = FormWindowState.Maximized;
             toolStripProgressBar1.Visible = false;
             //Client version
