@@ -3107,7 +3107,7 @@ namespace cristales_pva
                 constants.nombre_cotizacion = string.Empty;
                 constants.nombre_proyecto = string.Empty;
                 constants.precio_especial_desc = string.Empty;
-                constants.subfolio_titles.Clear();
+                constants.subfolioClear();
                 constants.initsubfoliotitles();
                 constants.errorLog(err.ToString());
             }

@@ -31,5 +31,15 @@ namespace cristales_pva
                 MessageBox.Show("[Error] necesitas ingresar un título al Sub-Folio.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            constants.borrarSubfoliotitle(constants.sub_folio);
+            if (Application.OpenForms["articulos_cotizacion"] != null)
+            {
+                ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                this.Close();
+            }
+        }
     }
 }

@@ -350,7 +350,7 @@ namespace cristales_pva
                 }
                 catch (Exception err)
                 {
-                    MessageBox.Show("[Error]: <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error]: <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     constants.errorLog(err.ToString());
                 }
                 finally
@@ -378,7 +378,7 @@ namespace cristales_pva
             }
             catch (Exception err)
             {
-                MessageBox.Show("[Error]: <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "[Error]: <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 constants.errorLog(err.ToString());
             }
             finally
@@ -438,7 +438,7 @@ namespace cristales_pva
                 }
                 catch(Exception err)
                 {
-                    MessageBox.Show("[Error]: <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, "[Error]: <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     constants.errorLog(err.ToString());
                 }
                 finally

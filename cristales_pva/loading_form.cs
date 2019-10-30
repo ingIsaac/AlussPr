@@ -14,6 +14,7 @@ namespace cristales_pva
     public partial class loading_form : Form
     {
         listas_entities_pva listas;
+        string _version = string.Empty;
 
         public loading_form()
         {
@@ -520,13 +521,13 @@ namespace cristales_pva
             }
         }
 
-        public void checkUpdates()
+        public void checkUpdates(DoWorkEventArgs e)
         {
             label1.Text = "Buscando actualizaciones...";
             sqlDateBaseManager sql = new sqlDateBaseManager();
-            string version = sql.getNewVersionUpdate();
-            constants.db_version = version;
-            string v = version;
+            _version = sql.getNewVersionUpdate();
+            constants.db_version = _version;
+            string v = _version;
             string h = constants.version;
             string[] n = v.Split('.');
             v = "";
@@ -543,7 +544,7 @@ namespace cristales_pva
             backgroundWorker1.ReportProgress(100);
             if (constants.stringToInt(h) < constants.stringToInt(v))
             {
-                new update(version).ShowDialog(this);
+                e.Result = true;
             }
         }
 
@@ -710,7 +711,7 @@ namespace cristales_pva
             t1 = sql.createDataTableFromSQLTable("costo_corte_precio");
             t2 = sql.createDataTableFromSQLTable("instalado");
 
-            for (i = 0; i <= t1.Rows.Count; i++)
+            for (i = 0; i < t1.Rows.Count; i++)
             {
                 if (t1.Rows[i][0] != null && t1.Rows[i][0].ToString() != "")
                 {                   
@@ -804,8 +805,20 @@ namespace cristales_pva
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-           if(backgroundWorker2.IsBusy == false)
+            //Updater ------------------------------------------->
+            if (e.Result != null)
             {
+                if ((bool)e.Result)
+                {
+                    if (_version != string.Empty)
+                    {
+                        new update(_version).ShowDialog(this);
+                    }
+                }
+            }
+            //--------------------------------------------------->
+            if (backgroundWorker2.IsBusy == false)
+            {               
                 label2.Text = "";
                 label3.Text = "";
                 label1.Text = "Configurando Datos...";
@@ -872,13 +885,15 @@ namespace cristales_pva
                 if (constants.logged == false)
                 {
                     constants.logged = true;
-                    checkUpdates();
+                    //Check for Updates
+                    checkUpdates(e);
+                    //---------------->
                     constants.downloadPropiedadesModel();
                     constants.loadPropiedadesModel();                                  
                     if (constants.optimizar_inicio == true)
                     {
                         insertTablesToLocalDB();
-                    }                                   
+                    }                  
                 }
                 else
                 {
@@ -958,11 +973,6 @@ namespace cristales_pva
             ((Form1)Application.OpenForms["Form1"]).Enabled = true;
             ((Form1)Application.OpenForms["Form1"]).setTCLabel(constants.tc);
             this.Close();
-        }
-
-        ~loading_form()
-        {
-
         }
     }
 }

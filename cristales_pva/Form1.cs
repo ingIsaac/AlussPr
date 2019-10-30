@@ -866,7 +866,16 @@ namespace cristales_pva
 
         private void BackgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            checkConnection();
+            checkConnection();         
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Visible = false;
+            toolStripStatusLabel2.Image = null;          
+            if(constants.iva_desglosado == true)
+            {
+                constants.iva = constants.getPropiedadesModel();
+            }
+            setTCLabel(constants.tc);
+            //Updater
             if (constants.update_later == true)
             {
                 if (Application.OpenForms["update"] == null)
@@ -878,14 +887,6 @@ namespace cristales_pva
                     Application.OpenForms["update"].Select();
                 }
             }
-            toolStripProgressBar1.Value = 0;
-            toolStripProgressBar1.Visible = false;
-            toolStripStatusLabel2.Image = null;          
-            if(constants.iva_desglosado == true)
-            {
-                constants.iva = constants.getPropiedadesModel();
-            }
-            setTCLabel(constants.tc);
         }
 
         public void reloadPrecios()
@@ -2493,7 +2494,7 @@ namespace cristales_pva
                 t1 = sql.createDataTableFromSQLTable("costo_corte_precio");
                 t2 = sql.createDataTableFromSQLTable("instalado");
 
-                for (i = 0; i <= t1.Rows.Count; i++)
+                for (i = 0; i < t1.Rows.Count; i++)
                 {
                     if (t1.Rows[i][0] != null && t1.Rows[i][0].ToString() != "")
                     {
@@ -6262,10 +6263,17 @@ namespace cristales_pva
         private void backgroundWorker3_DoWork(object sender, DoWorkEventArgs e)
         {
             System.Threading.Thread.Sleep(500);
-            sqlDateBaseManager sql = new sqlDateBaseManager();
-            if(sql.isModuleAlive(opened_module) == false)
+            if (!constants.local)
             {
-                module_alive = false;
+                sqlDateBaseManager sql = new sqlDateBaseManager();
+                if (sql.isModuleAlive(opened_module) == false)
+                {
+                    module_alive = false;
+                }
+                else
+                {
+                    module_alive = true;
+                }
             }
             else
             {
@@ -7078,7 +7086,7 @@ namespace cristales_pva
                 constants.nombre_proyecto = "";
                 constants.autor_cotizacion = "";
                 constants.fecha_cotizacion = "";
-                constants.subfolio_titles.Clear();
+                constants.subfolioClear();
                 constants.precio_especial_desc = string.Empty;
                 constants.initsubfoliotitles();
                 constants.cotizacion_proceso = false;

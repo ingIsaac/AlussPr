@@ -1397,7 +1397,7 @@ namespace cristales_pva
 
         private void button9_Click(object sender, EventArgs e)
         {
-            new subfolio_title().ShowDialog();
+            new subfolio_title().ShowDialog(this);
         }
 
         //Eliminar Todos los articulos

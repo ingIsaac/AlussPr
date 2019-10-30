@@ -101,7 +101,7 @@ namespace cristales_pva
         public static string nombre_proyecto = string.Empty;
         public static string fecha_cotizacion = string.Empty;
         public static string autor_cotizacion = string.Empty;
-        public static List<string> subfolio_titles = new List<string>();
+        public static string[] subfolio_titles = new string[5];
         public static float desc_cotizacion = 0;
         public static float utilidad_cotizacion = 0;
         public static int folio_eliminacion = -1;
@@ -1675,10 +1675,10 @@ namespace cristales_pva
             }           
         }
 
-        public static void updateModuloPersonalizado(int id)
-        {           
+        public static void resetModuloPersonalizado(int id)
+        {
             cotizaciones_local cotizaciones = new cotizaciones_local();
-            
+
             var concepto = (from c in cotizaciones.modulos_cotizaciones where c.modulo_id == -1 && c.concept_id == id select c).SingleOrDefault();
 
             if (concepto != null)
@@ -1695,10 +1695,39 @@ namespace cristales_pva
                 concepto.diseño = "";
                 concepto.claves_cristales = "";
                 concepto.news = "";
+                concepto.descripcion = "";
+                concepto.ubicacion = "";
                 concepto.largo = 0;
                 concepto.alto = 0;
-                int dir_p = -1;
+                concepto.cantidad = 1;
+                //Save
+                cotizaciones.SaveChanges();             
+            }
+        }
 
+        public static void updateModuloPersonalizado(int id)
+        {           
+            cotizaciones_local cotizaciones = new cotizaciones_local();
+            
+            var concepto = (from c in cotizaciones.modulos_cotizaciones where c.modulo_id == -1 && c.concept_id == id select c).SingleOrDefault();
+
+            if (concepto != null)
+            {
+                concepto.modulo_id = -1;
+                if (concepto.dir != 3)
+                {
+                    concepto.pic = null;                   
+                }
+                concepto.articulo = "";
+                concepto.total = 0;
+                concepto.linea = "";
+                concepto.acabado_perfil = "";
+                concepto.diseño = "";
+                concepto.claves_cristales = "";
+                concepto.news = "";             
+                int dir_p = -1;
+                //----------------------------->
+               
                 var modulos = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id select x);
                 if (modulos != null)
                 {                  
@@ -1722,7 +1751,7 @@ namespace cristales_pva
                         concepto.news = concepto.news + v.news;
                     }
                     concepto.total = concepto.total * concepto.cantidad;
-                }                          
+                }            
 
                 //New Medidas ------------------------------------------------------------------------------------------->
                 var c = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concepto.concept_id && x.dir > 0 select x).Count();
@@ -5526,13 +5555,21 @@ namespace cristales_pva
             }          
         }
 
+        public static void subfolioClear()
+        {
+            for (int i = 0; i < subfolio_titles.Length; i++)
+            {
+                subfolio_titles[i] = "";
+            }
+        }
+
         //Sub-Folio Titles
         public static string getSubfoliotitle(int subfolio)
         {
             string u = string.Empty;
             try
             {
-                if (subfolio_titles.Count > 0)
+                if (subfolio_titles.Length > 0)
                 {
                     subfolio = subfolio - 1;
                     if (subfolio >= 0 && subfolio <= 4)
@@ -5557,11 +5594,25 @@ namespace cristales_pva
             try
             {
                 subfolio = subfolio - 1;
-                subfolio_titles[subfolio] = title;
+                subfolio_titles[subfolio] = title;                 
             }
             catch(Exception e)
             {
                 MessageBox.Show("[Error] error al añadir el título de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorLog(e.ToString());
+            }
+        }
+
+        public static void borrarSubfoliotitle(int subfolio)
+        {
+            try
+            {
+                subfolio = subfolio - 1;
+                subfolio_titles[subfolio] = string.Empty;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("[Error] error al borrar el título de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorLog(e.ToString());
             }
         }
@@ -5595,7 +5646,7 @@ namespace cristales_pva
         {
             try
             {
-                subfolio_titles.Clear();
+                constants.subfolioClear();
                 initsubfoliotitles();
                 string[] r = titles.Split(',');
                 if (r.Length > 0)
@@ -5629,11 +5680,7 @@ namespace cristales_pva
 
         public static void initsubfoliotitles()
         {
-            subfolio_titles.Add("");
-            subfolio_titles.Add("");
-            subfolio_titles.Add("");
-            subfolio_titles.Add("");
-            subfolio_titles.Add("");
+            subfolioClear();
         }
 
         public static void loadPrecioEspecialDesc()

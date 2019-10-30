@@ -241,14 +241,21 @@ namespace cristales_pva
             {
                 ((Form1)Application.OpenForms["form1"]).setArticuloPersonalizacion((int)datagridviewNE1.CurrentRow.Cells[0].Value, perso_id, 0, true);
                 constants.getMargedItems(datagridviewNE1, perso_id);
+                //-------------------------------------------------------------------------------------------->
+                if (datagridviewNE1.RowCount <= 0)
+                {
+                    constants.resetModuloPersonalizado(perso_id);
+                }
+                //Reload
                 if (Application.OpenForms["articulos_cotizacion"] != null)
                 {
                     ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).reloadModulos();
                 }
                 if (Application.OpenForms["edit_expresss"] != null)
-                {
+                {                  
                     ((edit_expresss)Application.OpenForms["edit_expresss"]).reloadALL();
                 }
+                //Close
                 if (datagridviewNE1.RowCount <= 0)
                 {
                     this.Close();
@@ -289,10 +296,17 @@ namespace cristales_pva
                 {
                     constants.getMargedItems(datagridviewNE1, perso_id);
                 }
-                if (Application.OpenForms["articulos_cotizacion"] != null)
+                //----------------------------------------------------------------------------------------->
+                if (datagridviewNE1.RowCount <= 0)
                 {
+                    constants.resetModuloPersonalizado(perso_id);
+                }
+                //Reload
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {                  
                     ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).reloadModulos();
                 }
+                //Close
                 if (datagridviewNE1.RowCount <= 0)
                 {
                     this.Close();

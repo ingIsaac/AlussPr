@@ -16,7 +16,6 @@ namespace cristales_pva
         public update(string new_version)
         {
             InitializeComponent();
-            this.FormClosed += Update_FormClosed;
             if (new_version != "")
             {
                 label2.Text = "versión: " + new_version;
@@ -25,6 +24,7 @@ namespace cristales_pva
             {
                 Close();
             }
+            this.FormClosed += Update_FormClosed;
         }
 
         private void Update_FormClosed(object sender, FormClosedEventArgs e)
@@ -34,50 +34,71 @@ namespace cristales_pva
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.DoWork += (z, y) =>
             {
-                string rs = "false";
-                string esquemas = "false";
-                if (new sqlDateBaseManager().getNewConfigurationUpdate() == true)
+                try
                 {
-                    rs = "true";
-                }
-                if (new sqlDateBaseManager().getNewConfigurationUpdateEsquemas() == true)
-                {
-                    esquemas = "true";
-                }
-                XDocument updater_xml = XDocument.Load(constants.updater_xml);
+                    label3.Text = "Recopilando datos...";
+                    string rs = "false";
+                    string esquemas = "false";
+                    if (new sqlDateBaseManager().getNewConfigurationUpdate() == true)
+                    {
+                        rs = "true";
+                    }
+                    if (new sqlDateBaseManager().getNewConfigurationUpdateEsquemas() == true)
+                    {
+                        esquemas = "true";
+                    }
+                    XDocument updater_xml = XDocument.Load(constants.updater_xml);
 
-                var updater = from x in updater_xml.Descendants("UPDATER") select x;
+                    var updater = from x in updater_xml.Descendants("UPDATER") select x;
 
-                foreach (XElement x in updater)
-                {
-                    x.SetElementValue("ALL-DATA", rs);
-                    x.SetElementValue("SCHEMAS", esquemas);
+                    foreach (XElement x in updater)
+                    {
+                        x.SetElementValue("ALL-DATA", rs);
+                        x.SetElementValue("SCHEMAS", esquemas);
+                    }
+                    updater_xml.Save(constants.updater_xml);
+                    y.Result = true;
                 }
-                updater_xml.Save(constants.updater_xml);
-            }
-            catch (Exception err)
+                catch (Exception err)
+                {
+                    label3.Text = "Error.";
+                    constants.errorLog(err.ToString());
+                    MessageBox.Show("[Error] el archivo data_updater.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            };
+            bg.RunWorkerCompleted += (z, y) =>
             {
-                constants.errorLog(err.ToString());
-                MessageBox.Show("[Error] el archivo data_updater.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            try
-            {               
-                Process.Start(Application.StartupPath + "\\updater.exe");
-            }
-            catch (Exception err)
+                if(y.Result != null)
+                {
+                    if((bool)y.Result)
+                    {
+                        try
+                        {
+                            label3.Text = "Abriendo software de actualización...";
+                            Process.Start(Application.StartupPath + "\\updater.exe");
+                            //Exit
+                            System.Environment.Exit(1);
+                        }
+                        catch (Exception err)
+                        {
+                            label3.Text = "Error.";
+                            constants.errorLog(err.ToString());
+                            MessageBox.Show("[Error] no se encontro el archivo updater.exe en la carpeta el programa.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }                        
+                    }
+                }
+            };
+            if(!bg.IsBusy)
             {
-                constants.errorLog(err.ToString());
-                MessageBox.Show("[Error] no se encontro el archivo updater.exe en la carpeta el programa.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            System.Environment.Exit(1);
+                bg.RunWorkerAsync();
+            }                 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            constants.update_later = true;
             this.Close();
         }
     }
