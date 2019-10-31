@@ -7088,7 +7088,6 @@ namespace cristales_pva
                 constants.fecha_cotizacion = "";
                 constants.subfolioClear();
                 constants.precio_especial_desc = string.Empty;
-                constants.initsubfoliotitles();
                 constants.cotizacion_proceso = false;
                 constants.cotizacion_guardada = false;
                 constants.setClienteToPropiedades();

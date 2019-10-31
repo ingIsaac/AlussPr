@@ -2522,7 +2522,7 @@ namespace cristales_pva
         }
 
         public void insertCotizacion(int folio, string cliente, string usuario, string fecha, string nombre_proyecto, float descuento, float utilidad, string tienda, bool iva_desglosado, string registro, float tc, string subfolio_titles, string precio_especial)
-        {
+        {            
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
@@ -2572,7 +2572,7 @@ namespace cristales_pva
         }
 
         public void updateCotizacion(int folio, string fecha, string cliente, string proyecto, float descuento, float utilidad, bool iva_desglosado, float tc, string subfolio_titles, string precio_especial)
-        {
+        {           
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
@@ -3108,7 +3108,6 @@ namespace cristales_pva
                 constants.nombre_proyecto = string.Empty;
                 constants.precio_especial_desc = string.Empty;
                 constants.subfolioClear();
-                constants.initsubfoliotitles();
                 constants.errorLog(err.ToString());
             }
             finally

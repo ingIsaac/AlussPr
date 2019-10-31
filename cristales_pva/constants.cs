@@ -5585,6 +5585,7 @@ namespace cristales_pva
             {
                 MessageBox.Show("[Error] error al obtener los títulos de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorLog(e.ToString());
+                return string.Empty;
             }
             return u;
         }
@@ -5624,13 +5625,16 @@ namespace cristales_pva
             {
                 foreach (string x in subfolio_titles)
                 {
-                    if (r.Length > 0)
+                    if (x != string.Empty)
                     {
-                        r = r + "," + x;
-                    }
-                    else
-                    {
-                        r = x;
+                        if (r.Length > 0)
+                        {
+                            r = r + "," + x;
+                        }
+                        else
+                        {
+                            r = x;
+                        }
                     }
                 }
             }
@@ -5638,6 +5642,7 @@ namespace cristales_pva
             {
                 MessageBox.Show("[Error] error al serializar títulos de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorLog(e.ToString());
+                return string.Empty;
             }
             return r;
         }
@@ -5646,14 +5651,16 @@ namespace cristales_pva
         {
             try
             {
-                constants.subfolioClear();
-                initsubfoliotitles();
-                string[] r = titles.Split(',');
-                if (r.Length > 0)
+                if (titles != string.Empty)
                 {
-                    for (int i = 0; i < r.Length; i++)
+                    subfolioClear();
+                    string[] r = titles.Split(',');
+                    if (r.Length > 0)
                     {
-                        subfolio_titles[i] = r[i];
+                        for (int i = 0; i < r.Length; i++)
+                        {
+                            subfolio_titles[i] = r[i];
+                        }
                     }
                 }
             }
@@ -5676,11 +5683,6 @@ namespace cristales_pva
                 MessageBox.Show("[Error] no se ha podido obtener los títulos de los sub-folios.\n¿Cuenta con conexión a internet?.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorLog(e.ToString());
             }
-        }
-
-        public static void initsubfoliotitles()
-        {
-            subfolioClear();
         }
 
         public static void loadPrecioEspecialDesc()
