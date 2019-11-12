@@ -101,7 +101,7 @@ namespace cristales_pva
         public static string nombre_proyecto = string.Empty;
         public static string fecha_cotizacion = string.Empty;
         public static string autor_cotizacion = string.Empty;
-        public static string[] subfolio_titles = new string[5];
+        public static string[] subfolio_titles = new string[] {string.Empty, string.Empty, string.Empty, string.Empty, string.Empty};
         public static float desc_cotizacion = 0;
         public static float utilidad_cotizacion = 0;
         public static int folio_eliminacion = -1;
@@ -5559,7 +5559,7 @@ namespace cristales_pva
         {
             for (int i = 0; i < subfolio_titles.Length; i++)
             {
-                subfolio_titles[i] = "";
+                subfolio_titles[i] = string.Empty;
             }
         }
 
@@ -5624,31 +5624,29 @@ namespace cristales_pva
             try
             {
                 foreach (string x in subfolio_titles)
-                {
-                    if (x != string.Empty)
+                {                    
+                    if (r.Length > 0)
                     {
-                        if (r.Length > 0)
-                        {
-                            r = r + "," + x;
-                        }
-                        else
-                        {
-                            r = x;
-                        }
+                        r = r + "," + x;
                     }
+                    else
+                    {
+                        r = x;
+                    }                  
                 }
             }
             catch(Exception e)
             {
                 MessageBox.Show("[Error] error al serializar títulos de sub-folio.", msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorLog(e.ToString());
+                //Return empty
                 return string.Empty;
             }
             return r;
         }
 
         public static void unserializeSubfolio(string titles)
-        {
+        {         
             try
             {
                 if (titles != string.Empty)
