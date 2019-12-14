@@ -655,6 +655,7 @@
                               <Value>=Fields!Precio_u.Value</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
+                                <Format>'$'#,0.00;('$'#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -673,6 +674,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -690,6 +692,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
+                                <Format>'$'#,0.00;('$'#,0.00)</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -708,6 +711,7 @@
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
                         <PaddingBottom>2pt</PaddingBottom>
+                        <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                       </Style>
                     </Textbox>
                   </CellContents>
@@ -1350,12 +1354,14 @@
                 <Value>$</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
                 </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!tot.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>#,0.00;(#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1370,6 +1376,7 @@
         <Height>0.6cm</Height>
         <Width>3.27617cm</Width>
         <ZIndex>21</ZIndex>
+        <ToolTip>=FormatCurrency(Parameters!tot.Value, 0)</ToolTip>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1476,6 +1483,7 @@
                 <Value>=Parameters!tot_alum.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1496,6 +1504,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox25">
@@ -1598,6 +1607,7 @@
                 <Value>=Parameters!tot_herrajes.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1618,6 +1628,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox33">
@@ -1630,6 +1641,7 @@
                 <Value>=Parameters!tot_otros.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1650,6 +1662,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox35">
@@ -1662,6 +1675,7 @@
                 <Value>=Parameters!tot_cristales.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1682,6 +1696,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox39">
@@ -1729,6 +1744,7 @@
                 <Style>
                   <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
               <TextRun>
@@ -1736,6 +1752,7 @@
                 <Style>
                   <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1758,6 +1775,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Line Name="Line7">
@@ -1821,12 +1839,14 @@
                 <Value>$</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
               <TextRun>
                 <Value>=Parameters!cost_mats.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1847,6 +1867,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox43">
@@ -1859,6 +1880,7 @@
                 <Value>=Parameters!costo_add.Value</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
+                  <Format>'$'#,0.00;('$'#,0.00)</Format>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -1881,6 +1903,7 @@
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
           <PaddingBottom>2pt</PaddingBottom>
+          <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
         </Style>
       </Textbox>
       <Textbox Name="Textbox44">
@@ -1969,7 +1992,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox16</rd:DefaultName>
-          <Top>0cm</Top>
           <Left>0.2347cm</Left>
           <Height>0.6cm</Height>
           <Width>1.32701cm</Width>
@@ -2000,7 +2022,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox17</rd:DefaultName>
-          <Top>0cm</Top>
           <Left>1.7381cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
@@ -2036,7 +2057,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox18</rd:DefaultName>
-          <Top>0cm</Top>
           <Left>16.59724cm</Left>
           <Height>0.57354cm</Height>
           <Width>3.74354cm</Width>
@@ -2189,7 +2209,8 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="tot">
-      <DataType>String</DataType>
+      <DataType>Float</DataType>
+      <Nullable>true</Nullable>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="header">

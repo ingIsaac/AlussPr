@@ -414,6 +414,7 @@ namespace cristales_pva
             BackgroundWorker bg = new BackgroundWorker();
             bg.DoWork += (sender, e) =>
             {
+                constants.subfolioClear();
                 ((Form1)Application.OpenForms["form1"]).resetEdit();
                 ((Form1)Application.OpenForms["form1"]).setSubFolioLabel();
                 constants.folio_abierto = (int)datagridviewNE1.CurrentRow.Cells[1].Value;

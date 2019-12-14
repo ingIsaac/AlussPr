@@ -2103,11 +2103,7 @@ namespace cristales_pva
                 else if (x == '%')
                 {
                     r = false;
-                }
-                else
-                {
-                    r = true;
-                }
+                }             
             }
             return r;
         }
