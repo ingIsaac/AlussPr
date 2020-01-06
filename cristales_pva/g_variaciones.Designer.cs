@@ -35,6 +35,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(g_variaciones));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -86,6 +87,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.button2);
@@ -104,6 +106,17 @@
             this.tabPage1.Text = "Generar";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(17, 242);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(393, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "*Coloca -1 en cantidad si deseas que el módulo conserve la cantidad por defecto.";
+            // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -119,10 +132,13 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Image = global::cristales_pva.Properties.Resources.add_icon_16bits;
-            this.button3.Location = new System.Drawing.Point(548, 258);
+            this.button3.Location = new System.Drawing.Point(441, 242);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(36, 23);
+            this.button3.Size = new System.Drawing.Size(143, 34);
             this.button3.TabIndex = 13;
+            this.button3.Text = "Añadir Artículo";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -130,9 +146,9 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = global::cristales_pva.Properties.Resources.save_16;
-            this.button2.Location = new System.Drawing.Point(489, 373);
+            this.button2.Location = new System.Drawing.Point(489, 370);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 30);
+            this.button2.Size = new System.Drawing.Size(95, 34);
             this.button2.TabIndex = 12;
             this.button2.Text = "Guardar";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -178,7 +194,7 @@
             this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
             this.datagridviewNE1.Location = new System.Drawing.Point(16, 69);
             this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.Size = new System.Drawing.Size(568, 183);
+            this.datagridviewNE1.Size = new System.Drawing.Size(568, 167);
             this.datagridviewNE1.TabIndex = 9;
             // 
             // CP
@@ -231,7 +247,7 @@
             // 
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(16, 298);
+            this.richTextBox1.Location = new System.Drawing.Point(16, 295);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(568, 69);
             this.richTextBox1.TabIndex = 8;
@@ -250,7 +266,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 282);
+            this.label2.Location = new System.Drawing.Point(16, 279);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 7;
@@ -327,7 +343,7 @@
             this.eliminarToolStripMenuItem,
             this.modificarToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(171, 70);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(171, 48);
             // 
             // eliminarToolStripMenuItem
             // 
@@ -434,5 +450,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn operacion;
+        private System.Windows.Forms.Label label6;
     }
 }

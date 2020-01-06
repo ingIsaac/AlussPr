@@ -7429,6 +7429,11 @@ namespace cristales_pva
             new c_header().ShowDialog(this);
         }
 
+        private void button27_Click(object sender, EventArgs e)
+        {
+            reloadAll();
+        }
+
         public void disableModoLIVA()
         {
             textBox28.Text = "0";

@@ -34,7 +34,7 @@ namespace cristales_pva
             if (Application.OpenForms["articulos_cotizacion"] != null)
             {
                 Application.OpenForms["articulos_cotizacion"].Close();
-            }         
+            }  
         }
 
         private void borrarImagenPredeterminada(int perso_id)
@@ -272,12 +272,24 @@ namespace cristales_pva
             datagridviewNE1.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             cotizaciones = new cotizaciones_local();
             var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio select x);
+            if (constants.ac_sort == "Linea")
+            {
+                data = data.OrderBy(x => x.linea);
+            }
+            else if (constants.ac_sort == "Ubicación")
+            {
+                data = data.OrderBy(x => x.ubicacion);
+            }
+            else
+            {
+                data = data.OrderBy(x => x.orden);
+            }
             float sum = 0;
             if (textBox1.Text != "")
             {
                 string param = textBox1.Text;
                 data = null;
-                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.id.ToString().StartsWith(param) || x.ubicacion.Contains(param)) select x);
+                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.id.ToString().StartsWith(param) || x.ubicacion.Contains(param)) select x);              
             }
             foreach (var c in data)
             {

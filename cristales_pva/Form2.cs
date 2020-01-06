@@ -161,7 +161,7 @@ namespace cristales_pva
                                 }
                             }
                             //------------------------------------------------------------------------------------------>
-                            if (constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name, this)) //Try to Connect
+                            if (constants.setConnectionToLoginServer(constants.user + " - " + constants.org_name, this, true))
                             {
                                 string mac = constants.getMACAddress();
                                 if (sql.findActivation("mac_pc_activada", "mac_pc_activada", "pc_activadas", mac) == true)

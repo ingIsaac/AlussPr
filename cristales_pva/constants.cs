@@ -1203,6 +1203,16 @@ namespace cristales_pva
                                    });
                         if (data != null)
                         {
+                            //-------------------------------------->
+                            if (ac_sort == "Linea")
+                            {
+                                data = data.OrderBy(x => x.Linea);
+                            }
+                            else if (ac_sort == "Ubicación")
+                            {
+                                data = data.OrderBy(x => x.Ubicación);
+                            }                          
+                            //
                             if (datagrid.InvokeRequired == true)
                             {
                                 datagrid.Invoke((MethodInvoker)delegate
@@ -1257,6 +1267,16 @@ namespace cristales_pva
                                    });
                         if (data != null)
                         {
+                            //-------------------------------------->
+                            if (ac_sort == "Linea")
+                            {
+                                data = data.OrderBy(x => x.Linea);
+                            }
+                            else if (ac_sort == "Ubicación")
+                            {
+                                data = data.OrderBy(x => x.Ubicación);
+                            }
+                            //
                             if (datagrid.InvokeRequired == true)
                             {
                                 datagrid.Invoke((MethodInvoker)delegate
@@ -5455,39 +5475,40 @@ namespace cristales_pva
             ((Form1)Application.OpenForms["Form1"]).loadListaFromLocal();
         }
 
-        public static bool setConnectionToLoginServer(string _data, Form form)
+        public static bool setConnectionToLoginServer(string _data, Form form, bool login=false)
         {
-            if (!login_server.Connected || login_server.Available == 0)
+            bool r = false;
+            try
             {
-                login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                var result = login_server.BeginConnect(new IPEndPoint(getSocketIPAddress(server, form), 6400), null, null);
-                bool success = result.AsyncWaitHandle.WaitOne(10000, true);
-                if (success)
+                if (!login_server.Connected || login_server.Available == 0)
                 {
-                    try
+                    login_server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    var result = login_server.BeginConnect(new IPEndPoint(getSocketIPAddress(server, form), 6400), null, null);
+                    bool success = result.AsyncWaitHandle.WaitOne(10000, true);
+                    if (success)
                     {
                         byte[] data = System.Text.Encoding.Default.GetBytes(_data);
                         login_server.Send(data);
-                        return true;
+                        r = true;
                     }
-                    catch (Exception)
+                    else
                     {
                         login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
                         login_server.Close();
-                        return false;
                     }
                 }
-                else
-                {
-                    login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
-                    login_server.Close();
-                    return false;
-                }
             }
-            else
+            catch(Exception)
             {
-                return false;
+                if (login)
+                {
+                    MessageBox.Show(form, "[Error] no se ha podido ingresar al login server [Login Server Not Found].", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    connected = false;
+                }
+                login_server.Shutdown(System.Net.Sockets.SocketShutdown.Both);
+                login_server.Close();
             }
+            return r;
         }
 
         public static IPAddress getSocketIPAddress(string p, Form form)
