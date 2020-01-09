@@ -491,8 +491,11 @@ namespace cristales_pva
         private byte[] setDimensionsImage(byte[] pic, string largo, string alto)
         {
             byte[] r = pic;
+            int h_increase = 20;
+            int w_increase = 80;
             Image img = constants.byteToImage(r);
-            Bitmap bm = new Bitmap(img.Width + 80, img.Height + 20);           
+            Bitmap bm = new Bitmap(img.Width + w_increase, img.Height + h_increase);
+            bm.SetResolution(90, 90);       
             using (Graphics gp = Graphics.FromImage(bm))
             {
                 gp.Clear(Color.White);
@@ -503,12 +506,12 @@ namespace cristales_pva
                 StringFormat sf = new StringFormat();
                 sf.Alignment = StringAlignment.Center;
                 sf.LineAlignment = StringAlignment.Center;
-                //lines
+                //Lines
                 gp.DrawLine(new Pen(Brushes.Black), new PointF(img.Width + 4, 0), new PointF(img.Width + 4, img.Height));
                 gp.DrawLine(new Pen(Brushes.Black), new PointF(0, img.Height + 4), new PointF(img.Width, img.Height + 4));
                 //Text
-                gp.DrawString(largo + " mm", new Font("Arial", 10), Brushes.Black, new RectangleF(0, img.Height + 5, img.Width, 20), sf);
-                gp.DrawString(alto + " mm", new Font("Arial", 10), Brushes.Black, new RectangleF(img.Width + 5, 0, 80, img.Height), sf);
+                gp.DrawString(largo + " mm", new Font("Arial", 10), Brushes.Black, new RectangleF(0, img.Height + 5, img.Width, h_increase), sf);
+                gp.DrawString(alto + " mm", new Font("Arial", 10), Brushes.Black, new RectangleF(img.Width + 5, 0, w_increase, img.Height), sf);
                 r = constants.imageToByte(bm);
             }
             img = null;
