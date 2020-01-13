@@ -271,7 +271,7 @@ namespace cristales_pva
             datagridviewNE1.Columns[2].DefaultCellStyle.Font = new Font("Arial", 12f, FontStyle.Bold);
             datagridviewNE1.Columns[2].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             cotizaciones = new cotizaciones_local();
-            var data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio select x);
+            var data = (from x in cotizaciones.modulos_cotizaciones where x.modulo_id != -2 && x.merge_id <= 0 && x.sub_folio == constants.sub_folio select x);
             if (constants.ac_sort == "Linea")
             {
                 data = data.OrderBy(x => x.linea);
@@ -289,7 +289,7 @@ namespace cristales_pva
             {
                 string param = textBox1.Text;
                 data = null;
-                data = (from x in cotizaciones.modulos_cotizaciones where x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.id.ToString().StartsWith(param) || x.ubicacion.Contains(param)) select x);              
+                data = (from x in cotizaciones.modulos_cotizaciones where x.modulo_id != -2 && x.merge_id <= 0 && x.sub_folio == constants.sub_folio && (x.id.ToString().StartsWith(param) || x.ubicacion.Contains(param)) select x);              
             }
             foreach (var c in data)
             {
@@ -363,7 +363,6 @@ namespace cristales_pva
                 label6.Text = "Largo: " + modulo.largo.ToString();
                 label7.Text = "Alto: " + modulo.alto.ToString();
             }
-
         }
 
         //Buscar
