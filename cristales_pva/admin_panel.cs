@@ -2091,11 +2091,7 @@ namespace cristales_pva
                 else if (x == ',')
                 {
                     r = false;
-                }
-                else if (x == '.')
-                {
-                    r = false;
-                }
+                }             
                 else if (x == ';')
                 {
                     r = false;
