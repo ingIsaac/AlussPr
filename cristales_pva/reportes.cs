@@ -102,6 +102,35 @@ namespace cristales_pva
             textBox5.Text = email != "" ? email : textBox5.Text;
         }
 
+        public string deserializarPrecioSpecial(string precio_especial, int subfolio)
+        {
+            string r = string.Empty;
+            if(precio_especial != string.Empty)
+            {
+                if (precio_especial.Contains("#") || precio_especial.Contains("&"))
+                {
+                    string[] u = precio_especial.Split('#');
+                    foreach (string v in u)
+                    {
+                        string[] k = v.Split('&');
+                        if (k.Length == 2)
+                        {
+                            int s_f = constants.stringToInt(k[0]);
+                            if(s_f == subfolio)
+                            {
+                                r = k[1];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    r = precio_especial;
+                }
+            }
+            return r;
+        }
+
         public void loadReporte(string cliente, string proyecto, string folio, float subtotal, float iva, float total, bool pic=true)
         {
             float _utilidad = 0;
@@ -168,7 +197,7 @@ namespace cristales_pva
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("precio_especial", constants.precio_especial_desc));
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("precio_especial", deserializarPrecioSpecial(constants.precio_especial_desc, constants.sub_folio)));
             if (checkBox6.Checked)
             {
                 reportViewer1.LocalReport.SetParameters(new ReportParameter("marca", constants.getExternalImage("marca")));
