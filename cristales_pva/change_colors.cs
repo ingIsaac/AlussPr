@@ -418,8 +418,8 @@ namespace cristales_pva
                     string linea = comboBox4.Text;
                     var no_u = from x in cotizacion.modulos_cotizaciones where x.modulo_id > 0 && x.merge_id < 0 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
 
-                    var u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
-                    var m_m = from x in cotizacion.modulos_cotizaciones where u_m.Any(v => v.id == x.merge_id) select x;
+                    var u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio select x;
+                    var m_m = from x in cotizacion.modulos_cotizaciones where u_m.Any(v => v.id == x.merge_id && x.linea == linea) select x;
 
                     modulos_c = no_u.Concat(m_m);
                     modulos_count = modulos_c.Count();
@@ -427,21 +427,14 @@ namespace cristales_pva
                     if (checkBox4.Checked)
                     {
                         if (comboBox5.Text != string.Empty)
-                        {
-                            u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
-
-                            foreach (var y in u_m)
-                            {
-                                y.linea = comboBox5.Text;
-                            }
-
+                        {                            
                             changeLine(comboBox5.Text, modulos_c);
 
                             linea = comboBox5.Text;
                             no_u = from x in cotizacion.modulos_cotizaciones where x.modulo_id > 0 && x.merge_id < 0 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
 
-                            u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x;
-                            m_m = from x in cotizacion.modulos_cotizaciones where u_m.Any(v => v.id == x.merge_id) select x;
+                            u_m = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio select x;
+                            m_m = from x in cotizacion.modulos_cotizaciones where u_m.Any(v => v.id == x.merge_id && x.linea == linea) select x;
 
                             modulos_c = no_u.Concat(m_m);
                             modulos_count = modulos_c.Count();
@@ -1387,7 +1380,13 @@ namespace cristales_pva
                     {
                         linea = comboBox5.Text;
                     }
-                    modulos_c = (from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio && x.linea == linea select x);
+                    modulos_c = from x in cotizacion.modulos_cotizaciones where x.modulo_id == -1 && x.sub_folio == constants.sub_folio select x;
+                    var t_m = from x in cotizacion.modulos_cotizaciones where x.merge_id > 0 && x.sub_folio == constants.sub_folio select x;
+                    if(t_m != null)
+                    {
+                        var m_m = modulos_c.Where(v => t_m.Any(p => p.merge_id == v.id));
+                        modulos_c = m_m;
+                    }
                     modulos_count = modulos_c.Count();
                 }
                 else if (filter == "Ubicación")
@@ -1671,7 +1670,7 @@ namespace cristales_pva
                     int id = (int)(from x in listas.modulos where x.id == m_id select x.id_diseño).SingleOrDefault();
 
                     var modulos = (from x in listas.modulos where x.linea == new_line && x.id_diseño == id select x).FirstOrDefault();
-
+                    
                     if (modulos != null)
                     {
                         m.linea = new_line;

@@ -115,7 +115,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 553);
+            this.label1.Location = new System.Drawing.Point(9, 553);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 5;
@@ -123,9 +123,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(61, 550);
+            this.textBox1.Location = new System.Drawing.Point(58, 550);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(380, 20);
+            this.textBox1.Size = new System.Drawing.Size(383, 20);
             this.textBox1.TabIndex = 6;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -153,7 +153,7 @@
             this.datagridviewNE2.MultiSelect = false;
             this.datagridviewNE2.Name = "datagridviewNE2";
             this.datagridviewNE2.ReadOnly = true;
-            this.datagridviewNE2.Size = new System.Drawing.Size(240, 435);
+            this.datagridviewNE2.Size = new System.Drawing.Size(339, 435);
             this.datagridviewNE2.TabIndex = 1;
             // 
             // datagridviewNE1
@@ -179,7 +179,7 @@
             this.label5.ForeColor = System.Drawing.Color.Red;
             this.label5.Location = new System.Drawing.Point(569, 7);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(240, 24);
+            this.label5.Size = new System.Drawing.Size(339, 24);
             this.label5.TabIndex = 12;
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -188,9 +188,9 @@
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(569, 548);
+            this.label4.Location = new System.Drawing.Point(569, 549);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(240, 23);
+            this.label4.Size = new System.Drawing.Size(339, 23);
             this.label4.TabIndex = 13;
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -224,7 +224,7 @@
             "3",
             "4",
             "5"});
-            this.comboBox1.Location = new System.Drawing.Point(507, 549);
+            this.comboBox1.Location = new System.Drawing.Point(507, 550);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(56, 21);
             this.comboBox1.TabIndex = 16;
@@ -245,7 +245,7 @@
             this.label3.ForeColor = System.Drawing.Color.Red;
             this.label3.Location = new System.Drawing.Point(569, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(240, 23);
+            this.label3.Size = new System.Drawing.Size(339, 23);
             this.label3.TabIndex = 18;
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -253,7 +253,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 575);
+            this.ClientSize = new System.Drawing.Size(920, 581);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.comboBox1);

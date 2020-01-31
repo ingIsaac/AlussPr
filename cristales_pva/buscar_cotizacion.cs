@@ -142,13 +142,20 @@ namespace cristales_pva
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if(e.Argument != null)
+            try
             {
-                iniciarBusquedaFechada(e.Argument.ToString(), LastPage);
+                if (e.Argument != null)
+                {
+                    iniciarBusquedaFechada(e.Argument.ToString(), LastPage);
+                }
+                else
+                {
+                    iniciarBusqueda(LastPage);
+                }
             }
-            else
+            catch (Exception err)
             {
-                iniciarBusqueda(LastPage);
+                constants.errorLog(err.ToString());
             }
         }
 

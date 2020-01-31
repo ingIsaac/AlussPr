@@ -1681,38 +1681,39 @@ namespace cristales_pva
             {
                 if (backgroundWorker3.IsBusy == false)
                 {
-                    sqlDateBaseManager sql = new sqlDateBaseManager();
-                    if (constants.user_access == 4)
+                    BackgroundWorker bg = new BackgroundWorker();
+                    bg.DoWork += (sender, e) =>
                     {
-                        sql.dropTableOnGridViewWithFilter(datagridviewNE1, "modulos", "usuario", constants.user, true);
-                    }
-                    else
+                        sqlDateBaseManager sql = new sqlDateBaseManager();
+                        if (constants.user_access == 4)
+                        {
+                            sql.dropTableOnGridViewWithFilter(datagridviewNE1, "modulos", "usuario", constants.user, true);
+                        }
+                        else
+                        {
+                            sql.dropTableOnGridView(datagridviewNE1, "modulos");
+                        }
+                    };
+                    bg.RunWorkerCompleted += (sender, e) =>
                     {
-                        sql.dropTableOnGridView(datagridviewNE1, "modulos");
-                    }
-                    progressBar1.Visible = true;
-                    progressBar1.Value = 0;
-                    backgroundWorker1.RunWorkerAsync();
+                        pictureBox4.Visible = false;
+                        //------------------------------>
+                        progressBar1.Visible = true;
+                        progressBar1.Value = 0;
+                        backgroundWorker1.RunWorkerAsync();
+                    };
+                    if (!bg.IsBusy)
+                    {
+                        pictureBox4.Visible = true;
+                        bg.RunWorkerAsync();
+                    }                  
                 }
             }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if(constants.user_access == 4)
-            {
-               new sqlDateBaseManager().getModuloFilterUser(datagridviewNE1, "modulos", "articulo", textBox2.Text);
-            }
-            else
-            {
-               new sqlDateBaseManager().dropTableOnGridViewWithFilter(datagridviewNE1, "modulos", "articulo", textBox2.Text);
-            }
-            if (backgroundWorker1.IsBusy == false)
-            {
-                progressBar1.Visible = true;
-                progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
-            }
+            buscarModulos(datagridviewNE1, "modulos", "articulo", textBox2.Text);                        
         }
 
         private void deserializeParameters(string parameters)
@@ -2519,7 +2520,10 @@ namespace cristales_pva
 
         private void BackgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
+            if (e.ProgressPercentage <= progressBar1.Maximum && e.ProgressPercentage >= progressBar1.Minimum)
+            {
+                progressBar1.Value = e.ProgressPercentage;
+            }
         }
         //------------------------------------------------->
 
@@ -2583,24 +2587,41 @@ namespace cristales_pva
             md.Dispose();
         }
 
-        //Buscar modulo con filtros
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void buscarModulos(DataGridView dataview, string table, string column, string value, bool accurate = false)
         {
-            if (backgroundWorker1.IsBusy == false)
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.DoWork += (x, y) =>
             {
-                sqlDateBaseManager sql = new sqlDateBaseManager();
-                if(constants.user_access == 4)
+                if (constants.user_access == 4)
                 {
-                    sql.getModuloFilterUser(datagridviewNE1, "modulos", "linea", comboBox1.Text);
+                    new sqlDateBaseManager().getModuloFilterUser(dataview, table, column, value);
                 }
                 else
                 {
-                    sql.dropTableOnGridViewWithFilter(datagridviewNE1, "modulos", "linea", comboBox1.Text, true);
+                    new sqlDateBaseManager().dropTableOnGridViewWithFilter(dataview, table, column, value, accurate);
                 }
-                progressBar1.Visible = true;
-                progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+            };
+            bg.RunWorkerCompleted += (x, y) =>
+            {
+                pictureBox4.Visible = false;
+                if (backgroundWorker1.IsBusy == false)
+                {
+                    progressBar1.Visible = true;
+                    progressBar1.Value = 0;
+                    backgroundWorker1.RunWorkerAsync();
+                }
+            };
+            if (!bg.IsBusy)
+            {               
+                pictureBox4.Visible = true;
+                bg.RunWorkerAsync();
             }
+        }
+
+        //Buscar modulo con filtros
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buscarModulos(datagridviewNE1, "modulos", "linea", comboBox1.Text, true);            
         }
         //
 

@@ -67,7 +67,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,13 +148,14 @@
             this.componentesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.textBox12 = new System.Windows.Forms.TextBox();
+            this.datagridviewNE1 = new cristales_pva.datagridviewNE();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             this.contextMenuStrip4.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
@@ -172,6 +172,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip3.SuspendLayout();
             this.contextMenuStrip6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -463,6 +465,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.pictureBox4);
             this.tabPage5.Controls.Add(this.button16);
             this.tabPage5.Controls.Add(this.comboBox1);
             this.tabPage5.Controls.Add(this.label21);
@@ -552,23 +555,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // datagridviewNE1
-            // 
-            this.datagridviewNE1.AllowUserToAddRows = false;
-            this.datagridviewNE1.AllowUserToDeleteRows = false;
-            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
-            this.datagridviewNE1.Location = new System.Drawing.Point(3, 3);
-            this.datagridviewNE1.Name = "datagridviewNE1";
-            this.datagridviewNE1.ReadOnly = true;
-            this.datagridviewNE1.Size = new System.Drawing.Size(481, 195);
-            this.datagridviewNE1.TabIndex = 4;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -633,9 +619,9 @@
             // textBox4
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox4.Location = new System.Drawing.Point(56, 219);
+            this.textBox4.Location = new System.Drawing.Point(60, 219);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(167, 20);
+            this.textBox4.Size = new System.Drawing.Size(163, 20);
             this.textBox4.TabIndex = 6;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
@@ -643,7 +629,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 222);
+            this.label8.Location = new System.Drawing.Point(11, 222);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(43, 13);
             this.label8.TabIndex = 5;
@@ -665,9 +651,9 @@
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox3.Location = new System.Drawing.Point(104, 245);
+            this.textBox3.Location = new System.Drawing.Point(60, 245);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(294, 20);
+            this.textBox3.Size = new System.Drawing.Size(338, 20);
             this.textBox3.TabIndex = 2;
             // 
             // button4
@@ -687,9 +673,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(7, 248);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(91, 13);
+            this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 1;
-            this.label7.Text = "Nombre de Linea:";
+            this.label7.Text = "Nombre:";
             // 
             // dataGridView4
             // 
@@ -1460,6 +1446,35 @@
             this.textBox12.Size = new System.Drawing.Size(460, 20);
             this.textBox12.TabIndex = 9;
             // 
+            // datagridviewNE1
+            // 
+            this.datagridviewNE1.AllowUserToAddRows = false;
+            this.datagridviewNE1.AllowUserToDeleteRows = false;
+            this.datagridviewNE1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.datagridviewNE1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.datagridviewNE1.BackgroundColor = System.Drawing.SystemColors.Highlight;
+            this.datagridviewNE1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.datagridviewNE1.ContextMenuStrip = this.contextMenuStrip1;
+            this.datagridviewNE1.Location = new System.Drawing.Point(3, 3);
+            this.datagridviewNE1.Name = "datagridviewNE1";
+            this.datagridviewNE1.ReadOnly = true;
+            this.datagridviewNE1.Size = new System.Drawing.Size(481, 195);
+            this.datagridviewNE1.TabIndex = 4;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox4.Image = global::cristales_pva.Properties.Resources.circle_loading_gif;
+            this.pictureBox4.Location = new System.Drawing.Point(305, 204);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(33, 33);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 9;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Visible = false;
+            // 
             // crear_modulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1485,7 +1500,6 @@
             this.contextMenuStrip4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
@@ -1508,6 +1522,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip3.ResumeLayout(false);
             this.contextMenuStrip6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1632,5 +1648,6 @@
         private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }
