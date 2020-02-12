@@ -4453,19 +4453,9 @@ namespace cristales_pva
         }
 
         //eliminar articulo del grid
-        public void eliminarArticuloCotizado(int id, bool noDialog=false)
+        public void eliminarArticuloCotizado(int id)
         {
-            DialogResult r;
-
-            if (noDialog == false)
-            {
-                r = MessageBox.Show("¿Estás seguro de eliminar esté artículo?", constants.msg_box_caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            }
-            else
-            {
-                r = DialogResult.OK;
-            }
-
+            DialogResult r = MessageBox.Show("¿Estás seguro de eliminar esté artículo?", constants.msg_box_caption, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);           
             if (r == DialogResult.OK)
             {
                 cotizaciones_local cotizaciones = new cotizaciones_local();
@@ -4600,11 +4590,29 @@ namespace cristales_pva
 
                                 if (re == DialogResult.Yes)
                                 {
+                                    //Eliminar Merged Items
                                     foreach (var g in n)
                                     {
                                         if (g != null)
                                         {
-                                            eliminarArticuloCotizado(g.id, true);
+                                            var m_items = (from x in cotizaciones.modulos_cotizaciones where x.id == g.id select x).SingleOrDefault();
+                                            if(m_items != null)
+                                            {
+                                                cotizaciones.modulos_cotizaciones.Remove(m_items);
+                                                if (constants.count_modulos > 0)
+                                                {
+                                                    constants.count_modulos = constants.count_modulos - 1;
+                                                }
+                                                if (m_items.folio > 0)
+                                                {
+                                                    constants.setFilaBorradaOnLocalDB(5, (int)m_items.folio, constants.getIDFromClave(m_items.clave));
+                                                }
+                                                if (constants.id_articulo_cotizacion == m_items.id)
+                                                {
+                                                    constants.id_articulo_cotizacion = -1;
+                                                    setEditImage(false, false);
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -4629,10 +4637,7 @@ namespace cristales_pva
                     constants.cotizacion_guardada = false;
                     if (Application.OpenForms["articulos_cotizacion"] != null)
                     {
-                        if (!noDialog)
-                        {
-                            ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
-                        }                 
+                        ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();                                   
                     }
                 }
                 catch (Exception err)
@@ -4772,14 +4777,32 @@ namespace cristales_pva
                         {
                             int concept = (int)modulos.concept_id;
                             var n = (from x in cotizaciones.modulos_cotizaciones where x.merge_id == concept select x);
-                              
+
+                            //Eliminar Merged Items
                             foreach (var g in n)
                             {
                                 if (g != null)
                                 {
-                                    eliminarArticuloCotizado(g.id, true);
+                                    var m_items = (from x in cotizaciones.modulos_cotizaciones where x.id == g.id select x).SingleOrDefault();
+                                    if (m_items != null)
+                                    {
+                                        cotizaciones.modulos_cotizaciones.Remove(m_items);
+                                        if (constants.count_modulos > 0)
+                                        {
+                                            constants.count_modulos = constants.count_modulos - 1;
+                                        }
+                                        if (m_items.folio > 0)
+                                        {
+                                            constants.setFilaBorradaOnLocalDB(5, (int)m_items.folio, constants.getIDFromClave(m_items.clave));
+                                        }
+                                        if (constants.id_articulo_cotizacion == m_items.id)
+                                        {
+                                            constants.id_articulo_cotizacion = -1;
+                                            setEditImage(false, false);
+                                        }
+                                    }
                                 }
-                            }                                                          
+                            }
                             cotizaciones.SaveChanges();
                         }
                         constants.loadCotizacionesLocales("modulos", datagridviewNE1);
