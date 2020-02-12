@@ -4629,7 +4629,10 @@ namespace cristales_pva
                     constants.cotizacion_guardada = false;
                     if (Application.OpenForms["articulos_cotizacion"] != null)
                     {
-                        ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                        if (!noDialog)
+                        {
+                            ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                        }                 
                     }
                 }
                 catch (Exception err)

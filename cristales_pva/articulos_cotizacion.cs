@@ -770,7 +770,6 @@ namespace cristales_pva
             if (datagridviewNE1.RowCount > 0)
             {
                 ((Form1)Application.OpenForms["Form1"]).eliminarArticuloCotizado((int)datagridviewNE1.CurrentRow.Cells[0].Value);
-                loadALL();
             }
         }     
 
