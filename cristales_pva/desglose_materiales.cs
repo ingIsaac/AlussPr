@@ -267,6 +267,7 @@ namespace cristales_pva
             
             if (modulos != null)
             {
+                int _m_c = 1;
                 int counter = 0;
                 int modulos_cant = modulos.Count();
                 progressBar1.Maximum = modulos_cant;
@@ -274,7 +275,12 @@ namespace cristales_pva
 
                 foreach (var v in modulos)
                 {
-                    v_count = (int)v.cantidad;
+                    var _m = (from x in cotizaciones.modulos_cotizaciones where x.id == v.merge_id select x).FirstOrDefault();
+                    if(_m != null)
+                    {
+                        _m_c = (int)_m.cantidad;
+                    }
+                    v_count = (int)v.cantidad * _m_c;
                     counter++;
                     backgroundWorker1.ReportProgress(counter);
                     label1.Text = "Desglosando: " + v.articulo;

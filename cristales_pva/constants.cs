@@ -2879,9 +2879,12 @@ namespace cristales_pva
 
                 if (propiedades != null)
                 {
-                    if ((float)propiedades.iva > 0)
+                    if (iva_desglosado) //Check Iva Desglosado
                     {
-                        iva = (float)propiedades.iva;
+                        if ((float)propiedades.iva > 0)
+                        {
+                            iva = (float)propiedades.iva;
+                        }
                     }
                 }
             }
