@@ -36,6 +36,7 @@ namespace cristales_pva
         public static string release_n = "478";
         public static string ps_dl = "45uT2Q23l";
         public static Socket login_server = null;
+        public static int LocalDB_TimeOut = 5;
 
         //Properties...
         public static string licencia = string.Empty;

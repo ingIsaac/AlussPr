@@ -227,7 +227,7 @@ namespace cristales_pva
 
                 //Calcular Desperdicio
                 costo = costo + (costo * desperdicio);
-                alum_t = alum_t + costo;
+                alum_t = costo;
                 //-------------------------------->
 
                 if (claves_herrajes.Length > 0)
@@ -396,11 +396,11 @@ namespace cristales_pva
                         x.Cells[4].Value = constants.stringToFloat(x.Cells[4].Value.ToString()) + cantidad;
                         if (metros_lineales > 0)
                         {
-                            x.Cells[5].Value = Math.Round(constants.stringToFloat(x.Cells[5].Value.ToString()) + metros_lineales, 2);
+                            x.Cells[5].Value = Math.Round(constants.stringToFloat(x.Cells[5].Value.ToString().Replace(" m", "")) + metros_lineales, 2) + " m";
                         }
                         if (metros_cuadrados > 0)
                         {
-                            x.Cells[6].Value = Math.Round(constants.stringToFloat(x.Cells[6].Value.ToString()) + metros_cuadrados, 2);
+                            x.Cells[6].Value = Math.Round(constants.stringToFloat(x.Cells[6].Value.ToString().Replace(" m2", "")) + metros_cuadrados, 2) + " m2";
                         }
                         x.Cells[8].Value = constants.stringToFloat(x.Cells[8].Value.ToString()) + total;
                         find = true;
@@ -409,7 +409,7 @@ namespace cristales_pva
                 }
                 if (!find)
                 {
-                    datagridviewNE1.Rows.Add(componente, id_articulo.ToString() != "0" ? id_articulo.ToString() : "", clave, articulo, cantidad, metros_lineales.ToString() != "0" ? Math.Round(metros_lineales, 2).ToString() : "", metros_cuadrados.ToString() != "0" ? Math.Round(metros_cuadrados, 2).ToString() : "", precio_u, total);
+                    datagridviewNE1.Rows.Add(componente, id_articulo.ToString() != "0" ? id_articulo.ToString() : "", clave, articulo, cantidad, metros_lineales.ToString() != "0" ? (Math.Round(metros_lineales, 2).ToString() + " m") : "", metros_cuadrados.ToString() != "0" ? (Math.Round(metros_cuadrados, 2).ToString() + " m2") : "", precio_u, total);
                 }
             }
         }

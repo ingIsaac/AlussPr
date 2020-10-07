@@ -34,25 +34,39 @@ namespace cristales_pva
         }
 
         private void Bw_DoWork(object sender, DoWorkEventArgs e)
-        {    
-            //Load Version & XML Data      
+        {
+            //Load Version & XML Data
+            //Get version
+            constants.getSoftwareVersion();
+            label2.Text = "v." + constants.version;
+            //Wait
+            System.Threading.Thread.Sleep(5000);
+            //Check Connection to SQLLocalDB
+            checkSQLLocalDB();
+        }
+
+        private void checkSQLLocalDB(int _t = 0)
+        {
+            label3.Text = "Verificando instancia SQLLocalDB...";
             try
-            {
-                //Get version
-                constants.getSoftwareVersion();
-                label2.Text = "v." + constants.version;
+            {        
                 //Get XML Data
                 loadServerData();
                 constants.setServerCredentials();
             }
             catch (Exception err)
             {
-                MessageBox.Show(this, "[Error]: <:SQLLocalDB?> Se necesitan instalar los complementos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                constants.errorLog(err.ToString());
-                constants.error = true;
+                if (_t >= constants.LocalDB_TimeOut)
+                {
+                    MessageBox.Show(this, "[Error]: <:SQLLocalDB?> Se necesitan instalar los complementos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    constants.errorLog(err.ToString());
+                    constants.error = true;
+                }
+                else
+                {
+                    checkSQLLocalDB(_t++);
+                }
             }
-            //wait
-            System.Threading.Thread.Sleep(5000);
         }
 
         private void loading_icon_Load(object sender, EventArgs e)

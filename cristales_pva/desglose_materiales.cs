@@ -147,7 +147,7 @@ namespace cristales_pva
             var desglose = from x in cotizaciones.materiales_modulos select x;
             foreach(var x in desglose)
             {
-                x.cantidad = x.metros_lineales > 0 ? 0 : x.metros_cuadrados > 0 ? 0 : x.cantidad * factor;
+                x.cantidad = x.cantidad * factor;
                 x.metros_lineales = x.metros_lineales * factor;
                 x.metros_cuadrados = x.metros_cuadrados * factor;
             }

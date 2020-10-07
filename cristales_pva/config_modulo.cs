@@ -2755,12 +2755,20 @@ namespace cristales_pva
             }
             //Resultados
             //---> Desglose
+            int t_cant = constants.stringToInt(textBox4.Text);            
+            foreach (DataGridViewRow x in dataGridView6.Rows)
+            {
+                x.Cells[4].Value = Math.Round(constants.stringToFloat(x.Cells[4].Value.ToString()) * t_cant, 2);
+                x.Cells[8].Value = Math.Round(constants.stringToFloat(x.Cells[8].Value.ToString()) * t_cant, 2);
+            }    
+
             total = (tot_aluminio + (tot_aluminio * desperdicio));
-            textBox9.Text = "$" + total.ToString("0.00");
+            textBox9.Text = "$" + Math.Round(total * t_cant, 2).ToString("0.00");
             total = total + tot_herraje + tot_otros + tot_vidrio + getTotalNewCostos(new_costos);
-            textBox10.Text = "$" + tot_herraje.ToString("0.00");
-            textBox11.Text = "$" + tot_vidrio.ToString("0.00");
-            textBox12.Text = "$" + tot_otros.ToString("0.00") + " + $" + getTotalNewCostos(new_costos);
+            textBox10.Text = "$" + Math.Round(tot_herraje * t_cant, 2).ToString("0.00");
+            textBox11.Text = "$" + Math.Round(tot_vidrio * t_cant, 2).ToString("0.00");
+            textBox12.Text = "$" + Math.Round(tot_otros * t_cant, 2).ToString("0.00") + " + $" + Math.Round(getTotalNewCostos(new_costos) * t_cant, 2);
+            //--------------------------------->
             total = total + (total * flete);
             total = total + (total * mano_obra);
             total = total + (total * utilidad);
