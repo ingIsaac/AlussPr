@@ -3600,7 +3600,7 @@ namespace cristales_pva
             {
                 if (getSeccionesOK() == true)
                 {
-                    if (panel.Width < (tableLayoutPanel1.Width - 10) && panel.Height < (tableLayoutPanel1.Height - 10))
+                    if (panel.Width < (tableLayoutPanel1.Width - 5) && panel.Height < (tableLayoutPanel1.Height - 5))
                     {
                         if (checkIsPerfiles() == true)
                         {
@@ -4410,7 +4410,7 @@ namespace cristales_pva
         //Imprimir datos
         private void button4_Click(object sender, EventArgs e)
         {
-            if (panel.Width > (tableLayoutPanel1.Width - 10) || panel.Height > (tableLayoutPanel1.Height - 10))
+            if (panel.Width > (tableLayoutPanel1.Width - 5) || panel.Height > (tableLayoutPanel1.Height - 5))
             {
                 MessageBox.Show("[Error] Las dimensiones de esté módulo se han salido de la escala.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
