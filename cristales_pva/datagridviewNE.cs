@@ -27,5 +27,17 @@ namespace cristales_pva
                 this.Invalidate();
             }
         }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            try
+            {
+                base.OnMouseLeave(e);
+            }
+            catch (Exception)
+            {
+                this.Invalidate();
+            }
+        }
     }
 }

@@ -23,10 +23,8 @@ namespace cristales_pva
             InitializeComponent();
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
-
             backgroundWorker2.WorkerReportsProgress = true;
             backgroundWorker2.RunWorkerCompleted += BackgroundWorker2_RunWorkerCompleted;
-
             backgroundWorker3.WorkerReportsProgress = true;
             backgroundWorker3.RunWorkerCompleted += BackgroundWorker3_RunWorkerCompleted;
             backgroundWorker4.RunWorkerCompleted += BackgroundWorker4_RunWorkerCompleted;
@@ -40,7 +38,6 @@ namespace cristales_pva
             setYears();
             comboBox2.Text = getMesName(DateTime.Now.Month.ToString());
             comboBox3.Text = DateTime.Now.Year.ToString();
-            //
             checkBox2.MouseClick += CheckBox2_MouseClick;
         }
 

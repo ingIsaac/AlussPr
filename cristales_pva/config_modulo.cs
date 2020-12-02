@@ -4106,7 +4106,18 @@ namespace cristales_pva
             }
             else
             {
-                dataGridView2[e.ColumnIndex, e.RowIndex].Value = "";
+                if (dataGridView2[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText == "Cantidad")
+                {
+                    if (dataGridView2[e.ColumnIndex, e.RowIndex].Value == null)
+                    {
+                        dataGridView2[e.ColumnIndex, e.RowIndex].Value = "0";
+                    }                   
+                }
+                //---------------------------------------------------------------------------------->
+                if (dataGridView2[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText != "Cantidad")
+                {
+                    dataGridView2[e.ColumnIndex, e.RowIndex].Value = "";
+                }
                 getInstruction(dataGridView2.CurrentRow.Cells[1].Value.ToString(), constants.stringToFloat(dataGridView2.CurrentRow.Cells[3].Value.ToString()));
                 calcularCostoModulo();
             }
@@ -4138,7 +4149,18 @@ namespace cristales_pva
             }
             else
             {
-                dataGridView3[e.ColumnIndex, e.RowIndex].Value = "";
+                if (dataGridView3[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText == "Cantidad")
+                {
+                    if (dataGridView3[e.ColumnIndex, e.RowIndex].Value == null)
+                    {
+                        dataGridView3[e.ColumnIndex, e.RowIndex].Value = "0";
+                    }
+                }
+                //---------------------------------------------------------------------------------->
+                if (dataGridView3[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText != "Cantidad")
+                {
+                    dataGridView3[e.ColumnIndex, e.RowIndex].Value = "";
+                }
                 getInstruction(dataGridView3.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView3.CurrentRow.Cells[4].Value.ToString()));
                 calcularCostoModulo();
             }
@@ -4170,7 +4192,18 @@ namespace cristales_pva
             }
             else
             {
-                dataGridView4[e.ColumnIndex, e.RowIndex].Value = "";
+                if (dataGridView4[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText == "Cantidad")
+                {
+                    if (dataGridView4[e.ColumnIndex, e.RowIndex].Value == null)
+                    {
+                        dataGridView4[e.ColumnIndex, e.RowIndex].Value = "0";
+                    }
+                }
+                //---------------------------------------------------------------------------------->
+                if (dataGridView4[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText != "Cantidad")
+                {
+                    dataGridView4[e.ColumnIndex, e.RowIndex].Value = "";
+                }
                 getInstruction(dataGridView4.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView4.CurrentRow.Cells[4].Value.ToString()));
                 calcularCostoModulo();
             }
@@ -4236,6 +4269,14 @@ namespace cristales_pva
             }
             else
             {
+                if(dataGridView1[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText == "Cantidad")
+                {
+                    if(dataGridView1[e.ColumnIndex, e.RowIndex].Value == null)
+                    {
+                        dataGridView1[e.ColumnIndex, e.RowIndex].Value = "0";
+                    }                    
+                }
+                //---------------------------------------------------------------------------------->
                 if (constants.stringToFloat(dataGridView1.CurrentRow.Cells[4].Value.ToString()) <= 0)
                 {
                     dataGridView1.CurrentRow.Cells[7].Value = "";
@@ -4258,7 +4299,10 @@ namespace cristales_pva
                     //----------------------------------------------------------------------->
                 }
                 checkAcabados();
-                dataGridView1[e.ColumnIndex, e.RowIndex].Value = "";
+                if (dataGridView1[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText != "Cantidad")
+                {
+                    dataGridView1[e.ColumnIndex, e.RowIndex].Value = "";
+                }
                 getInstruction(dataGridView1.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView1.CurrentRow.Cells[4].Value.ToString()));
                 calcularCostoModulo();
             }
