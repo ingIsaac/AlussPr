@@ -666,7 +666,7 @@ namespace cristales_pva
                 checkBox5.Checked = constants.iva_desglosado;
                 toolStripStatusLabel3.Text = "     [Cliente: " + constants.nombre_cotizacion + "]   [Proyecto: " + constants.nombre_proyecto + "]";
                 toolStripStatusLabel3.Text = toolStripStatusLabel3.Text.ToUpper();
-                toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;
+                toolStripStatusLabel3.ForeColor = System.Drawing.Color.Blue;                        
                 //Load Special Parameters
                 if (constants.local == false)
                 {
@@ -715,6 +715,22 @@ namespace cristales_pva
             setModueTreeImages();
             //Modalidad LIVA
             setModoLIVA();
+            //Tasa Cero
+            if (!constants.iva_desglosado)
+            {
+                //Reload Data
+                constants.tasa_cero = constants.getOptionXMLValue("TSA_ZRO").ToString().ToLower() == "true" ? true : false;
+                if (constants.folio_abierto <= 0)
+                {
+                    for (int i = 1; i < 5; i++)
+                    {
+                        constants.reloadPreciosCotizaciones(i);
+                    }
+                    //-------------------------->
+                    calcularTotalesCotizacion();
+                }
+                constants.checkTasaCero(this);
+            }
             //Anuncios
             if (!constants.local && constants.anuncios)
             {
@@ -7103,6 +7119,7 @@ namespace cristales_pva
             try
             {
                 constants.save_onEdit.Clear();
+                constants.tasa_cero = false;
                 checkBox5.Checked = true;
                 textBox4.Text = "0";
                 textBox28.Text = "0";
@@ -7193,6 +7210,11 @@ namespace cristales_pva
                 this.enable_iva = true;
                 constants.iva = constants.getPropiedadesModel();
                 constants.iva_desglosado = true;
+                if(constants.tasa_cero)
+                {
+                    checkBox5.Checked = false;
+                    MessageBox.Show("Para habilitar nuevamente el desglose de IVA, deshabilita la opción Tasa Cero IVA.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {                
@@ -7458,6 +7480,60 @@ namespace cristales_pva
         private void button27_Click(object sender, EventArgs e)
         {
             reloadAll();
+        }
+
+        private void habilitarTasaCeroIVAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (constants.iva_desglosado)
+            {
+                MessageBox.Show("Para habilitar la opción Tasa Cero IVA, primero tienes que deshabilitar el desglose de IVA.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                DialogResult r = MessageBox.Show("Para habilitar o deshabilitar esta opción deberas actualizar los precios de está cotización. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (constants.tasa_cero)
+                    {
+                        constants.tasa_cero = false;                      
+                    }
+                    else
+                    {
+                        constants.tasa_cero = true;                       
+                    }
+
+                    constants.checkTasaCero(this);
+                    //-------------------------->
+                    constants.errors_Open.Clear();
+                    for (int i = 1; i < 5; i++)
+                    {
+                        constants.reloadPreciosCotizaciones(i);
+                    }
+                    //-------------------------->
+                    calcularTotalesCotizacion();
+                    constants.cotizacion_proceso = true;
+                    constants.cotizacion_guardada = false;
+                    //-------------------------->
+                    if (Application.OpenForms["articulos_cotizacion"] != null)
+                    {
+                        ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                    }
+                    if (Application.OpenForms["edit_expresss"] != null)
+                    {
+                        ((edit_expresss)Application.OpenForms["edit_expresss"]).Close();
+                    }
+                    if (Application.OpenForms["config_modulo"] != null)
+                    {
+                        ((config_modulo)Application.OpenForms["config_modulo"]).Close();
+                    }
+                }
+            }           
+        }
+
+        public void setTasaCeroTag()
+        {
+            habilitarTasaCeroIVAToolStripMenuItem.Checked = constants.tasa_cero;
+            constants.setOptionXML("TSA_ZRO", constants.tasa_cero ? "true" : "false");
         }
 
         public void disableModoLIVA()

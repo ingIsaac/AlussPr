@@ -2521,13 +2521,13 @@ namespace cristales_pva
             }
         }
 
-        public void insertCotizacion(int folio, string cliente, string usuario, string fecha, string nombre_proyecto, float descuento, float utilidad, string tienda, bool iva_desglosado, string registro, float tc, string subfolio_titles, string precio_especial)
+        public void insertCotizacion(int folio, string cliente, string usuario, string fecha, string nombre_proyecto, float descuento, float utilidad, string tienda, bool iva_desglosado, string registro, float tc, string subfolio_titles, string precio_especial, bool tasa_cero)
         {            
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "INSERT INTO cotizaciones (folio, cliente, fecha, usuario, nombre_proyecto, descuento, utilidad, tienda, iva_desglosado, registro, tc, subfolio_titles, precio_especial) VALUES (@FOLIO, @CLIENTE, @FECHA, @USUARIO, @PROYECTO, @DESC, @UTIL, @TIENDA, @IVA, @REG, @TC, @SFOL, @PESP)";
+            cmd.CommandText = "INSERT INTO cotizaciones (folio, cliente, fecha, usuario, nombre_proyecto, descuento, utilidad, tienda, iva_desglosado, registro, tc, subfolio_titles, precio_especial, tasa_cero) VALUES (@FOLIO, @CLIENTE, @FECHA, @USUARIO, @PROYECTO, @DESC, @UTIL, @TIENDA, @IVA, @REG, @TC, @SFOL, @PESP, @TASA_CERO)";
             cmd.Parameters.AddWithValue("@FOLIO", SqlDbType.Int);
             cmd.Parameters["@FOLIO"].Value = folio;
             cmd.Parameters.AddWithValue("@CLIENTE", SqlDbType.VarChar);
@@ -2554,6 +2554,8 @@ namespace cristales_pva
             cmd.Parameters["@SFOL"].Value = subfolio_titles;
             cmd.Parameters.AddWithValue("@PESP", SqlDbType.VarChar);
             cmd.Parameters["@PESP"].Value = precio_especial;
+            cmd.Parameters.AddWithValue("@TASA_CERO", SqlDbType.Bit);
+            cmd.Parameters["@TASA_CERO"].Value = tasa_cero;
             try
             {
                 connection.Open();
@@ -2571,13 +2573,13 @@ namespace cristales_pva
 
         }
 
-        public void updateCotizacion(int folio, string fecha, string cliente, string proyecto, float descuento, float utilidad, bool iva_desglosado, float tc, string subfolio_titles, string precio_especial)
+        public void updateCotizacion(int folio, string fecha, string cliente, string proyecto, float descuento, float utilidad, bool iva_desglosado, float tc, string subfolio_titles, string precio_especial, bool tasa_cero)
         {           
             SqlConnection connection = new SqlConnection();
             connection.ConnectionString = getConnectionString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE cotizaciones SET fecha=@FECHA, cliente=@CLIENTE, nombre_proyecto=@PROYECTO, descuento=@DESC, utilidad=@UTIL, iva_desglosado=@IVA, tc=@TC, subfolio_titles=@SFOL, precio_especial=@PESP WHERE folio='" + folio + "'";
+            cmd.CommandText = "UPDATE cotizaciones SET fecha=@FECHA, cliente=@CLIENTE, nombre_proyecto=@PROYECTO, descuento=@DESC, utilidad=@UTIL, iva_desglosado=@IVA, tc=@TC, subfolio_titles=@SFOL, precio_especial=@PESP, tasa_cero=@TASA_CERO WHERE folio='" + folio + "'";
             cmd.Parameters.AddWithValue("@FECHA", SqlDbType.VarChar);
             cmd.Parameters["@FECHA"].Value = fecha;
             cmd.Parameters.AddWithValue("@CLIENTE", SqlDbType.VarChar);
@@ -2596,6 +2598,8 @@ namespace cristales_pva
             cmd.Parameters["@SFOL"].Value = subfolio_titles;
             cmd.Parameters.AddWithValue("@PESP", SqlDbType.VarChar);
             cmd.Parameters["@PESP"].Value = precio_especial;
+            cmd.Parameters.AddWithValue("@TASA_CERO", SqlDbType.Bit);
+            cmd.Parameters["@TASA_CERO"].Value = tasa_cero;
             try
             {
                 connection.Open();
@@ -3104,6 +3108,7 @@ namespace cristales_pva
             {
                 MessageBox.Show("[Error] <?>.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 constants.folio_abierto = -1;
+                constants.tasa_cero = false;
                 constants.nombre_cotizacion = string.Empty;
                 constants.nombre_proyecto = string.Empty;
                 constants.precio_especial_desc = string.Empty;
@@ -5740,6 +5745,39 @@ namespace cristales_pva
                 connection.Close();
                 connection.Dispose();
             }
+        }
+
+        public bool getTasaCero(int folio)
+        {
+            bool result = false;
+            connection = new SqlConnection();
+            connection.ConnectionString = getConnectionString();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT tasa_cero FROM cotizaciones WHERE folio='" + folio + "'";
+            try
+            {
+                connection.Open();
+                SqlDataReader r = cmd.ExecuteReader();
+                while (r.Read())
+                {
+                    if (!r.IsDBNull(0))
+                    {
+                        result = (bool)r.GetValue(0);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                constants.errorLog(e.ToString());
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
+            return result;
         }
 
         ~sqlDateBaseManager()

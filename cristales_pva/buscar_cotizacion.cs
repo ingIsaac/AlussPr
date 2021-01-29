@@ -432,6 +432,8 @@ namespace cristales_pva
                 constants.utilidad_cotizacion = constants.stringToFloat(sql.getSingleSQLValue("cotizaciones", "utilidad", "folio", constants.folio_abierto.ToString(), 0));
                 constants.unserializeSubfolio(sql.getSingleSQLValue("cotizaciones", "subfolio_titles", "folio", constants.folio_abierto.ToString(), 0));
                 constants.iva_desglosado = sql.getIvaDesglosado(constants.folio_abierto);
+                constants.tasa_cero = sql.getTasaCero(constants.folio_abierto);
+                constants.checkTasaCero(this);
                 var t = sql.getSingleSQLValue("cotizaciones", "precio_especial", "folio", constants.folio_abierto.ToString(), 0);
                 if (t != null)
                 {

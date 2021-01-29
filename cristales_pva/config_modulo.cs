@@ -71,6 +71,7 @@ namespace cristales_pva
             contextMenuStrip5.Opening += ContextMenuStrip5_Opening;
             contextMenuStrip6.Opening += ContextMenuStrip6_Opening;
             contextMenuStrip7.Opening += ContextMenuStrip7_Opening;
+            Shown += Config_modulo_Shown;
             this.FormClosing += Config_modulo_FormClosing;
             dataGridView5.CellContextMenuStripNeeded += DataGridView5_CellContextMenuStripNeeded;
             SizeChanged += Config_modulo_SizeChanged;
@@ -131,6 +132,11 @@ namespace cristales_pva
             textBox14.Text = constants.lim_sm.ToString();
             this.KeyPreview = true;
             this.KeyDown += Config_modulo_KeyDown;
+        }
+
+        private void Config_modulo_Shown(object sender, EventArgs e)
+        {
+            constants.checkTasaCero(this);
         }
 
         private void Config_modulo_KeyDown(object sender, KeyEventArgs e)
@@ -2776,8 +2782,22 @@ namespace cristales_pva
             if (((dataGridView1.RowCount == 0 || arePerfiles() == false) && (comboBox1.Text == "" || comboBox3.Text == "")) || (dataGridView1.RowCount > 0 && (comboBox1.Text != "" || comboBox3.Text != "")))
             {
                 float _tot = getTotalNewCostosTotal(new_costos);
-                textBox13.Text = Math.Round((total * cantidad) + _tot, 2).ToString("0.00");
-                label12.Text = Math.Round(((total * cantidad) + _tot) * constants.iva, 2).ToString("n");
+                float t_tot = (total * cantidad) + _tot;
+                //Tasa Cero
+                if(constants.tasa_cero)
+                {
+                    if (!constants.iva_desglosado)
+                    {
+                        //Get IVA
+                        float _iva = constants.getPropiedadesModel();
+                        float _ut = t_tot / (utilidad + 1);
+                        float _nt = t_tot - _ut;
+                        t_tot = (_ut * _iva) + _nt;
+                    }
+                }
+                //----------------------------------------------------->
+                textBox13.Text = Math.Round(t_tot, 2).ToString("0.00");
+                label12.Text = Math.Round(t_tot * constants.iva, 2).ToString("n");
                 label44.Text = _tot > 0 ? "+ ($" + _tot + ")" : string.Empty;
             }
             else

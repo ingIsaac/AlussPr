@@ -118,6 +118,7 @@ namespace cristales_pva
         public static string factory_acabado_perfil = string.Empty;
         public static string factory_cristal = string.Empty;
         public static string precio_especial_desc = string.Empty;
+        public static bool tasa_cero = false;
 
         public static void getSoftwareVersion()
         {
@@ -4324,9 +4325,23 @@ namespace cristales_pva
             //Resultados
             costo = costo + (costo * flete);
             costo = costo + (costo * mano_obra);
-            costo = costo + (costo * utilidad);            
-            //
-            return ((costo) * cantidad) + _total;
+            costo = costo + (costo * utilidad);
+            
+            //Tasa 0
+            float t_tot = ((costo) * cantidad) + _total;
+            if (constants.tasa_cero)
+            {
+                if (!constants.iva_desglosado)
+                {
+                    //Get IVA
+                    float _iva = constants.getPropiedadesModel();
+                    float _ut = t_tot / (utilidad + 1);
+                    float _nt = t_tot - _ut;
+                    t_tot = (_ut * _iva) + _nt;
+                }
+            }
+
+            return t_tot;
         }
 
         public static void checkErrorsOnLoad()
@@ -5765,6 +5780,16 @@ namespace cristales_pva
                 errorLog(err.ToString());
                 MessageBox.Show("[Error] no se puede añadir datos del archivo opciones.xml.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public static void checkTasaCero(Form form)
+        {
+            ((Form1)Application.OpenForms["form1"]).setTasaCeroTag();
+            if (constants.tasa_cero)
+            {
+                MessageBox.Show(form, "La opción tasa cero IVA esta habilitada en esta cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+           
         }
     }
 }

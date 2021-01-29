@@ -36,6 +36,7 @@ namespace cristales_pva
 
         //Temporales
         Bitmap pic;
+        string cell_cache = string.Empty;
         List<int> precios_costos_list = new List<int>();
         List<int> instalado_list = new List<int>();
         List<int> hojas_list = new List<int>();
@@ -89,6 +90,8 @@ namespace cristales_pva
             datagridviewNE1.CellClick += datagridviewNE1_CellClick;
             datagridviewNE1.CellLeave += datagridviewNE1_CellLeave;
             datagridviewNE1.DataError += DatagridviewNE1_DataError;
+            datagridviewNE1.CellBeginEdit += DatagridviewNE1_CellBeginEdit;
+            datagridviewNE1.CellEndEdit += DatagridviewNE1_CellEndEdit;
             datagridviewNE1.EditingControlShowing += DatagridviewNE1_EditingControlShowing;
 
             //Other Events
@@ -128,6 +131,42 @@ namespace cristales_pva
             }
             textBox7.Text = alum_kg.ToString();
             m_tc = constants.getTCFromXML();            
+        }
+
+        private void DatagridviewNE1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewCell _t = datagridviewNE1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            object t = _t.Value;
+            if(t != null)
+            {
+                if(_t.OwningColumn.HeaderText == "articulo")
+                {
+                    string value = t.ToString();
+                    if (checkInvalidChars(value) == true)
+                    {
+                        if (value.Length < 3 || value.Length > 80)
+                        {
+                            datagridviewNE1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = cell_cache;
+                            MessageBox.Show("[Error] El nombre de artículo no es válido, solo se pueden usar nombres de 3 o hasta 80 caracteres.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        datagridviewNE1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = cell_cache;
+                        MessageBox.Show("[Error] el nombre de artículo incluye caracteres no válidos.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }              
+            }           
+        }
+
+        private void DatagridviewNE1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            cell_cache = string.Empty;
+            object t = datagridviewNE1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            if(t != null)
+            {
+                cell_cache = t.ToString();
+            }
         }
 
         private void ContextMenuStrip3_Opening(object sender, CancelEventArgs e)
@@ -2143,9 +2182,9 @@ namespace cristales_pva
                     {
                         if (checkInvalidChars(x.Cells[1].Value.ToString()) == true)
                         {
-                            if (x.Cells[1].Value.ToString().Length < 3 || x.Cells[1].Value.ToString().Length > 40)
+                            if (x.Cells[1].Value.ToString().Length < 3 || x.Cells[1].Value.ToString().Length > 80)
                             {
-                                MessageBox.Show("[Error] El nombre de artículo " + x.Cells[1].Value + " no es válido, solo se pueden usar nombres de 3 o hasta 40 caracteres.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("[Error] El nombre de artículo " + x.Cells[1].Value + " no es válido, solo se pueden usar nombres de 3 o hasta 80 caracteres.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 x.DefaultCellStyle.BackColor = Color.Red;
                                 r = true;
                                 break;
