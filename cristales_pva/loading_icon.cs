@@ -21,7 +21,7 @@ namespace cristales_pva
             bw.DoWork += Bw_DoWork;
             bw.RunWorkerCompleted += Bw_RunWorkerCompleted;
             System.Diagnostics.FileVersionInfo info = constants.getFileInfoVersion();           
-            label4.Text = info != null ? info.LegalCopyright : string.Empty;
+            label4.Text = info != null ? info.LegalCopyright + " " + DateTime.Today.Year : string.Empty;
         }
 
         private void Bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

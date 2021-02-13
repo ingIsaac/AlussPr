@@ -715,7 +715,7 @@ namespace cristales_pva
             {
                 if (t1.Rows[i][0] != null && t1.Rows[i][0].ToString() != "")
                 {                   
-                    insertListaCostoCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][5].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString(), t1.Rows[i][10].ToString());
+                    insertListaCostoCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][5].ToString()), getCostoInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString(), t1.Rows[i][10].ToString());
                     insertListaPrecioCorteInstalado(t1.Rows[i][0].ToString(), t1.Rows[i][1].ToString(), constants.stringToFloat(t1.Rows[i][7].ToString()), getPrecioInstalado(t2, t1.Rows[i][0].ToString()), t1.Rows[i][9].ToString(), t1.Rows[i][10].ToString());
                 }
             }
@@ -736,6 +736,23 @@ namespace cristales_pva
                     if(x[0].ToString() == clave)
                     {
                         r = constants.stringToFloat(x[7].ToString());
+                    }
+                }
+            }
+            return r;
+        }
+
+
+        private float getCostoInstalado(DataTable table, string clave)
+        {
+            float r = 0;
+            foreach (DataRow x in table.Rows)
+            {
+                if (x[0] != null)
+                {
+                    if (x[0].ToString() == clave)
+                    {
+                        r = constants.stringToFloat(x[5].ToString());
                     }
                 }
             }

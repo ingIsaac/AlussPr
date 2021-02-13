@@ -16,7 +16,7 @@ namespace cristales_pva
             this.Text = String.Format("Información de {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = System.Diagnostics.FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
-            this.labelCopyright.Text = AssemblyCopyright;
+            this.labelCopyright.Text = AssemblyCopyright + " " + DateTime.Today.Year;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = "Release: " + constants.release_n;
         }
