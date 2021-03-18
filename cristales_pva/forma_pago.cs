@@ -35,31 +35,28 @@ namespace cristales_pva
 
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            if (richTextBox1.Text != "")
+        {        
+            try
             {
-                try
+                XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
+
+                var mv = from x in propiedades_xml.Descendants("Propiedades") select x;
+
+                foreach (XElement x in mv)
                 {
-                    XDocument propiedades_xml = XDocument.Load(constants.propiedades_xml);
-
-                    var mv = from x in propiedades_xml.Descendants("Propiedades") select x;
-
-                    foreach (XElement x in mv)
-                    {
-                        x.SetElementValue("FP", richTextBox1.Text);
-                    }
-
-                    propiedades_xml.Save(constants.propiedades_xml);
-                    MessageBox.Show(this, "Se han guardado los cambios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ((reportes)Application.OpenForms["reportes"]).reload();
-                    Close();
+                    x.SetElementValue("FP", richTextBox1.Text);
                 }
-                catch (Exception err)
-                {
-                    constants.errorLog(err.ToString());
-                    MessageBox.Show(this, "[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+
+                propiedades_xml.Save(constants.propiedades_xml);
+                MessageBox.Show(this, "Se han guardado los cambios.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ((reportes)Application.OpenForms["reportes"]).reload();
+                Close();
             }
+            catch (Exception err)
+            {
+                constants.errorLog(err.ToString());
+                MessageBox.Show(this, "[Error] el archivo propiedades.xml no se encuentra en la carpeta de instalación o se está dañado." + Application.StartupPath, constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }           
         }
     }
 }

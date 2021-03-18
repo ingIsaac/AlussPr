@@ -116,6 +116,7 @@ namespace cristales_pva
                 var op8 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP8")).SingleOrDefault();
                 var op9 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP9")).SingleOrDefault();
                 var op10 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP10")).SingleOrDefault();
+                var op11 = (from x in opciones_xml.Descendants("Opciones") select x.Element("OP11")).SingleOrDefault();
 
                 if (mv != null)
                 {
@@ -467,6 +468,18 @@ namespace cristales_pva
                     else
                     {
                         constants.op10 = false;
+                    }
+                }
+
+                if (op11 != null)
+                {
+                    if (op11.Value == "true")
+                    {
+                        constants.op11 = true;
+                    }
+                    else
+                    {
+                        constants.op11 = false;
                     }
                 }
             }

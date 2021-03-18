@@ -54,6 +54,7 @@ namespace cristales_pva
             checkBox8.Checked = constants.op8;
             checkBox9.Checked = constants.op9;
             checkBox10.Checked = constants.op10;
+            checkBox11.Checked = constants.op11;
             load = true;
             label6.Text = "Sub-Folio: " + constants.sub_folio;
             
@@ -144,6 +145,13 @@ namespace cristales_pva
                 _utilidad = 1;
             }
 
+            //ocultar forma_pago
+            string _forma_pago_ext = string.Empty;
+            if (!checkBox3.Checked)
+            {
+                _forma_pago_ext = "_sp";
+            }
+
             //ocultar desglose          
             if (!constants.iva_desglosado)
             {
@@ -151,11 +159,11 @@ namespace cristales_pva
                 //---------------------------------------->
                 if (checkBox7.Checked)
                 {
-                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte2_c.rdlc";
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte2_c" + _forma_pago_ext + ".rdlc";
                 }
                 else
                 {
-                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte2.rdlc";
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte2" + _forma_pago_ext + ".rdlc";
                 }
             }
             else
@@ -164,11 +172,11 @@ namespace cristales_pva
                 //---------------------------------------->
                 if (checkBox7.Checked)
                 {
-                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte_c.rdlc";
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte_c" + _forma_pago_ext + ".rdlc";
                 }
                 else
                 {
-                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte.rdlc";
+                    reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte" + _forma_pago_ext + ".rdlc";
                 }
             }           
             //------------------------------------------------------------------------------------>
@@ -403,8 +411,17 @@ namespace cristales_pva
                         bm = null;                     
                     }
 
+                    string articulo = string.Empty;
                     string mosquitero = string.Empty;
                     string elevacion = string.Empty;
+
+                    if (checkBox11.Checked)
+                    {
+                        if (c.articulo != string.Empty)
+                        {
+                            articulo = "\n-Artículo: " + c.articulo.Replace(" C/M", "").Replace(" S/M", "").Replace("C/M", "").Replace("S/M", "").Replace("*(CS)-", "");
+                        }
+                    }
 
                     if (c.articulo.Contains("C/M") == true)
                     {
@@ -428,11 +445,11 @@ namespace cristales_pva
                     {
                         if (cristales.Length > 0)
                         {
-                            descripcion = "-Linea: " + c.linea + acabado + "\n-Cristal:\n" + cristales + "\n-Descripción:\n" + c.descripcion + mosquitero;
+                            descripcion = "-Linea: " + c.linea + articulo + acabado + "\n-Cristal:\n" + cristales + "\n-Descripción:\n" + c.descripcion + mosquitero;
                         }
                         else
                         {
-                            descripcion = "-Linea: " + c.linea + acabado + "\n-Descripción:\n" + c.descripcion + mosquitero;
+                            descripcion = "-Linea: " + c.linea + articulo + acabado + "\n-Descripción:\n" + c.descripcion + mosquitero;
                         }
                     }
                     else
@@ -1164,6 +1181,24 @@ namespace cristales_pva
                 {
                     setNewOption("OP10", "false");
                     constants.op10 = false;
+                }
+            }
+        }
+
+        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            if (load == true)
+            {
+                loadReporte(cliente, proyecto, folio, subtotal, iva, total);
+                if (checkBox11.Checked == true)
+                {
+                    setNewOption("OP11", "true");
+                    constants.op11 = true;
+                }
+                else
+                {
+                    setNewOption("OP11", "false");
+                    constants.op11 = false;
                 }
             }
         }

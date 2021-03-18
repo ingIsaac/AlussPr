@@ -78,6 +78,7 @@ namespace cristales_pva
         public static bool op8 = false;
         public static bool op9 = false;
         public static bool op10 = false;
+        public static bool op11 = false;
         public static bool m_liva = false;
         public static bool ingreso_ac = false;
         public static string user_ac = string.Empty;

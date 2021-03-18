@@ -915,6 +915,10 @@
       <DependentUpon>registro_presupuesto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="analiticas.rdlc" />
+    <EmbeddedResource Include="reporte2_c_sp.rdlc" />
+    <EmbeddedResource Include="reporte2_sp.rdlc" />
+    <EmbeddedResource Include="reporte_c_sp.rdlc" />
+    <EmbeddedResource Include="reporte_sp.rdlc" />
     <EmbeddedResource Include="reporte2_c.rdlc" />
     <EmbeddedResource Include="reporte_c.rdlc" />
     <EmbeddedResource Include="reporte2.rdlc" />

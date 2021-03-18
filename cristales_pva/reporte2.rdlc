@@ -1502,7 +1502,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox28</rd:DefaultName>
-          <Top>0cm</Top>
           <Left>0.26141cm</Left>
           <Height>0.6cm</Height>
           <Width>3.50542cm</Width>
@@ -1538,7 +1537,6 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox13</rd:DefaultName>
-          <Top>0cm</Top>
           <Left>16.58753cm</Left>
           <Height>0.6cm</Height>
           <Width>3.74764cm</Width>
@@ -1704,6 +1702,7 @@
     </ReportParameter>
     <ReportParameter Name="formaPago">
       <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="descuento">
