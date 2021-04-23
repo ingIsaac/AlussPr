@@ -6750,6 +6750,10 @@ namespace cristales_pva
                 constants.id_articulo_cotizacion = -1;
                 setEditImage(false, false);
                 calcularTotalesCotizacion();
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                }
             }
         }
 
@@ -6793,6 +6797,10 @@ namespace cristales_pva
                 constants.loadCotizacionesLocales("modulos", datagridviewNE1);
                 resetCountArticulos();
                 calcularTotalesCotizacion();
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                }
             }
         }
 
