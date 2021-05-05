@@ -715,7 +715,7 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "costo_corte_precio", true, "articulo", value_filter, true);                       
+                        sql.dropTableOnGridView(table, "costo_corte_precio", true, "articulo", value_filter, false);                       
                     }
                     else if (comboBox9.Text != "")
                     {
@@ -734,7 +734,7 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "instalado", true, "articulo", value_filter, true);
+                        sql.dropTableOnGridView(table, "instalado", true, "articulo", value_filter, false);
                     }
                     else if (comboBox9.Text != "")
                     {
@@ -753,7 +753,7 @@ namespace cristales_pva
                 {
                     if (comboBox8.Text != "")
                     {
-                        sql.dropTableOnGridView(table, "hojas", true, "articulo", value_filter, true);
+                        sql.dropTableOnGridView(table, "hojas", true, "articulo", value_filter, false);
                     }
                     else if (comboBox9.Text != "")
                     {
@@ -901,6 +901,7 @@ namespace cristales_pva
                     for (int i = 0; i < datagridviewNE1.ColumnCount; i++)
                     {
                         lista[i] = datagridviewNE1.Columns[i].HeaderText;
+                        datagridviewNE1.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
                     }
                     comboBox2.Items.AddRange(lista);
                     comboBox6.Items.Clear();
@@ -967,10 +968,20 @@ namespace cristales_pva
                 {
                     foreach (DataGridViewRow x in datagridviewNE1.Rows)
                     {
-                        if (x.Cells["linea"].Value.ToString() == comboBox8.Text)
+                        if(datagridviewNE1.Columns["linea"] == null)
                         {
-                            x.Cells[0].Style.BackColor = Color.Yellow;
-                        }
+                            if (x.Cells["articulo"].Value.ToString().Contains(comboBox8.Text.ToUpper()))
+                            {
+                                x.Cells[0].Style.BackColor = Color.Yellow;
+                            }
+                        }   
+                        else
+                        {
+                            if (x.Cells["linea"].Value.ToString() == comboBox8.Text)
+                            {
+                                x.Cells[0].Style.BackColor = Color.Yellow;
+                            }
+                        }                      
                     }
                 }
                 else if (comboBox9.Text != string.Empty)
