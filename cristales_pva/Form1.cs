@@ -4438,6 +4438,7 @@ namespace cristales_pva
                 }
                 //
                 label100.Text = "[Cerrando Cotización...]";
+                this.Enabled = false; //Disable UI
                 backgroundWorker4.RunWorkerAsync();
             }
         }
@@ -7127,8 +7128,6 @@ namespace cristales_pva
             try
             {
                 constants.save_onEdit.Clear();
-                constants.tasa_cero = false;
-                checkBox5.Checked = true;
                 textBox4.Text = "0";
                 textBox28.Text = "0";
                 constants.clearCotizacionesLocales();
@@ -7160,7 +7159,12 @@ namespace cristales_pva
                 disableTabPage();
                 tabControl1.SelectedTab = tabPage15;
                 float tc = constants.getTCFromXML();
-                if(constants.tc != tc)
+                //------------------------------------------>
+                constants.tasa_cero = false;
+                setTasaCeroTag();
+                checkBox5.Checked = true;
+                //------------------------------------------>
+                if (constants.tc != tc)
                 {
                     constants.changeTC(constants.tc, tc, "USD");
                 }
@@ -7180,6 +7184,7 @@ namespace cristales_pva
         {
             label100.Text = "";
             ((Form1)Application.OpenForms["Form1"]).setTCLabel(constants.tc);
+            this.Enabled = true; //Enable UI
         }     
 
         //Opciones del programa
@@ -7494,48 +7499,66 @@ namespace cristales_pva
         {
             if (constants.iva_desglosado)
             {
-                MessageBox.Show("Para habilitar la opción Tasa Cero IVA, primero tienes que deshabilitar el desglose de IVA.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(this, "Para habilitar la opción Tasa Cero IVA, primero tienes que deshabilitar el desglose de IVA.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                DialogResult r = MessageBox.Show("Para habilitar o deshabilitar esta opción deberas actualizar los precios de está cotización. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (r == DialogResult.Yes)
+                using (cotizaciones_local cotizaciones = new cotizaciones_local())
                 {
-                    if (constants.tasa_cero)
+                    if(cotizaciones.modulos_cotizaciones.Count() > 0)
                     {
-                        constants.tasa_cero = false;                      
+                        DialogResult r = MessageBox.Show(this, "Para habilitar o deshabilitar esta opción deberas actualizar los precios de está cotización. ¿Deseas continuar?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (r == DialogResult.Yes)
+                        {
+                            updateTasaCero();
+                        }
                     }
                     else
                     {
-                        constants.tasa_cero = true;                       
+                        updateTasaCero();
                     }
-
-                    constants.checkTasaCero(this);
-                    //-------------------------->
-                    constants.errors_Open.Clear();
-                    for (int i = 1; i < 5; i++)
-                    {
-                        constants.reloadPreciosCotizaciones(i);
-                    }
-                    //-------------------------->
-                    calcularTotalesCotizacion();
-                    constants.cotizacion_proceso = true;
-                    constants.cotizacion_guardada = false;
-                    //-------------------------->
-                    if (Application.OpenForms["articulos_cotizacion"] != null)
-                    {
-                        ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
-                    }
-                    if (Application.OpenForms["edit_expresss"] != null)
-                    {
-                        ((edit_expresss)Application.OpenForms["edit_expresss"]).Close();
-                    }
-                    if (Application.OpenForms["config_modulo"] != null)
-                    {
-                        ((config_modulo)Application.OpenForms["config_modulo"]).Close();
-                    }
-                }
+                }              
             }           
+        }
+
+        private void updateTasaCero()
+        {
+            if (constants.tasa_cero)
+            {
+                MessageBox.Show(this, "La opción tasa cero IVA se ha deshabilitado en esta cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //------------------------->
+                constants.tasa_cero = false;
+                checkBox5.Checked = true;
+            }
+            else
+            {
+                constants.tasa_cero = true;
+            }
+
+            constants.checkTasaCero(this);
+            //-------------------------->
+            constants.errors_Open.Clear();
+            for (int i = 1; i < 5; i++)
+            {
+                constants.reloadPreciosCotizaciones(i);
+            }
+            //-------------------------->
+            calcularTotalesCotizacion();
+            constants.cotizacion_proceso = true;
+            constants.cotizacion_guardada = false;
+            //-------------------------->
+            if (Application.OpenForms["articulos_cotizacion"] != null)
+            {
+                ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+            }
+            if (Application.OpenForms["edit_expresss"] != null)
+            {
+                ((edit_expresss)Application.OpenForms["edit_expresss"]).Close();
+            }
+            if (Application.OpenForms["config_modulo"] != null)
+            {
+                ((config_modulo)Application.OpenForms["config_modulo"]).Close();
+            }
         }
 
         public void setTasaCeroTag()

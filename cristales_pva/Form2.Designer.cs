@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(34, 232);
+            this.label1.Location = new System.Drawing.Point(34, 242);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 1;
@@ -69,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 272);
+            this.label2.Location = new System.Drawing.Point(34, 282);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 2;
@@ -77,7 +77,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(37, 288);
+            this.textBox2.Location = new System.Drawing.Point(37, 298);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(214, 20);
@@ -87,7 +87,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(94, 339);
+            this.button1.Location = new System.Drawing.Point(94, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 32);
             this.button1.TabIndex = 3;
@@ -98,7 +98,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 559);
+            this.checkBox1.Location = new System.Drawing.Point(12, 569);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(151, 17);
             this.checkBox1.TabIndex = 4;
@@ -109,7 +109,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(37, 248);
+            this.comboBox1.Location = new System.Drawing.Point(37, 258);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(214, 21);
             this.comboBox1.TabIndex = 1;
@@ -183,7 +183,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(12, 582);
+            this.checkBox2.Location = new System.Drawing.Point(12, 592);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(142, 17);
             this.checkBox2.TabIndex = 5;
@@ -195,7 +195,7 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(37, 316);
+            this.checkBox3.Location = new System.Drawing.Point(37, 326);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(114, 17);
             this.checkBox3.TabIndex = 13;
@@ -207,7 +207,7 @@
             // label3
             // 
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(37, 510);
+            this.label3.Location = new System.Drawing.Point(37, 520);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(214, 21);
             this.label3.TabIndex = 17;
@@ -217,7 +217,7 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(12, 536);
+            this.checkBox4.Location = new System.Drawing.Point(12, 546);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(116, 17);
             this.checkBox4.TabIndex = 18;
@@ -229,7 +229,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::cristales_pva.Properties.Resources.progress_bar;
-            this.pictureBox3.Location = new System.Drawing.Point(37, 474);
+            this.pictureBox3.Location = new System.Drawing.Point(37, 484);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(214, 34);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -255,7 +255,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(94, 379);
+            this.pictureBox2.Location = new System.Drawing.Point(94, 389);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 88);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -265,10 +265,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::cristales_pva.Properties.Resources.app_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(49, 38);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 40);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(192, 181);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(288, 189);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -277,7 +277,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(288, 608);
+            this.ClientSize = new System.Drawing.Size(288, 619);
             this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox3);

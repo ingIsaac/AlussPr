@@ -5786,11 +5786,10 @@ namespace cristales_pva
         public static void checkTasaCero(Form form)
         {
             ((Form1)Application.OpenForms["form1"]).setTasaCeroTag();
-            if (constants.tasa_cero)
+            if (tasa_cero)
             {
                 MessageBox.Show(form, "La opción tasa cero IVA esta habilitada en esta cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-           
+            }     
         }
     }
 }
