@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.IO;
 using System.Xml.Linq;
+using System.Drawing;
 
 namespace cristales_pva
 {
@@ -44,6 +45,11 @@ namespace cristales_pva
             this.descuento = descuento;
             this.desc_cant = desc_cant;
             this.utilidad = utilidad;
+            //--------------->
+            textBox4.Enter += TextBox4_Enter;
+            textBox5.Enter += TextBox5_Enter;
+            textBox5.Leave += TextBox5_Leave;
+            //--------------->
             checkBox2.Checked = constants.op1;
             checkBox1.Checked = constants.op2;
             checkBox3.Checked = constants.op3;
@@ -69,12 +75,6 @@ namespace cristales_pva
             //            
         }
 
-        private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
-        {
-            reportViewer1.LocalReport.ReleaseSandboxAppDomain();
-            reportViewer1.LocalReport.Dispose();
-        }
-
         private void TextBox4_Leave(object sender, EventArgs e)
         {
             if (constants.isLong(textBox4.Text) == true)
@@ -92,6 +92,46 @@ namespace cristales_pva
                     textBox4.Text = string.Format("{0:##-##-##}", Convert.ToInt64(textBox4.Text));
                 }
             }
+
+
+            if (textBox4.Text.Length == 0)
+            {
+                textBox4.Text = "(669)974-3456";
+                textBox4.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void TextBox5_Leave(object sender, EventArgs e)
+        {
+            if (textBox5.Text.Length == 0)
+            {
+                textBox5.Text = "user@mail.com";
+                textBox5.ForeColor = Color.LightGray;
+            }
+        }
+
+        private void TextBox5_Enter(object sender, EventArgs e)
+        {
+            if (textBox5.ForeColor == Color.LightGray)
+            {
+                textBox5.Text = string.Empty;
+                textBox5.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void TextBox4_Enter(object sender, EventArgs e)
+        {
+            if (textBox4.ForeColor == Color.LightGray)
+            {
+                textBox4.Text = string.Empty;
+                textBox4.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void LocalReport_SubreportProcessing(object sender, SubreportProcessingEventArgs e)
+        {
+            reportViewer1.LocalReport.ReleaseSandboxAppDomain();
+            reportViewer1.LocalReport.Dispose();
         }
 
         private void setData(string cliente, string proyecto, string domicilio, string telefono, string email)
@@ -99,8 +139,18 @@ namespace cristales_pva
             textBox1.Text = cliente != "" ? cliente : textBox1.Text;
             textBox2.Text = proyecto != "" ? proyecto : textBox2.Text;
             textBox3.Text = domicilio != "" ? domicilio : textBox3.Text;
-            textBox4.Text = telefono != "" ? telefono : textBox4.Text;
-            textBox5.Text = email != "" ? email : textBox5.Text;
+
+            if (telefono != "")
+            {
+                textBox4.Text = telefono;
+                textBox4.ForeColor = SystemColors.WindowText;
+            }
+
+            if (email != "")
+            {
+                textBox5.Text = email;
+                textBox5.ForeColor = SystemColors.WindowText;
+            }
         }
 
         public string deserializarPrecioSpecial(string precio_especial, int subfolio)
@@ -256,8 +306,8 @@ namespace cristales_pva
                     Nombre_Proyecto = textBox2.Text,
                     Fecha = DateTime.Today.ToString("dd/MM/yyyy"),
                     Domicilio = textBox3.Text,
-                    Telefono = textBox4.Text,
-                    email = textBox5.Text,
+                    Telefono = textBox4.ForeColor == Color.LightGray ? string.Empty : textBox4.Text,
+                    email = textBox5.ForeColor == Color.LightGray ? string.Empty : textBox5.Text,
                     Folio = folio,
                     Subtotal = subtotal,
                     IVA = iva,
@@ -1023,7 +1073,7 @@ namespace cristales_pva
                 sqlDateBaseManager sql = new sqlDateBaseManager();
                 if (cliente != "")
                 {
-                    setData(cliente, proyecto, textBox3.Text, textBox4.Text, textBox5.Text);
+                    setData(cliente, proyecto, textBox3.Text, textBox4.ForeColor == Color.LightGray ? string.Empty : textBox4.Text, textBox5.ForeColor == Color.LightGray ? string.Empty : textBox5.Text);
                 }
                 loadReporte(cliente, proyecto, folio, subtotal, iva, total);
             }

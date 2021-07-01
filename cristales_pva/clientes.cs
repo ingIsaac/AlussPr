@@ -65,11 +65,15 @@ namespace cristales_pva
             {
                 if (sql.findSQLValue("nombre", "nombre", "clientes", textBox1.Text) == false)
                 {
-                    sql.insertNewClient(textBox1.Text, textBox2.Text, textBox3.Text, textBox8.Text);
+                    sql.insertNewClient(textBox1.Text, textBox2.ForeColor == Color.LightGray ? string.Empty : textBox2.Text, textBox3.ForeColor == Color.LightGray ? string.Empty : textBox3.Text, textBox8.Text);
                     textBox1.Text = "";
-                    textBox2.Text = "";
-                    textBox3.Text = "";
                     textBox8.Text = "";
+                    //----------------->
+                    textBox2.Text = "(669)974-3456";
+                    textBox2.ForeColor = Color.LightGray;
+                    //----------------->
+                    textBox3.Text = "user@mail.com";
+                    textBox3.ForeColor = Color.LightGray;
                     MessageBox.Show("Un nuevo cliente ha sido ingresado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
@@ -96,7 +100,7 @@ namespace cristales_pva
             sqlDateBaseManager sql = new sqlDateBaseManager();
             if (textBox4.Text != "")
             {
-                sql.updateClient(textBox4.Text, textBox5.Text, textBox6.Text, textBox9.Text);
+                sql.updateClient(textBox4.Text, textBox5.ForeColor == Color.LightGray ? string.Empty : textBox5.Text, textBox6.ForeColor == Color.LightGray ? string.Empty : textBox6.Text, textBox9.Text);
                 loadClients();
                 MessageBox.Show("Actualización completa.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -133,10 +137,14 @@ namespace cristales_pva
                 if (r == DialogResult.Yes)
                 {
                     sql.deleteClient(dataGridView1.CurrentRow.Cells[1].Value.ToString());
-                    textBox4.Text = "";
-                    textBox5.Text = "";
-                    textBox6.Text = "";
-                    textBox9.Text = "";
+                    textBox1.Text = "";
+                    textBox8.Text = "";
+                    //----------------->
+                    textBox5.Text = "(669)974-3456";
+                    textBox5.ForeColor = Color.LightGray;
+                    //----------------->
+                    textBox6.Text = "user@mail.com";
+                    textBox6.ForeColor = Color.LightGray;
                     loadClients();
                 }
             }

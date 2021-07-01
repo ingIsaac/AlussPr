@@ -202,7 +202,7 @@
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox1.BackColor = System.Drawing.SystemColors.Window;
             this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox1.Location = new System.Drawing.Point(16, 342);
             this.textBox1.Name = "textBox1";
@@ -212,7 +212,7 @@
             // textBox2
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox2.BackColor = System.Drawing.SystemColors.Window;
             this.textBox2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox2.Location = new System.Drawing.Point(16, 381);
             this.textBox2.Name = "textBox2";
@@ -222,7 +222,7 @@
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox3.BackColor = System.Drawing.SystemColors.Window;
             this.textBox3.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBox3.Location = new System.Drawing.Point(16, 420);
             this.textBox3.Name = "textBox3";
@@ -232,12 +232,14 @@
             // textBox4
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox4.BackColor = System.Drawing.SystemColors.Window;
             this.textBox4.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox4.ForeColor = System.Drawing.Color.LightGray;
             this.textBox4.Location = new System.Drawing.Point(16, 459);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(177, 20);
             this.textBox4.TabIndex = 4;
+            this.textBox4.Text = "(669)974-3456";
             // 
             // checkBox3
             // 
@@ -280,12 +282,14 @@
             // textBox5
             // 
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox5.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBox5.BackColor = System.Drawing.SystemColors.Window;
             this.textBox5.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox5.ForeColor = System.Drawing.Color.LightGray;
             this.textBox5.Location = new System.Drawing.Point(16, 498);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(177, 20);
             this.textBox5.TabIndex = 5;
+            this.textBox5.Text = "USER@MAIL.COM";
             // 
             // checkBox5
             // 
