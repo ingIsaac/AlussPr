@@ -171,6 +171,7 @@ namespace cristales_pva
             }
             else if(e.KeyData == Keys.F1)
             {
+                button1.Focus();
                 agregar();
             }
         }
