@@ -3908,16 +3908,27 @@ namespace cristales_pva
                     {
                         if (esquema[2] == "V")
                         {
-                            panel.SetRowSpan(a1, s);
+                            if (panel.RowCount >= s)
+                            {
+                                panel.SetRowSpan(a1, s);
+                            }
                         }
                         else if (esquema[2] == "H")
                         {
-                            panel.SetColumnSpan(a1, s);
+                            if (panel.ColumnCount >= s)
+                            {
+                                panel.SetColumnSpan(a1, s);
+                            }
                         }
                         else if (esquema[2] == "VH")
                         {
-                            panel.SetRowSpan(a1, stringToInt(esquema[3]));
-                            panel.SetColumnSpan(a1, stringToInt(esquema[4]));
+                            int x = stringToInt(esquema[3]);
+                            int y = stringToInt(esquema[4]);
+                            if (panel.RowCount >= x && panel.ColumnCount >= y)
+                            {
+                                panel.SetRowSpan(a1, x);
+                                panel.SetColumnSpan(a1, y);
+                            }
                         }
                     }
                 });
@@ -3943,16 +3954,27 @@ namespace cristales_pva
                 {
                     if (esquema[2] == "V")
                     {
-                        panel.SetRowSpan(a1, s);
+                        if (panel.RowCount >= s)
+                        {
+                            panel.SetRowSpan(a1, s);
+                        }
                     }
                     else if (esquema[2] == "H")
                     {
-                        panel.SetColumnSpan(a1, s);
+                        if (panel.ColumnCount >= s)
+                        {
+                            panel.SetColumnSpan(a1, s);
+                        }
                     }
                     else if (esquema[2] == "VH")
                     {
-                        panel.SetRowSpan(a1, stringToInt(esquema[3]));
-                        panel.SetColumnSpan(a1, stringToInt(esquema[4]));
+                        int x = stringToInt(esquema[3]);
+                        int y = stringToInt(esquema[4]);
+                        if (panel.RowCount >= x && panel.ColumnCount >= y)
+                        {
+                            panel.SetRowSpan(a1, x);
+                            panel.SetColumnSpan(a1, y);
+                        }
                     }
                 }
             }                                              
@@ -3979,16 +4001,27 @@ namespace cristales_pva
                     {
                         if (esquema[2] == "V")
                         {
-                            panel.SetRowSpan(a1, s);
+                            if (panel.RowCount >= s)
+                            {
+                                panel.SetRowSpan(a1, s);
+                            }
                         }
                         else if (esquema[2] == "H")
                         {
-                            panel.SetColumnSpan(a1, s);
+                            if (panel.ColumnCount >= s)
+                            {
+                                panel.SetColumnSpan(a1, s);
+                            }
                         }
                         else if (esquema[2] == "VH")
                         {
-                            panel.SetRowSpan(a1, stringToInt(esquema[3]));
-                            panel.SetColumnSpan(a1, stringToInt(esquema[4]));
+                            int x = stringToInt(esquema[3]);
+                            int y = stringToInt(esquema[4]);
+                            if (panel.RowCount >= x && panel.ColumnCount >= y)
+                            {
+                                panel.SetRowSpan(a1, x);
+                                panel.SetColumnSpan(a1, y);
+                            }
                         }
                     }
                 });
@@ -4010,16 +4043,27 @@ namespace cristales_pva
                 {
                     if (esquema[2] == "V")
                     {
-                        panel.SetRowSpan(a1, s);
+                        if (panel.RowCount >= s)
+                        {
+                            panel.SetRowSpan(a1, s);
+                        }
                     }
                     else if (esquema[2] == "H")
                     {
-                        panel.SetColumnSpan(a1, s);
+                        if (panel.ColumnCount >= s)
+                        {
+                            panel.SetColumnSpan(a1, s);
+                        }
                     }
                     else if (esquema[2] == "VH")
                     {
-                        panel.SetRowSpan(a1, stringToInt(esquema[3]));
-                        panel.SetColumnSpan(a1, stringToInt(esquema[4]));
+                        int x = stringToInt(esquema[3]);
+                        int y = stringToInt(esquema[4]);
+                        if (panel.RowCount >= x && panel.ColumnCount >= y)
+                        {
+                            panel.SetRowSpan(a1, x);
+                            panel.SetColumnSpan(a1, y);
+                        }
                     }
                 }
             }      

@@ -345,16 +345,27 @@ namespace cristales_pva
                         {
                             if (esquema[2] == "V")
                             {
-                                tableLayoutPanel1.SetRowSpan(a1, s);
+                                if(tableLayoutPanel1.RowCount >= s)
+                                {
+                                    tableLayoutPanel1.SetRowSpan(a1, s);
+                                }
                             }
                             else if (esquema[2] == "H")
                             {
-                                tableLayoutPanel1.SetColumnSpan(a1, s);
+                                if(tableLayoutPanel1.ColumnCount >= s)
+                                {
+                                    tableLayoutPanel1.SetColumnSpan(a1, s);
+                                }
                             }
                             else if (esquema[2] == "VH")
                             {
-                                tableLayoutPanel1.SetRowSpan(a1, constants.stringToInt(esquema[3]));
-                                tableLayoutPanel1.SetColumnSpan(a1, constants.stringToInt(esquema[4]));
+                                int x = constants.stringToInt(esquema[3]);
+                                int y = constants.stringToInt(esquema[4]);
+                                if (tableLayoutPanel1.RowCount >= x && tableLayoutPanel1.ColumnCount >= y)
+                                {
+                                    tableLayoutPanel1.SetRowSpan(a1, x);
+                                    tableLayoutPanel1.SetColumnSpan(a1, y);
+                                }                                
                             }
                         }
                         if (esquema[1] != "" || esquema[1] != null)
@@ -738,17 +749,28 @@ namespace cristales_pva
                     {
                         if (esquema[2] == "V")
                         {
-                            tableLayoutPanel1.SetRowSpan(tableLayoutPanel1.Controls[v], s);
+                            if (tableLayoutPanel1.RowCount >= s)
+                            {
+                                tableLayoutPanel1.SetRowSpan(tableLayoutPanel1.Controls[v], s);
+                            }
                         }
                         else if (esquema[2] == "H")
                         {
-                            tableLayoutPanel1.SetColumnSpan(tableLayoutPanel1.Controls[v], s);
+                            if (tableLayoutPanel1.ColumnCount >= s)
+                            {
+                                tableLayoutPanel1.SetColumnSpan(tableLayoutPanel1.Controls[v], s);
+                            }
                         }
                         else if (esquema[2] == "VH")
                         {
-                            tableLayoutPanel1.SetRowSpan(tableLayoutPanel1.Controls[v], constants.stringToInt(esquema[3]));
-                            tableLayoutPanel1.SetColumnSpan(tableLayoutPanel1.Controls[v], constants.stringToInt(esquema[4]));
-                        }
+                            int x = constants.stringToInt(esquema[3]);
+                            int y = constants.stringToInt(esquema[4]);
+                            if (tableLayoutPanel1.RowCount >= x && tableLayoutPanel1.ColumnCount >= y)
+                            {
+                                tableLayoutPanel1.SetRowSpan(tableLayoutPanel1.Controls[v], x);
+                                tableLayoutPanel1.SetColumnSpan(tableLayoutPanel1.Controls[v], y);
+                            }
+                        }                
                     }
                     if (esquema[1] != "" || esquema[1] != null)
                     {
@@ -846,16 +868,27 @@ namespace cristales_pva
                         {
                             if (esquema[2] == "V")
                             {
-                                tableLayoutPanel1.SetRowSpan(a1, s);
+                                if (tableLayoutPanel1.RowCount >= s)
+                                {
+                                    tableLayoutPanel1.SetRowSpan(a1, s);
+                                }
                             }
                             else if (esquema[2] == "H")
                             {
-                                tableLayoutPanel1.SetColumnSpan(a1, s);
+                                if (tableLayoutPanel1.ColumnCount >= s)
+                                {
+                                    tableLayoutPanel1.SetColumnSpan(a1, s);
+                                }
                             }
                             else if (esquema[2] == "VH")
                             {
-                                tableLayoutPanel1.SetRowSpan(a1, constants.stringToInt(esquema[3]));
-                                tableLayoutPanel1.SetColumnSpan(a1, constants.stringToInt(esquema[4]));
+                                int x = constants.stringToInt(esquema[3]);
+                                int y = constants.stringToInt(esquema[4]);
+                                if (tableLayoutPanel1.RowCount >= x && tableLayoutPanel1.ColumnCount >= y)
+                                {
+                                    tableLayoutPanel1.SetRowSpan(a1, x);
+                                    tableLayoutPanel1.SetColumnSpan(a1, y);
+                                }
                             }
                         }
                         if (esquema[1] != "" || esquema[1] != null)
