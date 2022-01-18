@@ -312,7 +312,7 @@ namespace cristales_pva
                 cotizaciones.SaveChanges();
                 loadCopy();
                 datagridviewNE1.Refresh();
-                ((Form1)Application.OpenForms["form1"]).reloadAll();
+                ((Form1)Application.OpenForms["form1"]).reloadAll(this);
                 ((Form1)Application.OpenForms["form1"]).refreshNewArticulo(5);
                 if (Application.OpenForms["articulos_cotizacion"] != null)
                 {

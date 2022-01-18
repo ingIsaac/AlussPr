@@ -961,7 +961,7 @@ namespace cristales_pva
             {
                 resetRowSelect();
                 constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value, -1, true);
-                ((Form1)Application.OpenForms["Form1"]).reloadAll();
+                ((Form1)Application.OpenForms["Form1"]).reloadAll(this);
                 loadALL();
             }
         }
@@ -973,7 +973,7 @@ namespace cristales_pva
             {
                 constants.errors_Open.Clear();
                 constants.reloadPreciosCotizaciones(0, constants.reload_precios);
-                ((Form1)Application.OpenForms["Form1"]).reloadAll();
+                ((Form1)Application.OpenForms["Form1"]).reloadAll(this);
             }
         }
 
@@ -1047,11 +1047,11 @@ namespace cristales_pva
                     constants.reloadPreciosCotizaciones(0, constants.reload_precios, id, (int)concepto.concept_id);
                     if (reload == true)
                     {
-                        ((Form1)Application.OpenForms["Form1"]).reloadAll();
+                        ((Form1)Application.OpenForms["Form1"]).reloadAll(this);
                     }
                     else
                     {
-                        ((Form1)Application.OpenForms["Form1"]).reloadCotizacion();
+                        ((Form1)Application.OpenForms["Form1"]).reloadCotizacion(this);
                     }
                 }
             }

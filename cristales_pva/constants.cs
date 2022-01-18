@@ -651,9 +651,9 @@ namespace cristales_pva
         //
 
         //reload cotizaciones
-        public static void reloadCotizaciones()
+        public static void reloadCotizaciones(Form form)
         {
-            ((Form1)Application.OpenForms["Form1"]).reloadAll();      
+            ((Form1)Application.OpenForms["Form1"]).reloadAll(form);      
         }
         //
 
@@ -4389,12 +4389,12 @@ namespace cristales_pva
             return t_tot;
         }
 
-        public static void checkErrorsOnLoad()
+        public static void checkErrorsOnLoad(Form form)
         {
             if(errors_Open.Count > 0)
             {
                 ((Form1)Application.OpenForms["form1"]).checkErrorsModulos();
-                MessageBox.Show("[Advertencia]: Se han detectado algunos errores dentro de la configuración de los módulos siguientes. Configura de nuevo los módulos afectados.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(form, "[Advertencia]: Se han detectado algunos errores dentro de la configuración de los módulos siguientes. Configura de nuevo los módulos afectados.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

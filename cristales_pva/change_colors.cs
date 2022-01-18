@@ -1538,7 +1538,7 @@ namespace cristales_pva
             label4.Text = "Actualizando Datos...";
             constants.errors_Open.Clear();
             constants.reloadPreciosCotizaciones(constants.sub_folio);
-            ((Form1)Application.OpenForms["Form1"]).reloadAll();                
+            ((Form1)Application.OpenForms["Form1"]).reloadAll(this);                
         }
 
         private void BackgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

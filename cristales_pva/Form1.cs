@@ -836,20 +836,20 @@ namespace cristales_pva
             checkBox5.Text = "IVA (" + ((constants.getPropiedadesModel() - 1) * 100) + "%):";
         }
 
-        public void reloadAll()
+        public void reloadAll(Form form)
         {
             countCotizacionesArticulo();
             loadCountArticulos();
             calcularTotalesCotizacion();         
             refreshNewArticulo();
-            constants.checkErrorsOnLoad();
+            constants.checkErrorsOnLoad(form);
             constants.cotizacion_guardada = false;
         }
 
-        public void reloadCotizacion()
+        public void reloadCotizacion(Form form)
         {
             refreshNewArticulo();
-            constants.checkErrorsOnLoad();
+            constants.checkErrorsOnLoad(form);
             constants.cotizacion_guardada = false;
         }
 
@@ -913,7 +913,7 @@ namespace cristales_pva
                 loadListaFromLocal();
             }
             reloadPreciosCotizaciones();
-            reloadAll();
+            reloadAll(this);
         }
 
         private void BackgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -6812,7 +6812,7 @@ namespace cristales_pva
             {                
                 constants.sub_folio = constants.stringToInt(comboBox5.Text);
                 setSubFolioLabel();
-                reloadAll();
+                reloadAll(this);
                 constants.loadCotizacionesLocales("modulos", datagridviewNE1);
                 if (Application.OpenForms["articulos_cotizacion"] != null) { ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL(); }
             }
@@ -6895,7 +6895,7 @@ namespace cristales_pva
             if (datagridviewNE1.RowCount > 0)
             {
                 constants.duplicarConcepto(constants.tipo_cotizacion, (int)datagridviewNE1.CurrentRow.Cells[0].Value, -1, true);
-                reloadAll();
+                reloadAll(this);
                 if (Application.OpenForms["articulos_cotizacion"] != null)
                 {
                     ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
@@ -6924,7 +6924,7 @@ namespace cristales_pva
                     if (r == DialogResult.Yes)
                     {
                         constants.duplicarSubfolio(constants.stringToInt(comboBox7.Text), constants.sub_folio);
-                        reloadAll();
+                        reloadAll(this);
                         if (Application.OpenForms["articulos_cotizacion"] != null)
                         {
                             ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
@@ -7492,7 +7492,7 @@ namespace cristales_pva
 
         private void button27_Click(object sender, EventArgs e)
         {
-            reloadAll();
+            reloadAll(this);
         }
 
         private void habilitarTasaCeroIVAToolStripMenuItem_Click(object sender, EventArgs e)

@@ -183,7 +183,7 @@ namespace cristales_pva
                     constants.reloadPreciosCotizaciones(i, constants.reload_precios);
                 }
             }
-            constants.reloadCotizaciones();
+            constants.reloadCotizaciones(this);
             ((Form1)Application.OpenForms["Form1"]).setFolioLabel();
             ((Form1)Application.OpenForms["Form1"]).setEditImage(false, false);
             constants.cotizacion_guardada = true;
