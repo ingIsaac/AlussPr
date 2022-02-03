@@ -14,7 +14,7 @@ namespace cristales_pva
         public subfolio_title()
         {
             InitializeComponent();
-            textBox1.Text = constants.getSubfoliotitle(constants.sub_folio);
+            textBox1.Text = constants.getSubfoliotitle(constants.sub_folio).Trim();
         }
 
         private void button1_Click(object sender, EventArgs e)

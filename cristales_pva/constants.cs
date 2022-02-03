@@ -5712,11 +5712,11 @@ namespace cristales_pva
                 {                    
                     if (r.Length > 0)
                     {
-                        r = r + "," + x;
+                        r = r + "," + (x == string.Empty ? " " : x);
                     }
                     else
                     {
-                        r = x;
+                        r = (x == string.Empty ? " " : x);
                     }                  
                 }
             }

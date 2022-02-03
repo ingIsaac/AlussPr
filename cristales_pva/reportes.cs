@@ -68,7 +68,7 @@ namespace cristales_pva
             sqlDateBaseManager sql = new sqlDateBaseManager();
             if (cliente != "")
             {
-                setData(cliente, proyecto + (constants.getSubfoliotitle(constants.sub_folio) != string.Empty ? (proyecto != string.Empty ? " - " + constants.getSubfoliotitle(constants.sub_folio) : constants.getSubfoliotitle(constants.sub_folio)) : string.Empty), sql.getSingleSQLValue("clientes", "domicilio", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "telefono", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "correo_electronico", "nombre", cliente, 0));
+                setData(cliente, proyecto + (constants.getSubfoliotitle(constants.sub_folio).Trim() != string.Empty ? (proyecto != string.Empty ? " - " + constants.getSubfoliotitle(constants.sub_folio) : constants.getSubfoliotitle(constants.sub_folio)) : string.Empty), sql.getSingleSQLValue("clientes", "domicilio", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "telefono", "nombre", cliente, 0), sql.getSingleSQLValue("clientes", "correo_electronico", "nombre", cliente, 0));
             }
             loadReporte(cliente, proyecto, folio, subtotal, iva, total);
             reportViewer1.LocalReport.SubreportProcessing += LocalReport_SubreportProcessing;

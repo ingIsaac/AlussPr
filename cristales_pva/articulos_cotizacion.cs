@@ -112,7 +112,7 @@ namespace cristales_pva
             {
                 m = m + " - " + constants.nombre_proyecto;
             }
-            if(constants.getSubfoliotitle(constants.sub_folio) != string.Empty)
+            if(constants.getSubfoliotitle(constants.sub_folio).Trim() != string.Empty)
             {
                 if(m.Length > 0)
                 {
