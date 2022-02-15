@@ -15,6 +15,31 @@ namespace cristales_pva
         public cm_opciones()
         {
             InitializeComponent();
+            //-->
+            textBox1.TextChanged += TextBox1_TextChanged;
+            textBox2.TextChanged += TextBox2_TextChanged;
+            textBox3.TextChanged += TextBox3_TextChanged;
+            textBox4.TextChanged += TextBox4_TextChanged;
+        }
+
+        private void TextBox4_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox4);
+        }
+
+        private void TextBox3_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox3);
+        }
+
+        private void TextBox2_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox2);
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox1);
         }
 
         private void cm_opciones_Load(object sender, EventArgs e)
@@ -56,12 +81,12 @@ namespace cristales_pva
 
                 foreach (XElement x in opciones)
                 {
-                   x.SetElementValue("CM", textBox1.Text + "," + textBox2.Text + "," + textBox3.Text + "," + textBox4.Text);
+                   x.SetElementValue("CM", constants.stringToInt(textBox1.Text) + "," + constants.stringToInt(textBox2.Text) + "," + constants.stringToInt(textBox3.Text) + "," + constants.stringToInt(textBox4.Text));
                 }
                 opciones_xml.Save(constants.opciones_xml);
                 if (Application.OpenForms["config_modulo"] != null)
                 {
-                    ((config_modulo)Application.OpenForms["config_modulo"]).setNewParameters(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text);
+                    ((config_modulo)Application.OpenForms["config_modulo"]).setNewParameters(constants.stringToInt(textBox1.Text).ToString(), constants.stringToInt(textBox2.Text).ToString(), constants.stringToInt(textBox3.Text).ToString(), constants.stringToInt(textBox4.Text).ToString());
                 }
                 this.Close();
             }

@@ -50,7 +50,32 @@ namespace cristales_pva
             contextMenuStrip4.Opening += ContextMenuStrip4_Opening;
             contextMenuStrip5.Opening += ContextMenuStrip5_Opening;
             contextMenuStrip6.Opening += ContextMenuStrip6_Opening;
+            //-->
+            textBox8.TextChanged += TextBox8_TextChanged;
+            textBox9.TextChanged += TextBox9_TextChanged;
+            textBox10.TextChanged += TextBox10_TextChanged;
+            textBox11.TextChanged += TextBox11_TextChanged;
             loadAll();
+        }
+
+        private void TextBox11_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox11);
+        }
+
+        private void TextBox10_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox10);
+        }
+
+        private void TextBox9_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox9);
+        }
+
+        private void TextBox8_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox8);
         }
 
         private void ContextMenuStrip6_Opening(object sender, CancelEventArgs e)
@@ -388,14 +413,40 @@ namespace cristales_pva
         {
             if (dataGridView6[e.ColumnIndex, e.RowIndex].Value != null)
             {
+                checkInputNumValue(dataGridView6, e.RowIndex, e.ColumnIndex);
+                //-->
                 setColors();
                 countItems();
             }
             else
             {
-                dataGridView6[e.ColumnIndex, e.RowIndex].Value = "";
+                if (dataGridView6[e.ColumnIndex, e.RowIndex].OwningColumn.HeaderText == "Cantidad")
+                {
+                    if (dataGridView6[e.ColumnIndex, e.RowIndex].Value == null)
+                    {
+                        dataGridView6[e.ColumnIndex, e.RowIndex].Value = "0";
+                    }
+                }
+                else
+                {
+                    dataGridView6[e.ColumnIndex, e.RowIndex].Value = "";
+                }
                 setColors();
                 countItems();
+            }
+        }
+
+        private void checkInputNumValue(DataGridView table, int x, int y)
+        {
+            if (table[y, x].OwningColumn.HeaderText == "Cantidad")
+            {
+                if (table[y, x].Value != null)
+                {
+                    if (!constants.isFloat(table[y, x].Value.ToString()))
+                    {
+                        table[y, x].Value = "0";
+                    }
+                }
             }
         }
 

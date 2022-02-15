@@ -65,6 +65,26 @@ namespace cristales_pva
             //Otros
             datagridviewNE1.DataError += DatagridviewNE1_DataError;
             setYears();
+
+            //-------------------------->
+            textBox3.TextChanged += TextBox3_TextChanged;
+            textBox8.TextChanged += TextBox8_TextChanged;
+            textBox7.TextChanged += TextBox7_TextChanged;
+        }
+
+        private void TextBox7_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox7);
+        }
+
+        private void TextBox8_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox8);
+        }
+
+        private void TextBox3_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox3);
         }
 
         private void setYears()

@@ -51,7 +51,45 @@ namespace cristales_pva
             if (constants.user_access <= 1 && constants.permitir_cp == false)
             {
                 checkBox3.Enabled = false;
-            }  
+            }
+            //--------------------->
+            textBox3.TextChanged += TextBox3_TextChanged;
+            textBox4.TextChanged += TextBox4_TextChanged;
+            textBox5.TextChanged += TextBox5_TextChanged;
+            textBox6.TextChanged += TextBox6_TextChanged;
+            //--------------------->
+            textBox7.TextChanged += TextBox7_TextChanged;
+            textBox8.TextChanged += TextBox8_TextChanged;
+        }
+
+        private void TextBox8_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox8);
+        }
+
+        private void TextBox7_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox7);
+        }
+
+        private void TextBox6_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox6);
+        }
+
+        private void TextBox5_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox5);
+        }
+
+        private void TextBox4_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox4);
+        }
+
+        private void TextBox3_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox3);
         }
 
         private void loadLineas()
@@ -334,7 +372,29 @@ namespace cristales_pva
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(comboBox1.Text == "" && comboBox2.Text == "" && textBox1.Text == "" && !checkBox3.Checked && textBox7.Text == "" && textBox8.Text == "")
+            if (comboBox5.Text != "")
+            {
+                if (comboBox1.Text == "" && comboBox2.Text == "")
+                {
+                    MessageBox.Show(this, "[Error] Para hacer el cambio de linea necesitas añadir un color o acabado al perfil.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else if (textBox1.Text == "")
+                {
+                    MessageBox.Show(this, "[Error] Para hacer el cambio de linea necesitas añadir un tipo de cristal.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    if (backgroundWorker1.IsBusy == false && backgroundWorker2.IsBusy == false && backgroundWorker3.IsBusy == false)
+                    {
+                        tableLayoutPanel1.Controls.Clear();
+                        pictureBox1.Visible = false;
+                        progressBar1.Value = 0;
+                        progressBar1.Visible = true;
+                        backgroundWorker1.RunWorkerAsync();
+                    }
+                }
+            }
+            else if (comboBox1.Text == "" && comboBox2.Text == "" && textBox1.Text == "" && !checkBox3.Checked && textBox7.Text == "" && textBox8.Text == "")
             {
                 MessageBox.Show(this, "[Error] necesitas añadir al menos una opción.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);             
             }
@@ -342,7 +402,7 @@ namespace cristales_pva
             {
                 MessageBox.Show(this, "[Error] necesitas especificar el filtro seleccionado.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if(id <= 0 && checkBox4.Checked && comboBox5.Text != "" && comboBox3.Text != "Linea" && comboBox4.Text == "")
+            else if (id <= 0 && checkBox4.Checked && comboBox5.Text != "" && comboBox3.Text != "Linea" && comboBox4.Text == "")
             {
                 MessageBox.Show(this, "[Error] necesitas seleccionar la linea que será afectada.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -484,6 +544,7 @@ namespace cristales_pva
             {
                 foreach (var v in modulos_c)
                 {
+                    
                     if (backgroundWorker1.CancellationPending == false)
                     {
                         modulo_id = (int)v.modulo_id;
@@ -501,7 +562,7 @@ namespace cristales_pva
                             }
                         }
                         if (modulo != null)
-                        {                          
+                        {             
                             if (v.new_desing != "" && modulo_id >= 0)
                             {
                                 id_diseño = constants.stringToInt(v.new_desing);

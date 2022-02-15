@@ -254,6 +254,8 @@
             this.opcionesDelProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optimizarBaseDeDatosLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.habilitarCambioDeParametrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parametrosEspecialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.habilitarTasaCeroIVAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cambiarTiendaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadísticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -327,8 +329,6 @@
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.parametrosEspecialesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.habilitarTasaCeroIVAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.datagridviewNE2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -2757,6 +2757,21 @@
             this.habilitarCambioDeParametrosToolStripMenuItem.Text = "Habilitar cambio de parámetros";
             this.habilitarCambioDeParametrosToolStripMenuItem.Click += new System.EventHandler(this.habilitarCambioDeParametrosToolStripMenuItem_Click);
             // 
+            // parametrosEspecialesToolStripMenuItem
+            // 
+            this.parametrosEspecialesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.habilitarTasaCeroIVAToolStripMenuItem});
+            this.parametrosEspecialesToolStripMenuItem.Name = "parametrosEspecialesToolStripMenuItem";
+            this.parametrosEspecialesToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
+            this.parametrosEspecialesToolStripMenuItem.Text = "Parametros especiales";
+            // 
+            // habilitarTasaCeroIVAToolStripMenuItem
+            // 
+            this.habilitarTasaCeroIVAToolStripMenuItem.Name = "habilitarTasaCeroIVAToolStripMenuItem";
+            this.habilitarTasaCeroIVAToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.habilitarTasaCeroIVAToolStripMenuItem.Text = "Habilitar Tasa Cero IVA";
+            this.habilitarTasaCeroIVAToolStripMenuItem.Click += new System.EventHandler(this.habilitarTasaCeroIVAToolStripMenuItem_Click);
+            // 
             // opcionesDeEmpresaToolStripMenuItem
             // 
             this.opcionesDeEmpresaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -3518,21 +3533,6 @@
             // 
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(0, 17);
-            // 
-            // parametrosEspecialesToolStripMenuItem
-            // 
-            this.parametrosEspecialesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.habilitarTasaCeroIVAToolStripMenuItem});
-            this.parametrosEspecialesToolStripMenuItem.Name = "parametrosEspecialesToolStripMenuItem";
-            this.parametrosEspecialesToolStripMenuItem.Size = new System.Drawing.Size(241, 22);
-            this.parametrosEspecialesToolStripMenuItem.Text = "Parametros especiales";
-            // 
-            // habilitarTasaCeroIVAToolStripMenuItem
-            // 
-            this.habilitarTasaCeroIVAToolStripMenuItem.Name = "habilitarTasaCeroIVAToolStripMenuItem";
-            this.habilitarTasaCeroIVAToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.habilitarTasaCeroIVAToolStripMenuItem.Text = "Habilitar Tasa Cero IVA";
-            this.habilitarTasaCeroIVAToolStripMenuItem.Click += new System.EventHandler(this.habilitarTasaCeroIVAToolStripMenuItem_Click);
             // 
             // Form1
             // 

@@ -264,6 +264,22 @@ namespace cristales_pva
             }
         }
 
+        public static void CheckInputIntegerValue(Control ctrl)
+        {           
+            if (!isInteger(ctrl.Text))
+            {
+                ctrl.Text = string.Empty;
+            }
+        }
+
+        public static void CheckInputFloatValue(Control ctrl)
+        {
+            if (!isFloat(ctrl.Text))
+            {
+                ctrl.Text = string.Empty;
+            }
+        }
+
         public static float stringToFloat(string num, bool round=false)
         {
             float r = 0;

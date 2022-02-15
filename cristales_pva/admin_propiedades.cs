@@ -13,6 +13,8 @@ namespace cristales_pva
         public admin_propiedades()
         {
             InitializeComponent();
+            textBox1.TextChanged += TextBox1_TextChanged;
+            textBox4.TextChanged += TextBox4_TextChanged;
             if(constants.user_access < 6 || constants.local == true)
             {
                 textBox4.Enabled = false;
@@ -21,7 +23,17 @@ namespace cristales_pva
             {
                 textBox4.Enabled = true;
             }
-        }      
+        }
+
+        private void TextBox4_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox4);
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox1);
+        }
 
         private void admin_propiedades_Load(object sender, EventArgs e)
         {

@@ -27,6 +27,13 @@ namespace cristales_pva
             contextMenuStrip1.Opening += ContextMenuStrip1_Opening;
             this.Text = this.Text + " - Sub-Folio: " + constants.sub_folio;
             label2.Text = "Los conceptos personalizados 'C/E' no están incluidos en el desglose, al igual todos aquellos artículos que no sean módulos.";
+            //------------------------------>
+            textBox1.TextChanged += TextBox1_TextChanged;
+        }
+
+        private void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox1);
         }
 
         private void ContextMenuStrip1_Opening(object sender, CancelEventArgs e)

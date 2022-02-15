@@ -45,22 +45,28 @@ namespace cristales_pva
             checkBox12.Click += CheckBox12_Click;
             checkBox13.Click += CheckBox13_Click;
             checkBox14.Click += CheckBox14_Click;
-            dataGridView1.CellClick += DataGridView1_CellClick;
             hScrollBar1.ValueChanged += HScrollBar1_ValueChanged;
+            //-->
+            dataGridView1.CellClick += DataGridView1_CellClick;
             dataGridView1.CellLeave += DataGridView1_CellLeave;
             dataGridView1.CellEndEdit += DataGridView1_CellEndEdit;
+            //-->
             dataGridView2.CellClick += DataGridView2_CellClick;
             dataGridView2.CellLeave += DataGridView2_CellLeave;
             dataGridView2.CellEndEdit += DataGridView2_CellEndEdit;
+            //-->
             dataGridView3.CellClick += DataGridView3_CellClick;
             dataGridView3.CellLeave += DataGridView3_CellLeave;
             dataGridView3.CellEndEdit += DataGridView3_CellEndEdit;
+            //-->
             dataGridView4.CellClick += DataGridView4_CellClick;
             dataGridView4.CellLeave += DataGridView4_CellLeave;
             dataGridView4.CellEndEdit += DataGridView4_CellEndEdit;
+            //-->
             dataGridView5.CellEndEdit += DataGridView5_CellEndEdit;
             dataGridView5.CellClick += DataGridView5_CellClick;
             dataGridView5.CellLeave += DataGridView5_CellLeave;
+            //->
             textBox1.TextChanged += TextBox1_TextChanged;
             textBox2.TextChanged += TextBox2_TextChanged;
             checkBox10.Click += CheckBox10_Click;
@@ -76,6 +82,12 @@ namespace cristales_pva
             dataGridView5.CellContextMenuStripNeeded += DataGridView5_CellContextMenuStripNeeded;
             SizeChanged += Config_modulo_SizeChanged;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+            //->
+            textBox3.TextChanged += TextBox3_TextChanged;
+            textBox4.TextChanged += TextBox4_TextChanged;
+            textBox5.TextChanged += TextBox5_TextChanged;
+            textBox6.TextChanged += TextBox6_TextChanged;
+            textBox7.TextChanged += TextBox7_TextChanged;
             //bloquear parametros---------------->
             if(constants.user_access <= 1 && constants.permitir_cp == false)
             {
@@ -133,6 +145,31 @@ namespace cristales_pva
             this.KeyPreview = true;
             this.KeyDown += Config_modulo_KeyDown;
             reloadSecciones();
+        }
+
+        private void TextBox3_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox3);
+        }
+
+        private void TextBox7_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox7);
+        }
+
+        private void TextBox6_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox6);
+        }
+
+        private void TextBox5_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox5);
+        }
+
+        private void TextBox4_TextChanged(object sender, EventArgs e)
+        {
+            constants.CheckInputIntegerValue(textBox4);
         }
 
         private void Config_modulo_Shown(object sender, EventArgs e)
@@ -4130,6 +4167,8 @@ namespace cristales_pva
         {
             if (dataGridView2[e.ColumnIndex, e.RowIndex].Value != null)
             {
+                checkInputNumValue(dataGridView2, e.RowIndex, e.ColumnIndex);
+                //-->
                 getInstruction(dataGridView2.CurrentRow.Cells[1].Value.ToString(), constants.stringToFloat(dataGridView2.CurrentRow.Cells[3].Value.ToString()));
                 calcularCostoModulo();
                 recountItems();
@@ -4173,6 +4212,8 @@ namespace cristales_pva
         {
             if (dataGridView3[e.ColumnIndex, e.RowIndex].Value != null)
             {
+                checkInputNumValue(dataGridView3, e.RowIndex, e.ColumnIndex);
+                //-->
                 getInstruction(dataGridView3.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView3.CurrentRow.Cells[4].Value.ToString()));
                 calcularCostoModulo();
                 recountItems();
@@ -4216,6 +4257,8 @@ namespace cristales_pva
         {
             if (dataGridView4[e.ColumnIndex, e.RowIndex].Value != null)
             {
+                checkInputNumValue(dataGridView4, e.RowIndex, e.ColumnIndex);
+                //-->
                 getInstruction(dataGridView4.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView4.CurrentRow.Cells[4].Value.ToString()));
                 calcularCostoModulo();
                 recountItems();
@@ -4271,6 +4314,8 @@ namespace cristales_pva
         {
             if (dataGridView1[e.ColumnIndex, e.RowIndex].Value != null)
             {
+                checkInputNumValue(dataGridView1, e.RowIndex, e.ColumnIndex);
+                //-->
                 if (constants.stringToFloat(dataGridView1.CurrentRow.Cells[4].Value.ToString()) <= 0)
                 {
                     dataGridView1.CurrentRow.Cells[7].Value = "";
@@ -4304,7 +4349,7 @@ namespace cristales_pva
                     if(dataGridView1[e.ColumnIndex, e.RowIndex].Value == null)
                     {
                         dataGridView1[e.ColumnIndex, e.RowIndex].Value = "0";
-                    }                    
+                    }                               
                 }
                 //---------------------------------------------------------------------------------->
                 if (constants.stringToFloat(dataGridView1.CurrentRow.Cells[4].Value.ToString()) <= 0)
@@ -4335,6 +4380,20 @@ namespace cristales_pva
                 }
                 getInstruction(dataGridView1.CurrentRow.Cells[2].Value.ToString(), constants.stringToFloat(dataGridView1.CurrentRow.Cells[4].Value.ToString()));
                 calcularCostoModulo();
+            }
+        }
+
+        private void checkInputNumValue(DataGridView table, int x, int y)
+        {
+            if (table[y, x].OwningColumn.HeaderText == "Cantidad")
+            {
+                if (table[y, x].Value != null)
+                {
+                    if(!constants.isFloat(table[y, x].Value.ToString()))
+                    {
+                        table[y, x].Value = "0";
+                    }
+                }
             }
         }
 
