@@ -1598,8 +1598,34 @@ namespace cristales_pva
         {
             label4.Text = "Actualizando Datos...";
             constants.errors_Open.Clear();
-            constants.reloadPreciosCotizaciones(constants.sub_folio);
-            ((Form1)Application.OpenForms["Form1"]).reloadAll(this);                
+            if (this.id == 0)
+            {
+                constants.reloadPreciosCotizaciones(constants.sub_folio);
+            }  
+            else
+            {
+                var m_id = (from x in cotizacion.modulos_cotizaciones where x.id == this.id && x.sub_folio == constants.sub_folio select x).SingleOrDefault();
+                var modulos_c = (IQueryable<modulos_cotizaciones>)null;
+
+                if (m_id != null)
+                {
+                    if (m_id.modulo_id == -1)
+                    {
+                        modulos_c = (from x in cotizacion.modulos_cotizaciones where x.merge_id == id && x.sub_folio == constants.sub_folio select x);
+                    }
+                    else
+                    {
+                        modulos_c = (from x in cotizacion.modulos_cotizaciones where x.id == id && x.sub_folio == constants.sub_folio select x);
+                    }                
+                }
+
+                foreach(var t in modulos_c)
+                {
+                    constants.reloadPreciosCotizaciones(constants.sub_folio, true, t.id);
+                }
+            }
+            //--->
+            ((Form1)Application.OpenForms["Form1"]).reloadAll(this);
         }
 
         private void BackgroundWorker3_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
