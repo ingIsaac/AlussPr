@@ -31,6 +31,7 @@ namespace cristales_pva
         bool sort_a_z = true;
         bool load = false;
         float _c = 0;
+        string subfoliotitle = string.Empty;
 
         public reportes(string cliente, string proyecto, string folio, float subtotal, float iva, float total, float descuento, float desc_cant, float utilidad)
         {
@@ -63,7 +64,6 @@ namespace cristales_pva
             checkBox11.Checked = constants.op11;
             load = true;
             label6.Text = "Sub-Folio: " + constants.sub_folio;
-            
             //load reporte
             sqlDateBaseManager sql = new sqlDateBaseManager();
             if (cliente != "")
@@ -251,7 +251,7 @@ namespace cristales_pva
             {
                 display = this.Text;
             }
-            reportViewer1.LocalReport.DisplayName = display + " - " + (constants.getSubfoliotitle(constants.sub_folio) != string.Empty ? constants.getSubfoliotitle(constants.sub_folio) : constants.sub_folio.ToString());
+            reportViewer1.LocalReport.DisplayName = display + " - " + (constants.getSubfoliotitle(constants.sub_folio).Trim() != string.Empty ? constants.getSubfoliotitle(constants.sub_folio) : constants.sub_folio.ToString());
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.LocalReport.EnableExternalImages = true;
             reportViewer1.LocalReport.SetParameters(new ReportParameter("Image", constants.getExternalImage("header")));
