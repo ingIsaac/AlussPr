@@ -1258,7 +1258,19 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>IVA: (16%)</Value>
+                <Value>IVA: (</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!iva.Value</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>%)</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -1882,6 +1894,10 @@
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="iva">
+      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>

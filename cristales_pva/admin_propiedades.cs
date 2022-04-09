@@ -38,7 +38,7 @@ namespace cristales_pva
         private void admin_propiedades_Load(object sender, EventArgs e)
         {
             textBox1.Text = constants.updater_interval.ToString();
-            textBox4.Text = ((constants.getPropiedadesModel() - 1) * 100).ToString();
+            textBox4.Text = Math.Round((constants.getPropiedadesModel() - 1) * 100, 2).ToString();
             //updater
             if (constants.updater_enable == false)
             {
@@ -202,16 +202,26 @@ namespace cristales_pva
                             {
                                 sqlDateBaseManager sql = new sqlDateBaseManager();
                                 localDateBaseEntities3 p = new localDateBaseEntities3();
-                                float iva = (float.Parse(textBox4.Text) / 100) + 1;
-                                if (iva > 0)
+                                int input = constants.stringToInt(textBox4.Text);
+                                if (input > 0)
                                 {
+                                    float iva = ((float)constants.stringToInt(textBox4.Text) / 100) + 1;
                                     if (constants.iva_desglosado == true)
                                     {
-                                        constants.iva = iva;
+                                        constants.iva = (float)Math.Round(iva, 2);
                                     }
-                                    sql.updatePropiedades(iva);
+                                    if(MessageBox.Show(this, "¿Deseas actualizar el válor del IVA en la base de datos?", constants.msg_box_caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                    {
+                                        sql.updatePropiedades(iva);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(this, "El válor del IVA se a modificado de manera local y volverá a tomar su válor desde la base de datos una vez reiniciado o actualizado el programa.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
                                     constants.setPropiedadesModel(iva);
+                                    //-------------------------------->
                                     ((Form1)Application.OpenForms["form1"]).reloadIVA();
+                                    ((Form1)Application.OpenForms["form1"]).calcularTotalesCotizacion();
                                 }
                                 else
                                 {

@@ -2856,7 +2856,7 @@ namespace cristales_pva
 
                 if (propiedades != null)
                 {
-                    propiedades.iva = iva;
+                    propiedades.iva = Math.Round(iva, 2);
                 }
                 p.SaveChanges();
             }
@@ -4390,12 +4390,12 @@ namespace cristales_pva
             
             //Tasa 0
             float t_tot = ((costo) * cantidad) + _total;
-            if (constants.tasa_cero)
+            if (tasa_cero)
             {
-                if (!constants.iva_desglosado)
+                if (!iva_desglosado)
                 {
                     //Get IVA
-                    float _iva = constants.getPropiedadesModel();
+                    float _iva = getPropiedadesModel();
                     float _ut = t_tot / (utilidad + 1);
                     float _nt = t_tot - _ut;
                     t_tot = (_ut * _iva) + _nt;

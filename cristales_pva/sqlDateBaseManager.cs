@@ -3299,7 +3299,7 @@ namespace cristales_pva
             cmd.Connection = connection;
             cmd.CommandText = "UPDATE propiedades SET iva=@IVA WHERE id='1'";
             cmd.Parameters.AddWithValue("@IVA", System.Data.SqlDbType.Float);
-            cmd.Parameters["@IVA"].Value = iva;            
+            cmd.Parameters["@IVA"].Value = Math.Round(iva, 2);            
             try
             {
                 connection.Open();
@@ -4585,7 +4585,9 @@ namespace cristales_pva
             SqlCommand cmd = new SqlCommand();
 
             cmd.Connection = connection;
-            cmd.CommandText = "UPDATE propiedades SET ref_kg_aluminio='" + costo + "' WHERE id='1'";
+            cmd.CommandText = "UPDATE propiedades SET ref_kg_aluminio=@REF WHERE id='1'";
+            cmd.Parameters.AddWithValue("@REF", System.Data.SqlDbType.Float);
+            cmd.Parameters["@REF"].Value = Math.Round(costo, 2);
             try
             {
                 connection.Open();

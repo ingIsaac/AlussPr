@@ -833,7 +833,7 @@ namespace cristales_pva
 
         public void reloadIVA()
         {
-            checkBox5.Text = "IVA (" + ((constants.getPropiedadesModel() - 1) * 100) + "%):";
+            checkBox5.Text = "IVA (" + Math.Round((constants.getPropiedadesModel() - 1) * 100, 2) + "%):";
         }
 
         public void reloadAll(Form form)

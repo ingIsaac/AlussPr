@@ -228,7 +228,9 @@ namespace cristales_pva
                 {
                     reportViewer1.LocalReport.ReportEmbeddedResource = "cristales_pva.reporte" + _forma_pago_ext + ".rdlc";
                 }
-            }           
+                //---------------------------------------->
+                reportViewer1.LocalReport.SetParameters(new ReportParameter("iva", Math.Round((constants.getPropiedadesModel() - 1) * 100, 2).ToString()));
+            }
             //------------------------------------------------------------------------------------>
 
             string[] modelo = null;
