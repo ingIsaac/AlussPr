@@ -6831,17 +6831,22 @@ namespace cristales_pva
                 //End   
                 if (!error)
                 {
-                    if (richTextBox1.TextLength > 0)
+                    if(descripcion != string.Empty)
                     {
-                        if (!richTextBox1.Text.Contains(descripcion.ToUpper()))
+                        if (richTextBox1.TextLength > 0)
                         {
-                            richTextBox1.Text = richTextBox1.Text + "\n-" + descripcion.ToUpper();
+                            if (!richTextBox1.Text.Contains(descripcion.ToUpper()))
+                            {
+                                richTextBox1.Text = richTextBox1.Text + "\n-" + descripcion.ToUpper();
+                            }
                         }
-                    }
-                    else
-                    {
-                        richTextBox1.Text = "-" + descripcion.ToUpper();
-                    }
+                        else
+                        {
+                            richTextBox1.Text = "-" + descripcion.ToUpper();
+                        }
+                    }         
+                    //Reload Acabados
+                    setAcabadoLista();
                 }
                 else
                 {
