@@ -580,6 +580,8 @@ namespace cristales_pva
         {
             if (datagridviewNE1.Rows.Count > 0)
             {
+                clear();
+                //-------------------------------------------------->
                 load((int)datagridviewNE1.CurrentRow.Cells[0].Value);
                 button4.Visible = true;
                 calcular();
@@ -827,7 +829,7 @@ namespace cristales_pva
                 {
                     if (comboBox3.Text != "")
                     {
-                        if (sql.findSQLValue("clave", "clave", "otros", textBox3.Text) == false)
+                        if (sql.findSQLValue("clave", "clave", getTableName(categoria), textBox3.Text) == false)
                         {
                             if (sql.findSQLValue("articulo", "articulo", getListaFromCategoria(categoria), textBox2.Text) == false)
                             {
@@ -959,6 +961,24 @@ namespace cristales_pva
                 }
             }
             pictureBox1.Visible = false;
+        }
+
+        private string getTableName(string categoria)
+        {
+            if (categoria == "Cristal")
+            {
+                return "costo_corte_precio";
+            }
+            else if (categoria == "Herraje")
+            {
+                return "herrajes";
+            }
+            else if (categoria == "Otros Materiales")
+            {
+                return "otros";
+            }
+
+            return string.Empty;
         }
     }
 }

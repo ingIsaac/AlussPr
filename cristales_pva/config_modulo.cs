@@ -4565,6 +4565,7 @@ namespace cristales_pva
                     md.Tables[1].Rows.Add(row);
                 }
                 createModuloPic(md);
+                int t_cant = constants.stringToInt(textBox4.Text);
                 new modulo_precios(md, label6.Text, label7.Text, label8.Text, label37.Text, textBox4.Text, textBox5.Text, textBox6.Text, textBox3.Text, textBox7.Text, label12.Text, "Largo: " + label21.Text + " - " + "Alto: " + label20.Text, textBox9.Text, textBox10.Text, textBox12.Text, textBox11.Text, textBox13.Text, label44.Text, "Largo mm", "Alto mm", textBox8.Text).ShowDialog();
                 md.Dispose();
             }       

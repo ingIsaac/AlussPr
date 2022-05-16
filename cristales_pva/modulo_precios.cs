@@ -40,25 +40,13 @@ namespace cristales_pva
             reportViewer1.LocalReport.SetParameters(new ReportParameter("subtot", subtot));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("costo_add", costo_add));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("d_1", d_1));
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("d_2", d_2));
-            if (tot_otros.Contains("+"))
-            {
-                string[] y = tot_otros.Split(' ');
-                if(y.Length > 0)
-                {
-                    tot_otros = y[0];
-                }
-            }
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("d_2", d_2));        
             reportViewer1.LocalReport.SetParameters(new ReportParameter("modulo_ubicacion", "Ubicación: " + ubicacion));
-            reportViewer1.LocalReport.SetParameters(new ReportParameter("cost_mats", Math.Round(constants.stringToFloat(tot_alum.Replace("$", "")) + constants.stringToFloat(tot_herraje.Replace("$", "")) + constants.stringToFloat(tot_otros.Replace("$", "")) + constants.stringToFloat(tot_cristales.Replace("$", "")), 2).ToString()));
+            float cost_mats = (float)Math.Round(constants.stringToFloat(tot_alum.Replace("$", "")) + constants.stringToFloat(tot_herraje.Replace("$", "")) + (tot_otros.Contains("+") ? (constants.stringToFloat(tot_otros.Split('+')[0].Trim().Replace("$", "")) + constants.stringToFloat(tot_otros.Split('+')[1].Trim().Replace("$", ""))) : constants.stringToFloat(tot_otros.Replace("$", ""))) + constants.stringToFloat(tot_cristales.Replace("$", "")), 2);
+            reportViewer1.LocalReport.SetParameters(new ReportParameter("cost_mats", cost_mats.ToString()));
             reportViewer1.LocalReport.SetParameters(new ReportParameter("header", constants.getExternalImage("header")));
             reportViewer1.LocalReport.Refresh();
             reportViewer1.RefreshReport();
-        }
-
-        private void modulo_precios_Load(object sender, EventArgs e)
-        { 
-                    
         }
     }
 }

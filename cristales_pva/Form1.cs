@@ -7523,42 +7523,61 @@ namespace cristales_pva
 
         private void updateTasaCero()
         {
-            if (constants.tasa_cero)
+            BackgroundWorker bg = new BackgroundWorker();
+            bg.DoWork += (sender, e) =>
             {
-                MessageBox.Show(this, "La opción tasa cero IVA se ha deshabilitado en esta cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //------------------------->
-                constants.tasa_cero = false;
-                checkBox5.Checked = true;
-            }
-            else
-            {
-                constants.tasa_cero = true;
-            }
+                if (constants.tasa_cero)
+                {
+                    MessageBox.Show(this, "La opción tasa cero IVA se ha deshabilitado en esta cotización.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //------------------------->
+                    constants.tasa_cero = false;
+                    checkBox5.Checked = true;
+                }
+                else
+                {
+                    constants.tasa_cero = true;
+                }
 
-            constants.checkTasaCero(this);
-            //-------------------------->
-            constants.errors_Open.Clear();
-            for (int i = 1; i < 5; i++)
+                constants.checkTasaCero(this);
+                //-------------------------->
+                constants.errors_Open.Clear();
+                for (int i = 1; i < 5; i++)
+                {
+                    constants.reloadPreciosCotizaciones(i);
+                }
+                //-------------------------->
+                calcularTotalesCotizacion();
+                constants.cotizacion_proceso = true;
+                constants.cotizacion_guardada = false;
+                //-------------------------->
+                if (Application.OpenForms["articulos_cotizacion"] != null)
+                {
+                    ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                }
+                if (Application.OpenForms["edit_expresss"] != null)
+                {
+                    ((edit_expresss)Application.OpenForms["edit_expresss"]).Close();
+                }
+                if (Application.OpenForms["config_modulo"] != null)
+                {
+                    ((config_modulo)Application.OpenForms["config_modulo"]).Close();
+                }
+            };
+            bg.RunWorkerCompleted += (sender, e) =>
             {
-                constants.reloadPreciosCotizaciones(i);
-            }
-            //-------------------------->
-            calcularTotalesCotizacion();
-            constants.cotizacion_proceso = true;
-            constants.cotizacion_guardada = false;
-            //-------------------------->
-            if (Application.OpenForms["articulos_cotizacion"] != null)
+                this.Enabled = true;
+            };
+            if(!bg.IsBusy)
             {
-                ((articulos_cotizacion)Application.OpenForms["articulos_cotizacion"]).loadALL();
+                this.Enabled = false;
+                bg.RunWorkerAsync();
             }
-            if (Application.OpenForms["edit_expresss"] != null)
-            {
-                ((edit_expresss)Application.OpenForms["edit_expresss"]).Close();
-            }
-            if (Application.OpenForms["config_modulo"] != null)
-            {
-                ((config_modulo)Application.OpenForms["config_modulo"]).Close();
-            }
+            
+        }
+
+        private void Bg_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public void setTasaCeroTag()

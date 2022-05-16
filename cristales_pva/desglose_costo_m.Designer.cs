@@ -86,6 +86,8 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox19 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -97,6 +99,8 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.textBox19);
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.textBox18);
@@ -658,6 +662,25 @@
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Image = global::cristales_pva.Properties.Resources.Counterclockwise_arrow_icon;
+            this.button2.Location = new System.Drawing.Point(722, 547);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(37, 26);
+            this.button2.TabIndex = 44;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox19
+            // 
+            this.textBox19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox19.Location = new System.Drawing.Point(582, 551);
+            this.textBox19.Name = "textBox19";
+            this.textBox19.Size = new System.Drawing.Size(133, 20);
+            this.textBox19.TabIndex = 45;
+            // 
             // desglose_costo_m
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -734,5 +757,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox19;
     }
 }

@@ -204,7 +204,7 @@ namespace cristales_pva
                             _t = (float)(_total / ((c.utilidad / 100) + 1));
                             _t = (float)(_t / ((c.mano_obra / 100) + 1));
                             _t = (float)(_t / ((c.flete / 100) + 1));
-                            _t = (float)(_t / ((c.desperdicio / 100) + 1));
+                            //_t = (float)(_t / ((c.desperdicio / 100) + 1));
                             costo_materiales = costo_materiales + _t;
                         }
                         else
@@ -219,7 +219,7 @@ namespace cristales_pva
                                     _t = (float)(x.total / ((x.utilidad / 100) + 1));
                                     _t = (float)(_t / ((x.mano_obra / 100) + 1));
                                     _t = (float)(_t / ((x.flete / 100) + 1));
-                                    _t = (float)(_t / ((x.desperdicio / 100) + 1));
+                                    //_t = (float)(_t / ((x.desperdicio / 100) + 1));
                                     costo_materiales = costo_materiales + _t;
                                 }
                             }

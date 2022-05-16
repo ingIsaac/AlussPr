@@ -56,7 +56,6 @@
             this.Name = "modulo_precios";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.modulo_precios_Load);
             this.ResumeLayout(false);
 
         }

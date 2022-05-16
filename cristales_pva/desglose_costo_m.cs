@@ -11,16 +11,52 @@ namespace cristales_pva
 {
     public partial class desglose_costo_m : Form
     {
-        float total_t = 0, alum_t = 0, cris_t = 0, herra_t = 0, otros_t = 0, cost_add = 0, costo_ext = 0;
+        float total_t = 0, sub_total = 0, alum_t = 0, cris_t = 0, herra_t = 0, otros_t = 0, cost_add = 0, costo_ext = 0;
+        int m_id = 0;
 
         public desglose_costo_m(int m_id)
         {
             InitializeComponent();
-            init(m_id);
-
+            textBox19.TextChanged += TextBox19_TextChanged;
+            this.m_id = m_id;
+            //------------->
+            init(this.m_id);
+            button1.Focus();
         }
 
-        private void init(int m_id)
+        private void TextBox19_TextChanged(object sender, EventArgs e)
+        {
+            if(!constants.isInteger(textBox19.Text))
+            {
+                textBox19.Clear();
+            }
+        }
+
+        private void resetCost()
+        {
+            datagridviewNE1.Rows.Clear();
+            //-------------------------->
+            total_t = 0;
+            sub_total = 0;
+            alum_t = 0;
+            cris_t = 0;
+            herra_t = 0;
+            otros_t = 0;
+            cost_add = 0;
+            costo_ext = 0;
+        }
+
+        private float getCostoMateriales()
+        {
+            return (float)Math.Round((alum_t + herra_t + otros_t + cris_t + costo_ext), 2);
+        }
+
+        private float getSubTotal(float flete, float mano_obra, float utilidad)
+        {
+            return getCostoMateriales() * flete * mano_obra * utilidad;
+        }
+
+        private void init(int m_id, int p_cant=0)
         {
             using (cotizaciones_local cotizaciones = new cotizaciones_local())
             {
@@ -34,10 +70,12 @@ namespace cristales_pva
                     textBox10.Text = modulo.alto.ToString();
                     textBox11.Text = modulo.acabado_perfil.ToString();
                     textBox12.Text = modulo.linea;
-                    textBox5.Text = modulo.cantidad.ToString();
-                    richTextBox1.Text = modulo.descripcion;
-                    label9.Text = "$" + Math.Round(((float)modulo.total) * constants.iva, 2).ToString("n");
-                    total_t = (float)modulo.total;
+                    //Cantidad
+                    int t_cant = p_cant > 0 ? p_cant : (int)modulo.cantidad;
+                    textBox5.Text = t_cant.ToString();
+                    textBox19.Text = textBox5.Text;
+                    //
+                    richTextBox1.Text = modulo.descripcion;                   
                     pictureBox1.Image = constants.byteToImage(modulo.pic);
                     if (modulo.modulo_id > 0)
                     {
@@ -45,7 +83,7 @@ namespace cristales_pva
                         textBox2.Text = modulo.flete.ToString();
                         textBox3.Text = modulo.mano_obra.ToString();
                         textBox4.Text = modulo.utilidad.ToString();
-                        loadModulo((int)modulo.modulo_id, (float)modulo.mano_obra / 100, (int)modulo.cantidad, modulo.dimensiones, modulo.claves_cristales, (float)modulo.flete / 100, (float)modulo.desperdicio / 100, (float)modulo.utilidad / 100, modulo.claves_otros, modulo.claves_herrajes, modulo.claves_perfiles, modulo.news, modulo.acabado_perfil, modulo.id);
+                        loadModulo((int)modulo.modulo_id, (float)modulo.mano_obra / 100, t_cant, modulo.dimensiones, modulo.claves_cristales, (float)modulo.flete / 100, (float)modulo.desperdicio / 100, (float)modulo.utilidad / 100, modulo.claves_otros, modulo.claves_herrajes, modulo.claves_perfiles, modulo.news, modulo.acabado_perfil, modulo.id);
                     }
                     else
                     {
@@ -61,7 +99,7 @@ namespace cristales_pva
                                 flete = flete + (float)u.flete;
                                 mano_o = mano_o + (float)u.mano_obra;
                                 utilidad = utilidad + (float)u.utilidad;
-                                loadModulo((int)u.modulo_id, (float)u.mano_obra / 100, (int)u.cantidad * (int)modulo.cantidad, u.dimensiones, u.claves_cristales, (float)u.flete / 100, (float)u.desperdicio / 100, (float)u.utilidad / 100, u.claves_otros, u.claves_herrajes, u.claves_perfiles, u.news, u.acabado_perfil, u.id);
+                                loadModulo((int)u.modulo_id, (float)u.mano_obra / 100, (int)u.cantidad * t_cant, u.dimensiones, u.claves_cristales, (float)u.flete / 100, (float)u.desperdicio / 100, (float)u.utilidad / 100, u.claves_otros, u.claves_herrajes, u.claves_perfiles, u.news, u.acabado_perfil, u.id);
                             }
                             textBox1.Text = Math.Round(desperdicio / c).ToString();
                             textBox2.Text = Math.Round(flete / c).ToString();
@@ -72,10 +110,17 @@ namespace cristales_pva
                     acomodarDesglose();
                     textBox14.Text = "$" + Math.Round(alum_t, 2).ToString();
                     textBox15.Text = "$" + Math.Round(herra_t, 2).ToString();
+                    costo_ext = costo_ext * t_cant;
                     textBox16.Text = "$" + Math.Round(otros_t, 2).ToString() + " + $" + costo_ext;
                     textBox17.Text = "$" + Math.Round(cris_t, 2).ToString();
-                    textBox18.Text = "$" + Math.Round((alum_t + herra_t + otros_t + cris_t), 2).ToString();
-                    textBox13.Text = "$" + modulo.total.ToString() + (cost_add > 0 ? (" + $" + cost_add) : "");
+                    textBox18.Text = "$" + getCostoMateriales().ToString();
+
+                    //SubTotal
+                    sub_total = sub_total + cost_add;
+                    textBox13.Text = "$" + sub_total.ToString() + (cost_add > 0 ? (" + $" + cost_add) : "");
+                    //Total
+                    total_t = (float)Math.Round((sub_total) * constants.iva, 2);
+                    label9.Text = "$" + total_t.ToString("n");
                 }
             }                  
         }
@@ -115,7 +160,6 @@ namespace cristales_pva
             bool cs = false;
             string buffer = string.Empty;
             float get = 0;
-            float _total = 0;
 
             if (new_items.Length > 0)
             {
@@ -193,7 +237,6 @@ namespace cristales_pva
                             if (get >= 0)
                             {
                                 costo = costo + get;
-                                alum_t = alum_t + get;
                             }
                             else
                             {
@@ -227,7 +270,7 @@ namespace cristales_pva
 
                 //Calcular Desperdicio
                 costo = costo + (costo * desperdicio);
-                alum_t = costo;
+                alum_t = alum_t + costo;
                 //-------------------------------->
 
                 if (claves_herrajes.Length > 0)
@@ -368,18 +411,14 @@ namespace cristales_pva
                                 }
                                 else
                                 {
-                                    _total = _total + constants.stringToFloat(p[2]);                                   
+                                    cost_add = cost_add + constants.stringToFloat(p[2]);                                   
                                 }
                             }
                         }
                     }
                 }
                 //------------------------->
-                if (error == true)
-                {
-                    
-                }
-                cost_add = (_total*cantidad);
+                sub_total = sub_total + costo * (flete + 1) * (mano_obra + 1) * (utilidad + 1);
             }         
         }
 
@@ -788,6 +827,12 @@ namespace cristales_pva
                 total = -1;
             }
             return total;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            resetCost();
+            init(m_id, constants.stringToInt(textBox19.Text));
         }
 
         private float leerModuloOtros(listas_entities_pva listas, string module, string n_id, int[,] dim, bool cs, int rows, int columns, int t_count = 1)
@@ -1251,7 +1296,7 @@ namespace cristales_pva
                 DataRow row_2 = md.Tables["img_modulo"].NewRow();
                 row_2[0] = constants.imageToByte(gm_2);
                 md.Tables["img_modulo"].Rows.Add(row_2);
-                new modulo_precios(md, textBox7.Text, textBox6.Text, textBox12.Text, textBox11.Text, textBox5.Text, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, Math.Round(total_t*1.16, 2).ToString(), "Largo: " + textBox9.Text + " - " + "Alto: " + textBox10.Text, textBox14.Text, textBox15.Text, textBox16.Text, textBox17.Text, total_t.ToString(), cost_add > 0 ? ("+ (" + cost_add.ToString() + ")") : "", "M/L", "M/C", textBox8.Text).ShowDialog(this);
+                new modulo_precios(md, textBox7.Text, textBox6.Text, textBox12.Text, textBox11.Text, textBox5.Text, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, total_t.ToString(), "Largo: " + textBox9.Text + " - " + "Alto: " + textBox10.Text, textBox14.Text, textBox15.Text, textBox16.Text, textBox17.Text, sub_total.ToString(), cost_add > 0 ? ("+ (" + cost_add.ToString() + ")") : "", "M/L", "M/C", textBox8.Text).ShowDialog(this);
                 bm = null;
                 gm_2 = null;
             }
