@@ -96,7 +96,7 @@ namespace cristales_pva
         {
             localDateBaseEntities3 lineas = new localDateBaseEntities3();
 
-            var l = from x in lineas.lineas_modulos select x;
+            var l = from x in lineas.lineas_modulos orderby x.linea_modulo ascending select x;
 
             comboBox5.Items.Clear();
 

@@ -417,6 +417,11 @@ namespace cristales_pva
                         }
                     }
                 }
+                if(error)
+                {
+                    MessageBox.Show(this, "[Error]: no se pudo leer el documento. Intente de nuevo.", constants.msg_box_caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
                 //------------------------->
                 sub_total = sub_total + costo * (flete + 1) * (mano_obra + 1) * (utilidad + 1);
             }         
