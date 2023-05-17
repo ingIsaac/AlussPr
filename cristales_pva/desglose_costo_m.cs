@@ -695,13 +695,13 @@ namespace cristales_pva
                     {
                         ext = (float)(largo * color.costo_extra_ml);
                         total = (float)((((perfil.crudo / perfil.largo) * largo) * count) + ((((largo * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext)) * count);
-                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((largo * 1000) * count), 0, (float)Math.Round((float)((((perfil.crudo / perfil.largo) * largo) * count) + ((((largo * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext))), 2), (float)Math.Round(total, 2));
+                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((largo * 1000) * count), 0, (float)Math.Round((float)((perfil.crudo / perfil.largo) + ((((perfil.perimetro_dm2_ml / 100) * color.precio) + color.costo_extra_ml))), 2), (float)Math.Round(total, 2));
                     }
                     else if (dir == "alto")
                     {
                         ext = (float)(alto * color.costo_extra_ml);
                         total = (float)((((perfil.crudo / perfil.largo) * alto) * count) + ((((alto * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext)) * count);
-                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((alto * 1000) * count), 0, (float)Math.Round((float)((((perfil.crudo / perfil.largo) * alto) * count) + ((((alto * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext))), 2), (float)Math.Round(total, 2));
+                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((alto * 1000) * count), 0, (float)Math.Round((float)((perfil.crudo / perfil.largo) + ((((perfil.perimetro_dm2_ml / 100) * color.precio) + color.costo_extra_ml))), 2), (float)Math.Round(total, 2));
                     }
                 }
             }
@@ -1137,13 +1137,13 @@ namespace cristales_pva
                     {
                         ext = (float)(largo * color.costo_extra_ml);
                         costo = (float)((((perfil.crudo / perfil.largo) * largo) * count) + ((((largo * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext)) * count);
-                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((largo * 1000) * count), 0, (float)Math.Round((float)((((perfil.crudo / perfil.largo) * largo) * count) + ((((largo * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext))), 2), (float)Math.Round(costo, 2));
+                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((largo * 1000) * count), 0, (float)Math.Round((float)((perfil.crudo / perfil.largo) + ((((perfil.perimetro_dm2_ml / 100) * color.precio) + color.costo_extra_ml))), 2), (float)Math.Round(costo, 2));
                     }
                     else if (dir == "alto")
                     {
                         ext = (float)(alto * color.costo_extra_ml);
                         costo = (float)((((perfil.crudo / perfil.largo) * alto) * count) + ((((alto * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext)) * count);
-                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((alto * 1000) * count), 0, (float)Math.Round((float)((((perfil.crudo / perfil.largo) * alto) * count) + ((((alto * (perfil.perimetro_dm2_ml / 100)) * (color.precio)) + ext))), 2), (float)Math.Round(costo, 2));
+                        setNewRow("Perfil", perfil.id, perfil.clave, perfil.articulo, count, ((alto * 1000) * count), 0, (float)Math.Round((float)((perfil.crudo / perfil.largo) + ((((perfil.perimetro_dm2_ml / 100) * color.precio) + color.costo_extra_ml))), 2), (float)Math.Round(costo, 2));
                     }
                 }
             }
